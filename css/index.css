@@ -1,0 +1,227 @@
+#personas-consulta, #medicos-consulta, #hijos-consulta {
+  position: relative; 
+  right: 0px; 
+  top: 3px; 
+  min-width: fit-content;
+  background: transparent;
+  border: none;
+}
+
+.subtitulo-parametros {
+  width: fit-content;
+  font-size: 13px;
+  font-weight: 100 !important;
+  border-bottom: 2px dotted #4caf50;
+}
+
+.parametros-paginacion {
+  background: #fff;
+  color: #262626;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  width: 30px;
+}
+
+.parametros-paginacion:hover {
+  background: black;
+  color: #fff;
+}
+
+#procesar-monedas, #procesar-impuestos {
+  border: none;
+  background: #4caf50;
+  color: #fff;
+  padding: 5px;
+  font-weight: bold;
+}
+
+#reiniciar-monedas, #reiniciar-impuestos {
+  border: none;
+  background: #dc3545;
+  color: #fff;
+  padding: 5px;
+  font-weight: bold;
+}
+
+#procesar-monedas:hover, #reiniciar-monedas:hover, #procesar-impuestos:hover, #reiniciar-impuestos:hover {
+  background: black
+}
+
+#iva-confirmar-nuevo, #iva-confirmar-seleccionado {
+  border: 2px dashed #243447;
+  background: #3e68ff;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+}
+
+#iva-confirmar-nuevo:hover, #iva-confirmar-seleccionado:hover {
+  background: black;
+}
+
+div#desplegable-recibos-iframe-contenedor {
+  position: relative;
+  height: 100%; 
+  background: linear-gradient(57deg, white, #3e68ff69); 
+  padding: 10px;
+}
+
+div#desplegable-recibos-iframe-contenedor::after {
+    content: "NO VÁLIDOS";
+    position: absolute;
+    width: 7.5vw;
+    height: 6vh;
+    right: 3.5vw;
+    top: 2.5vh;
+    background: #dc354557;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px #fff;
+}
+
+div#monedas-contenedor .columnas div {
+  margin: 8px 0px;
+}
+
+#desplegable-contenedor label {
+  color: black;
+  font-variant: all-small-caps;
+  font-size: 16px !important;
+}
+
+#desplegable-pagos-secciones {
+  display: flex;
+  justify-content: center;
+  column-gap: 12px;
+  padding-top: 10px;
+  position: relative;
+}
+
+#desplegable-pagos-secciones button {
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed #7428b8;
+  padding: 5px 2px;
+  transition: 0.3s ease all;
+  bottom: 0px;
+}
+
+#desplegable-pagos-secciones button:hover {
+  position: relative;
+  bottom: 3px;
+  transition: 0.3s ease all;
+  background: rgba(0,0,0,0.1);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; 
+}
+
+.desplegable-contenedor {
+  display: grid;
+  justify-content: stretch;
+  grid-template-rows: auto auto;
+  align-items: stretch;
+  height: 100%;
+}
+
+.pagos-titulos {
+  font-size: 16px;
+  background: #ffffff;
+  padding: 10px;
+  border-bottom: 1px dashed #ccc;
+  position: relative;
+  display: flex;
+  align-items: end;
+  column-gap: 5px;
+  height: fit-content;
+  min-height: 45px;
+}
+
+.pagos-titulos::before {
+  content: "";
+  width: 2px;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  background: #6400ff;
+  position: absolute;
+}
+
+[data-grupo="pagos-forma"] {
+  flex-direction: row !important; 
+  margin: 0px !important; 
+  width: fit-content !important;    
+  border: none; 
+  position: relative;
+}
+
+[data-grupo="pagos-forma"]:hover {
+  border: none;
+}
+
+[data-grupo="pagos-forma"]::after {
+  width:300px;
+}
+
+[data-grupo="pagos-forma"]:hover::after {
+  content: "cálculo aplicado del ISRL sobre el monto";
+  opacity: 1;
+  width:350px;
+}
+
+[data-grupo="pagos-forma"] section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagos-forma label {
+  font-weight: bolder !important;
+  height: 15px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.pagos-botones {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  column-gap: 10px;
+  padding: 5px;
+}
+
+.pagos-botones button {
+  border: none;
+  padding: 7px;
+  color: #fff;
+}
+
+.pagos-botones button:hover {
+  background: black !important;
+}
+
+.pagos-botones button:nth-child(1) {
+  background: #e456ac;
+}
+
+.pagos-botones button:nth-child(2) {
+  background: #198754;
+}
+
+#crud-confirmar-botones button:nth-child(1), #crud-medicos-botones button:nth-child(1), #crud-hijos-botones button:nth-child(1) {
+  color: #fff;
+}
+
+#crud-confirmar-botones button:nth-child(2), #crud-medicos-botones button:nth-child(2), #crud-hijos-botones button:nth-child(2) {
+  color: #fff;
+  background: #4caf50;
+}
+
+#crud-confirmar-botones button:nth-child(3), #crud-medicos-botones button:nth-child(3), #crud-hijos-botones button:nth-child(3) {
+  color: #fff;
+}

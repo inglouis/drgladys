@@ -1,0 +1,18 @@
+Open the Certificate Manager 
+Hit Windows+R, or click on the Blue Vista icon in the lower left hand corner 
+In the "Start Search" box, type "certmgr.msc" (no quotes). 
+The certificate manager will open. 
+Right click on "Trusted Root Certification Authorities" from the folder list on the left. 
+In the pop-up menu, choose "All Tasks" >> "Import.." 
+Click the "Next" button 
+Click the "Browse" button 
+Browse to the location where the certificate is saved, click on it then click the "Open" button 
+Click the "Next" button 
+Select "Place all certificates in the following store" 
+Click the "Browse" button 
+Put a checkmark beside "Show physical stores" 
+Expand the "Trusted Root Certification Authorities" folder 
+Click "Local Computer" 
+Click the "OK" button. 
+Click the "Next" button 
+Click the "Finish" button

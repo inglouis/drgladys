@@ -1,0 +1,427 @@
+html {
+	background: #243447;
+}
+
+body { 
+	font-family: Lato, -webkit-pictograph,"Trebuchet MS";
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+}
+
+.dev-margenes {
+    padding: 0px 50px;
+}
+
+.separador {
+    width: 100%;
+    border: 1px dashed #fff;
+    margin-top: 10px;
+}
+
+#dev-bloqueo-popup{
+    background: rgba(0,0,0,0.8) !important;
+}
+
+#dev-titulo {
+	background: black;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+#regresar {
+    background: #2196f3;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    height: 21px;
+    left: 5px;
+    font-size: 12px;
+    position: relative;
+}
+
+#regresar:hover {
+    transition: 0.3s ease all;
+    background: black;
+    outline: 1px solid #fff;
+}
+
+#dev-parches {
+	display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: fit-content;
+}
+
+#dev-parches section {
+	display: flex;
+    width: 100%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#dev-parches-nueva div, #dev-parches-elimnar div {
+	width: 100%;
+	display: flex;
+	padding: 5px 0px;
+    box-sizing: border-box;
+}
+
+#dev-parches-nueva label {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 15px;
+	color: #fff;
+    font-size: 17px;
+    position: relative;
+    font-weight: bold;
+}
+
+.dev-input1 {
+	width: 100%;
+ 		padding: 10px;
+ 		box-sizing: border-box;
+}
+
+#nacionalidad {
+	width: 207px;
+    height: 100%;
+    padding: 10px;
+}
+
+#sexo {
+	height: 100%;
+    width: 80px;
+    padding: 5px;
+}
+
+#dev-parches-generar {
+	padding: 10px 30px;
+    font-size: 19px;
+    cursor: pointer;
+    border: 2px solid #47b34b;
+    background: #243447;
+    border-radius: 100px;
+    color: #47b34b;
+    transition: 0.3s ease all;
+}
+
+#dev-parches-generar:hover {
+	transition: 0.3s ease all;
+    color: #fff;
+    background: black;
+    border: 2px solid black;
+    box-shadow: 0px 0px 6px -2px;
+}
+
+.copiado::after {
+	content: "copiado";
+    color: #262626;
+    position: absolute;
+    color: #fff;
+    right: 0px;
+    top: 27%;
+    height: 47%;
+    display: flex;
+    align-items: center;
+    padding: 0px 13px;
+    background: #4caf50;
+}
+
+.botones-claves {
+    background: #7a46d6;
+    cursor: pointer;
+    color: #fff;
+    font-size: 12px;
+    border: 2px dotted #37215f;
+    height: 30px;
+}
+
+.inputs-vacios-efecto {
+  animation: inputs-vacios-efecto 0.5s 2 alternate;
+  background-color:#fff;
+  color: #ccc;
+}
+
+@keyframes inputs-vacios-efecto {
+  0% {
+    color: #ccc;
+    background-color:#fff;
+  }
+  50% {
+    color:#fff;
+    background-color:#F78181;
+  }
+  100% {
+    color: #ccc;
+    background-color:#fff;
+  }
+}
+
+.dev-titulos {
+	width: 100%;
+    display: flex;
+    margin: 0px 0px 0px 0px;
+    font-size: 20px;
+    color: #fff;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+#dev-parches-seleccionar {
+	width: 100%;
+	height: 45px;
+}
+
+#dev-parches-eliminar {
+	font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #47b34b;
+    background: #243447;
+    color: #47b34b;
+    transition: 0.3s ease all;
+}
+
+#dev-parches-eliminar:disabled {
+	background-color: #ccc;
+	color: #fff;
+	border: none;
+}
+
+#dev-eliminar-popup {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+}
+
+#dev-eliminar-pop {
+	background: #fff;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    text-align: center;
+    width: 300px;
+    padding: 30px;
+}
+
+#dev-eliminar-boton {
+    background: #4caf50;
+    color: #fff;
+    transition: 0.3s ease all;
+    width: 100%;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+#dev-eliminar-boton:hover {
+	transition: 0.3s ease all;
+	background-color: black;
+}
+
+#dev-eliminar-cerrar {
+	position: absolute;
+    background: none;
+    border: none;
+    right: 0px;
+    padding: 10px;
+    top: 0px;
+    transition: 0.3s ease all;
+    color: #8e8e8e;
+    border-bottom-left-radius: 5px;
+}
+
+#dev-eliminar-cerrar:hover {
+	transition: 0.3s ease all;
+	background: #f44336;
+    border-bottom-left-radius: 5px;
+    color: #fff;
+}
+
+#dev-parches-limpiar, .dev-boton {
+	background: transparent;
+    color: #fff;
+    border: 2px solid #47b34b;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.3s ease all;
+}
+
+#dev-parches-limpiar:hover, .dev-boton:hover {
+	transition: 0.3s ease all;
+    color: #fff;
+    background: black;
+    border: 2px solid black;
+    box-shadow: 0px 0px 6px -2px;
+}
+
+/*-----------------anuncios---------------------------*/
+#dev-parches-actualizacion {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+#dev-parches-actualizacion div {
+    width: 100%;
+}
+
+#dev-parches-actualizacion input {
+    width: 40%;
+    padding: 5px;
+}
+
+#dev-parches-actualizacion textarea {
+    width: 60%;
+    min-height: 500px;
+}
+
+/*-----------------actualizar parches---------------------------*/
+#tabla-parches-contenedor {
+    width: 100%;
+    height: 300px;
+    background: #fff;
+}
+
+#tabla-parches-contenedor table {
+    height: auto;
+}
+
+#dev-actualizar-parches {
+    height: fit-content;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#dev-actualizar-parches [data-subcotenedor] {
+    width: 100%;
+    height: fit-content;
+    background: #fff;
+    padding: 25px;
+    padding-bottom: 12px;
+}
+
+#crud-dev-parche-editar {
+    width: 90%;
+}
+
+#crud-dev-parche-vivo {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #ccc;
+    font-size: 14px !important;
+    position: relative;
+    align-items: baseline;
+    justify-content: flex-start;
+    border-radius: 5px !important;
+}
+
+/*------------------------------------------------------
+//------------------popups efectos--------------------
+/*-----------------efectos generales------------------*/
+#mensaje-popup {
+    text-align: center;
+}
+
+.popup-oculto {
+    display: none !important;
+}
+
+.popup-activo {
+    animation: popup-activo 0.5s forwards;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    display: flex;
+    opacity: 0;
+}
+
+.popup2-activo {
+    animation: popup-activo 0.5s forwards;
+    background-color: transparent;
+    z-index: 10;
+    display: flex;
+    opacity: 0;
+}
+
+.popup-inactivo{
+    animation: popup-inactivo 0.5s forwards;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    display: flex;
+    opacity: 1;
+}
+
+.popup1-activo {
+    animation: popup-activo 0.5s forwards;
+    z-index: 11;
+    display: flex;
+    opacity: 0;
+    background: rgba(0,0,0,0.1);
+}
+
+.popup1-inactivo{
+    animation: popup-inactivo 0.5s forwards;
+    z-index: 11;
+    display: flex;
+    opacity: 1;
+}
+
+.subefecto0 {
+    opacity: 0;
+    animation-name: subefecto0;
+    animation-fill-mode: forwards;
+    animation-duration: 1.2s;
+    top:50px;
+}
+
+.subefecto1 {
+    opacity: 0;
+    animation-name: subefecto1;
+    animation-fill-mode: forwards;
+    animation-duration: 1.2s;
+    top:20px;
+}
+
+.subefecto2 {
+    opacity: 0;
+    animation-name: subefecto2;
+    animation-fill-mode: forwards;
+    animation-duration: 1.2s;
+    top:95%;
+}
+
+@keyframes popup-activo {
+    50%  {opacity: 0}
+    100% {opacity: 1}
+}
+
+@keyframes popup-inactivo {
+    50%  {opacity: 1}
+    100% {opacity: 0}
+}
+
+@keyframes subefecto0 {
+    30%  {opacity:0;}
+    100% {opacity:1;}
+}
+
+@keyframes subefecto1 {
+    30%  {opacity:0; top:20px;}
+    100% {opacity:1;   top:-80px;}
+}
+
+@keyframes subefecto2 {
+    30%  {opacity:0; top:95%;}
+    100% {opacity:1;   top:90%;}
+}

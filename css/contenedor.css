@@ -1,0 +1,26 @@
+body {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: rgb();
+}
+
+.contenedor {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.cabecera {
+	text-align: center;
+	color: rgba();
+}
+
+h1 {
+	text-align: center;
+	color: rgba();
+}
+
+.checar {
+	text-align: center;
+}

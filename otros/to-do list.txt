@@ -1,0 +1,149 @@
+..debuggin windows: psr.exe (system32)
+recdisc.exe
+MRT.exe
+msra.exe
+shrpubw.exe
+Msinfo32.exe
+
+http://intranetx.adm.ula.ve/ore_nutula/
+--------configuracion servidor apache multiples equipos----------
+-----------------------------------------------------------------
+
+C:\Windows\System32\drivers\etc - host
+C:\wamp64\bin\apache\apache2.4.39\conf - httpd.conf
+C:\wamp64\bin\apache\apache2.4.39\conf\extra - httpd-vhosts.conf
+
+//set http_proxy=http://localhost:3306
+
+opciones.class.php
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+psql -U user db_name < C:/User/Luis/directory/archive.sql
+-----------------------------------------------------------------
+select tablename,attname,n_distinct,correlation from pg_stats where tablename='entradas';
+select (p.detalle_servicios->0->>'id_servicio')::bigint from presupuestos.presupuesto as p where p.id_presupuesto = 1
+select tablename,attname,n_distinct,correlation from pg_stats where tablename='tbl_label';
+-----------------------------------------------------------------
+update historias.historias set dire_paci = replace(dire_paci,'\', '') where id_historias = id_historias;
+-----------------------------------------------------------------
+ALTER TABLE presales alter column code type numeric(10,0) using code::numeric;
+ALTER DATABASE "drCastillo" SET datestyle TO "ISO, DMY";
+-----------------------------------------------------------------
+create index idx_tbl_label2 on tbl_label using btree(c2);  
+-----------------------------------------------------------------
+explain (analyze,verbose,timing,costs,buffers) select * from historias.entradas where id_historia between 1 and 100
+-----------------------------------------------------------------
+raise notice 'Value: %  %', 'paso', E'\n'; 
+-----------------------------------------------------------------
+coalesce(NULLIF(a.id_historia, null), 0) AS id_historia
+-----------------------------------------------------------------
+trigger_error('test', E_ERROR);
+-----------------------------------------------------------------
+shift + click derecho = abrir consola en carpeta
+rename "*.txt" "////*.txt"
+-----------------------------------------------------------------
+///////////////////////////////////
+http://www.dbrnd.com/2015/05/how-to-create-job-in-postgresql/  
+///////////////////////////////////
+
+///////////////////////////////////
+corto plazo
+///////////////////////////////////
+
+-agregar conversion de monedas en compras rapidas
+-organizar el codigo de carga de detalle y editar en presupuestos porque da asco
+-MOSTRAR TOTAL DE PAQUETE DESDE LOS DETALLES DEL PRESUPUESTO
+-agilizar carga de datos del recipe de indicaciones
+-EVITAR QUE PUEDAN GENERARSE USUARIOS CON EL MISMO NOMBRE XDDD
+-el crud esta llamando dos veces a las propieedadesTR, resolver esta perdida de rendimiento estupida
+-AJUSTAR EL TIEMPO EN QUE VENCE LA SESION A 10 MIN
+-quitar la variable query administrador de confirmar ordenes y reemplazarla por el rol usuario
+
+///////////////////////////////////
+mediano plazo
+///////////////////////////////////
+
+-en un futuro cercano hacer que la generacion de recibos de carga ocurra en una sola tarea de postgresql (esto es parte de toda la refactorizacion de las facturas) 
+-historial formulas
+-historial medicos
+-restaurar sistema de notas y adaptar para que sea semejante a un chat de voz [websockets]
+-con variables de sesion es posible conservar y aplicar el filtro de status de cada formulario
+
+///////////////////////////////////
+largo plazo
+///////////////////////////////////
+
+-experimentar con shadow-dom
+-en un futuro cambiar todas las clases de window. a var puras por temas de seguridad, la clases más importantes y delicadas tendria que ver como protegerla con getters y setters
+-tablet para precarga de historias cuando piden información
+
+----------------------------------------------
+----------------------------------------------
+******** RAMA DEVELOPER CAMBIADOS ************
+----------------------------------------------
+
+----------------------------------------------
+----------------------------------------------
+----------------------------------------------
+
+These are Encapsulation
+Data Abstraction
+Polymorphism
+Inheritance
+
+O - Open-closed Principle.
+L - Liskov Substitution Principle.
+I - Interface Segregation Principle.
+D - Dependency Inversion Principle.
+-------------------------------------------
+-------------------------------------------
+footer:has(p:hover) p {
+    display: none;
+}
+
+estudiar :has en css
+-------------------------------------------
+twitter
+
+var x = function x () {
+  
+   var existencia1 = setInterval(function() {
+
+            if 
+
+(document.querySelector('html').getElementsByClassName ('css-1dbjc4n r-1awozwy r-1kihuf0 r-18u37iz r-1pi2tsx r-1777fci r-1pjcn9w r-xr3zp9 r-1xcajam r-ipm5af r-g6jmlv').length > 0) {
+
+                    
+
+  document.querySelector('html').setAttribute('style', 'font-size: 15px;overflow: scroll;margin-right: 18px;')
+
+                      document.querySelector('html').getElementsByClassName ('css-1dbjc4n r-1awozwy r-1kihuf0 r-18u37iz r-1pi2tsx r-1777fci r-1pjcn9w r-xr3zp9 r-1xcajam r-ipm5af r-g6jmlv')[0].remove()
+                
+            }
+
+    }, 1500);
+        
+    
+
+}
+
+
+
+x()
+
+
+
+Vegans get no pass from me, they eat all the food MY food has to eat.
+
+
+contraseña local sistema
+.-----------------------
+RHhjHRivS??AxTE - MARCOXL
+INhUdLtCmyUSQk# - SISTEMA
+IvTYJQXPs82a4xW - KEYLA SISTEMA
+AeuHt?L3JGH4=vA - FINA
+1W6U#k8KO!Lp=MW - RECEPCION2
+W5m3aS*g/m=Icuj - JANETH
+NOS!s1ic3KpC0XL - moraturh
+1$QC8qNl0RH0SSI - inglouis
+KcWdsbhV6OEDiCB - cmbonza
