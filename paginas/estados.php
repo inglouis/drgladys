@@ -118,7 +118,7 @@
       <div id="crud-insertar-pop" class="popup-oculto" style="width: 50%">
         <button id="crud-insertar-cerrar" data-crud='cerrar'>X</button>
         <section id="crud-insertar-titulo" data-crud='titulo'>
-          AGREGAR ESTADO
+          INSERTAR ESTADO
         </section> 
 
         <div class="filas">
