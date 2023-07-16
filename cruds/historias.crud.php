@@ -174,7 +174,7 @@
         
         <div>
           <label class="requerido">Fecha de nacimiento</label>
-          <input type="date" id="editar-fecha" data-valor="fecha_nacimiento" class="editar-valores lleno upper">
+          <input type="date" id="editar-fecha" data-valor="fecha_naci" class="editar-valores lleno upper">
         </div>
 
         <div>
@@ -226,15 +226,6 @@
 
         </div>
         
-        <div>
-          <label>Talla - M/CM</label>
-          <input type="number" data-valor="talla" placeholder="0.00" class="editar-valores upper">
-        </div>
-
-        <div>
-          <label">Peso - KG</label>
-          <input type="number" data-valor="peso" placeholder="0.00" class="editar-valores upper">
-        </div>
 
       </div>
 
@@ -266,27 +257,6 @@
           </section>
 
         </div>
-
-        <div>
-
-          <label>Correos</label>
-          
-          <section id="cc-correos-editar" class="contenedor-consulta editar-valores borde-estilizado" data-valor="correos">
-
-            <span class="tooltip-general">Presionar [ENTER] para agregar</span>
-            <section>
-              <input type="text" data-estilo="cc-input" placeholder="Cargar...">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
-            </section>
-            <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
-
-          </section>
-
-        </div>
-
-      </div>
-
-      <div class="columnas">
 
         <div>
           <label>Otros</label>
@@ -400,16 +370,6 @@
           </select>
 
         </div>
-        
-        <div>
-          <label>Talla - M/CM</label>
-          <input type="number" placeholder="0.00" class="insertar-valores upper">
-        </div>
-
-        <div>
-          <label>Peso - KG</label>
-          <input type="number" placeholder="0.00" class="insertar-valores upper">
-        </div>
 
       </div>
 
@@ -429,23 +389,6 @@
             <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
 
           </section>
-        </div>
-
-        <div>
-
-          <label>Correos</label>
-          
-          <section id="cc-correos-insertar" class="contenedor-consulta insertar-valores borde-estilizado">
-
-            <span class="tooltip-general">Presionar [ENTER] para agregar</span>
-            <section>
-              <input type="text" data-estilo="cc-input" placeholder="Cargar...">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
-            </section>
-            <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
-
-          </section>
-
         </div>
 
       </div>

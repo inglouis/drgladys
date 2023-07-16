@@ -1823,7 +1823,7 @@ span.numeracion {
     -khtml-user-select: none;
     -ms-user-select: none;
     background: #fff !important;
-    box-shadow: inset -4px 0px 5px 0px rgb(197 197 197 / 35%);
+    box-shadow: inset -1px 0px 5px 0px rgb(197 197 197 / 35%);
 }
 
 .grupo {
