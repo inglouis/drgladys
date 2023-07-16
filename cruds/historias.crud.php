@@ -226,15 +226,6 @@
 
         </div>
         
-        <div>
-          <label>Talla - M/CM</label>
-          <input type="number" data-valor="talla" placeholder="0.00" class="editar-valores upper">
-        </div>
-
-        <div>
-          <label">Peso - KG</label>
-          <input type="number" data-valor="peso" placeholder="0.00" class="editar-valores upper">
-        </div>
 
       </div>
 
@@ -399,16 +390,6 @@
             <option value="M">MASCULINO</option>
           </select>
 
-        </div>
-        
-        <div>
-          <label>Talla - M/CM</label>
-          <input type="number" placeholder="0.00" class="insertar-valores upper">
-        </div>
-
-        <div>
-          <label>Peso - KG</label>
-          <input type="number" placeholder="0.00" class="insertar-valores upper">
         </div>
 
       </div>
