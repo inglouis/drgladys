@@ -94,7 +94,7 @@
 	//------------------------------------------------
 	if (!isset($_SESSION['modo_filas'])) {
 
-		$_SESSION['modo_filas'] = 10;
+		$_SESSION['modo_filas'] = 14;
 
 	}
 
