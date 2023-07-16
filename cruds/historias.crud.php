@@ -174,7 +174,7 @@
         
         <div>
           <label class="requerido">Fecha de nacimiento</label>
-          <input type="date" id="editar-fecha" data-valor="fecha_nacimiento" class="editar-valores lleno upper">
+          <input type="date" id="editar-fecha" data-valor="fecha_naci" class="editar-valores lleno upper">
         </div>
 
         <div>
@@ -257,10 +257,6 @@
           </section>
 
         </div>
-
-      </div>
-
-      <div class="columnas">
 
         <div>
           <label>Otros</label>

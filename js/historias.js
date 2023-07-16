@@ -343,16 +343,16 @@ historias['crud']['customBodyEvents'] = {
 			historias.sublista = historias.tr.sublista
 
 			if (permitirLimpieza) {
-				tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.reposos-valores', '', {
-					"contenedor-personalizable": window.camposTextosPersonalizables,
-					"procesado": e => {
-						gid('reposos-inicio-insertar').value = window.dia
-					}
-				})
-				gid('reposos-fecha-insertar').innerHTML = ''
+				// tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				// tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				// tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				// tools.limpiar('.reposos-valores', '', {
+				// 	"contenedor-personalizable": window.camposTextosPersonalizables,
+				// 	"procesado": e => {
+				// 		gid('reposos-inicio-insertar').value = window.dia
+				// 	}
+				// })
+				// gid('reposos-fecha-insertar').innerHTML = ''
 			} else {
 				permitirLimpieza = true
 			}
