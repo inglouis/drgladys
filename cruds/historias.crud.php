@@ -25,10 +25,9 @@
 <!-------------------------------------------------------- -->
 <div id="crud-informacion-popup" class="popup-oculto" data-crud='popup'>
   <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="
-      height: 83%;
-      justify-content: flex-start;
-      position: relative;
-      min-width: 450px;
+    justify-content: flex-start;
+    position: relative;
+    min-width: 450px;
   ">
 
     <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
@@ -39,10 +38,15 @@
 
     <input type="text" id="informacion-enfocar" style="position: absolute; top: -100%;">
 
-    <div class="valor-cabecera" style="padding-top: 7px;">
-      <div style="justify-content: flex-start;">
-        <label>Última consulta (AAAA-MM-DD)</label>
-        <input type="text" id="informacion-fecha-valor" data-valor="fecha_cons" class="informacion-valores upper visual" disabled>
+    <div class="valor-cabecera" style="padding-top: 2px;">
+      <div style="
+        justify-content: flex-start;
+        padding: 0px 0px 3px 0px;
+        margin-bottom: 7px;
+        border-bottom: 1px solid #97b2d1;
+      ">
+        <label>Última consulta (MM-DD-AAAA)</label>
+        <input type="text" id="informacion-fecha-valor" data-valor="fecha_cons" class="informacion-valores upper visual" disabled style="width: 65px;">
       </div>
     </div>
 
@@ -94,23 +98,13 @@
 
         </div>
 
-        <div style="width: 100px">
-          <label>Talla[M/CM]</label>
-          <input type="text" data-valor="talla" class="informacion-valores upper visual" disabled>
-        </div>
-
-        <div style="width: 100px">
-          <label>Peso[KG]</label>
-          <input type="text" data-valor="peso" class="informacion-valores upper visual" disabled>
-        </div>
-
       </div>
 
       <div class="columnas">
         
         <div>
           <label>Fecha de nacimiento</label>
-          <input type="date" id="informacion-fecha" data-valor="fecha_nacimiento" class="informacion-valores upper visual" disabled>
+          <input type="date" id="informacion-fecha" data-valor="fecha_naci" class="informacion-valores upper visual" disabled>
         </div>
 
         <div>
@@ -125,11 +119,6 @@
         <div style="margin: 0px">
           <label>Teléfonos</label>
           <section data-valor="telefonos" class="informacion-valores contenedor-lista"></section>
-        </div>
-
-        <div style="margin: 0px">
-          <label>Correos</label>
-          <section data-valor="correos" class="informacion-valores contenedor-lista"></section>
         </div>
 
       </div>

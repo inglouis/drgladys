@@ -457,6 +457,17 @@ export class Tabla {
                       qs(`#${th.tabla} tbody`).appendChild(div)
 
                   setTimeout(() => {
+
+                    if (th.retornarSiempre) {
+
+                      th.busqueda = th.lista
+
+                    } else {
+
+                      th.busqueda = []
+
+                    }
+
                     th.generar(true)  
                   }, 2500)
 
@@ -473,17 +484,7 @@ export class Tabla {
             }
 
         } else {
-
-          if (th.retornarSiempre) {
-
-            th.busqueda = th.lista
-
-          } else {
-
-            th.busqueda = []
-
-          }
-
+          th.busqueda = th.lista
           th.generar(true)
         }
 

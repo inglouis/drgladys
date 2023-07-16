@@ -3,7 +3,7 @@
     
     class Model extends ppal {
 
-        public $schema ='principales';
+        public $schema ='historias';
         public $tabla = 'historias';
 
         public $filtroMapa = [
@@ -16,82 +16,26 @@
             $sql = "
                 select 
                     id_historia,
-                    id_correlativo
                     id_ocupacion,
-                    id_proveniencia,
-                    id_medico_referido,
-                    id_ocupacion,
-                    id_parentesco,
-                    id_estado_civil,
-                    id_religion,
                     nombres,
                     apellidos,
-                    cedula,
                     direccion,
+                    cedula,
                     sexo,
-                    fecha_naci,
-                    lugar_naci,
+                    talla,
+                    peso,
+                    fecha_nacimiento,
                     telefonos,
+                    correos,
                     otros,
-                    emergencia_persona,
-                    emergencia_informacion,
-                    emergencia_contacto,
-                    fecha_consulta,
-                    fecha,
+                    fecha_cons,
                     status, 
                     concat(nombres, ' ', apellidos) as nombre_completo,
-                    TO_CHAR(fecha_consulta :: DATE, 'dd-mm-yyyy') as fecha_consulta_arreglada 
-                from $this->schema.$this->tabla where status = 'A' order by id_historia desc
-                limit 800
+                    TO_CHAR(fecha_cons :: DATE, 'dd-mm-yyyy') as fecha_cons_arreglada 
+                from $this->tabla.$this->schema where status = 'A' order by id_historia desc
             ";
             
             return $this->seleccionar($sql, $args);
-        }
-
-        public function buscar_historias($args) {
-
-            $busqueda = $args[0];
-                        
-            if (is_numeric($busqueda) || gettype($busqueda) == 'integer' || ctype_digit($busqueda)) {
-                $historia = "or id_historia = ".(int)$busqueda;
-            } else {
-                $historia = '';
-            }
-
-            $sql = "
-                select 
-                    id_historia,
-                    id_ocupacion,
-                    id_estado,
-                    id_municipio,
-                    id_medico,
-                    id_ocupacion,
-                    id_parentesco,
-                    id_estado_civil,
-                    id_religion,
-                    nombres,
-                    apellidos,
-                    direccion_paciente,
-                    cedula,
-                    sexo,
-                    parentesco,
-                    fecha_naci,
-                    lugar_naci,
-                    telefonos,
-                    otros,
-                    persona_emergencia,
-                    persona_direccion,
-                    fecha_consulta,
-                    status, 
-                    concat(nombres, ' ', apellidos) as nombre_completo,
-                    TO_CHAR(fecha_consulta :: DATE, 'dd-mm-yyyy') as fecha_consulta_arreglada 
-                from $this->schema.$this->tabla
-                where cedula like '$busqueda' or concat(nombres, ' ', apellidos) like '%'|| UPPER('$busqueda') ||'%' $historia order by 1 DESC
-                limit 800
-            ";
-
-            return $this->seleccionar($sql, []);
-
         }
 
         public function traer_historia($args) {
@@ -104,13 +48,13 @@
 
         public function insertar_historia($args) {
 
-            $id_ocupacion = &$args[5];
+        	$id_ocupacion = &$args[5];
             $telefonos = &$args[9];
             $correos   = &$args[10];
             $otros     = &$args[11];
 
             if (empty($id_ocupacion)) {
-                $id_ocupacion = 0;
+            	$id_ocupacion = 0;
             }
 
             foreach ($otros as &$o) {
@@ -169,9 +113,9 @@
             $telefonos = &$args[10];
             $correos   = &$args[11];
             $otros     = &$args[12];
-            
-            if (empty($id_ocupacion)) {
-                $id_ocupacion = 0;
+			
+			if (empty($id_ocupacion)) {
+            	$id_ocupacion = 0;
             }
 
             foreach ($telefonos as &$t) {
