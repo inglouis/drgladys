@@ -465,14 +465,6 @@ contenedoresEditar.eventos().contenedor(
 )
 
 contenedoresEditar.eventos().contenedor(
-	'cc-correos-editar', //elemento
-	['', '', ['', '']],    //informacion de la petición
-	[0, 1], 			   //limitador de busqueda
-	[false, true, [false, false], false, true, false, false, false, [false, true], false, false], //comportamientos extras
-	{} //funciones
-)
-
-contenedoresEditar.eventos().contenedor(
 	'cc-otros-editar', //elemento
 	['', '', ['', '']],    //informacion de la petición
 	[0, 1], 			   //limitador de busqueda
@@ -482,14 +474,6 @@ contenedoresEditar.eventos().contenedor(
 
 contenedoresInsertar.eventos().contenedor(
 	'cc-telefonos-insertar', //elemento
-	['', '', ['', '']],    //informacion de la petición
-	[0, 1], 			   //limitador de busqueda
-	[false, true, [false, false], false, true, false, false, false, [false, true], false, false], //comportamientos extras
-	{} //funciones
-)
-
-contenedoresInsertar.eventos().contenedor(
-	'cc-correos-insertar', //elemento
 	['', '', ['', '']],    //informacion de la petición
 	[0, 1], 			   //limitador de busqueda
 	[false, true, [false, false], false, true, false, false, false, [false, true], false, false], //comportamientos extras
