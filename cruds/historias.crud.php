@@ -120,7 +120,7 @@
         <div>
           
           <label>Ocupación</label>
-          <section data-grupo="cc-ocupacion-consultar" class="combo-consulta">
+          <section data-grupo="cc-ocupaciones-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_ocupacion" disabled style="color:#262626"></select>
           </section>
@@ -130,7 +130,7 @@
         <div>
           
           <label>Proveniencia</label>
-          <section data-grupo="cc-proveniencia-consultar" class="combo-consulta">
+          <section data-grupo="cc-proveniencias-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_proveniencia" disabled style="color:#262626"></select>
           </section>
@@ -140,7 +140,7 @@
         <div>
           
           <label>Médico referido</label>
-          <section data-grupo="cc-medico-consultar" class="combo-consulta">
+          <section data-grupo="cc-medicos-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_medico_referido" disabled style="color:#262626"></select>
           </section>
@@ -154,7 +154,7 @@
         <div>
           
           <label>Parentesco</label>
-          <section data-grupo="cc-parentesco-consultar" class="combo-consulta">
+          <section data-grupo="cc-parentescos-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_parentesco" disabled style="color:#262626"></select>
           </section>
@@ -164,7 +164,7 @@
         <div>
           
           <label>Estado civil</label>
-          <section data-grupo="cc-civil-consultar" class="combo-consulta">
+          <section data-grupo="cc-estado_civil-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_estado_civil" disabled style="color:#262626"></select>
           </section>
@@ -174,7 +174,7 @@
         <div>
           
           <label>Religión</label>
-          <section data-grupo="cc-religion-consultar" class="combo-consulta">
+          <section data-grupo="cc-religiones-consultar" class="combo-consulta">
             <input type="text" autocomplete="off"  data-limit="" data-hide>
             <select class="informacion-valores upper visual" data-valor="id_religion" disabled style="color:#262626"></select>
           </section>
@@ -244,6 +244,7 @@
           <input type="text" autocomplete="off"  data-valor="id_historia" class="editar-cargar upper visual" disabled style="width: 65px;">
         </div>
       </div>
+
     </section>
 
     <div class="filas" style="justify-content: flex-start;">
@@ -253,6 +254,28 @@
         <div style="width: 100px" title="[TAB] para enforcar">
           <label class="requerido">Cédula/rif</label>
           <input id="editar-enfocar" type="text" autocomplete="off"  maxlength="14" data-valor="cedula" placeholder="-" class="editar-valores lleno upper" maxlength="14">
+        </div>
+
+        <div style="width: 200px;">
+          <label>N° DE HIJO</label>
+          <select data-valor="nro_hijo" class="editar-valores upper">
+            <option value="0">---</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+          </select>
         </div>
 
         <div>
@@ -304,7 +327,7 @@
           </button>
 
           <label class="requerido">Ocupación</label>
-          <section data-grupo="cc-ocupacion-editar" class="combo-consulta">
+          <section data-grupo="cc-ocupaciones-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off" placeholder="Buscar ocupación" data-limit="" class="upper">
             <select class="editar-valores lleno scroll" data-valor="id_ocupacion" id="editar-ocupacion"></select>
@@ -315,12 +338,12 @@
 
         <div style="position: relative;">
 
-          <button id="editar-nueva-proveniencia" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
+          <button id="editar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
             +  
           </button>
 
           <label>Proveniencia</label>
-          <section data-grupo="cc-proveniencia-editar" class="combo-consulta">
+          <section data-grupo="cc-proveniencias-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar proveniencia" data-limit="" class="upper">
             <select class="editar-valores scroll" data-valor="id_proveniencia" id="editar-proveniencia"></select>
@@ -331,12 +354,12 @@
 
         <div style="position: relative;">
 
-          <button id="editar-nueva-medico" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
+          <button id="editar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
             +  
           </button>
 
           <label>Médico referido</label>
-          <section data-grupo="cc-medico-editar" class="combo-consulta">
+          <section data-grupo="cc-medicos-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar médico referido" data-limit="" class="upper">
             <select class="editar-valores scroll" data-valor="id_proveniencia" id="editar-medico"></select>
@@ -351,12 +374,12 @@
 
         <div style="position: relative;">
           
-          <button id="editar-nueva-parentesco" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
+          <button id="editar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
             +  
           </button>
 
           <label>Parentesco</label>
-          <section data-grupo="cc-parentesco-editar" class="combo-consulta">
+          <section data-grupo="cc-parentescos-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar parentesco" data-limit="" class="upper">
             <select class="editar-valores scroll" data-valor="id_parentesco" id="editar-parentesco"></select>
@@ -367,12 +390,12 @@
 
         <div style="position: relative;">
           
-          <button id="editar-nueva-civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
+          <button id="editar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
             +  
           </button>
 
           <label>Estado civil</label>
-          <section data-grupo="cc-civil-editar" class="combo-consulta">
+          <section data-grupo="cc-estado_civil-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar estado civil" data-limit="" class="upper">
             <select class="editar-valores scroll" data-valor="id_estado_civil" id="editar-civil"></select>
@@ -383,12 +406,12 @@
 
         <div style="position: relative;">
           
-          <button id="editar-nueva-religion" class="boton-ver contenedor-resaltar" title="Cargar nueva religión" style="left: 50px; top: 4px">
+          <button id="editar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nueva religión" style="left: 50px; top: 4px">
             +  
           </button>
 
           <label>Religión</label>
-          <section data-grupo="cc-religion-editar" class="combo-consulta">
+          <section data-grupo="cc-religiones-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar religión" data-limit="" class="upper">
             <select class="editar-valores scroll" data-valor="id_religion" id="editar-religion"></select>
@@ -494,6 +517,28 @@
           <input id="insertar-enfocar" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper" maxlength="14">
         </div>
 
+        <div style="width: 200px;">
+          <label>N° DE HIJO</label>
+          <select class="insertar-valores upper">
+            <option value="0">---</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+          </select>
+        </div>
+
         <div>
           <label class="requerido">Nombres</label>
           <input id="insertar-nombre" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper">
@@ -552,7 +597,7 @@
           </button>
 
           <label class="requerido">Ocupación</label>
-          <section data-grupo="cc-ocupacion-insertar" class="combo-consulta">
+          <section data-grupo="cc-ocupaciones-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off" placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores lleno scroll" id="insertar-ocupacion"></select>
@@ -563,12 +608,12 @@
 
         <div style="position: relative;">
 
-          <button id="insertar-nueva-proveniencia" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
+          <button id="insertar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
             +  
           </button>
 
           <label>Proveniencia</label>
-          <section data-grupo="cc-proveniencia-insertar" class="combo-consulta">
+          <section data-grupo="cc-proveniencias-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores scroll" id="insertar-proveniencia"></select>
@@ -579,12 +624,12 @@
 
         <div style="position: relative;">
 
-          <button id="insertar-nueva-medico" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
+          <button id="insertar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
             +  
           </button>
 
           <label>Médico referido</label>
-          <section data-grupo="cc-medico-insertar" class="combo-consulta">
+          <section data-grupo="cc-medicos-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores scroll" id="insertar-medico"></select>
@@ -599,12 +644,12 @@
         
         <div style="position: relative;">
 
-          <button id="insertar-nueva-parentesco" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
+          <button id="insertar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
             +  
           </button>
 
           <label>Parentesco</label>
-          <section data-grupo="cc-parentesco-insertar" class="combo-consulta">
+          <section data-grupo="cc-parentescos-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores scroll" id="insertar-parentesco"></select>
@@ -615,12 +660,12 @@
 
         <div style="position: relative;">
 
-          <button id="insertar-nueva-civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
+          <button id="insertar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
             +  
           </button>
 
           <label>Estado civil</label>
-          <section data-grupo="cc-civil-insertar" class="combo-consulta">
+          <section data-grupo="cc-estado_civil-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores scroll" id="insertar-civil"></select>
@@ -631,12 +676,12 @@
 
         <div style="position: relative;">
 
-          <button id="insertar-nueva-religion" class="boton-ver contenedor-resaltar" title="Cargar nuevo religion" style="left: 50px; top: 4px">
+          <button id="insertar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nuevo religion" style="left: 50px; top: 4px">
             +  
           </button>
 
           <label>Religión</label>
-          <section data-grupo="cc-religion-insertar" class="combo-consulta">
+          <section data-grupo="cc-religiones-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
             <select class="insertar-valores scroll" id="insertar-religion"></select>
@@ -701,10 +746,10 @@
 <?php 
   $insersiones = array(
     0 => ["ocupaciones", "ocupación"],
-    1 => ["proveniencia", "proveniencia"],
-    2 => ["parentesco", "parentesco"],
-    3 => ["civil", "estado civil"],
-    4 => ["religion", "religión"]
+    1 => ["proveniencias", "proveniencia"],
+    2 => ["parentescos", "parentesco"],
+    3 => ["estado_civil", "estado civil"],
+    4 => ["religiones", "religión"]
   );
 
   foreach ($insersiones as $r) {
@@ -742,12 +787,12 @@
   }
 ?>
 
-<div id="crud-insertar-medico-popup" class="popup-oculto" data-crud='popup'>
-  <div id="crud-insertar-medico-pop" class="popup-oculto" style="width:50%;">
+<div id="crud-insertar-medicos-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-insertar-medicos-pop" class="popup-oculto" style="width:50%;">
 
-    <button id="crud-insertar-medico-cerrar" data-crud='cerrar'>X</button>
+    <button id="crud-insertar-medicos-cerrar" data-crud='cerrar'>X</button>
 
-    <section id="crud-insertar-medico-titulo" data-crud='titulo'>
+    <section id="crud-insertar-medicos-titulo" data-crud='titulo'>
       Insertar médico referido
     </section> 
 
@@ -756,20 +801,20 @@
       <div class="columnas">
         <div>
           <label class="requerido">Nombre del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-medico" maxlength="100" class="nuevas-medico lleno upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="nombre-medicos" maxlength="100" class="nuevas-medicos lleno upper" placeholder="...">
         </div>
       </div>
 
       <div class="columnas">
         <div>
           <label>Dirección del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-medico" maxlength="100" class="nuevas-medico upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="direccion-medicos" maxlength="100" class="nuevas-medicos upper" placeholder="...">
         </div>
       </div> 
 
     </section>
 
-    <section id="crud-insertar-medico-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
+    <section id="crud-insertar-medicos-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
       <button class="botones-formularios insertar">CONFIRMAR</button>
       <button class="botones-formularios cerrar">CANCELAR</button> 
     </section>

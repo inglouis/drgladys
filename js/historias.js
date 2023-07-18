@@ -17,16 +17,16 @@ import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Re
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones', 'insertar-proveniencia', 'insertar-parentesco', 'insertar-civil', 'insertar-religion', 'insertar-medico'], 27)
-window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencia', 'insertar-parentesco', 'insertar-civil', 'insertar-religion', 'insertar-medico'], 27)
+window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
+window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
-window.proPop = new PopUp('crud-insertar-proveniencia-popup','popup', 'subefecto', true, 'insertar-proveniencia', '', 27)
-window.parPop = new PopUp('crud-insertar-parentesco-popup','popup', 'subefecto', true, 'insertar-parentesco', '', 27)
-window.civPop = new PopUp('crud-insertar-civil-popup','popup', 'subefecto', true, 'insertar-civil', '', 27)
-window.relPop = new PopUp('crud-insertar-religion-popup','popup', 'subefecto', true, 'insertar-religion', '', 27)
-window.medPop = new PopUp('crud-insertar-medico-popup','popup', 'subefecto', true, 'insertar-medico', '', 27)
+window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
+window.parPop = new PopUp('crud-insertar-parentescos-popup','popup', 'subefecto', true, 'insertar-parentescos', '', 27)
+window.civPop = new PopUp('crud-insertar-estado_civil-popup','popup', 'subefecto', true, 'insertar-estado_civil', '', 27)
+window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto', true, 'insertar-religiones', '', 27)
+window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 //window.diaPop = new PopUp('crud-insertar-diagnosticos-popup','popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
 
 ediPop.evtBotones()
@@ -194,6 +194,7 @@ export var historias = new Historias(new Tabla(
 		[['Correlativo', 'N° de historia original'], true, 1],
 		['Paciente', true, 23],
 		['N° de cédula', true, 10],
+		['N° de hijo', true, 26],
 		['Status', true, 22]
 	],
 	'tabla-historias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
@@ -215,6 +216,7 @@ historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 23)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 10)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 26)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 22)
 
 /////////////////////////////////////////////////////
@@ -388,7 +390,7 @@ historias['crud']['customBodyEvents'] = {
 				"procesado": function fn() {
 
 					qs('#editar-edad').value = tools.calcularFecha(new Date(qs('#editar-fecha').value))
-					qs('[data-grupo=cc-ocupacion-editar] input').value = ''
+					qs('[data-grupo=cc-ocupaciones-editar] input').value = ''
 				
 				}
 			})
@@ -469,38 +471,38 @@ historias['crud'].botonBuscar('buscar', false)
 //										E V E N T O S                                                
 //----------------------------------------------------------------------------------------------------
 var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_diagnosticos', [])),
-	comboOcupacion    = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_ocupacion', [])),
+	comboOcupacion    = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_ocupaciones', [])),
 	comboProveniencia = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_proveniencias', [])),
 	comboParentesco   = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_parentescos', [])),
-	comboCivil        = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_estados_civiles', [])),
+	comboCivil        = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_estado_civil', [])),
 	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
 	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', []))
 
 contenedores.eventos().checkboxes('status')
 
-contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-ocupacion-insertar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-ocupaciones-consultar', ['combos', 'combo_ocupaciones', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-ocupaciones-insertar', ['combos', 'combo_ocupaciones', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-ocupaciones-editar', ['combos', 'combo_ocupaciones', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresConsultar.eventos().combo('cc-parentesco-consultar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-parentesco-insertar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-parentesco-editar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-parentescos-consultar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-parentescos-insertar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-parentescos-editar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresConsultar.eventos().combo('cc-proveniencia-consultar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-proveniencia-insertar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-proveniencia-editar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-proveniencias-consultar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-proveniencias-insertar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-proveniencias-editar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresConsultar.eventos().combo('cc-civil-consultar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-civil-insertar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-civil-editar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-estado_civil-consultar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-estado_civil-insertar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-estado_civil-editar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresConsultar.eventos().combo('cc-religion-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-religion-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-religion-editar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-religiones-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-religiones-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-religiones-editar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresConsultar.eventos().combo('cc-medico-consultar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true})
-contenedoresInsertar.eventos().combo('cc-medico-insertar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresEditar.eventos().combo('cc-medico-editar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresConsultar.eventos().combo('cc-medicos-consultar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-medicos-insertar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-medicos-editar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
 
 contenedoresEditar.eventos().contenedor(
 	'cc-telefonos-editar', //elemento
@@ -599,6 +601,10 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 					}
 				
+				} else if (resultado.trim() === 'repetido') {
+
+					notificaciones.mensajeSimple('Un paciente con esta cédula y N° de hijo ya existe', resultado, 'F') 
+
 				} else {
 
 					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
@@ -647,6 +653,10 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 				}
 
 			
+			} else if (resultado.trim() === 'repetido') {
+
+				notificaciones.mensajeSimple('Un paciente con esta cédula y N° de hijo ya existe', resultado, 'F')
+
 			} else {
 
 				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
@@ -705,21 +715,20 @@ qs('#crud-insertar-limpiar').addEventListener('click', e => {
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
 
-var insersiones_lista  = ['ocupaciones', 'proveniencia', 'parentesco', 'civil', 'religion', 'medico'],
-	insersiones_inputs = ['ocupacion', 'proveniencia', 'parentesco', 'civil', 'religion', 'medico'], //arreglar los nombres para que sea iguales en todas partes
+var insersiones_lista  = ['ocupaciones', 'proveniencias', 'parentescos', 'estado_civil', 'religiones', 'medicos'],
 	insersiones_lista_combos = [ocuPop, proPop, parPop, civPop, relPop, medPop];
 
 insersiones_lista.forEach((grupo, i) => {
 
 	qs(`#editar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		qs(`#nombre-${grupo}`).value = ''
+		tools.limpiar(`.nuevas-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
 	qs(`#insertar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		qs(`#nombre-${grupo}`).value = ''
+		tools.limpiar(`.nuevas-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
@@ -731,13 +740,17 @@ insersiones_lista.forEach((grupo, i) => {
 
 			if (datos !== '') {
 
-				datos.splice(1,1)
+				if (grupo === 'medicos') {
+					datos.splice(2,1)
+				} else {
+					datos.splice(1,1)
+				}
 
 				var resultado = await tools.fullAsyncQuery(grupo, `crear_${grupo}`, datos)
 
 				if(resultado.trim() === 'exito') {
 
-					notificaciones.mensajeSimple(`${grupo.toUpperCase()} insertada con éxito`, resultado, 'V')
+					notificaciones.mensajeSimple(`Información insertada con éxito`, resultado, 'V')
 
 					setTimeout(async () => {
 
@@ -750,11 +763,11 @@ insersiones_lista.forEach((grupo, i) => {
 
 						insersiones_lista_combos[i].pop()
 
-						contenedoresEditar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] input`), lista)
-						contenedoresEditar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] input`))
+						contenedoresEditar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_lista[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_lista[i]}-editar"] input`), lista)
+						contenedoresEditar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_lista[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_lista[i]}-editar"] input`))
 
-						contenedoresInsertar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] input`), lista)
-						contenedoresInsertar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] input`))
+						contenedoresInsertar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_lista[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_lista[i]}-insertar"] input`), lista)
+						contenedoresInsertar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_lista[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_lista[i]}-insertar"] input`))
 
 					}, 500)
 

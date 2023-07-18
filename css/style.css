@@ -1631,11 +1631,11 @@ span.numeracion {
 
 #crud-editar-pop, #crud-insertar-pop,
 #crud-insertar-ocupaciones-pop,
-#crud-insertar-proveniencia-pop,
-#crud-insertar-parentesco-pop,
-#crud-insertar-civil-pop,
-#crud-insertar-religion-pop,
-#crud-insertar-medico-pop,
+#crud-insertar-proveniencias-pop,
+#crud-insertar-parentescos-pop,
+#crud-insertar-estado_civil-pop,
+#crud-insertar-religiones-pop,
+#crud-insertar-medicos-pop,
 #crud-insertar-diagnosticos-pop {
     height: fit-content;
     display: flex;
@@ -2552,11 +2552,11 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
-    width: 13%;
+    width: 10%;
 }
 
 #tabla-historias tbody tr td:nth-child(4) {
-    width: 15%;
+    width: 10%;
 }
 
 #tabla-historias tbody tr td:nth-child(5) {
@@ -2564,10 +2564,14 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(6) {
-    width: 20%;
+    width: 18%;
 }
 
 #tabla-historias tbody tr td:nth-child(7) {
+    width: 10%;
+}
+
+#tabla-historias tbody tr td:nth-child(8) {
     width: 20%;
 }
 
