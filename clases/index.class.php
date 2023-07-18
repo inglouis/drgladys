@@ -161,6 +161,10 @@
 
                     $li = '';
 
+                    // echo "<pre>";
+                    // print_r($lista);
+                    // echo "</pre>";
+
                     $li_atributos = $lista[$elemento]['atributos'];
                     
                     /////////////////////////////////////////////////

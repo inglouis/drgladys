@@ -23,7 +23,7 @@
   <!-------------------------------------------------------- -->
   <head>
       <?php require_once('../estructura/head.php');?>
-      <title>ESTADO CIVIL</title>
+      <title>ESTADOS CIVILES</title>
       <script type="module" src="../js/estado_civil.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
   </head>
@@ -41,7 +41,7 @@
         <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
 
         <section id="crud-informacion-titulo" data-crud='titulo'>
-          INFORMACIÓN DE ESTADO CIVIL
+          INFORMACIÓN DEL ESTADO CIVIL
         </section>
 
         <div class="filas" style="height: fit-content;">
@@ -118,7 +118,7 @@
       <div id="crud-insertar-pop" class="popup-oculto" style="width: 50%">
         <button id="crud-insertar-cerrar" data-crud='cerrar'>X</button>
         <section id="crud-insertar-titulo" data-crud='titulo'>
-          AGREGAR ESTADO CIVIL
+          INSERTAR ESTADO CIVIL
         </section> 
 
         <div class="filas">
@@ -147,7 +147,7 @@
     <div class="container-fluid bg-3 paginas-contenedor">
 
       <div id="titulo-contenedor">  
-        <h3>LISTADO DE ESTADO CIVIL</h3>
+        <h3>LISTADO DE ESTADOS CIVILES</h3>
       </div>
 
        <div id='contenido-contenedor'>

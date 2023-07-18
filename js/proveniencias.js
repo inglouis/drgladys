@@ -44,7 +44,7 @@ var notificaciones = new Notificaciones()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-window.contenedores = new ContenedoresEspeciales('municipios-filtros')
+window.contenedores = new ContenedoresEspeciales('proveniencias-filtros')
 
 window.contenedoresConsultar = new ContenedoresEspeciales('crud-informacion-popup') 
 window.contenedoresEditar = new ContenedoresEspeciales('crud-editar-popup') 
@@ -58,7 +58,7 @@ window.idSeleccionada = 0
 /////////////////////////////////////////////////////
 //REVISA QUE LA PÁGINA YA CARGO POR COMPLETO PARA QUITAR LA ANIMACIÓN DE CARGA
 /////////////////////////////////////////////////////
-window.cargar = new paginaCargada('#tabla-municipios thead .ASC', 'existencia')
+window.cargar = new paginaCargada('#tabla-proveniencias thead .ASC', 'existencia')
 window.cargar.revision()
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
@@ -66,19 +66,19 @@ window.rellenar = new Rellenar()
 var sesiones = await window.sesiones()
 /////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
-//										municipios                                           
+//										proveniencias                                           
 //----------------------------------------------------------------------------------------------------
-class Municipios extends Acciones {
+class Proveniencias extends Acciones {
 
 	constructor(crud) {
 		super(crud)
 		this.fila
-		this.uso   = 'municipios'
-		this.funcion = 'buscar_municipios'
-		this.cargar  = 'cargar_municipios' 
+		this.uso   = 'proveniencias'
+		this.funcion = 'buscar_proveniencias'
+		this.cargar  = 'cargar_proveniencias' 
 		//-------------------------------
 		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['id_municipio', 'nombre']
+		this.especificos = ['id_proveniencia', 'nombre']
 		this.limitante = 0
 		this.boton = ''
 		//-------------------------------
@@ -100,33 +100,33 @@ class Municipios extends Acciones {
 }
 /////////////////////////////////////////////////////
 ///
-window.municipios = new Municipios(new Tabla(
+window.proveniencias = new Proveniencias(new Tabla(
 	[
-		['N°. ocupación', true, 0],
+		['N°. de proveniencia', true, 0],
 		['Descripción', true, 1],
 		['Acciones', false, 0]
 	],
-	'tabla-municipios', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
+	'tabla-proveniencias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
 /////////////////////////////////////////////////////
 ///
-municipios['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
-municipios['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
+proveniencias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
+proveniencias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
 
 
-municipios['crud'].cuerpo.push([municipios['crud'].columna = municipios['crud'].cuerpo.length, [
-		municipios['crud'].gBt('informacion btn btn-informacion', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="svg-inline--fa fa-info fa-w-6 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
-		municipios['crud'].gBt('editar btn btn-editar', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
+proveniencias['crud'].cuerpo.push([proveniencias['crud'].columna = proveniencias['crud'].cuerpo.length, [
+		proveniencias['crud'].gBt('informacion btn btn-informacion', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="svg-inline--fa fa-info fa-w-6 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
+		proveniencias['crud'].gBt('editar btn btn-editar', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
 	], [0,0,0,0], ['VALUE', 'VALUE','VALUE','VALUE'], 'crud-botones', false
 ])
 /////////////////////////////////////////////////////
-municipios['crud']['limitante'] = 1
+proveniencias['crud']['limitante'] = 1
 
 /////////////////////////////////////////////////////
 ///
-municipios['crud'].botonModoBusqueda("#modo-buscar", 1, [
-	['id_municipio'],
-	['id_municipio', 'nombre']
+proveniencias['crud'].botonModoBusqueda("#modo-buscar", 1, [
+	['id_proveniencia'],
+	['id_proveniencia', 'nombre']
 ], {"mensaje": (e) => {
 	if(e.target.opcion === 0) {
 		tools['mensaje'] = 'Modo filtro PRECISO seleccionado'
@@ -139,7 +139,7 @@ municipios['crud'].botonModoBusqueda("#modo-buscar", 1, [
 
 /////////////////////////////////////////////////////
 ///
-municipios['crud']['customBodyEvents'] = {
+proveniencias['crud']['customBodyEvents'] = {
 	"informacion": async (e) => {
 		if(e.target.classList.contains('informacion')) {
 
@@ -172,8 +172,8 @@ municipios['crud']['customBodyEvents'] = {
 };
 
 (async () => {
-	var resultado = await tools.fullAsyncQuery('municipios', 'cargar_municipios', [])
-	municipios.cargarTabla(JSON.parse(resultado), undefined, undefined)
+	var resultado = await tools.fullAsyncQuery('proveniencias', 'cargar_proveniencias', [])
+	proveniencias.cargarTabla(JSON.parse(resultado), undefined, undefined)
 })()
 
 //----------------------------------------------------------------------------------------------------
@@ -189,14 +189,14 @@ contenedores.eventos().checkboxes('status')
 //----------------------------------------------------------------------------------------------------
 qs('#procesar').addEventListener('click', async e => {
 
-	municipios.spinner('#tabla-municipios tbody')
+	proveniencias.spinner('#tabla-proveniencias tbody')
 	
-	var peticion = contenedores.procesar(tools.fullQuery, 'municipios','filtrar')
+	var peticion = contenedores.procesar(tools.fullQuery, 'proveniencias','filtrar')
 
 	peticion.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-        	qs('#tabla-municipios tbody').innerHTML = ''
-        	municipios.cargarTabla(JSON.parse(this.responseText))
+        	qs('#tabla-proveniencias tbody').innerHTML = ''
+        	proveniencias.cargarTabla(JSON.parse(this.responseText))
         }
     };
 })
@@ -218,11 +218,11 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 			if(datos !== '') {
 
-				var resultado = await tools.fullAsyncQuery('municipios', 'actualizar_municipios', datos)
+				var resultado = await tools.fullAsyncQuery('proveniencias', 'actualizar_proveniencias', datos)
 
 				if (resultado.trim() === 'exito') {
 
-					municipios.confirmarActualizacion(ediPop)
+					proveniencias.confirmarActualizacion(ediPop)
 				
 				} else {
 
@@ -253,11 +253,11 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 
 		if (datos !== false) {
 
-			var resultado = await tools.fullAsyncQuery('municipios', 'crear_municipios', datos)
+			var resultado = await tools.fullAsyncQuery('proveniencias', 'crear_proveniencias', datos)
 
 			if (resultado.trim() === 'exito') {
 
-				municipios.confirmarActualizacion(insPop)
+				proveniencias.confirmarActualizacion(insPop)
 			
 			} else {
 
@@ -276,7 +276,7 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 /* -------------------------------------------------------------------------------------------------*/	
 //          evento que envía la ID del crud al boton de eliminar del contenedor
 /* -------------------------------------------------------------------------------------------------*/
-qs('#tabla-municipios').addEventListener('click', e => {
+qs('#tabla-proveniencias').addEventListener('click', e => {
 	if (e.target.tagName === 'BUTTON') {
 		if (e.target.classList.contains('eliminar')) {
 			idEliminar = Number(e.target.value)
@@ -290,7 +290,7 @@ qs('#tabla-municipios').addEventListener('click', e => {
 /* -------------------------------------------------------------------------------------------------*/
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-qs('#municipios-insertar').addEventListener('click', e => {
+qs('#proveniencias-insertar').addEventListener('click', e => {
 	tools.limpiar('.nuevos', '', {})
 	window.idSeleccionada = 0
 	insPop.pop()

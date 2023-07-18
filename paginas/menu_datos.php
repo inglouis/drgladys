@@ -25,56 +25,99 @@
 
 	//agregar sección de configuracion solo para PHP y errores
 
-	$lista_menu = array(
-		0 => array(
-			"ruta" => 'historias,bloquear',
-			"nombre"=> 'historias',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
+	$lista_menu = array();
 
-		1 => array(
-			"ruta" => 'historias,ul,lista,historias,bloquear',
-			"nombre"=> 'historias',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
+	array_push($lista_menu, array(
+		"ruta" => 'historias,bloquear',
+		"nombre"=> 'historias',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
 
-		2 => array(
-			"ruta" => 'historias,ul,lista,ocupaciones,bloquear',
-			"nombre"=> 'ocupaciones',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
 
-		3 => array(
-			"ruta" => 'historias,ul,lista,diagnosticos,bloquear',
-			"nombre"=> 'diagnosticos',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,historias,bloquear',
+		"nombre"=> 'historias',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
 
-		4 => array(
-			"ruta" => 'configuracion,bloquear',
-			"nombre"=> 'configuracion',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,bloquear',
+		"nombre"=> 'formularios',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
 
-		5 => array(
-			"ruta" => 'configuracion,ul,lista,errores,bloquear',
-			"nombre"=> 'errores',
-			"bloquear" => 0, 
-			"editable" => 1
-		),
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,diagnosticos,bloquear',
+		"nombre"=> 'diagnosticos',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
 
-		6 => array(
-			"ruta" => 'configuracion,ul,lista,phpinfo,bloquear',
-			"nombre"=> 'phpinfo',
-			"bloquear" => 0, 
-			"editable" => 1
-		)
-	);
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,estado_civil,bloquear',
+		"nombre"=> 'estado_civil',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,parentesco,bloquear',
+		"nombre"=> 'parentesco',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,proveniencias,bloquear',
+		"nombre"=> 'proveniencias',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,medicos,bloquear',
+		"nombre"=> 'medicos',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,religion,bloquear',
+		"nombre"=> 'religion',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,ocupaciones,bloquear',
+		"nombre"=> 'ocupaciones',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'configuracion,bloquear',
+		"nombre"=> 'configuracion',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'configuracion,ul,lista,errores,bloquear',
+		"nombre"=> 'errores',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'configuracion,ul,lista,phpinfo,bloquear',
+		"nombre"=> 'phpinfo',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,26 +163,95 @@
 						"ul": "",
 						"bloquear": 0
 				  	},
-					"ocupaciones":  {
+
+				  	"formularios":  {
 				  		"atributos": "",
 				  		"span": "",
 						"a": {
-							"href": "ocupaciones.php",
-							"titulo": "Ocupaciones"
+							"href": "#",
+							"titulo": "Formularios"
 						},
-						"ul": "",
-						"bloquear": 0
-				  	},
-				  	"diagnosticos":  {
-				  		"atributos": "",
-				  		"span": "",
-						"a": {
-							"href": "diagnosticos.php",
-							"titulo": "Diagnósticos"
+						"ul": {
+							"atributos": "",
+							"lista": {
+
+
+							  	"diagnosticos":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "diagnosticos.php",
+										"titulo": "Diagnósticos"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+								"ocupaciones":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "ocupaciones.php",
+										"titulo": "Ocupaciones"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"estado_civil":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "estado_civil.php",
+										"titulo": "Estado civil"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"parentesco":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "parentesco.php",
+										"titulo": "Parentesco"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"proveniencias":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "proveniencias.php",
+										"titulo": "Proveniencias"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"medicos":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "medicos.php",
+										"titulo": "Médicos referidos"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"religion":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "religiones.php",
+										"titulo": "Religión"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	}
+
+							}
 						},
-						"ul": "",
 						"bloquear": 0
 				  	}
+
 				}
 			}
 		},

@@ -17,18 +17,28 @@ import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Re
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones'], 27)
-window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', '', 27)
+window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones', 'insertar-proveniencia', 'insertar-parentesco', 'insertar-civil', 'insertar-religion', 'insertar-medico'], 27)
+window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencia', 'insertar-parentesco', 'insertar-civil', 'insertar-religion', 'insertar-medico'], 27)
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
-// window.diaPop = new PopUp('crud-insertar-diagnosticos-popup','popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
+window.proPop = new PopUp('crud-insertar-proveniencia-popup','popup', 'subefecto', true, 'insertar-proveniencia', '', 27)
+window.parPop = new PopUp('crud-insertar-parentesco-popup','popup', 'subefecto', true, 'insertar-parentesco', '', 27)
+window.civPop = new PopUp('crud-insertar-civil-popup','popup', 'subefecto', true, 'insertar-civil', '', 27)
+window.relPop = new PopUp('crud-insertar-religion-popup','popup', 'subefecto', true, 'insertar-religion', '', 27)
+window.medPop = new PopUp('crud-insertar-medico-popup','popup', 'subefecto', true, 'insertar-medico', '', 27)
+//window.diaPop = new PopUp('crud-insertar-diagnosticos-popup','popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
 infPop.evtBotones()
 
 ocuPop.evtBotones()
+proPop.evtBotones()
+parPop.evtBotones()
+civPop.evtBotones()
+relPop.evtBotones()
+medPop.evtBotones()
 // diaPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
@@ -38,6 +48,11 @@ window.addEventListener('keyup', (e) => {
 	infPop.evtEscape(e)
 
 	ocuPop.evtEscape(e)
+	proPop.evtEscape(e)
+	parPop.evtEscape(e)
+	civPop.evtEscape(e)
+	relPop.evtEscape(e)
+	medPop.evtEscape(e)
 	// diaPop.evtEscape(e)
 
 })
@@ -174,11 +189,12 @@ class Historias extends Acciones {
 ///
 export var historias = new Historias(new Tabla(
 	[
-		['N°. Hist', true, 0],
-		['Paciente', true, 22],
-		['N° de cédula', true, 9],
-		['Status', true, 21],
-		['Acciones', false, 0]
+		['Acciones', false, 0],
+		['N°. Historia', true, 0],
+		[['Correlativo', 'N° de historia original'], true, 1],
+		['Paciente', true, 23],
+		['N° de cédula', true, 10],
+		['Status', true, 22]
 	],
 	'tabla-historias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
@@ -186,18 +202,21 @@ export var historias = new Historias(new Tabla(
 window.historias = historias
 /////////////////////////////////////////////////////
 ///
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 22)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 9)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 21)
 
 historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
-		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
-		historias['crud'].gBt(['evolucion-cargar antecedentes-crud btn btn-general', 'Cargar evolución del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`),
-		historias['crud'].gBt(['evolucion-consultar antecedentes-crud btn btn-general', 'Consultar evoluciones del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`)
-	], [0,0,0,0], ['VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
+		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
+		//historias['crud'].gBt(['evolucion-cargar antecedentes-crud btn btn-general', 'Cargar evolución del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`),
+		//historias['crud'].gBt(['evolucion-consultar antecedentes-crud btn btn-general', 'Consultar evoluciones del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`)
+	], [0,0], ['VALUE', 'VALUE'], 'crud-botones', false
 ])
+
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 23)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 10)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 22)
+
 /////////////////////////////////////////////////////
 historias['crud']['retornarSiempre'] = true
 historias['crud']['limitante'] = 1
@@ -208,8 +227,8 @@ historias['crud']['inputNavegarGenerar'] = false
 /////////////////////////////////////////////////////
 ///
 historias['crud'].botonModoBusqueda("#modo-buscar", 1, [
-	['id_historia'],
-	['id_historia', 'nombre_completo', 'cedula']
+	['id_historia', 'id_correlativo'],
+	['id_historia', 'id_correlativo','nombre_completo', 'cedula']
 ], {"mensaje": (e) => {
 	if(e.target.opcion === 0) {
 		tools['mensaje'] = 'Modo filtro PRECISO seleccionado'
@@ -226,8 +245,7 @@ historias['crud']['propiedadesTr'] = {
 		var fr = new DocumentFragment(), th = historias
 		var div = th.div.cloneNode(true);
 
-		//var fecha = (e.sublista.fecha_consulta === '1900-01-01') ? '---' :  e.sublista.fecha_consulta_arreglada;
-		var  fecha = 'PLACEHOLDER'
+		var fecha = (e.sublista.fecha_consulta === '1900-01-01') ? '---' :  e.sublista.fecha_consulta_arreglada;
 
 		var d1 = th.div.cloneNode(true)
 			d1.insertAdjacentHTML('afterbegin', 'Última fecha de consulta')
@@ -358,7 +376,9 @@ historias['crud']['customBodyEvents'] = {
 			}
 
 			tools.limpiar('.editar-valores', '', {})
+			tools.limpiar('.editar-cargar', '', {})
 
+			rellenar.contenedores(historias.sublista, '.editar-cargar', {elemento: button, id: 'value'}, {})
 			rellenar.contenedores(historias.sublista, '.editar-valores', {elemento: button, id: 'value'}, {
 				"contenedorConsulta": function fn(lista, elemento) {
 					
@@ -448,13 +468,39 @@ historias['crud'].botonBuscar('buscar', false)
 //----------------------------------------------------------------------------------------------------
 //										E V E N T O S                                                
 //----------------------------------------------------------------------------------------------------
-var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_diagnosticos', []))
+var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_diagnosticos', [])),
+	comboOcupacion    = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_ocupacion', [])),
+	comboProveniencia = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_proveniencias', [])),
+	comboParentesco   = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_parentescos', [])),
+	comboCivil        = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_estados_civiles', [])),
+	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
+	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', []))
 
 contenedores.eventos().checkboxes('status')
 
-contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {})
-contenedoresInsertar.eventos().combo('cc-ocupacion-insertar', ['combos', 'combo_ocupacion', ['', '']], false, {})
-contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {})
+contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-ocupacion-insertar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {}, undefined, undefined, {"lista": comboOcupacion, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresConsultar.eventos().combo('cc-parentesco-consultar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-parentesco-insertar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-parentesco-editar', ['combos', 'combo_parentescos', ['', '']], false, {}, undefined, undefined, {"lista": comboParentesco, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresConsultar.eventos().combo('cc-proveniencia-consultar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-proveniencia-insertar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-proveniencia-editar', ['combos', 'combo_proveniencias', ['', '']], false, {}, undefined, undefined, {"lista": comboProveniencia, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresConsultar.eventos().combo('cc-civil-consultar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-civil-insertar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-civil-editar', ['combos', 'combo_estados_civiles', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresConsultar.eventos().combo('cc-religion-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-religion-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-religion-editar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresConsultar.eventos().combo('cc-medico-consultar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true})
+contenedoresInsertar.eventos().combo('cc-medico-insertar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresEditar.eventos().combo('cc-medico-editar', ['combos', 'combo_medicos', ['', '']], false, {}, undefined, undefined, {"lista": comboMedico, "seleccionarGenerado": true, "navegacionVertical": true})
 
 contenedoresEditar.eventos().contenedor(
 	'cc-telefonos-editar', //elemento
@@ -535,7 +581,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 			var datos = tools.procesar(e.target, 'editar', 'editar-valores', tools)
 
-			if(datos !== '') {
+			if (datos !== '') {
 				
 				notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
@@ -547,7 +593,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 					historias.confirmarActualizacion()
 
-					if (datos[9] === 'D') {
+					if (datos[13] === 'D') {
 
 						ediPop.pop()
 
@@ -574,11 +620,11 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#crud-insertar-botones').addEventListener('click', async e => {
 
-	if (e.target.classList.contains('insertar')) {
+	if (e.target.classList.contains('insertar') || e.target.classList.contains('permanecer')) {
 
-		var datos = tools.procesar(e.target, 'insertar', 'insertar-valores', tools)
+		var datos = tools.procesar('', '', 'insertar-valores', tools)
 
-		if (datos !== false) {
+		if (datos !== '') {
 
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
@@ -586,7 +632,20 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 
 			if (resultado.trim() === 'exito') {
 
-				historias.confirmarActualizacion(insPop)
+				if (e.target.classList.contains('insertar')) {
+
+					historias.confirmarActualizacion(insPop)
+
+				} else {
+
+					historias.confirmarActualizacion()
+					tools.limpiar('.insertar-valores', '', {})
+					tools.limpiar('.insertar-cajones', '', {})
+					
+					qs('#insertar-edad').value = ''
+
+				}
+
 			
 			} else {
 
@@ -621,41 +680,48 @@ qs('#insertar-fecha').addEventListener('change', e=> {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#historias-insertar').addEventListener('click', e => {
 	prevenirCierrePop = false
-	qs('[data-grupo=cc-ocupacion-insertar] input').value = ''
+	
+	tools.limpiar('.insertar-cajones', '', {})
 	tools.limpiar('.insertar-valores', '', {})
+	
 	window.idSeleccionada = 0
 	insPop.pop()
 })
 
-/* -------------------------------------------------------------------------------------------------*/	
-//                abrir ediciones de campos dentro de la historia (ocupacion, dermatologia)
 /* -------------------------------------------------------------------------------------------------*/
-qs('#editar-nueva-ocupacion').addEventListener('click', e=> {
-	ultimoBotonInsersionBasica = e.target
-	qs('#nombre-ocupaciones').value = ''
-	ocuPop.pop()
+/*   		Evento que limpia los datos del contenedor de insertar*            		    
+/* -------------------------------------------------------------------------------------------------*/
+qs('#crud-insertar-limpiar').addEventListener('click', e => {
+	tools.limpiar('.insertar-valores', '', {})
+	tools.limpiar('.insertar-valores', '', {
+		"procesado": e => {
+			notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+		},
+		"asegurar": () => {return '#crud-insertar-pop'}
+	})
 })
-
-qs('#insertar-nueva-ocupacion').addEventListener('click', e=> {
-	ultimoBotonInsersionBasica = e.target
-	qs('#nombre-ocupaciones').value = ''
-	ocuPop.pop()
-})
-
-// qs('#insertar-nueva-diagnostico').addEventListener('click', e=> {
-// 	ultimoBotonInsersionBasica = e.target
-// 	qs('#nombre-diagnosticos').value = ''
-// 	diaPop.pop()
-// })
 
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
 
-var insersiones_lista = ['ocupaciones' /*, 'diagnosticos'*/],
-	insersiones_lista_combos = [ocuPop/*, diaPop*/];
+var insersiones_lista  = ['ocupaciones', 'proveniencia', 'parentesco', 'civil', 'religion', 'medico'],
+	insersiones_inputs = ['ocupacion', 'proveniencia', 'parentesco', 'civil', 'religion', 'medico'], //arreglar los nombres para que sea iguales en todas partes
+	insersiones_lista_combos = [ocuPop, proPop, parPop, civPop, relPop, medPop];
 
 insersiones_lista.forEach((grupo, i) => {
+
+	qs(`#editar-nueva-${grupo}`).addEventListener('click', e => {
+		ultimoBotonInsersionBasica = e.target
+		qs(`#nombre-${grupo}`).value = ''
+		insersiones_lista_combos[i].pop()
+	})
+
+	qs(`#insertar-nueva-${grupo}`).addEventListener('click', e => {
+		ultimoBotonInsersionBasica = e.target
+		qs(`#nombre-${grupo}`).value = ''
+		insersiones_lista_combos[i].pop()
+	})
 
 	qs(`#crud-insertar-${grupo}-botones`).addEventListener('click', async e => {
 
@@ -684,21 +750,11 @@ insersiones_lista.forEach((grupo, i) => {
 
 						insersiones_lista_combos[i].pop()
 
-						if (grupo === 'ocupaciones') {
+						contenedoresEditar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] input`), lista)
+						contenedoresEditar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-editar"] input`))
 
-							contenedoresEditar.reconstruirCombo(qs('[data-grupo="cc-ocupacion-editar"] select'), qs('[data-grupo="cc-ocupacion-editar"] input'), lista)
-							contenedoresEditar.filtrarComboForzado(qs('[data-grupo="cc-ocupacion-editar"] select'), qs('[data-grupo="cc-ocupacion-editar"] input'))
-
-							contenedoresInsertar.reconstruirCombo(qs('[data-grupo="cc-ocupacion-insertar"] select'), qs('[data-grupo="cc-ocupacion-insertar"] input'), lista)
-							contenedoresInsertar.filtrarComboForzado(qs('[data-grupo="cc-ocupacion-insertar"] select'), qs('[data-grupo="cc-ocupacion-insertar"] input'))
-
-						} else if (grupo === 'diagnosticos') {
-
-							contenedoresInformes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-							contenedoresInformes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
-
-						}
-
+						contenedoresInsertar.reconstruirCombo(qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] input`), lista)
+						contenedoresInsertar.filtrarComboForzado(qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] select`), qs(`[data-grupo="cc-${insersiones_inputs[i]}-insertar"] input`))
 
 					}, 500)
 
@@ -987,8 +1043,8 @@ infPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar()}}
 // antPop.funciones['apertura'] = {"apertura": () => {window.pg.mostrar()}}
 // antPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar()}}
 
-// antEdiPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
-// antEdiPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
+insPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
+insPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
 
 /* -------------------------------------------------------------------------------------------------*/
 /* ------------------------------PAGINACIÓN ENTRE CONTENEDORES--------------------------------------*/
