@@ -64,35 +64,35 @@
           <div class="columnas">
             <div>
               <label>Rif de la empresa:</label>
-              <input type="text" name="rif" readonly value="J-16541912-6"> 
+              <input type="text" name="rif" readonly value="J-16541912-6" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
             </div>
           </div>
 
           <div class="columnas" style="align-items: baseline;">
             <div>
               <label>Tlf. Celular</label>
-                <input type="text" readonly value="0424-7462907"> 
-                <input type="text" readonly value="De lunes a viernes" style="background: transparent !important; border: none !important">
+                <input type="text" readonly value="TELEFONO" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
+                <input type="text" readonly value="DE A DE" style="background: transparent !important; border: none !important">
             </div>
             <div>
               <label>MPPS / CMT</label>
-                <input type="text" readonly value="98438"> 
-                <input type="text" readonly value="5320">
+                <input type="text" readonly value="" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
+                <input type="text" readonly value="" style="border: none; border-bottom: 1px solid #b3b3b3;">
             </div>
           </div>
 
           <div class="columnas">
             <div>
               <label>Correos electrónicos</label>
-              <input type="text" name="rif" readonly value="rosanamic6@gmail.com"> 
-              <input type="text" name="rif" readonly value="Rosana_samper1@hotmail.com"> 
+              <input type="text" name="rif" readonly value="correo@gmail.com" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
+              <input type="text" name="rif" readonly value="correo@hotmail.com" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
             </div>
           </div>
 
           <div class="columnas">
             <div>
               <label>Redes sociales</label>
-                <input type="text" readonly value="@ros_dermatologa" title="instagram"> 
+                <input type="text" readonly value="RED" title="instagram" style="border: none; border-bottom: 1px solid #b3b3b3;"> 
             </div>
             <div style="width: fit-content;margin: 0px; display: flex; flex-direction: column; justify-content: center; align-items: center">
               <img src="../imagenes/instagram.png" width="25px" height="25px">

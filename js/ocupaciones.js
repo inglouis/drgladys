@@ -181,8 +181,8 @@ ocupaciones['crud']['customBodyEvents'] = {
 //----------------------------------------------------------------------------------------------------
 contenedores.eventos().checkboxes('status')
 
-//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {})
-//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {})
+//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupaciones', ['', '']], false, {})
+//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupaciones', ['', '']], false, {})
 
 //----------------------------------------------------------------------------------------------------
 //						Evento del botón de aplicar filtros en la tabla principal

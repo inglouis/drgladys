@@ -262,7 +262,7 @@
                   <?php } ?>
 
                   <div style="font-size: 18px !important; width: fit-content; color: #484a49; min-width: 400px">
-                    Bienvenido/a al sistema <b style="text-decoration: underline;">Dra. Rosana Sánchez, Dermatología</b>
+                    Bienvenido/a al sistema <b style="text-decoration: underline;">Dra. Gladys Chaparro, Oftalmología</b>
                   </div>
                   <div id="inicio-bienvenida-fecha">
                     

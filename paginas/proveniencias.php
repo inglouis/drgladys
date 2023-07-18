@@ -3,7 +3,7 @@
   //---------------------------------------
   //LLAMADO DE LAS CLASES FUNCIONES DE PHP 
   //---------------------------------------
-  include_once('../clases/municipios.class.php');
+  include_once('../clases/proveniencias.class.php');
 
   //---------------------------------------
   //OBJETO DE CLASE (GENERICO)
@@ -23,8 +23,8 @@
   <!-------------------------------------------------------- -->
   <head>
       <?php require_once('../estructura/head.php');?>
-      <title>MUNICIPIOS</title>
-      <script type="module" src="../js/municipios.js" defer></script>
+      <title>PROVENIENCIAS</title>
+      <script type="module" src="../js/proveniencias.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
   </head>
     
@@ -41,13 +41,13 @@
         <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
 
         <section id="crud-informacion-titulo" data-crud='titulo'>
-          INFORMACIÓN DEL MUNICIPIO 
+          INFORMACIÓN DE LOS LUGARES DE PROVENIENCIA 
         </section>
 
         <div class="filas" style="height: fit-content;">
           <div class="columnas">
             <div>
-              <label>Descripción</label>
+              <label>Nombre</label>
               <input type="text" data-valor="nombre" class="informacion-valores upper visual" disabled="true">
             </div>
           </div>
@@ -55,7 +55,7 @@
 
           <div class="columnas">
             <div>
-              <label class="requerido">Estado del Municipio</label>
+              <label class="requerido">Status del proveniencia</label>
               <select class="informacion-valores upper visual" data-valor="status" disabled="true">
                 <option value="">SELECCIONAR</option>
                 <option value="A">ACTIVA</option>
@@ -79,7 +79,7 @@
       <div id="crud-editar-pop" class="popup-oculto" data-scroll style="justify-content: flex-start; min-width: 400px; width: 40%">
         <button id="crud-editar-cerrar" data-crud='cerrar'>X</button>
         <section id="crud-editar-titulo" data-crud='titulo'>
-          EDITAR MUNICIPIO
+          EDITAR LUGAR DE PROVENIENCIA
         </section> 
 
         <div class="filas" style="justify-content: flex-start;">
@@ -87,14 +87,14 @@
           <div class="columnas">
             
             <div>
-              <label>Descripción</label>
-                <input type="text" data-valor="nombre" placeholder="Descripcion del Municipio" class="editar-valores lleno iupper">
+              <label>Nombre</label>
+                <input type="text" data-valor="nombre" placeholder="Descripción de la proveniencia" class="editar-valores lleno iupper">
             </div>
           </div>
 
           <div class="columnas">
             <div>
-              <label class="requerido">Estado del Municipio</label>
+              <label class="requerido">Status del proveniencia</label>
               <select class="editar-valores lleno" data-valor="status">
                 <option value="">SELECCIONAR</option>
                 <option value="A">ACTIVA</option>
@@ -118,7 +118,7 @@
       <div id="crud-insertar-pop" class="popup-oculto" style="width: 50%">
         <button id="crud-insertar-cerrar" data-crud='cerrar'>X</button>
         <section id="crud-insertar-titulo" data-crud='titulo'>
-          AGREGAR MUNICIPIO
+          INSERTAR LUGAR DE PROVENIENCIA
         </section> 
 
         <div class="filas">
@@ -126,8 +126,8 @@
           <div class="columnas" style="align-items: baseline;">
 
             <div>
-              <label class="requerido">Descripción</label>  
-              <input type="text" placeholder="Descripción del Municipio" class="nuevos lleno upper">
+              <label class="requerido">Nombre</label>  
+              <input type="text" placeholder="Descripción de la proveniencia" class="nuevos lleno upper">
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@
     <div class="container-fluid bg-3 paginas-contenedor">
 
       <div id="titulo-contenedor">  
-        <h3>LISTADO DE MUNICIPIOS</h3>
+        <h3>LISTADO DE LUGARES DE PROVENIENCIA</h3>
       </div>
 
        <div id='contenido-contenedor'>
@@ -177,19 +177,19 @@
                 padding: 0px 5px;
               ">
                 
-                <button id="municipios-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
+                <button id="proveniencias-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
 
               </div>
 
-              <div id="municipios-filtros" class="filtros" style="padding-left: 10px;">
+              <div id="proveniencias-filtros" class="filtros" style="padding-left: 10px;">
 
                 <div data-grupo="status" class="grupo">
 
-                  <section class="filtro municipios-status">
+                  <section class="filtro proveniencias-status">
                     <input type="checkbox" data-name="status" data-familia="global" data-modo="individual" value="A">
                   </section>
 
-                  <section class="filtro municipios-status">
+                  <section class="filtro proveniencias-status">
                     <input type="checkbox" data-name="status" data-familia="global" data-modo="individual" value="D">
                   </section>
 
@@ -208,7 +208,7 @@
             </div>
 
             <div id="tabla-principal" class="tabla-ppal table-min">
-              <table id="tabla-municipios" class="table table-bordered table-striped">
+              <table id="tabla-proveniencias" class="table table-bordered table-striped">
                 <thead>
                 </thead>
                 <tbody>

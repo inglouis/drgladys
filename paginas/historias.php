@@ -154,7 +154,7 @@
               </button>
 
               <div id="numeracion" data-estilo="numeracion-contenedor" style="width: 100px">
-                <input type="number" class="numeracion" maxlength="3" minlength="0">
+                <input type="number" class="numeracion" maxlength="3" minlength="0" title="[ENTER] para cargar página">
                 <span class="numeracion"></span> 
               </div>
 
