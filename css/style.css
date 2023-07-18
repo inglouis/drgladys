@@ -190,7 +190,7 @@ option:hover {
 }
 
 [data-resaltar] table, [data-resaltar] div, [data-resaltar] input, [data-resaltar] select, [data-resaltar] textarea, [data-resaltar] span {
-    font-weight: 400;
+    font-weight: 500;
 }
 
 [data-noche] .columnas label {
@@ -563,7 +563,7 @@ body::-webkit-scrollbar-thumb {
     -khtml-user-select: none;
     -ms-user-select: none;
     transition: 0.3s ease all;
-    color: #5e6f76;
+    color: #4d5c62;
     font-weight: 500;
 }
 

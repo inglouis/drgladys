@@ -201,7 +201,7 @@
 							  		"span": "",
 									"a": {
 										"href": "estado_civil.php",
-										"titulo": "Estado civil"
+										"titulo": "Estados civiles"
 									},
 									"ul": "",
 									"bloquear": 0
@@ -210,7 +210,7 @@
 							  		"atributos": "",
 							  		"span": "",
 									"a": {
-										"href": "parentesco.php",
+										"href": "parentescos.php",
 										"titulo": "Parentesco"
 									},
 									"ul": "",
