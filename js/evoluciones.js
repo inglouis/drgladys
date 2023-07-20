@@ -104,7 +104,7 @@ window.evoluciones = new Evoluciones(new Tabla(
 	[
 		['N°. Evolución', true, 0],
 		['Cédula', true, 1],
-		['Hist.Ant', true, 2],
+		[['H. Ant', 'N° de historia del antecedente'], true, 2],
 		['Nombres', true, 3],
 		['Apellidos', true, 4],
 		['status', true, 14],

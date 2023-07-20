@@ -78,7 +78,7 @@ class Antecedentes extends Acciones {
 		this.cargar  = 'cargar_antecedentes' 
 		//-------------------------------
 		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['id_antecedentes', 'nombre']
+		this.especificos = ['id_antecedente', 'cedula','nhist','nombres','apellidos']
 		this.limitante = 0
 		this.boton = ''
 		//-------------------------------
@@ -102,8 +102,13 @@ class Antecedentes extends Acciones {
 ///
 window.antecedentes = new Antecedentes(new Tabla(
 	[
-		['N°. antecedentes', true, 0],
-		['Descripción de antecedentes', true, 1],
+		['N°. Antecedente', true, 0],
+		['Cédula', true, 1],
+		[['Hist.Ant', 'N° de historia del antecedente'], true, 2],
+		['Nombres', true, 3],
+		['Apellidos', true, 4],
+		['Fecha', true, 5],
+		['status', true, 7],
 		['Acciones', false, 0]
 	],
 	'tabla-antecedentes', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
@@ -112,7 +117,11 @@ window.antecedentes = new Antecedentes(new Tabla(
 ///
 antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
 antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
-
+antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 2)
+antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 3)
+antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 4)
+antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 5)
+antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 7)
 
 antecedentes['crud'].cuerpo.push([antecedentes['crud'].columna = antecedentes['crud'].cuerpo.length, [
 		antecedentes['crud'].gBt('informacion btn btn-informacion', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="svg-inline--fa fa-info fa-w-6 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
@@ -125,8 +134,8 @@ antecedentes['crud']['limitante'] = 1
 /////////////////////////////////////////////////////
 ///
 antecedentes['crud'].botonModoBusqueda("#modo-buscar", 1, [
-	['id_antecedentes'],
-	['id_antecedentes', 'nombre']
+	['id_ocupacion'],
+	['id_ocupacion', 'cedula','nhist','nombres','apellidos']
 ], {"mensaje": (e) => {
 	if(e.target.opcion === 0) {
 		tools['mensaje'] = 'Modo filtro PRECISO seleccionado'
@@ -181,8 +190,8 @@ antecedentes['crud']['customBodyEvents'] = {
 //----------------------------------------------------------------------------------------------------
 contenedores.eventos().checkboxes('status')
 
-//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {})
-//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {})
+//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_antecedentes', ['', '']], false, {})
+//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_antecedentes', ['', '']], false, {})
 
 //----------------------------------------------------------------------------------------------------
 //						Evento del botón de aplicar filtros en la tabla principal
@@ -190,12 +199,15 @@ contenedores.eventos().checkboxes('status')
 qs('#procesar').addEventListener('click', async e => {
 
 	antecedentes.spinner('#tabla-antecedentes tbody')
+	
+	var peticion = contenedores.procesar(tools.fullQuery, 'antecedentes','filtrar')
 
-	var resultado = await tools.fullAsyncQuery('antecedentes', 'filtrar', [])
-
-	qs('#tabla-antecedentes tbody').innerHTML = ''
-	antecedentes.cargarTabla(JSON.parse(resultado))
-
+	peticion.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        	qs('#tabla-antecedentes tbody').innerHTML = ''
+        	antecedentes.cargarTabla(JSON.parse(this.responseText))
+        }
+    };
 })
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -211,7 +223,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 			window.procesar = false
 
-			var datos = antecedentes.confirmar(e.target, 'editar', 'crud-valores', tools);
+			var datos = tools.procesar(e.target, 'editar', 'editar-valores', tools);
 
 			if(datos !== '') {
 
@@ -219,7 +231,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 				if (resultado.trim() === 'exito') {
 
-					descripcionislr.confirmarActualizacion(ediPop)
+					antecedentes.confirmarActualizacion(ediPop)
 				
 				} else {
 
@@ -246,7 +258,7 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
-		var datos = antecedentes.confirmar(e.target, 'insertar', 'nuevos', tools)
+		var datos = tools.procesar(e.target, 'insertar', 'nuevos', tools)
 
 		if (datos !== false) {
 

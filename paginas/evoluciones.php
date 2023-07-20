@@ -36,7 +36,11 @@
     <!--------------------- INFORMARCIÓN  -------------------- -->
     <!-------------------------------------------------------- -->
     <div id="crud-informacion-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="justify-content: flex-start width: 95%;">
+      <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="    
+        width: 80%;
+        height: 80%;
+        justify-content: space-between;
+      ">
 
         <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
 
@@ -128,75 +132,7 @@
       </div>
     </div>
 
-    <!-------------------------------------------------------- -->
-    <!---------------------------- EDITAR -------------------- -->
-    <!-------------------------------------------------------- -->
-    <div id="crud-editar-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-editar-pop" class="popup-oculto" data-scroll style="justify-content: flex-start; min-width: 400px; width: 40%">
-        <button id="crud-editar-cerrar" data-crud='cerrar'>X</button>
-        <section id="crud-editar-titulo" data-crud='titulo'>
-          EDITAR OCUPACIÓN
-        </section> 
-
-        <div class="filas" style="justify-content: flex-start;">
-
-          <div class="columnas">
-            
-            <div>
-              <label>Descripción</label>
-                <input type="text" data-valor="nombre" placeholder="Descripcion de la Ocupación" class="editar-valores lleno iupper">
-            </div>
-          </div>
-
-          <div class="columnas">
-            <div>
-              <label class="requerido">Estado de la Ocupación</label>
-              <select class="editar-valores lleno" data-valor="status">
-                <option value="">SELECCIONAR</option>
-                <option value="A">ACTIVA</option>
-                <option value="D">DESACTIVADA</option>
-              </select>            
-            </div>
-          </div>
-
-          <section id="crud-editar-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
-            <button class="botones-formularios editar">CONFIRMAR</button>
-            <button class="botones-formularios cerrar">CANCELAR</button> 
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <!-------------------------------------------------------- -->
-    <!---------------------------- INSERTAR------------------- -->
-    <!-------------------------------------------------------- -->
-    <div id="crud-insertar-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-insertar-pop" class="popup-oculto" style="width: 50%">
-        <button id="crud-insertar-cerrar" data-crud='cerrar'>X</button>
-        <section id="crud-insertar-titulo" data-crud='titulo'>
-          AGREGAR OCUPACIÓN
-        </section> 
-
-        <div class="filas">
-
-          <div class="columnas" style="align-items: baseline;">
-
-            <div>
-              <label class="requerido">Descripción</label>  
-              <input type="text" placeholder="Descripción de la Ocupación" class="nuevos lleno upper">
-            </div>
-          </div>
-        </div>
-
-
-        <section id="crud-insertar-botones" data-crud='botones' style="column-gap: 10px">
-          <button class="botones-formularios insertar">CONFIRMAR</button>
-          <button class="botones-formularios cerrar">CANCELAR</button> 
-        </section>
-
-      </div>
-    </div>
-
+    
     <!---------------------------------------------------------------------->
     <!------------                P A G I N A                  ------------->
     <!---------------------------------------------------------------------->

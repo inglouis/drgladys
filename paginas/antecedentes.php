@@ -26,6 +26,25 @@
       <title>antecedentes</title>
       <script type="module" src="../js/antecedentes.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
+      <style>
+        #tabla-antecedentes thead {
+            display: table-header-group;
+        }
+
+        #tabla-antecedentes tbody tr {
+            display: table-row;
+            height: 100%;
+            width: 100%;
+        }
+
+        #tabla-antecedentes tbody tr td:nth-child(1) {
+            display: table-cell;
+            align-items: center;
+            width: 3%;
+            justify-content: center;
+        }
+
+      </style>  
   </head>
     
 <!------------------------- CUERPO ----------------------- -->
@@ -36,28 +55,55 @@
     <!--------------------- INFORMARCIÓN  -------------------- -->
     <!-------------------------------------------------------- -->
     <div id="crud-informacion-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="height: 50%; justify-content: flex-start;">
+      <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="    
+        width: 80%;
+        height: 80%;
+        justify-content: space-between;
+      ">
 
         <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
 
         <section id="crud-informacion-titulo" data-crud='titulo'>
-          INFORMACIÓN DE ANTECEDENTES
+          INFORMACIÓN ANTECEDENTES
         </section>
 
         <div class="filas" style="height: fit-content;">
           <div class="columnas">
             <div>
-              <label>Descripción</label>
-                <textarea data-valor="nombre" cols="40" rows="3"  class="informacion-valores upper visual" disabled="true" style="resize: none;">
-                </textarea>
+              <label>cedula</label>
+              <input type="text" data-valor="cedula" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Historia</label>
+              <input type="text" data-valor="nhist" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Nombres</label>
+              <input type="text" data-valor="nombres" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Apellidos</label>
+              <input type="text" data-valor="apellidos" class="informacion-valores upper visual" disabled="true">
             </div>
           </div>
 
-
           <div class="columnas">
             <div>
-              <label class="requerido">Estado Antecedentes</label>
-              <select class="informacion-valores visual" data-valor="status">
+              <label>Fecha</label>
+              <input type="text" data-valor="fecha" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Detalle</label>
+              <input type="text" data-valor="descripcion" class="informacion-valores upper visual" disabled="true">
+            </div>
+          </div>
+
+ 
+  
+          <div class="columnas">
+            <div>
+              <label class="requerido">Estado del Antecedente</label>
+              <select class="informacion-valores upper visual" data-valor="status" disabled="true">
                 <option value="">SELECCIONAR</option>
                 <option value="A">ACTIVA</option>
                 <option value="D">DESACTIVADA</option>
@@ -73,76 +119,7 @@
       </div>
     </div>
 
-    <!-------------------------------------------------------- -->
-    <!---------------------------- EDITAR -------------------- -->
-    <!-------------------------------------------------------- -->
-    <div id="crud-editar-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-editar-pop" class="popup-oculto" data-scroll style="height: 50%; justify-content: flex-start; min-width: 700px; width: 40%">
-        <button id="crud-editar-cerrar" data-crud='cerrar'>X</button>
-        <section id="crud-editar-titulo" data-crud='titulo'>
-          EDITAR ANTECEDENTES
-        </section> 
-
-        <div class="filas" style="justify-content: flex-start;">
-
-          <div class="columnas">
-            
-            <div>
-              <label>Descripción Antecedente</label>
-                <textarea data-valor="nombre" cols="40" rows="5"  class="editar lleno upper" style="resize: none;">
-                </textarea>
-            </div>
-          </div>
-
-          <div class="columnas">
-            <div>
-              <label class="requerido">Estado del Antecedente</label>
-              <select class="editar-valores lleno" data-valor="status">
-                <option value="">SELECCIONAR</option>
-                <option value="A">ACTIVA</option>
-                <option value="D">DESACTIVADA</option>
-              </select>            
-            </div>
-          </div>
-
-          <section id="crud-editar-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
-            <button class="botones-formularios editar">CONFIRMAR</button>
-            <button class="botones-formularios cerrar">CANCELAR</button> 
-          </section>
-        </div>
-      </div>
-    </div>
-
-    <!-------------------------------------------------------- -->
-    <!---------------------------- INSERTAR------------------- -->
-    <!-------------------------------------------------------- -->
-    <div id="crud-insertar-popup" class="popup-oculto" data-crud='popup'>
-      <div id="crud-insertar-pop" class="popup-oculto" style="width: 50%">
-        <button id="crud-insertar-cerrar" data-crud='cerrar'>X</button>
-        <section id="crud-insertar-titulo" data-crud='titulo'>
-          AGREGAR ANTECEDENTE
-        </section> 
-
-        <div class="filas">
-
-          <div class="columnas" style="align-items: baseline;">
-
-            <div>
-              <label class="requerido">Descripción de Antecedente</label>  
-              <textarea cols="40" rows="5"  class="nuevos lleno upper" style="resize: none;"></textarea>
-            </div>
-          </div>
-        </div>
-
-
-        <section id="crud-insertar-botones" data-crud='botones' style="column-gap: 10px">
-          <button class="botones-formularios insertar">CONFIRMAR</button>
-          <button class="botones-formularios cerrar">CANCELAR</button> 
-        </section>
-
-      </div>
-    </div>
-
+    
     <!---------------------------------------------------------------------->
     <!------------                P A G I N A                  ------------->
     <!---------------------------------------------------------------------->
