@@ -3122,6 +3122,74 @@ span.numeracion {
     content: "Solo Iva Desactivados [D]";
 }
 
+
+
+
+/*-----------------------------------------------------*/
+/*----------------evoluciones--------------------------*/
+/*-----------------------------------------------------*/
+#insertar-evoluciones::after {
+    width: 200px;
+}
+
+#insertar-evoluciones:hover::after {
+    content: "Agregar Nueva Evolución";
+    opacity: 1;
+    width:230px;
+}
+.evoluciones-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(2) {
+    width: 3%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(3) {
+    width: 3%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(4) {
+    width: 3%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(5) {
+    width: 20%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(6) {
+    width: 30%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(7) {
+    width: 100%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(8) {
+    width: 100%;
+}
+
+
+.evoluciones-status:nth-child(1)::after {
+    content:"Solo Ocupaciónes Activadas [A]";
+}
+
+.evoluciones-status:nth-child(2)::after {
+    content: "Solo evoluciones Desactivadas [D]";
+}
+
+
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/
