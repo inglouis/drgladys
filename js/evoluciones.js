@@ -44,7 +44,7 @@ var notificaciones = new Notificaciones()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-window.contenedores = new ContenedoresEspeciales('antecedentes-filtros')
+window.contenedores = new ContenedoresEspeciales('evoluciones-filtros')
 
 window.contenedoresConsultar = new ContenedoresEspeciales('crud-informacion-popup') 
 window.contenedoresEditar = new ContenedoresEspeciales('crud-editar-popup') 
@@ -58,7 +58,7 @@ window.idSeleccionada = 0
 /////////////////////////////////////////////////////
 //REVISA QUE LA PÁGINA YA CARGO POR COMPLETO PARA QUITAR LA ANIMACIÓN DE CARGA
 /////////////////////////////////////////////////////
-window.cargar = new paginaCargada('#tabla-antecedentes thead .ASC', 'existencia')
+window.cargar = new paginaCargada('#tabla-evoluciones thead .ASC', 'existencia')
 window.cargar.revision()
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
@@ -66,19 +66,19 @@ window.rellenar = new Rellenar()
 var sesiones = await window.sesiones()
 /////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
-//										antecedentes                                           
+//										evoluciones                                           
 //----------------------------------------------------------------------------------------------------
-class Antecedentes extends Acciones {
+class Evoluciones extends Acciones {
 
 	constructor(crud) {
 		super(crud)
 		this.fila
-		this.uso   = 'antecedentes'
-		this.funcion = 'buscar_antecedentes'
-		this.cargar  = 'cargar_antecedentes' 
+		this.uso   = 'evoluciones'
+		this.funcion = 'buscar_evoluciones'
+		this.cargar  = 'cargar_evoluciones' 
 		//-------------------------------
 		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['id_antecedente', 'cedula','nhist','nombres','apellidos']
+		this.especificos = ['id_ocupacion', 'cedula','nhist','nombres','apellidos']
 		this.limitante = 0
 		this.boton = ''
 		//-------------------------------
@@ -100,40 +100,39 @@ class Antecedentes extends Acciones {
 }
 /////////////////////////////////////////////////////
 ///
-window.antecedentes = new Antecedentes(new Tabla(
+window.evoluciones = new Evoluciones(new Tabla(
 	[
-		['N°. Antecedente', true, 0],
+		['N°. Evolución', true, 0],
 		['Cédula', true, 1],
-		[['Hist.Ant', 'N° de historia del antecedente'], true, 2],
+		[['H. Ant', 'N° de historia del antecedente'], true, 2],
 		['Nombres', true, 3],
 		['Apellidos', true, 4],
-		['Fecha', true, 5],
-		['status', true, 7],
+		['status', true, 14],
+
 		['Acciones', false, 0]
 	],
-	'tabla-antecedentes', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
+	'tabla-evoluciones', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
 /////////////////////////////////////////////////////
 ///
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 2)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 3)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 4)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 5)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 7)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 2)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 3)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 4)
+evoluciones['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 14)
 
-antecedentes['crud'].cuerpo.push([antecedentes['crud'].columna = antecedentes['crud'].cuerpo.length, [
-		antecedentes['crud'].gBt('informacion btn btn-informacion', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="svg-inline--fa fa-info fa-w-6 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
-		antecedentes['crud'].gBt('editar btn btn-editar', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
+evoluciones['crud'].cuerpo.push([evoluciones['crud'].columna = evoluciones['crud'].cuerpo.length, [
+		evoluciones['crud'].gBt('informacion btn btn-informacion', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="svg-inline--fa fa-info fa-w-6 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
+		evoluciones['crud'].gBt('editar btn btn-editar', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
 	], [0,0,0,0], ['VALUE', 'VALUE','VALUE','VALUE'], 'crud-botones', false
 ])
 /////////////////////////////////////////////////////
-antecedentes['crud']['limitante'] = 1
+evoluciones['crud']['limitante'] = 1
 
 /////////////////////////////////////////////////////
 ///
-antecedentes['crud'].botonModoBusqueda("#modo-buscar", 1, [
+evoluciones['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	['id_ocupacion'],
 	['id_ocupacion', 'cedula','nhist','nombres','apellidos']
 ], {"mensaje": (e) => {
@@ -148,7 +147,7 @@ antecedentes['crud'].botonModoBusqueda("#modo-buscar", 1, [
 
 /////////////////////////////////////////////////////
 ///
-antecedentes['crud']['customBodyEvents'] = {
+evoluciones['crud']['customBodyEvents'] = {
 	"informacion": async (e) => {
 		if(e.target.classList.contains('informacion')) {
 
@@ -181,8 +180,8 @@ antecedentes['crud']['customBodyEvents'] = {
 };
 
 (async () => {
-	var resultado = await tools.fullAsyncQuery('antecedentes', 'cargar_antecedentes', [])
-	antecedentes.cargarTabla(JSON.parse(resultado), undefined, undefined)
+	var resultado = await tools.fullAsyncQuery('evoluciones', 'cargar_evoluciones', [])
+	evoluciones.cargarTabla(JSON.parse(resultado), undefined, undefined)
 })()
 
 //----------------------------------------------------------------------------------------------------
@@ -190,22 +189,22 @@ antecedentes['crud']['customBodyEvents'] = {
 //----------------------------------------------------------------------------------------------------
 contenedores.eventos().checkboxes('status')
 
-//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_antecedentes', ['', '']], false, {})
-//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_antecedentes', ['', '']], false, {})
+//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_evoluciones', ['', '']], false, {})
+//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_evoluciones', ['', '']], false, {})
 
 //----------------------------------------------------------------------------------------------------
 //						Evento del botón de aplicar filtros en la tabla principal
 //----------------------------------------------------------------------------------------------------
 qs('#procesar').addEventListener('click', async e => {
 
-	antecedentes.spinner('#tabla-antecedentes tbody')
+	evoluciones.spinner('#tabla-evoluciones tbody')
 	
-	var peticion = contenedores.procesar(tools.fullQuery, 'antecedentes','filtrar')
+	var peticion = contenedores.procesar(tools.fullQuery, 'evoluciones','filtrar')
 
 	peticion.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-        	qs('#tabla-antecedentes tbody').innerHTML = ''
-        	antecedentes.cargarTabla(JSON.parse(this.responseText))
+        	qs('#tabla-evoluciones tbody').innerHTML = ''
+        	evoluciones.cargarTabla(JSON.parse(this.responseText))
         }
     };
 })
@@ -227,11 +226,11 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 			if(datos !== '') {
 
-				var resultado = await tools.fullAsyncQuery('antecedentes', 'actualizar_antecedentes', datos)
+				var resultado = await tools.fullAsyncQuery('evoluciones', 'actualizar_evoluciones', datos)
 
 				if (resultado.trim() === 'exito') {
 
-					antecedentes.confirmarActualizacion(ediPop)
+					evoluciones.confirmarActualizacion(ediPop)
 				
 				} else {
 
@@ -262,11 +261,11 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 
 		if (datos !== false) {
 
-			var resultado = await tools.fullAsyncQuery('antecedentes', 'crear_antecedentes', datos)
+			var resultado = await tools.fullAsyncQuery('evoluciones', 'crear_evoluciones', datos)
 
 			if (resultado.trim() === 'exito') {
 
-				antecedentes.confirmarActualizacion(insPop)
+				evoluciones.confirmarActualizacion(insPop)
 			
 			} else {
 
@@ -285,7 +284,7 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 /* -------------------------------------------------------------------------------------------------*/	
 //          evento que envía la ID del crud al boton de eliminar del contenedor
 /* -------------------------------------------------------------------------------------------------*/
-qs('#tabla-antecedentes').addEventListener('click', e => {
+qs('#tabla-evoluciones').addEventListener('click', e => {
 	if (e.target.tagName === 'BUTTON') {
 		if (e.target.classList.contains('eliminar')) {
 			idEliminar = Number(e.target.value)
@@ -299,7 +298,7 @@ qs('#tabla-antecedentes').addEventListener('click', e => {
 /* -------------------------------------------------------------------------------------------------*/
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-qs('#antecedentes-insertar').addEventListener('click', e => {
+qs('#evoluciones-insertar').addEventListener('click', e => {
 	tools.limpiar('.nuevos', '', {})
 	window.idSeleccionada = 0
 	insPop.pop()

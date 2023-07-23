@@ -3122,6 +3122,140 @@ span.numeracion {
     content: "Solo Iva Desactivados [D]";
 }
 
+
+
+/*-----------------------------------------------------*/
+/*----------------antecedentes--------------------------*/
+/*-----------------------------------------------------*/
+#insertar-antecedentes::after {
+    width: 200px;
+}
+
+#insertar-antecedentes:hover::after {
+    content: "Agregar Antecedente";
+    opacity: 1;
+    width:230px;
+}
+.antecedentes-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(2) {
+    width: 10%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(3) {
+    width: 10%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(4) {
+    width: 7%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(5) {
+    width: 25%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(6) {
+    width: 25%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(7) {
+    width: 10%;
+}
+
+#tabla-antecedentes tbody tr td:nth-child(8) {
+    width: 10%;
+    min-width: 100px;
+}
+
+
+.antecedentes-status:nth-child(1)::after {
+    content:"Solo Antecedentes Activadas [A]";
+}
+
+.antecedentes-status:nth-child(2)::after {
+    content: "Solo antecedentes Desactivadas [D]";
+}
+
+
+/*-----------------------------------------------------*/
+/*----------------evoluciones--------------------------*/
+/*-----------------------------------------------------*/
+#insertar-evoluciones::after {
+    width: 200px;
+}
+
+#insertar-evoluciones:hover::after {
+    content: "Agregar Nueva Evolución";
+    opacity: 1;
+    width:230px;
+}
+.evoluciones-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(2) {
+    width: 10%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(3) {
+    width: 10%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(4) {
+    width: 7%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(5) {
+    width: 25%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(6) {
+    width: 25%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(7) {
+    width: 10%;
+}
+
+#tabla-evoluciones tbody tr td:nth-child(8) {
+    width: 10%;
+    min-width: 100px;
+}
+
+
+.evoluciones-status:nth-child(1)::after {
+    content:"Solo Ocupaciónes Activadas [A]";
+}
+
+.evoluciones-status:nth-child(2)::after {
+    content: "Solo evoluciones Desactivadas [D]";
+}
+
+
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/
