@@ -18,7 +18,7 @@ qs("#recipes-procesar .reporte-cargar").addEventListener('click', async e => {
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
-				tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				tools.limpiar('.recipes-valores', '', {})
 
 				var sesion = [
 					{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}
@@ -83,12 +83,12 @@ qs("#recipes-procesar .reporte-previa").addEventListener('click', async e => {
 				"peso": historias.sublista.peso,
 				"talla": historias.sublista.talla,
 				"recipe": {
-					"texto": qs('#recipes-enfocar').texto,
-					"textoPrevia": qs('#recipes-enfocar').textoPrevia
+					"texto_base": qs('#recipes-enfocar').texto_base,
+					"texto_html": qs('#recipes-enfocar').texto_html
 				},
 				"indicacion": {
-					"texto": qs('#recipes-indicaciones').texto,
-					"textoPrevia": qs('#recipes-indicaciones').textoPrevia
+					"texto_base": qs('#recipes-indicaciones').texto_base,
+					"texto_html": qs('#recipes-indicaciones').texto_html
 				}
 			}
 
@@ -157,6 +157,8 @@ qs('#crud-receditar-botones .confirmar').addEventListener('click', async e => {
 				recipes.cargarTabla(recipes.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				recEdiPop.pop()
 
@@ -250,7 +252,7 @@ qs('#crud-receditar-pop .filas').addEventListener('mouseleave', e => {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#recipes-limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+	tools.limpiar('.recipes-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 

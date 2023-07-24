@@ -1618,7 +1618,7 @@ span.numeracion {
 }
 
 #crud-informacion-pop, #crud-anteditar-pop, #crud-infeditar-pop, #crud-receditar-pop, #crud-repeditar-pop {
-    background: #fff;
+    background: #f5f5f5d1;
     padding: 15px;
     justify-content: center;
     display: flex;

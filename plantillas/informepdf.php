@@ -265,11 +265,7 @@ $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
   <b>MOTIVO CONSULTA:&nbsp;&nbsp;&nbsp;</b>
     <?php 
-      $texto = '';
-
-      foreach ($motivo['textoPrevia'] as $r) { $texto .= $r;}
-
-      echo trim(strtoupper($texto));
+      echo trim(strtoupper($motivo['texto_html']));
     ?>
 
   <br>
@@ -277,11 +273,7 @@ $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
   <b>ENFERMEDAD ACTUAL:&nbsp;&nbsp;&nbsp;</b>
   <?php 
-      $texto = '';
-
-      foreach ($enfermedad['textoPrevia'] as $r) { $texto .= $r;}
-
-      echo trim(strtoupper($texto));
+      echo trim(strtoupper($enfermedad['texto_html']));
     ?>
 
 
@@ -302,11 +294,7 @@ $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
   <b>PLAN:&nbsp;&nbsp;&nbsp;</b>
   <?php 
-      $texto = '';
-
-      foreach ($plan['textoPrevia'] as $r) { $texto .= $r;}
-
-      echo trim(strtoupper($texto));
+      echo trim(strtoupper($plan['texto_html']));
     ?>
 
   <br>

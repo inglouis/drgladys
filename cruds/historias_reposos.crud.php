@@ -149,10 +149,10 @@
             <section>Personalización</section>
             <section style="width: 100%; border: 1px dashed #fff"></section>
             <span>ENTER: SEPARAR LÍNEA</span>
-            <span>|CENTRAR|</span>
+            <span>°CENTRAR°</span>
             <span>*<b>NEGRITA</b>*</span>
             <span>_ <u>SUBRAYADO</u> _</span>
-            <span>/<i>ITÁLICA</i>/</span>
+            <span>~<i>ITÁLICA</i>~</span>
 
             <div id="reposos-previa-texto" data-scroll></div>
 
@@ -165,7 +165,7 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">MOTIVOS DEL REPOSO</label>
-                <textarea id="reposos-enfocar" rows="4" class="reposos-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea id="reposos-enfocar" rows="4" data-previa="reposos-previa-texto" class="reposos-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 
@@ -280,10 +280,10 @@
         <section>Personalización</section>
         <section style="width: 100%; border: 1px dashed #fff"></section>
         <span>ENTER: SEPARAR LÍNEA</span>
-        <span>|CENTRAR|</span>
+        <span>°CENTRAR°</span>
         <span>*<b>NEGRITA</b>*</span>
-        <span>_ <u>SUBRAYADO</u> _</span>
-        <span>/<i>ITÁLICA</i>/</span>
+        <span>_<u>SUBRAYADO</u>_</span>
+        <span>~<i>ITÁLICA</i>~</span>
 
         <div id="repeditar-previa-texto" data-scroll></div>
 
@@ -294,7 +294,7 @@
         <div style="height: 100%; margin: 0px">
           
           <label class="requerido">MOTIVOS DEL REPOSO</label>
-          <textarea id="repeditar-motivo" rows="4" data-valor="motivo" class="repeditar-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none; min-height: 20vh;" data-scroll></textarea>
+          <textarea id="repeditar-motivo" rows="4" data-previa="repeditar-previa-texto" data-valor="motivo" class="repeditar-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none; min-height: 20vh;" data-scroll></textarea>
 
         </div>
 

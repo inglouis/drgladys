@@ -258,13 +258,7 @@
   	<div></div>
 
 	<?php 
-    $texto = '';
-
-    foreach ($antecedente['textoPrevia'] as $r) {
-      $texto .= $r;
-    }
-
-    echo trim(strtoupper($texto));
+    echo trim(strtoupper($antecedente['texto_html']));
   ?>
 
   <div style="width: 100%"></div>

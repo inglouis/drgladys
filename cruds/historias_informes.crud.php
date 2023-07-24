@@ -168,10 +168,10 @@
             <section>Personalización</section>
             <section style="width: 100%; border: 1px dashed #fff"></section>
             <span>ENTER: SEPARAR LÍNEA</span>
-            <span>|CENTRAR|</span>
+            <span>°CENTRAR°</span>
             <span>*<b>NEGRITA</b>*</span>
             <span>_ <u>SUBRAYADO</u> _</span>
-            <span>/<i>ITÁLICA</i>/</span>
+            <span>~<i>ITÁLICA</i>~</span>
 
             <div id="informes-previa-motivo" data-scroll data-hidden></div>
             <div id="informes-previa-enfermedad" data-scroll data-hidden></div>
@@ -186,21 +186,21 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">Motivo</label>
-                <textarea id="informes-enfocar" rows="3" class="informes-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea id="informes-enfocar"  data-previa="informes-previa-motivo" rows="3" class="informes-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 
               <div style="height: 100%; margin: 0px">
                 
                 <label>Enfermedad</label>
-                <textarea rows="3" id="informes-enfermedad" class="informes-valores upper textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea rows="3" id="informes-enfermedad" data-previa="informes-previa-enfermedad" class="informes-valores upper textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 
               <div style="height: 100%; margin: 0px">
                 
                 <label>Plan</label>
-                <textarea rows="3" id="informes-plan" class="informes-valores upper textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea rows="3" id="informes-plan" data-previa="informes-previa-plan" class="informes-valores upper textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 
@@ -312,10 +312,10 @@
         <section>Personalización</section>
         <section style="width: 100%; border: 1px dashed #fff"></section>
         <span>ENTER: SEPARAR LÍNEA</span>
-        <span>|CENTRAR|</span>
+        <span>°CENTRAR°</span>
         <span>*<b>NEGRITA</b>*</span>
         <span>_ <u>SUBRAYADO</u> _</span>
-        <span>/<i>ITÁLICA</i>/</span>
+        <span>~<i>ITÁLICA</i>~</span>
 
         <div id="infeditar-previa-motivo" data-scroll data-hidden></div>
         <div id="infeditar-previa-enfermedad" data-scroll data-hidden></div>
@@ -327,12 +327,12 @@
         
         <div>
           <label class="requerido">MOTIVO</label>
-          <textarea rows="3" id="infeditar-motivo" data-valor="motivo" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
+          <textarea rows="3" id="infeditar-motivo" data-previa="infeditar-previa-motivo" data-valor="motivo" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
         </div>
 
         <div>
           <label>ENFERMEDAD</label>
-          <textarea rows="3" id="infeditar-enfermedad" data-valor="enfermedad" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
+          <textarea rows="3" id="infeditar-enfermedad" data-previa="infeditar-previa-enfermedad" data-valor="enfermedad" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
         </div>
 
       </div>
@@ -341,7 +341,7 @@
         
         <div>
           <label>PLAN</label>
-          <textarea rows="3" id="infeditar-plan" data-valor="plan" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
+          <textarea rows="3" id="infeditar-plan" data-previa="infeditar-previa-plan" data-valor="plan" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 20vh;" data-scroll></textarea>
         </div>
 
         <style type="text/css">

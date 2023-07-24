@@ -132,10 +132,10 @@
             <section>Personalización</section>
             <section style="width: 100%; border: 1px dashed #fff"></section>
             <span>ENTER: SEPARAR LÍNEA</span>
-            <span>|CENTRAR|</span>
+            <span>°CENTRAR°</span>
             <span>*<b>NEGRITA</b>*</span>
             <span>_ <u>SUBRAYADO</u> _</span>
-            <span>/<i>ITÁLICA</i>/</span>
+            <span>~<i>ITÁLICA</i>~</span>
 
             <div id="antecedentes-previa-texto" data-scroll></div>
 
@@ -148,7 +148,7 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">Información del antecedente</label>
-                <textarea id="antecedentes-enfocar" rows="6" class="antecedentes-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea id="antecedentes-enfocar" data-previa="antecedentes-previa-texto" rows="6" class="antecedentes-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 
@@ -229,10 +229,10 @@
         <section>Personalización</section>
         <section style="width: 100%; border: 1px dashed #fff"></section>
         <span>ENTER: SEPARAR LÍNEA</span>
-        <span>|CENTRAR|</span>
+        <span>°CENTRAR°</span>
         <span>*<b>NEGRITA</b>*</span>
         <span>_ <u>SUBRAYADO</u> _</span>
-        <span>/<i>ITÁLICA</i>/</span>
+        <span>~<i>ITÁLICA</i>~</span>
 
         <div id="anteditar-previa-texto" data-scroll></div>
       </div>
@@ -241,7 +241,7 @@
         
         <div>
           <label class="requerido">ANTECEDENTE</label>
-          <textarea rows="4" id="anteditar-textarea" data-valor="antecedente" class="anteditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
+          <textarea rows="4" id="anteditar-textarea" data-previa="anteditar-previa-texto" data-valor="antecedente" class="anteditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
         </div>
 
       </div>
