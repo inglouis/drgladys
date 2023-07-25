@@ -3,7 +3,7 @@
   //---------------------------------------
   //LLAMADO DE LAS CLASES FUNCIONES DE PHP 
   //---------------------------------------
-  include_once('../clases/antecedentes.class.php');
+  include_once('../clases/evoluciones.class.php');
 
   //---------------------------------------
   //OBJETO DE CLASE (GENERICO)
@@ -23,28 +23,9 @@
   <!-------------------------------------------------------- -->
   <head>
       <?php require_once('../estructura/head.php');?>
-      <title>antecedentes</title>
-      <script type="module" src="../js/antecedentes.js" defer></script>
+      <title>evoluciones</title>
+      <script type="module" src="../js/evoluciones.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
-      <style>
-        #tabla-antecedentes thead {
-            display: table-header-group;
-        }
-
-        #tabla-antecedentes tbody tr {
-            display: table-row;
-            height: 100%;
-            width: 100%;
-        }
-
-        #tabla-antecedentes tbody tr td:nth-child(1) {
-            display: table-cell;
-            align-items: center;
-            width: 3%;
-            justify-content: center;
-        }
-
-      </style>  
   </head>
     
 <!------------------------- CUERPO ----------------------- -->
@@ -64,7 +45,7 @@
         <button id="crud-informacion-cerrar" data-crud='cerrar'>X</button>
 
         <section id="crud-informacion-titulo" data-crud='titulo'>
-          INFORMACIÓN ANTECEDENTES
+          INFORMACIÓN EVOLUCIONES 
         </section>
 
         <div class="filas" style="height: fit-content;">
@@ -89,20 +70,52 @@
 
           <div class="columnas">
             <div>
-              <label>Fecha</label>
-              <input type="text" data-valor="fecha" class="informacion-valores upper visual" disabled="true">
+              <label>Diagnóstico</label>
+              <input type="text" data-valor="diag1" class="informacion-valores upper visual" disabled="true">
             </div>
             <div>
-              <label>Detalle</label>
-              <input type="text" data-valor="descripcion" class="informacion-valores upper visual" disabled="true">
+              <label>Diagnóstico</label>
+              <input type="text" data-valor="diag2" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>fecha</label>
+              <input type="text" data-valor="fecha" class="informacion-valores upper visual" disabled="true">
             </div>
           </div>
 
- 
-  
           <div class="columnas">
             <div>
-              <label class="requerido">Estado del Antecedente</label>
+              <label>Agudeza Visual OD</label>
+              <input type="text" data-valor="avod" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Agudeza Visual OI</label>
+              <input type="text" data-valor="avoi" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Rx OD</label>
+              <input type="text" data-valor="rxod" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Rx OI</label>
+              <input type="text" data-valor="rxoi" class="informacion-valores upper visual" disabled="true">
+            </div>
+          </div>
+
+          <div class="columnas">
+            <div>
+              <label>Plan</label>
+              <input type="text" data-valor="plan" class="informacion-valores upper visual" disabled="true">
+            </div>
+            <div>
+              <label>Evolucion</label>
+              <input type="text" data-valor="evo" class="informacion-valores upper visual" disabled="true">
+            </div>
+          </div>
+
+          <div class="columnas">
+            <div>
+              <label class="requerido">Estado de la Evolución</label>
               <select class="informacion-valores upper visual" data-valor="status" disabled="true">
                 <option value="">SELECCIONAR</option>
                 <option value="A">ACTIVA</option>
@@ -126,7 +139,7 @@
     <div class="container-fluid bg-3 paginas-contenedor">
 
       <div id="titulo-contenedor">  
-        <h3>LISTADO DE ANTECEDENTES</h3>
+        <h3>LISTADO DE evoluciones</h3>
       </div>
 
        <div id='contenido-contenedor'>
@@ -156,19 +169,19 @@
                 padding: 0px 5px;
               ">
                 
-                <button id="antecedentes-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
+                <button id="evoluciones-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
 
               </div>
 
-              <div id="antecedentes-filtros" class="filtros" style="padding-left: 10px;">
+              <div id="evoluciones-filtros" class="filtros" style="padding-left: 10px;">
 
                 <div data-grupo="status" class="grupo">
 
-                  <section class="filtro antecedentes-status">
+                  <section class="filtro evoluciones-status">
                     <input type="checkbox" data-name="status" data-familia="global" data-modo="individual" value="A">
                   </section>
 
-                  <section class="filtro antecedentes-status">
+                  <section class="filtro evoluciones-status">
                     <input type="checkbox" data-name="status" data-familia="global" data-modo="individual" value="D">
                   </section>
 
@@ -187,7 +200,7 @@
             </div>
 
             <div id="tabla-principal" class="tabla-ppal table-min">
-              <table id="tabla-antecedentes" class="table table-bordered table-striped">
+              <table id="tabla-evoluciones" class="table table-bordered table-striped">
                 <thead>
                 </thead>
                 <tbody>
