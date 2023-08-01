@@ -1,5 +1,5 @@
-import {historias, reposos, tools, notificaciones, reposoPrevia} from '../js/historias.js';
-
+import {historias, tools, notificaciones, reposoPrevia} from '../js/historias.js';
+import {constancias} from '../js/historias.js';
 
 /* -------------------------------------------------------------------------------------------------*/
 /*           						GENERAR REPORTE DEL ANTECENDENTE		  					    */

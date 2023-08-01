@@ -180,7 +180,7 @@ option:hover {
     color: #fff !important;
 }
 
-[data-noche] .antecedentes-contenido, [data-noche] .informes-contenido, [data-noche] .recipes-contenido, [data-noche] .template-fecha-contenedor {
+[data-noche] .cruds, [data-noche] .antecedentes-contenido, [data-noche] .informes-contenido, [data-noche] .recipes-contenido, [data-noche] .template-fecha-contenedor {
     background: #243447 !important;
 }
 
@@ -685,6 +685,10 @@ span.numeracion {
     background: #ff4057;
 }
 
+.btn-imprimir:hover {
+    background: #f178cc;
+}
+
 .btn-nuevo, #buscar {
     color: #fff;
     background: #b9a3cb;
@@ -777,7 +781,7 @@ span.numeracion {
   
 .busqueda-estilizada::before {
     content: "";
-    background: #fff;
+    background: #ffffffc7;
     width: 75px;
     position: absolute;
     top: 0px;
@@ -1034,7 +1038,7 @@ span.numeracion {
 
 [data-crud='limpiar'] {
     position: relative;
-    top: 7px;
+    top: 0px;
     left: 2px;
     background: transparent;
     border: none;
@@ -1602,22 +1606,8 @@ span.numeracion {
 }
 
 /*------------------cruds-----------------------------*/
-#crud-nuevo-pop {
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-    padding: 2%;
-    width: fit-content; 
-    width: -moz-fit-content;
-    text-align: center;
-    position: relative;
-    box-shadow:0px 0px 2px 2px #fff;
-}
-
-#crud-informacion-pop, #crud-anteditar-pop, #crud-infeditar-pop, #crud-receditar-pop, #crud-repeditar-pop {
+#crud-informacion-pop, 
+#crud-coneditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
     justify-content: center;
@@ -1650,50 +1640,135 @@ span.numeracion {
     box-shadow: 0px 0px 1px 1px #fff;
 }
 
-#crud-antprevia-pop, 
-#crud-infprevia-pop, 
-#crud-recprevia-pop, 
-#crud-repprevia-pop {
-    height: 90%;
+#crud-previas-pop {
+    height: 95%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    background: #f5f5f5d1;
     padding: 10px;
-    width: 50%;
+    width: 40%;
+    min-width: 500px;
     text-align: center;
     position: relative;
     box-shadow: 0px 0px 1px 1px #fff;
 }
 
-#crud-antecedentes-pop, #crud-informes-pop, #crud-recipes-pop, #crud-reposos-pop {
-    height: 95%;
+#crud-reportes-pop {
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    background: #fff;
-    padding: 1%;
-    width: 95%;
+    background: #f5f5f5d1;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
     position: relative;
-    box-shadow:0px 0px 2px 2px #fff;
+    box-shadow: 0px 0px 1px 1px #fff;
 }
 
-#crud-anteliminar-pop, #crud-infeliminar-pop, #crud-receliminar-pop, #crud-repeliminar-pop {
-    background: #fff;
-    padding: 15px;
-    justify-content: space-evenly;
-    display: flex;
-    text-align: center;
-    align-items: center;
+#crud-reportes-contenedor {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
     flex-direction: column;
+    row-gap: 10px;
+}
+
+#crud-reportes-cabecera {
+    display: flex;
     position: relative;
+}
+
+#crud-reportes-cuerpo {
+    width: 100%;
+}
+
+#crud-reportes-cuerpo {
+    z-index: 1;
+}
+
+#crud-reportes-cabecera .boton {
+    width: 25px;
+    height: 25px;
+}
+
+#crud-reportes-cabecera .boton button {
+    width: 100%;
+    height: 100%;
+    background: #393576;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#crud-reportes-cabecera .contenido {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    z-index: 2;
+}
+
+#crud-reportes-cabecera .cabecera {
+    width: 300px;
+    padding: 0px 10px;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+    background: #ffffffb5;
+    border-bottom: 1px dashed #383475;
+    border-top-right-radius: 10px;
+    margin-left: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#crud-reportes-secciones {
+    height: 100%;
+}
+
+#reportes-paginacion {
+    background: #393576;
+    padding: 0px 10px;
+    border-bottom-right-radius: 15px;
+}
+
+#reportes-paginacion .titulo {
+    padding: 5px;
+    font-size: 1.5em;
+    color: #fff;
+    border-bottom: 1px dashed #fff;
+}
+
+#reportes-paginacion .botones {
+    width: 100%;
+    display: grid;
+    row-gap: 5px;
+    background: transparent;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5px;
+    padding: 10px 0px 10px 0px;
+    height: 100%;
+}
+
+#reportes-paginacion .botones button {
+    background: repeating-linear-gradient(45deg, #ffffffd9,#ffffffad, #ffffff9c 100px);
+    padding: 5px;
+    font-weight: bold;
 }
 
 .reportes-previa-iframe, .reportes-previa-iframe iframe {
     width: 100%;
     height: 100%;
+}
+
+#reportes-paginacion .botones button:hover {
+    background: black;
+    color: #fff;
 }
 
 /*-----------------------organizacion--------------------*/
@@ -2598,12 +2673,14 @@ span.numeracion {
 
 .contenedor-reportes .izquierda {
     display: grid;
-    grid-template-rows: auto  1fr;
+    grid-template-rows: auto 1fr;
     row-gap: 10px;
     align-items: center;
     padding: 5px;
     justify-content: stretch;
     position: relative;
+    width: 30%;
+    min-width: 300px;
 }
 
 .titulo {
@@ -2638,6 +2715,7 @@ span.numeracion {
     display: flex;
     flex-direction: column;
     position: relative;
+    row-gap: 5px;
 }
 
 .botones-reportes {
@@ -2671,8 +2749,11 @@ span.numeracion {
     grid-template-rows: auto 1fr;
     row-gap: 10px;
     align-items: center;
-    padding: 15px;
-    height: 80vh;
+    padding: 5px;
+    justify-content: stretch;
+    position: relative;
+    width: 100%;
+    min-width: 300px;
 }
 
 .derecha > .busqueda-estilizada::before {
@@ -2685,86 +2766,99 @@ span.numeracion {
 
 /*--------------------tablas estandarizadas---------------------*/
 /*------------------agregar nombres tal cual--------------------*/
-.antecedentes-contenido,
-.informes-contenido,
-.recipes-contenido,
-.reposos-contenido {
-  display: flex;
-  flex-direction: column;
-  text-align: justify;
-  padding: 10px;
-  background: #fff;
-  border-radius: 10px;
-  row-gap: 10px;
-
+.reportes-seccion {
+    height: 100%;
 }
 
-.antecedentes-contenido label,
-.informes-contenido label,
-.recipes-contenido label,
-.reposos-contenido label {
+.reportes-seccion .contenedor {
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    padding: 10px;
+    background: #ffffff8a;
+    border-radius: 10px;
+    row-gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.reportes-seccion .contenedor label {
     font-size: 14px;
 }
 
-.antecedentes-contenido input,
-.informes-contenido input,
-.recipes-contenido input,
-.reposos-contenido input {
-    height: 20px;
-    width: fit-content;
+.reportes-seccion .busqueda-estilizada .contenedor input {
+    height: 35px;
+    width: 25vw;
+    min-width: 200px;
 }
 
-.antecedentes-subtitulo,
-.informes-subtitulo,
-.recipes-subtitulo,
-.reposos-subtitulo  {
+.reportes-seccion table thead {
+    display: none;
+}
+
+.reportes-seccion .subtitulo  {
     border-bottom: 1px dashed #262626;
     color: #5e6f76;
     font-weight: bold !important;
     position: relative;
 }
 
-.antecedentes-datos,
-.informes-datos,
-.recipes-datos,
-.reposos-datos  {
+.cruds {
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    row-gap: 10px;
+}
+
+.cruds .crud-contenido {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cruds .crud-botones {
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #5e6f76 !important;
+    column-gap: 5px;
+}
+
+.cruds .crud-botones button {
+    width: 25px !important;
+    height: 25px !important;
+    padding: 2px;
+    margin: 0px;
+}
+
+.cruds .crud-datos  {
     cursor: pointer;
+    font-size: 12px;
+    color: #9477dc;
 }
 
-.antecedentes-dato,
-.informes-dato,
-.recipes-dato,
-.reposos-dato {
-    color: #fff;
-}
-
-.antecedentes-datos:hover,
-.informes-datos:hover,
-.recipes-datos:hover,
-.reposos-datos:hover {
+.cruds .crud-datos:hover {
     background: #ebebec;
     padding: 0px 5px;
 }
 
-.antecedentes-contenido > div,
-.informes-contenido > div,
-.recipes-contenido > div,
-.reposos-contenido > div  {
+.cruds .crud-dato {
+    color: #fff;
+}
+
+.cruds .crud-contenido > div  {
   transition: 0.3s ease all;
 }
 
-.antecedentes-contenido:hover > div,
-.informes-contenido:hover > div,
-.recipes-contenido:hover > div,
-.reposos-contenido:hover > div {
+.cruds .contenido:hover > div {
     transition: 0.3s ease all;
     font-weight: bold;
 }
 
-.antecedentes-datos-contenedor,
-.informes-datos-contenedor,
-.recipes-datos-contenedor,
-.reposos-datos-contenedor {
+.cruds .crud-datos-contenedor {
     background: #243447;
     color: #fff;
     padding: 5px;
@@ -2773,65 +2867,55 @@ span.numeracion {
     border-bottom-right-radius: 10px;
 }
 
-.antecedentes-botones,
-.informes-botones,
-.recipes-botones,
-.reposos-botones {
-    display: flex;
-    position: absolute;
-    right: 0px;
-    top: 0px;
+.cruds .crud-informacion label  {
+    border-bottom: 1px solid #5e6f76;
 }
 
-#antecedentes-previa-desplegable,
-#informes-previa-desplegable,
-#recipes-previa-desplegable,
-#reposos-previa-desplegable {
+.cruds .crud-titulo {
+    font-size: 18px !important;
+    font-weight: bold;
+}
+
+.cruds .crud-reporte {
+    font-size: 13px;
+    padding-bottom: 10px;
+}
+
+.cruds .crud-eliminar-contenedor {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.desplegable-contenedor {
     height: 100%;
     z-index: 1;
     left: 100%;
     position: absolute;
 }
 
-#antecedentes-previa-desplegable section,
-#informes-previa-desplegable section,
-#recipes-previa-desplegable section,
-#reposos-previa-desplegable section {
+.desplegable-contenedor section {
     width: 100%;
     height: 100%;
     display: flex;
     background: linear-gradient(90deg, white, #e0efed, #e0efed);
 }
 
-#antecedentes-iframe-contenedor,
-#informes-iframe-contenedor,
-#recipes-iframe-contenedor,
-#reposos-iframe-contenedor {
+.desplegable-iframe {
     width: 100%;
     min-width: 40vw;
+    height: 100%;
+    border: none;
 }
 
-#antecedentes-iframe,
-#informes-iframe,
-#recipes-iframe,
-#reposos-iframe {
+.desplegable-iframe iframe {
     width: 100%;
     padding: 15px;
     height: 100%;
     border: none;
 }
 
-.antecedentes-informacion label,
-.informes-informacion label,
-.recipes-informacion label,
-.reposos-informacion label  {
-    border-bottom: 1px solid #5e6f76;
-}
-
-#crud-antecedentes-personalizacion, 
-#crud-informes-personalizacion, 
-#crud-recipes-personalizacion, 
-#crud-reposos-personalizacion {
+.reportes-seccion .personalizacion {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -2842,15 +2926,12 @@ span.numeracion {
     right: 0px;
     width: 100%;
     border-radius: 10px;
-    top: 0px;
+    top: 25%;
     left: 100%;
     min-width: 200px;
 }
 
-#crud-anteditar-personalizacion,
-#crud-infeditar-personalizacion,
-#crud-receditar-personalizacion,
-#crud-repeditar-personalizacion {
+.personalizacion-b {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -2866,15 +2947,7 @@ span.numeracion {
     min-width: 150px;
 }
 
-
-#crud-antecedentes-personalizacion::after, 
-#crud-anteditar-personalizacion::after,
-#crud-informes-personalizacion::after, 
-#crud-infeditar-personalizacion::after,
-#crud-recipes-personalizacion::after, 
-#crud-receditar-personalizacion::after,
-#crud-reposos-personalizacion::after,
-#crud-repeditar-personalizacion::after {
+.reportes-seccion .personalizacion::after, .personalizacion-b::after {
     content: "";
     background: #000000ba;
     clip-path: polygon(100% 100%, 30% 40%, 100% 0%);
@@ -2885,13 +2958,17 @@ span.numeracion {
     left: -19px;
 }
 
-#antecedentes-previa-texto,
-#informes-previa-motivo,
-#informes-previa-enfermedad,
-#informes-previa-plan,
-#recipes-previa-recipes,
-#recipes-previa-indicaciones,
-#reposos-previa-texto {
+.personalizacion div, .personalizacion-b div {
+    background: #fff;
+    color: black;
+    padding: 5px;
+    min-height: 100px;
+    margin-top: 5px;
+    text-transform: uppercase;
+    max-height: 30vh;
+}
+
+.reportes-seccion .previa {
     background: #fff;
     color: black;
     padding: 10px;
@@ -2903,13 +2980,7 @@ span.numeracion {
     text-align: justify;
 }
 
-#anteditar-previa-texto,
-#infeditar-previa-motivo,
-#infeditar-previa-enfermedad,
-#infeditar-previa-plan,
-#receditar-previa-recipes,
-#receditar-previa-indicaciones,
-#repeditar-previa-texto {
+.previa-b {
     background: #fff;
     color: black;
     padding: 10px;
@@ -2921,31 +2992,6 @@ span.numeracion {
     text-align: justify;
 }
 
-/*#crud-anteditar-personalizacion {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    background: #000000ba;
-    padding: 10px;
-    color: #fff;
-    z-index: 1;
-    right: 0px;
-    width: 100%;
-    border-radius: 10px;
-    bottom: 105%;
-}
-
-#crud-anteditar-personalizacion::after {
-    content: "";
-    background: #000000ba;
-    clip-path: polygon(45% 58%, 0 0, 100% 0);
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    bottom: -20px;
-    right: 47%;
-}
-*/
 /*---------------template de fechas para reportes----------------------*/
 
 .template-fecha-contenedor {
@@ -2967,30 +3013,85 @@ span.numeracion {
 }
 
 .template-fecha-contenedor input {
-    height: 20px;
-    width: fit-content;
+    height: 30px;
+    width: 100px;
+    padding: 0px 5px;
+}
+
+/*---------------template eliminar reporte----------------------*/
+.eliminar-contenedor {
+    width: 265px;
+    position: absolute;
+    background: #151a27;
+    padding: 5px;
+    z-index: 1;
+    top: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+    left: 40px;
+}
+
+.eliminar-contenedor::after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    left: -15px;
+    top: 8px;
+}
+
+.eliminar-contenedor::after {
+    border-right: 15px solid #151a27;
+}
+
+.eliminar-texto {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
+
+.eliminar-boton {
+    width: 25px;
+    border-radius: 0px;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    color: #fff;
+    background: linear-gradient(0deg, #c5738e 0%, rgb(229 70 70) 38%);
+    padding: 5px;
+}
+
+.eliminar-boton:hover {
+  background: #e45666;
 }
 
 /*-----------------------------------------------------*/
-/*------------------antecendentes----------------------*/
+/*------------------ CONSTANCIAS ----------------------*/
 /*-----------------------------------------------------*/
 
-#tabla-antecedentes thead {
+#tabla-constancia thead {
     display: none
 }
 
-#tabla-antecedentes tbody tr {
+#tabla-constancia tbody tr {
     display: flex;
     height: 100%;
     width: 100%;
+    position: relative;
 }
 
-#tabla-antecedentes tbody tr td:nth-child(2) {
+#tabla-constancia tbody tr td:nth-child(2) {
     width: 100%;
 }
 
 
-#tabla-antecedentes tbody tr td:nth-child(1) {
+#tabla-constancia tbody tr td:nth-child(1) {
     display: flex;
     align-items: center;
     width: 40px;
@@ -2998,85 +3099,7 @@ span.numeracion {
 }
 
 /*-----------------------------------------------------*/
-/*------------------antecendentes----------------------*/
-/*-----------------------------------------------------*/
-
-#tabla-informes thead {
-    display: none
-}
-
-#tabla-informes tbody tr {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-#tabla-informes tbody tr td:nth-child(2) {
-    width: 100%;
-}
-
-
-#tabla-informes tbody tr td:nth-child(1) {
-    display: flex;
-    align-items: center;
-    width: 40px;
-    justify-content: center;
-}
-
-/*-----------------------------------------------------*/
-/*------------------recipes----------------------*/
-/*-----------------------------------------------------*/
-
-#tabla-recipes thead {
-    display: none
-}
-
-#tabla-recipes tbody tr {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-#tabla-recipes tbody tr td:nth-child(2) {
-    width: 100%;
-}
-
-
-#tabla-recipes tbody tr td:nth-child(1) {
-    display: flex;
-    align-items: center;
-    width: 40px;
-    justify-content: center;
-}
-
-/*-----------------------------------------------------*/
-/*------------------antecendentes----------------------*/
-/*-----------------------------------------------------*/
-
-#tabla-reposos thead {
-    display: none
-}
-
-#tabla-reposos tbody tr {
-    display: flex;
-    height: 100%;
-    width: 100%;
-}
-
-#tabla-reposos tbody tr td:nth-child(2) {
-    width: 100%;
-}
-
-
-#tabla-reposos tbody tr td:nth-child(1) {
-    display: flex;
-    align-items: center;
-    width: 40px;
-    justify-content: center;
-}
-
-/*-----------------------------------------------------*/
-/*-------------------    Iva --------------------------*/
+/*---------------------- Iva --------------------------*/
 /*-----------------------------------------------------*/
 #insertar-iva::after {
     width: 200px;
@@ -3121,8 +3144,6 @@ span.numeracion {
 .iva-status:nth-child(2)::after {
     content: "Solo Iva Desactivados [D]";
 }
-
-
 
 /*-----------------------------------------------------*/
 /*----------------antecedentes--------------------------*/
@@ -4713,50 +4734,6 @@ span.numeracion {
 @keyframes mostrar {
     50%{opacity: 0;}
     100%{opacity:1;visibility: visible;}
-}
-
-/*-----------------------------------------------------*/
-/*--------------------media-queries--------------------*/
-/*-----------------------------------------------------*/
-@media all and (min-height:900px), (min-width:1600px) {
-    .crud-procesar-pop-factura, .crud-procesar-pop-presupuesto, .crud-imprimir-pop {
-        min-width: 500px;
-    }
-
-    .scroll-form::-webkit-scrollbar {
-        width: 0em;
-        height: 0.6em;
-    }
-}
-
-@media all and (max-height:900px), (max-width:1300px) {
-    .crud-procesar-pop-factura, .crud-procesar-pop-presupuesto, .crud-imprimir-pop {
-        min-width: 700px;
-    }
-}
-
-@media all and (max-width:600px) {
-    html {
-        height: 130%;
-    }
-
-    footer p {
-        font-size: 2vw;
-    }
-
-    .tabla-ppal {
-        height: 100%;
-    }   
-
-    .tabla-ppal table thead tr th {
-        min-width: 100px;
-    }
-}
-
-@media all and (max-width:400px) {
-    html {
-        height: 144%;
-    }
 }
 
 /*-------------------------pollito-time-------------------------*/

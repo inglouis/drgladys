@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['antecedente']) == 'string') {
-    $antecedente = json_decode($datos['antecedente'], true);
+  if (gettype($datos['constancia']) == 'string') {
+    $constancia = json_decode($datos['constancia'], true);
   } else {
-    $antecedente = $datos['antecedente'];
+    $constancia = $datos['constancia'];
   }
 
   $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
@@ -204,7 +204,7 @@
 			<img src="../imagenes/decoracion_historia.jpg" style="width: 170mm; height: 13mm;">
 		</div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm">HISTORIA MÉDICA</div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm">CONSTANCIA</div>
 
 	    <div></div>
 	    <div></div>
@@ -232,15 +232,6 @@
 	    <table>
 	      <tbody>
 	        <tr>
-	          <td>DIRECCIÓN:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['direccion'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
-
-	    <table>
-	      <tbody>
-	        <tr>
 	          <td>FECHA:</td>
 	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
 	          <td>HORA:</td>
@@ -258,7 +249,7 @@
   	<div></div>
 
 	<?php 
-    echo trim(strtoupper($antecedente['texto_html']));
+    echo trim(strtoupper($constancia['texto_html']));
   ?>
 
   <div style="width: 100%"></div>
@@ -288,12 +279,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/antecedentes/antecedente$nombre.pdf", "f");
+          $html2pdf->output("../reportes/constancias/constancia$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/antecedentes/antecedente$nombre.pdf");
+          $html2pdf->Output("../reportes/constancias/constancia$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/antecedentes/antecedente$nombre.pdf");
-          $html2pdf->output("../reportes/antecedentes/antecedente$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/constancias/constancia$nombre.pdf");
+          $html2pdf->output("../reportes/constancias/constancia$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

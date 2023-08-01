@@ -728,7 +728,7 @@ export class Herramientas {
 
 				} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-					datos.push({"texto": contenedores[i].texto, "textoPrevia": contenedores[i].textoPrevia})
+					datos.push({"texto_base": contenedores[i].texto_base, "texto_html": contenedores[i].texto_html})
 
 				} else {
 
@@ -824,17 +824,12 @@ export class Herramientas {
 
 			} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-				params['contenedor-personalizable'].elementos[contenedores[i].id].texto = ''
-				params['contenedor-personalizable'].elementos[contenedores[i].id].textoPrevia = []
-
 				contenedores[i].value = ''
-				contenedores[i].texto = ''
-				contenedores[i].textoPrevia = []
+				contenedores[i].texto_base = ''
+				contenedores[i].texto_html = ''
 
-				if (params['contenedor-personalizable'].elementos[contenedores[i].id].previa !== undefined) {
-
-					params['contenedor-personalizable'].elementos[contenedores[i].id].previa.innerHTML = ''
-
+				if (qs(`#${contenedores[i].dataset.previa}`)) {
+					qs(`#${contenedores[i].dataset.previa}`).innerHTML = ''
 				}
 
 			} else {
@@ -3087,23 +3082,17 @@ export class Rellenar {
 
 					var array = JSON.parse(lista[contenedores[i].dataset[th.grupo]])
 
-					params['contenedor-personalizable'].elementos[contenedores[i].id].texto = array.texto
-					params['contenedor-personalizable'].elementos[contenedores[i].id].textoPrevia = array.textoPrevia
+					contenedores[i].value = ''
+					contenedores[i].texto_base = ''
+					contenedores[i].texto_html = ''
 
-					contenedores[i].value = array.texto
-					contenedores[i].texto = array.texto
-					contenedores[i].textoPrevia = array.textoPrevia
+					contenedores[i].value = array.texto_base
+					contenedores[i].texto_base = array.texto_base
+					contenedores[i].texto_html = array.texto_html
 
-					if (params['contenedor-personalizable'].elementos[contenedores[i].id].previa !== undefined) {
+					if (qs(`#${contenedores[i].dataset.previa}`)) {
 
-						var ant = array.textoPrevia,
-							texto = ''
-
-						ant.forEach(el => {
-						    texto = `${texto}${el}` 
-						})
-
-						params['contenedor-personalizable'].elementos[contenedores[i].id].previa.innerHTML = texto.toUpperCase()
+						qs(`#${contenedores[i].dataset.previa}`).innerHTML = array.texto_html
 
 					}
  
@@ -3382,10 +3371,10 @@ export class FormaContactos {
 /////////////////////////////////////////////////////////////////////////////////////////77//////
 export class customDesplegable {
 	constructor(desplegable, abrir, cerrar, evt, wh, desplegado) {
-		this.desplegable = qs(`#${desplegable}`);
+		this.desplegable = qs(desplegable);
 		this.estado      = false;
-		this.abrir       = (qs(`#${abrir}`)) ? qs(`#${abrir}`) : false;
-		this.cerrar      = (qs(`#${cerrar}`)) ? qs(`#${cerrar}`) : false;
+		this.abrir       = (qs(abrir)) ? qs(abrir) : false;
+		this.cerrar      = (qs(cerrar)) ? qs(cerrar) : false;
 		this.seguir      = true;
 		this.horientacion= 'H';
 		this.eventosAbrirCerrar = (typeof evt !== 'undefined') ? evt : ['click', 'click'];

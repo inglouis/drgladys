@@ -81,14 +81,11 @@ qs("#antecedentes-procesar .reporte-previa").addEventListener('click', async e =
 				"id": historias.sublista.id_historia,
 				"nombres": historias.sublista.nombres,
 				"apellidos": historias.sublista.apellidos,
-				"direccion": historias.sublista.direccion,
 				"cedula": historias.sublista.cedula,
 				"fecha_nacimiento": historias.sublista.fecha_nacimiento,
-				"peso": historias.sublista.peso,
-				"talla": historias.sublista.talla,
-				"antecedente": {
-					"texto_base": qs('#antecedentes-enfocar').texto_base,
-					"texto_html": qs('#antecedentes-enfocar').texto_html
+				"constancia": {
+					"texto_base": qs('#constancia-textarea').texto_base,
+					"texto_html": qs('#constancia-textarea').texto_html
 				}
 			}
 
