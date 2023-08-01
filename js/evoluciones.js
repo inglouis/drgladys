@@ -63,7 +63,7 @@ window.cargar.revision()
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 /////////////////////////////////////////////////////
-var sesiones = await window.sesiones()
+var sesiones = await window.sesiones(true)
 /////////////////////////////////////////////////////
 //----------------------------------------------------------------------------------------------------
 //										evoluciones                                           
@@ -107,7 +107,7 @@ window.evoluciones = new Evoluciones(new Tabla(
 		[['H. Ant', 'N° de historia del antecedente'], true, 2],
 		['Nombres', true, 3],
 		['Apellidos', true, 4],
-		['status', true, 14],
+		['Status', true, 14],
 
 		['Acciones', false, 0]
 	],
@@ -206,78 +206,6 @@ qs('#procesar').addEventListener('click', async e => {
         	evoluciones.cargarTabla(JSON.parse(this.responseText))
         }
     };
-})
-
-/* -------------------------------------------------------------------------------------------------*/
-/*   		Evento que envia los datos al metodo de javascript que hace la peticion*                */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#crud-editar-botones').addEventListener('click', async e => {
-
-	if(e.target.classList.contains('editar')) {
-
-		if(window.procesar) {
-
-			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
-			window.procesar = false
-
-			var datos = tools.procesar(e.target, 'editar', 'editar-valores', tools);
-
-			if(datos !== '') {
-
-				var resultado = await tools.fullAsyncQuery('evoluciones', 'actualizar_evoluciones', datos)
-
-				if (resultado.trim() === 'exito') {
-
-					evoluciones.confirmarActualizacion(ediPop)
-				
-				} else {
-
-					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
-
-				}
-
-			}
-
-		} else {
-
-			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-			
-		}
-	}
-})
-
-/* -------------------------------------------------------------------------------------------------*/
-/*                    evento que envia los datos a php para la insersión                            */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#crud-insertar-botones').addEventListener('click', async e => {
-
-	if (e.target.classList.contains('insertar')) {
-
-		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
-		var datos = tools.procesar(e.target, 'insertar', 'nuevos', tools)
-
-		if (datos !== false) {
-
-			var resultado = await tools.fullAsyncQuery('evoluciones', 'crear_evoluciones', datos)
-
-			if (resultado.trim() === 'exito') {
-
-				evoluciones.confirmarActualizacion(insPop)
-			
-			} else {
-
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
-
-			}
-
-		} else {
-
-			notificaciones.mensajeSimple('Campos vacíos', resultado, 'F')
-
-		}
-	}
 })
 
 /* -------------------------------------------------------------------------------------------------*/	

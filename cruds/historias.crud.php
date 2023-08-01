@@ -272,8 +272,8 @@
           <input id="editar-enfocar" type="text" autocomplete="off"  maxlength="14" data-valor="cedula" placeholder="-" class="editar-valores lleno upper" maxlength="14">
         </div>
 
-        <div style="width: 200px;">
-          <label>N° DE HIJO</label>
+        <div style="width: 20rem;">
+          <label>N° HIJO</label>
           <select data-valor="nro_hijo" class="editar-valores upper">
             <option value="0">---</option>
             <option value="1">1</option>
@@ -294,6 +294,11 @@
           </select>
         </div>
 
+        <div style="width: 40rem" title="Correlativo del número de historia antiguo">
+          <label>Correlativo</label>
+          <input type="text" autocomplete="off"  data-valor="id_correlativo" class="editar-valores upper">
+        </div>
+
         <div>
           <label class="requerido">Nombres</label>
           <input type="text" autocomplete="off"  data-valor="nombres" maxlength="100" placeholder="-" class="editar-valores lleno upper">
@@ -308,7 +313,7 @@
 
       <div class="columnas">
         
-        <div style="width: 200px;">
+        <div style="width: 250px;">
           <label class="requerido">Fecha de nacimiento</label>
           <input type="date" id="editar-fecha" data-valor="fecha_naci" class="editar-valores lleno upper">
         </div>
@@ -533,8 +538,8 @@
           <input id="insertar-enfocar" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper" maxlength="14">
         </div>
 
-        <div style="width: 200px;">
-          <label>N° DE HIJO</label>
+        <div style="width: 20rem;">
+          <label>N° HIJO</label>
           <select class="insertar-valores upper">
             <option value="0">---</option>
             <option value="1">1</option>
@@ -555,6 +560,12 @@
           </select>
         </div>
 
+        <div style="width: 100px" title="Correlativo del número de historia antiguo">
+          <label>Correlativo</label>
+          <input type="text" autocomplete="off" class="insertar-valores upper">
+        </div>
+
+
         <div>
           <label class="requerido">Nombres</label>
           <input id="insertar-nombre" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper">
@@ -569,7 +580,7 @@
 
       <div class="columnas">
         
-        <div style="width: 410px">
+        <div style="width: 40rem;">
           <label class="requerido">Fecha de nacimiento</label>
           <input type="date" id="insertar-fecha" class="insertar-valores lleno upper">
         </div>
