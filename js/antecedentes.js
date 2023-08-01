@@ -99,7 +99,8 @@ class Antecedentes extends Acciones {
 
 }
 /////////////////////////////////////////////////////
-///
+/** @type {Antecedentes} [description] */
+
 window.antecedentes = new Antecedentes(new Tabla(
 	[
 		['N°. Antecedente', true, 0],
@@ -131,7 +132,20 @@ antecedentes['crud'].cuerpo.push([antecedentes['crud'].columna = antecedentes['c
 antecedentes['crud']['limitante'] = 1
 
 /////////////////////////////////////////////////////
-///
+/**
+ * [description]
+ * @param  {[type]} "#modo-buscar"       [description]
+ * @param  {[type]} 1                    [description]
+ * @param  {[type]} [	['id_antecedente'] [description]
+ * @param  {[type]} ['id_antecedente'    [description]
+ * @param  {[type]} 'cedula'             [description]
+ * @param  {[type]} 'nhist'              [description]
+ * @param  {[type]} 'nombres'            [description]
+ * @param  {[type]} 'apellidos']]        [description]
+ * @param  {[type]} {"mensaje":         (e            [description]
+ * @return {[type]}                      [description]
+ */
+
 antecedentes['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	['id_antecedente'],
 	['id_antecedente', 'cedula','nhist','nombres','apellidos']
