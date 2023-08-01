@@ -629,7 +629,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 					historias.confirmarActualizacion()
 
-					if (datos[13] === 'D') {
+					if (datos[14] === 'D') {
 
 						ediPop.pop()
 

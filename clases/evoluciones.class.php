@@ -1,8 +1,8 @@
 <?php
     require('../clases/ppal.class.php');
     class Model extends ppal {
-        public $schema ='primarias';
-        public $tabla = 'evolucion';
+        public $schema ='principales';
+        public $tabla = 'evoluciones';
         public $filtroMapa = [
             0 => "status = '?'",
             1 => "status = '?'"
@@ -10,8 +10,23 @@
      
         public function cargar_evoluciones($args) {
 
-        	$sql ="select a.id_evolucion,trim(a.cedula) as cedula, trim(a.nhist) as nhist, trim(b.nombres) as nombres,trim(b.apellidos) as apellidos, trim(a.diag1) as diag1, trim(a.diag2) as diag2, trim(a.fecha) as fecha, trim(a.avod) as avod, trim(a.avoi) as avoi, trim(a.rxod) as rxod, trim(a.rxoi) as rxoi, trim(a.plan) as plan, trim(a.evo) as evo, trim(a.status) as status
-				from principales.evolucion as a
+        	$sql ="
+                select 
+                    a.id_evolucion,trim(a.cedula) as cedula, 
+                    trim(a.nhist) as nhist, 
+                    trim(b.nombres) as nombres,
+                    trim(b.apellidos) as apellidos, 
+                    trim(a.diag1) as diag1, 
+                    trim(a.diag2) as diag2, 
+                    trim(a.fecha) as fecha, 
+                    trim(a.avod) as avod, 
+                    trim(a.avoi) as avoi, 
+                    trim(a.rxod) as rxod, 
+                    trim(a.rxoi) as rxoi, 
+                    trim(a.plan) as plan, 
+                    trim(a.evo) as evo, 
+                    trim(a.status) as status
+				from $this->schema.$this->tabla as a
 				left join principales.historias as b ON a.nhist = b.id_correlativo::character varying(100) order by a.nhist desc limit 800";
                 return $this->seleccionar($sql, $args);
         }
@@ -26,7 +41,7 @@
             }
 
             $sql = "select a.id_evolucion,a.cedula,a.nhist,trim(b.nombres),trim(b.apellidos),trim(a.diag1),trim(a.diag2),trim(a.fecha),trim(a.avod),trim(a.avoi),trim(a.rxod),trim(a.rxoi),trim(a.plan),trim(a.evo),trim(a.status)
-				from principales.evolucion as a
+				from $this->schema.$this->tabla as a
 				left join principales.historias as b ON a.nhist = b.id_correlativo::character varying(100) where a.status='A' and nombres like '%'|| UPPER('$busqueda') ||'%' $conc order by id_evolucion order by a.nhist DESC limit 8000";
                 return $this->seleccionar($sql, []);
         }
