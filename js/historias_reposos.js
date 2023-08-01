@@ -1,5 +1,5 @@
-import {historias, reposos, tools, notificaciones, reposoPrevia} from '../js/historias.js';
-
+import {historias, tools, notificaciones, reposoPrevia} from '../js/historias.js';
+import {constancias} from '../js/historias.js';
 
 /* -------------------------------------------------------------------------------------------------*/
 /*           						GENERAR REPORTE DEL ANTECENDENTE		  					    */
@@ -20,7 +20,11 @@ qs("#reposos-procesar .reporte-cargar").addEventListener('click', async e => {
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
-				tools.limpiar('.reposos-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				tools.limpiar('.reposos-valores', '', {
+					"procesado": e =>{
+						gid('reposos-inicio-insertar').value = window.dia
+					}
+				})
 
 				var sesion = [
 					{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}
@@ -83,8 +87,8 @@ qs("#reposos-procesar .reporte-previa").addEventListener('click', async e => {
 				"apellidos": historias.sublista.apellidos,
 				"cedula": historias.sublista.cedula,
 				"motivo": {
-					"texto": qs('#reposos-enfocar').texto,
-					"textoPrevia": qs('#reposos-enfocar').textoPrevia
+					"texto_base": qs('#reposos-enfocar').texto_base,
+					"texto_html": qs('#reposos-enfocar').texto_html
 				},
 				"fecha_inicio": datos[1],
 				"dias": datos[2].trim(),
@@ -161,6 +165,8 @@ qs('#crud-repeditar-botones .confirmar').addEventListener('click', async e => {
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
+				window.idSeleccionada = historias.sublista.id_historia
+
 				repEdiPop.pop()
 
 			} else {
@@ -221,7 +227,6 @@ qs('#crud-repeliminar-botones .eliminar').addEventListener('click', async e => {
 
 })
 
-
 /* -------------------------------------------------------------------------------------------------*/
 /*           					EDITAR FORMATO DEL REPORTES, SUGERENCIAS	 					    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -237,13 +242,13 @@ qs('#crud-reposos-contenedor .cargar').addEventListener('mouseleave', e => {
 
 })
 
-qs('#crud-anteditar-pop .filas').addEventListener('mouseenter', e => {
+qs('#crud-repeditar-pop .filas').addEventListener('mouseenter', e => {
 
 	qs('#crud-repeditar-personalizacion').removeAttribute('data-hidden')	
 
 })
 
-qs('#crud-anteditar-pop .filas').addEventListener('mouseleave', e => {
+qs('#crud-repeditar-pop .filas').addEventListener('mouseleave', e => {
 
 	qs('#crud-repeditar-personalizacion').setAttribute('data-hidden', '')
 
@@ -256,7 +261,6 @@ qs('#crud-anteditar-pop .filas').addEventListener('mouseleave', e => {
 qs('#reposos-limpiar').addEventListener('click', e => {
 
 	tools.limpiar('.reposos-valores', '', {
-		"contenedor-personalizable": window.camposTextosPersonalizables,
 		"procesado": e => {
 			gid('reposos-inicio-insertar').value = window.dia
 		}

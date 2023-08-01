@@ -249,13 +249,7 @@
         <tr>
           <td>POR CAUSA DE: <b>
             <?php 
-              $texto = '';
-
-              foreach ($motivo['textoPrevia'] as $r) {
-                $texto .= $r;
-              }
-
-              echo trim(strtoupper($texto));
+              echo trim(strtoupper($motivo['texto_html']));
             ?>
           </b></td>
         </tr> 

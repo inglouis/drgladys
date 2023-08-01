@@ -4,16 +4,44 @@
 //----------------------------------------------------------------------------------------------------
 ////--------------------------------------------------------------------------------------------------
 
-/////////////////////////////////////////////////////
 //IMPORTA EL CÓDIGO DEL CRUD
 /////////////////////////////////////////////////////
 import {Tabla} from '../js/crud.js';
 
 /////////////////////////////////////////////////////
+window.qs = document.querySelector.bind(document)
+window.qsa = document.querySelectorAll.bind(document)
+/////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable} from '../js/main.js';
+import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion} from '../js/main.js';
 
+/////////////////////////////////////////////////////
+//DESPLEGABLES DE LA PAGINA
+/////////////////////////////////////////////////////
+const paginacionReportesDesplegable = new customDesplegable('#reportes-paginacion', '#reportes-abrir-paginacion', '#reportes-cerrar-paginacion', ['mouseenter', 'mouseleave'], 'fit-content')
+	  paginacionReportesDesplegable.horientacion = 'V'
+
+paginacionReportesDesplegable.eventos()
+
+/////////////////////////////////////////////////////
+//BOTONES PAGINACION
+/////////////////////////////////////////////////////
+qsa('#reportes-paginacion-botones button').forEach((boton) => {
+
+	boton['identificador'] = boton.id
+
+})
+
+qs('#reportes-paginacion-botones').addEventListener('click', (e) => {
+
+	if (e.target.tagName === 'BUTTON') {
+
+		reporteSeleccionado = e.target.identificador
+
+	}
+
+})
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
@@ -29,6 +57,12 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 //window.diaPop = new PopUp('crud-insertar-diagnosticos-popup','popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
 
+window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['coneditar', 'previas'], 27)
+
+window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
+//window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
+
 ediPop.evtBotones()
 insPop.evtBotones()
 infPop.evtBotones()
@@ -39,7 +73,11 @@ parPop.evtBotones()
 civPop.evtBotones()
 relPop.evtBotones()
 medPop.evtBotones()
-// diaPop.evtBotones()
+
+prePop.evtBotones()
+repPop.evtBotones()
+
+conPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -53,7 +91,11 @@ window.addEventListener('keyup', (e) => {
 	civPop.evtEscape(e)
 	relPop.evtEscape(e)
 	medPop.evtEscape(e)
-	// diaPop.evtEscape(e)
+	
+	prePop.evtEscape(e)
+	repPop.evtEscape(e)
+
+	conPop.evtEscape(e)
 
 })
 
@@ -73,7 +115,7 @@ export var notificaciones = new Notificaciones()
 ///////////////////////////////////////////////////////
 //PROPIEDADES BOTONES PAGINACION CONTENEDORES
 /////////////////////////////////////////////////////
-const propiedadesBotonesContenedores = new ARPropiedades({"data-estilo": "focus-2"})
+const botonesReportesPaginacion = new ARPropiedades({"data-estilo": "focus-2"})
 ///////////////////////////////////////////////////////
 //ANIMACIONES
 ////////////////////////////////////////////////////
@@ -91,22 +133,21 @@ window.contenedoresInsertar  = new ContenedoresEspeciales('crud-insertar-popup')
 /////////////////////////////////////////////////////
 //TEXTAREAS PERSONALIZABLES
 /////////////////////////////////////////////////////
-// window.camposTextosPersonalizables = new textoPersonalizable()
+window.camposTextosPersonalizables = new textoPersonalizable()
 
-// window.camposTextosPersonalizables.declarar('#antecedentes-enfocar', undefined, '#antecedentes-previa-texto')
-// window.camposTextosPersonalizables.declarar('#anteditar-textarea', undefined, '#anteditar-previa-texto')
+window.camposTextosPersonalizables.declarar('#constancia-textarea', '#constancia-previa')
+window.camposTextosPersonalizables.declarar('#coneditar-textarea', '#coneditar-previa')
 
-// window.camposTextosPersonalizables.init()
-/////////////////////////////////////////////////////
-window.qs = document.querySelector.bind(document)
-window.qsa = document.querySelectorAll.bind(document)
+window.camposTextosPersonalizables.init()
 /////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
-
-var prevenirCierrePop = false,
+/////////////////////////////////////////////////////
+export var 
+	prevenirCierrePop = false,
 	permitirLimpieza = true,
-	ultimoBotonInsersionBasica = ''
+	ultimoBotonInsersionBasica = '',
+	reporteSeleccionado = 'constancia'
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
 /////////////////////////////////////////////////////
@@ -164,6 +205,7 @@ class Historias extends Acciones {
 		this.tr = ''
 		//-------------------------------
 		this.div = document.createElement('div')
+		this.contenedorEliminarBoton = qs('#eliminar-template').content.querySelector('.eliminar-contenedor').cloneNode(true)
 	}
 
 	async confirmarActualizacion(popUp) {
@@ -181,6 +223,27 @@ class Historias extends Acciones {
 		var resultado = JSON.parse(await tools.fullAsyncQuery(this.uso, this.cargar, []))
 
 		this.cargarTabla(resultado, true)
+
+	}
+
+	limpieza() {
+
+		tools.limpiar('.constancia-valores', '', {})
+
+		// tools.limpiar('.reposos-valores', '', {
+		// 	"procesado": e => {
+		// 		gid('reposos-inicio-insertar').value = window.dia
+		// 	}
+		// })
+
+		// gid('reposos-fecha-insertar').innerHTML = ''
+
+	}
+
+	async traer_lista() {
+		
+		var lista = JSON.parse(await tools.fullAsyncQuery('historias_reportes', `${reporteSeleccionado}_consultar`, [historias.sublista.id_historia]))
+		reportesDisponibles[reporteSeleccionado].cargarTabla(lista, undefined, undefined)
 
 	}
 
@@ -206,10 +269,9 @@ window.historias = historias
 
 historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
-		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`)
-		//historias['crud'].gBt(['evolucion-cargar antecedentes-crud btn btn-general', 'Cargar evolución del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`),
-		//historias['crud'].gBt(['evolucion-consultar antecedentes-crud btn btn-general', 'Consultar evoluciones del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" class="iconos-b" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>`)
-	], [0,0], ['VALUE', 'VALUE'], 'crud-botones', false
+		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
+		historias['crud'].gBt(['reportes btn btn-imprimir', 'Generar reportes del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos-b"><path fill="currentColor" d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`)	
+	], [0, 0, 0], ['VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
 ])
 
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
@@ -301,7 +363,7 @@ historias['crud']['customBodyEvents'] = {
 
 		if (button.classList.contains('informacion')) {
 
-			propiedadesBotonesContenedores.ejecutar('#paginacion-contenedores .informacion')
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .informacion')
 
 			historias.tr = tools.pariente(button, 'TR')
 			historias.sublista = historias.tr.sublista
@@ -357,22 +419,13 @@ historias['crud']['customBodyEvents'] = {
 
 		if (button.classList.contains('editar')) {
 
-			propiedadesBotonesContenedores.ejecutar('#paginacion-contenedores .editar')
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .editar')
 
 			historias.tr = tools.pariente(button, 'TR')
 			historias.sublista = historias.tr.sublista
 
 			if (permitirLimpieza) {
-				// tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				// tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				// tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				// tools.limpiar('.reposos-valores', '', {
-				// 	"contenedor-personalizable": window.camposTextosPersonalizables,
-				// 	"procesado": e => {
-				// 		gid('reposos-inicio-insertar').value = window.dia
-				// 	}
-				// })
-				// gid('reposos-fecha-insertar').innerHTML = ''
+
 			} else {
 				permitirLimpieza = true
 			}
@@ -406,52 +459,33 @@ historias['crud']['customBodyEvents'] = {
 		}
 
 	},
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA LOS ANTECEDENTES   						    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"antecedentes": async(e) => { 
+	"reportes": async (e) => {
 
 		var button = (tools.esDOM(e)) ? e : e.target;
 
-		if (button.classList.contains('antecedentes')) {
+		if (button.classList.contains('reportes')) {
 
-			tools.limpiar('.antecedentes-cargar', '', {})
-
-			propiedadesBotonesContenedores.ejecutar('#paginacion-contenedores .antecedentes')
-
-			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
-			historias.tr = tools.pariente(button, 'TR')
-			historias.sublista = historias.tr.sublista
-
-			if (permitirLimpieza) {
-				tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.recipes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-				tools.limpiar('.reposos-valores', '', {
-					"contenedor-personalizable": window.camposTextosPersonalizables,
-					"procesado": e => {
-						gid('reposos-inicio-insertar').value = window.dia
-					}
-				})
-				gid('reposos-fecha-insertar').innerHTML = ''
+			if (permitirLimpieza) {	
+				historias.limpieza()
 			} else {
 				permitirLimpieza = true
 			}
 
-			rellenar.contenedores(historias.sublista, '.antecedentes-cargar', {elemento: button, id: 'value', "contenedor-personalizable": window.camposTextosPersonalizables})
+			historias.tr = tools.pariente(button, 'TR')
+			historias.sublista = historias.tr.sublista
 			
-			setTimeout(() => {
-				
-				document.querySelector('#antecedentes-enfocar').focus()
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .reportes')
 
-			}, 100)
-
-			antPop.pop()
+			rellenar.contenedores(historias.sublista, '.constancia-cargar', {elemento: button, id: 'value'})
 			
-			var lista = JSON.parse(await tools.fullAsyncQuery('historias_antecedentes', 'antecedentes_consultar', [historias.sublista.id_historia]))
+			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
 
-			antecedentes.cargarTabla(lista, undefined, undefined)
+			tools.limpiar('.reportes-cargar', '', {})
+			//rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
+
+			await historias.traer_lista()
+
+			repPop.pop()
 
 		}
 
@@ -787,172 +821,6 @@ insersiones_lista.forEach((grupo, i) => {
 })
 
 //5)---------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-//										ANTECEDENTES                                        
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-class Antecedentes extends Acciones {
-
-	constructor(crud) {
-		super(crud)
-		this.fila
-		this.clase   = 'historias'
-		this.funcion = 'traer_antecedentes_historia'
-		//-------------------------------
-		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['fecha_arreglada']
-		this.limitante = 0
-		this.boton = ''
-		this.sublista = {}
-		//-------------------------------
-		this.div = document.createElement('div')
-		this.contenido = qs('#antecedentes-template').content.querySelector('.antecedentes-contenido').cloneNode(true)
-		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
-	}
-
-	async confirmarActualizacion(popUp) {
-
-		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
-
-		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
-
-		this.cargarTabla(resultado, true)
-
-	}
-
-}
-/////////////////////////////////////////////////////
-///
-export var antecedentes = new Antecedentes(new Tabla(
-	[	
-		['', false, 0],
-		['', false, 0]
-	],
-	'tabla-antecedentes', 'antecedentes-busqueda', -1, 'null', 'null', 'null', true
-))
-/////////////////////////////////////////////////////
-///
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'antecedentes-contenedor', 0)
-antecedentes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
-/////////////////////////////////////////////////////
-///
-antecedentes['crud']['propiedadesTr'] = {
-	"contenedor": (e) => {
-
-		var fr = new DocumentFragment(),
-			th = antecedentes, 
-			contenedor = e.querySelector('.antecedentes-contenedor'), 
-			contenido = th.contenido.cloneNode(true)
-
-		contenedor.innerHTML = ''
-		contenedor.appendChild(contenido)
-		contenedor.setAttribute('id', `id-${e.sublista.id}`)
-		
-		contenedor.querySelector('.antecedentes-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}`)
-
-		var ant = JSON.parse(e.sublista.antecedente).textoPrevia,
-			texto = ''
-
-		ant.forEach(el => {
-		    texto = `${texto}${el}` 
-		})
-
-		contenedor.querySelector('.antecedentes-antecedente').innerHTML = texto.toUpperCase()
-
-		contenedor.querySelector('.antecedente-nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
-		contenedor.querySelector('.antecedente-apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
-		contenedor.querySelector('.antecedente-cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.antecedente-direccion').insertAdjacentHTML('afterbegin', `<b>- Dirección:</b> ${e.sublista.direccion}`)
-		contenedor.querySelector('.antecedente-edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
-		contenedor.querySelector('.antecedente-peso').insertAdjacentHTML('afterbegin', `<b>- Peso (M):</b> ${e.sublista.peso}`)
-		contenedor.querySelector('.antecedente-talla').insertAdjacentHTML('afterbegin', `<b>- Talla (KG):</b> ${e.sublista.talla}`)
-		
-		setTimeout(() => {
-
-			window.animaciones.generar(`#id-${e.sublista.id} .antecedentes-datos`, [`#a-id-${e.sublista.id}`])
-
-		}, 0)
-
-	},
-	"fecha": (e) => {
-
-		var th = antecedentes, 
-			contenedor = e.querySelector('.fecha-contenedor'), 
-			contenido = th.contenidoFecha.cloneNode(true)
-
-		contenedor.innerHTML = ''
-		contenedor.appendChild(contenido)
-
-		contenedor.querySelector('.fecha-template').value = e.sublista.fecha
-		contenedor.querySelector('.hora-template').value  = e.sublista.hora
-
-	}
-}
-/////////////////////////////////////////////////////
-///
-antecedentes['crud']['customBodyEvents'] = {
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR EL ANTECEDENTE   					    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"editar": async (e) => {
-
-		if (e.target.classList.contains('editar')) {
-
-			antecedentes.sublista = tools.pariente(e.target, 'TR').sublista
-
-			tools.limpiar('.anteditar-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
-			rellenar.contenedores(antecedentes.sublista, '.anteditar-valores', {elemento: e.target, id: 'value', "contenedor-personalizable": window.camposTextosPersonalizables}, {})
-
-			antEdiPop.pop()
-
-		}
-
-	},
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           				ENVIAR LOS DATOS PARA REIMPRIMIR EL ANTECENDENTE   					    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"reimprimir": async (e) => {
-
-		if (e.target.classList.contains('reimprimir')) {
-
-			antecedentes.sublista = tools.pariente(e.target, 'TR').sublista
-
-			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(antecedentes.sublista)}
-				]
-
-			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
-
-			antPrePop.pop()
-
-			window.reportes.previa(qs('#crud-antprevia-reporte iframe'), `../plantillas/antecedentepdf.php?&pdf=2`)
-
-		}
-
-	},
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA ELIMINAR EL ANTECEDENTE   					    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"eliminar": async (e) => {
-
-		if (e.target.classList.contains('eliminar')) {
-
-			antecedentes.sublista = tools.pariente(e.target, 'TR').sublista
-			antEliPop.pop()
-
-		}
-
-	}
-};
-
-
-(async () => {
-
-	antecedentes.cargarTabla([], undefined, undefined)
-
-})()
-
-//5)---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION CONTENEDORES			 	  					    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -969,6 +837,10 @@ class PaginacionContenedores {
 			},
 			"editar": {
 				"pop": () => {ediPop.pop()},
+				"boton": ''
+			},
+			"reportes": {
+				"pop": () => {repPop.pop()},
 				"boton": ''
 			}
 		}
@@ -1022,7 +894,7 @@ class PaginacionContenedores {
 	}
 
 	abrirContenedorRemoto(ref) {
-		propiedadesBotonesContenedores.ejecutar(`#paginacion-contenedores .${ref}`)
+		botonesReportesPaginacion.ejecutar(`#paginacion-contenedores .${ref}`)
 
 		if (this.ultimoSeleccionado === '') {
 			this.cambiarUltimoSeleccionado(ref)
@@ -1053,11 +925,17 @@ insPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar(); permitir
 infPop.funciones['apertura'] = {"apertura": () => {window.pg.mostrar()}}
 infPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar()}}
 
-// antPop.funciones['apertura'] = {"apertura": () => {window.pg.mostrar()}}
-// antPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar()}}
+repPop.funciones['apertura'] = {"apertura": () => {window.pg.mostrar()}}
+repPop.funciones['cierre']   = {"cierre": ()   => {window.pg.ocultar()}}
+
+prePop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
+prePop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
 
 insPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
 insPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
+
+conPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
+conPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
 
 /* -------------------------------------------------------------------------------------------------*/
 /* ------------------------------PAGINACIÓN ENTRE CONTENEDORES--------------------------------------*/
@@ -1068,7 +946,7 @@ qs('#paginacion-contenedores').addEventListener('click', e => {
 
 		permitirLimpieza = false
 
-		propiedadesBotonesContenedores.ejecutar(e.target)
+		botonesReportesPaginacion.ejecutar(e.target)
 		window.pg.cambiarContenedor(e.target.classList[0])
 
 	}
@@ -1076,7 +954,6 @@ qs('#paginacion-contenedores').addEventListener('click', e => {
 })
 
 //6)---------------------------------------------------------------------------------------------------
-/* -------------------------------------------------------------------------------------------------*/
 /* --------------------------------------ATAJOS DE BUSQUEDA----------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 qs('#busqueda').addEventListener('keydown', e => {
@@ -1085,7 +962,7 @@ qs('#busqueda').addEventListener('keydown', e => {
 
 		if (historias.crud.busqueda.length > 0) {
 
-			propiedadesBotonesContenedores.ejecutar('#paginacion-contenedores .informacion')
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .informacion')
 			window.pg.cambiarUltimoSeleccionado('informacion')
 			window.pg.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .informacion'), 'TR'))
 			window.pg.cambiarContenedor('informacion')
@@ -1110,3 +987,218 @@ qs('#busqueda').addEventListener('keydown', e => {
 	}
 
 })
+
+/* -------------------------------------------------------------------------------------------------*/
+/* -----------------------------------PAGINACIÓN DE REPORTES----------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+window.paginacion = new Paginacion(
+	{"contenedores": ".reportes-seccion" ,"familia": '[data-familia]', "efecto": ['aparecer', 'aparecer'], "delay": 100},
+	[
+		{},
+		{}
+	]
+)
+
+window.paginacion.subefectos = true //por defecto true es solo para acordarme de la opcion
+
+qsa('#reportes-paginacion-botones button').forEach((e, i) => {
+	e.addEventListener('click', (boton) => {
+
+		window.paginacion.animacion(i, true)
+		qs('#crud-reportes-cabecera .cabecera').innerHTML = boton.target.innerHTML.toUpperCase()
+
+	})
+})
+
+//7)---------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//										OBJETOS DE LOS REPORTES                                        
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+class Constancias extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'constancia_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#constancia-template').content.querySelector('.constancia-crud').cloneNode(true)
+		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
+	}
+
+	async confirmarActualizacion(popUp) {
+
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
+
+		this.cargarTabla(resultado, true)
+
+	}
+
+}
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+export var constancias = new Constancias(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-constancia', 'constancia-busqueda', -1, 'null', 'null', 'null', true
+))
+
+window.constancias = constancias
+/////////////////////////////////////////////////////
+///
+constancias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'constancias-contenedor', 0)
+constancias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+/////////////////////////////////////////////////////
+///
+constancias['crud']['propiedadesTr'] = {
+	"contenedor": (e) => {
+
+		var fr = new DocumentFragment(),
+			th = constancias, 
+			contenedor = e.querySelector('.constancias-contenedor'), 
+			contenido = th.contenido.cloneNode(true)
+
+		contenedor.innerHTML = ''
+		contenedor.appendChild(contenido)
+		contenedor.setAttribute('id', `id-${e.sublista.id}`)
+		
+		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}`)
+
+		var texto = JSON.parse(e.sublista.constancia).texto_html
+
+		contenedor.querySelector('.constancia').innerHTML = texto.toUpperCase()
+
+		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
+		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
+		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
+		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
+		
+		setTimeout(() => {
+
+			window.animaciones.generar(`#id-${e.sublista.id} .crud-datos`, [`#a-id-${e.sublista.id}`])
+
+		}, 0)
+
+	},
+	"fecha": (e) => {
+
+		var th = constancias, 
+			contenedor = e.querySelector('.fecha-contenedor'), 
+			contenido = th.contenidoFecha.cloneNode(true)
+
+		contenedor.innerHTML = ''
+		contenedor.appendChild(contenido)
+
+		contenedor.querySelector('.fecha-template').value = e.sublista.fecha
+		contenedor.querySelector('.hora-template').value  = e.sublista.hora
+
+	},
+	"eliminar": (e) => {
+		var th = constancias,
+			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
+
+		contenedor.setAttribute('data-hidden', '')
+		contenedor.querySelector('.eliminar-boton').value = e.sublista.id
+
+		e.querySelector('.crud-eliminar-contenedor').appendChild(contenedor)
+
+		contenedor = e.querySelector('.eliminar-contenedor')
+		
+		e.addEventListener('mouseover', el => {
+
+			if (el.target.classList.contains('eliminar')) {
+				var coordenadas = e.querySelector('.eliminar').getBoundingClientRect()
+				//contenedor.setAttribute('style', `left: ${coordenadas.left - 310}px`)
+				contenedor.removeAttribute('data-hidden')	
+			}	
+
+		})
+
+		e.querySelector('.eliminar').addEventListener('mouseleave', el => {
+			if (!contenedor.matches(':hover')) {
+				contenedor.setAttribute('data-hidden', '')
+			}
+		})
+
+		contenedor.addEventListener('mouseleave', el => {
+			contenedor.setAttribute('data-hidden', '')
+		})
+
+	}
+}
+/////////////////////////////////////////////////////
+///
+constancias['crud']['customBodyEvents'] = {
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           					ENVIAR LOS DATOS PARA EDITAR EL constancia   					    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"editar": async (e) => {
+
+		if (e.target.classList.contains('editar')) {
+
+			constancias.sublista = tools.pariente(e.target, 'TR').sublista
+
+			tools.limpiar('.coneditar-valores', '', {})
+			rellenar.contenedores(constancias.sublista, '.coneditar-valores', {elemento: e.target, id: 'value'}, {})
+
+			conPop.pop()
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           				ENVIAR LOS DATOS PARA REIMPRIMIR EL ANTECENDENTE   					    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"reimprimir": async (e) => {
+
+		if (e.target.classList.contains('reimprimir')) {
+
+			constancias.sublista = tools.pariente(e.target, 'TR').sublista
+
+			var sesion = [
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(constancias.sublista)}
+				]
+
+			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
+
+			qs('#crud-previas-popup iframe').src = ''
+
+			prePop.pop()
+
+			window.reportes.previa(qs('#crud-previas-popup iframe'), `../plantillas/${reporteSeleccionado}pdf.php?&pdf=2`)
+
+		}
+
+	}
+};
+
+
+(async () => {
+
+	constancias.cargarTabla([], undefined, undefined)
+
+})()
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           					LISTADO DE TABLAS DE REPORTES 									    */
+/* -------------------------------------------------------------------------------------------------*/
+
+export var reportesDisponibles = {
+	"constancia": constancias
+}

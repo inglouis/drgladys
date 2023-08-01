@@ -148,10 +148,10 @@
             <section>Personalización</section>
             <section style="width: 100%; border: 1px dashed #fff"></section>
             <span>ENTER: SEPARAR LÍNEA</span>
-            <span>|CENTRAR|</span>
+            <span>°CENTRAR°</span>
             <span>*<b>NEGRITA</b>*</span>
-            <span>_ <u>SUBRAYADO</u> _</span>
-            <span>/<i>ITÁLICA</i>/</span>
+            <span>_<u>SUBRAYADO</u>_</span>
+            <span>~<i>ITÁLICA</i>~</span>
 
             <div id="recipes-previa-recipes" data-scroll data-hidden style="text-transform: none;"></div>
             <div id="recipes-previa-indicaciones" data-scroll data-hidden style="text-transform: none;"></div>
@@ -165,7 +165,7 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">Récipe</label>
-                <textarea id="recipes-enfocar" rows="6" placeholder="CARGAR INFORMACIÓN..." class="recipes-valores lleno textarea-espaciado contenedor-personalizable" style="resize: none" data-scroll></textarea>
+                <textarea id="recipes-enfocar" data-previa="recipes-previa-recipes" rows="6" placeholder="CARGAR INFORMACIÓN..." class="recipes-valores lleno textarea-espaciado contenedor-personalizable" style="resize: none" data-scroll></textarea>
 
               </div>
 
@@ -176,7 +176,7 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">Indicaciones</label>
-                <textarea id="recipes-indicaciones" rows="6" placeholder="CARGAR INFORMACIÓN..." class="recipes-valores lleno textarea-espaciado contenedor-personalizable" style="resize: none" data-scroll></textarea>
+                <textarea id="recipes-indicaciones" data-previa="recipes-previa-indicaciones" rows="6" placeholder="CARGAR INFORMACIÓN..." class="recipes-valores lleno textarea-espaciado contenedor-personalizable" style="resize: none" data-scroll></textarea>
 
               </div>
 
@@ -258,10 +258,10 @@
         <section>Personalización</section>
         <section style="width: 100%; border: 1px dashed #fff"></section>
         <span>ENTER: SEPARAR LÍNEA</span>
-        <span>|CENTRAR|</span>
+        <span>°CENTRAR°</span>
         <span>*<b>NEGRITA</b>*</span>
         <span>_ <u>SUBRAYADO</u> _</span>
-        <span>/<i>ITÁLICA</i>/</span>
+        <span>~<i>ITÁLICA</i>~</span>
 
         <div id="receditar-previa-recipes" data-scroll data-hidden style="text-transform: none;"></div>
         <div id="receditar-previa-indicaciones" data-scroll data-hidden style="text-transform: none;"></div>
@@ -272,12 +272,12 @@
         
         <div>
           <label>Récipe</label>
-          <textarea id="receditar-recipes" rows="4" data-valor="recipe" class="receditar-valores lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
+          <textarea id="receditar-recipes" data-previa="receditar-previa-recipes" rows="4" data-valor="recipe" class="receditar-valores lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
         </div>
 
         <div>
           <label>Indicaciones</label>
-          <textarea id="receditar-indicaciones" rows="4" data-valor="indicacion" class="receditar-valores lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
+          <textarea id="receditar-indicaciones" data-previa="receditar-previa-indicaciones" rows="4" data-valor="indicacion" class="receditar-valores lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
         </div>
 
       </div>

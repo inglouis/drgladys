@@ -7,13 +7,20 @@
   */
 
   ob_start();
-  include_once('../clases/pruebas.class.php');
+  include_once('../clases/historias.class.php');
   $obj = new Model();
 
-  if (isset($_REQUEST['datos'])) {
-    $datos = json_decode($_REQUEST['datos'], true);
-  } else {
-    throw new Exception('operación inválida: DATOS necesario para imprimir reposo'); 
+  $datos = json_decode($_SESSION['datos_pdf'], true);
+
+  $dia  = $obj->fechaHora('America/Caracas','d-m-Y');
+  $hora  = $obj->fechaHora('America/Caracas','H-i-s');
+
+  if (!isset($datos['fecha'])) {
+    $datos['fecha'] = $dia;
+  }
+
+  if (!isset($datos['hora'])) {
+    $datos['hora'] = $hora;
   }
 
   if (isset($_REQUEST['pdf'])) {
@@ -22,229 +29,235 @@
     $pdf = 1;
   }
 
-  $datos[3] = date("d-m-Y", strtotime($datos[3]));
+  // echo "<pre>";
+  // print_r($datos);
+  // echo "</pre>";
 
-  $dia   = $obj->fechaHora('America/Caracas','d-m-Y');
-// Array ( 
-//   [0] => 3 
-//   [1] => 2021-11-25 
-//   [2] => 5 
-//   [3] => 2021-11-29 
-//   [4] => 1 
-//   [5] => lunes, 29 de noviembre de 2021 
-//   [6] => 1 )
+  if (gettype($datos['constancia']) == 'string') {
+    $constancia = json_decode($datos['constancia'], true);
+  } else {
+    $constancia = $datos['constancia'];
+  }
+
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+
+  $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
+
 ?>
 
 <style>
-      #separador {
-        margin-top: 0px
-      }
 
-      #titulo1 {
-        top:50px
-      }
+  page {
+  	font-size: 12px;
+  }
 
-      #titulo2 {
-        top: 75px;
-      }
+  page, div, table, h5, h3, h4 {
+    color: #723200;
+    margin:0px !important;
+  }
 
-      #titulo3 {
-        top:135px;
-        font-size: 15px;
-      }
+  table {
+    font-size: 13px;
+    left: 7mm;
+    position: relative;
+  }
 
-      #titulo4 {
-        top: 160px;
-        font-size: 15px;
-      }
+  table tbody {
 
-      #fecha {
-        top: 55px;
-        font-weight: 100; 
-        color: #5f5f5f;
-      }
+  }
 
-      #hora {
-        top:90px; 
-        font-weight: 100; 
-        color:#5f5f5f;
-      }
+  #separador {
+    margin-top: 0px
+  }
 
-      h5, h3, h4 {
-        padding:0px; 
-        margin: 0px;
-        text-align: center;
-      }
+  #fecha {
+    top: 55px;
+    font-weight: 100; 
+    color: #5f5f5f;
+  }
 
-     .contenedor {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        font-size: 18px;
-      }
+  #hora {
+    top:90px; 
+    font-weight: 100; 
+    color:#5f5f5f;
+  }
 
-      #subcabecera {
-        font-size: 12px;
-        width: 100%;
-        text-align: center;
-      }
-    
-      .separador {
-        width: 100%;
-        height: 2px;
-        border-top: 2px dashed #909090;
-        border-bottom: 2px dashed #909090;
-        margin: 2px 2px;
-      }
+  h5, h3, h4 {
+    padding:0px; 
+    margin: 0px;
+    text-align: center;
+  }
 
-      #cabecera h5, #cabecera h4 {
-        width: 100%; 
-        text-align: center;
-        position:absolute;
-      }
+ .contenedor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-      #cabecera h5 {
-        font-size: 16px;
-      }
+  #subcabecera {
+    font-size: 12px;
+    width: 100%;
+    text-align: center;
+  }
 
-      #cabecera h4 {
-        font-size: 18px;
-      }
+  .separador {
+    width: 200mm;
+    height: 2px;
+    border-top: 2px dashed #909090;
+    border-bottom: 2px dashed #909090;
+    margin: 2px 2px;
+  }
 
-      .centro {
-        text-align: left;
-        font-size: 14px;
-        width: 100%;
-      }
+  #cabecera {
+    top: 25mm;
+    position: relative;
+    width: 100%; 
+    color: #723200;
+  }
 
-      .tabla {
-        margin-left: 50px;
-      }
+  #cabecera h5, #cabecera h4, #cabecera div {
+    text-align: center;
+    font-size: 16px;
+  }
 
-      table {
-        width:100%;
-        color: #202020;
-        border-bottom: 1px solid #ccc;
-        border-left: 1px dashed #ccc;
-        font-size: 11px;
-      }
+  .centro {
+    text-align: center;
+    font-size: 14px;
+    width: 100%;
+  }
 
-      table thead, table tbody, table tbody tr, table thead tr {
-        width: 300px;
-      }
+  .derecha {
+    text-align: right !important;
+  }
 
-      table tbody tr td, table thead tr th {
-        text-align: left;
-        padding: 3px 5px;
-        font-weight: bold;
-      }
+  .small {
+    font-size: 9.5px;
+    padding-top: 1px;
+    width: fit-content;
+  }
 
-      .derecha {
-        text-align: right !important;
-      }
+  .subtitulo {
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 50px;
+    padding-top:10px;
+  }
 
-      .small {
-        font-size: 11px;
-        padding-left: 2px;
-        width: fit-content;
-        font-weight: 100;
-      }
-
-      .unbold {
-        font-size: 12px;
-        padding-left: 2px;
-        top: -1px;
-        width: fit-content;
-        font-weight: 100;
-      }
-
-      .subtitulo {
-        font-size: 12px;
-        font-weight: bold;
-        margin-left: 50px;
-        padding-top:10px;
-      }
-
-      .fecha {
-        position: absolute; 
-        bottom: 5px; 
-        right: 30px; 
-        font-size: 15px;
-      }
+  .fecha {
+    position: absolute; 
+    bottom: 5px; 
+    right: 30px; 
+    font-size: 15px;
+  }
 </style>
 
-<!-- // Array ( 
-//   [0] => 3 
-//   [1] => 2021-11-25 
-//   [2] => 5 
-//   [3] => 2021-11-29 
-//   [4] => 1 
-//   [5] => lunes, 29 de noviembre de 2021 
-//   [6] => 1 ) -->
+<!------------------------------------------------------------------------------------------------->
 
-<page style="width: 200mm" backtop="1mm" backbottom="5mm" backleft="5mm" backright="5mm">
+<page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
+
+	<page_footer>
+		<div style="position:absolute; bottom: 5mm">
+		  
+		  <div style="width: 90%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
+
+		  <div style="font-size: 15px;" class="centro">
+		    <?php echo $_SESSION['informacion_pie_pagina_reportes_1']?>
+		  </div>
+		  <div style="font-size: 15px;" class="centro">
+		    <?php echo $_SESSION['informacion_pie_pagina_reportes_2']?>
+		  </div>
+
+		  <div style="font-size: 15px;" class="centro">
+		    <?php echo $_SESSION['informacion_pie_pagina_reportes_3']?>
+		  </div>
+
+		  <div style="position: absolute; bottom: -0.5mm; left: 36%; height: 0px;">
+		   <img src="../imagenes/facebook.jpg" style="width: 4.5mm; height: 4.5mm;">
+		  </div>
+
+		  <div style="position: absolute; bottom: -0.5mm; left: 39%; height: 0px;">
+		   <img src="../imagenes/instagram.jpg" style="width: 4.5mm; height: 4.5mm;">
+		  </div>
+
+		</div>
+	</page_footer> 
+
   <div class="contenedor">
-    <div id="cabecera" style="height: 70px">
-      <div style="position:relative;">
-        <h4 id="titulo1" style="">CLÍNICA OFTALMOLÓGICA</h4>
-        <h4 id="titulo2">DR. CASTILLO INCIARTE Y ASOCIADOS C.A</h4>
-      </div> 
-      <h3 id="titulo3">Enfermedades Oculares, Retina, Glaucoma, Lentes Intraoculares</h3>
-      <h3 id="titulo4">Rayos Laser, Ecografía</h3>
-    </div> 
-    <div class="separador imprimir-separar"></div>
-    <div id="subcabecera" class="centrar" style="font-size: 10px">
-      <?php echo $_SESSION['informacion_subcabecera_reportes'];?>
-    </div>
 
-    <div style="position: absolute;  top: 5mm; left: 0mm">
-       <img src="../imagenes/logo_reportes.jpg" style="width: 30mm; height: 23mm;">
-    </div>
+    <div id="cabecera">
 
-    <div class="separador" id="separador"></div>
-    <table style="margin-bottom: 5mm; border:none">
-      <tbody>
-        <tr>
-          <td style="width: 170mm; text-align: center;"><div style="width:fit-content; border-bottom: 2px dashed #ccc; font-size: 16px">CONSTANCIA</div></td>
-        </tr>
-      </tbody>
-    </table>  
+  		<div style="top:-21mm; left: 0mm; height: 0px; position: relative;">
+  			<img src="../imagenes/reportes_historia_cabecera.jpg" style="width: 80mm; height: 20mm;">
+  		</div>
 
-    <table style="border:none">
-      <tbody>
-        <tr>
-          <td style="width: 170mm; text-align: left">SE HACE CONSTANCIA QUE EL PACIENTE: <div class="unbold" style="bottom: 5px"><?php echo $datos[1]." [N° Historia: ".$datos[0]."]"?></div></td>
-        </tr> 
-      </tbody>    
-    </table>
+  		<div style="font-family: 'Qwigley'; font-size: 30px; ">
+  			Al servicio de tu piel
+  		</div>
 
-    <table style="border:none">
-      <tbody>
-        <tr>
-          <td style="width: 170mm; text-align: left">CON CÉDULA DE IDENTIDAD NÚMERO: <div class="unbold"><?php echo $datos[2]?></div></td>
-        </tr> 
-      </tbody>    
-    </table>
+		</div> 
 
-    <table style="border:none">
-      <tbody>
-        <tr>
-          <td style="width: 170mm; text-align: left">ASISTIÓ A CONSULTA EN (DD/MM/AAAA): <div class="unbold"><?php echo $datos[3]?></div></td>
-        </tr> 
-      </tbody>    
-    </table>
+		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+			<img src="../imagenes/logo_reportes.jpg" style="width: 28mm; height: 28mm;">
+		</div>
 
-   <table style="position: absolute; top: 90mm; left: 0mm">
-      <tbody>
-        <tr>
-          <td>FECHA:<?php echo $dia?></td>
-        </tr> 
-      </tbody>    
-    </table>
-  </div>  
+		<div style="position: absolute;  top: 2mm; right: 0mm; height: 0px;">
+			<img src="../imagenes/decoracion_historia.jpg" style="width: 170mm; height: 13mm;">
+		</div>
+
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm">CONSTANCIA</div>
+
+	    <div></div>
+	    <div></div>
+
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>NOMBRES Y APELLIDOS:</td>
+	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
+	        </tr>
+	      </tbody>
+	    </table>
+
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>EDAD:</td>
+	          <td style="font-weight: bold"><?php echo $edad?></td>
+	          <td>CÉDULA O PASAPORTE:</td>
+	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
+	        </tr>
+	      </tbody>
+	    </table>
+
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>FECHA:</td>
+	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
+	          <td>HORA:</td>
+	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
+	        </tr>
+	      </tbody>
+	    </table>
+	    
+	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
+	    <!--</p>-->
+
+  	</div>
+
+  	<div></div>
+  	<div></div>
+
+	<?php 
+    echo trim(strtoupper($constancia['texto_html']));
+  ?>
+
+  <div style="width: 100%"></div>
+
 </page>
 
 <?php
+
   require_once(dirname(__FILE__).'/../vendor/autoload.php');
   require_once('../vendor/autoload.php');
   use Spipu\Html2Pdf\Html2Pdf;
@@ -260,10 +273,10 @@
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
 
-        $id = 0;
-        $hora   = $obj->fechaHora('America/Caracas','H-i-s');
+        
         $obj->fechaHora('America/Caracas','d-m-Y');
-        $nombre = $datos[0].'-'.$dia.'-'.$hora;
+        
+        $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
           $html2pdf->output("../reportes/constancias/constancia$nombre.pdf", "f");

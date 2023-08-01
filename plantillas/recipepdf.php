@@ -245,11 +245,7 @@
       <br>
       <br>
       <?php 
-        $texto = '';
-
-        foreach ($recipe['textoPrevia'] as $r) { $texto .= $r;}
-
-        echo trim($texto);
+        echo trim($recipe['texto_html']);
       ?>
     </div>
 
@@ -272,11 +268,7 @@
       <br>
       <br>
       <?php 
-        $texto = '';
-
-        foreach ($indicacion['textoPrevia'] as $r) { $texto .= $r;}
-
-        echo trim($texto);
+        echo trim($indicacion['texto_html']);
       ?>
     </div>
 

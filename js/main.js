@@ -728,7 +728,7 @@ export class Herramientas {
 
 				} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-					datos.push({"texto": contenedores[i].texto, "textoPrevia": contenedores[i].textoPrevia})
+					datos.push({"texto_base": contenedores[i].texto_base, "texto_html": contenedores[i].texto_html})
 
 				} else {
 
@@ -824,17 +824,12 @@ export class Herramientas {
 
 			} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-				params['contenedor-personalizable'].elementos[contenedores[i].id].texto = ''
-				params['contenedor-personalizable'].elementos[contenedores[i].id].textoPrevia = []
-
 				contenedores[i].value = ''
-				contenedores[i].texto = ''
-				contenedores[i].textoPrevia = []
+				contenedores[i].texto_base = ''
+				contenedores[i].texto_html = ''
 
-				if (params['contenedor-personalizable'].elementos[contenedores[i].id].previa !== undefined) {
-
-					params['contenedor-personalizable'].elementos[contenedores[i].id].previa.innerHTML = ''
-
+				if (qs(`#${contenedores[i].dataset.previa}`)) {
+					qs(`#${contenedores[i].dataset.previa}`).innerHTML = ''
 				}
 
 			} else {
@@ -3087,23 +3082,17 @@ export class Rellenar {
 
 					var array = JSON.parse(lista[contenedores[i].dataset[th.grupo]])
 
-					params['contenedor-personalizable'].elementos[contenedores[i].id].texto = array.texto
-					params['contenedor-personalizable'].elementos[contenedores[i].id].textoPrevia = array.textoPrevia
+					contenedores[i].value = ''
+					contenedores[i].texto_base = ''
+					contenedores[i].texto_html = ''
 
-					contenedores[i].value = array.texto
-					contenedores[i].texto = array.texto
-					contenedores[i].textoPrevia = array.textoPrevia
+					contenedores[i].value = array.texto_base
+					contenedores[i].texto_base = array.texto_base
+					contenedores[i].texto_html = array.texto_html
 
-					if (params['contenedor-personalizable'].elementos[contenedores[i].id].previa !== undefined) {
+					if (qs(`#${contenedores[i].dataset.previa}`)) {
 
-						var ant = array.textoPrevia,
-							texto = ''
-
-						ant.forEach(el => {
-						    texto = `${texto}${el}` 
-						})
-
-						params['contenedor-personalizable'].elementos[contenedores[i].id].previa.innerHTML = texto.toUpperCase()
+						qs(`#${contenedores[i].dataset.previa}`).innerHTML = array.texto_html
 
 					}
  
@@ -3382,10 +3371,10 @@ export class FormaContactos {
 /////////////////////////////////////////////////////////////////////////////////////////77//////
 export class customDesplegable {
 	constructor(desplegable, abrir, cerrar, evt, wh, desplegado) {
-		this.desplegable = qs(`#${desplegable}`);
+		this.desplegable = qs(desplegable);
 		this.estado      = false;
-		this.abrir       = (qs(`#${abrir}`)) ? qs(`#${abrir}`) : false;
-		this.cerrar      = (qs(`#${cerrar}`)) ? qs(`#${cerrar}`) : false;
+		this.abrir       = (qs(abrir)) ? qs(abrir) : false;
+		this.cerrar      = (qs(cerrar)) ? qs(cerrar) : false;
 		this.seguir      = true;
 		this.horientacion= 'H';
 		this.eventosAbrirCerrar = (typeof evt !== 'undefined') ? evt : ['click', 'click'];
@@ -3599,7 +3588,6 @@ export class customDesplegable {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 export class textoPersonalizable {
-
 	constructor () {
 		var th = this
 		
@@ -3607,40 +3595,39 @@ export class textoPersonalizable {
 		this.elementos = {}
 		this.elementoActual = ''
 
-		this.simbolos = {
-			"*": (condicion) => {
+		this.simbolos = [
+			"\\*",
+			"\\_",
+			"\\~",
+			"\\°",
+			"\\n"
+		]
+
+		this.reemplazos = {
+			"\\*": (condicion) => {
 				return (condicion) ? '<b>': '</b>';
 			},
-			"_": (condicion) => {
+			"\\_": (condicion) => {
 				return (condicion) ? '<u>': '</u>';
 			}, 	 
-			"/": (condicion) => {
+			"\\~": (condicion) => {
 				return (condicion) ? '<i>': '</i>';
 			}, 
-			"|": (condicion) => {
+			"\\°": (condicion) => {
 				return (condicion) ? "<br><div style='width:100%;text-align:center'>" : "</div>";
 			}, 
-			"Enter": () => {
+			"\\n": (condicion) => {
 				return '<br>'
 			}
 		}
 
-		this.equivalentes = {
-			"*": "<b>",
-			"_": "<u>", 	 
-			"/": "<i>", 	
-			"|": "<br><div style='width:100%;text-align:center'>",
-			"Enter": "<br>"
+		this.selectorSimbolos = {
+			"\\*": true,
+			"\\_": true,
+			"\\~": true,
+			"\\°": true,
+			"\\n": true
 		}
-
-		this.equivalentesNegativos = {
-			"*": "</b>",
-			"_": "</u>", 	 
-			"/": "</i>", 	
-			"|": "</div>",
-			"Enter": "<br>"
-		}
-
 	}
 
 	actual(elemento) {
@@ -3650,147 +3637,88 @@ export class textoPersonalizable {
 	}
 
 	//declarar elemento [OBLIGATORIO]
-	declarar(elemento, eventos, previa) { 
+	declarar(elemento, previa) { 
 
 		elemento = (document.querySelector(elemento)) ? document.querySelector(elemento) : '';
-		eventos  = (typeof eventos === 'undefined') ? ['keydown'] : eventos;
 		previa   = (document.querySelector(previa)) ? document.querySelector(previa) : undefined;
 
 		this.elementos[elemento.id] = {
 			"elemento": elemento,
-			"eventos": eventos,
-			"previa": previa,
-			"texto": '',
-			"textoPrevia": []
+			"previa": previa
 		}
 
-		this.elementos[elemento.id].elemento.texto = ''
-		this.elementos[elemento.id].elemento.textoPrevia = []
+		this.elementos[elemento.id].elemento.texto_base = ''
+		this.elementos[elemento.id].elemento.texto_html = ''
 
-	} 
+	}
 
-	//procesa las acciones de cada elemento
-	logica(evento) {
+	logica(texto) {
 
-		var th = this
+		var th = this,
+			longitud = 0,
+			resultado = '',
+			txt = texto
 
-		//this.elementos[this.elementoActual].textoPrevia
-		//this.elementos[this.elementoActual].texto
+		this.simbolos.forEach(simbolo => {
 
-		th.elementos[th.elementoActual].textoPrevia
-		th.elementos[th.elementoActual].texto
+			var regex = new RegExp(simbolo); //g es para todos
+			var regexCount = new RegExp(simbolo, "g");
+			resultado = texto.match(regexCount);
+			
+			if (resultado) {
 
-		if (Object.keys(this.elementos) !== 0) {
+				th.selectorSimbolos[simbolo] = true
+				longitud = resultado.length
+				txt = txt
 
-			//console.log(evento.key, typeof evento.key)
+				for (var i = 0; i < longitud; i++) {
 
-			var posicion = evento.target.selectionStart,
-				valor    = (evento.key.length === 1) ? evento.key : '',
-				llave    = evento.key;
+					if (th.selectorSimbolos[simbolo]) {
 
-			if (valor !== '') {
-				
-				this.elementos[this.elementoActual].textoPrevia.splice(posicion, 0, valor)
+						txt = txt.replace(regex, th.reemplazos[simbolo](th.selectorSimbolos[simbolo]))
 
-			}
+						th.selectorSimbolos[simbolo] = false
 
-			if (llave === 'Enter') {
-				this.elementos[this.elementoActual].textoPrevia.splice(posicion, 0, '<br>')
-			}
+					} else {
 
-			var longitud = this.elementos[this.elementoActual].textoPrevia.length - (this.elementos[this.elementoActual].textoPrevia.length - posicion)
+						txt = txt.replace(regex, th.reemplazos[simbolo](th.selectorSimbolos[simbolo]))
 
-			//ve si el simbolo debe procesarse de forma especial
-			if (typeof this.simbolos[llave] !== 'undefined') {
-
-				//hacer comparativas si a la izquierda tiene caracter o espcio vacio y viseversa
-				for (var i = longitud; i >= 0; i--) {
-
-					// console.log({"texto_previa": th.textoPrevia[i]})
-					// console.log({"equivalentes negativos": th.equivalentesNegativos[valor]})
-					// console.log({"equivalentes positicvos": th.equivalentes[valor]})
-
-					if (this.elementos[this.elementoActual].textoPrevia[i] === this.equivalentesNegativos[valor]) {
-
-						this.elementos[this.elementoActual].textoPrevia[posicion] = this.simbolos[llave](true)
-						break;
-
-					} else if (this.elementos[this.elementoActual].textoPrevia[i] === this.equivalentes[valor]) {
-
-						this.elementos[this.elementoActual].textoPrevia[posicion] = this.simbolos[llave](false)
-						break;
-
-					} else if (this.elementos[this.elementoActual].textoPrevia[i] === valor) {
-
-						this.elementos[this.elementoActual].textoPrevia[posicion] = this.simbolos[llave](true)
+						th.selectorSimbolos[simbolo] = true
 
 					}
 
 				}
 
-			}
+			} else {
 
-			if (llave === 'Backspace') {
-
-				if (evento.target.selectionStart !== evento.target.selectionEnd) {
-
-					this.elementos[this.elementoActual].textoPrevia.splice(evento.target.selectionStart, (evento.target.selectionEnd - evento.target.selectionStart))
-
-				} else {
-
-					this.elementos[this.elementoActual].textoPrevia.splice(posicion - 1, 1)
-
-				}
+				txt = txt
 
 			}
 
-			this.elementos[this.elementoActual].texto = evento.target.value
+		})
 
-		} else {
+		this.elementos[this.elementoActual].elemento.texto_base = texto
+		this.elementos[this.elementoActual].elemento.texto_html = txt
 
-			console.log(this.alerta)
-
-		}
+		this.elementos[this.elementoActual].previa.innerHTML  = txt
 
 	}
 
 	//genera los eventos de cada elemento
 	eventos(objeto) {
 
-		if (Object.keys(this.elementos) !== 0) {
+		if (Object.keys(this.elementos).length > 0) {
 
 			var th = this
 
-			objeto.eventos.forEach((evt, i) => {
+			objeto.elemento.addEventListener('keyup', e => {
 
-				objeto.elemento.addEventListener(evt, e => {
+				th.elementoActual = objeto.elemento.id
 
-					th.elementoActual = objeto.elemento.id
-
-				  	th.logica(e)
-
-				  	if (objeto.previa !== undefined) {
-
-				  		objeto.previa.innerHTML = '' 
-
-				  		var texto = ''
-
-						th.elementos[th.elementoActual].textoPrevia.forEach(e => {
-						    texto = `${texto}${e}` 
-						})
-
-				  		objeto.previa.insertAdjacentHTML('afterbegin', texto) 
-
-				  	}
-
-				  	setTimeout(() => {
-				  		th.elementos[th.elementoActual].elemento.texto = e.target.value
-						th.elementos[th.elementoActual].elemento.textoPrevia = th.elementos[th.elementoActual].textoPrevia
-				  	}, 100) 
-
-				})
+			  	th.logica(e.target.value)
 
 			})
+
 
 		} else {
 
@@ -3799,11 +3727,11 @@ export class textoPersonalizable {
 		}
 
 	}
-	
+
 	//llama a todo a la vez en el orden adecuado
 	init() { 
 
-		if (Object.keys(this.elementos) !== 0) {
+		if (Object.keys(this.elementos).length > 0) {
 
 			var th = this
 
@@ -3820,7 +3748,6 @@ export class textoPersonalizable {
 		}
 
 	}
-
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////77//////

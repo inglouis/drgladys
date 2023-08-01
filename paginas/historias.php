@@ -29,32 +29,98 @@
         window.dia = '<?php echo "$dia"?>'
       </script>
       <script type="module" src="../js/historias.js" defer></script>
-      <script type="module" src="../js/historias_evolucion.js" defer></script>
+      <script type="module" src="../js/historias_evoluciones.js" defer></script>
+      <script type="module" src="../js/historias_reportes.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
   </head>
     
-  <!------------------------- CUERPO ----------------------- -->
-  <!-------------------------------------------------------- -->
+  <!----------------------------------------- CUERPO -------------------------------------- -->
+  <!--------------------------------------------------------------------------------------- -->
   <body data-scroll id="body">
 
     <div id="cruds" style="width: 100%; height: 100%">
       
     <?php 
       include_once('../cruds/historias.crud.php');
-      include_once('../cruds/historias_evolucion.crud.php'); 
+      include_once('../cruds/historias_evoluciones.crud.php');
+      include_once('../cruds/historias_reportes.crud.php'); 
     ?>
 
     </div>
 
-    <!--2)---------------------------------------------------------------------------------------->
+    <!--2)----------------------------------------------------------------------------------------->
+    <!----------------------------------- CONTENEDOR REPORTES ------------------------------------->
+    <!--------------------------------------------------------------------------------------------->
+    <div id="crud-reportes-popup" class="popup-oculto" data-crud='popup' style="z-index: 1">
+      <div id="crud-reportes-pop" class="popup-oculto">
+
+        <button id="crud-reportes-cerrar" data-crud='cerrar'>X</button>
+
+        <div id="crud-reportes-contenedor">
+
+          <div id="crud-reportes-cabecera">
+
+            <div class="boton">
+
+              <button id="reportes-abrir-paginacion" title="Listado de reportes">
+                <svg style="height: 20px;" xmlns="http://www.w3.org/2000/svg" class="iconos" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
+              </button>
+
+            </div>
+
+            <div class="contenido">
+
+              <div id="reportes-paginacion" class="desplegable-oculto">
+
+                <div>
+
+                  <div id="reportes-cerrar-paginacion" display="none"></div>
+                  
+                  <div class="titulo">Seleccionar reporte</div>
+
+                  <div class="botones" id="reportes-paginacion-botones">
+                    <button id="constancia">Constancias</button>
+                    <!--<button>Presupuestos</button>
+                    <button>Examen de thorax</button>
+                    <button>Informe médico</button>-->
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="cabecera">CONSTANCIAS</div>
+
+          </div>
+
+          <div class="crud-reportes-cuerpo">
+          
+            <div id="crud-reportes-secciones">
+
+              <?php 
+                include_once('historias_reportes_contenidos.php');
+              ?>
+
+            </div>
+
+          </div>
+          
+        </div>        
+
+      </div>
+    </div>
+
+    <!--3)---------------------------------------------------------------------------------------->
     <!-------------------------------------------------------------------------------------------->
     <!------------------------ PAGINACION ENTRE CONTENEDORES ------------------------------------->
     <!-------------------------------------------------------------------------------------------->
     <div id="paginacion-contenedores" data-hidden>
       <button class="informacion" title="Consultar información del paciente"></button>
       <button class="editar" title="Editar historia del paciente"></button>
-      <!--<button class="antecedentes" title="Antecedentes del paciente"></button>
-      <button class="informes" title="Informes del paciente"></button>
+      <button class="reportes" title="Reportes del paciente"></button>
+      <!--<button class="informes" title="Informes del paciente"></button>
       <button class="recipes"title="Récipes del paciente"></button>
       <button class="reposos"title="Reposos del paciente"></button> -->
     </div>

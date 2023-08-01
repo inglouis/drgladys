@@ -1,5 +1,5 @@
 <!--//////////////////////////////////////////////////////////////////////////////////-->
-<!--////////////////////////  TEMPLATE FECHA //////////////////////////////////-->
+<!--///////////////////////////////  TEMPLATE FECHA //////////////////////////////////-->
 <!--//////////////////////////////////////////////////////////////////////////////////-->
 
 <template id="template-fecha">
@@ -18,6 +18,22 @@
 
 </section>
 
+</template>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->
+<!--////////////////////////////  TEMPLATE ELIMINAR //////////////////////////////////-->
+<!--//////////////////////////////////////////////////////////////////////////////////-->
+<template id="eliminar-template">
+  <div class="eliminar-contenedor">
+
+    <div class="eliminar-texto" style="color: #fff;">
+      ¿DESEA ELIMINAR ESTE REPORTE?: 
+    </div>
+
+    <div>
+      <button class="btn eliminar-boton btn-eliminar" title="ELIMINAR">X</button>
+    </div>
+  </div>
 </template>
 
 <!-------------------------------------------------------- -->
@@ -734,6 +750,30 @@
       <button class="botones-formularios insertar boton-confirmar">CONFIRMAR Y CERRAR</button>
       <button class="botones-formularios permanecer boton-confirmar">CONFIRMAR Y PERMANECER</button>
       <button class="botones-formularios cancelar boton-cancelar">CANCELAR</button> 
+    </section>
+
+  </div>
+</div>
+
+<!------------------------------------------------------------------- -->
+<!------------------------- PREVIA REPORTES ------------------------- -->
+<!------------------------------------------------------------------- -->
+<div id="crud-previas-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-previas-pop" class="popup-oculto">
+
+    <button id="crud-previas-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-previas-titulo" data-crud='titulo' style="margin-bottom: 5px;">
+      VISTA PREVIA
+    </section>
+
+    <section id="crud-previas-reporte" class="reportes-previa-iframe">
+      <iframe src=""></iframe>
+    </section>
+
+    <section id="crud-previas-botones" data-crud='botones' style="padding-top: 10px; column-gap: 5px;">
+      <button class="botones-formularios imprimir">IMPRIMIR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button>
     </section>
 
   </div>

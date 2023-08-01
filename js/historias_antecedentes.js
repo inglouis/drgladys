@@ -20,7 +20,7 @@ qs("#antecedentes-procesar .reporte-cargar").addEventListener('click', async e =
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
-				tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				tools.limpiar('.antecedentes-valores', '', {})
 
 				var sesion = [
 					{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}
@@ -81,14 +81,11 @@ qs("#antecedentes-procesar .reporte-previa").addEventListener('click', async e =
 				"id": historias.sublista.id_historia,
 				"nombres": historias.sublista.nombres,
 				"apellidos": historias.sublista.apellidos,
-				"direccion": historias.sublista.direccion,
 				"cedula": historias.sublista.cedula,
 				"fecha_nacimiento": historias.sublista.fecha_nacimiento,
-				"peso": historias.sublista.peso,
-				"talla": historias.sublista.talla,
-				"antecedente": {
-					"texto": qs('#antecedentes-enfocar').texto,
-					"textoPrevia": qs('#antecedentes-enfocar').textoPrevia
+				"constancia": {
+					"texto_base": qs('#constancia-textarea').texto_base,
+					"texto_html": qs('#constancia-textarea').texto_html
 				}
 			}
 
@@ -156,6 +153,8 @@ qs('#crud-anteditar-botones .confirmar').addEventListener('click', async e => {
 				antecedentes.cargarTabla(antecedentes.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				antEdiPop.pop()
 
@@ -251,7 +250,7 @@ qs('#crud-anteditar-pop .filas').addEventListener('mouseleave', e => {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#antecedentes-limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.antecedentes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+	tools.limpiar('.antecedentes-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 

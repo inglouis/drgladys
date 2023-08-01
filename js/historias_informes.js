@@ -20,7 +20,7 @@ qs("#informes-procesar .reporte-cargar").addEventListener('click', async e => {
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
-				tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+				tools.limpiar('.informes-valores', '', {})
 
 				var sesion = [
 					{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}
@@ -97,16 +97,16 @@ qs("#informes-procesar .reporte-previa").addEventListener('click', async e => {
 				"peso": historias.sublista.peso,
 				"talla": historias.sublista.talla,
 				"motivo": {
-					"texto": qs('#informes-enfocar').texto,
-					"textoPrevia": qs('#informes-enfocar').textoPrevia
+					"texto_base": qs('#informes-enfocar').texto_base,
+					"texto_html": qs('#informes-enfocar').texto_html
 				},
 				"enfermedad": {
-					"texto": qs('#informes-enfermedad').texto,
-					"textoPrevia": qs('#informes-enfermedad').textoPrevia
+					"texto_base": qs('#informes-enfermedad').texto_base,
+					"texto_html": qs('#informes-enfermedad').texto_html
 				},
 				"plan": {
-					"texto": qs('#informes-plan').texto,
-					"textoPrevia": qs('#informes-plan').textoPrevia
+					"texto_base": qs('#informes-plan').texto_base,
+					"texto_html": qs('#informes-plan').texto_html
 				},
 				"diagnosticos": diagnosticos
 			}
@@ -185,6 +185,8 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 				informes.cargarTabla(lista, undefined, undefined)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				infEdiPop.pop()
 
@@ -279,7 +281,7 @@ qs('#crud-infeditar-pop .filas').addEventListener('mouseleave', e => {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.informes-valores', '', {"contenedor-personalizable": window.camposTextosPersonalizables})
+	tools.limpiar('.informes-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
