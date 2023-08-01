@@ -3,8 +3,8 @@ import  {PopUp, Acciones, Herramientas, Menu, customDesplegable, MenuTree, Pagin
 const tools = new Herramientas()
 const acciones = new Acciones()
 /////////////////////////////////////////////////////
-window.contactos = new customDesplegable('desplegable-contactos', 'desplegable-abrir-contactos', 'desplegable-cerrar-contactos', undefined, '300px')
-window.ediciones = new customDesplegable('desplegable-ediciones', 'desplegable-abrir-ediciones', 'desplegable-cerrar-ediciones', undefined, '550px')
+window.contactos = new customDesplegable('#desplegable-contactos', '#desplegable-abrir-contactos', '#desplegable-cerrar-contactos', undefined, '300px')
+window.ediciones = new customDesplegable('#desplegable-ediciones', '#desplegable-abrir-ediciones', '#desplegable-cerrar-ediciones', undefined, '550px')
 /////////////////////////////////////////////////////
 contactos.eventos()
 ediciones.eventos()
