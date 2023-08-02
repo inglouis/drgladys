@@ -30,8 +30,10 @@
       </script>
       <script type="module" src="../js/historias.js" defer></script>
       <script type="module" src="../js/historias_evoluciones.js" defer></script>
-      <script type="module" src="../js/historias_reportes.js" defer></script>
-      <script type="module" src="../js/main.js" defer></script>
+      <!--<script type="module" src="../js/main.js" defer></script>-->
+      <?php
+        include_once('../estructura/reportes_scripts.php');
+      ?>
   </head>
     
   <!----------------------------------------- CUERPO -------------------------------------- -->
@@ -55,6 +57,18 @@
       <div id="crud-reportes-pop" class="popup-oculto">
 
         <button id="crud-reportes-cerrar" data-crud='cerrar'>X</button>
+
+        <div class="valor-cabecera cabecera-formularios" style="right: 30px;">
+          <div>
+            <label>N° de historia</label>
+            <input type="text" autocomplete="off"  data-valor="id_historia" class="reportes-cargar upper visual" disabled style="width: 65px;">
+          </div>
+
+          <div>
+            <label>Paciente</label>
+            <input type="text" autocomplete="off"  data-valor="nombre_completo" class="reportes-cargar upper visual" disabled style="width: 10vw; min-width: 150px">
+          </div>
+        </div>
 
         <div id="crud-reportes-contenedor">
 
@@ -80,9 +94,7 @@
 
                   <div class="botones" id="reportes-paginacion-botones">
                     <button id="constancia">Constancias</button>
-                    <!--<button>Presupuestos</button>
-                    <button>Examen de thorax</button>
-                    <button>Informe médico</button>-->
+                    <button id="general">Generales</button>
                   </div>
 
                 </div>
@@ -100,7 +112,7 @@
             <div id="crud-reportes-secciones">
 
               <?php 
-                include_once('historias_reportes_contenidos.php');
+                include_once('../estructura/reportes_includes.php');
               ?>
 
             </div>

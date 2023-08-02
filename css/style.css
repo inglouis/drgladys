@@ -1255,7 +1255,9 @@ span.numeracion {
 .cabecera-formularios {
     position: absolute;
     right: 0px;
+    top: 0px;
     width: fit-content !important;
+    column-gap: 5px;
 }
 
 #notas-importantes-contenedor, .notas-importantes-contenedor {
@@ -1607,7 +1609,8 @@ span.numeracion {
 
 /*------------------cruds-----------------------------*/
 #crud-informacion-pop, 
-#crud-coneditar-pop {
+#crud-coneditar-pop,
+#crud-geneditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
     justify-content: center;
@@ -3092,6 +3095,33 @@ span.numeracion {
 
 
 #tabla-constancia tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    justify-content: center;
+}
+
+/*-----------------------------------------------------*/
+/*------------------ GENERALES ------------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-general thead {
+    display: none
+}
+
+#tabla-general tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-general tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+
+#tabla-general tbody tr td:nth-child(1) {
     display: flex;
     align-items: center;
     width: 40px;

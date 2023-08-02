@@ -33,11 +33,19 @@ qsa('#reportes-paginacion-botones button').forEach((boton) => {
 
 })
 
-qs('#reportes-paginacion-botones').addEventListener('click', (e) => {
+qs('#reportes-paginacion-botones').addEventListener('click', async (e) => {
 
 	if (e.target.tagName === 'BUTTON') {
 
 		reporteSeleccionado = e.target.identificador
+
+		if (reportesDisponibles[reporteSeleccionado].crud.lista.length < 1) {
+
+			notificaciones.mensajeSimple('Cargando datos', false, 'V')
+
+			await historias.traer_lista()
+
+		} 
 
 	}
 
@@ -55,13 +63,12 @@ window.parPop = new PopUp('crud-insertar-parentescos-popup','popup', 'subefecto'
 window.civPop = new PopUp('crud-insertar-estado_civil-popup','popup', 'subefecto', true, 'insertar-estado_civil', '', 27)
 window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto', true, 'insertar-religiones', '', 27)
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
-//window.diaPop = new PopUp('crud-insertar-diagnosticos-popup','popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['coneditar', 'previas'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
-//window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
+window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -78,6 +85,7 @@ prePop.evtBotones()
 repPop.evtBotones()
 
 conPop.evtBotones()
+genPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -96,6 +104,7 @@ window.addEventListener('keyup', (e) => {
 	repPop.evtEscape(e)
 
 	conPop.evtEscape(e)
+	genPop.evtEscape(e)
 
 })
 
@@ -137,6 +146,9 @@ window.camposTextosPersonalizables = new textoPersonalizable()
 
 window.camposTextosPersonalizables.declarar('#constancia-textarea', '#constancia-previa')
 window.camposTextosPersonalizables.declarar('#coneditar-textarea', '#coneditar-previa')
+
+window.camposTextosPersonalizables.declarar('#general-informacion', '#general-previa')
+window.camposTextosPersonalizables.declarar('#geneditar-informacion', '#geneditar-previa')
 
 window.camposTextosPersonalizables.init()
 /////////////////////////////////////////////////////
@@ -229,7 +241,11 @@ class Historias extends Acciones {
 	limpieza() {
 
 		tools.limpiar('.constancia-valores', '', {})
+		tools.limpiar('.general-valores', '', {})
 
+		constancias.cargarTabla([], undefined, undefined)
+		generales.cargarTabla([], undefined, undefined)
+		
 		// tools.limpiar('.reposos-valores', '', {
 		// 	"procesado": e => {
 		// 		gid('reposos-inicio-insertar').value = window.dia
@@ -242,14 +258,14 @@ class Historias extends Acciones {
 
 	async traer_lista() {
 		
-		var lista = JSON.parse(await tools.fullAsyncQuery('historias_reportes', `${reporteSeleccionado}_consultar`, [historias.sublista.id_historia]))
+		var lista = JSON.parse(await tools.fullAsyncQuery(`historias_${reporteSeleccionado}`, `${reporteSeleccionado}_consultar`, [historias.sublista.id_historia]))
 		reportesDisponibles[reporteSeleccionado].cargarTabla(lista, undefined, undefined)
 
 	}
 
 }
 /////////////////////////////////////////////////////
-///
+/////////////////////////////////////////////////////
 export var historias = new Historias(new Tabla(
 	[
 		['Acciones', false, 0],
@@ -265,8 +281,7 @@ export var historias = new Historias(new Tabla(
 
 window.historias = historias
 /////////////////////////////////////////////////////
-///
-
+/////////////////////////////////////////////////////
 historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
 		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
@@ -280,7 +295,7 @@ historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 2
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 10)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 26)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 22)
-
+/////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 historias['crud']['retornarSiempre'] = true
 historias['crud']['limitante'] = 1
@@ -289,7 +304,7 @@ historias['crud']['funcion'] = 'buscar_historias'
 historias['crud']['autoBusqueda'] = true
 historias['crud']['inputNavegarGenerar'] = false
 /////////////////////////////////////////////////////
-///
+/////////////////////////////////////////////////////
 historias['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	['id_historia', 'id_correlativo'],
 	['id_historia', 'id_correlativo','nombre_completo', 'cedula']
@@ -303,7 +318,7 @@ historias['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	}
 }})
 /////////////////////////////////////////////////////
-///
+/////////////////////////////////////////////////////
 historias['crud']['propiedadesTr'] = {
 	"informacion": (e) => {
 		var fr = new DocumentFragment(), th = historias
@@ -368,11 +383,7 @@ historias['crud']['customBodyEvents'] = {
 			historias.tr = tools.pariente(button, 'TR')
 			historias.sublista = historias.tr.sublista
 
-			// if (permitirLimpieza) {
-
-			// } else {
-			// 	permitirLimpieza = true
-			// }
+			// if (permitirLimpieza) {} else {	permitirLimpieza = true}
 
 			tools.limpiar('.informacion-valores', '', {})
 
@@ -481,7 +492,8 @@ historias['crud']['customBodyEvents'] = {
 			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
 
 			tools.limpiar('.reportes-cargar', '', {})
-			//rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
+
+			rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
 
 			await historias.traer_lista()
 
@@ -736,7 +748,6 @@ qs('#historias-insertar').addEventListener('click', e => {
 /*   		Evento que limpia los datos del contenedor de insertar*            		    
 /* -------------------------------------------------------------------------------------------------*/
 qs('#crud-insertar-limpiar').addEventListener('click', e => {
-	tools.limpiar('.insertar-valores', '', {})
 	tools.limpiar('.insertar-valores', '', {
 		"procesado": e => {
 			notificaciones.mensajeSimple('Datos limpiados', false, 'V')
@@ -937,6 +948,9 @@ insPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
 conPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
 conPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
 
+genPop.funciones['apertura'] = {"apertura": () => {pce.style = "z-index: 9;"}}
+genPop.funciones['cierre']   = {"cierre": ()   => {pce.style = "z-index: 10;"}}
+
 /* -------------------------------------------------------------------------------------------------*/
 /* ------------------------------PAGINACIÓN ENTRE CONTENEDORES--------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
@@ -974,9 +988,6 @@ qs('#busqueda').addEventListener('keydown', e => {
 			if (!isNaN(e.target.value)) {
 				qs('#insertar-enfocar').value = e.target.value
 			}
-			// else {
-			// 	qs('#insertar-nombre').value = e.target.value
-			// }
 
 			setTimeout(() => {qs('#insertar-enfocar').focus()}, 100)
 			
@@ -985,6 +996,19 @@ qs('#busqueda').addEventListener('keydown', e => {
 		}
 
 	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/* --------------------------------- IMPRESION FINAL GENERAL ---------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+qs('#crud-previas-botones .imprimir').addEventListener('click', e => {
+	
+	window.reportes.imprimirPDF(`../plantillas/${reporteSeleccionado}pdf.php?&pdf=2`, {})
+
+	setTimeout(() => {
+		prePop.pop()
+	}, 1000)
 
 })
 
@@ -1013,9 +1037,6 @@ qsa('#reportes-paginacion-botones button').forEach((e, i) => {
 //7)---------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //										OBJETOS DE LOS REPORTES                                        
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
@@ -1049,8 +1070,7 @@ class Constancias extends Acciones {
 	}
 
 }
-/////////////////////////////////////////////////////
-/////////////////////////////////////////////////////
+
 export var constancias = new Constancias(new Tabla(
 	[	
 		['', false, 0],
@@ -1058,147 +1078,57 @@ export var constancias = new Constancias(new Tabla(
 	],
 	'tabla-constancia', 'constancia-busqueda', -1, 'null', 'null', 'null', true
 ))
-
 window.constancias = constancias
 /////////////////////////////////////////////////////
-///
-constancias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'constancias-contenedor', 0)
-constancias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
 /////////////////////////////////////////////////////
-///
-constancias['crud']['propiedadesTr'] = {
-	"contenedor": (e) => {
 
-		var fr = new DocumentFragment(),
-			th = constancias, 
-			contenedor = e.querySelector('.constancias-contenedor'), 
-			contenido = th.contenido.cloneNode(true)
+class Generales extends Acciones {
 
-		contenedor.innerHTML = ''
-		contenedor.appendChild(contenido)
-		contenedor.setAttribute('id', `id-${e.sublista.id}`)
-		
-		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}`)
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'general_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#general-template').content.querySelector('.general-crud').cloneNode(true)
+		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
+	}
 
-		var texto = JSON.parse(e.sublista.constancia).texto_html
+	async confirmarActualizacion(popUp) {
 
-		contenedor.querySelector('.constancia').innerHTML = texto.toUpperCase()
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
-		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
-		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
-		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
-		
-		setTimeout(() => {
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
 
-			window.animaciones.generar(`#id-${e.sublista.id} .crud-datos`, [`#a-id-${e.sublista.id}`])
-
-		}, 0)
-
-	},
-	"fecha": (e) => {
-
-		var th = constancias, 
-			contenedor = e.querySelector('.fecha-contenedor'), 
-			contenido = th.contenidoFecha.cloneNode(true)
-
-		contenedor.innerHTML = ''
-		contenedor.appendChild(contenido)
-
-		contenedor.querySelector('.fecha-template').value = e.sublista.fecha
-		contenedor.querySelector('.hora-template').value  = e.sublista.hora
-
-	},
-	"eliminar": (e) => {
-		var th = constancias,
-			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
-
-		contenedor.setAttribute('data-hidden', '')
-		contenedor.querySelector('.eliminar-boton').value = e.sublista.id
-
-		e.querySelector('.crud-eliminar-contenedor').appendChild(contenedor)
-
-		contenedor = e.querySelector('.eliminar-contenedor')
-		
-		e.addEventListener('mouseover', el => {
-
-			if (el.target.classList.contains('eliminar')) {
-				var coordenadas = e.querySelector('.eliminar').getBoundingClientRect()
-				//contenedor.setAttribute('style', `left: ${coordenadas.left - 310}px`)
-				contenedor.removeAttribute('data-hidden')	
-			}	
-
-		})
-
-		e.querySelector('.eliminar').addEventListener('mouseleave', el => {
-			if (!contenedor.matches(':hover')) {
-				contenedor.setAttribute('data-hidden', '')
-			}
-		})
-
-		contenedor.addEventListener('mouseleave', el => {
-			contenedor.setAttribute('data-hidden', '')
-		})
+		this.cargarTabla(resultado, true)
 
 	}
+
 }
+
+export var generales = new Generales(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-general', 'general-busqueda', -1, 'null', 'null', 'null', true
+))
+
 /////////////////////////////////////////////////////
-///
-constancias['crud']['customBodyEvents'] = {
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR EL constancia   					    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"editar": async (e) => {
-
-		if (e.target.classList.contains('editar')) {
-
-			constancias.sublista = tools.pariente(e.target, 'TR').sublista
-
-			tools.limpiar('.coneditar-valores', '', {})
-			rellenar.contenedores(constancias.sublista, '.coneditar-valores', {elemento: e.target, id: 'value'}, {})
-
-			conPop.pop()
-
-		}
-
-	},
-	/* -------------------------------------------------------------------------------------------------*/
-	/*           				ENVIAR LOS DATOS PARA REIMPRIMIR EL ANTECENDENTE   					    */
-	/* -------------------------------------------------------------------------------------------------*/
-	"reimprimir": async (e) => {
-
-		if (e.target.classList.contains('reimprimir')) {
-
-			constancias.sublista = tools.pariente(e.target, 'TR').sublista
-
-			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(constancias.sublista)}
-				]
-
-			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
-
-			qs('#crud-previas-popup iframe').src = ''
-
-			prePop.pop()
-
-			window.reportes.previa(qs('#crud-previas-popup iframe'), `../plantillas/${reporteSeleccionado}pdf.php?&pdf=2`)
-
-		}
-
-	}
-};
-
-
-(async () => {
-
-	constancias.cargarTabla([], undefined, undefined)
-
-})()
+/////////////////////////////////////////////////////
 
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
 
 export var reportesDisponibles = {
-	"constancia": constancias
+	"constancia": constancias,
+	"general": generales
 }
