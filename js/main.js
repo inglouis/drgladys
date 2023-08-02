@@ -3790,14 +3790,3 @@ window.sesiones = async function (nolog) {
 /////////////////////////////////////////////////////////////////////////////////////////
 var sesiones = await window.sesiones(true)
 /////////////////////////////////////////////////////////////////////////////////////////
-///
-///// var peticion = new XMLHttpRequest();
-// 	peticion.open('GET', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css', true);  
-// 	peticion.send();
-// peticion.onreadystatechange = function() {
-//     if (this.readyState == 4 && this.status == 200) {
-//     	console.log('libreria cargada')
-//     } else {
-//     	document.querySelector('head').insertAdjacentHTML('afterbegin', '<link rel="stylesheet" type="text/css" href="../css/cdn.css" defer>')
-//     }
-// };
