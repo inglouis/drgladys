@@ -16,7 +16,6 @@
             $sql = "
                 select 
                     id_historia,
-                    coalesce(NULLIF(id_correlativo::character varying(10), '0'), '-') AS id_correlativo,
                     id_ocupacion,
                     id_proveniencia,
                     id_medico_referido,
@@ -63,7 +62,6 @@
             $sql = "
                 select 
                     id_historia,
-                    coalesce(NULLIF(id_correlativo::character varying(10), '0'), '-') AS id_correlativo,
                     id_ocupacion,
                     id_proveniencia,
                     id_medico_referido,
@@ -103,7 +101,6 @@
             $sql = "
                 select 
                     id_historia,
-                    coalesce(NULLIF(id_correlativo::character varying(10), '0'), '-') AS id_correlativo,
                     id_ocupacion,
                     id_proveniencia,
                     id_medico_referido,
@@ -140,18 +137,16 @@
 
             $cedulaHijo = $args[0].'-'.$args[1];
 
-            $id_correlativo  = &$args[2];
-            $id_ocupacion    = &$args[9];
-            $id_proveniencia = &$args[10];
-            $id_medico       = &$args[11];
-            $id_parentesco   = &$args[12];
-            $id_estado_civil = &$args[13];
-            $id_religion     = &$args[14];
+            $id_ocupacion    = &$args[8];
+            $id_proveniencia = &$args[9];
+            $id_medico       = &$args[10];
+            $id_parentesco   = &$args[11];
+            $id_estado_civil = &$args[12];
+            $id_religion     = &$args[13];
 
-            $telefonos = &$args[15];
-            $otros     = &$args[16];
+            $telefonos = &$args[14];
+            $otros     = &$args[15];
             
-            if (empty($id_correlativo)) {$id_correlativo = 0;}
             if (empty($id_ocupacion)) {$id_ocupacion = 0;}
             if (empty($id_proveniencia)) {$id_proveniencia = 0;}
             if (empty($id_medico)) {$id_medico = 0;}
@@ -179,7 +174,6 @@
                     insert into $this->schema.$this->tabla (
                         cedula,
                         nro_hijo,
-                        id_correlativo,
                         nombres,
                         apellidos,
                         fecha_naci,
@@ -197,7 +191,6 @@
                     ) values (
                         trim(upper(?)), 
                         trim(upper(?)),
-                        ?,
                         trim(upper(?)), 
                         trim(upper(?)), 
                         ?::date,
@@ -229,20 +222,18 @@
 
             $cedulaHijo = $args[0].'-'.$args[1];
 
-            $id_correlativo  = &$args[2];
-            $id_ocupacion    = &$args[8];
-            $id_proveniencia = &$args[9];
-            $id_medico       = &$args[10];
-            $id_parentesco   = &$args[11];
-            $id_estado_civil = &$args[12];
-            $id_religion     = &$args[13];
+            $id_ocupacion    = &$args[7];
+            $id_proveniencia = &$args[8];
+            $id_medico       = &$args[9];
+            $id_parentesco   = &$args[10];
+            $id_estado_civil = &$args[11];
+            $id_religion     = &$args[12];
 
-            $telefonos = &$args[16];
-            $otros     = &$args[17];
+            $telefonos = &$args[15];
+            $otros     = &$args[16];
 
-            $id_historia = $args[18];
+            $id_historia = $args[17];
             
-            if (empty($id_correlativo) || $id_correlativo == trim('-')) {$id_correlativo = 0;}
             if (empty($id_ocupacion)) {$id_ocupacion = 0;}
             if (empty($id_proveniencia)) {$id_proveniencia = 0;}
             if (empty($id_medico)) {$id_medico = 0;}
@@ -270,7 +261,6 @@
                     update $this->schema.$this->tabla set
                         cedula = trim(upper(?)),
                         nro_hijo = trim(upper(?)),
-                        id_correlativo = ?,
                         nombres = trim(upper(?)),
                         apellidos = trim(upper(?)),
                         fecha_naci = ?::date,
@@ -303,7 +293,6 @@
             $sql = "
                 select 
                     id_historia,
-                    coalesce(NULLIF(id_correlativo::character varying(10), '0'), '-') AS id_correlativo,
                     id_ocupacion,
                     id_proveniencia,
                     id_medico_referido,

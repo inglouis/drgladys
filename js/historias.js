@@ -270,11 +270,10 @@ export var historias = new Historias(new Tabla(
 	[
 		['Acciones', false, 0],
 		['N°. Historia', true, 0],
-		[['Correlativo', 'N° de historia original'], true, 1],
-		['Paciente', true, 23],
-		['N° de cédula', true, 10],
-		['N° de hijo', true, 26],
-		['Status', true, 22]
+		['Paciente', true, 22],
+		['N° de cédula', true, 9],
+		['N° de hijo', true, 25],
+		['Status', true, 21]
 	],
 	'tabla-historias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
@@ -290,11 +289,10 @@ historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cue
 ])
 
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 23)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 10)
-historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 26)
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 22)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 9)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 25)
+historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 21)
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 historias['crud']['retornarSiempre'] = true
