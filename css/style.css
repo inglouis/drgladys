@@ -2633,23 +2633,20 @@ span.numeracion {
     width: 10%;
 }
 
+
 #tabla-historias tbody tr td:nth-child(4) {
-    width: 10%;
+    width: 45%;
 }
 
 #tabla-historias tbody tr td:nth-child(5) {
-    width: 40%;
+    width: 23%;
 }
 
 #tabla-historias tbody tr td:nth-child(6) {
-    width: 18%;
-}
-
-#tabla-historias tbody tr td:nth-child(7) {
     width: 10%;
 }
 
-#tabla-historias tbody tr td:nth-child(8) {
+#tabla-historias tbody tr td:nth-child(7) {
     width: 20%;
 }
 

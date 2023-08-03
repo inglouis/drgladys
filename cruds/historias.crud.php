@@ -75,11 +75,6 @@
           <input type="text" autocomplete="off"  data-valor="id_historia" class="informacion-valores upper visual" disabled>
         </div>
 
-        <div style="width:125px" title="Correlativo del número de las historias antiguas">
-          <label>Correlativo</label>
-          <input type="text" autocomplete="off"  data-valor="id_correlativo" class="informacion-valores upper visual" disabled>
-        </div>
-
         <div style="width:40%">
           <label>Cédula/rif</label>
           <input type="text" autocomplete="off"  data-valor="cedula" class="informacion-valores upper visual" disabled>
@@ -292,11 +287,6 @@
             <option value="14">14</option>
             <option value="15">15</option>
           </select>
-        </div>
-
-        <div style="width: 40rem" title="Correlativo del número de historia antiguo">
-          <label>Correlativo</label>
-          <input type="text" autocomplete="off"  data-valor="id_correlativo" class="editar-valores upper">
         </div>
 
         <div>
@@ -559,12 +549,6 @@
             <option value="15">15</option>
           </select>
         </div>
-
-        <div style="width: 100px" title="Correlativo del número de historia antiguo">
-          <label>Correlativo</label>
-          <input type="text" autocomplete="off" class="insertar-valores upper">
-        </div>
-
 
         <div>
           <label class="requerido">Nombres</label>
