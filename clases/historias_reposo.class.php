@@ -12,10 +12,10 @@
         ];
 
         /* 1)------------------------------------------------------------------------------------------------*/
-		/*           							presupuesto 							  					    */
+		/*           							CONSTANCIA 							  					    */
 		/* -------------------------------------------------------------------------------------------------*/
 
-        public function presupuesto_insertar($args) {
+        public function constancia_insertar($args) {
 
             $lista = $args[0];
             $id_historia = $args[1];
@@ -26,8 +26,8 @@
             $sql = "
                 update $this->schema.$this->tabla 
                 SET 
-                    presupuestos = jsonb_insert(
-                        presupuestos, 
+                    constancias = jsonb_insert(
+                        constancias, 
                         '{0}', 
                         ?::jsonb
                         , true
@@ -49,7 +49,7 @@
 
         }
 
-        public function presupuesto_consultar($args) {
+        public function constancia_consultar($args) {
 
             $sql = "
                 select
@@ -60,7 +60,7 @@
                     SELECT x.*
                     FROM 
                      jsonb_array_elements(
-                    	(SELECT presupuestos FROM principales.reportes WHERE id_historia = ?)
+                    	(SELECT constancias FROM principales.reportes WHERE id_historia = ?)
                      ) AS t(doc),
                      jsonb_to_record(t.doc) as x (
                      	nombres character varying(150), 
@@ -69,7 +69,7 @@
                      	fecha date, 
                      	hora time without time zone, 
                      	fecha_nacimiento date,
-                     	presupuesto jsonb
+                     	constancia jsonb
                      )
                 ) as t
                 ORDER BY t.fecha desc, t.hora desc
@@ -79,11 +79,11 @@
 
         }
 
-        public function presupuesto_editar($args) {
+        public function constancia_editar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set presupuestos = ?::jsonb
+                set constancias = ?::jsonb
                 where id_historia = ?
             ";
 
@@ -91,11 +91,11 @@
 
         }
 
-        public function presupuesto_eliminar($args) {
+        public function constancia_eliminar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set presupuestos = ?::jsonb
+                set constancias = ?::jsonb
                 where id_historia = ?
             ";
 

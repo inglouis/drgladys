@@ -3185,6 +3185,33 @@ span.numeracion {
 }
 
 /*-----------------------------------------------------*/
+/*--------------------- REPOSO ------------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-reposo thead {
+    display: none
+}
+
+#tabla-reposo tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-reposo tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+
+#tabla-reposo tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    justify-content: center;
+}
+
+/*-----------------------------------------------------*/
 /*------------------ GENERALES ------------------------*/
 /*-----------------------------------------------------*/
 

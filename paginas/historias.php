@@ -94,6 +94,7 @@
                   <div class="botones" id="reportes-paginacion-botones">
                     <button id="constancia">Constancias</button>
                     <button id="informe">Informes médicos</button>
+                    <button id="presupuesto">Presupuestos</button>
                     <button id="general">Generales</button>
                   </div>
 

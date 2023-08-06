@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['constancia']) == 'string') {
-    $constancia = json_decode($datos['constancia'], true);
+  if (gettype($datos['presupuesto']) == 'string') {
+    $presupuesto = json_decode($datos['presupuesto'], true);
   } else {
-    $constancia = $datos['constancia'];
+    $presupuesto = $datos['presupuesto'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -215,7 +215,7 @@
   			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
   		</div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">CONSTANCIA</div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
 
 	    <div></div>
 	    <div></div>
@@ -232,8 +232,6 @@
 	    <table>
 	      <tbody>
 	        <tr>
-	          <td>EDAD:</td>
-	          <td style="font-weight: bold"><?php echo $edad?></td>
 	          <td>CÉDULA O PASAPORTE:</td>
 	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
 	        </tr>
@@ -250,9 +248,6 @@
 	        </tr>
 	      </tbody>
 	    </table>
-	    
-	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
-	    <!--</p>-->
 
   	</div>
 
@@ -260,7 +255,7 @@
   	<div></div>
 
 	<?php 
-    echo trim(strtoupper($constancia['texto_html']));
+    echo trim(strtoupper($presupuesto['texto_html']));
   ?>
 
   <div style="width: 100%"></div>
@@ -290,12 +285,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/constancias/constancia$nombre.pdf", "f");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/constancias/constancia$nombre.pdf");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/constancias/constancia$nombre.pdf");
-          $html2pdf->output("../reportes/constancias/constancia$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

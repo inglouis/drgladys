@@ -7,7 +7,7 @@
     <button id="crud-infeditar-cerrar" data-crud='cerrar'>X</button>
 
     <section id="crud-infeditar-titulo" data-crud='titulo'>
-      EDITAR informe
+      EDITAR INFORME
     </section>
 
     <div class="filas" style="height: fit-content; position:relative;">

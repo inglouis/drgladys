@@ -61,14 +61,10 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#general-informacion', '#general-previa'],
 	['#geneditar-informacion', '#geneditar-previa'],
 	['#informe-informacion', '#informe-previa'],
-	['#infeditar-informacion', '#infeditar-previa']
+	['#infeditar-informacion', '#infeditar-previa'],
+	['#presupuesto-informacion', '#presupuesto-previa'],
+	['#preeditar-informacion', '#preeditar-previa']
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
-
-// window.camposTextosPersonalizables.declarar('#constancia-textarea', '#constancia-previa')
-// window.camposTextosPersonalizables.declarar('#coneditar-textarea', '#coneditar-previa')
-
-// window.camposTextosPersonalizables.declarar('#general-informacion', '#general-previa')
-// window.camposTextosPersonalizables.declarar('#geneditar-informacion', '#geneditar-previa')
 
 window.camposTextosPersonalizables.init()
 /////////////////////////////////////////////////////
@@ -86,11 +82,12 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
 window.forPop = new PopUp('crud-infeditar-popup', 'popup', 'subefecto', true, 'infeditar', '', 27);
+window.prePop = new PopUp('crud-preeditar-popup', 'popup', 'subefecto', true, 'preeditar', '', 27);
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -109,6 +106,7 @@ repPop.evtBotones()
 conPop.evtBotones()
 genPop.evtBotones()
 forPop.evtBotones()
+prePop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -129,6 +127,7 @@ window.addEventListener('keyup', (e) => {
 	conPop.evtEscape(e)
 	genPop.evtEscape(e)
 	forPop.evtEscape(e)
+	prePop.evtEscape(e)
 
 })
 
@@ -255,10 +254,12 @@ class Historias extends Acciones {
 		tools.limpiar('.constancia-valores', '', {})
 		tools.limpiar('.general-valores', '', {})
 		tools.limpiar('.informe-valores', '', {})
+		tools.limpiar('.presupuesto-valores', '', {})
 
 		constancias.cargarTabla([], undefined, undefined)
 		generales.cargarTabla([], undefined, undefined)
 		informes.cargarTabla([], undefined, undefined)
+		presupuestos.cargarTabla([], undefined, undefined)
 		
 		// tools.limpiar('.reposos-valores', '', {
 		// 	"procesado": e => {
@@ -1068,6 +1069,48 @@ export var informes = new Informes(new Tabla(
 	'tabla-informe', 'informe-busqueda', -1, 'null', 'null', 'null', true
 ))
 
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Presupuestos extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'presupuesto_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#presupuesto-template').content.querySelector('.presupuesto-crud').cloneNode(true)
+		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
+	}
+
+	async confirmarActualizacion(popUp) {
+
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
+
+		this.cargarTabla(resultado, true)
+
+	}
+
+}
+
+export var presupuestos = new Presupuestos(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-presupuesto', 'presupuesto-busqueda', -1, 'null', 'null', 'null', true
+))
+
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION HISTORIAS			 	  					    */
@@ -1120,6 +1163,10 @@ genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
+prePop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+
+
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -1127,7 +1174,8 @@ forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 export var reportesDisponibles = {
 	"constancia": constancias,
 	"general": generales,
-	"informe": informes
+	"informe": informes,
+	"presupuesto": presupuestos
 }
 
 /* -------------------------------------------------------------------------------------------------*/
