@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['general']) == 'string') {
-    $general = json_decode($datos['general'], true);
+  if (gettype($datos['informe']) == 'string') {
+    $informe = json_decode($datos['informe'], true);
   } else {
-    $general = $datos['general'];
+    $informe = $datos['informe'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -215,7 +215,7 @@
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
       </div>
 
-      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;"><?php echo strtoupper($datos['titulo']) ?></div>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">INFORME MÉDICO</div>
 
       <div></div>
       <div></div>
@@ -260,7 +260,7 @@
   	<div></div>
 
 	<?php 
-    echo trim(strtoupper($general['texto_html']));
+    echo trim(strtoupper($informe['texto_html']));
   ?>
 
   <div style="width: 100%"></div>
@@ -290,12 +290,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/generales/general$nombre.pdf", "f");
+          $html2pdf->output("../reportes/informees/informe$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/generales/general$nombre.pdf");
+          $html2pdf->Output("../reportes/informees/informe$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/generales/general$nombre.pdf");
-          $html2pdf->output("../reportes/generales/general$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/informees/informe$nombre.pdf");
+          $html2pdf->output("../reportes/informees/informe$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

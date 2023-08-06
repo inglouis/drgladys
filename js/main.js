@@ -3750,6 +3750,88 @@ export class textoPersonalizable {
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////
+export class PaginacionContenedores {
+
+	constructor(contenedor, botones, tabla, resaltar) {
+		this.contenedor = (qs(contenedor)) ? qs(contenedor) : '';
+		this.ultimoSeleccionado = ''
+		this.controlador = botones
+		this.resaltar = (resaltar) ? resaltar : false;
+		this.tabla = tabla
+	}
+
+	ocultar() {
+		this.contenedor.setAttribute('data-hidden', '')
+	}
+
+	mostrar() {
+		this.contenedor.removeAttribute('data-hidden')
+	}
+
+	cambiarContenedor(nuevoSeleccionado) {
+
+		//var button = (tools.esDOM(nuevoSeleccionado)) ? e : e.target;
+		//
+		if (window.procesar) {
+
+			window.procesaar = false
+
+			this.controlador[this.ultimoSeleccionado]['pop']()
+
+			this.tabla.crud.customBodyEvents[nuevoSeleccionado](this.controlador[nuevoSeleccionado].boton)
+
+			this.cambiarUltimoSeleccionado(nuevoSeleccionado)
+
+			setTimeout(() => {
+				qs('body').classList.add('no-scroll')
+				window.procesaar = true
+			}, 400)
+
+		}
+
+	}
+
+	cambiarUltimoSeleccionado(seleccionado) {
+		this.ultimoSeleccionado = seleccionado
+	}
+
+	actualizarFamiliaDeBotones(tr) {
+
+		var th = this
+
+		Object.keys(this.controlador).forEach(el => {
+
+			th.controlador[el]['boton'] = tr.querySelector(`.${el}`)
+
+		})
+
+	}
+
+	abrirContenedorRemoto(ref) {
+		
+		if (this.resaltar !== false) {
+
+		}
+
+		this.resaltar.ejecutar(`#${this.contenedor.id} .${ref}`)
+
+		if (this.ultimoSeleccionado === '') {
+			this.cambiarUltimoSeleccionado(ref)
+		}
+
+		if (this.tabla.tr !== '') {
+			this.actualizarFamiliaDeBotones(this.tabla.tr)
+		} else {
+			this.actualizarFamiliaDeBotones(tools.pariente(qs(`#tabla-historias tbody tr .${ref}`), 'TR'))
+
+		}
+
+		this.cambiarContenedor(ref)
+	}
+
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////77//////
 export default '';
 

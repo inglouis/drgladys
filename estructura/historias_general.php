@@ -1,4 +1,59 @@
 <!--1)---------------------------------------------------- -->
+<!-------------------- GENERAL EDITAR -------------------- -->
+<!-------------------------------------------------------- -->
+<div id="crud-geneditar-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-geneditar-pop" class="popup-oculto" style="width:30%; min-width: 300px">
+
+    <button id="crud-geneditar-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-geneditar-titulo" data-crud='titulo'>
+      EDITAR INFORMACIÓN GENERAL
+    </section>
+
+    <div class="filas" style="height: fit-content; position:relative;">
+
+      <div class="personalizacion-b" id="crud-geneditar-personalizacion" data-hidden>
+        <section>Personalización</section>
+        <section style="width: 100%; border: 1px dashed #fff"></section>
+        <span>ENTER: SEPARAR LÍNEA</span>
+        <span>°CENTRAR°</span>
+        <span>*<b>NEGRITA</b>*</span>
+        <span>_ <u>SUBRAYADO</u> _</span>
+        <span>~<i>ITÁLICA</i>~</span>
+
+        <div class="previa-b" id="geneditar-previa" data-scroll></div>
+
+      </div>
+
+      <div class="columnas">
+        
+        <div>
+          <label class="requerido">Título</label>
+          <input type="text" id="geneditar-titulo" data-valor="titulo" class="geneditar-valores upper lleno">
+        </div>
+
+      </div>
+
+      <div class="columnas" style="height: 100%">
+
+        <div>
+          <label class="requerido">Información</label>
+          <textarea rows="4" id="geneditar-informacion" data-previa="geneditar-previa" data-valor="general" class="geneditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
+        </div>
+
+      </div>
+
+    </div>
+
+    <section id="crud-geneditar-botones" data-crud='botones' style="column-gap:5px">
+      <button class="botones-formularios confirmar btn-editar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button>
+    </section>
+
+  </div>
+</div>
+
+<!--2)---------------------------------------------------- -->
 <!----------------- GENERALES TEMPLATE ----------------- -->
 <!-------------------------------------------------------- -->
 <template id="general-template">
@@ -11,23 +66,27 @@
 
 			<div class="crud-botones">
 
-				<button class="editar btn btn-editar">
-					<?php echo $_SESSION['botones']['reportes_editar']?>
-				</button>
+        <button class="reusar btn btn-reusar" title="Reutilizar información del reporte">
+          <?php echo $_SESSION['botones']['reportes_reusar']?>
+        </button>
 
-				<button class="reimprimir btn btn-imprimir">
-					<?php echo $_SESSION['botones']['reportes_reimprimir']?>
-				</button>
-				
-				<div class="crud-eliminar-contenedor">
-					
-					<button class="eliminar btn btn-eliminar">
-						<?php echo $_SESSION['botones']['reportes_eliminar']?>
-					</button>
-					
-				</div>
+        <button class="editar btn btn-editar" title="Editar reporte">
+          <?php echo $_SESSION['botones']['reportes_editar']?>
+        </button>
 
-			</div>
+        <button class="reimprimir btn btn-imprimir" title="Reimprimir reporte">
+          <?php echo $_SESSION['botones']['reportes_reimprimir']?>
+        </button>
+        
+        <div class="crud-eliminar-contenedor">
+          
+          <button class="eliminar btn btn-eliminar">
+            <?php echo $_SESSION['botones']['reportes_eliminar']?>
+          </button>
+          
+        </div>
+
+      </div>
 
 			<div class="crud-informacion">
 
@@ -70,8 +129,8 @@
 
 </template>
 
-<!-------------------------------------------------------- -->
-<!----------------- GENERALES CONTENEDOR --------------- -->
+<!--3)---------------------------------------------------- -->
+<!------------------- GENERALES CONTENEDOR --------------- -->
 <!-------------------------------------------------------- -->
 <section class="reportes-seccion" data-hide>
                 
@@ -109,7 +168,7 @@
               
               <div>
                 <label class="requerido">Título</label>
-                <input type="text" id="general-titulo" class="general-valores upper lleno">
+                <input type="text" id="general-titulo" data-valor="titulo" class="general-valores upper lleno">
               </div>        
 
             </div>
@@ -118,7 +177,7 @@
 
               <div style="height: 100%; margin: 0px">
                 <label class="requerido">Información</label>
-                <textarea id="general-informacion" data-previa="general-previa" rows="6" class="general-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea id="general-informacion" data-previa="general-previa" data-valor="general" rows="6" class="general-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
               </div>
 
             </div>

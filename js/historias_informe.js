@@ -1,29 +1,29 @@
-import { customDesplegable } from '../js/main.js';
+import { customDesplegable, Rellenar } from '../js/main.js';
 import { historias, tools, notificaciones, reporteSeleccionado } from '../js/historias.js';
-import { generales } from '../js/historias.js';
+import { informes } from '../js/historias.js';
 
 /* 1)------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------- generales ---------------------------------------------*/
+/* ---------------------------------------- informeS ---------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 
-export const generalPrevia = new customDesplegable('#generales-contenedor .desplegable-contenedor', '#generales-contenedor .reporte-previa', '#generales-contenedor .desplegable-cerrar', undefined, 'fit-content')
+export const informePrevia = new customDesplegable('#informes-contenedor .desplegable-contenedor', '#informes-contenedor .reporte-previa', '#informes-contenedor .desplegable-cerrar', undefined, 'fit-content')
 
-generalPrevia.eventos()
-generalPrevia.prevenir = true
+informePrevia.eventos()
+informePrevia.prevenir = true
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - PROPIEDADES				 					    */
+/*           						informe - PROPIEDADES				 					    */
 /* -------------------------------------------------------------------------------------------------*/
-generales['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'generales-contenedor', 0)
-generales['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'informes-contenedor', 0)
+informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
 /////////////////////////////////////////////////////
 ///
-generales['crud']['propiedadesTr'] = {
+informes['crud']['propiedadesTr'] = {
 	"contenedor": (e) => {
 
 		var fr = new DocumentFragment(),
-			th = generales, 
-			contenedor = e.querySelector('.generales-contenedor'), 
+			th = informes, 
+			contenedor = e.querySelector('.informes-contenedor'), 
 			contenido = th.contenido.cloneNode(true)
 
 		contenedor.innerHTML = ''
@@ -32,11 +32,10 @@ generales['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.general).texto_html
+		var texto = JSON.parse(e.sublista.informe).texto_html
 
-		contenedor.querySelector('.general').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.informe').innerHTML = texto.toUpperCase()
 
-		contenedor.querySelector('.titulo').innerHTML = e.sublista.titulo
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
 		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
@@ -51,7 +50,7 @@ generales['crud']['propiedadesTr'] = {
 	},
 	"fecha": (e) => {
 
-		var th = generales, 
+		var th = informes, 
 			contenedor = e.querySelector('.fecha-contenedor'), 
 			contenido = th.contenidoFecha.cloneNode(true)
 
@@ -63,7 +62,7 @@ generales['crud']['propiedadesTr'] = {
 
 	},
 	"eliminar": (e) => {
-		var th = generales,
+		var th = informes,
 			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
 		contenedor.setAttribute('data-hidden', '')
@@ -97,7 +96,7 @@ generales['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
-generales['crud']['customBodyEvents'] = {
+informes['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
@@ -105,10 +104,10 @@ generales['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reusar')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			informes.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.general-valores', '', {})
-			rellenar.contenedores(generales.sublista, '.general-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.informe-valores', '', {})
+			rellenar.contenedores(informes.sublista, '.informe-valores', {elemento: e.target, id: 'value'}, {})
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -116,18 +115,19 @@ generales['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR GENERALES 		  					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA informe   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
 		if (e.target.classList.contains('editar')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			informes.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.geneditar-valores', '', {})
-			rellenar.contenedores(generales.sublista, '.geneditar-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.infeditar-valores', '', {})	
 
-			genPop.pop()
+			rellenar.contenedores(informes.sublista, '.infeditar-valores', {elemento: e.target, id: 'value'}, {})
+
+			conPop.pop()
 
 		}
 
@@ -139,10 +139,10 @@ generales['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reimprimir')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			informes.sublista = tools.pariente(e.target, 'TR').sublista
 
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(generales.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(informes.sublista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -161,20 +161,20 @@ generales['crud']['customBodyEvents'] = {
 
 (async () => {
 
-	generales.cargarTabla([], undefined, undefined)
+	informes.cargarTabla([], undefined, undefined)
 
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							generales - CARGAR	  								    */
+/*           							informeS - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor').identificador = 'general'
+qs('#informes-contenedor').identificador = 'informe'
 
-qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e => {
+qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#informes-contenedor')
 
 		window.procesar = false
 
@@ -189,8 +189,7 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"titulo": datos[0].toUpperCase(),
-				"general": {
+				"informe": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -206,15 +205,15 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				generales.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				informes.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display !== 'none') {
 
-						generalPrevia.prevenir = false
-						generalPrevia.accionar()
-						generalPrevia.prevenir = true
+						informePrevia.prevenir = false
+						informePrevia.accionar()
+						informePrevia.prevenir = true
 
 					}
 
@@ -239,13 +238,13 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							general - PREVIA					  					    */
+/*           							informe - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs("#generales-contenedor .reporte-previa").addEventListener('click', async e => {
+qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#informes-contenedor')
 
 		window.procesar = false
 
@@ -263,8 +262,7 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"titulo": datos[0].toUpperCase(),
-				"general": {
+				"informe": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -276,15 +274,15 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				generales.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				informes.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display === 'none') {
 
-						generalPrevia.prevenir = false
-						generalPrevia.accionar()
-						generalPrevia.prevenir = true
+						informePrevia.prevenir = false
+						informePrevia.accionar()
+						informePrevia.prevenir = true
 
 					}
 
@@ -309,38 +307,37 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							GENERAL - EDITAR			 							    */
+/*           							informe - EDITAR			 							    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-geneditar-botones .confirmar').addEventListener('click', async e => {
+qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 
 	if(window.procesar) {
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#informes-contenedor')
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `geneditar-valores`, tools);
+		var datos = tools.procesar('', '', `infeditar-valores`, tools);
 
 		if (datos !== '') {
 
-			var listaGeneral = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
 
-			generales.sublista.titulo  = datos[0]
-			generales.sublista.general = JSON.stringify(listaGeneral)
+			informes.sublista.informe = JSON.stringify(lista)
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(generales.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(informes.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
 			if (resultado.trim() === 'exito') {
 
-				generales.cargarTabla(generales.crud.lista)
+				informes.cargarTabla(informes.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				genPop.pop()
+				conPop.pop()
 
 			} else {
 
@@ -359,35 +356,35 @@ qs('#crud-geneditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - ELIMINAR					 					    */
+/*           						informe - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor table').addEventListener('click', async e => {
+qs('#informes-contenedor table').addEventListener('click', async e => {
 
 	if (e.target.classList.contains('eliminar-boton')) {
 
 		if (window.procesar) {
 
-			var elemento = qs('#generales-contenedor')
+			var elemento = qs('#informes-contenedor')
 
 			window.procesar = false
 			
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-			generales.crud.lista.forEach((lista, i) => {
+			informes.crud.lista.forEach((lista, i) => {
 
 				if (lista.id === Number(e.target.value)) {
 
-					generales.crud.lista.splice(i, 1)
+					informes.crud.lista.splice(i, 1)
 
 				}
 
 			})
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(generales.crud.lista), historias.sublista.id_historia])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(informes.crud.lista), historias.sublista.id_historia])
 
 			if (resultado.trim() === 'exito') {
 
-				generales.cargarTabla(generales.crud.lista)
+				informes.cargarTabla(informes.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
@@ -406,39 +403,69 @@ qs('#generales-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  general - TEXTO PREVIA	 								    */
+/*           						  informe - TEXTO PREVIA	 								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor .cargar').addEventListener('mouseenter', e => {
+qs('#informes-contenedor .cargar').addEventListener('mouseenter', e => {
 
-	qs('#generales-contenedor .personalizacion').removeAttribute('data-hidden')	
-
-})
-
-qs('#generales-contenedor .cargar').addEventListener('mouseleave', e => {
-
-	qs('#generales-contenedor .personalizacion').setAttribute('data-hidden', '')
+	qs('#informes-contenedor .personalizacion').removeAttribute('data-hidden')	
 
 })
 
-qs('#crud-geneditar-pop .filas').addEventListener('mouseenter', e => {
+qs('#informes-contenedor .cargar').addEventListener('mouseleave', e => {
 
-	qs('#crud-geneditar-personalizacion').removeAttribute('data-hidden')	
+	qs('#informes-contenedor .personalizacion').setAttribute('data-hidden', '')
 
 })
 
-qs('#crud-geneditar-pop .filas').addEventListener('mouseleave', e => {
+qs('#crud-infeditar-pop .filas').addEventListener('mouseenter', e => {
 
-	qs('#crud-geneditar-personalizacion').setAttribute('data-hidden', '')
+	qs('#crud-infeditar-personalizacion').removeAttribute('data-hidden')	
+
+})
+
+qs('#crud-infeditar-pop .filas').addEventListener('mouseleave', e => {
+
+	qs('#crud-infeditar-personalizacion').setAttribute('data-hidden', '')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - LIMPIAR					 					    */
+/*           						informe - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor .limpiar').addEventListener('click', e => {
+qs('#informes-contenedor .limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.general-valores', '', {})
+	tools.limpiar('.informe-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						INFORME - MODELO					 					    	*/
+/* -------------------------------------------------------------------------------------------------*/
+var modelos = {
+	"preoperatorio": {"informe": JSON.stringify({
+		"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+		"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+	})},
+	"rx": {"informe": JSON.stringify({
+		"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
+		"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
+	})},
+	"cardiovascular": {"informe": JSON.stringify({
+		"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+		"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+	})}
+}
+
+qs('#informe-modelos').addEventListener('click', e=> {
+
+    if (e.target.tagName === 'BUTTON') {
+
+        rellenar.contenedores(modelos[e.target.dataset.identificador], '.informe-valores', {}, {})
+        
+        notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+    }
+    
 })

@@ -45,7 +45,6 @@
     <?php 
       include_once('../cruds/historias.crud.php');
       include_once('../cruds/historias_evoluciones.crud.php');
-      include_once('../cruds/historias_reportes.crud.php'); 
     ?>
 
     </div>
@@ -94,6 +93,7 @@
 
                   <div class="botones" id="reportes-paginacion-botones">
                     <button id="constancia">Constancias</button>
+                    <button id="informe">Informes médicos</button>
                     <button id="general">Generales</button>
                   </div>
 
