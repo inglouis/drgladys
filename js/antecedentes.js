@@ -11,21 +11,12 @@ import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Re
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-const eliPop = new PopUp('crud-eliminar-popup', 'popup', 'subefecto', true, 'eliminar', '', 27)
-const ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', '', 27)
-const insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', '', 27)
 const infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 
-ediPop.evtBotones()
-insPop.evtBotones()
 infPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
-
-	ediPop.evtEscape(e)
-	insPop.evtEscape(e)
 	infPop.evtEscape(e)
-
 })
 
 /////////////////////////////////////////////////////
@@ -105,7 +96,7 @@ window.antecedentes = new Antecedentes(new Tabla(
 	[
 		['N°. Antecedente', true, 0],
 		['Cédula', true, 1],
-		[['Hist.Ant', 'N° de historia del antecedente'], true, 2],
+		['N° historia', true, 2],
 		['Nombres', true, 3],
 		['Apellidos', true, 4],
 		['Fecha', true, 5],
@@ -221,78 +212,6 @@ qs('#procesar').addEventListener('click', async e => {
         	antecedentes.cargarTabla(JSON.parse(this.responseText))
         }
     };
-})
-
-/* -------------------------------------------------------------------------------------------------*/
-/*   		Evento que envia los datos al metodo de javascript que hace la peticion*                */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#crud-editar-botones').addEventListener('click', async e => {
-
-	if(e.target.classList.contains('editar')) {
-
-		if(window.procesar) {
-
-			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
-			window.procesar = false
-
-			var datos = tools.procesar(e.target, 'editar', 'editar-valores', tools);
-
-			if(datos !== '') {
-
-				var resultado = await tools.fullAsyncQuery('antecedentes', 'actualizar_antecedentes', datos)
-
-				if (resultado.trim() === 'exito') {
-
-					antecedentes.confirmarActualizacion(ediPop)
-				
-				} else {
-
-					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
-
-				}
-
-			}
-
-		} else {
-
-			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-			
-		}
-	}
-})
-
-/* -------------------------------------------------------------------------------------------------*/
-/*                    evento que envia los datos a php para la insersión                            */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#crud-insertar-botones').addEventListener('click', async e => {
-
-	if (e.target.classList.contains('insertar')) {
-
-		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
-		var datos = tools.procesar(e.target, 'insertar', 'nuevos', tools)
-
-		if (datos !== false) {
-
-			var resultado = await tools.fullAsyncQuery('antecedentes', 'crear_antecedentes', datos)
-
-			if (resultado.trim() === 'exito') {
-
-				antecedentes.confirmarActualizacion(insPop)
-			
-			} else {
-
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
-
-			}
-
-		} else {
-
-			notificaciones.mensajeSimple('Campos vacíos', resultado, 'F')
-
-		}
-	}
 })
 
 /* -------------------------------------------------------------------------------------------------*/	

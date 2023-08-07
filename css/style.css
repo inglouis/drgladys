@@ -474,10 +474,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 [data-estilo="focus-2"] {
-    background: #212529d9 !important;
+    background: #721aff !important;
     transition: 0.3s ease all;
-    transition: 0.3s ease all;
-    box-shadow: 0px 0px 6px 1px #2196f3;
+    box-shadow: 0px 0px 6px 2px #fbfbfb;
 }
 
 [data-estilo="focus-3"] {
@@ -687,6 +686,10 @@ span.numeracion {
 
 .btn-imprimir:hover {
     background: #f178cc;
+}
+
+.btn-reusar:hover {
+    background: #ffb307;
 }
 
 .btn-nuevo, #buscar {
@@ -1610,6 +1613,9 @@ span.numeracion {
 /*------------------cruds-----------------------------*/
 #crud-informacion-pop, 
 #crud-coneditar-pop,
+#crud-preeditar-pop,
+#crud-infeditar-pop,
+#crud-repeditar-pop,
 #crud-geneditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
@@ -3099,6 +3105,146 @@ span.numeracion {
 }
 
 /*-----------------------------------------------------*/
+/*--------------------- INFORMES ----------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-informe thead {
+    display: none
+}
+
+#tabla-informe tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-informe tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+
+#tabla-informe tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    justify-content: center;
+}
+
+#informe-modelos {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+#informe-modelos button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 3px;
+    font-size: 
+}
+
+#informe-modelos button:nth-child(1)::after {
+    content: "PREOPERATORIO";
+    width: 100px;
+    font-size: 14px;
+}
+
+#informe-modelos button:nth-child(2)::after {
+    content: "RX THORAX";
+    width: 100px;
+    font-size: 14px;
+}
+
+#informe-modelos button:nth-child(3)::after {
+    content: "VALORACIÓN CARDIOVASCULAR";
+    width: 300px;
+    font-size: 14px;
+}
+
+/*-----------------------------------------------------*/
+/*------------------ PRESUPUESTO ----------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-presupuesto thead {
+    display: none
+}
+
+#tabla-presupuesto tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-presupuesto tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+
+#tabla-presupuesto tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    justify-content: center;
+}
+
+#presupuesto-representante {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    margin: 0px;
+}
+
+#presupuesto-representante button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 3px;
+    font-size: 
+}
+
+#presupuesto-representante button:nth-child(1)::after {
+    content: "A NOMBRE DEL PACIENTE";
+    width: 250px;
+    font-size: 14px;
+}
+
+#presupuesto-representante button:nth-child(2)::after {
+    content: "A NOMBRE DEL REPRESENTANTE";
+    width: 250px;
+    font-size: 14px;
+}
+
+/*-----------------------------------------------------*/
+/*--------------------- REPOSO ------------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-reposo thead {
+    display: none
+}
+
+#tabla-reposo tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-reposo tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+
+#tabla-reposo tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    justify-content: center;
+}
+
+/*-----------------------------------------------------*/
 /*------------------ GENERALES ------------------------*/
 /*-----------------------------------------------------*/
 
@@ -3274,7 +3420,7 @@ span.numeracion {
 }
 
 #tabla-evoluciones tbody tr td:nth-child(4) {
-    width: 7%;
+    width: 15%;
 }
 
 #tabla-evoluciones tbody tr td:nth-child(5) {
@@ -3705,11 +3851,11 @@ span.numeracion {
   width: 20px;
   height: 20px;
   border-radius: 100px;
-  background: #7547e5a1
+  background: #8f61ff
 }
 
 #paginacion-contenedores button:hover {
-  background: #3e68ff;
+  background: #447dfb;
   transition: 0.3s ease all;
 }
 
@@ -4670,7 +4816,7 @@ span.numeracion {
     opacity: 1;
     display: block;
     animation-name: tooltip-down;
-    animation-duration: 0.8s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     bottom: 0px;
 }
@@ -4681,7 +4827,7 @@ span.numeracion {
 }
 
 [data-efecto="toggle"] { 
-    transition: 0.6s ease all !important;
+    transition: 0.3s ease all !important;
 }
 
 /*-----------------tooltips-complejos------------------*/

@@ -23,7 +23,7 @@
   <!-------------------------------------------------------- -->
   <head>
       <?php require_once('../estructura/head.php');?>
-      <title>antecedentes</title>
+      <title>ANTECEDENTES</title>
       <script type="module" src="../js/antecedentes.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
       <style>
@@ -56,8 +56,8 @@
     <!-------------------------------------------------------- -->
     <div id="crud-informacion-popup" class="popup-oculto" data-crud='popup'>
       <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="    
-        width: 80%;
-        height: 80%;
+        width: 50%;
+        height: fit-content;
         justify-content: space-between;
       ">
 

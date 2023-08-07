@@ -39,6 +39,19 @@
     $constancia = $datos['constancia'];
   }
 
+  setlocale(LC_TIME,"es_ES");
+
+  $fmt = new IntlDateFormatter('es_ES',
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::NONE,
+    'Europe/Berlin',
+    IntlDateFormatter::GREGORIAN
+  );
+
+  $timestamp = strtotime($datos['fecha']);
+
+  $fecha =  $fmt->format($timestamp);
+
   $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
@@ -52,12 +65,12 @@
   }
 
   page, div, table, h5, h3, h4 {
-    color: #723200;
+    color: #262626; /*#723200;*/
     margin:0px !important;
   }
 
   table {
-    font-size: 13px;
+    font-size: 12px;
     left: 7mm;
     position: relative;
   }
@@ -109,7 +122,7 @@
   }
 
   #cabecera {
-    top: 25mm;
+    top: 5mm;
     position: relative;
     width: 100%; 
     color: #723200;
@@ -140,7 +153,7 @@
     font-size: 12px;
     font-weight: bold;
     margin-left: 50px;
-    padding-top:10px;
+    padding-top:11px;
   }
 
   .fecha {
@@ -158,53 +171,51 @@
 	<page_footer>
 		<div style="position:absolute; bottom: 5mm">
 		  
-		  <div style="width: 90%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
-
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_1']?>
+		  <div style="font-size: 11px;" class="centro">
+		    Dra. Gladys A. Chaparro H.
 		  </div>
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_2']?>
+		  <div style="font-size: 11px;" class="centro">
+		    Oftalmólogo
 		  </div>
 
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_3']?>
+		  <div style="font-size: 11px;" class="centro">
+		    M.S.D.S.: 34.989 C.M.: 1.915
 		  </div>
 
-		  <div style="position: absolute; bottom: -0.5mm; left: 36%; height: 0px;">
-		   <img src="../imagenes/facebook.jpg" style="width: 4.5mm; height: 4.5mm;">
-		  </div>
+      <div style="text-align: right; font-size: 12px; position: relative; right: 26px">
+        San Cristóbal, <?php echo $fecha?>
+      </div>
 
-		  <div style="position: absolute; bottom: -0.5mm; left: 39%; height: 0px;">
-		   <img src="../imagenes/instagram.jpg" style="width: 4.5mm; height: 4.5mm;">
-		  </div>
+      <div style="width: 92%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
+
+      <div class="centro" style="font-size: 11px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
 
 		</div>
 	</page_footer> 
 
   <div class="contenedor">
 
-    <div id="cabecera">
+      <div id="cabecera">
 
-  		<div style="top:-21mm; left: 0mm; height: 0px; position: relative;">
-  			<img src="../imagenes/reportes_historia_cabecera.jpg" style="width: 80mm; height: 20mm;">
+    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
+    			Dra. Gladys A. Chaparro H.
+    		</div>
+
+        <div style="font-size: 11px">Rlf: V-09143081-5</div>
+        <div style="font-size: 11px">Oftalmólogo</div>
+        <div style="font-size: 11px">Infantil y Estrabismo</div>
+        <div style="font-size: 11px">M.S.D.S.: 34.989 C.M.: 1.915</div>
+
   		</div>
 
-  		<div style="font-family: 'Qwigley'; font-size: 30px; ">
-  			Al servicio de tu piel
+      <div></div>
+      <div class="separador"></div>
+
+  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
   		</div>
 
-		</div> 
-
-		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-			<img src="../imagenes/logo_reportes.jpg" style="width: 28mm; height: 28mm;">
-		</div>
-
-		<div style="position: absolute;  top: 2mm; right: 0mm; height: 0px;">
-			<img src="../imagenes/decoracion_historia.jpg" style="width: 170mm; height: 13mm;">
-		</div>
-
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm">CONSTANCIA</div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">CONSTANCIA</div>
 
 	    <div></div>
 	    <div></div>

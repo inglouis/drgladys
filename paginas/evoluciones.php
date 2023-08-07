@@ -23,7 +23,7 @@
   <!-------------------------------------------------------- -->
   <head>
       <?php require_once('../estructura/head.php');?>
-      <title>evoluciones</title>
+      <title>EVOLUCIONES</title>
       <script type="module" src="../js/evoluciones.js" defer></script>
       <script type="module" src="../js/main.js" defer></script>
   </head>
@@ -37,8 +37,8 @@
     <!-------------------------------------------------------- -->
     <div id="crud-informacion-popup" class="popup-oculto" data-crud='popup'>
       <div id="crud-informacion-pop" class="popup-oculto" data-scroll style="    
-        width: 80%;
-        height: 80%;
+        width: 50%;
+        height: fit-content;;
         justify-content: space-between;
       ">
 
@@ -56,7 +56,7 @@
             </div>
             <div>
               <label>Historia</label>
-              <input type="text" data-valor="nhist" class="informacion-valores upper visual" disabled="true">
+              <input type="text" data-valor="id_historia" class="informacion-valores upper visual" disabled="true">
             </div>
             <div>
               <label>Nombres</label>

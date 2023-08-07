@@ -98,7 +98,24 @@ constancias['crud']['propiedadesTr'] = {
 ///
 constancias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR EL constancia   					    */
+	/*           								REUTILIZAR 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"reusar": async (e) => {
+
+		if (e.target.classList.contains('reusar')) {
+
+			constancias.sublista = tools.pariente(e.target, 'TR').sublista
+
+			tools.limpiar('.constancia-valores', '', {})
+			rellenar.contenedores(constancias.sublista, '.constancia-valores', {elemento: e.target, id: 'value'}, {})
+
+			notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA CONSTANCIA   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
@@ -106,7 +123,8 @@ constancias['crud']['customBodyEvents'] = {
 
 			constancias.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.coneditar-valores', '', {})
+			tools.limpiar('.coneditar-valores', '', {})	
+
 			rellenar.contenedores(constancias.sublista, '.coneditar-valores', {elemento: e.target, id: 'value'}, {})
 
 			conPop.pop()
@@ -420,4 +438,11 @@ qs('#constancias-contenedor .limpiar').addEventListener('click', e => {
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						CONSTNCIA - SCROLL TOP						 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#constancia-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-constancia').parentElement.scrollTo(0,0)
 })

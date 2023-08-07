@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['general']) == 'string') {
-    $general = json_decode($datos['general'], true);
+  if (gettype($datos['presupuesto']) == 'string') {
+    $presupuesto = json_decode($datos['presupuesto'], true);
   } else {
-    $general = $datos['general'];
+    $presupuesto = $datos['presupuesto'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -52,8 +52,6 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
-
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
 ?>
@@ -61,7 +59,7 @@
 <style>
 
   page {
-    font-size: 12px;
+  	font-size: 12px;
   }
 
   page, div, table, h5, h3, h4 {
@@ -169,18 +167,18 @@
 <page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
 
 	<page_footer>
-    <div style="position:absolute; bottom: 5mm">
-      
-      <div style="font-size: 11px;" class="centro">
-        Dra. Gladys A. Chaparro H.
-      </div>
-      <div style="font-size: 11px;" class="centro">
-        Oftalmólogo
-      </div>
+		<div style="position:absolute; bottom: 5mm">
+		  
+		  <div style="font-size: 11px;" class="centro">
+		    Dra. Gladys A. Chaparro H.
+		  </div>
+		  <div style="font-size: 11px;" class="centro">
+		    Oftalmólogo
+		  </div>
 
-      <div style="font-size: 11px;" class="centro">
-        M.S.D.S.: 34.989 C.M.: 1.915
-      </div>
+		  <div style="font-size: 11px;" class="centro">
+		    M.S.D.S.: 34.989 C.M.: 1.915
+		  </div>
 
       <div style="text-align: right; font-size: 12px; position: relative; right: 26px">
         San Cristóbal, <?php echo $fecha?>
@@ -190,41 +188,41 @@
 
       <div class="centro" style="font-size: 11px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
 
-    </div>
-  </page_footer>  
+		</div>
+	</page_footer> 
 
   <div class="contenedor">
 
       <div id="cabecera">
 
-        <div style="font-family: 'Qwigley'; font-size: 40px; ">
-          Dra. Gladys A. Chaparro H.
-        </div>
+    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
+    			Dra. Gladys A. Chaparro H.
+    		</div>
 
         <div style="font-size: 11px">Rlf: V-09143081-5</div>
         <div style="font-size: 11px">Oftalmólogo</div>
         <div style="font-size: 11px">Infantil y Estrabismo</div>
         <div style="font-size: 11px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
-      </div>
+  		</div>
 
       <div></div>
       <div class="separador"></div>
 
-      <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-        <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-      </div>
+  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+  		</div>
 
-      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;"><?php echo strtoupper($datos['titulo']) ?></div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
 
-      <div></div>
-      <div></div>
+	    <div></div>
+	    <div></div>
 
 	    <table>
 	      <tbody>
 	        <tr>
 	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
+	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
 	        </tr>
 	      </tbody>
 	    </table>
@@ -232,8 +230,6 @@
 	    <table>
 	      <tbody>
 	        <tr>
-	          <td>EDAD:</td>
-	          <td style="font-weight: bold"><?php echo $edad?></td>
 	          <td>CÉDULA O PASAPORTE:</td>
 	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
 	        </tr>
@@ -250,9 +246,6 @@
 	        </tr>
 	      </tbody>
 	    </table>
-	    
-	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
-	    <!--</p>-->
 
   	</div>
 
@@ -260,7 +253,7 @@
   	<div></div>
 
 	<?php 
-    echo trim(strtoupper($general['texto_html']));
+    echo trim(strtoupper($presupuesto['texto_html']));
   ?>
 
   <div style="width: 100%"></div>
@@ -290,12 +283,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/generales/general$nombre.pdf", "f");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/generales/general$nombre.pdf");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/generales/general$nombre.pdf");
-          $html2pdf->output("../reportes/generales/general$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

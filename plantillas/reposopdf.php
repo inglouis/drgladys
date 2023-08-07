@@ -32,34 +32,46 @@
   // echo "<pre>";
   // print_r($datos);
   // echo "</pre>";
-  if (gettype($datos['motivo']) == 'string') {
-    $motivo = json_decode($datos['motivo'], true);
+
+  if (gettype($datos['reposo']) == 'string') {
+    $reposo = json_decode($datos['reposo'], true);
   } else {
-    $motivo = $datos['motivo'];
+    $reposo = $datos['reposo'];
   }
 
+  setlocale(LC_TIME,"es_ES");
+
+  $fmt = new IntlDateFormatter('es_ES',
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::NONE,
+    'Europe/Berlin',
+    IntlDateFormatter::GREGORIAN
+  );
+
   $timestamp = strtotime($datos['fecha']);
+
+  $fecha =  $fmt->format($timestamp);
 
   $fecha_inicio = date("d-m-Y", strtotime($datos['fecha_inicio']));
   $fecha_final = date("d-m-Y", strtotime($datos['fecha_final']));
   $fecha_simple = date("d-m-Y", strtotime($datos['fecha_simple']));
+
 
 ?>
 
 <style>
 
   page {
-  page {
-  	font-size: 13px;
+  	font-size: 12px;
   }
 
   page, div, table, h5, h3, h4 {
-    color: #723200;
+    color: #262626; /*#723200;*/
     margin:0px !important;
   }
 
   table {
-    font-size: 14px;
+    font-size: 12px;
     left: 7mm;
     position: relative;
   }
@@ -94,7 +106,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    font-size: 16px;
   }
 
   #subcabecera {
@@ -112,6 +123,7 @@
   }
 
   #cabecera {
+    top: 5mm;
     position: relative;
     width: 100%; 
     color: #723200;
@@ -142,7 +154,7 @@
     font-size: 12px;
     font-weight: bold;
     margin-left: 50px;
-    padding-top:10px;
+    padding-top:11px;
   }
 
   .fecha {
@@ -160,74 +172,58 @@
 	<page_footer>
 		<div style="position:absolute; bottom: 5mm">
 		  
-		  <div style="width: 90%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
-
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_1']?>
+		  <div style="font-size: 11px;" class="centro">
+		    Dra. Gladys A. Chaparro H.
 		  </div>
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_2']?>
+		  <div style="font-size: 11px;" class="centro">
+		    Oftalmólogo
 		  </div>
 
-		  <div style="font-size: 15px;" class="centro">
-		    <?php echo $_SESSION['informacion_pie_pagina_reportes_3']?>
+		  <div style="font-size: 11px;" class="centro">
+		    M.S.D.S.: 34.989 C.M.: 1.915
 		  </div>
 
-		  <div style="position: absolute; bottom: -0.5mm; left: 36%; height: 0px;">
-		   <img src="../imagenes/facebook.jpg" style="width: 4.5mm; height: 4.5mm;">
-		  </div>
+      <div style="text-align: right; font-size: 12px; position: relative; right: 26px">
+        San Cristóbal, <?php echo $fecha?>
+      </div>
 
-		  <div style="position: absolute; bottom: -0.5mm; left: 39%; height: 0px;">
-		   <img src="../imagenes/instagram.jpg" style="width: 4.5mm; height: 4.5mm;">
-		  </div>
+      <div style="width: 92%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
+
+      <div class="centro" style="font-size: 11px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
 
 		</div>
 	</page_footer> 
 
-    <div class="contenedor">
+  <div class="contenedor">
 
-    	<div id="cabecera" style="width: 100%; top: 5mm">
+      <div id="cabecera">
 
-        <div style="text-align: center; width: 100%; font-weight: bold;">DRA. ROSANA SÁNCHEZ PERNÍA</div>
-        <div style="text-align: center; width: 100%; font-weight: bold;">DERMATOLÓGICA CLÍNICA Y VENEROLOGÍA</div>
-        <div style="text-align: center; width: 100%; font-weight: bold;">NIÑOS, ADOLESCENTES Y ADULTOS</div>
+    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
+    			Dra. Gladys A. Chaparro H.
+    		</div>
 
-      </div> 
+        <div style="font-size: 11px">Rlf: V-09143081-5</div>
+        <div style="font-size: 11px">Oftalmólogo</div>
+        <div style="font-size: 11px">Infantil y Estrabismo</div>
+        <div style="font-size: 11px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
-      <div style="position: absolute;  top: 5mm; left: 5mm; height: 0px;">
-       <img src="../imagenes/logo_reportes.jpg" style="width: 25mm; height: 25mm;">
-      </div>
+  		</div>
 
-      <!-- <div style="font-size: 11px; font-weight: bold; position: absolute; right: 4.5mm; top: 15mm">
-        FECHA DE EMISIÓN
-      </div>
+      <div></div>
+      <div class="separador"></div>
 
-      <table id="tabla-fecha" style="position: absolute; right: 30mm; top: 18mm">
-        <thead style="border: 1px solid #723200;">
-          <tr style="border: 1px solid #723200;">
-            <th style="border: 1px solid #723200; border-top-left-radius: 10px; background: #723200; color: #fff">DD</th>
-            <th style="border: 1px solid #723200; background: #723200; color: #fff">MM</th>
-            <th style="border: 1px solid #723200; border-top-right-radius: 10px; background: #723200; color: #fff">AAAA</th>
-          </tr>
-        </thead>
-        <tbody style="border: 1px solid #723200;">
-          <tr style="border: 1px solid #723200;">
-            <td style="border: 1px solid #723200; text-align: center"><?php echo date("d", $timestamp);?></td>
-            <td style="border: 1px solid #723200; text-align: center"><?php echo date("m", $timestamp);?></td>
-            <td style="border: 1px solid #723200; text-align: center"><?php echo date("Y", $timestamp);?></td>
-          </tr>
-        </tbody>
-      </table> -->
+  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+  		</div>
+
+	    <div></div>
+
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">REPOSO MÉDICO</div>
 
       <div></div>
       <div></div>
 
-	    <div class="centro" style="font-size: 20px; font-weight: bold; position:relative; top: 10mm">REPOSO MÉDICO</div>
-
-	    <div></div>
-	    <div></div>
-
-	    <table style="border:none">
+      <table style="border:none">
       <tbody>
         <tr>
           <td style="width: 80mm; text-align: left">SE INDICA REPOSO DESDE EL:&nbsp;&nbsp;<b><?php echo $fecha_inicio?></b></td>
@@ -249,7 +245,7 @@
         <tr>
           <td>POR CAUSA DE: <b>
             <?php 
-              echo trim(strtoupper($motivo['texto_html']));
+              echo trim(strtoupper($reposo['texto_html']));
             ?>
           </b></td>
         </tr> 
@@ -265,10 +261,12 @@
       </tbody>    
     </table>
 
-  	</div>
+    </div>
 
-  	<div></div>
-  	<div></div>
+    <div></div>
+    <div></div>
+
+  <div style="width: 100%"></div>
 
 </page>
 
@@ -295,12 +293,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/antecedentes/antecedente$nombre.pdf", "f");
+          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/antecedentes/antecedente$nombre.pdf");
+          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/antecedentes/antecedente$nombre.pdf");
-          $html2pdf->output("../reportes/antecedentes/antecedente$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
+          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

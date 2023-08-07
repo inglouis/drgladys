@@ -1,29 +1,29 @@
 import { customDesplegable } from '../js/main.js';
 import { historias, tools, notificaciones, reporteSeleccionado } from '../js/historias.js';
-import { generales } from '../js/historias.js';
+import { reposos } from '../js/historias.js';
 
 /* 1)------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------- generales ---------------------------------------------*/
+/* ---------------------------------------- reposoS ---------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 
-export const generalPrevia = new customDesplegable('#generales-contenedor .desplegable-contenedor', '#generales-contenedor .reporte-previa', '#generales-contenedor .desplegable-cerrar', undefined, 'fit-content')
+export const reposoPrevia = new customDesplegable('#reposos-contenedor .desplegable-contenedor', '#reposos-contenedor .reporte-previa', '#reposos-contenedor .desplegable-cerrar', undefined, 'fit-content')
 
-generalPrevia.eventos()
-generalPrevia.prevenir = true
+reposoPrevia.eventos()
+reposoPrevia.prevenir = true
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - PROPIEDADES				 					    */
+/*           						reposo - PROPIEDADES				 					    */
 /* -------------------------------------------------------------------------------------------------*/
-generales['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'generales-contenedor', 0)
-generales['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+reposos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'reposos-contenedor', 0)
+reposos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
 /////////////////////////////////////////////////////
 ///
-generales['crud']['propiedadesTr'] = {
+reposos['crud']['propiedadesTr'] = {
 	"contenedor": (e) => {
 
 		var fr = new DocumentFragment(),
-			th = generales, 
-			contenedor = e.querySelector('.generales-contenedor'), 
+			th = reposos, 
+			contenedor = e.querySelector('.reposos-contenedor'), 
 			contenido = th.contenido.cloneNode(true)
 
 		contenedor.innerHTML = ''
@@ -32,15 +32,19 @@ generales['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.general).texto_html
+		var texto = JSON.parse(e.sublista.reposo).texto_html
 
-		contenedor.querySelector('.general').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.reposos-motivo').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.reposos-fecha-inicio input').value = e.sublista.fecha_inicio
+		contenedor.querySelector('.reposos-fecha-final input').value = e.sublista.fecha_final
+		
+		contenedor.querySelector('.reposos-fecha-dias div').innerHTML = e.sublista.dias
+		contenedor.querySelector('.reposos-fecha-simple div').innerHTML = e.sublista.fecha_simple
 
-		contenedor.querySelector('.titulo').innerHTML = e.sublista.titulo
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
 		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
+		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_naci))}`)
 		
 		setTimeout(() => {
 
@@ -51,7 +55,7 @@ generales['crud']['propiedadesTr'] = {
 	},
 	"fecha": (e) => {
 
-		var th = generales, 
+		var th = reposos, 
 			contenedor = e.querySelector('.fecha-contenedor'), 
 			contenido = th.contenidoFecha.cloneNode(true)
 
@@ -63,7 +67,7 @@ generales['crud']['propiedadesTr'] = {
 
 	},
 	"eliminar": (e) => {
-		var th = generales,
+		var th = reposos,
 			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
 		contenedor.setAttribute('data-hidden', '')
@@ -97,7 +101,7 @@ generales['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
-generales['crud']['customBodyEvents'] = {
+reposos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
@@ -105,10 +109,10 @@ generales['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reusar')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.general-valores', '', {})
-			rellenar.contenedores(generales.sublista, '.general-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.reposo-valores', '', {})
+			rellenar.contenedores(reposos.sublista, '.reposo-valores', {elemento: e.target, id: 'value'}, {})
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -116,18 +120,19 @@ generales['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR GENERALES 		  					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA reposo   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
 		if (e.target.classList.contains('editar')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.geneditar-valores', '', {})
-			rellenar.contenedores(generales.sublista, '.geneditar-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.repeditar-valores', '', {})	
 
-			genPop.pop()
+			rellenar.contenedores(reposos.sublista, '.repeditar-valores', {elemento: e.target, id: 'value'}, {})
+
+			repoPop.pop()
 
 		}
 
@@ -139,10 +144,10 @@ generales['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reimprimir')) {
 
-			generales.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(generales.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(reposos.sublista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -161,20 +166,20 @@ generales['crud']['customBodyEvents'] = {
 
 (async () => {
 
-	generales.cargarTabla([], undefined, undefined)
+	reposos.cargarTabla([], undefined, undefined)
 
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							generales - CARGAR	  								    */
+/*           							reposoS - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor').identificador = 'general'
+qs('#reposos-contenedor').identificador = 'reposo'
 
-qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e => {
+qs("#reposos-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
@@ -188,9 +193,12 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"titulo": datos[0].toUpperCase(),
-				"general": {
+				"fecha_naci": historias.sublista.fecha_naci,
+				"fecha_inicio": datos[1],
+				"dias": datos[2].trim(),
+				"fecha_final": datos[3],
+				"fecha_simple": datos[4].toUpperCase(),
+				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -206,15 +214,15 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				generales.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				reposos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display !== 'none') {
 
-						generalPrevia.prevenir = false
-						generalPrevia.accionar()
-						generalPrevia.prevenir = true
+						reposoPrevia.prevenir = false
+						reposoPrevia.accionar()
+						reposoPrevia.prevenir = true
 
 					}
 
@@ -239,13 +247,13 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							general - PREVIA					  					    */
+/*           							reposo - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs("#generales-contenedor .reporte-previa").addEventListener('click', async e => {
+qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
@@ -258,13 +266,15 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 			notificaciones.mensajePersonalizado('Cargando reporte...', false, 'CLARO-1', 'PROCESANDO')
 
 			var resultado = {
-				"id_historia": historias.sublista.id_historia, 
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"titulo": datos[0].toUpperCase(),
-				"general": {
+				"fecha_naci": historias.sublista.fecha_naci,
+				"fecha_inicio": datos[1],
+				"dias": datos[2].trim(),
+				"fecha_final": datos[3],
+				"fecha_simple": datos[4].toUpperCase(),
+				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -276,15 +286,15 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				generales.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				reposos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display === 'none') {
 
-						generalPrevia.prevenir = false
-						generalPrevia.accionar()
-						generalPrevia.prevenir = true
+						reposoPrevia.prevenir = false
+						reposoPrevia.accionar()
+						reposoPrevia.prevenir = true
 
 					}
 
@@ -309,38 +319,37 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							GENERAL - EDITAR			 							    */
+/*           							reposo - EDITAR			 							    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-geneditar-botones .confirmar').addEventListener('click', async e => {
+qs('#crud-repeditar-botones .confirmar').addEventListener('click', async e => {
 
 	if(window.procesar) {
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-		var elemento = qs('#generales-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `geneditar-valores`, tools);
+		var datos = tools.procesar('', '', `repeditar-valores`, tools);
 
 		if (datos !== '') {
 
-			var listaGeneral = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
 
-			generales.sublista.titulo  = datos[0]
-			generales.sublista.general = JSON.stringify(listaGeneral)
+			reposos.sublista.reposo = JSON.stringify(lista)
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(generales.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(reposos.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
 			if (resultado.trim() === 'exito') {
 
-				generales.cargarTabla(generales.crud.lista)
+				reposos.cargarTabla(reposos.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				genPop.pop()
+				repoPop.pop()
 
 			} else {
 
@@ -359,35 +368,35 @@ qs('#crud-geneditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - ELIMINAR					 					    */
+/*           						reposo - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor table').addEventListener('click', async e => {
+qs('#reposos-contenedor table').addEventListener('click', async e => {
 
 	if (e.target.classList.contains('eliminar-boton')) {
 
 		if (window.procesar) {
 
-			var elemento = qs('#generales-contenedor')
+			var elemento = qs('#reposos-contenedor')
 
 			window.procesar = false
 			
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-			generales.crud.lista.forEach((lista, i) => {
+			reposos.crud.lista.forEach((lista, i) => {
 
 				if (lista.id === Number(e.target.value)) {
 
-					generales.crud.lista.splice(i, 1)
+					reposos.crud.lista.splice(i, 1)
 
 				}
 
 			})
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(generales.crud.lista), historias.sublista.id_historia])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(reposos.crud.lista), historias.sublista.id_historia])
 
 			if (resultado.trim() === 'exito') {
 
-				generales.cargarTabla(generales.crud.lista)
+				reposos.cargarTabla(reposos.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
@@ -406,46 +415,114 @@ qs('#generales-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  general - TEXTO PREVIA	 								    */
+/*           						  reposo - TEXTO PREVIA	 								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor .cargar').addEventListener('mouseenter', e => {
+qs('#reposos-contenedor .cargar').addEventListener('mouseenter', e => {
 
-	qs('#generales-contenedor .personalizacion').removeAttribute('data-hidden')	
-
-})
-
-qs('#generales-contenedor .cargar').addEventListener('mouseleave', e => {
-
-	qs('#generales-contenedor .personalizacion').setAttribute('data-hidden', '')
+	qs('#reposos-contenedor .personalizacion').removeAttribute('data-hidden')	
 
 })
 
-qs('#crud-geneditar-pop .filas').addEventListener('mouseenter', e => {
+qs('#reposos-contenedor .cargar').addEventListener('mouseleave', e => {
 
-	qs('#crud-geneditar-personalizacion').removeAttribute('data-hidden')	
+	qs('#reposos-contenedor .personalizacion').setAttribute('data-hidden', '')
 
 })
 
-qs('#crud-geneditar-pop .filas').addEventListener('mouseleave', e => {
+qs('#crud-repeditar-pop .filas').addEventListener('mouseenter', e => {
 
-	qs('#crud-geneditar-personalizacion').setAttribute('data-hidden', '')
+	qs('#crud-repeditar-personalizacion').removeAttribute('data-hidden')	
+
+})
+
+qs('#crud-repeditar-pop .filas').addEventListener('mouseleave', e => {
+
+	qs('#crud-repeditar-personalizacion').setAttribute('data-hidden', '')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						GENERAL - LIMPIAR					 					    */
+/*           						REPOSO - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#generales-contenedor .limpiar').addEventListener('click', e => {
+qs('#reposos-contenedor .limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.general-valores', '', {})
+	tools.limpiar('.reposo-valores', '', {
+		"procesado": e => {
+			gid('reposos-inicio-insertar').value = window.dia
+		}
+	})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						GENERAL - SCROLL TOP						 					    */
+/*           						REPOSO - SCROLL TOP						 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#general-busqueda').addEventListener('keydown', e => {
-	qs('#tabla-general').parentElement.scrollTo(0,0)
+qs('#reposo-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-reposo').parentElement.scrollTo(0,0)
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+//operaciones relacionadas al calculo de la fecha de reposo insersion
+/*-------------------------------------------------------------------------------------------------*/
+qs('#reposos-dias-insertar').addEventListener('input', e => {
+
+	qs('#reposos-fin-insertar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-insertar').value)
+	
+	var now = new Date(qs('#reposos-inicio-insertar').value)
+		now.setDate(now.getDate() + Number(e.target.value) - 1)
+
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+})
+
+qs('#reposos-inicio-insertar').addEventListener('change', e => {
+
+	var reposo
+
+	if(qs('#reposos-dias-insertar').value.trim() !== '') {
+		reposo = Number(qs('#reposos-dias-insertar').value) - 1
+	} else {
+		reposo = 0
+	}
+
+	qs('#reposos-fin-insertar').value = tools.calcularFecha(reposo, 'dia', qs('#reposos-inicio-insertar').value)
+	
+	var now = new Date(qs('#reposos-inicio-insertar').value)
+		now.setDate(now.getDate() + reposo)
+
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+//operaciones relacionadas al calculo de la fecha de reposo edicion
+/*-------------------------------------------------------------------------------------------------*/
+qs('#reposos-dias-editar').addEventListener('input', e => {
+
+	qs('#reposos-fin-editar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-editar').value)
+	
+	var now = new Date(qs('#reposos-inicio-editar').value)
+		now.setDate(now.getDate() + Number(e.target.value) - 1)
+
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+})
+
+qs('#reposos-inicio-editar').addEventListener('change', e => {
+
+	var reposo
+
+	if(qs('#reposos-dias-editar').value.trim() !== '') {
+		reposo = Number(qs('#reposos-dias-editar').value) - 1
+	} else {
+		reposo = 0
+	}
+
+	qs('#reposos-fin-editar').value = tools.calcularFecha(reposo, 'dia', qs('#reposos-inicio-editar').value)
+	
+	var now = new Date(qs('#reposos-inicio-editar').value)
+		now.setDate(now.getDate() + reposo)
+
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 })

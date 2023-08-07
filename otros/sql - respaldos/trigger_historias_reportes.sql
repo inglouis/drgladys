@@ -26,3 +26,10 @@ DROP TRIGGER historias_reportes_nuevo_renglon on principales.historias;
   ON principales.historias
   FOR EACH ROW
   EXECUTE PROCEDURE ppal.historias_reportes_nuevo_renglon();
+
+
+--ESTANDARIZAR HISTORIAS REPORTES
+-----------------------------------------------------------
+INSERT INTO principales.reportes(id_historia)
+select id_historia from principales.historias where id_historia = id_historia order by id_historia asc 
+
