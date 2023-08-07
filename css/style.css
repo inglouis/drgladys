@@ -3104,6 +3104,11 @@ span.numeracion {
     justify-content: center;
 }
 
+#constancia-previa, #coneditar-previa {
+    background: #fff !important;
+    color: black !important;
+}
+
 /*-----------------------------------------------------*/
 /*--------------------- INFORMES ----------------------*/
 /*-----------------------------------------------------*/
@@ -3163,6 +3168,11 @@ span.numeracion {
     font-size: 14px;
 }
 
+#informe-previa, #infeditar-previa {
+    background: #fff !important;
+    color: black !important;
+}
+
 /*-----------------------------------------------------*/
 /*------------------ PRESUPUESTO ----------------------*/
 /*-----------------------------------------------------*/
@@ -3202,7 +3212,6 @@ span.numeracion {
     align-items: center;
     display: flex;
     padding: 3px;
-    font-size: 
 }
 
 #presupuesto-representante button:nth-child(1)::after {
@@ -3215,6 +3224,11 @@ span.numeracion {
     content: "A NOMBRE DEL REPRESENTANTE";
     width: 250px;
     font-size: 14px;
+}
+
+#presupuesto-previa, #preeditar-previa {
+    background: #fff !important;
+    color: black;
 }
 
 /*-----------------------------------------------------*/
@@ -3244,6 +3258,11 @@ span.numeracion {
     justify-content: center;
 }
 
+#reposo-previa, #repeditar-previa {
+    background: #fff !important;
+    color: black !important;
+}
+
 /*-----------------------------------------------------*/
 /*------------------ GENERALES ------------------------*/
 /*-----------------------------------------------------*/
@@ -3269,6 +3288,11 @@ span.numeracion {
     align-items: center;
     width: 40px;
     justify-content: center;
+}
+
+#general-previa, #geneditar-previa {
+    background: #fff !important;
+    color: black !important;
 }
 
 /*-----------------------------------------------------*/
