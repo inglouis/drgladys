@@ -12,10 +12,10 @@
         ];
 
         /* 1)------------------------------------------------------------------------------------------------*/
-		/*           							CONSTANCIA 							  					    */
+		/*           							reposo 							  					    */
 		/* -------------------------------------------------------------------------------------------------*/
 
-        public function constancia_insertar($args) {
+        public function reposo_insertar($args) {
 
             $lista = $args[0];
             $id_historia = $args[1];
@@ -26,8 +26,8 @@
             $sql = "
                 update $this->schema.$this->tabla 
                 SET 
-                    constancias = jsonb_insert(
-                        constancias, 
+                    reposos = jsonb_insert(
+                        reposos, 
                         '{0}', 
                         ?::jsonb
                         , true
@@ -49,7 +49,7 @@
 
         }
 
-        public function constancia_consultar($args) {
+        public function reposo_consultar($args) {
 
             $sql = "
                 select
@@ -60,17 +60,21 @@
                     SELECT x.*
                     FROM 
                      jsonb_array_elements(
-                    	(SELECT constancias FROM principales.reportes WHERE id_historia = ?)
+                    	(SELECT reposos FROM principales.reportes WHERE id_historia = ?)
                      ) AS t(doc),
                      jsonb_to_record(t.doc) as x (
-                     	nombres character varying(150), 
-                     	apellidos character varying(150),  
-                     	cedula character varying(14), 
-                     	fecha date, 
-                     	hora time without time zone, 
-                     	fecha_nacimiento date,
-                     	constancia jsonb
-                     )
+                        nombres character varying(150), 
+                        apellidos character varying(150), 
+                        cedula character varying(14), 
+                        fecha date, 
+                        hora time without time zone, 
+                        reposo text, 
+                        fecha_inicio date, 
+                        dias character varying(100), 
+                        fecha_final date, 
+                        fecha_simple text,
+                        fecha_naci date
+                    )
                 ) as t
                 ORDER BY t.fecha desc, t.hora desc
             ";
@@ -79,11 +83,11 @@
 
         }
 
-        public function constancia_editar($args) {
+        public function reposo_editar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set constancias = ?::jsonb
+                set reposos = ?::jsonb
                 where id_historia = ?
             ";
 
@@ -91,11 +95,11 @@
 
         }
 
-        public function constancia_eliminar($args) {
+        public function reposo_eliminar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set constancias = ?::jsonb
+                set reposos = ?::jsonb
                 where id_historia = ?
             ";
 

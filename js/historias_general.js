@@ -433,7 +433,7 @@ qs('#crud-geneditar-pop .filas').addEventListener('mouseleave', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						general - LIMPIAR					 					    */
+/*           						GENERAL - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#generales-contenedor .limpiar').addEventListener('click', e => {
 
@@ -441,4 +441,11 @@ qs('#generales-contenedor .limpiar').addEventListener('click', e => {
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						GENERAL - SCROLL TOP						 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#general-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-general').parentElement.scrollTo(0,0)
 })

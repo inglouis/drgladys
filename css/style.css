@@ -1613,6 +1613,9 @@ span.numeracion {
 /*------------------cruds-----------------------------*/
 #crud-informacion-pop, 
 #crud-coneditar-pop,
+#crud-preeditar-pop,
+#crud-infeditar-pop,
+#crud-repeditar-pop,
 #crud-geneditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
@@ -3145,16 +3148,19 @@ span.numeracion {
 #informe-modelos button:nth-child(1)::after {
     content: "PREOPERATORIO";
     width: 100px;
+    font-size: 14px;
 }
 
 #informe-modelos button:nth-child(2)::after {
     content: "RX THORAX";
     width: 100px;
+    font-size: 14px;
 }
 
 #informe-modelos button:nth-child(3)::after {
     content: "VALORACIÓN CARDIOVASCULAR";
     width: 300px;
+    font-size: 14px;
 }
 
 /*-----------------------------------------------------*/
@@ -3182,6 +3188,33 @@ span.numeracion {
     align-items: center;
     width: 40px;
     justify-content: center;
+}
+
+#presupuesto-representante {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    margin: 0px;
+}
+
+#presupuesto-representante button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 3px;
+    font-size: 
+}
+
+#presupuesto-representante button:nth-child(1)::after {
+    content: "A NOMBRE DEL PACIENTE";
+    width: 250px;
+    font-size: 14px;
+}
+
+#presupuesto-representante button:nth-child(2)::after {
+    content: "A NOMBRE DEL REPRESENTANTE";
+    width: 250px;
+    font-size: 14px;
 }
 
 /*-----------------------------------------------------*/
@@ -3387,7 +3420,7 @@ span.numeracion {
 }
 
 #tabla-evoluciones tbody tr td:nth-child(4) {
-    width: 7%;
+    width: 15%;
 }
 
 #tabla-evoluciones tbody tr td:nth-child(5) {
@@ -4783,7 +4816,7 @@ span.numeracion {
     opacity: 1;
     display: block;
     animation-name: tooltip-down;
-    animation-duration: 0.8s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     bottom: 0px;
 }
@@ -4794,7 +4827,7 @@ span.numeracion {
 }
 
 [data-efecto="toggle"] { 
-    transition: 0.6s ease all !important;
+    transition: 0.3s ease all !important;
 }
 
 /*-----------------tooltips-complejos------------------*/

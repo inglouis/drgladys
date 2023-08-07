@@ -127,7 +127,7 @@ informes['crud']['customBodyEvents'] = {
 
 			rellenar.contenedores(informes.sublista, '.infeditar-valores', {elemento: e.target, id: 'value'}, {})
 
-			conPop.pop()
+			forPop.pop()
 
 		}
 
@@ -337,7 +337,7 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				conPop.pop()
+				forPop.pop()
 
 			} else {
 
@@ -403,7 +403,7 @@ qs('#informes-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  informe - TEXTO PREVIA	 								    */
+/*           						  INFORME - TEXTO PREVIA	 								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-contenedor .cargar').addEventListener('mouseenter', e => {
 
@@ -430,7 +430,7 @@ qs('#crud-infeditar-pop .filas').addEventListener('mouseleave', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						informe - LIMPIAR					 					    */
+/*           						INFORME - LIMPIAR					 						    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-contenedor .limpiar').addEventListener('click', e => {
 
@@ -438,6 +438,13 @@ qs('#informes-contenedor .limpiar').addEventListener('click', e => {
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						INFORME - SCROLL TOP					 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#informe-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-informe').parentElement.scrollTo(0,0)
 })
 
 /* -------------------------------------------------------------------------------------------------*/

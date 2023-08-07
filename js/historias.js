@@ -63,7 +63,9 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#informe-informacion', '#informe-previa'],
 	['#infeditar-informacion', '#infeditar-previa'],
 	['#presupuesto-informacion', '#presupuesto-previa'],
-	['#preeditar-informacion', '#preeditar-previa']
+	['#preeditar-informacion', '#preeditar-previa'],
+	['#reposo-informacion', '#reposo-previa'],
+	['#repeditar-informacion', '#repeditar-previa']
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
 window.camposTextosPersonalizables.init()
@@ -82,12 +84,13 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
 window.forPop = new PopUp('crud-infeditar-popup', 'popup', 'subefecto', true, 'infeditar', '', 27);
-window.prePop = new PopUp('crud-preeditar-popup', 'popup', 'subefecto', true, 'preeditar', '', 27);
+window.presPop = new PopUp('crud-preeditar-popup', 'popup', 'subefecto', true, 'preeditar', '', 27);
+window.repoPop = new PopUp('crud-repeditar-popup', 'popup', 'subefecto', true, 'repeditar', '', 27);
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -106,7 +109,8 @@ repPop.evtBotones()
 conPop.evtBotones()
 genPop.evtBotones()
 forPop.evtBotones()
-prePop.evtBotones()
+presPop.evtBotones()
+repoPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -127,7 +131,8 @@ window.addEventListener('keyup', (e) => {
 	conPop.evtEscape(e)
 	genPop.evtEscape(e)
 	forPop.evtEscape(e)
-	prePop.evtEscape(e)
+	presPop.evtEscape(e)
+	repoPop.evtEscape(e)
 
 })
 
@@ -255,19 +260,27 @@ class Historias extends Acciones {
 		tools.limpiar('.general-valores', '', {})
 		tools.limpiar('.informe-valores', '', {})
 		tools.limpiar('.presupuesto-valores', '', {})
+		tools.limpiar('.reposo-valores', '', {
+			"procesado": e => {
+				gid('reposos-inicio-insertar').value = window.dia
+			}
+		})
 
 		constancias.cargarTabla([], undefined, undefined)
 		generales.cargarTabla([], undefined, undefined)
 		informes.cargarTabla([], undefined, undefined)
 		presupuestos.cargarTabla([], undefined, undefined)
-		
-		// tools.limpiar('.reposos-valores', '', {
-		// 	"procesado": e => {
-		// 		gid('reposos-inicio-insertar').value = window.dia
-		// 	}
-		// })
+		reposos.cargarTabla([], undefined, undefined)
 
-		// gid('reposos-fecha-insertar').innerHTML = ''
+		rellenar.contenedores(this.sublista, '.presupuesto-representante-valores', {}, {})
+		
+		gid('reposos-fecha-insertar').innerHTML = ''
+
+		gid('constancia-busqueda').value = ''
+		gid('general-busqueda').value = ''
+		gid('informe-busqueda').value = ''
+		gid('presupuesto-busqueda').value = ''
+		gid('reposo-busqueda').value = ''
 
 	}
 
@@ -293,7 +306,6 @@ export var historias = new Historias(new Tabla(
 	'tabla-historias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
 
-window.historias = historias
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
@@ -503,14 +515,14 @@ historias['crud']['customBodyEvents'] = {
 
 		if (button.classList.contains('reportes')) {
 
+			historias.tr = tools.pariente(button, 'TR')
+			historias.sublista = historias.tr.sublista
+
 			if (permitirLimpiezaReportes) {
 				historias.limpieza()
 				permitirLimpiezaReportes = true
 			}
-
-			historias.tr = tools.pariente(button, 'TR')
-			historias.sublista = historias.tr.sublista
-			
+	
 			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .reportes')
 
 			rellenar.contenedores(historias.sublista, '.constancia-cargar', {elemento: button, id: 'value'})
@@ -1111,6 +1123,48 @@ export var presupuestos = new Presupuestos(new Tabla(
 	'tabla-presupuesto', 'presupuesto-busqueda', -1, 'null', 'null', 'null', true
 ))
 
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Reposos extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'reposo_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#reposo-template').content.querySelector('.reposo-crud').cloneNode(true)
+		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
+	}
+
+	async confirmarActualizacion(popUp) {
+
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
+
+		this.cargarTabla(resultado, true)
+
+	}
+
+}
+
+export var reposos = new Reposos(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-reposo', 'reposo-busqueda', -1, 'null', 'null', 'null', true
+))
+
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION HISTORIAS			 	  					    */
@@ -1163,10 +1217,11 @@ genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
-prePop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+presPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
-
+repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -1175,7 +1230,8 @@ export var reportesDisponibles = {
 	"constancia": constancias,
 	"general": generales,
 	"informe": informes,
-	"presupuesto": presupuestos
+	"presupuesto": presupuestos,
+	"reposo": reposos
 }
 
 /* -------------------------------------------------------------------------------------------------*/

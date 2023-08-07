@@ -152,7 +152,7 @@
               
               <div style="height: 100%; margin: 0px">
                 
-                <label class="requerido">informe</label>
+                <label class="requerido">Informe</label>
 
                 <div id="informe-modelos">
                   <button class="btn btn-general tooltip-filtro" data-identificador="preoperatorio">

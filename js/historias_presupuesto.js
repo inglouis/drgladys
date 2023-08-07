@@ -36,10 +36,8 @@ presupuestos['crud']['propiedadesTr'] = {
 
 		contenedor.querySelector('.presupuesto').innerHTML = texto.toUpperCase()
 
-		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
-		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
+		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombre_completo}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
 		
 		setTimeout(() => {
 
@@ -127,7 +125,7 @@ presupuestos['crud']['customBodyEvents'] = {
 
 			rellenar.contenedores(presupuestos.sublista, '.preeditar-valores', {elemento: e.target, id: 'value'}, {})
 
-			conPop.pop()
+			presPop.pop()
 
 		}
 
@@ -185,10 +183,8 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 		if (datos !== '') {
 			
 			var lista = { 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
 				"presupuesto": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
@@ -258,10 +254,8 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 
 			var resultado = {
 				"id_historia": historias.sublista.id_historia, 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
 				"presupuesto": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
@@ -337,7 +331,7 @@ qs('#crud-preeditar-botones .confirmar').addEventListener('click', async e => {
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				conPop.pop()
+				prePop.pop()
 
 			} else {
 
@@ -430,7 +424,7 @@ qs('#crud-preeditar-pop .filas').addEventListener('mouseleave', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						presupuesto - LIMPIAR					 					    */
+/*           						PRESUPUESTO - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#presupuestos-contenedor .limpiar').addEventListener('click', e => {
 
@@ -438,4 +432,37 @@ qs('#presupuestos-contenedor .limpiar').addEventListener('click', e => {
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						PRESUPUESTO - SCROLL TOP				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#presupuesto-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-presupuesto').parentElement.scrollTo(0,0)
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						PRESUPUESTO - REPRESENTANTE			 					    	*/
+/* -------------------------------------------------------------------------------------------------*/
+qs('#presupuesto-representante').addEventListener('click', e=> {
+
+    if (e.target.tagName === 'BUTTON') {
+
+    	var lista = {
+    		"paciente": {
+    			"nombre_completo": historias.sublista.nombre_completo,
+    			"cedula": historias.sublista.cedula
+    		},
+    		"representante": {
+    			"nombre_completo": historias.sublista.emergencia_persona,
+    			"cedula": historias.sublista.emergencia_informacion
+    		}
+    	}
+
+        rellenar.contenedores(lista[e.target.dataset.identificador], '.presupuesto-representante-valores', {}, {})
+        
+        notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+    }
+    
 })

@@ -24,6 +24,22 @@
         <div class="previa-b" id="preeditar-previa" data-scroll></div>
       </div>
 
+      <div class="columnas" >
+
+        <div>
+          <label class="requerido">Nombre completo</label>
+          <input type="text" data-valor="nombre_completo" class="preeditar-valores upper lleno">
+        </div>
+
+      </div>
+
+      <div class="columnas">
+         <div>
+          <label class="requerido">Cédula</label>
+          <input type="text" data-valor="cedula" class="preeditar-valores upper lleno">
+        </div>
+      </div>
+
       <div class="columnas">
         
         <div>
@@ -98,9 +114,7 @@
 	      	<div style="border-bottom: 1px solid;">Información</div>
 
 	      	<div class="crud-dato nombre"></div>
-	      	<div class="crud-dato apellido"></div>
 	      	<div class="crud-dato cedula"></div>
-	      	<div class="crud-dato edad"></div>
 
 	      </section>
 
@@ -147,12 +161,41 @@
           </div>
             
           <div class="filas" style="height: 100%; position: relative">
-          
+            
+            <div class="columnas">
+              <div id="presupuesto-representante">
+                <button class="btn btn-general tooltip-filtro" data-identificador="paciente">
+                  <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><path fill="currentColor" d="M256 64A64 64 0 1 0 128 64a64 64 0 1 0 128 0zM152.9 169.3c-23.7-8.4-44.5-24.3-58.8-45.8L74.6 94.2C64.8 79.5 45 75.6 30.2 85.4s-18.7 29.7-8.9 44.4L40.9 159c18.1 27.1 42.8 48.4 71.1 62.4V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384h32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V221.6c29.1-14.2 54.4-36.2 72.7-64.2l18.2-27.9c9.6-14.8 5.4-34.6-9.4-44.3s-34.6-5.5-44.3 9.4L291 122.4c-21.8 33.4-58.9 53.6-98.8 53.6c-12.6 0-24.9-2-36.6-5.8c-.9-.3-1.8-.7-2.7-.9z"/></svg>
+                </button>
+                <button class="btn btn-general tooltip-filtro" data-identificador="representante">
+                  <svg  class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="columnas" >
+              
+              <div>
+                <label class="requerido">Nombre completo</label>
+                <input type="text" data-valor="nombre_completo" class="presupuesto-valores upper lleno presupuesto-representante-valores">
+              </div>
+
+            </div>
+
+            <div class="columnas" >
+              
+              <div>
+                <label class="requerido">Cédula</label>
+                <input type="text" data-valor="cedula" class="presupuesto-valores upper lleno presupuesto-representante-valores">
+              </div>        
+
+            </div>
+
             <div class="columnas" style="height: 100%">
               
               <div style="height: 100%; margin: 0px">
                 
-                <label class="requerido">presupuesto</label>
+                <label class="requerido">Presupuesto</label>
                 <textarea id="presupuesto-informacion" data-previa="presupuesto-previa" data-valor="presupuesto" rows="6" class="presupuesto-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>

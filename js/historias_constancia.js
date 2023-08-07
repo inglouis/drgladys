@@ -439,3 +439,10 @@ qs('#constancias-contenedor .limpiar').addEventListener('click', e => {
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
 })
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						CONSTNCIA - SCROLL TOP						 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#constancia-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-constancia').parentElement.scrollTo(0,0)
+})

@@ -1,29 +1,29 @@
 import { customDesplegable } from '../js/main.js';
 import { historias, tools, notificaciones, reporteSeleccionado } from '../js/historias.js';
-import { presupuestos } from '../js/historias.js';
+import { reposos } from '../js/historias.js';
 
 /* 1)------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------- presupuestoS ---------------------------------------------*/
+/* ---------------------------------------- reposoS ---------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 
-export const presupuestoPrevia = new customDesplegable('#presupuestos-contenedor .desplegable-contenedor', '#presupuestos-contenedor .reporte-previa', '#presupuestos-contenedor .desplegable-cerrar', undefined, 'fit-content')
+export const reposoPrevia = new customDesplegable('#reposos-contenedor .desplegable-contenedor', '#reposos-contenedor .reporte-previa', '#reposos-contenedor .desplegable-cerrar', undefined, 'fit-content')
 
-presupuestoPrevia.eventos()
-presupuestoPrevia.prevenir = true
+reposoPrevia.eventos()
+reposoPrevia.prevenir = true
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						presupuesto - PROPIEDADES				 					    */
+/*           						reposo - PROPIEDADES				 					    */
 /* -------------------------------------------------------------------------------------------------*/
-presupuestos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'presupuestos-contenedor', 0)
-presupuestos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+reposos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'reposos-contenedor', 0)
+reposos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
 /////////////////////////////////////////////////////
 ///
-presupuestos['crud']['propiedadesTr'] = {
+reposos['crud']['propiedadesTr'] = {
 	"contenedor": (e) => {
 
 		var fr = new DocumentFragment(),
-			th = presupuestos, 
-			contenedor = e.querySelector('.presupuestos-contenedor'), 
+			th = reposos, 
+			contenedor = e.querySelector('.reposos-contenedor'), 
 			contenido = th.contenido.cloneNode(true)
 
 		contenedor.innerHTML = ''
@@ -32,14 +32,19 @@ presupuestos['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.presupuesto).texto_html
+		var texto = JSON.parse(e.sublista.reposo).texto_html
 
-		contenedor.querySelector('.presupuesto').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.reposos-motivo').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.reposos-fecha-inicio input').value = e.sublista.fecha_inicio
+		contenedor.querySelector('.reposos-fecha-final input').value = e.sublista.fecha_final
+		
+		contenedor.querySelector('.reposos-fecha-dias div').innerHTML = e.sublista.dias
+		contenedor.querySelector('.reposos-fecha-simple div').innerHTML = e.sublista.fecha_simple
 
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
 		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
+		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_naci))}`)
 		
 		setTimeout(() => {
 
@@ -50,7 +55,7 @@ presupuestos['crud']['propiedadesTr'] = {
 	},
 	"fecha": (e) => {
 
-		var th = presupuestos, 
+		var th = reposos, 
 			contenedor = e.querySelector('.fecha-contenedor'), 
 			contenido = th.contenidoFecha.cloneNode(true)
 
@@ -62,7 +67,7 @@ presupuestos['crud']['propiedadesTr'] = {
 
 	},
 	"eliminar": (e) => {
-		var th = presupuestos,
+		var th = reposos,
 			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
 		contenedor.setAttribute('data-hidden', '')
@@ -96,7 +101,7 @@ presupuestos['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
-presupuestos['crud']['customBodyEvents'] = {
+reposos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
@@ -104,10 +109,10 @@ presupuestos['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reusar')) {
 
-			presupuestos.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.presupuesto-valores', '', {})
-			rellenar.contenedores(presupuestos.sublista, '.presupuesto-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.reposo-valores', '', {})
+			rellenar.contenedores(reposos.sublista, '.reposo-valores', {elemento: e.target, id: 'value'}, {})
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -115,19 +120,19 @@ presupuestos['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR LA presupuesto   					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA reposo   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
 		if (e.target.classList.contains('editar')) {
 
-			presupuestos.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.preeditar-valores', '', {})	
+			tools.limpiar('.repeditar-valores', '', {})	
 
-			rellenar.contenedores(presupuestos.sublista, '.preeditar-valores', {elemento: e.target, id: 'value'}, {})
+			rellenar.contenedores(reposos.sublista, '.repeditar-valores', {elemento: e.target, id: 'value'}, {})
 
-			conPop.pop()
+			repoPop.pop()
 
 		}
 
@@ -139,10 +144,10 @@ presupuestos['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reimprimir')) {
 
-			presupuestos.sublista = tools.pariente(e.target, 'TR').sublista
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
 
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(presupuestos.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(reposos.sublista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -161,20 +166,20 @@ presupuestos['crud']['customBodyEvents'] = {
 
 (async () => {
 
-	presupuestos.cargarTabla([], undefined, undefined)
+	reposos.cargarTabla([], undefined, undefined)
 
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							presupuestoS - CARGAR	  								    */
+/*           							reposoS - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#presupuestos-contenedor').identificador = 'presupuesto'
+qs('#reposos-contenedor').identificador = 'reposo'
 
-qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e => {
+qs("#reposos-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#presupuestos-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
@@ -188,8 +193,12 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"presupuesto": {
+				"fecha_naci": historias.sublista.fecha_naci,
+				"fecha_inicio": datos[1],
+				"dias": datos[2].trim(),
+				"fecha_final": datos[3],
+				"fecha_simple": datos[4].toUpperCase(),
+				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -205,15 +214,15 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				presupuestos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				reposos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display !== 'none') {
 
-						presupuestoPrevia.prevenir = false
-						presupuestoPrevia.accionar()
-						presupuestoPrevia.prevenir = true
+						reposoPrevia.prevenir = false
+						reposoPrevia.accionar()
+						reposoPrevia.prevenir = true
 
 					}
 
@@ -238,13 +247,13 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							presupuesto - PREVIA					  					    */
+/*           							reposo - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e => {
+qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#presupuestos-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
@@ -257,12 +266,15 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 			notificaciones.mensajePersonalizado('Cargando reporte...', false, 'CLARO-1', 'PROCESANDO')
 
 			var resultado = {
-				"id_historia": historias.sublista.id_historia, 
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"presupuesto": {
+				"fecha_naci": historias.sublista.fecha_naci,
+				"fecha_inicio": datos[1],
+				"dias": datos[2].trim(),
+				"fecha_final": datos[3],
+				"fecha_simple": datos[4].toUpperCase(),
+				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -274,15 +286,15 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				presupuestos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				reposos.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display === 'none') {
 
-						presupuestoPrevia.prevenir = false
-						presupuestoPrevia.accionar()
-						presupuestoPrevia.prevenir = true
+						reposoPrevia.prevenir = false
+						reposoPrevia.accionar()
+						reposoPrevia.prevenir = true
 
 					}
 
@@ -307,37 +319,37 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							presupuesto - EDITAR			 							    */
+/*           							reposo - EDITAR			 							    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-preeditar-botones .confirmar').addEventListener('click', async e => {
+qs('#crud-repeditar-botones .confirmar').addEventListener('click', async e => {
 
 	if(window.procesar) {
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-		var elemento = qs('#presupuestos-contenedor')
+		var elemento = qs('#reposos-contenedor')
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `preeditar-valores`, tools);
+		var datos = tools.procesar('', '', `repeditar-valores`, tools);
 
 		if (datos !== '') {
 
 			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
 
-			presupuestos.sublista.presupuesto = JSON.stringify(lista)
+			reposos.sublista.reposo = JSON.stringify(lista)
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(presupuestos.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(reposos.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
 			if (resultado.trim() === 'exito') {
 
-				presupuestos.cargarTabla(presupuestos.crud.lista)
+				reposos.cargarTabla(reposos.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				conPop.pop()
+				repoPop.pop()
 
 			} else {
 
@@ -356,35 +368,35 @@ qs('#crud-preeditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						presupuesto - ELIMINAR					 					    */
+/*           						reposo - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#presupuestos-contenedor table').addEventListener('click', async e => {
+qs('#reposos-contenedor table').addEventListener('click', async e => {
 
 	if (e.target.classList.contains('eliminar-boton')) {
 
 		if (window.procesar) {
 
-			var elemento = qs('#presupuestos-contenedor')
+			var elemento = qs('#reposos-contenedor')
 
 			window.procesar = false
 			
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-			presupuestos.crud.lista.forEach((lista, i) => {
+			reposos.crud.lista.forEach((lista, i) => {
 
 				if (lista.id === Number(e.target.value)) {
 
-					presupuestos.crud.lista.splice(i, 1)
+					reposos.crud.lista.splice(i, 1)
 
 				}
 
 			})
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(presupuestos.crud.lista), historias.sublista.id_historia])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(reposos.crud.lista), historias.sublista.id_historia])
 
 			if (resultado.trim() === 'exito') {
 
-				presupuestos.cargarTabla(presupuestos.crud.lista)
+				reposos.cargarTabla(reposos.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
@@ -403,39 +415,114 @@ qs('#presupuestos-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  presupuesto - TEXTO PREVIA	 								    */
+/*           						  reposo - TEXTO PREVIA	 								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#presupuestos-contenedor .cargar').addEventListener('mouseenter', e => {
+qs('#reposos-contenedor .cargar').addEventListener('mouseenter', e => {
 
-	qs('#presupuestos-contenedor .personalizacion').removeAttribute('data-hidden')	
-
-})
-
-qs('#presupuestos-contenedor .cargar').addEventListener('mouseleave', e => {
-
-	qs('#presupuestos-contenedor .personalizacion').setAttribute('data-hidden', '')
+	qs('#reposos-contenedor .personalizacion').removeAttribute('data-hidden')	
 
 })
 
-qs('#crud-preeditar-pop .filas').addEventListener('mouseenter', e => {
+qs('#reposos-contenedor .cargar').addEventListener('mouseleave', e => {
 
-	qs('#crud-preeditar-personalizacion').removeAttribute('data-hidden')	
+	qs('#reposos-contenedor .personalizacion').setAttribute('data-hidden', '')
 
 })
 
-qs('#crud-preeditar-pop .filas').addEventListener('mouseleave', e => {
+qs('#crud-repeditar-pop .filas').addEventListener('mouseenter', e => {
 
-	qs('#crud-preeditar-personalizacion').setAttribute('data-hidden', '')
+	qs('#crud-repeditar-personalizacion').removeAttribute('data-hidden')	
+
+})
+
+qs('#crud-repeditar-pop .filas').addEventListener('mouseleave', e => {
+
+	qs('#crud-repeditar-personalizacion').setAttribute('data-hidden', '')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						presupuesto - LIMPIAR					 					    */
+/*           						REPOSO - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#presupuestos-contenedor .limpiar').addEventListener('click', e => {
+qs('#reposos-contenedor .limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.presupuesto-valores', '', {})
+	tools.limpiar('.reposo-valores', '', {
+		"procesado": e => {
+			gid('reposos-inicio-insertar').value = window.dia
+		}
+	})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						REPOSO - SCROLL TOP						 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#reposo-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-reposo').parentElement.scrollTo(0,0)
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+//operaciones relacionadas al calculo de la fecha de reposo insersion
+/*-------------------------------------------------------------------------------------------------*/
+qs('#reposos-dias-insertar').addEventListener('input', e => {
+
+	qs('#reposos-fin-insertar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-insertar').value)
+	
+	var now = new Date(qs('#reposos-inicio-insertar').value)
+		now.setDate(now.getDate() + Number(e.target.value) - 1)
+
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+})
+
+qs('#reposos-inicio-insertar').addEventListener('change', e => {
+
+	var reposo
+
+	if(qs('#reposos-dias-insertar').value.trim() !== '') {
+		reposo = Number(qs('#reposos-dias-insertar').value) - 1
+	} else {
+		reposo = 0
+	}
+
+	qs('#reposos-fin-insertar').value = tools.calcularFecha(reposo, 'dia', qs('#reposos-inicio-insertar').value)
+	
+	var now = new Date(qs('#reposos-inicio-insertar').value)
+		now.setDate(now.getDate() + reposo)
+
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+//operaciones relacionadas al calculo de la fecha de reposo edicion
+/*-------------------------------------------------------------------------------------------------*/
+qs('#reposos-dias-editar').addEventListener('input', e => {
+
+	qs('#reposos-fin-editar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-editar').value)
+	
+	var now = new Date(qs('#reposos-inicio-editar').value)
+		now.setDate(now.getDate() + Number(e.target.value) - 1)
+
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+})
+
+qs('#reposos-inicio-editar').addEventListener('change', e => {
+
+	var reposo
+
+	if(qs('#reposos-dias-editar').value.trim() !== '') {
+		reposo = Number(qs('#reposos-dias-editar').value) - 1
+	} else {
+		reposo = 0
+	}
+
+	qs('#reposos-fin-editar').value = tools.calcularFecha(reposo, 'dia', qs('#reposos-inicio-editar').value)
+	
+	var now = new Date(qs('#reposos-inicio-editar').value)
+		now.setDate(now.getDate() + reposo)
+
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 })

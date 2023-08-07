@@ -11,19 +11,13 @@ import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Re
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
-const eliPop = new PopUp('crud-eliminar-popup', 'popup', 'subefecto', true, 'eliminar', '', 27)
-const ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', '', 27)
-const insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', '', 27)
+
 const infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 
-ediPop.evtBotones()
-insPop.evtBotones()
 infPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
-	ediPop.evtEscape(e)
-	insPop.evtEscape(e)
 	infPop.evtEscape(e)
 
 })
@@ -78,7 +72,7 @@ class Evoluciones extends Acciones {
 		this.cargar  = 'cargar_evoluciones' 
 		//-------------------------------
 		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['id_evolucion', 'cedula','nhist','nombres','apellidos']
+		this.especificos = ['id_evolucion', 'cedula','id_historia','nombres','apellidos']
 		this.limitante = 0
 		this.boton = ''
 		//-------------------------------
@@ -104,7 +98,7 @@ window.evoluciones = new Evoluciones(new Tabla(
 	[
 		['N°. Evolución', true, 0],
 		['Cédula', true, 1],
-		[['H. Ant', 'N° de historia del antecedente'], true, 2],
+		['N° historia', true, 2],
 		['Nombres', true, 3],
 		['Apellidos', true, 4],
 		['Status', true, 14],
@@ -133,7 +127,7 @@ evoluciones['crud']['limitante'] = 1
 ///
 evoluciones['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	['id_evolucion'],
-	['id_evolucion', 'cedula','nhist','nombres','apellidos']
+	['id_evolucion', 'cedula','id_historia','nombres','apellidos']
 ], {"mensaje": (e) => {
 	if(e.target.opcion === 0) {
 		tools['mensaje'] = 'Modo filtro PRECISO seleccionado'

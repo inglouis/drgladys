@@ -13,7 +13,7 @@
         	$sql ="select a.id_antecedente,trim(b.cedula) as cedula, a.nhist as nhist, trim(b.nombres) as nombres,trim(b.apellidos) as apellidos, a.fecha as fecha, trim(a.descripcion) as descripcion,
                 trim(a.status) as status
                 from principales.antecedentes as a
-                left join principales.historias as b ON a.nhist = b.id_correlativo order by a.nhist desc limit 800";
+                left join principales.historias as b ON a.nhist = b.id_historia order by a.nhist desc limit 800";
                 return $this->seleccionar($sql, $args);
         }
 
@@ -29,7 +29,7 @@
             $sql = "select a.id_antecedente,trim(b.cedula) as cedula, a.nhist as nhist, trim(b.nombres) as nombres,trim(b.apellidos) as apellidos, a.fecha as fecha, trim(a.descripcion) as descripcion,
                 trim(a.status) as status
                 from principales.antecedentes as a
-                left join principales.historias as b ON a.nhist = b.id_correlativo order by a.nhist  where a.status='A' and nombres like '%'|| UPPER('$busqueda') ||'%' $conc order by a.id_antecedente order by a.nhist DESC limit 8000";
+                left join principales.historias as b ON a.nhist = b.id_historia order by a.nhist  where a.status='A' and nombres like '%'|| UPPER('$busqueda') ||'%' $conc order by a.id_antecedente order by a.nhist DESC limit 8000";
                 return $this->seleccionar($sql, []);
         }
 
@@ -73,7 +73,7 @@
             $sql = "select a.id_antecedente,trim(b.cedula) as cedula, a.nhist as nhist, trim(b.nombres) as nombres,trim(b.apellidos) as apellidos, a.fecha as fecha, trim(a.descripcion) as descripcion,
                 trim(a.status) as status
                 from principales.antecedentes as a
-                left join principales.historias as b ON a.nhist = b.id_correlativo order by a.nhist desc limit 800";   
+                left join principales.historias as b ON a.nhist = b.id_historia order by a.nhist desc limit 800";   
             $this->aplicar_filtros([$sql, $args, 0, false]);
         }
     }

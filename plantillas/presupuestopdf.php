@@ -52,8 +52,6 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
-
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
 ?>
@@ -224,7 +222,7 @@
 	      <tbody>
 	        <tr>
 	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
+	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
 	        </tr>
 	      </tbody>
 	    </table>

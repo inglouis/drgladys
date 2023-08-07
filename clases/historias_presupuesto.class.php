@@ -63,12 +63,10 @@
                     	(SELECT presupuestos FROM principales.reportes WHERE id_historia = ?)
                      ) AS t(doc),
                      jsonb_to_record(t.doc) as x (
-                     	nombres character varying(150), 
-                     	apellidos character varying(150),  
+                     	nombre_completo character varying(300), 
                      	cedula character varying(14), 
                      	fecha date, 
                      	hora time without time zone, 
-                     	fecha_nacimiento date,
                      	presupuesto jsonb
                      )
                 ) as t

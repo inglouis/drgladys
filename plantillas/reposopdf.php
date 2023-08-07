@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['presupuesto']) == 'string') {
-    $presupuesto = json_decode($datos['presupuesto'], true);
+  if (gettype($datos['reposo']) == 'string') {
+    $reposo = json_decode($datos['reposo'], true);
   } else {
-    $presupuesto = $datos['presupuesto'];
+    $reposo = $datos['reposo'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -52,9 +52,10 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+  $fecha_inicio = date("d-m-Y", strtotime($datos['fecha_inicio']));
+  $fecha_final = date("d-m-Y", strtotime($datos['fecha_final']));
+  $fecha_simple = date("d-m-Y", strtotime($datos['fecha_simple']));
 
-  $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
 ?>
 
@@ -215,48 +216,55 @@
   			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
   		</div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
-
-	    <div></div>
 	    <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">REPOSO MÉDICO</div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <div></div>
+      <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table style="border:none">
+      <tbody>
+        <tr>
+          <td style="width: 80mm; text-align: left">SE INDICA REPOSO DESDE EL:&nbsp;&nbsp;<b><?php echo $fecha_inicio?></b></td>
+          <td style="width: 40mm; text-align: left">HASTA EL:&nbsp;&nbsp;<b><?php echo $fecha_final?></b></td>
+        </tr> 
+      </tbody>    
+    </table>
 
-  	</div>
+    <table style="border:none">
+      <tbody>
+        <tr>
+          <td>(  *  *  <?php echo $datos['dias']?> DÍAS *  *  )</td>
+        </tr> 
+      </tbody>    
+    </table>
 
-  	<div></div>
-  	<div></div>
+    <table style="border:none">
+      <tbody>
+        <tr>
+          <td>POR CAUSA DE: <b>
+            <?php 
+              echo trim(strtoupper($reposo['texto_html']));
+            ?>
+          </b></td>
+        </tr> 
+      </tbody>    
+    </table>
 
-	<?php 
-    echo trim(strtoupper($presupuesto['texto_html']));
-  ?>
+    <table style="border:none">
+      <tbody>
+        <tr>
+          <td style="width: fit-content; text-align: left">NOMBRE DEL PACIENTE:&nbsp;&nbsp;<?php echo $datos['nombres'].' '.$datos['apellidos']?></td>
+          <td style="width: 70mm; text-align: left">&nbsp;&nbsp;&nbsp;&nbsp;C.I:&nbsp;&nbsp;<?php echo $datos['cedula']?></td>
+        </tr> 
+      </tbody>    
+    </table>
+
+    </div>
+
+    <div></div>
+    <div></div>
 
   <div style="width: 100%"></div>
 
@@ -285,12 +293,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
+          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
+          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
-          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
+          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {
