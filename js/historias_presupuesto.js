@@ -317,7 +317,7 @@ qs('#crud-preeditar-botones .confirmar').addEventListener('click', async e => {
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
+			var lista = (typeof datos[2] === 'string') ? JSON.parse(datos[2]) : datos[2];
 
 			presupuestos.sublista.presupuesto = JSON.stringify(lista)
 
@@ -331,7 +331,7 @@ qs('#crud-preeditar-botones .confirmar').addEventListener('click', async e => {
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				prePop.pop()
+				presPop.pop()
 
 			} else {
 

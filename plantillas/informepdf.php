@@ -215,7 +215,7 @@
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
       </div>
 
-      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">INFORME MÉDICO</div>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;"><?php echo strtoupper($datos['titulo'])?></div>
 
       <div></div>
       <div></div>

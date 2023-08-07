@@ -3168,6 +3168,12 @@ span.numeracion {
     font-size: 14px;
 }
 
+#informe-modelos button:nth-child(3)::after {
+    content: "VALORACIÓN PEDIÁTRICA";
+    width: 300px;
+    font-size: 14px;
+}
+
 #informe-previa, #infeditar-previa {
     background: #fff !important;
     color: black !important;
