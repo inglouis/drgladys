@@ -34,6 +34,7 @@ informes['crud']['propiedadesTr'] = {
 
 		var texto = JSON.parse(e.sublista.informe).texto_html
 
+		contenedor.querySelector('.crud-titulo').innerHTML = e.sublista.titulo.toUpperCase()
 		contenedor.querySelector('.informe').innerHTML = texto.toUpperCase()
 
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
@@ -192,7 +193,8 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 				"informe": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				}
+				},
+				"titulo": datos[0]
 			}
 
 			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_insertar`, [lista, historias.sublista.id_historia], [["+", "%2B"]]))
@@ -265,7 +267,8 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 				"informe": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				}
+				},
+				"titulo": datos[0]
 			}
 
 			if (typeof resultado === 'object' && resultado !== null) {
@@ -323,7 +326,7 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
+			var lista = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
 
 			informes.sublista.informe = JSON.stringify(lista)
 
@@ -451,18 +454,34 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 /*           						INFORME - MODELO					 					    	*/
 /* -------------------------------------------------------------------------------------------------*/
 var modelos = {
-	"preoperatorio": {"informe": JSON.stringify({
-		"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+	"preoperatorio": {
+		"informe": JSON.stringify({
+				"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
 		"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-	})},
-	"rx": {"informe": JSON.stringify({
-		"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
-		"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
-	})},
-	"cardiovascular": {"informe": JSON.stringify({
-		"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-		"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-	})}
+		}),
+		"titulo": "PREOPERATORIO"
+	},
+	"rx": {
+		"informe": JSON.stringify({
+			"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
+			"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
+		}),
+		"titulo": "RX TORAX"
+	},
+	"cardiovascular": {
+		"informe": JSON.stringify({
+			"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+			"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+		}),
+		"titulo": "VALORACIÓN CARDIOVASCULAR"
+	},
+	"pediatrica": {
+		"informe": JSON.stringify({
+			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+		}),
+		"titulo": "VALORACIÓN PEDIÁTRICA"
+	}
 }
 
 qs('#informe-modelos').addEventListener('click', e=> {

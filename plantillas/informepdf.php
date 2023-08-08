@@ -61,7 +61,8 @@
 <style>
 
   page {
-    font-size: 12px;
+    font-size: 15px;
+    font-family: arial;
   }
 
   page, div, table, h5, h3, h4 {
@@ -70,7 +71,7 @@
   }
 
   table {
-    font-size: 12px;
+    font-size: 15px;
     left: 7mm;
     position: relative;
   }
@@ -171,27 +172,29 @@
 	<page_footer>
     <div style="position:absolute; bottom: 5mm">
       
-      <div style="font-size: 11px;" class="centro">
+      <div style="font-size: 14px;" class="centro">
         Dra. Gladys A. Chaparro H.
       </div>
-      <div style="font-size: 11px;" class="centro">
+      <div style="font-size: 14px;" class="centro">
         Oftalmólogo
       </div>
 
-      <div style="font-size: 11px;" class="centro">
+      <div style="font-size: 14px;" class="centro">
         M.S.D.S.: 34.989 C.M.: 1.915
       </div>
 
-      <div style="text-align: right; font-size: 12px; position: relative; right: 26px">
+      <div style="text-align: right; font-size: 13px; position: relative; right: 26px; font-weight: bold">
         San Cristóbal, <?php echo $fecha?>
       </div>
 
+      <div></div>
+
       <div style="width: 92%; height: 1px; background: #723200; position: relative; left: 10mm"></div>
 
-      <div class="centro" style="font-size: 11px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
+      <div class="centro" style="font-size: 12px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
 
     </div>
-  </page_footer>  
+  </page_footer>   
 
   <div class="contenedor">
 
@@ -201,10 +204,10 @@
           Dra. Gladys A. Chaparro H.
         </div>
 
-        <div style="font-size: 11px">Rlf: V-09143081-5</div>
-        <div style="font-size: 11px">Oftalmólogo</div>
-        <div style="font-size: 11px">Infantil y Estrabismo</div>
-        <div style="font-size: 11px">M.S.D.S.: 34.989 C.M.: 1.915</div>
+        <div style="font-size: 14px">RIF: v-09143081-5</div>
+        <div style="font-size: 14px">Oftalmólogo</div>
+        <div style="font-size: 14px">Infantil y Estrabismo</div>
+        <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
       </div>
 
@@ -215,7 +218,7 @@
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
       </div>
 
-      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">INFORME MÉDICO</div>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;"><?php echo strtoupper($datos['titulo'])?></div>
 
       <div></div>
       <div></div>

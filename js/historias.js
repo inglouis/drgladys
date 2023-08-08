@@ -33,19 +33,25 @@ qsa('#reportes-paginacion-botones button').forEach((boton) => {
 
 })
 
+async function cambiarSeccionBotones (boton) {
+
+	reporteSeleccionado = boton.identificador
+
+	if (reportesDisponibles[reporteSeleccionado].crud.lista.length < 1) {
+
+		notificaciones.mensajeSimple('Cargando datos', false, 'V')
+
+		await historias.traer_lista()
+
+	}
+
+}
+
 qs('#reportes-paginacion-botones').addEventListener('click', async (e) => {
 
 	if (e.target.tagName === 'BUTTON') {
 
-		reporteSeleccionado = e.target.identificador
-
-		if (reportesDisponibles[reporteSeleccionado].crud.lista.length < 1) {
-
-			notificaciones.mensajeSimple('Cargando datos', false, 'V')
-
-			await historias.traer_lista()
-
-		} 
+		cambiarSeccionBotones(e.target)
 
 	}
 
@@ -198,6 +204,32 @@ window.atajoSuprimir = new Atajos('Delete', [
 ])
 
 window.atajoSuprimir.eventos()
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+window.atajoReportes = new Atajos('Shift', [
+	{"elemento": '#crud-reportes-popup',"ejecuta": '1', "clean": true, "tarea": () => {
+		cambiarSeccionBotones(qs('#constancia'))
+		window.paginacion.animacion(0, true)
+	}},
+	{"elemento": '#crud-reportes-popup',"ejecuta": '2', "clean": true, "tarea": () => {
+		cambiarSeccionBotones(qs('#informe'))
+		window.paginacion.animacion(1, true)
+	}},
+	{"elemento": '#crud-reportes-popup',"ejecuta": '3', "clean": true, "tarea": () => {
+		cambiarSeccionBotones(qs('#presupuesto'))
+		window.paginacion.animacion(2, true)
+	}},
+	{"elemento": '#crud-reportes-popup',"ejecuta": '4', "clean": true, "tarea": () => {
+		cambiarSeccionBotones(qs('#reposo'))
+		window.paginacion.animacion(3, true)
+	}},
+	{"elemento": '#crud-reportes-popup',"ejecuta": '5', "clean": true, "tarea": () => {
+		cambiarSeccionBotones(qs('#general'))
+		window.paginacion.animacion(4, true)
+	}}
+])
+
+window.atajoReportes.eventos()
 /////////////////////////////////////////////////////
 //REVISA QUE LA PÁGINA YA CARGO POR COMPLETO PARA QUITAR LA ANIMACIÓN DE CARGA
 /////////////////////////////////////////////////////
