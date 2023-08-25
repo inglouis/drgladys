@@ -1,6 +1,79 @@
 <header>
 
+	<style type="text/css">
+        
+		#boton-usuario-contenedor {
+			width: 30px;
+    		position: relative;
+    		color: #262626;
+		}
+
+        #boton-usuario-contenedor:hover::after {
+          height: 100%;
+          transition: 0.3s ease all;
+          content: "";
+          margin: 0 auto 0 auto;
+          animation: tooltip-desplegable-alto 0.8s forwards, tooltip-desplegable-ancho 1.2s forwards;
+          border: 1px solid #fff;
+        }
+
+        @keyframes tooltip-desplegable-alto {
+          	0% {
+            	content: "";
+            	color: transparent;
+            }
+          	100% {
+	        	color: #262626;
+	        }
+        }
+
+        @keyframes tooltip-desplegable-ancho {
+          50% {
+              margin: 0px 0px 0 0px;
+              width:100%;
+              color: #262626;
+              content: "";
+              clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+          100% {
+              margin: 0px 0px 0 50px;
+              width:100px;
+              content: "<?php echo strtoupper($_SESSION['usuario']['usuario'])?>";
+              color: #fff;
+              clip-path: polygon(0 100%, 100% 100%, 100% 10%, 95% 10%, 90% 0, 85% 10%, 0 10%);
+            }
+        }
+
+        #boton-usuario-contenedor:after {
+            content: "";
+		    position: absolute;
+		    width: 100%;
+		    vertical-align: top;
+		    right: 6px;
+		    height: 0px;
+		    transition: 0.3s ease all;
+		    display: flex;
+		    top: 110%;
+		    align-items: center;
+		    justify-content: center;
+		    background: black;
+        }
+
+    </style>
+
 	<div id="botones-configuracion">
+
+		<button id="boton-salir" title="CERRAR SESIÓN" style="border-left: 1px dashed;">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="iconos"><path fill="currentColor" d="M208 96c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zM123.7 200.5c1-.4 1.9-.8 2.9-1.2l-16.9 63.5c-5.6 21.1-.1 43.6 14.7 59.7l70.7 77.1 22 88.1c4.3 17.1 21.7 27.6 38.8 23.3s27.6-21.7 23.3-38.8l-23-92.1c-1.9-7.8-5.8-14.9-11.2-20.8l-49.5-54 19.3-65.5 9.6 23c4.4 10.6 12.5 19.3 22.8 24.5l26.7 13.3c15.8 7.9 35 1.5 42.9-14.3s1.5-35-14.3-42.9L281 232.7l-15.3-36.8C248.5 154.8 208.3 128 163.7 128c-22.8 0-45.3 4.8-66.1 14l-8 3.5c-32.9 14.6-58.1 42.4-69.4 76.5l-2.6 7.8c-5.6 16.8 3.5 34.9 20.2 40.5s34.9-3.5 40.5-20.2l2.6-7.8c5.7-17.1 18.3-30.9 34.7-38.2l8-3.5zm-30 135.1L68.7 398 9.4 457.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L116.3 441c4.6-4.6 8.2-10.1 10.6-16.1l14.5-36.2-40.7-44.4c-2.5-2.7-4.8-5.6-7-8.6zM550.6 153.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L530.7 224H384c-17.7 0-32 14.3-32 32s14.3 32 32 32H530.7l-25.4 25.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l80-80c12.5-12.5 12.5-32.8 0-45.3l-80-80zM392 0c-13.3 0-24 10.7-24 24V72c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24zm24 152c0-13.3-10.7-24-24-24s-24 10.7-24 24v16c0 13.3 10.7 24 24 24s24-10.7 24-24V152zM392 320c-13.3 0-24 10.7-24 24v16c0 13.3 10.7 24 24 24s24-10.7 24-24V344c0-13.3-10.7-24-24-24zm24 120c0-13.3-10.7-24-24-24s-24 10.7-24 24v48c0 13.3 10.7 24 24 24s24-10.7 24-24V440z"></path></svg>
+		</button>
+
+		<div id="boton-usuario-contenedor">
+			
+			<button id="boton-usuario">
+				<svg style="width: 15px !important;" xmlns="http://www.w3.org/2000/svg" class="iconos" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"></path></svg>
+			</button>
+			
+		</div>
 		
 		<button id="boton-minimalista" title="Activar/Desactivar modo Minimalista">		
 			<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="square" class="svg-inline--fa fa-square fa-w-14 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-6 400H54c-3.3 0-6-2.7-6-6V86c0-3.3 2.7-6 6-6h340c3.3 0 6 2.7 6 6v340c0 3.3-2.7 6-6 6z"></path></svg>

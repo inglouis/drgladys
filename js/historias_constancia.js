@@ -166,10 +166,63 @@ constancias['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							CONSTANCIAS - CARGAR	  								    */
+/*           							CONSTANCIAS - NOTIFICAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#constancias-contenedor').identificador = 'constancia'
 
+qs("#constancias-contenedor .reporte-notificar").addEventListener('click', async e => {
+
+	if (window.procesar) {
+
+		var elemento = qs('#constancias-contenedor')
+
+		window.procesar = false
+
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+
+		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
+			var lista = {
+				"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres,
+				"apellidos": historias.sublista.apellidos,
+				"cedula": historias.sublista.cedula,
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"constancia": {
+					"texto_base": qs(`#${elemento.identificador}-textarea`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-textarea`).texto_html
+				}
+			}
+
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+
+			if (typeof resultado === 'object' && resultado !== null) {
+
+				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+
+				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		}
+
+	} else {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+		
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							CONSTANCIAS - CARGAR	  								    */
+/* -------------------------------------------------------------------------------------------------*/
 qs("#constancias-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {
@@ -178,11 +231,11 @@ qs("#constancias-contenedor .reporte-cargar").addEventListener('click', async e 
 
 		window.procesar = false
 
-		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-
 		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
 
 		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 			
 			var lista = { 
 				"nombres": historias.sublista.nombres, 

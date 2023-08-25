@@ -673,70 +673,126 @@ qs('#parametros-izquierda').addEventListener('click', e=> {
     window.paginacionParametros.animacion(-1)
 })
 
-//--------------------------
-//window.cambio = false
+//------------------------------------------------
+//              CERRAR SESION
+//------------------------------------------------
+qs('#boton-salir').addEventListener('click', async e => {
 
-setInterval(async () => {         
-        
-    var peticion = new XMLHttpRequest();
-        peticion.responseType='';
-        peticion.open('GET', "https://s3.amazonaws.com/dolartoday/data.json");
-        peticion.send();
+    tools['mensaje'] = 'CERRANDO SESIÓN'
+    tools.mensajes(['#262626', '#fff'])
 
-    peticion.onreadystatechange = async () =>{
+    var resultado = null
 
-      if(peticion.status == 200 && peticion.readyState == 4) {
+    setTimeout(async () => {
 
-        var cambios = JSON.parse(peticion.responseText);
+        var peticion = new XMLHttpRequest();
+            peticion.overrideMimeType("application/json");
+            peticion.open('POST', '../clases/logout.class.php', true);  
+            peticion.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            peticion.send();
 
-        if (Number(window.monedas.parametros[1].conver) !== cambios['USD']['promedio']) {
-            
-            var resultado = await tools.fullAsyncQuery('index', 'actualizar_cambio_nuevo', cambios)
-
-            if (resultado.trim() === 'exito') {
-
-                window.monedas.datos()
-
-                qsa('.monedas-valores').forEach((el, i) => {
-
-                    if(el.id_moneda === 2) {
-
-                        el.value = cambios['USD']['promedio']
-
-                    }
-      
-                })
-
-
-                if (index.iframe.src.includes('inicio.php')) {
-
-                    index.hardRefresh()
-
+        await new Promise(resolve => {
+            peticion.onreadystatechange = function() {
+                 if (this.readyState == 4 && this.status == 200) {
+                    resolve(this.responseText)
                 }
+            };
+        }).then(datos => {
 
-                tools.tiempo = 4000
-                tools['mensaje'] = 'Control cambiario actualizado'
-                tools.mensajes(true)
+            resultado = datos
 
-            } else {
+        })
 
-                console.log('No pudo actualizarse la taza de cambio')
-                console.log(resultado)
+        if (await resultado.includes('exito')) {
 
-            }
-
-
-        } else {
-
-            tools.fullAsyncQuery('index', 'actualizar_cambio_igual', [])
+            window.location.href = '../paginas/login.php'
 
         }
 
-      }
+    }, 2000);
 
-    };
+})
 
-}, 30000); //60000 * 5
+
+//------------------------------------------------
+//              COMPROBAR SESION ACTIVA
+//------------------------------------------------
+setInterval(async () => {
+
+    if (!await tools.fullAsyncQuery('index', 'comprobar_sesion', [])) {
+
+        window.location.href = '../paginas/login.php?sesion=vencida'
+
+    }
+
+}, 100000); //1min
+
+//--------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
+//window.cambio = false
+
+//BUSCAR OTRO PROVEEDOR DE MONTOS DEL BANCO CENTRAL
+// setInterval(async () => {         
+        
+//     var peticion = new XMLHttpRequest();
+//         peticion.responseType='';
+//         peticion.open('GET', "https://s3.amazonaws.com/dolartoday/data.json");
+//         peticion.send();
+
+//     peticion.onreadystatechange = async () =>{
+
+//       if(peticion.status == 200 && peticion.readyState == 4) {
+
+//         var cambios = JSON.parse(peticion.responseText);
+
+//         if (Number(window.monedas.parametros[1].conver) !== cambios['USD']['promedio']) {
+            
+//             var resultado = await tools.fullAsyncQuery('index', 'actualizar_cambio_nuevo', cambios)
+
+//             if (resultado.trim() === 'exito') {
+
+//                 window.monedas.datos()
+
+//                 qsa('.monedas-valores').forEach((el, i) => {
+
+//                     if(el.id_moneda === 2) {
+
+//                         el.value = cambios['USD']['promedio']
+
+//                     }
+      
+//                 })
+
+
+//                 if (index.iframe.src.includes('inicio.php')) {
+
+//                     index.hardRefresh()
+
+//                 }
+
+//                 tools.tiempo = 4000
+//                 tools['mensaje'] = 'Control cambiario actualizado'
+//                 tools.mensajes(true)
+
+//             } else {
+
+//                 console.log('No pudo actualizarse la taza de cambio')
+//                 console.log(resultado)
+
+//             }
+
+
+//         } else {
+
+//             tools.fullAsyncQuery('index', 'actualizar_cambio_igual', [])
+
+//         }
+
+//       }
+
+//     };
+
+// }, 30000); //60000 * 5
 
 /*setInterval(async () => {
 
@@ -749,57 +805,56 @@ setInterval(async () => {
 //iteracion que refresca el formularios después de un cambio de taza
 //------------------------------------------------
 
+// setInterval(async () => {         
 
-setInterval(async () => {         
+//     var resultado = JSON.parse(await tools.fullAsyncQuery('index', 'monedas', []))
 
-    var resultado = JSON.parse(await tools.fullAsyncQuery('index', 'monedas', []))
+//     if (Number(window.monedas.parametros[1].conver) !== Number(resultado[1]['conver'])) {
 
-    if (Number(window.monedas.parametros[1].conver) !== Number(resultado[1]['conver'])) {
+//         window.monedas.datos()
 
-        window.monedas.datos()
+//         qsa('.monedas-valores').forEach((el, i) => {
 
-        qsa('.monedas-valores').forEach((el, i) => {
+//             if (el.id_moneda === 2) {
 
-            if (el.id_moneda === 2) {
+//                 el.value = resultado[1]['conver']
 
-                el.value = resultado[1]['conver']
+//             }
 
-            }
+//         })
 
-        })
+//         var tiempo = 6;
 
-        var tiempo = 6;
+//         var procesado = setInterval(async function() {
 
-        var procesado = setInterval(async function() {
+//             if (tiempo <= 1) {
 
-            if (tiempo <= 1) {
+//                 clearInterval(procesado)
 
-                clearInterval(procesado)
+//                 if (index.iframe.src.includes('inicio.php')) {
 
-                if (index.iframe.src.includes('inicio.php')) {
-
-                    index.hardRefresh()
+//                     index.hardRefresh()
                     
-                }
+//                 }
 
-                tools.tiempo = 15000
-                tools['mensaje'] = 'EL BCV HA ACTUALIZADO LA TASA DE CAMBIO: REFRESCANDO FORMULARIO'
-                tools.mensajes(['#009688', '#fff'], ';border: 3px dashed #3f51b5; border-radius: 0px; text-transform: uppercase; box-shadow: 1px 1px 7px 1px #262626;')    
+//                 tools.tiempo = 15000
+//                 tools['mensaje'] = 'EL BCV HA ACTUALIZADO LA TASA DE CAMBIO: REFRESCANDO FORMULARIO'
+//                 tools.mensajes(['#009688', '#fff'], ';border: 3px dashed #3f51b5; border-radius: 0px; text-transform: uppercase; box-shadow: 1px 1px 7px 1px #262626;')    
 
-            } else  {
+//             } else  {
 
-                tiempo = tiempo - 1
+//                 tiempo = tiempo - 1
 
-                tools['mensaje'] = `- ${tiempo} -`
-                tools.mensajes(['#e91e63', '#fff'], ';width: fit-content; border-radius: 0px; box-shadow: 1px 1px 7px 1px #262626;')
+//                 tools['mensaje'] = `- ${tiempo} -`
+//                 tools.mensajes(['#e91e63', '#fff'], ';width: fit-content; border-radius: 0px; box-shadow: 1px 1px 7px 1px #262626;')
 
-            }
+//             }
 
-        }, 1000)
+//         }, 1000)
         
-    }
+//     }
 
-}, 30000);//
+// }, 30000);//
 
 /*setInterval(async () => {
 

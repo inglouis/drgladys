@@ -9,7 +9,7 @@
 import {Tabla} from '../js/crud.js';
 
 /////////////////////////////////////////////////////
-window.qs = document.querySelector.bind(document)
+window.qs  = document.querySelector.bind(document)
 window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
@@ -62,6 +62,7 @@ qs('#reportes-paginacion-botones').addEventListener('click', async (e) => {
 window.camposTextosPersonalizables = new textoPersonalizable();
 
 ([
+	
 	['#constancia-textarea', '#constancia-previa'],
 	['#coneditar-textarea', '#coneditar-previa'],
 	['#general-informacion', '#general-previa'],
@@ -71,7 +72,10 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#presupuesto-informacion', '#presupuesto-previa'],
 	['#preeditar-informacion', '#preeditar-previa'],
 	['#reposo-informacion', '#reposo-previa'],
-	['#repeditar-informacion', '#repeditar-previa']
+	['#repeditar-informacion', '#repeditar-previa'],
+
+	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones']
+
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
 window.camposTextosPersonalizables.init()
@@ -81,6 +85,7 @@ window.camposTextosPersonalizables.init()
 window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
+window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -101,6 +106,7 @@ window.repoPop = new PopUp('crud-repeditar-popup', 'popup', 'subefecto', true, '
 ediPop.evtBotones()
 insPop.evtBotones()
 infPop.evtBotones()
+notPop.evtBotones()
 
 ocuPop.evtBotones()
 proPop.evtBotones()
@@ -123,6 +129,7 @@ window.addEventListener('keyup', (e) => {
 	ediPop.evtEscape(e)
 	insPop.evtEscape(e)
 	infPop.evtEscape(e)
+	notPop.evtEscape(e)
 
 	ocuPop.evtEscape(e)
 	proPop.evtEscape(e)
@@ -243,7 +250,9 @@ window.rellenar = new Rellenar()
 window.reportes = new Reportes()
 /////////////////////////////////////////////////////
 var sesiones = await window.sesiones(true)
+export var usuario = sesiones.usuario
 /////////////////////////////////////////////////////
+
 //2)--------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //									FORMULARIO                                   
@@ -543,7 +552,7 @@ historias['crud']['customBodyEvents'] = {
 	},
 	"reportes": async (e) => {
 
-		var button = (tools.esDOM(e)) ? e : e.target;
+		var button = (tools.esDOM(e)) ? e : e.target; 
 
 		if (button.classList.contains('reportes')) {
 
@@ -577,7 +586,7 @@ historias['crud']['customBodyEvents'] = {
 (async () => {
 	var resultado = await tools.fullAsyncQuery('historias', 'cargar_historias', [])
 	historias.cargarTabla(JSON.parse(resultado), undefined, undefined)
-
+	window.historias = historias
 })()
 
 historias['crud'].botonBuscar('buscar', false)
@@ -1171,6 +1180,7 @@ class Reposos extends Acciones {
 		this.limitante = 0
 		this.boton = ''
 		this.sublista = {}
+		this.posicion = undefined
 		//-------------------------------
 		this.div = document.createElement('div')
 		this.contenido = qs('#reposo-template').content.querySelector('.reposo-crud').cloneNode(true)
@@ -1196,6 +1206,49 @@ export var reposos = new Reposos(new Tabla(
 	],
 	'tabla-reposo', 'reposo-busqueda', -1, 'null', 'null', 'null', true
 ))
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Notificaciones_reportes extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'informe_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#notificaciones-template').content.querySelector('.notificaciones-contenedor').cloneNode(true)
+	}
+
+	async confirmarActualizacion(popUp) {
+
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
+
+		this.cargarTabla(resultado, true)
+
+	}
+
+}
+
+export var notificaciones_reportes = new Notificaciones_reportes(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-notificaciones', 'notificaciones-busqueda', -1, 'null', 'null', 'null', false
+))
+
+window.notificaciones_reportes = notificaciones_reportes
 
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
@@ -1254,6 +1307,7 @@ presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.c
 
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -1265,5 +1319,3 @@ export var reportesDisponibles = {
 	"presupuesto": presupuestos,
 	"reposo": reposos
 }
-
-/* -------------------------------------------------------------------------------------------------*/

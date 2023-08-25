@@ -70,12 +70,12 @@
 
       <div class="columnas">
         
-        <div style="width:125px">
+        <div style="width:20rem">
           <label>N° historia</label>
           <input type="text" autocomplete="off"  data-valor="id_historia" class="informacion-valores upper visual" disabled>
         </div>
 
-        <div style="width:40%">
+        <div style="width:20rem">
           <label>Cédula/rif</label>
           <input type="text" autocomplete="off"  data-valor="cedula" class="informacion-valores upper visual" disabled>
         </div>
@@ -109,12 +109,12 @@
 
         </div>
 
-        <div style="width: 400px;">
+        <div style="width: 40rem;">
           <label>Fecha de nacimiento</label>
           <input type="date" id="informacion-fecha" data-valor="fecha_naci" class="informacion-valores upper visual" disabled>
         </div>
 
-        <div style="width: 100px">
+        <div style="width: 10rem">
           <label>Edad</label>
           <input type="text" autocomplete="off"  id="informacion-edad" class="upper visual" disabled>
         </div>
@@ -262,7 +262,7 @@
 
       <div class="columnas">
 
-        <div style="width: 100px" title="[TAB] para enforcar">
+        <div style="width: 20rem" title="[TAB] para enforcar">
           <label class="requerido">Cédula/rif</label>
           <input id="editar-enfocar" type="text" autocomplete="off"  maxlength="14" data-valor="cedula" placeholder="-" class="editar-valores lleno upper" maxlength="14">
         </div>
@@ -303,12 +303,12 @@
 
       <div class="columnas">
         
-        <div style="width: 250px;">
+        <div style="width: 40rem;">
           <label class="requerido">Fecha de nacimiento</label>
           <input type="date" id="editar-fecha" data-valor="fecha_naci" class="editar-valores lleno upper">
         </div>
 
-        <div style="width: 100px">
+        <div style="width: 20rem">
           <label>Edad</label>
           <input type="text" autocomplete="off"  id="editar-edad" class="lleno upper" disabled style="background: #fff">
         </div>
@@ -331,13 +331,15 @@
 
       <div class="columnas" style="align-items: baseline;">
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="editar-nueva-ocupaciones" class="boton-ver contenedor-resaltar" title="Cargar nueva ocupación" style="left: 75px; top: 4px">
-            +  
-          </button>
+          <label class="requerido">
+            <button id="editar-nueva-ocupaciones" class="boton-ver contenedor-resaltar" title="Cargar nueva ocupación" style="left: 75px; top: 4px">
+              +  
+            </button>
+            Ocupación
+          </label>
 
-          <label class="requerido">Ocupación</label>
           <section data-grupo="cc-ocupaciones-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off" placeholder="Buscar ocupación" data-limit="" class="upper">
@@ -347,13 +349,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="editar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="editar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
+              +  
+            </button>
+            Proveniencia
+          </label>
 
-          <label>Proveniencia</label>
           <section data-grupo="cc-proveniencias-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar proveniencia" data-limit="" class="upper">
@@ -363,13 +367,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="editar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="editar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
+              +  
+            </button>
+            Médico referido
+          </label>
 
-          <label>Médico referido</label>
           <section data-grupo="cc-medicos-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar médico referido" data-limit="" class="upper">
@@ -383,13 +389,15 @@
 
       <div class="columnas" style="align-items: baseline;">
 
-        <div style="position: relative;">
-          
-          <button id="editar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
-            +  
-          </button>
+        <div>
 
-          <label>Parentesco</label>
+          <label>
+            <button id="editar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
+              +  
+            </button>
+            Parentesco
+          </label>
+
           <section data-grupo="cc-parentescos-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar parentesco" data-limit="" class="upper">
@@ -399,13 +407,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
           
-          <button id="editar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="editar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
+              +  
+            </button>
+            Estado civil
+          </label>
 
-          <label>Estado civil</label>
           <section data-grupo="cc-estado_civil-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar estado civil" data-limit="" class="upper">
@@ -415,13 +425,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
           
-          <button id="editar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nueva religión" style="left: 50px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="editar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nueva religión" style="left: 50px; top: 4px">
+              +  
+            </button>
+            Religión
+          </label>
 
-          <label>Religión</label>
           <section data-grupo="cc-religiones-editar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar religión" data-limit="" class="upper">
@@ -601,13 +613,15 @@
 
       <div class="columnas" style="align-items: baseline;">
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-ocupaciones" class="boton-ver contenedor-resaltar" title="Cargar nueva ocupación" style="left: 75px; top: 4px">
-            +  
-          </button>
+          <label class="requerido">
+            <button id="insertar-nueva-ocupaciones" class="boton-ver contenedor-resaltar" title="Cargar nueva ocupación" style="left: 75px; top: 4px">
+              +  
+            </button>
+            Ocupación
+          </label>
 
-          <label class="requerido">Ocupación</label>
           <section data-grupo="cc-ocupaciones-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off" placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
@@ -617,13 +631,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="insertar-nueva-proveniencias" class="boton-ver contenedor-resaltar" title="Cargar nueva proveniencia" style="left: 80px; top: 4px">
+              +  
+            </button>
+            Proveniencia
+          </label>
 
-          <label>Proveniencia</label>
           <section data-grupo="cc-proveniencias-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
@@ -633,13 +649,15 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="insertar-nueva-medicos" class="boton-ver contenedor-resaltar" title="Cargar nuevo médico" style="left: 95px; top: 4px">
+              +  
+            </button>
+            Médico referido
+          </label>
 
-          <label>Médico referido</label>
           <section data-grupo="cc-medicos-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
@@ -653,13 +671,15 @@
 
       <div class="columnas" style="align-items: baseline;">
         
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
-            +  
-          </button>
+          <label>
+            <button id="insertar-nueva-parentescos" class="boton-ver contenedor-resaltar" title="Cargar nuevo parentesco" style="left: 70px; top: 4px">
+              +  
+            </button>
+            Parentesco
+          </label>
 
-          <label>Parentesco</label>
           <section data-grupo="cc-parentescos-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
@@ -669,13 +689,16 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
-            +  
-          </button>
 
-          <label>Estado civil</label>
+          <label>
+            <button id="insertar-nueva-estado_civil" class="boton-ver contenedor-resaltar" title="Cargar nuevo estado civil" style="left: 70px; top: 4px">
+              +  
+            </button>
+            Estado civil
+          </label>
+          
           <section data-grupo="cc-estado_civil-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">
@@ -685,13 +708,16 @@
 
         </div>
 
-        <div style="position: relative;">
+        <div>
 
-          <button id="insertar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nuevo religion" style="left: 50px; top: 4px">
-            +  
-          </button>
 
-          <label>Religión</label>
+          <label>
+            <button id="insertar-nueva-religiones" class="boton-ver contenedor-resaltar" title="Cargar nuevo religion" style="left: 50px; top: 4px">
+              +  
+            </button>
+            Religión
+          </label>
+          
           <section data-grupo="cc-religiones-insertar" class="combo-consulta">
 
             <input type="text" autocomplete="off"  placeholder="Buscar ocupación" data-limit="" class="upper insertar-cajones">

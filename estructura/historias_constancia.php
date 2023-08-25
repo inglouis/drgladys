@@ -162,6 +162,18 @@
           </div>
 
           <div class="botones-reportes">
+            <?php 
+              if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+            ?>
+              <button class="reporte-notificar" title="Envía una notificación de revisión y modificación del reporte al doctor/a" data-hidden>NOTIFICAR</button>
+            <?php 
+              } else if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+            ?>
+              <button class="reporte-notificar" title="Envía una notificación de revisión y modificación del reporte al doctor/a">NOTIFICAR</button>
+            <?php 
+              }
+            ?>
+            
             <button class="reporte-cargar">CARGAR</button>
             <button class="reporte-previa">PREVIA</button>
           </div>

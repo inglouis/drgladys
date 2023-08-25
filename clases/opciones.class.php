@@ -1,5 +1,88 @@
 <?php 
 
+	//--------------------------------------------------
+	//--------------------------------------------------
+	// SISTEMA DE USUARIOS - DATOS
+	//--------------------------------------------------
+
+	//--------------------------------------------------
+	//COOKIE & SESIÓN 
+
+	//EXISTE GALLETA
+	if (isset($_COOKIE["se_cookie"])) {
+
+		// NO EXISTE SESION DEL USUARIO
+	    if (!isset($_SESSION['usuario']) && !empty($_COOKIE["se_cookie"])) {
+
+	 		$usuario = ($objeto->i_pdo("select * from miscelaneos.usuarios where cookie like ?;", [$_COOKIE['se_cookie']], true))->fetch(PDO::FETCH_ASSOC);
+
+	 		if (!empty($usuario)) {
+
+	 			$_SESSION['usuario'] = $usuario;
+
+	 		}
+
+
+	    } else if (isset($_SESSION['usuario'])) { 
+	    //ESTO MANTIENE LA GALLETA ACTUALIZADA, PERO SE DISPARA A CADA QUE RECARGA O CARGA UNA PAGINA, CONSIDERAR SI DEJAR O NO
+		    	
+	    	$id_usuario = $_SESSION['usuario']['id_usuario'];
+
+	    	($objeto->i_pdo("update miscelaneos.usuarios set cookie = ? where id_usuario = ?;", [$_COOKIE['se_cookie'], $id_usuario], true))->fetch(PDO::FETCH_ASSOC);
+
+	    	$_SESSION['usuario']['cookie'] = $_COOKIE["se_cookie"];
+
+	    }
+
+	//NO EXISTE GALLETA
+	} else {
+
+		header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+		header('Cache-Control: no-store, no-cache, must-revalidate');
+		header('Cache-Control: post-check=0, pre-check=0', FALSE);
+		header('Pragma: no-cache');
+
+		setcookie("se_cookie", bin2hex(random_bytes(4)) , time()+4*12*60*60., "/");
+
+		//USUARIO EXISTE EN SESION Y ACTUALIZA GALLETA
+		if (isset($_SESSION['usuario'])) {
+
+			$id_usuario = $_SESSION['usuario']['id_usuario'];
+
+			($objeto->i_pdo("update miscelaneos.usuarios set cookie = ? where id_usuario = ?;", [$_COOKIE['se_cookie'], $id_usuario], true))->fetch(PDO::FETCH_ASSOC);
+
+		}
+	}
+
+	//--------------------------------------------------
+	//EXCEPCIONES AL ACCESO DENEGADO
+
+	$excepciones_login = array(
+		'login.php',
+		'login.class.php',
+		'controlador.php',
+		'ppal.class.php',
+		'cbdc.class.php'
+	); 
+
+	$ubicacion = basename(strtok($_SERVER["REQUEST_URI"], '?'));
+
+	if (in_array($ubicacion , $excepciones_login, true) != true) {
+
+		if (!isset($_SESSION['usuario'])) {
+
+		   header("Location: ../paginas/login.php?error=acceso-denegado");
+
+		} 
+
+		if ($_SESSION['usuario'] == false) {
+
+		   header("Location: ../paginas/login.php?error=acceso-denegado");
+
+		};
+
+	};
+
 	//bloqueo temporal de opciones equipo recepcion [quitar cuando se añada el sistema de usuarios]
 	//------------------------------------------------
 

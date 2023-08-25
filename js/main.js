@@ -692,7 +692,9 @@ export class Herramientas {
 		}
 
 		if (boton.classList.contains(comparacion) || comparacion === '') {
+
 			window.procesar = false
+
 			var procesar = true,
 				datos = [],
 				contenedores = (typeof(elementos) !== 'object' && elementos !== null) ? qsa(`.${elementos}`) : qsa(elementos[0]),
@@ -701,7 +703,19 @@ export class Herramientas {
 
 			if(typeof(params) !== 'undefined') {
 				if(typeof(params['asociativa']) !== 'undefined' && params['asociativa'] === true) {
-					asociativa = true
+
+					if (typeof params['id'] === 'undefined') {
+
+						console.log('el modo ASOCIATIVO requiere la asignacion del nombre de la ID desde parametros [PARAMS]')
+						window.procesar = true
+						return ''
+
+					} else {
+						
+						asociativa = true
+
+					}
+
 				}
 			}
 
@@ -717,18 +731,29 @@ export class Herramientas {
 							procesar = false
 							th.alertaInput(contenedores[i])
 						} else {
-							(!asociativa) ? datos.push(contenedores[i].querySelector('div')['lista']) : datos[contenedores[i].dataset.name] = contenedores[i].querySelectorAll('[data-contenedor]')[2]['lista'];
+							(!asociativa) ? datos.push(contenedores[i].querySelector('div')['lista']) : datos[contenedores[i].dataset.valor] = contenedores[i].querySelector('div')['lista'];
 						}
 	
 					} else if(contenedores[i].classList.contains('contenedor-lista')) {
 
-						datos.push(contenedores[i].dataset.informacion)
+						(!asociativa) ? datos.push(contenedores[i].dataset.informacion) : datos[contenedores[i].dataset.valor] = contenedores[i].dataset.informacion;
 
 					}
 
 				} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-					datos.push({"texto_base": contenedores[i].texto_base, "texto_html": contenedores[i].texto_html})
+					if (contenedores[i].texto_base.trim().length === 0 && contenedores[i].classList.contains('lleno')) {
+
+						procesar = false
+						th.alertaInput(contenedores[i])
+						
+					} else {
+
+						(!asociativa) ? datos.push({"texto_base": contenedores[i].texto_base, "texto_html": contenedores[i].texto_html}) : datos[contenedores[i].dataset.valor] = {"texto_base": contenedores[i].texto_base, "texto_html": contenedores[i].texto_html};
+
+					}
+
+					
 
 				} else {
 
@@ -741,19 +766,20 @@ export class Herramientas {
 
 						if (contenedores[i].type === 'number') {
 
-							datos.push(Number(contenedores[i].value))
+							
+							(!asociativa) ? datos.push(Number(contenedores[i].value)) : datos[contenedores[i].dataset.valor] = Number(contenedores[i].value);
 
 						} else if (contenedores[i].type === 'checkbox') {
 
 							if(contenedores[i].checked) {
-								(!asociativa) ? datos.push(th.marcador) : datos[contenedores[i].dataset.name] = th.marcador;
+								(!asociativa) ? datos.push(th.marcador) : datos[contenedores[i].dataset.valor] = th.marcador;
 							} else {
-								(!asociativa) ? datos.push('') : datos[contenedores[i].dataset.name] = '';
+								(!asociativa) ? datos.push('') : datos[contenedores[i].dataset.valor] = '';
 							}
 
 						} else {
 
-							(!asociativa) ? datos.push(contenedores[i].value) : datos[contenedores[i].dataset.name] = contenedores[i].value;
+							(!asociativa) ? datos.push(contenedores[i].value) : datos[contenedores[i].dataset.valor] = contenedores[i].value;
 							
 						}
 
@@ -3080,7 +3106,16 @@ export class Rellenar {
 				
 				if (contenedores[i].classList.contains('contenedor-personalizable')) {
 
-					var array = JSON.parse(lista[contenedores[i].dataset[th.grupo]])
+					if (typeof lista[contenedores[i].dataset[th.grupo]] === 'string') {
+
+						var array = JSON.parse(lista[contenedores[i].dataset[th.grupo]])
+
+					} else {
+
+						var array = lista[contenedores[i].dataset[th.grupo]]
+
+					}
+
 
 					contenedores[i].value = ''
 					contenedores[i].texto_base = ''

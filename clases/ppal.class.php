@@ -64,25 +64,6 @@ class ppal extends cbdc
 
 //********************************************************************************	
 //********************************************************************************
-
-	function caputar_transaccion($sql, $datos, $mensaje) {
-
-		$this->year = $this->fechaHora('America/Caracas','Y');
-		
-		if (gettype($datos) == 'array') {
-
-			$datos = json_encode($datos);
-
-		}
-
-		$query = "insert into transacciones.fecha".$this->year."(sql, datos, descripcion, fecha, hora) values(?,?,?, upper(?), current_date, current_time)";
-
-		$this->i_pdo($query, [$sql, $datos, $mensaje], false);
-
-	}
-
-//********************************************************************************	
-//********************************************************************************
 	function i_pdo($sql, $datos, $return, $transaccion = false, $mensaje = null) {
 		
 		$conn = $this::pdo_conectar(); 
@@ -633,6 +614,57 @@ class ppal extends cbdc
     public function consultarCookie($args) {
 
     	echo $_COOKIE["se_cookie"];
+
+    }
+
+    //********************************************************************************	
+	//********************************************************************************
+
+	function caputar_transaccion($sql, $datos, $mensaje) {
+
+		$this->year = $this->fechaHora('America/Caracas','Y');
+		
+		if (gettype($datos) == 'array') {
+
+			$datos = json_encode($datos);
+
+		}
+
+		$query = "insert into transacciones.fecha".$this->year."(sql, datos, descripcion, fecha, hora) values(?,?,?, upper(?), current_date, current_time)";
+
+		$this->i_pdo($query, [$sql, $datos, $mensaje], false);
+
+	}
+
+    public function controlador_cambios($args) {
+
+        $sql = "select controlador_cambios from miscelaneos.usuarios where id_usuario = ?";
+        
+        if ($this->i_pdo($sql, [$_SESSION['usuario']['id_usuario']], true)->fetchColumn()) {
+            
+            return 1;
+
+        } else {
+            
+            return 0;
+            
+        }
+
+    }
+
+    public function controlador_cambios_activar($args) {
+
+        $sql = "update miscelaneos.usuarios set controlador_cambios = true where id_usuario = id_usuario";
+        
+        return $this->i_pdo($sql, [], false);
+
+    }
+
+    public function controlador_cambios_desactivar($args) {
+
+        $sql = "update miscelaneos.usuarios set controlador_cambios = false where id_usuario = ?";
+        
+        return $this->i_pdo($sql, [$_SESSION['usuario']['id_usuario']], false);
 
     }
 }
