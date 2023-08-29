@@ -24,6 +24,10 @@ const paginacionReportesDesplegable = new customDesplegable('#reportes-paginacio
 
 paginacionReportesDesplegable.eventos()
 
+window.notificados = new customDesplegable('#desplegable-notificados', '#desplegable-abrir-notificados', '#desplegable-cerrar-notificados', undefined, '400px')
+
+notificados.eventos()
+
 /////////////////////////////////////////////////////
 //BOTONES PAGINACION
 /////////////////////////////////////////////////////
@@ -33,7 +37,7 @@ qsa('#reportes-paginacion-botones button').forEach((boton) => {
 
 })
 
-async function cambiarSeccionBotones (boton) {
+export async function cambiarSeccionBotones (boton) {
 
 	reporteSeleccionado = boton.identificador
 
@@ -189,6 +193,8 @@ export var
 	permitirLimpiezaReportes = true,
 	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
+
+window.prevenirCierreReporte = false
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
 /////////////////////////////////////////////////////
@@ -425,6 +431,7 @@ historias['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
+
 historias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           					PAGINACION ENTRE CONTENEDORES				   					    */
@@ -576,7 +583,13 @@ historias['crud']['customBodyEvents'] = {
 
 			await historias.traer_lista()
 
-			repPop.pop()
+			if (!prevenirCierreReporte) {
+				
+				repPop.pop()
+
+			} 
+
+			prevenirCierreReporte = false
 
 		}
 
@@ -1215,27 +1228,17 @@ class Notificaciones_reportes extends Acciones {
 	constructor(crud) {
 		super(crud)
 		this.fila
-		this.clase   = 'principales'
-		this.funcion = 'informe_consultar'
+		this.clase   = ''
+		this.funcion = ''
 		//-------------------------------
 		this.alternar = [true, 'white', 'whitesmoke']
-		this.especificos = ['fecha_arreglada']
+		this.especificos = ['']
 		this.limitante = 0
 		this.boton = ''
 		this.sublista = {}
 		//-------------------------------
 		this.div = document.createElement('div')
 		this.contenido = qs('#notificaciones-template').content.querySelector('.notificaciones-contenedor').cloneNode(true)
-	}
-
-	async confirmarActualizacion(popUp) {
-
-		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
-
-		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
-
-		this.cargarTabla(resultado, true)
-
 	}
 
 }
@@ -1245,10 +1248,43 @@ export var notificaciones_reportes = new Notificaciones_reportes(new Tabla(
 		['', false, 0],
 		['', false, 0]
 	],
-	'tabla-notificaciones', 'notificaciones-busqueda', -1, 'null', 'null', 'null', false
+	'tabla-notificaciones', 'null', -1, 'null', 'null', 'null', false
 ))
 
 window.notificaciones_reportes = notificaciones_reportes
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Notificados_reportes extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#notificados-template').content.querySelector('.notificados-contenedor').cloneNode(true)
+	}
+
+}
+
+export var notificados_reportes = new Notificados_reportes(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-notificados', 'null', -1, 'null', 'null', 'null', false
+))
+
+window.notificados_reportes = notificados_reportes
 
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
@@ -1273,6 +1309,10 @@ window.paginacionHistorias = new PaginacionContenedores(
 	historias,
 	botonesReportesPaginacion
 )
+
+//SOLUCIONAR ESTE PROBLEMA
+window.paginacionHistorias.cambiarUltimoSeleccionado('informacion')
+window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .informacion'), 'TR'))
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}

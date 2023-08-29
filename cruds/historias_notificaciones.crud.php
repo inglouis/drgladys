@@ -1,11 +1,32 @@
-<!--2)---------------------------------------------------- -->
-<!----------------- GENERALES TEMPLATE ----------------- -->
+<!-------------------------------------------------------- -->
+<!-------------- NOTIFICACIONES TEMPLATE ----------------- -->
 <!-------------------------------------------------------- -->
 <template id="notificaciones-template">
 
   <section class="notificaciones-contenedor">
 
   	<div class="notificaciones-contenido">
+  		
+	  	<div class="reporte"></div>
+	  	<div class="nombre"></div>
+
+  	</div>
+
+  </section>
+
+</template>
+
+
+<!-------------------------------------------------------- -->
+<!-------------- NOTIFICADOS TEMPLATE ----------------- -->
+<!-------------------------------------------------------- -->
+<template id="notificados-template">
+
+  <section class="notificados-contenedor">
+  	
+  	<button class="btn eliminar" title="Cerrar reporte">C</button>
+
+  	<div class="notificados-contenido">
   		
 	  	<div class="reporte"></div>
 	  	<div class="nombre"></div>

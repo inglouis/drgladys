@@ -2397,7 +2397,7 @@ span.numeracion {
     background: #151a27;
 }
 
-#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos {
+#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados {
     width: 300px;
     height: 400px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
@@ -2516,6 +2516,16 @@ span.numeracion {
     padding-top: 20px;
     width: 65vw;
 }
+
+#desplegable-notificados {
+    z-index: 11;
+    background: #b9a3cb66;
+    width: 300px;
+    overflow: hidden;
+    height: 60%;
+}
+
+/*---------------------------------------*/
 
 #indice-contenido {
   display: grid;
@@ -2802,6 +2812,7 @@ span.numeracion {
 .reporte-notificar {
     background: #ff8100;
     color: #fff;
+    width: 50px !important;
 }
 
 .reporte-cargar {
@@ -3432,12 +3443,12 @@ span.numeracion {
     cursor: pointer;
 }
 
-#tabla-notificaciones .seleccionado {
+#tabla-notificaciones .seleccionado, #tabla-notificados .seleccionado {
     background: linear-gradient(360deg, #4700c933, #004c962e) !important;
     padding: 10px 6.5px;
 }
 
-#tabla-notificaciones .nombre {
+#tabla-notificaciones .nombre, #tabla-notificados .nombre  {
     text-align: left;
 }
 
@@ -3453,33 +3464,37 @@ span.numeracion {
     background: #ffffff75;
 }
 
-.notificaciones-seccion {
+.notificaciones-seccion, .notificados-seccion {
     height: 100%;
 }
 
-.notificaciones-contenedor {
+.notificaciones-contenedor, .notificados-contenedor {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.notificaciones-contenido {
+.notificados-contenedor {
+    justify-content: flex-start;
+}
+
+.notificaciones-contenido, .notificados-contenido {
     display: flex;
     flex-direction: column;
     align-items: baseline;
 }
 
-.notificaciones-crud:hover {
+.notificaciones-crud:hover, .notificados-crud:hover {
     padding: 10px 6.5px;
 }
 
-.notificaciones-contenido .reporte {
+.notificaciones-contenido .reporte, .notificados-contenido .reporte {
     border-bottom: 1px solid #009688;
     font-size: 11px;
     color: #009688;
 }
 
-.contenedor-notificaciones {
+.contenedor-notificaciones, .contenedor-notificados {
     padding: 10px;
 }
 
@@ -3492,6 +3507,94 @@ span.numeracion {
     padding: 0px;
     background: transparent;
 }
+
+/*-----------------------------------------------------*/
+/*----------------- NOTIDICADOS --------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-notificados thead {
+    display: none
+}
+
+#tabla-notificados tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-notificados tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#tabla-notificados thead {
+    display: none;
+}
+
+#tabla-notificados tbody tr {
+    cursor: pointer;
+    width: 345px;
+}
+
+#tabla-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-notificados .nombre {
+    text-align: left;
+}
+
+#tabla-notificados-contenedor {
+    padding: 12px;
+}
+
+#desplegable-cerrar-notificados {
+    background: #b9a3cb;
+}
+
+#desplegable-abrir-notificados {
+    background: #b9a3cb;
+    height: 25px;
+    width: 25px;
+    top: 80px;
+    z-index: 11;
+}
+
+div#tabla-notificados-contenedor .titulo {
+    border-bottom: 1px solid #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    width: 345px;
+}
+
+div#tabla-notificados-contenedor .titulo::after {
+    content: "";
+    left: 0px;
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+}
+
+.notificados-contenedor {
+    position: relative;
+}
+
+.notificados-contenedor .eliminar {
+    position: absolute;
+    background: lightgreen;
+    width: 10px;
+    height: 10px;
+    top: 5px; 
+    right: 5px;
+    color: #fff;
+}
+
 /*-----------------------------------------------------*/
 /*---------------------- Iva --------------------------*/
 /*-----------------------------------------------------*/
