@@ -171,7 +171,66 @@ reposos['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							reposoS - CARGAR	  								    */
+/*           							REPOSOS - NOTIFICAR	  								    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#reposos-contenedor').identificador = 'reposo'
+
+qs("#reposos-contenedor .reporte-notificar").addEventListener('click', async e => {
+
+	if (window.procesar) {
+
+		var elemento = qs('#reposos-contenedor')
+
+		window.procesar = false
+
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+
+		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+
+			var lista = { 
+				"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_naci": historias.sublista.fecha_naci,
+				"fecha_inicio": datos[1],
+				"dias": datos[2].trim(),
+				"fecha_final": datos[3],
+				"fecha_simple": datos[4].toUpperCase(),
+				"reposo": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				}
+			}
+
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+
+			if (typeof resultado === 'object' && resultado !== null) {
+
+				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+
+				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		}
+
+	} else {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+		
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							REPOSOS - CARGAR	  									    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#reposos-contenedor').identificador = 'reposo'
 
@@ -465,7 +524,7 @@ qs('#reposo-busqueda').addEventListener('keydown', e => {
 
 /* -------------------------------------------------------------------------------------------------*/
 //operaciones relacionadas al calculo de la fecha de reposo insersion
-/*-------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------*/
 qs('#reposos-dias-insertar').addEventListener('input', e => {
 
 	qs('#reposos-fin-insertar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-insertar').value)
@@ -497,7 +556,7 @@ qs('#reposos-inicio-insertar').addEventListener('change', e => {
 
 /* -------------------------------------------------------------------------------------------------*/
 //operaciones relacionadas al calculo de la fecha de reposo edicion
-/*-------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------*/
 qs('#reposos-dias-editar').addEventListener('input', e => {
 
 	qs('#reposos-fin-editar').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-editar').value)
@@ -525,4 +584,36 @@ qs('#reposos-inicio-editar').addEventListener('change', e => {
 		now.setDate(now.getDate() + reposo)
 
 	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+//operaciones relacionadas al calculo de la fecha de reposo notificaciones
+/*--------------------------------------------------------------------------------------------------*/
+qs('#reposos-dias-notificaciones').addEventListener('input', e => {
+
+	qs('#reposos-fin-notificaciones').value = tools.calcularFecha(Number(e.target.value), 'dia', qs('#reposos-inicio-notificaciones').value)
+	
+	var now = new Date(qs('#reposos-inicio-notificaciones').value)
+		now.setDate(now.getDate() + Number(e.target.value) - 1)
+
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+
+})
+
+qs('#reposos-inicio-notificaciones').addEventListener('change', e => {
+
+	var reposo
+
+	if(qs('#reposos-dias-notificaciones').value.trim() !== '') {
+		reposo = Number(qs('#reposos-dias-notificaciones').value) - 1
+	} else {
+		reposo = 0
+	}
+
+	qs('#reposos-fin-notificaciones').value = tools.calcularFecha(reposo, 'dia', qs('#reposos-inicio-notificaciones').value)
+	
+	var now = new Date(qs('#reposos-inicio-notificaciones').value)
+		now.setDate(now.getDate() + reposo)
+
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
 })

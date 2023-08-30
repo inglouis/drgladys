@@ -3,3 +3,4 @@
 <script type="module" src="../js/historias_informe.js" defer></script>
 <script type="module" src="../js/historias_presupuesto.js" defer></script>
 <script type="module" src="../js/historias_reposo.js" defer></script>
+<script type="module" src="../js/historias_notificaciones.js" defer></script>

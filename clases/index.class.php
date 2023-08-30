@@ -3,6 +3,24 @@
     
     class Model extends ppal {
 
+        public function comprobar_sesion() {
+
+           if (!isset($_SESSION['usuario'])) {
+
+                return false;
+
+           } else if (empty($_SESSION['usuario'])) {
+
+                return false;
+
+           } else {
+
+                return true;
+
+           }
+
+        }
+
         public function monedas() {
         	$monedas = json_encode($this->e_pdo("select * from miscelaneos.monedas order by id_moneda asc")->fetchAll(PDO::FETCH_ASSOC));
         	return $monedas;

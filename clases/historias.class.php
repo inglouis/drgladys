@@ -11,6 +11,8 @@
             1 => "status = '?'"
         ];
 
+        //--------------------------------------------------------------------------------------
+
         public function cargar_historias($args) {
             
             $sql = "
@@ -54,7 +56,7 @@
             $busqueda = $args[0];
                         
             if (is_numeric($busqueda) || gettype($busqueda) == 'integer' || ctype_digit($busqueda)) {
-                $historia = "or id_historia = ".(int)$busqueda." or id_correlativo = ".(int)$busqueda;
+                $historia = "or id_historia = ".(int)$busqueda;
             } else {
                 $historia = '';
             }

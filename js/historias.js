@@ -9,7 +9,7 @@
 import {Tabla} from '../js/crud.js';
 
 /////////////////////////////////////////////////////
-window.qs = document.querySelector.bind(document)
+window.qs  = document.querySelector.bind(document)
 window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
@@ -25,6 +25,10 @@ const paginacionReportesDesplegable = new customDesplegable('#reportes-paginacio
 paginacionReportesDesplegable.eventos()
 
 /////////////////////////////////////////////////////
+window.notificados = new customDesplegable('#desplegable-notificados', '#desplegable-abrir-notificados', '#desplegable-cerrar-notificados', undefined, '400px')
+	   notificados.eventos()
+
+/////////////////////////////////////////////////////
 //BOTONES PAGINACION
 /////////////////////////////////////////////////////
 qsa('#reportes-paginacion-botones button').forEach((boton) => {
@@ -33,7 +37,7 @@ qsa('#reportes-paginacion-botones button').forEach((boton) => {
 
 })
 
-async function cambiarSeccionBotones (boton) {
+export async function cambiarSeccionBotones (boton) {
 
 	reporteSeleccionado = boton.identificador
 
@@ -62,6 +66,7 @@ qs('#reportes-paginacion-botones').addEventListener('click', async (e) => {
 window.camposTextosPersonalizables = new textoPersonalizable();
 
 ([
+	
 	['#constancia-textarea', '#constancia-previa'],
 	['#coneditar-textarea', '#coneditar-previa'],
 	['#general-informacion', '#general-previa'],
@@ -71,7 +76,14 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#presupuesto-informacion', '#presupuesto-previa'],
 	['#preeditar-informacion', '#preeditar-previa'],
 	['#reposo-informacion', '#reposo-previa'],
-	['#repeditar-informacion', '#repeditar-previa']
+	['#repeditar-informacion', '#repeditar-previa'],
+
+	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
+	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
+	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
+	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
+	['#general-informacion-notificaciones', '#general-previa-notificaciones']
+
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
 window.camposTextosPersonalizables.init()
@@ -81,6 +93,7 @@ window.camposTextosPersonalizables.init()
 window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
+window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -101,6 +114,7 @@ window.repoPop = new PopUp('crud-repeditar-popup', 'popup', 'subefecto', true, '
 ediPop.evtBotones()
 insPop.evtBotones()
 infPop.evtBotones()
+notPop.evtBotones()
 
 ocuPop.evtBotones()
 proPop.evtBotones()
@@ -123,6 +137,7 @@ window.addEventListener('keyup', (e) => {
 	ediPop.evtEscape(e)
 	insPop.evtEscape(e)
 	infPop.evtEscape(e)
+	notPop.evtEscape(e)
 
 	ocuPop.evtEscape(e)
 	proPop.evtEscape(e)
@@ -182,6 +197,8 @@ export var
 	permitirLimpiezaReportes = true,
 	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
+
+window.prevenirCierreReporte = false
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
 /////////////////////////////////////////////////////
@@ -243,7 +260,9 @@ window.rellenar = new Rellenar()
 window.reportes = new Reportes()
 /////////////////////////////////////////////////////
 var sesiones = await window.sesiones(true)
+export var usuario = sesiones.usuario
 /////////////////////////////////////////////////////
+
 //2)--------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //									FORMULARIO                                   
@@ -416,6 +435,7 @@ historias['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
+
 historias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           					PAGINACION ENTRE CONTENEDORES				   					    */
@@ -543,7 +563,7 @@ historias['crud']['customBodyEvents'] = {
 	},
 	"reportes": async (e) => {
 
-		var button = (tools.esDOM(e)) ? e : e.target;
+		var button = (tools.esDOM(e)) ? e : e.target; 
 
 		if (button.classList.contains('reportes')) {
 
@@ -551,7 +571,10 @@ historias['crud']['customBodyEvents'] = {
 			historias.sublista = historias.tr.sublista
 
 			if (permitirLimpiezaReportes) {
-				historias.limpieza()
+
+				if (!prevenirCierreReporte) {
+					historias.limpieza()
+				}
 				permitirLimpiezaReportes = true
 			}
 	
@@ -561,13 +584,17 @@ historias['crud']['customBodyEvents'] = {
 			
 			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
 
-			tools.limpiar('.reportes-cargar', '', {})
-
 			rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
 
 			await historias.traer_lista()
 
-			repPop.pop()
+			if (!prevenirCierreReporte) {
+				
+				repPop.pop()
+
+			} 
+
+			prevenirCierreReporte = false
 
 		}
 
@@ -577,7 +604,7 @@ historias['crud']['customBodyEvents'] = {
 (async () => {
 	var resultado = await tools.fullAsyncQuery('historias', 'cargar_historias', [])
 	historias.cargarTabla(JSON.parse(resultado), undefined, undefined)
-
+	window.historias = historias
 })()
 
 historias['crud'].botonBuscar('buscar', false)
@@ -1171,6 +1198,7 @@ class Reposos extends Acciones {
 		this.limitante = 0
 		this.boton = ''
 		this.sublista = {}
+		this.posicion = undefined
 		//-------------------------------
 		this.div = document.createElement('div')
 		this.contenido = qs('#reposo-template').content.querySelector('.reposo-crud').cloneNode(true)
@@ -1197,6 +1225,74 @@ export var reposos = new Reposos(new Tabla(
 	'tabla-reposo', 'reposo-busqueda', -1, 'null', 'null', 'null', true
 ))
 
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Notificaciones_reportes extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		this.posicion = undefined
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#notificaciones-template').content.querySelector('.notificaciones-contenedor').cloneNode(true)
+	}
+
+}
+
+export var notificaciones_reportes = new Notificaciones_reportes(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-notificaciones', 'null', -1, 'null', 'null', 'null', false
+))
+
+window.notificaciones_reportes = notificaciones_reportes
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+
+class Notificados_reportes extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		this.posicion = undefined
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#notificados-template').content.querySelector('.notificados-contenedor').cloneNode(true)
+	}
+
+}
+
+export var notificados_reportes = new Notificados_reportes(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-notificados', 'null', -1, 'null', 'null', 'null', false
+))
+
+window.notificados_reportes = notificados_reportes
+
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION HISTORIAS			 	  					    */
@@ -1220,6 +1316,10 @@ window.paginacionHistorias = new PaginacionContenedores(
 	historias,
 	botonesReportesPaginacion
 )
+
+//SOLUCIONAR ESTE PROBLEMA
+window.paginacionHistorias.cambiarUltimoSeleccionado('informacion')
+window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .informacion'), 'TR'))
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
@@ -1254,6 +1354,7 @@ presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.c
 
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
@@ -1265,5 +1366,3 @@ export var reportesDisponibles = {
 	"presupuesto": presupuestos,
 	"reposo": reposos
 }
-
-/* -------------------------------------------------------------------------------------------------*/

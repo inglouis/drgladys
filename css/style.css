@@ -1077,7 +1077,7 @@ span.numeracion {
 .boton-ver {
     width: 15px;
     height: 15px;
-    position: absolute;
+    /*position: absolute;*/
     font-size: 14px;
     border: none;
     padding: 0px;
@@ -1146,6 +1146,10 @@ span.numeracion {
     border: none;
     position: relative;
     color: #fff;
+}
+
+#boton-usuario {
+    border-right: 1px dashed #fff;
 }
 
 #boton-resaltar {
@@ -1635,7 +1639,8 @@ span.numeracion {
 #crud-insertar-estado_civil-pop,
 #crud-insertar-religiones-pop,
 #crud-insertar-medicos-pop,
-#crud-insertar-diagnosticos-pop {
+#crud-insertar-diagnosticos-pop,
+#crud-notificaciones-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2392,7 +2397,7 @@ span.numeracion {
     background: #151a27;
 }
 
-#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos {
+#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados {
     width: 300px;
     height: 400px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
@@ -2511,6 +2516,16 @@ span.numeracion {
     padding-top: 20px;
     width: 65vw;
 }
+
+#desplegable-notificados {
+    z-index: 11;
+    background: #b9a3cb66;
+    width: 300px;
+    overflow: hidden;
+    height: 60%;
+}
+
+/*---------------------------------------*/
 
 #indice-contenido {
   display: grid;
@@ -2665,6 +2680,64 @@ span.numeracion {
     content: "Solo Historias Desactivados [D]";
 }
 
+#historia-notificaciones {
+    position: absolute;
+    right: 0px;
+    height: 100%;
+}
+
+#historia-notificaciones button {
+    height: 35px;
+    width: 40px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: #b9a3cb;
+    transition: 0.3s ease all;
+}
+
+#historia-notificaciones button:hover {
+    background: black;
+    transition: 0.3s ease all;
+}
+
+#notificacion-doctor {
+
+}
+
+#notificacion-administracion {
+
+}
+
+.notificacion-alerta::after {
+    content: "!";
+    width: 20px;
+    height: 20px;
+    background: red;
+    position: absolute;
+    top: -8px;
+    left: -9px;
+    border-radius: 100px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    animation: notificacion-alerta 0.8s infinite;
+}
+
+@keyframes notificacion-alerta {
+    0% {
+        box-shadow:  0px 0px 0px 0px red;
+    }
+    10% {
+        box-shadow:  0px 0px 15px 0px red;
+    }
+}
+
 /*--------------------------------------------------------------*/
 /*------------------ CONTENEDORES REPORTES ---------------------*/
 /*--------------------------------------------------------------*/
@@ -2736,6 +2809,12 @@ span.numeracion {
     width: 100%;
 }
 
+.reporte-notificar {
+    background: #ff8100;
+    color: #fff;
+    width: 50px !important;
+}
+
 .reporte-cargar {
     background: #009688;
     color: #fff;
@@ -2746,7 +2825,12 @@ span.numeracion {
     color: #fff;
 }
 
-.reporte-cargar:hover, .reporte-previa:hover {
+.reporte-actualizar {
+    background: #009688;
+    color: #fff;
+}
+
+.reporte-cargar:hover, .reporte-previa:hover, .reporte-notificar:hover, .reporte-actualizar:hover {
     background: black;
 }
 
@@ -2964,7 +3048,34 @@ span.numeracion {
     left: -19px;
 }
 
-.personalizacion div, .personalizacion-b div {
+.notificaciones-seccion .personalizacion-notificaciones  {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: #000000ba;
+    padding: 10px;
+    color: #fff;
+    z-index: 2;
+    right: 0px;
+    width: 60%;
+    border-radius: 10px;
+    top: 0%;
+    left: -62%;
+    text-align: initial;
+}
+
+.notificaciones-seccion .personalizacion-notificaciones::after {
+    content: "";
+    background: #000000ba;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 60%;
+    right: -14px;
+}
+
+.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div {
     background: #fff;
     color: black;
     padding: 5px;
@@ -3299,6 +3410,196 @@ span.numeracion {
 #general-previa, #geneditar-previa {
     background: #fff !important;
     color: black !important;
+}
+
+
+/*-----------------------------------------------------*/
+/*----------------- NOTIFICACIONES --------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-notificaciones thead {
+    display: none
+}
+
+#tabla-notificaciones tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-notificaciones tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#tabla-notificaciones thead {
+    display: none;
+}
+
+#tabla-notificaciones tbody tr {
+    cursor: pointer;
+}
+
+#tabla-notificaciones .seleccionado, #tabla-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-notificaciones .nombre, #tabla-notificados .nombre  {
+    text-align: left;
+}
+
+#crud-notificaciones-contenedor {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    column-gap: 10px;
+}
+
+#edicion-notificaciones {
+    background: #ffffff75;
+}
+
+.notificaciones-seccion, .notificados-seccion {
+    height: 100%;
+}
+
+.notificaciones-contenedor, .notificados-contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+
+.notificados-contenedor {
+    justify-content: flex-start;
+}
+
+.notificaciones-contenido, .notificados-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.notificaciones-crud:hover, .notificados-crud:hover {
+    padding: 10px 6.5px;
+}
+
+.notificaciones-contenido .reporte, .notificados-contenido .reporte {
+    border-bottom: 1px solid #009688;
+    font-size: 11px;
+    color: #009688;
+}
+
+.contenedor-notificaciones, .contenedor-notificados {
+    padding: 10px;
+}
+
+.contenedor-notificaciones .subtitulo {
+    margin: 0px;
+    margin-bottom: 5px;
+}
+
+.contenedor-notificaciones .cargar {
+    padding: 0px;
+    background: transparent;
+}
+
+/*-----------------------------------------------------*/
+/*----------------- NOTIDICADOS --------------------*/
+/*-----------------------------------------------------*/
+
+#tabla-notificados thead {
+    display: none
+}
+
+#tabla-notificados tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-notificados tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#tabla-notificados thead {
+    display: none;
+}
+
+#tabla-notificados tbody tr {
+    cursor: pointer;
+    width: 345px;
+}
+
+#tabla-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-notificados .nombre {
+    text-align: left;
+}
+
+#tabla-notificados-contenedor {
+    padding: 12px;
+}
+
+#desplegable-cerrar-notificados {
+    background: #b9a3cb;
+}
+
+#desplegable-abrir-notificados {
+    background: #b9a3cb;
+    height: 25px;
+    width: 25px;
+    top: 80px;
+    z-index: 11;
+}
+
+div#tabla-notificados-contenedor .titulo {
+    border-bottom: 1px solid #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    width: 345px;
+}
+
+div#tabla-notificados-contenedor .titulo::after {
+    content: "";
+    left: 0px;
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+}
+
+.notificados-contenedor {
+    position: relative;
+}
+
+.notificados-contenedor .eliminar {
+    position: absolute;
+    background: #009688;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: none;
+    padding: 5px;
+}
+
+.notificados-contenedor .eliminar:hover {
+    background: black;
 }
 
 /*-----------------------------------------------------*/
