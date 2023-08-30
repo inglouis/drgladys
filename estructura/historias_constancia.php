@@ -162,6 +162,7 @@
           </div>
 
           <div class="botones-reportes">
+            
             <?php 
               if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
             ?>

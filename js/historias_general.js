@@ -166,10 +166,64 @@ generales['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							generales - CARGAR	  								    */
+/*           							GENERALES - NOTIFICAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#generales-contenedor').identificador = 'general'
 
+qs("#generales-contenedor .reporte-notificar").addEventListener('click', async e => {
+
+	if (window.procesar) {
+
+		var elemento = qs('#generales-contenedor')
+
+		window.procesar = false
+
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+
+		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+
+			var lista = { 
+				"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"titulo": datos[0].toUpperCase(),
+				"general": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				}
+			}
+
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+
+			if (typeof resultado === 'object' && resultado !== null) {
+
+				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+
+				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		}
+
+	} else {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+		
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							GENERALES - CARGAR	  									    */
+/* -------------------------------------------------------------------------------------------------*/
 qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {

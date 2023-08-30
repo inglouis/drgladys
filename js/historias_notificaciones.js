@@ -3,7 +3,11 @@ import { notificaciones_reportes, notificados_reportes } from '../js/historias.j
 import { Paginacion } from '../js/main.js';
 
 var paginacionPosiciones = {
-	"constancia": 0
+	"constancia": 0,
+	"informe": 1,
+	"presupuesto": 2,
+	"reposo": 3,
+	"general": 4
 }
 
 var historiaPopups = {
@@ -71,8 +75,13 @@ notificaciones_reportes['crud']['propiedadesTr'] = {
 		var lista = JSON.parse(e.sublista.datos)
 
 		contenedor.querySelector('.reporte').innerHTML = e.sublista.reporte.toUpperCase()
-		contenedor.querySelector('.nombre').innerHTML  = `${lista.nombres.toUpperCase()} ${lista.apellidos.toUpperCase()}`
-		
+
+		if (typeof lista.nombres === 'undefined') {
+			contenedor.querySelector('.nombre').innerHTML  = lista.nombre_completo.toUpperCase()
+		} else {
+			contenedor.querySelector('.nombre').innerHTML  = `${lista.nombres.toUpperCase()} ${lista.apellidos.toUpperCase()}`
+		}
+
 		if (e.sublista.id === th.posicion) {
 
 			contenedor.classList.add('seleccionado')
@@ -181,7 +190,12 @@ notificados_reportes['crud']['propiedadesTr'] = {
 		var lista = JSON.parse(e.sublista.datos)
 
 		contenedor.querySelector('.reporte').innerHTML = e.sublista.reporte.toUpperCase()
-		contenedor.querySelector('.nombre').innerHTML  = `${lista.nombres.toUpperCase()} ${lista.apellidos.toUpperCase()}`
+		
+		if (typeof lista.nombres === 'undefined') {
+			contenedor.querySelector('.nombre').innerHTML  = lista.nombre_completo.toUpperCase()
+		} else {
+			contenedor.querySelector('.nombre').innerHTML  = `${lista.nombres.toUpperCase()} ${lista.apellidos.toUpperCase()}`
+		}
 		
 		if (e.sublista.id === th.posicion) {
 
@@ -239,87 +253,133 @@ notificados_reportes['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	"cargar": async (e) => {
 
-		var tr = undefined, botonHistoria = undefined
+		if (e.target.tagName !== 'BUTTON') {
 
-		qsa('#tabla-notificados tr td').forEach( ren => {
-			
-			ren.classList.remove('seleccionado')
+			var tr = undefined, botonHistoria = undefined
 
-		});
+			qsa('#tabla-notificados tr td').forEach( ren => {
+				
+				ren.classList.remove('seleccionado')
 
-		notificados_reportes.sublista = tools.pariente(e.target, 'TR').sublista
+			});
 
-		tools.pariente(e.target, 'TR').children[0].classList.add('seleccionado')
+			notificados_reportes.sublista = tools.pariente(e.target, 'TR').sublista
 
-		//CAMBIAR POPUP
-		window.paginacionHistorias.cambiarUltimoSeleccionado('reportes')
-		window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .reportes'), 'TR'))
+			tools.pariente(e.target, 'TR').children[0].classList.add('seleccionado')
 
-		//LISTA DE DATOS
-		var datos = JSON.parse(notificados_reportes.sublista.datos)
+			//CAMBIAR POPUP
+			window.paginacionHistorias.cambiarUltimoSeleccionado('reportes')
+			window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .reportes'), 'TR'))
 
-		//CAMBIA LA POSICION ACTUAL DE LA LISTA SELECCIONADA
-		notificados_reportes.posicion = notificados_reportes.sublista.id
+			//LISTA DE DATOS
+			var datos = JSON.parse(notificados_reportes.sublista.datos)
 
-		//ASIGNA EL VALOR AL CAJON DE BUSQUEDA DE LA HISTORIA
-		qs('#busqueda').value = datos.id_historia
+			//CAMBIA LA POSICION ACTUAL DE LA LISTA SELECCIONADA
+			notificados_reportes.posicion = notificados_reportes.sublista.id
 
-		//FUERZA LA BUSQUEDA EN EL CRUD
-		historias.crud.botonForzar()
+			//ASIGNA EL VALOR AL CAJON DE BUSQUEDA DE LA HISTORIA
+			qs('#busqueda').value = datos.id_historia
 
-		//CIERRA LOS POPUPS ACTIVOS
-		qsa('.popup-activo').forEach(el => {
+			//FUERZA LA BUSQUEDA EN EL CRUD
+			historias.crud.botonForzar()
 
-			if (el.id === 'crud-reportes-popup') {
+			//CIERRA LOS POPUPS ACTIVOS
+			qsa('.popup-activo').forEach(el => {
 
-				if (historias.sublista.id_historia !== datos.id_historia) {
+				if (el.id === 'crud-reportes-popup') {
+
+					if (historias.sublista.id_historia !== datos.id_historia) {
+
+						historiaPopups[el.id].pop()
+
+					}
+
+				} else {
 
 					historiaPopups[el.id].pop()
 
 				}
 
+			})
+
+			//CAPTURA EL TR DE LA TABLA
+			qsa('#tabla-historias tbody tr').forEach(el => {
+			    
+			    if (el.sublista.id_historia === datos.id_historia) {
+			        tr = el
+			    }
+			    
+			})
+			
+			//CAPTURA EL BOTON DEL RENGLON
+			botonHistoria = tr.querySelector('.reportes')
+
+			//PREVIENE EL CIERRE DEL POPUP EN CASO DE SER EL MISMO NUMERO DE HISTORIA
+			if (historias.sublista.id_historia === datos.id_historia && qs('#crud-reportes-popup').classList.contains('popup-activo')) {
+
+				prevenirCierreReporte = true
+
 			} else {
 
-				historiaPopups[el.id].pop()
+				//LIMPIAR LOS DATOS
+				tools.limpiar(`.${notificados_reportes.sublista.reporte}-valores`, '', {})
 
 			}
 
-		})
+			//RELLENA LOS DATOS Y ABRE EL POPUP
+			historias.crud.customBodyEvents['reportes'](botonHistoria)
 
-		//CAPTURA EL TR DE LA TABLA
-		qsa('#tabla-historias tbody tr').forEach(el => {
-		    
-		    if (el.sublista.id_historia === datos.id_historia) {
-		        tr = el
-		    }
-		    
-		})
-		
-		//CAPTURA EL BOTON DEL RENGLON
-		botonHistoria = tr.querySelector('.reportes')
+			//CAMBIA A LA POSICION DEL REPORTE CORRESPONDIENTE
+			reportesPaginacion[notificados_reportes.sublista.reporte]()
 
-		//PREVIENE EL CIERRE DEL POPUP EN CASO DE SER EL MISMO NUMERO DE HISTORIA
-		if (historias.sublista.id_historia === datos.id_historia && qs('#crud-reportes-popup').classList.contains('popup-activo')) {
+			//LLENA LOS DATOS DEL REPORTE
+			rellenar.contenedores(datos, `.${notificados_reportes.sublista.reporte}-valores`, {}, {})
 
-			prevenirCierreReporte = true
+			//ENVIA NOTIFICACION
+			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
 		}
 
-		//RELLENA LOS DATOS Y ABRE EL POPUP
-		historias.crud.customBodyEvents['reportes'](botonHistoria)
+	},
+	"eliminar": async (e) => {
+		if (e.target.classList.contains('eliminar')) {
 
-		//CAMBIA A LA POSICION DEL REPORTE CORRESPONDIENTE
-		reportesPaginacion[notificados_reportes.sublista.reporte]()
+			if (window.procesar) {
 
-		//LIMPIAR LOS DATOS
-		tools.limpiar(`.${notificados_reportes.sublista.reporte}-valores`, '', {})
+				window.procesar = false
 
-		//LLENA LOS DATOS DEL REPORTE
-		rellenar.contenedores(datos, `.${notificados_reportes.sublista.reporte}-valores`, {}, {})
+				notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
-		//ENVIA NOTIFICACION
-		notificaciones.mensajeSimple('Datos cargados', false, 'V')
+				notificados_reportes.sublista = tools.pariente(e.target, 'TR').sublista
 
+				//CAMBIA LA POSICION ACTUAL DE LA LISTA SELECCIONADA
+				notificados_reportes.posicion = notificados_reportes.sublista.id
+
+				var resultado = await tools.fullAsyncQuery(`historias_notificaciones`, `notificado_revisado`, [notificados_reportes.posicion], [["+", "%2B"]])
+
+				if (resultado.trim() === 'exito') {
+
+					notificados_reportes.posicion = undefined
+
+					notificados_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_notificaciones', 'notificaciones_consultar', [])))
+
+					notificaciones.mensajeSimple('Revisión del reporte completada', '', 'V')
+
+				} else if (resultado.trim() === 'espera') {
+
+					notificaciones.mensajePersonalizado('Se está actualizando el listado de reportes, espere un momento...', false, 'CLARO-1', 'PROCESANDO')
+
+				} else {
+
+					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+				}
+
+				window.procesar = true
+				
+			}
+
+		}
 	}
 };
 
@@ -348,74 +408,76 @@ window.paginacionNotificaciones.subefectos = true //por defecto true es solo par
 /* -------------------------------------------------------------------------------------------------*/
 /*           					CONSTANCIAS - NOTIFICAR	REVISADO								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs("#edicion-notificaciones .reporte-actualizar").addEventListener('click', async e => {
+qs("#edicion-notificaciones").addEventListener('click', async e => {
 
-	if (window.procesar) {
+	if (e.target.classList.contains('reporte-actualizar') && e.target.tagName === 'BUTTON') {
 
-		window.procesar = false
+		if (window.procesar) {
 
-		var datos = tools.procesar('', '', `${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, tools, {'asociativa': true, 'id': 'id'});
+			window.procesar = false
 
-		if (datos !== '') {
-		
-			if (notificaciones_reportes.posicion !== undefined) {
+			var datos_notificados = tools.procesar('', '', `${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, tools, {'asociativa': true, 'id': 'id'});
 
-				notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-				
-				var x = JSON.parse(notificaciones_reportes.sublista.datos)
+			if (datos_notificados !== '') {
+			
+				if (notificaciones_reportes.posicion !== undefined) {
 
-				datos['id_historia']      = x.id_historia
-				datos['nombres']          = x.nombres
-				datos['apellidos']        = x.apellidos
-				datos['cedula'] 	      = x.cedula
-				datos['fecha_nacimiento'] = x.fecha_nacimiento
+					notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+					
+					var x = JSON.parse(notificaciones_reportes.sublista.datos)
 
-				var datos_modificados = [] 
+					datos_notificados['id_historia']      = x.id_historia
+					datos_notificados['nombres']          = x.nombres
+					datos_notificados['apellidos']        = x.apellidos
+					datos_notificados['cedula'] 	      = x.cedula
+					datos_notificados['fecha_nacimiento'] = x.fecha_nacimiento
 
-				notificaciones_reportes.crud.lista.forEach(e => {
+					// notificaciones_reportes.crud.lista.forEach(e => {
 
-				    if (e.id !== notificaciones_reportes.posicion) {
-				        datos_modificados.push(e)
-				    }
-				   
-				})
+					//     if (e.id !== notificaciones_reportes.posicion) {
+					//         datos_modificados.push(e)
+					//     }
+					   
+					// })
 
-				var resultado = await tools.fullAsyncQuery(`historias_notificaciones`, `notificar_revisado`, [datos, datos_modificados, notificaciones_reportes.sublista.reporte], [["+", "%2B"]])
+					var resultado = await tools.fullAsyncQuery(`historias_notificaciones`, `notificar_revisado`, [datos_notificados, notificaciones_reportes.sublista.reporte, notificaciones_reportes.posicion], [["+", "%2B"]])
 
-				if (resultado.trim() === 'exito') {
+					if (resultado.trim() === 'exito') {
 
-					notificaciones_reportes.posicion = undefined
+						notificaciones_reportes.posicion = undefined
 
-					notificaciones_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_notificaciones', 'notificaciones_consultar', [])))
+						notificaciones_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_notificaciones', 'notificaciones_consultar', [])))
 
-					tools.limpiar(`.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, '', {})
+						tools.limpiar(`.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, '', {})
 
-					notificaciones.mensajeSimple('Reporte modificado', '', 'V')
+						notificaciones.mensajeSimple('Reporte modificado', '', 'V')
 
-					setTimeout(() => {
-						notificaciones.mensajeSimple('Se notificó a recepción la impresión del reporte', '', 'V')
-					}, 2000)
+						setTimeout(() => {
+							notificaciones.mensajeSimple('Se notificó a recepción la impresión del reporte', '', 'V')
+						}, 2000)
 
-				} else if (resultado.trim() === 'espera') {
+					} else if (resultado.trim() === 'espera') {
 
-					notificaciones.mensajePersonalizado('Se está actualizando el listado de reportes, espere un momento...', false, 'CLARO-1', 'PROCESANDO')
+						notificaciones.mensajePersonalizado('Se está actualizando el listado de reportes, espere un momento...', false, 'CLARO-1', 'PROCESANDO')
+
+					} else {
+
+						notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+					}
 
 				} else {
-
-					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
-
+					notificaciones.mensajeSimple('No ha seleccionado ningún reporte', resultado, 'F')
 				}
 
-			} else {
-				notificaciones.mensajeSimple('No ha seleccionado ningún reporte', resultado, 'F')
 			}
 
+		} else {
+
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
 		}
 
-	} else {
-
-		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
-		
 	}
 
 })
@@ -423,15 +485,22 @@ qs("#edicion-notificaciones .reporte-actualizar").addEventListener('click', asyn
 /* -------------------------------------------------------------------------------------------------*/
 /*           					  NOTIFICACIONES - TEXTAREAS PREVIAS	 						    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#constancias-contenedor-notificaciones .cargar').addEventListener('mouseenter', e => {
 
-	qs('#constancias-contenedor-notificaciones .personalizacion-notificaciones').removeAttribute('data-hidden')	
+var previas = ['constancias', 'informes']
 
-})
+previas.forEach((reporte) => {
 
-qs('#constancias-contenedor-notificaciones .cargar').addEventListener('mouseleave', e => {
+	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseenter', e => {
 
-	qs('#constancias-contenedor-notificaciones .personalizacion-notificaciones').setAttribute('data-hidden', '')
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).removeAttribute('data-hidden')	
+
+	})
+
+	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseleave', e => {
+
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).setAttribute('data-hidden', '')
+
+	})
 
 })
 
@@ -439,6 +508,8 @@ qs('#constancias-contenedor-notificaciones .cargar').addEventListener('mouseleav
 /* ------------------------------ ABRIR SECCIÓN DE NOTIFICACIONES ----------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 qs('#notificacion-doctor').addEventListener('click', async e => {
+
+	notificaciones_reportes.posicion = undefined
 
 	//PETICION PARA ACTUALIZAR LISTA DE DATOS DE NOTIFIACION
 
@@ -448,7 +519,6 @@ qs('#notificacion-doctor').addEventListener('click', async e => {
 	e.target.classList.remove('notificacion-alerta')
 
 	//LIMPIAR DATOS
-	notificaciones_reportes.posicion = undefined
 	paginacionNotificaciones.animacion(0, true)
 	tools.limpiar(`.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, '', {})
 
@@ -459,6 +529,9 @@ qs('#notificacion-doctor').addEventListener('click', async e => {
 /* ------------------------------ ABRIR SECCIÓN DE NOTIFICADOS -------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 qs('#desplegable-abrir-notificados').addEventListener('click', async e => {
+
+	//LIMPIAR
+	notificados_reportes.posicion = undefined
 
 	//PETICION PARA ACTUALIZAR LISTA DE DATOS DE NOTIFIACION
 
@@ -526,15 +599,3 @@ setInterval(async () => {
     }
 
 }, 5000);
-
-//----------------------------------------------------------------------------------------------------
-//              				PASOS PARA LAS NOTIFICACIONES DE ANDREA
-//----------------------------------------------------------------------------------------------------
-
-//0- ABRIR EL DESPLEGABLE DE NOTIFICACIONES Y CLICKAR UN RENGLON
-//1- APLICAR FILTRO POR NUMERO DE HISTORIA EN EL CRUD DE HISTORIAS
-//2- BUSCAR EL BOTON EN LA TABLA DONDE LA COMPARATIVA DE ID_HISTORIA SEA IGUAL
-//3- LLAMAR A CUSTOMBBODYEVENTS "REPORTES" PASANDOLE LA REFERENCIA DEL BOTON PARA ABRIR EL CONTENEDOR FUNCIONALMENTE
-//4- RELLENAR LOS DATOS DEL DESPLEGABLE A LA SECCION CORRECTA [CAMBIAR A LA SECCION CORRESPONDIENTE DE FORMA AUTOMATICA CON LA REFERENCIA DEL REPORTE]
-
-//NOTAS: CUANDO SE CLICKEE UN BOTON DEBE: CERRARSE CUALQUIER POPUP ABIERTO, ABRIRSE EL DE REPORTES, LIMPIAR INFORMACION Y CARGAR CORRESPONDIENTE [BLOQUAR CLICKEO MIENTRAS SE ESTE CARGANDO ESTE PROCESO]

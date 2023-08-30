@@ -3471,7 +3471,7 @@ span.numeracion {
 .notificaciones-contenedor, .notificados-contenedor {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
 }
 
 .notificados-contenedor {
@@ -3587,12 +3587,19 @@ div#tabla-notificados-contenedor .titulo::after {
 
 .notificados-contenedor .eliminar {
     position: absolute;
-    background: lightgreen;
-    width: 10px;
-    height: 10px;
-    top: 5px; 
+    background: #009688;
+    top: 5px;
     right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #fff;
+    border: none;
+    padding: 5px;
+}
+
+.notificados-contenedor .eliminar:hover {
+    background: black;
 }
 
 /*-----------------------------------------------------*/

@@ -167,9 +167,64 @@ informes['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							informeS - CARGAR	  								    */
+/*           							CONSTANCIAS - NOTIFICAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-contenedor').identificador = 'informe'
+
+qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e => {
+
+	if (window.procesar) {
+
+		var elemento = qs('#informes-contenedor')
+
+		window.procesar = false
+
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+
+		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
+			var lista = {
+				"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"informe": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				},
+				"titulo": datos[0]
+			}
+
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+
+			if (typeof resultado === 'object' && resultado !== null) {
+
+				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+
+				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		}
+
+	} else {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+		
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           								INFORMES - CARGAR	  								    */
+/* -------------------------------------------------------------------------------------------------*/
 
 qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => {
 

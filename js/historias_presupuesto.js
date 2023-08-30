@@ -164,9 +164,63 @@ presupuestos['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							presupuestoS - CARGAR	  								    */
+/*           							PRESUPUESTOS - NOTIFICAR								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#presupuestos-contenedor').identificador = 'presupuesto'
+
+qs("#presupuestos-contenedor .reporte-notificar").addEventListener('click', async e => {
+
+	if (window.procesar) {
+
+		var elemento = qs('#presupuestos-contenedor')
+
+		window.procesar = false
+
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+
+		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
+			var lista = {
+				"id_historia": historias.sublista.id_historia,
+				"presupuesto": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				},
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
+			}
+
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+
+			if (typeof resultado === 'object' && resultado !== null) {
+
+				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+				
+				rellenar.contenedores(historias.sublista, '.presupuesto-representante-valores', {}, {})
+
+				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		}
+
+	} else {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+		
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							PRESUPUESTO - CARGAR	  								    */
+/* -------------------------------------------------------------------------------------------------*/
 
 qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e => {
 
@@ -196,6 +250,8 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 			if (typeof resultado === 'object' && resultado !== null) {
 
 				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+
+				rellenar.contenedores(historias.sublista, '.presupuesto-representante-valores', {}, {})
 
 				var sesion = [{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}]
 
@@ -234,7 +290,7 @@ qs("#presupuestos-contenedor .reporte-cargar").addEventListener('click', async e
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							presupuesto - PREVIA					  					    */
+/*           							PRESUPUESTO - PREVIA				  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e => {
 

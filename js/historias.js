@@ -24,9 +24,9 @@ const paginacionReportesDesplegable = new customDesplegable('#reportes-paginacio
 
 paginacionReportesDesplegable.eventos()
 
+/////////////////////////////////////////////////////
 window.notificados = new customDesplegable('#desplegable-notificados', '#desplegable-abrir-notificados', '#desplegable-cerrar-notificados', undefined, '400px')
-
-notificados.eventos()
+	   notificados.eventos()
 
 /////////////////////////////////////////////////////
 //BOTONES PAGINACION
@@ -78,7 +78,11 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#reposo-informacion', '#reposo-previa'],
 	['#repeditar-informacion', '#repeditar-previa'],
 
-	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones']
+	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
+	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
+	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
+	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
+	['#general-informacion-notificaciones', '#general-previa-notificaciones']
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
@@ -567,7 +571,10 @@ historias['crud']['customBodyEvents'] = {
 			historias.sublista = historias.tr.sublista
 
 			if (permitirLimpiezaReportes) {
-				historias.limpieza()
+
+				if (!prevenirCierreReporte) {
+					historias.limpieza()
+				}
 				permitirLimpiezaReportes = true
 			}
 	
@@ -576,8 +583,6 @@ historias['crud']['customBodyEvents'] = {
 			rellenar.contenedores(historias.sublista, '.constancia-cargar', {elemento: button, id: 'value'})
 			
 			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
-
-			tools.limpiar('.reportes-cargar', '', {})
 
 			rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
 
@@ -1236,6 +1241,7 @@ class Notificaciones_reportes extends Acciones {
 		this.limitante = 0
 		this.boton = ''
 		this.sublista = {}
+		this.posicion = undefined
 		//-------------------------------
 		this.div = document.createElement('div')
 		this.contenido = qs('#notificaciones-template').content.querySelector('.notificaciones-contenedor').cloneNode(true)
@@ -1269,6 +1275,7 @@ class Notificados_reportes extends Acciones {
 		this.limitante = 0
 		this.boton = ''
 		this.sublista = {}
+		this.posicion = undefined
 		//-------------------------------
 		this.div = document.createElement('div')
 		this.contenido = qs('#notificados-template').content.querySelector('.notificados-contenedor').cloneNode(true)
