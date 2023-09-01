@@ -3,7 +3,7 @@
     
     class Model extends ppal {
 
-        public $schema ='historias';
+        public $schema ='basicas';
         public $tabla = 'tratamientos';
 
         public $filtroMapa = [
@@ -13,8 +13,8 @@
         
         public function cargarTratamientos($args) {
             $sql = "
-                select * from historias.tratamientos as a
-                inner join historias.medicamentos as b using (id_medicamento)
+                select * from $this->schema.$this->tabla as a
+                inner join $this->schema.medicamentos as b using (id_medicamento)
                 where a.status = 'A' order by a.id_tratamiento desc limit 8000
             ";
             return $this->seleccionar($sql, $args);
@@ -30,8 +30,8 @@
                 $tra = '';
             }
 
-            $sql = "select * from historias.tratamientos as a
-                inner join historias.medicamentos as b using (id_medicamento) 
+            $sql = "select * from $this->schema.$this->tabla as a
+                inner join $this->schema.medicamentos as b using (id_medicamento) 
                 where a.status='A' and a.tratamientos::text like '%'|| UPPER('$busqueda') ||'%' 
                 or a.status='A' and b.nombre like '%'|| UPPER('$busqueda') ||'%' 
                 $tra order by id_tratamiento limit 8000";

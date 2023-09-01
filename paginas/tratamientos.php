@@ -47,7 +47,7 @@
       <div id="crud-eliminar-pop" class="popup-oculto">
         <button id="crud-eliminar-cerrar" data-crud='cerrar'>X</button>
         <section id="crud-eliminar-titulo" data-crud='titulo'>
-            ¿Confirma eliminar Tratamientos Médicos ?
+            ¿Confirma eliminar Tratamientos Médicos?
         </section>
         <p style="color:red">Esto eliminará permanentemente el Tratamiento Médico de la Base de Datos, si quieres deshabilitar el Tratamiento Médico lo puedes hacer desde la Opción de Editar</p>
         <section id="crud-eliminar-botones" data-crud='botones'>
