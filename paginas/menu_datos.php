@@ -102,6 +102,34 @@
 	));
 
 	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,medicamentos,bloquar',
+		"nombre"=> 'medicamentos',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,medicamentos,ul,lista,genericos,bloquear',
+		"nombre"=> 'genericos',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,medicamentos,ul,lista,tratamientos,bloquear',
+		"nombre"=> 'tratamientos',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,medicamentos,ul,lista,presentaciones,bloquear',
+		"nombre"=> 'presentaciones',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
 		"ruta" => 'configuracion,bloquear',
 		"nombre"=> 'configuracion',
 		"bloquear" => 0, 
@@ -266,6 +294,56 @@
 									"a": {
 										"href": "religiones.php",
 										"titulo": "Religión"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	}
+
+							}
+						},
+						"bloquear": 0
+				  	},
+
+				  	"medicamentos":  {
+				  		"atributos": "",
+				  		"span": {
+							"atributos": "class=tooltip-general",
+							"titulo": ""
+						},
+						"a": {
+							"href": "medicamentos.php",
+							"titulo": "Medicamentos"
+						},
+						"ul": {
+							"atributos": "",
+							"lista": {
+
+							  	"genericos":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "genericos.php",
+										"titulo": "Genéricos"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"presentaciones":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "presentaciones.php",
+										"titulo": "Presentaciones"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"tratamientos":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "tratamientos.php",
+										"titulo": "Tratamientos"
 									},
 									"ul": "",
 									"bloquear": 0

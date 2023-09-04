@@ -105,7 +105,7 @@ if(URLquery.has('posicion')) {
 //----------------------------------------------------------------------------------------------------
 //										MEDICAMENTOS                                           
 //----------------------------------------------------------------------------------------------------
-class Medicamentos extends Acciones {
+class medicamentos extends Acciones {
 
 	constructor(crud) {
 		super(crud)
@@ -134,10 +134,10 @@ class Medicamentos extends Acciones {
 }
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-var medicamentos = new Medicamentos(new Tabla(
+var medicamentos = new medicamentos(new Tabla(
 	[
 		['N° del medicamento', true, 0],
-		['Descripción del medicamento', true, 1],
+		['Descripción del Médicamento', true, 1],
 		['Status', true, 3],
 		['Acciones', false, 0]
 	],
@@ -154,9 +154,9 @@ medicamentos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], ''
 var estiloBotones = 'margin-right: 2px;height: 29px;display: inline-flex;justify-content: center;align-items: center;color: #fff;';
 
 medicamentos['crud'].cuerpo.push([medicamentos['crud'].columna = medicamentos['crud'].cuerpo.length, [
-		medicamentos['crud'].gBt(['editar btn btn-editar', 'Editar medicamento'], `<svg aria-hidden="true" class="iconos-b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
-		medicamentos['crud'].gBt(['presentacion btn btn-general', 'Editar presentaciones', estiloBotones], `<svg class="iconos-b" style="width: 15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M112 32C50.12 32 0 82.12 0 143.1v223.1c0 61.88 50.12 111.1 112 111.1s112-50.12 112-111.1V143.1C224 82.12 173.9 32 112 32zM160 256H64V144c0-26.5 21.5-48 48-48s48 21.5 48 48V256zM299.8 226.2c-3.5-3.5-9.5-3-12.38 .875c-45.25 62.5-40.38 150.1 15.88 206.4c56.38 56.25 144 61.25 206.5 15.88c4-2.875 4.249-8.75 .75-12.25L299.8 226.2zM529.5 207.2c-56.25-56.25-143.9-61.13-206.4-15.87c-4 2.875-4.375 8.875-.875 12.38l210.9 210.7c3.5 3.5 9.375 3.125 12.25-.75C590.8 351.1 585.9 263.6 529.5 207.2z"/></svg>`),
-		medicamentos['crud'].gBt(['tratamiento btn btn-general', 'Editar tratamientos', estiloBotones], `<svg class="iconos-b" style="width: 15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM288 301.7v36.57C288 345.9 281.9 352 274.3 352L224 351.1v50.29C224 409.9 217.9 416 210.3 416H173.7C166.1 416 160 409.9 160 402.3V351.1L109.7 352C102.1 352 96 345.9 96 338.3V301.7C96 294.1 102.1 288 109.7 288H160V237.7C160 230.1 166.1 224 173.7 224h36.57C217.9 224 224 230.1 224 237.7V288h50.29C281.9 288 288 294.1 288 301.7z"/></svg>`)
+		medicamentos['crud'].gBt(['editar btn btn-editar', 'Editar medicamento'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
+		medicamentos['crud'].gBt(['presentacion btn btn-general', 'Editar presentaciones', estiloBotones], `<svg class="iconos" style="width: 15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M112 32C50.12 32 0 82.12 0 143.1v223.1c0 61.88 50.12 111.1 112 111.1s112-50.12 112-111.1V143.1C224 82.12 173.9 32 112 32zM160 256H64V144c0-26.5 21.5-48 48-48s48 21.5 48 48V256zM299.8 226.2c-3.5-3.5-9.5-3-12.38 .875c-45.25 62.5-40.38 150.1 15.88 206.4c56.38 56.25 144 61.25 206.5 15.88c4-2.875 4.249-8.75 .75-12.25L299.8 226.2zM529.5 207.2c-56.25-56.25-143.9-61.13-206.4-15.87c-4 2.875-4.375 8.875-.875 12.38l210.9 210.7c3.5 3.5 9.375 3.125 12.25-.75C590.8 351.1 585.9 263.6 529.5 207.2z"/></svg>`),
+		medicamentos['crud'].gBt(['tratamiento btn btn-general', 'Editar tratamientos', estiloBotones], `<svg class="iconos" style="width: 15px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M256 0v128h128L256 0zM224 128L224 0H48C21.49 0 0 21.49 0 48v416C0 490.5 21.49 512 48 512h288c26.51 0 48-21.49 48-48V160h-127.1C238.3 160 224 145.7 224 128zM288 301.7v36.57C288 345.9 281.9 352 274.3 352L224 351.1v50.29C224 409.9 217.9 416 210.3 416H173.7C166.1 416 160 409.9 160 402.3V351.1L109.7 352C102.1 352 96 345.9 96 338.3V301.7C96 294.1 102.1 288 109.7 288H160V237.7C160 230.1 166.1 224 173.7 224h36.57C217.9 224 224 230.1 224 237.7V288h50.29C281.9 288 288 294.1 288 301.7z"/></svg>`)
 	], [0,0,0], ['VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
 ])
 /////////////////////////////////////////////////////
@@ -239,7 +239,7 @@ contenedores.eventos().checkboxes('status')
 
 contenedoresInsertar.eventos().contenedor(
 	'cc-insertar-genericos', //elemento
-	['combos', 'combo_genericos', ['', 80]],    //informacion de la petición
+	['medicamentos', 'combo_genericos', ['', 80]],    //informacion de la petición
 	[0, 2], 			   //limitador de busqueda
 	[true, true, [false, false], true, false, true, true, true, [true, false], false, false], //comportamientos extras
 	{} //funciones
@@ -247,7 +247,7 @@ contenedoresInsertar.eventos().contenedor(
 
 contenedoresEditar.eventos().contenedor(
 	'cc-editar-genericos', //elemento
-	['combos', 'combo_genericos', ['', 80]],    //informacion de la petición
+	['medicamentos', 'combo_genericos', ['', 80]],    //informacion de la petición
 	[0, 2], 			   //limitador de busqueda
 	[true, true, [false, false], true, false, true, true, true, [true, false], false, false], //comportamientos extras
 	{} //funciones
@@ -290,9 +290,7 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 				if (resultado.trim() === 'exito') {
 
-					await medicamentos.confirmarActualizacion(ediPop)
-
-					medicamentos.crud.botonForzar(true)
+					medicamentos.confirmarActualizacion(ediPop)
 				
 				} else {
 

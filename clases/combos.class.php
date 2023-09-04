@@ -42,6 +42,16 @@
             return $this->combos($args, [$sql, 'nombre', 'nombre ASC', '']);
         }
 
+        public function combo_medicamentos($args) {
+            $sql = "select id_medicamento, concat(id_medicamento,' || ', nombre), status from basicas.medicamentos where id_medicamento not in (select id_medicamento from basicas.tratamientos) and status = 'A' order by id_medicamento asc";
+            return $this->seleccionar($sql, []);
+        }
+
+         public function combo_genericos($args) {
+            $sql = "select id_generico, nombre from basicas.genericos";
+            return $this->combos($args, [$sql, 'nombre', 'id_generico']);
+        }
+
     }
 ?>
 
