@@ -777,6 +777,164 @@
 </div>
 
 <!------------------------------------------------------------------- -->
+<!---------------------------- RECIPES ------------------------------ -->
+<!------------------------------------------------------------------- -->
+<div id="crud-recipe-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-recipe-pop" class="popup-oculto" data-scroll style="padding: 2.5% !important">
+    <button id="crud-recipe-cerrar" data-crud='cerrar'>X</button>
+
+    <section style="height: 100%; width: 100%; display: flex; align-items: center;">
+      <div style="display: grid; height: 100%; grid-template-rows: 30px 100px 1fr 1fr; width: 100%;">
+        <div style="font-weight: 100 !important; width: 100%; font-size: 1.5em !important; text-align: right; border-bottom: 2px dashed #ccc; height: fit-content;">
+          RÉCIPES E INDICACIONES
+        </div>
+        <div class="filas">
+          <div class="columnas">
+            <div>
+              <label>N° Historia:</label>
+              <input type="number" data-recipe="id_historia" readonly="true" class="crud-recipe">
+            </div>
+            <div>
+              <label for="recipe-nombres" class="requerido">Nombres y Apellidos o Razón Social</label>
+              <input type="text" id="recipe-nombres"  maxlength="40" minlength="1" maxlength="40" data-recipe="apel_nomb" class="crud-recipe lleno upper recipe-limpiar">
+            </div>
+            <div>
+              <label for="imprimir-cedula" class="requerido">N° Cédula/Rif o pasaporte</label>
+              <input type="text" id="recipe-cedula" maxlength="20" minlength="1" data-recipe="nume_cedu" class="crud-recipe lleno upper recipe-limpiar">
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; height: 100%;">
+          <section style="font-size: 20px; text-align: left;" class="titulo">
+            MEDICAMENTOS
+          </section> 
+
+          <div style="display: grid; height: 100%; width: 100%; grid-template-rows: 35px 1fr auto;">
+            <div style="display: flex; position:relative; width: 40%;">
+              <input type="text"  id="salto" placeholder="test" style="display: block; position: absolute; top:-4200px" tabindex="1">
+              <input type="text" name="medicamentos-busqueda" id="medicamentos-busqueda" data-estilo="busqueda" placeholder="Busqueda" tabindex="2" style="height: 100%">
+              <button id="modo-buscar-medicamentos" data-estilo="modo-buscar" style="right: 32px; left: unset; top: 1px; width: 25px; height: 33px;">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort" class="svg-inline--fa fa-sort fa-w-10 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"></path></svg>
+              </button>
+              <button id="modo-buscar-medicamentos-preciso" data-estilo="modo-buscar" style="right: 58px; left: unset; top: 1px; width: 25px; height: 33px;">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sort" class="svg-inline--fa fa-sort fa-w-10 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z"></path></svg>
+              </button>
+              <button id="modo-insertar-medicamentos" title="Insertar medicamento">
+                +
+              </button>
+            </div>
+
+            <div class="tabla-ppal scroll" data-estilo="tabla-recipes">
+              <table id="tabla-medicamentos" class="table table-bordered table-striped">
+                  <thead>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+            </div>
+
+            <div style="display: flex; height: 100%; padding-top: 5px;">
+              <button id="izquierda-medicamentos" class="botones"><?php echo "<"?></button>
+              <div id="numeracion-medicamentos" data-estilo="numeracion-contenedor">
+                  <input class="numeracion-medicamentos" type="number" maxlength="3" minlength="0">
+                  <span class="numeracion-medicamentos" data-estilo="numeracion"></span> 
+              </div>
+              <button id="derecha-medicamentos" class="botones"><?php echo ">"?></button>          
+            </div>
+            <div id="crud-recipe-botones" data-crud='botones' style="padding: 0px; top: 20px; column-gap: 10px; display: flex; height: fit-content; min-height: fit-content; position: relative;">
+              <button class="botones-formularios imprimir" id="imprimir-recipe" style="height: fit-content; font-weight: bold; padding: 10px;">GUARDAR E IMPRIMIR</button>
+              <button class="botones-formularios cerrar" style="height: fit-content; min-width: 160px; font-weight: bold; padding: 10px;">CANCELAR</button> 
+            </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!------------------------------------------------------------------- -->
+<!------------------------- TRATAMIENTOS ------------------------- -->
+<!------------------------------------------------------------------- -->
+<div id="crud-tratamientos-popup" class="popup-oculto" data-crud='popup' style="background: transparent;">
+  <div id="crud-tratamientos-pop" class="popup-oculto">
+    <button id="crud-tratamientos-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-tratamientos-titulo" class="subtitulo">
+      Seleccionar y editar un tratamiento existente o llenar manualmente el campo [PROCESAR TRATAMIENTO]
+    </section> 
+
+    <div style="display: grid; height: 100%; width: 100%; grid-template-rows: 35px 1fr auto;">
+      <div style="display: flex;">
+        <input type="text" name="tratamientos-busqueda" id="tratamientos-busqueda" data-estilo="busqueda" placeholder="Busqueda">
+      </div>
+
+      <div class="tabla-ppal scroll" data-estilo="tabla-tratamientos">
+        <table id="tabla-tratamientos" class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+      </div>
+
+      <!-- <div style="display: flex; height: 100%;">
+        <button id="tratamientos-izquierda" class="botones"><?php echo "<"?></button>
+        <div id="tratamientos-numeracion" data-estilo="numeracion-contenedor">
+            <span class="tratamientos-numeracion" data-estilo="numeracion"></span>
+            <span class="tratamientos-numeracion" data-estilo="numeracion"></span> 
+        </div>
+        <button id="tratamientos-derecha" class="botones"><?php echo ">"?></button>          
+      </div> -->
+    </div>
+    <div class="filas columnas">
+      <label style="width: 100%; text-align: left; padding-top: 5px;">PROCESAR TRATAMIENTO</label>
+      <textarea spellcheck=true lang="es" cols="30" rows="3" id="tratamientos-seleccionado" class="scroll upper"></textarea>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------------- -->
+<!------------------------- PRESENTACIONES ------------------------- -->
+<!------------------------------------------------------------------- -->
+<div id="crud-presentaciones-popup" class="popup-oculto" data-crud='popup' style="background: transparent;">
+  <div id="crud-presentaciones-pop" class="popup-oculto">
+    <button id="crud-presentaciones-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-presentaciones-titulo" class="subtitulo">
+      Seleccionar y editar una presentación existente o llenar manualmente el campo [PROCESAR PRESENTACIÓN]
+    </section> 
+
+    <div style="display: grid; height: 100%; width: 100%; grid-template-rows: 35px 1fr auto;">
+      <div style="display: flex;">
+        <input type="text" name="presentaciones-busqueda" id="presentaciones-busqueda" data-estilo="busqueda" placeholder="Busqueda">
+      </div>
+
+      <div class="tabla-ppal scroll" data-estilo="tabla-presentaciones">
+        <table id="tabla-presentaciones" class="table table-bordered table-striped">
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+      </div>
+
+      <!-- <div style="display: flex; height: 100%;">
+        <button id="presentaciones-izquierda" class="botones"><?php echo "<"?></button>
+        <div id="presentaciones-numeracion" data-estilo="numeracion-contenedor">
+            <span class="presentaciones-numeracion" data-estilo="numeracion"></span>
+            <span class="presentaciones-numeracion" data-estilo="numeracion"></span> 
+        </div>
+        <button id="presentaciones-derecha" class="botones"><?php echo ">"?></button>          
+      </div> -->
+      <div class="filas columnas">
+        <label style="width: 100%; text-align: left; padding-top: 5px;">PROCESAR PRESENTACIÓN</label>
+        <textarea spellcheck=true cols="30" lang="es" rows="3" id="presentacion-seleccionada" class="scroll upper"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------------- -->
 <!------------------------- PREVIA REPORTES ------------------------- -->
 <!------------------------------------------------------------------- -->
 <div id="crud-previas-popup" class="popup-oculto" data-crud='popup'>

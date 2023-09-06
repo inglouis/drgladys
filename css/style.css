@@ -2656,7 +2656,7 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 120px;
+    max-width: 140px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
