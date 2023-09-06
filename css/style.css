@@ -4202,7 +4202,7 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 #tabla-tratamientos tbody tr td:nth-child(1) {
-    width: 3%;
+    width: 3%; 
 }
 
 #tabla-tratamientos tbody tr td:nth-child(2) {
