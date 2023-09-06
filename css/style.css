@@ -714,6 +714,15 @@ span.numeracion {
     background: #337ab7;
 }
 
+.botones-cabecera {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    column-gap: 5px;
+    flex-direction: row-reverse;
+}
+
 /*---------------------------------------------------*/
 #titulo-contenedor {
     width: 100%;
@@ -2647,7 +2656,7 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 120px;
+    max-width: 140px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
@@ -4168,8 +4177,318 @@ div#tabla-notificados-contenedor .titulo::after {
     content: "Solo Monedas Desactivadas [D]";
 }
 
+/*-----------------------------------------------------*/
+/*------------------- TRATAMIENTOS --------------------*/
+/*-----------------------------------------------------*/
+#insertar-tratamientos::after {
+    width: 200px;
+}
+
+#insertar-tratamientos:hover::after {
+    content: "Agregar nuevo tratamiento";
+    opacity: 1;
+    width:230px;
+}
+
+.tratamientos-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(2) {
+    width: 20%;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(3) {
+    width: 100%;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(4) {
+    min-width: 100px;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(5) {
+    min-width: 100px;
+}
+
+.tratamientos-status:nth-child(1)::after {
+    content:"Solo Tratamientos Activados [A]";
+}
+
+.tratamientos-status:nth-child(2)::after {
+    content: "Solo Tratamientos Desactivados [D]";
+}
+
+#tabla-tratamientos-editar tbody tr td:nth-child(1), #tabla-tratamientos-insertar tbody tr td:nth-child(1) {
+    width:5%;
+}
+
+#tabla-tratamientos-editar tbody tr td:nth-child(2), #tabla-tratamientos-insertar tbody tr td:nth-child(1) {
+    width:90%;
+}
+
+#tabla-tratamientos-editar tbody tr td:nth-child(3), #tabla-tratamientos-insertar tbody tr td:nth-child(1) {
+    width:10%;
+    min-width: 30px;
+}
+
+[data-estilo="tabla-tratamientos"] {
+    min-height: 300px;
+    border: 1px solid #ccc;
+}
+
+#tratamientos-insertar:hover::after {
+    content: "Cargar nuevo tratamiento";
+}
+
+#regresar-medicamentos .tooltip-filtro-reverso:after {
+    content: "Regresar a los medicamentos";
+    width: 200px;
+}
+
+/*-----------------------------------------------------*/
+/*------------------- PRESENTACIONES ------------------*/
+/*-----------------------------------------------------*/
+#insertar-presentaciones::after {
+    width: 200px;
+}
+
+#insertar-presentaciones:hover::after {
+    content: "Agregar nueva presentación";
+    opacity: 1;
+    width:230px;
+}
+
+.presentaciones-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-presentaciones tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-presentaciones tbody tr td:nth-child(2) {
+    width: 20%;
+}
+
+#tabla-presentaciones tbody tr td:nth-child(3) {
+    width: 100%;
+}
+
+#tabla-presentaciones tbody tr td:nth-child(4) {
+    min-width: 100px;
+}
+
+#tabla-presentaciones tbody tr td:nth-child(5) {
+    min-width: 100px;
+}
+
+.tratamientos-status:nth-child(1)::after {
+    content:"Solo Presentaciones Activados [A]";
+}
+
+.tratamientos-status:nth-child(2)::after {
+    content: "Solo Presentaciones Desactivados [D]";
+}
+
+#tabla-presentaciones-editar tbody tr td:nth-child(1), #tabla-presentaciones-insertar tbody tr td:nth-child(1) {
+    width:5%;
+}
+
+#tabla-presentaciones-editar tbody tr td:nth-child(2), #tabla-presentaciones-insertar tbody tr td:nth-child(1) {
+    width:90%;
+}
+
+#tabla-presentaciones-editar tbody tr td:nth-child(3), #tabla-presentaciones-insertar tbody tr td:nth-child(1) {
+    width:10%;
+    min-width: 30px;
+}
+
+[data-estilo="tabla-presentaciones"] {
+    min-height: 300px;
+    border: 1px solid #ccc;
+}
+
+#presentaciones-insertar:hover::after {
+    content: "Cargar nuevo presentaciones";
+}
+
+#regresar-medicamentos .tooltip-filtro-reverso:after {
+    content: "Regresar a los medicamentos";
+    width: 200px;
+}
+
+/*-----------------------------------------------------*/
+/*------------------- MEDICAMENTOS --------------------*/
+/*-----------------------------------------------------*/
+#insertar-medicamentos::after {
+    width: 200px;
+}
+
+#insertar-medicamentos:hover::after {
+    content: "Agregar nuevo medicamento";
+    opacity: 1;
+    width:230px;
+}
+
+.medicamentos-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-medicamentos tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+#tabla-medicamentos tbody tr td:nth-child(2) {
+    width: 20%;
+}
+
+#tabla-medicamentos tbody tr td:nth-child(3) {
+    width: 100%;
+}
+
+#tabla-medicamentos tbody tr td:nth-child(4) {
+    min-width: 100px;
+}
+
+#tabla-medicamentos tbody tr td:nth-child(5) {
+    min-width: 100px;
+}
+
+.tratamientos-status:nth-child(1)::after {
+    content:"Solo Medicamentos Activados [A]";
+}
+
+.tratamientos-status:nth-child(2)::after {
+    content: "Solo Medicamentos Desactivados [D]";
+}
+
+[data-estilo="tabla-medicamentos"] {
+    min-height: 300px;
+    border: 1px solid #ccc;
+}
+
+#medicamentos-presentaciones .tooltip-filtro-reverso:after {
+    content: "Ir a las presentaciones";
+    width: 200px;
+}
+
+#medicamentos-tratamientos .tooltip-filtro-reverso:after {
+    content: "Ir a los tratamientos";
+    width: 200px;
+}
+
+#medicamentos-genericos .tooltip-filtro-reverso:after {
+    content: "Ir a los medicamentos genéricos";
+    width: 250px;
+}
+
+#medicamentos-regresar .tooltip-filtro-reverso:after {
+    content: "Regresar a los medicamentos";
+    width: 200px;
+}
+
+#medicamentos-regresar {
+    position: absolute;
+    right: 0px;
+    /* top: 0px; */
+    bottom: 0px;
+}
+
+#cc-editar-genericos, #cc-insertar-genericos {
+    flex-direction: row !important;
+}
+
+#cc-editar-genericos input, #cc-insertar-genericos input {
+    height: 40px;
+}
+
+#cc-editar-genericos section, #cc-insertar-genericos section {
+    height: fit-content;
+}
+
+#cc-insertar-genericos .cc-div, #cc-editar-genericos .cc-div  {
+    display: flex;
+    flex-direction: row;
+}
+
+#cc-insertar-genericos .ccContenedor, #cc-editar-genericos .ccContenedor {
+    width: 100%;
+}
+
+/*-----------------------------------------------------*/
+/*-------------------genericos--------------------------*/
+/*-----------------------------------------------------*/
+#insertar-genericos::after {
+    width: 200px;
+}
+
+#insertar-genericos:hover::after {
+    content: "Agregar Nueva Medicina Genérica";
+    opacity: 1;
+    width:230px;
+}
+.genericos-contenedor {
+    width: 99%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center!important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabla-genericos tbody tr td:nth-child(1) {
+
+}
+
+#tabla-genericos tbody tr td:nth-child(2) {
+
+}
+
+#tabla-genericos tbody tr td:nth-child(3) {
+
+}
+
+#tabla-genericos tbody tr td:nth-child(4) {
+
+}
+
+.genericos-status:nth-child(1)::after {
+    content:"Solo Medicinas Genéricas Activas [A]";
+}
+
+.genericos-status:nth-child(2)::after {
+    content: "Solo Medicinas Genéricas Desactivadas [D]";
+}
+
 /*------------------------------------*/
-/*paginacion contenedores*/
+/*      paginacion contenedores       */
 /*------------------------------------*/
 #paginacion-contenedores {
   position: absolute;
@@ -4320,6 +4639,7 @@ div#tabla-notificados-contenedor .titulo::after {
     display: flex !important;
     flex-direction: column;
     width: 100%;
+    position: relative;
 }
 
 .confirmar { 
@@ -4732,9 +5052,6 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 [data-estilo="cc-div"] {
-    height: 100%;
-    max-height: 100px !important;
-    min-height: 100px !important;
     border: 1px solid #ccc !important;
     border-top: 0px;
     padding: 3px;

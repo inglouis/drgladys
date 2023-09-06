@@ -1,116 +1,128 @@
-import  {Tabla} from '../js/crud.js';
-import  {PopUp, Acciones, Herramientas, Filtros, paginaCargada, Rellenar} from '../js/main.js';
-const eliPop = new PopUp('crud-eliminar-popup','popup', 'subefecto', false)
-const ediPop = new PopUp('crud-editar-popup','popup', 'subefecto', true)
-const insPop = new PopUp('crud-insertar-popup','popup', 'subefecto', true)
-
-const tools = new Herramientas()
-window.filtros = new Filtros('genericos-filtros')
-window.filtrosInsertar  = new Filtros('crud-insertar-popup')
-window.filtrosEditar  = new Filtros('crud-editar-popup')
 /////////////////////////////////////////////////////
-window.qs    = document.querySelector.bind(document)
-window.qsa   = document.querySelectorAll.bind(document)
+//IMPORTA EL CÓDIGO DEL CRUD
+/////////////////////////////////////////////////////
+import {Tabla} from '../js/crud.js';
+
+/////////////////////////////////////////////////////
+//IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
+/////////////////////////////////////////////////////
+import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Notificaciones} from '../js/main.js';
+
+/////////////////////////////////////////////////////
+//GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
+/////////////////////////////////////////////////////
+const eliPop = new PopUp('crud-eliminar-popup', 'popup', 'subefecto', true, 'eliminar', '', 27)
+const ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'editar', '', 27)
+const insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', '', 27)
+
+ediPop.evtBotones()
+insPop.evtBotones()
+eliPop.evtBotones()
+
+window.addEventListener('keyup', (e) => {
+
+	ediPop.evtEscape(e)
+	insPop.evtEscape(e)
+	eliPop.evtEscape(e)
+
+})
+
+/////////////////////////////////////////////////////
+//HERRAMIENTAS GENERALES
+/////////////////////////////////////////////////////
+const tools = new Herramientas()
+
+/////////////////////////////////////////////////////
+//NOTIFICACIONES GENERALES
+/////////////////////////////////////////////////////
+var notificaciones = new Notificaciones()
+
+//notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'ALERTA')
+//notificaciones.mensajeSimple('Procesando...', false, 'V')
+
+/////////////////////////////////////////////////////
+//GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
+/////////////////////////////////////////////////////
+window.contenedores = new ContenedoresEspeciales('genericos-status')
+
+window.contenedoresConsultar = new ContenedoresEspeciales('crud-informacion-popup') 
+window.contenedoresEditar = new ContenedoresEspeciales('crud-editar-popup') 
+
+/////////////////////////////////////////////////////
+window.qs = document.querySelector.bind(document)
+window.qsa = document.querySelectorAll.bind(document)
+/////////////////////////////////////////////////////
+window.procesar = true;
+window.idSeleccionada = 0
+/////////////////////////////////////////////////////
+//REVISA QUE LA PÁGINA YA CARGO POR COMPLETO PARA QUITAR LA ANIMACIÓN DE CARGA
+/////////////////////////////////////////////////////
+window.cargar = new paginaCargada('#tabla-genericos thead .ASC', 'existencia')
+window.cargar.revision()
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 /////////////////////////////////////////////////////
-window.procesar = true;
-window.idEliminar = 0
-window.idSeleccionada = 0
-
-window.cargar = new paginaCargada('#tabla-genericos thead .ASC', 'existencia')
-window.cargar.revision()
-
-window.contenedoresMapa = [
-	['editar', ediPop, 'popup', ''],
-	['eliminar', eliPop, 'popup', ''],
-	['insertar', insPop, 'popup', 'genericos'],
-]
-
-/////////////////////////////////////////////////////
 var sesiones = await window.sesiones()
 /////////////////////////////////////////////////////
-//var banderas = JSON.parse(sesiones.usuario.banderas)['recibos']
-var configuracion = JSON.parse(sesiones.usuario.configuracion)
-/////////////////////////////////////////////////////
-
-//---------------------------------------------------------------------------------//
-//								genericos
-//---------------------------------------------------------------------------------//
-
+//----------------------------------------------------------------------------------------------------
+//										genericos                                           
+//----------------------------------------------------------------------------------------------------
 class Genericos extends Acciones {
-	constructor (crud) {
+
+	constructor(crud) {
 		super(crud)
 		this.fila
-		this.clase = 'genericos'
-		this.funcion = 'buscarGenericos'
+		this.uso   = 'genericos'
+		this.funcion = 'buscar_genericos'
+		this.cargar  = 'cargar_genericos' 
 		//-------------------------------
-		this.alternar =  [true, '#fff' , '#fff']
-		this.especificos =  ['id_generico', 'nombre']
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['id_generico', 'nombre']
 		this.limitante = 0
 		this.boton = ''
 		//-------------------------------
+		this.div = document.createElement('div')
 	}
 
-	actualizar(datos, params, excepciones) {
-		tools['mensaje'] = 'Procesando...'
-		tools.mensajes(['#ffc107', '#fff'])
-		var th = this
-		var peticion = this.query(params[0], datos, excepciones)
-		peticion.onreadystatechange = function() {
-	        if (this.readyState == 4 && this.status == 200) {
-	        	window.procesar = true
+	async confirmarActualizacion(popUp) {
 
-				if (this.responseText.trim() === 'exito') {
-					tools['mensaje'] = 'Petición realizada con éxito'
-					tools.mensajes(true)
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+		
+		popUp.pop()
 
-					setTimeout(() => {
-						params[2].pop()
-						var peticion = th.query(params[1], [])
-							peticion.onreadystatechange = function() {
-		        				if (this.readyState == 4 && this.status == 200) {
-		        					qs('#tabla-genericos tbody').innerHTML = ''
-		        					window.lista = JSON.parse(this.responseText)
-				        			th.cargarTabla(window.lista)
-				        		}
-				    		}
-					}, 1000)
-				} else if (this.responseText.trim() === 'repetido') {
-					tools['mensaje'] = 'El Registro ya existe'
-					tools.mensajes(false)
-				} else {
-					tools['mensaje'] = 'Error al procesar la petición'
-					tools.mensajes(false)
-					console.log(this.responseText)
-				}
-	        } else {
-	        	window.procesar = true
-	        }
-	    };
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.uso, this.cargar, []))
+
+		this.cargarTabla(resultado, true)
+
 	}
+
 }
-
-//----------------------------------------------------------------------------------------------------
-//										GENERICOS                                           
-//----------------------------------------------------------------------------------------------------
+/////////////////////////////////////////////////////
+///
 window.genericos = new Genericos(new Tabla(
 	[
 		['Código', true, 0],
-		['Nombre del Medicamento Generico', true, 1],
+		['Nombre del medicamento genérico', true, 1],
 		['Status', true, 2],
 		['Acciones', false, 0]
 	],
-	'tabla-genericos','busqueda', Number(configuracion.filas),'izquierda','derecha','numeracion',true
+	'tabla-genericos', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true
 ))
+/////////////////////////////////////////////////////
+///
+genericos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
+genericos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 1)
+genericos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 2)
 
-genericos['crud'].cuerpo.push([genericos['crud'].columna = genericos['crud'].cuerpo.length, [genericos['crud'].gSpan(null,null)], [false], ['HTML'], '', 0])
-genericos['crud'].cuerpo.push([genericos['crud'].columna = genericos['crud'].cuerpo.length, [genericos['crud'].gSpan(null,null)], [false], ['HTML'], '', 1])
-genericos['crud'].cuerpo.push([genericos['crud'].columna = genericos['crud'].cuerpo.length, [genericos['crud'].gSpan(null,null)], [false], ['HTML'], '', 2])
 genericos['crud'].cuerpo.push([genericos['crud'].columna = genericos['crud'].cuerpo.length, [
-		genericos['crud'].gBt('editar btn btn-success', `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
-	], [false], ['VALUE'], '', 0])
+	genericos['crud'].gBt(['editar btn btn-editar', '', 'padding: 3px;'], `<svg class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
+], [false], ['VALUE'], '', 0])
 
+/////////////////////////////////////////////////////
+genericos['crud']['limitante'] = 1
+
+/////////////////////////////////////////////////////
+///
 genericos['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	['id_generico'],
 	['id_generico', 'nombre']
@@ -124,6 +136,8 @@ genericos['crud'].botonModoBusqueda("#modo-buscar", 1, [
 	}
 }})
 
+/////////////////////////////////////////////////////
+///
 genericos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           evento que envia los datos del boton de editar del crud al contenedor de edicion       */
@@ -144,29 +158,36 @@ genericos['crud']['customBodyEvents'] = {
 
 			}
 
-			genericos.limpiar('.crud-valores', '', {})
-			rellenar.contenedores(sublista, '.crud-valores', {elemento: button, id: 'value'})
+			tools.limpiar('.editar-valores', '', {})
+			rellenar.contenedores(sublista, '.editar-valores', {elemento: button, id: 'value'})
 
 			ediPop.pop()
 		}
 	}
 };
 
-genericos['crud']['clase'] = 'genericos'
-genericos['crud']['funcion'] = 'buscarGenericos';
-
 (async () => {
-	var resultado = await tools.fullAsyncQuery('genericos', 'cargarGenericos', [])
-	genericos.cargarTabla(JSON.parse(resultado))
-	genericos['crud'].botonBuscar('buscar', false) 	
+	var resultado = await tools.fullAsyncQuery('genericos', 'cargar_genericos', [])
+	genericos.cargarTabla(JSON.parse(resultado), undefined, undefined)
 })()
 
-/* -------------------------------------------------------------------------------------------------*/
-/*   		Evento que refresca la el crud con datos sql*							                */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#procesar').addEventListener('click', e => {
+//----------------------------------------------------------------------------------------------------
+//										E V E N T O S                                                
+//----------------------------------------------------------------------------------------------------
+contenedores.eventos().checkboxes('status')
+
+//contenedoresConsultar.eventos().combo('cc-ocupacion-consultar', ['combos', 'combo_ocupacion', ['', '']], false, {})
+//contenedoresEditar.eventos().combo('cc-ocupacion-editar', ['combos', 'combo_ocupacion', ['', '']], false, {})
+
+//----------------------------------------------------------------------------------------------------
+//						Evento del botón de aplicar filtros en la tabla principal
+//----------------------------------------------------------------------------------------------------
+qs('#procesar').addEventListener('click', async e => {
+
 	genericos.spinner('#tabla-genericos tbody')
-	var peticion = filtros.procesar(tools.fullQuery, 'genericos','filtrar')
+	
+	var peticion = contenedores.procesar(tools.fullQuery, 'genericos','filtrar')
+
 	peticion.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
         	qs('#tabla-genericos tbody').innerHTML = ''
@@ -175,43 +196,74 @@ qs('#procesar').addEventListener('click', e => {
     };
 })
 
-//----------------------------------------------------------------------------------------------------
-//										E V E N T O S                                                
-//----------------------------------------------------------------------------------------------------
-filtros.eventos().checkboxes('status')
-
-/* -------------------------------------------------------------------------------------------------*/
-/*   		Evento que limpia los datos del contenedor de insertar*                */
-/* -------------------------------------------------------------------------------------------------*/
-qs('#crud-insertar-limpiar').addEventListener('click', e => {
-	genericos.limpiar('.nuevos', '', {
-		"procesado": e => {
-			tools['mensaje'] = 'Datos limpiados'
-			tools.mensajes(true)
-		},
-		"asegurar": () => {return '#crud-insertar-pop'}
-	})
-})
-
 /* -------------------------------------------------------------------------------------------------*/
 /*   		Evento que envia los datos al metodo de javascript que hace la peticion*                */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-editar-botones').addEventListener('click', e => {
-	var datos = genericos.confirmar(e.target, 'editar', 'crud-valores', tools);
-	(datos !== '') ? genericos.actualizar(datos, ['actualizarGenericos', 'cargarGenericos', ediPop], [["+", "%2B"]]) : '' 
+qs('#crud-editar-botones').addEventListener('click', async e => {
+
+	if(e.target.classList.contains('editar')) {
+
+		if(window.procesar) {
+
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+
+			window.procesar = false
+
+			var datos = tools.procesar(e.target, 'editar', 'editar-valores', tools)
+
+			if (datos !== '') {
+
+				var resultado = await tools.fullAsyncQuery('genericos', 'actualizar_genericos', datos)
+
+				if (resultado.trim() === 'exito') {
+
+					genericos.confirmarActualizacion(ediPop)
+				
+				} else {
+
+					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+				}
+
+			}
+
+		} else {
+
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
+		}
+	}
 })
 
 /* -------------------------------------------------------------------------------------------------*/
 /*                    evento que envia los datos a php para la insersión                            */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-insertar-botones').addEventListener('click', e => {
+qs('#crud-insertar-botones').addEventListener('click', async e => {
+
 	if (e.target.classList.contains('insertar')) {
-		var datos = genericos.confirmar(e.target, 'insertar', 'nuevos', tools)
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+
+		var datos = tools.procesar(e.target, 'insertar', 'insertar-valores', tools)
+
 		if (datos !== '') {
-			genericos.actualizar(datos, ['crearGenericos', 'cargarGenericos', insPop], [["+", "%2B"]])
+
+			var resultado = await tools.fullAsyncQuery('genericos', 'crear_genericos', datos)
+
+			if (resultado.trim() === 'exito') {
+
+				genericos.confirmarActualizacion(insPop)
+			
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
 		} else {
-			tools['mensaje'] = 'Campos vacíos'
-			tools.mensajes(false)
+
+			notificaciones.mensajeSimple('Campos vacíos', resultado, 'F')
+
 		}
 	}
 })
@@ -222,51 +274,19 @@ qs('#crud-insertar-botones').addEventListener('click', e => {
 qs('#tabla-genericos').addEventListener('click', e => {
 	if (e.target.tagName === 'BUTTON') {
 		if (e.target.classList.contains('eliminar')) {
-			window.idEliminar = Number(e.target.classList[3])
+			idEliminar = Number(e.target.value)
 			eliPop.pop()
 		}
 	}
 })
 
 /* -------------------------------------------------------------------------------------------------*/	
-//                      generador de eventos de los botones de cada contenedor
-/* -------------------------------------------------------------------------------------------------*/
-contenedoresMapa.forEach((e,i) => {
-	if(qs(`#crud-${e[0]}-cerrar`)) {
-		qs(`#crud-${e[0]}-cerrar`).addEventListener('click', () => {	
-			e[1].pop()
-		})
-	}
-
-	if(qs(`#crud-${e[0]}-botones`)) {
-		qs(`#crud-${e[0]}-botones`).addEventListener('click', (el) => {
-			if(el.target.classList.contains('cerrar')) {
-				e[1].pop()
-			}	
-		})
-	}
-});
-
-window.addEventListener('keyup', (el) => {
-	contenedoresMapa.forEach((e,i) => {
-		if (el.keyCode === 27 && qs(`#crud-${e[0]}-popup`).classList.contains(`${e[2]}-activo`)) {
-			if(qs(`#crud-${e[3]}-popup`)) {
-				if(qs(`#crud-${e[3]}-popup`).classList.contains('popup-oculto')) {
-					e[1].pop()
-				}	
-			} else {
-				e[1].pop()
-			}  	
-		}
-	})
-})
-
-/* -------------------------------------------------------------------------------------------------*/	
 //                      eventos exclusivos de el archivo js
 /* -------------------------------------------------------------------------------------------------*/
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-qs('#insertar-genericos').addEventListener('click', e => {
+qs('#genericos-insertar').addEventListener('click', e => {
+	tools.limpiar('.nuevos', '', {})
 	window.idSeleccionada = 0
-	genericos.limpiar('.nuevos', '', {"asegurar": () => {return '#crud-insertar-pop'}})
 	insPop.pop()
 })

@@ -1,19 +1,19 @@
 <?php
     require('../clases/ppal.class.php');
     class Model extends ppal {
-        public $schema ='historias';
+        public $schema ='basicas';
         public $tabla = 'genericos';
         public $filtroMapa = [
             0 => "status = '?'",
             1 => "status = '?'"
         ];
      
-        public function cargarGenericos($args) {
+        public function cargar_genericos($args) {
             $sql = "select id_generico, trim(nombre) as nombre, trim(status) as status from $this->schema.$this->tabla where status='A' order by id_generico DESC limit 8000";
                 return $this->seleccionar($sql, $args);
         }
 
-        public function buscarGenericos($args) {
+        public function buscar_genericos($args) {
             $busqueda = $args[0];
 
             if (is_numeric($busqueda) || gettype($busqueda) == 'integer' || ctype_digit($busqueda)) {
@@ -26,7 +26,7 @@
                 return $this->seleccionar($sql, []);
         }
 
-        public function crearGenericos($args){
+        public function crear_genericos($args){
 
             $resultado = ($this->i_pdo("select id_generico from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
@@ -40,7 +40,7 @@
             
         }
 
-        public function actualizarGenericos($args) { 
+        public function actualizar_genericos($args) { 
 
             $resultado = ($this->i_pdo("select id_generico from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) and id_generico != $args[2] limit 1", [], true))->fetchColumn();
 
@@ -53,13 +53,15 @@
                     
         }
 
-        public function eliminaGenerico($args){    
+        public function elimina_generico($args){    
            $sql ="delete from $this->schema.$this->tabla where id_generico = ?";
            return $this->eliminar($sql, $args);
         }
+
         //--------------------------------------------------------------
         //--------------------------------------------------------------
-        public function traerGenerico($args){     
+        
+        public function traer_generico($args){     
             $sql = "select * from $this->schema.$this->tabla where id_generico = ?";
             return $this->seleccionar($sql, $args);
         }   

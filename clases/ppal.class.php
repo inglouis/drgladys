@@ -175,7 +175,7 @@ class ppal extends cbdc
 
 		if (stripos($sql,'returning') !== false) {
 
-			$datos = $this->i_pdo($sql, $args, true, true, $mensaje);
+			$datos = $this->i_pdo($sql, $args, true);
 			$resultado = $datos->fetchAll(PDO::FETCH_ASSOC);
 
         	return $resultado; 

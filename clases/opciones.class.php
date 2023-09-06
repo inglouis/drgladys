@@ -169,7 +169,19 @@
 	//------------------------------------------------
 	if (!isset($_SESSION['modo_filas'])) {
 
-		$_SESSION['modo_filas'] = 14;
+		if ($_SESSION['usuario']['usuario'] == 'GLADYS') {
+
+			$_SESSION['modo_filas'] = 18;
+
+		} else if ($_SESSION['usuario']['usuario'] == 'ANDREA') {
+
+			$_SESSION['modo_filas'] = 16;
+
+		} else {
+
+			$_SESSION['modo_filas'] = 16;
+
+		}
 
 	}
 
