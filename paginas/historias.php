@@ -46,6 +46,7 @@
       include_once('../cruds/historias.crud.php');
       include_once('../cruds/historias_evoluciones.crud.php');
       include_once('../cruds/historias_notificaciones.crud.php');
+      include_once('../cruds/historias_recipes.crud.php');
     ?>
 
     </div>
@@ -135,6 +136,7 @@
       <button class="informacion" title="Consultar información del paciente"></button>
       <button class="editar" title="Editar historia del paciente"></button>
       <button class="reportes" title="Reportes del paciente"></button>
+      <button class="recipes" title="Recipes & indicaciones del paciente"></button>
       <!--
         <button class="recipes" title="Recipes indicaciones"></button>
         <button class="evoluciones" title="Evoluciones"></button>

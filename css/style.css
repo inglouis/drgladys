@@ -1641,6 +1641,19 @@ span.numeracion {
     position: relative;
 }
 
+#crud-presentaciones-pop,
+#crud-tratamientos-pop {
+    background: #f5f5f5d1;
+    padding: 15px;
+    justify-content: center;
+    display: flex;
+    width: 300px;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
 #crud-editar-pop, #crud-insertar-pop,
 #crud-insertar-ocupaciones-pop,
 #crud-insertar-proveniencias-pop,
@@ -1678,7 +1691,7 @@ span.numeracion {
     box-shadow: 0px 0px 1px 1px #fff;
 }
 
-#crud-reportes-pop {
+#crud-reportes-pop, #crud-recipes-pop {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -2748,6 +2761,30 @@ span.numeracion {
 }
 
 /*--------------------------------------------------------------*/
+/*--------------------------- RECIPES --------------------------*/
+/*--------------------------------------------------------------*/
+
+#crud-recipes-contenedor {
+    padding: 15px 0px;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    align-items: baseline;
+    grid-template-columns: 1fr 1fr;
+}
+
+#crud-recipes-contenedor .derecha,  #crud-recipes-contenedor .izquierda {
+    width: 100%;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr auto;
+}
+
+#crud-recipes-contenedor .derecha .tabla-ppal,  #crud-recipes-contenedor .izquierda .tabla-ppal {
+    height: 100%;
+}
+
+/*--------------------------------------------------------------*/
 /*------------------ CONTENEDORES REPORTES ---------------------*/
 /*--------------------------------------------------------------*/
 .contenedor-reportes {    
@@ -3559,6 +3596,7 @@ span.numeracion {
 
 #tabla-notificados-contenedor {
     padding: 12px;
+    overflow-x: hidden;
 }
 
 #desplegable-cerrar-notificados {
@@ -4360,11 +4398,11 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 #tabla-medicamentos tbody tr td:nth-child(1) {
-    width: 3%;
+    width: 10%;
 }
 
 #tabla-medicamentos tbody tr td:nth-child(2) {
-    width: 20%;
+    width: auto;
 }
 
 #tabla-medicamentos tbody tr td:nth-child(3) {

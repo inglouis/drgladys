@@ -94,6 +94,7 @@ window.ediPop = new PopUp('crud-editar-popup', 'popup', 'subefecto', true, 'edit
 window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'insertar', ['insertar-ocupaciones', 'insertar-proveniencias', 'insertar-parentescos', 'insertar-estado_civil', 'insertar-religiones', 'insertar-medicos'], 27)
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
+window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', '', 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -111,10 +112,14 @@ window.forPop = new PopUp('crud-infeditar-popup', 'popup', 'subefecto', true, 'i
 window.presPop = new PopUp('crud-preeditar-popup', 'popup', 'subefecto', true, 'preeditar', '', 27);
 window.repoPop = new PopUp('crud-repeditar-popup', 'popup', 'subefecto', true, 'repeditar', '', 27);
 
+window.traPop = new PopUp('crud-tratamientos-popup', 'popup', 'subefecto', true, 'tratamientos', '', 27)
+window.presenPop = new PopUp('crud-presentaciones-popup', 'popup', 'subefecto', true, 'presentaciones', '', 27);
+
 ediPop.evtBotones()
 insPop.evtBotones()
 infPop.evtBotones()
 notPop.evtBotones()
+recPop.evtBotones()
 
 ocuPop.evtBotones()
 proPop.evtBotones()
@@ -132,12 +137,16 @@ forPop.evtBotones()
 presPop.evtBotones()
 repoPop.evtBotones()
 
+traPop.evtBotones()
+presenPop.evtBotones()
+
 window.addEventListener('keyup', (e) => {
 
 	ediPop.evtEscape(e)
 	insPop.evtEscape(e)
 	infPop.evtEscape(e)
 	notPop.evtEscape(e)
+	recPop.evtEscape(e)
 
 	ocuPop.evtEscape(e)
 	proPop.evtEscape(e)
@@ -154,6 +163,9 @@ window.addEventListener('keyup', (e) => {
 	forPop.evtEscape(e)
 	presPop.evtEscape(e)
 	repoPop.evtEscape(e)
+
+	traPop.evtEscape(e)
+	presenPop.evtEscape(e)
 
 })
 
@@ -600,7 +612,45 @@ historias['crud']['customBodyEvents'] = {
 
 		}
 
-	}
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           							RECIPES & INDICACIONES									    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"recipes": async (e) => {
+
+		var button
+
+		if (tools.esDOM(e)) {
+
+			button = e
+
+		} else {
+
+			button = e.target
+			permitirLimpiezaReportes = true
+
+		}
+
+		if (button.classList.contains('recipes')) {
+
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .recipes')
+
+			historias.tr = tools.pariente(button, 'TR')
+			historias.sublista = historias.tr.sublista
+
+			if (permitirLimpiezaReportes) {
+				historias.limpieza()
+				permitirLimpiezaReportes = true
+			}
+
+			//tools.limpiar('.recipes-valores', '', {})
+			//rellenar.contenedores(historias.sublista, '.recipes-valores', {elemento: button, id: 'value'}, {})
+
+			recPop.pop()
+
+		}
+
+	},
 };
 
 (async () => {
@@ -1144,7 +1194,6 @@ export var informes = new Informes(new Tabla(
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-
 class Presupuestos extends Acciones {
 
 	constructor(crud) {
@@ -1186,7 +1235,6 @@ export var presupuestos = new Presupuestos(new Tabla(
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-
 class Reposos extends Acciones {
 
 	constructor(crud) {
@@ -1229,7 +1277,6 @@ export var reposos = new Reposos(new Tabla(
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-
 class Notificaciones_reportes extends Acciones {
 
 	constructor(crud) {
@@ -1263,7 +1310,6 @@ window.notificaciones_reportes = notificaciones_reportes
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-
 class Notificados_reportes extends Acciones {
 
 	constructor(crud) {
@@ -1295,6 +1341,130 @@ export var notificados_reportes = new Notificados_reportes(new Tabla(
 
 window.notificados_reportes = notificados_reportes
 
+/////////////////////////////////////////////////////
+/*					MEDICAMENTOS 				   */
+/////////////////////////////////////////////////////
+class Medicamentos extends Acciones {
+	constructor (crud) {
+		super(crud)
+		this.fila
+		this.clase = 'historias_recipes'
+		this.funcion = 'cargar_medicamentos'
+		//-------------------------------
+		this.alternar =  [true, 'transparent' , '#fff']
+		this.especificos =  ['id_medicamento', 'nombre', 'genericos_nombres', 'marcador']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#medicamentos-template').content.querySelector('.medicamentos-crud').cloneNode(true)
+		//-------------------------------
+		this.btnSeleccionado = undefined
+	}
+}
+
+export var medicamentos = new Medicamentos(new Tabla(
+	[
+		['Chulito', true, 0],
+		['Contenido del récipe & indicación', true, 0]
+	],
+	'tabla-medicamentos', 'medicamentos-busqueda', 14,'medicamentos-izquierda','medicamentos-derecha','medicamentos-numeracion', false
+))
+
+window.medicamentos = medicamentos
+
+/////////////////////////////////////////////////////
+/*					RECIPES 					   */
+/////////////////////////////////////////////////////
+class Recipes extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['id_recipe', 'fecha']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		this.posicion = undefined
+		//-------------------------------
+	}
+
+}
+
+export var recipes = new Recipes(new Tabla(
+	[	
+		['Recipe', true, 0],
+		['Fecha', true, 1],
+		['AcciONES', false, 0]
+	],
+	'tabla-recipes', 'recipes-busqueda', -1, 'null', 'null', 'null', false
+))
+
+window.recipes = recipes
+
+/////////////////////////////////////////////////////
+/*					TRATAMIENTOS 				   */
+/////////////////////////////////////////////////////
+class Tratamientos extends Acciones {
+	constructor (crud) {
+		super(crud)
+		this.fila
+		this.clase = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar =  ''
+		this.especificos = []
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+	}
+}
+
+export var tratamientos = new Tratamientos(new Tabla(
+	[
+		['Descripción', true, 0],
+		['Seleccionar', false, 0]
+	],
+	'tabla-tratamientos','tratamientos-busqueda', -1,'null','null','null',true
+))
+
+window.tratamientos = tratamientos
+
+/////////////////////////////////////////////////////
+/*					PRESENTACIONES 				   */
+/////////////////////////////////////////////////////
+class Presentaciones extends Acciones {
+		constructor (crud) {
+			super(crud)
+			this.fila
+			this.clase = ''
+			this.funcion = ''
+			//-------------------------------
+			this.alternar =  ''
+			this.especificos = []
+			this.limitante = 0
+			this.boton = ''
+			this.sublista = {}
+			//-------------------------------
+		}
+	}
+
+export var presentaciones = new Presentaciones(new Tabla(
+	[
+		['Descripción', true, 0],
+		['Seleccionar', false, 0]
+	],
+	'tabla-presentaciones','presentaciones-busqueda', -1,'null','null','null',true
+))
+
+window.presentaciones = presentaciones
+
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION HISTORIAS			 	  					    */
@@ -1312,6 +1482,10 @@ window.paginacionHistorias = new PaginacionContenedores(
 		},
 		"reportes": {
 			"pop": () => {repPop.pop(); permitirLimpiezaReportes = false},
+			"boton": ''
+		},
+		"recipes": {
+			"pop": () => {recPop.pop(); permitirLimpiezaReportes = false},
 			"boton": ''
 		}
 	},
@@ -1336,6 +1510,9 @@ infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.oc
 repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
+recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
+recPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
+
 prePop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
@@ -1357,6 +1534,11 @@ presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.c
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
+traPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+traPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+
+presenPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+presenPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/
