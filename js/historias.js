@@ -644,6 +644,7 @@ historias['crud']['customBodyEvents'] = {
 			}
 
 			//tools.limpiar('.recipes-valores', '', {})
+			rellenar.contenedores(historias.sublista, '.recipes-cargar', {elemento: button, id: 'value'}, {})
 			//rellenar.contenedores(historias.sublista, '.recipes-valores', {elemento: button, id: 'value'}, {})
 
 			recPop.pop()
@@ -1351,7 +1352,7 @@ class Medicamentos extends Acciones {
 		this.clase = 'historias_recipes'
 		this.funcion = 'cargar_medicamentos'
 		//-------------------------------
-		this.alternar =  [true, 'transparent' , '#fff']
+		this.alternar =  [true, '#ebebeb' , '#fff']
 		this.especificos =  ['id_medicamento', 'nombre', 'genericos_nombres', 'marcador']
 		this.limitante = 0
 		this.boton = ''
@@ -1366,10 +1367,10 @@ class Medicamentos extends Acciones {
 
 export var medicamentos = new Medicamentos(new Tabla(
 	[
-		['Chulito', true, 0],
-		['Contenido del récipe & indicación', true, 0]
+		[['✓', 'Medicamentos seleccionados para el récipe & indicación del paciente'], true, 7],
+		['Contenido del récipe & indicación', false, 0]
 	],
-	'tabla-medicamentos', 'medicamentos-busqueda', 14,'medicamentos-izquierda','medicamentos-derecha','medicamentos-numeracion', false
+	'tabla-medicamentos', 'medicamentos-busqueda', 6,'medicamentos-izquierda','medicamentos-derecha','medicamentos-numeracion', false
 ))
 
 window.medicamentos = medicamentos
@@ -1428,10 +1429,10 @@ class Tratamientos extends Acciones {
 
 export var tratamientos = new Tratamientos(new Tabla(
 	[
-		['Descripción', true, 0],
-		['Seleccionar', false, 0]
+		['', true, 0],
+		['', false, 0]
 	],
-	'tabla-tratamientos','tratamientos-busqueda', -1,'null','null','null',true
+	'tabla-tratamientos','tratamientos-busqueda', -1,'null','null','null', false
 ))
 
 window.tratamientos = tratamientos
@@ -1457,10 +1458,10 @@ class Presentaciones extends Acciones {
 
 export var presentaciones = new Presentaciones(new Tabla(
 	[
-		['Descripción', true, 0],
-		['Seleccionar', false, 0]
+		['', true, 0],
+		['', false, 0]
 	],
-	'tabla-presentaciones','presentaciones-busqueda', -1,'null','null','null',true
+	'tabla-presentaciones','presentaciones-busqueda', -1,'null','null','null', false
 ))
 
 window.presentaciones = presentaciones

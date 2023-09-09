@@ -13,23 +13,25 @@
 
         /*--------------------------------------------------------*/
         public function cargar_medicamentos($args) {
-            
+
             $sql = "
                 select 
-                    a.id_medicamento, a.nombre, a.genericos,
+                    a.id_medicamento, 
+                    a.nombre, 
+                    a.genericos,
                     coalesce(b.genericos_nombres::text, null, '[]')::json as genericos_nombres,
-                    a.status, ''::character varying(500) as presentacion, ''::character varying(500) as tratamiento,''::character varying(1) as marcador, ''::character varying(1) as marcador_nueva_presentacion, ''::character varying(1) as marcador_nuevo_tratamiento,
-                    case when b.genericos_texto != '' then
-                    coalesce(concat(a.nombre, ' O ', b.genericos_texto)::character varying(300), null, '')::character varying(300) 
-                    else
-                    a.nombre
-                    end as medicamentos_genericos
+                    a.status, 
+                    ''::character varying(500) as presentacion, 
+                    ''::character varying(500) as tratamiento,''::character varying(1) as marcador, 
+                    ''::character varying(1) as marcador_nueva_presentacion, 
+                    ''::character varying(1) as marcador_nuevo_tratamiento,
+                    coalesce(concat(b.genericos_texto, ' - ')::character varying(300), null, '')::character varying(300) as medicamentos_genericos
                 from basicas.medicamentos as a
                 left join (
                     select 
                     b.id_medicamento,
                     json_agg(a.nombre)::json as genericos_nombres,
-                    string_agg(a.nombre, ' O ') AS genericos_texto
+                    string_agg(a.nombre, ' - ') AS genericos_texto
                     from basicas.genericos as a
                     inner join (
                     select id_medicamento, trim(json_array_elements_text(genericos::json))::bigint as id_generico from basicas.medicamentos where id_medicamento = id_medicamento order by id_medicamento asc
@@ -259,7 +261,7 @@
 
         /*-----------------------------------------------------------------------------------*/
         /*-----------------------------------------------------------------------------------*/
-        public function mostrarMedicamentos_dados_pacientes($args) { //recipes_cargar
+        public function mostrar_medicamentos_dados_pacientes($args) { //recipes_cargar
             $sql = "
                 select 
                     x.*,

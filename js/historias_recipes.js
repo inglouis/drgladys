@@ -9,16 +9,17 @@ import { recipes, medicamentos, tratamientos, presentaciones } from '../js/histo
 //----------------------------------------------------------------------------------------------------
 //										MEDICAMENTOS - PROPIEDADES                                          
 //----------------------------------------------------------------------------------------------------
-medicamentos['crud'].cuerpo.push([medicamentos['crud'].columna = medicamentos['crud'].cuerpo.length, [
-		medicamentos['crud'].gCheck('check checksmall check-seleccionar', 'Seleccionar medicamento para el récipe', [], 'width:25px; height:25px; margin:0px', {'positivo': 'X', 'negativo': '', 'id': 0}),
-		medicamentos['crud'].gCheck('check checksmall check-presentacion', 'Guardar modelo de presentación', [], 'width:20px; height:20px', {'positivo': 'X', 'negativo': '', 'id': 0}),
-		medicamentos['crud'].gCheck('check checksmall check-tratamiento', 'Guardar modelo de tratamiento', [], 'width:20px; height:20px', {'positivo': 'X', 'negativo': '', 'id': 0})
-	], [6, 7, 8], ['VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
+medicamentos['crud']['cuerpo'].push([medicamentos['crud'].columna = medicamentos['crud'].cuerpo.length, [
+		medicamentos['crud'].gCheck('check checklarge check-seleccionar', 'Seleccionar medicamento para el récipe', [], 'width:24px; height:24px; margin:0px; margin-bottom: 5px;', {'positivo': 'X', 'negativo': '', 'id': 7}),
+		medicamentos['crud'].gCheck('check checksmall check-presentacion', 'Guardar modelo de presentación', [], 'width:20px; height:20px; margin: 0px;', {'positivo': 'X', 'negativo': '', 'id': 8}),
+		medicamentos['crud'].gCheck('check checksmall check-tratamiento', 'Guardar modelo de tratamiento', [], 'width:20px; height:20px; margin: 0px;', {'positivo': 'X', 'negativo': '', 'id': 9})
+	], [7, 8, 9], ['VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
 ])
-medicamentos['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'medicamentos-contenedor', 0)
+
+medicamentos['crud'].generarColumnas(['gDiv', null, null], [false],['HTML'], 'medicamentos-contenedor-crud', 0)
 
 ////////////////////////////////////////////////////////////
-medicamentos.crud['inputHandler'] = [{"input":0, "checkbox":0}, true]
+medicamentos['crud']['inputHandler'] = [{"input":0, "checkbox":0}, true]
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 medicamentos['crud']['propiedadesTr'] = {
@@ -27,27 +28,28 @@ medicamentos['crud']['propiedadesTr'] = {
 
 		var fr = new DocumentFragment(),
 			th = medicamentos, 
-			contenedor = e.querySelector('.medicamentos-contenedor'), 
+			contenedor = e.querySelector('.medicamentos-contenedor-crud'), 
 			contenido = th.contenido.cloneNode(true)
 
 		contenedor.innerHTML = ''
 		contenedor.appendChild(contenido)
-		contenedor.setAttribute('id', `id-${e.sublista.id}-medicamentos`)
+		contenedor.setAttribute('id', `id-${e.sublista.id_medicamento}-medicamentos`)
 
-		var genericos = JSON.parse(e.sublista.genericos),
-			medicamentosGenericos = ''
-		
-		genericos.forEach(e => {medicamentosGenericos = `${e}, ${medicamentosGenericos}`})
+		if (e.sublista.medicamentos_genericos === '') {var medicamentos_genericos = '---'} else {var medicamentos_genericos = e.sublista.medicamentos_genericos}
+		if (e.sublista.presentacion 		  === '') {var presentacion 		  = '---'} else {var presentacion 		    = e.sublista.presentacion}
+		if (e.sublista.tratamiento 			  === '') {var tratamiento 		      = '---'} else {var tratamiento 			= e.sublista.tratamiento}
 
-		contenedor.querySelector('.genericos').insertAdjacentHTML('afterbegin', `<b>${e.sublista.nombre}</b>:${medicamentosGenericos}`)
-		contenedor.querySelector('.presentacion').insertAdjacentHTML('afterbegin', `${e.sublista.presentacion}`)
-		contenedor.querySelector('.tratamiento').insertAdjacentHTML('afterbegin', ` ${e.sublista.tratamiento}`)
+		contenedor.querySelector('.genericos').insertAdjacentHTML('afterbegin', `<b>${e.sublista.nombre}:</b> `)
+		contenedor.querySelector('.genericos input').value = medicamentos_genericos
+		contenedor.querySelector('.presentacion ul li').insertAdjacentHTML('afterbegin', `${presentacion}`)
+		contenedor.querySelector('.tratamiento ul li').insertAdjacentHTML('afterbegin', ` ${tratamiento}`)
 
 	}
+	
 };
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
-medicamentos['crud']['customKeyEvents'] = {
+medicamentos['crud']['customBodyEvents'] = {
 
 	"tratamientos": async (e) => {
 
@@ -69,8 +71,6 @@ medicamentos['crud']['customKeyEvents'] = {
 
 				traPop.pop()
 
-				qs('#tratamientos-seleccionado').value = ''
-
 				if(tratamientos.crud.lista.length > 0) {
 					window.setTimeout(() => qs('#tratamientos-busqueda').focus(), 5);
 				} else {
@@ -87,7 +87,7 @@ medicamentos['crud']['customKeyEvents'] = {
 
 		if (boton.tagName === 'BUTTON') {
 
-			if (boton.classList.contains('seleccionar-presentaciones')) {
+			if (boton.classList.contains('seleccionar-presentacion')) {
 
 				var th = medicamentos, 
 					resultado
@@ -101,13 +101,33 @@ medicamentos['crud']['customKeyEvents'] = {
 
 				presenPop.pop()
 
-				qs('#presentaciones-seleccionado').value = ''
-
 				if(presentaciones.crud.lista.length > 0) {
 					window.setTimeout(() => qs('#presentaciones-busqueda').focus(), 5);
 				} else {
 					window.setTimeout(() => qs('#presentaciones-seleccionado').focus(), 10);
 				}
+			}
+
+		}
+
+	}
+}
+
+medicamentos['crud']['customKeyEvents'] = {
+	"genericos": async (e) => {
+
+		var input = e.target
+
+		if (input.tagName === 'INPUT') {
+
+			if (input.classList.contains('genericos-input')) {
+
+				var th = medicamentos
+
+				th.sublista = tools.pariente(input, 'TR').sublista
+
+				th.sublista.medicamentos_genericos = input.value.toUpperCase()
+
 			}
 
 		}
@@ -129,7 +149,7 @@ medicamentos['crud']['customKeyEvents'] = {
 //----------------------------------------------------------------------------------------------------
 recipes['crud'].cuerpo.push([recipes['crud'].columna = recipes['crud'].cuerpo.length, [recipes['crud'].gSpan(null,null)], [false], ['HTML'], '', 0])
 recipes['crud'].cuerpo.push([recipes['crud'].columna = recipes['crud'].cuerpo.length, [recipes['crud'].gSpan(null,null)], [false], ['HTML'], '', 1])
-recipes['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
+recipes['crud'].cuerpo.push([recipes['crud'].columna = recipes['crud'].cuerpo.length, [
 		recipes['crud'].gBt(['imprimir btn btn-imprimir', 'Reimprimir récipe & indicación'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
 		recipes['crud'].gBt(['reusar btn btn-reusar', 'Reutilizar contenido de récipe & indicación'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
 		recipes['crud'].gBt(['eliminar btn btn-eliminar', 'Eliminar récipe & indicación'], `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos-b"><path fill="currentColor" d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`)
@@ -245,21 +265,21 @@ recipes['crud']['propiedadesTr'] = {
 //----------------------------------------------------------------------------------------------------
 //										TRATAMIENTOS - PROPIEDADES                                          
 //----------------------------------------------------------------------------------------------------
+tratamientos['crud'].cuerpo.push([tratamientos['crud'].columna = tratamientos['crud'].cuerpo.length, [tratamientos['crud'].gBt(['seleccionar btn-seleccionar-flecha', 'Seleccionar tratamiento', 'height: 40px; background: transparent;'], '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-alt-circle-right" class="svg-inline--fa fa-arrow-alt-circle-right fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path></svg>')], [false], ['VALUE'], '', 0])
 tratamientos['crud'].cuerpo.push([
 	tratamientos['crud'].columna = tratamientos['crud'].cuerpo.length, [tratamientos['crud'].gInp('input upper', 'text', 'Descripción del tratamiento', 
 	[
 		{"atributo": "titulo", "valor":""}, 
 		{"atributo": "placeholder", "valor":"Contenido..."}
 	], 
-	'width: 100%')
+	'width: 100%; padding: 5px;')
 ], [false], ['VALUE'], '', 0])
 
-tratamientos['crud'].cuerpo.push([tratamientos['crud'].columna = tratamientos['crud'].cuerpo.length, [tratamientos['crud'].gBt(['seleccionar btn-seleccionar-flecha', 'Seleccionar tratamiento', 'height: 25px'], '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-alt-circle-right" class="svg-inline--fa fa-arrow-alt-circle-right fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path></svg>')], [false], ['VALUE'], '', 0])
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 
 tratamientos['crud']['inputHandler'] = [{"input":0}, true]
-tratamientos['crud']['desplazamientoActivo'] = [true, true, true, true]
+//tratamientos['crud']['desplazamientoActivo'] = [true, true, true, true]
 tratamientos['crud']['ofv'] = true
 tratamientos['crud']['ofvh'] = '400px';
 
@@ -267,7 +287,7 @@ tratamientos['crud']['ofvh'] = '400px';
 ////////////////////////////////////////////////////////////
 tratamientos['crud']['customBodyEvents'] = {
 	"seleccionar": async (e) => {
-		if(e.target.classList.contains('seleccionar')) {
+		if (e.target.classList.contains('seleccionar')) {
 			
 			var pariente = tools.pariente(medicamentos.btnSeleccionado, 'TR')
 
@@ -283,7 +303,7 @@ tratamientos['crud']['customBodyEvents'] = {
 				medicamentos.btnSeleccionado = undefined
 			}, 5);
 
-			notificaciones.mensajeSimple(`Tratamiento seleccionado`, resultado, 'V')
+			notificaciones.mensajeSimple(`Tratamiento seleccionado`, false, 'V')
 
 			traPop.pop()
 
@@ -294,21 +314,21 @@ tratamientos['crud']['customBodyEvents'] = {
 //----------------------------------------------------------------------------------------------------
 //										PRESENTACIONES - PROPIEDADES                                          
 //----------------------------------------------------------------------------------------------------
+presentaciones['crud'].cuerpo.push([presentaciones['crud'].columna = presentaciones['crud'].cuerpo.length, [presentaciones['crud'].gBt(['seleccionar btn-seleccionar-flecha', 'Seleccionar presentación', 'height: 40px; background: transparent;'], '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-alt-circle-right" class="svg-inline--fa fa-arrow-alt-circle-right fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path></svg>')], [false], ['VALUE'], '', 0])
 presentaciones['crud'].cuerpo.push([
 	presentaciones['crud'].columna = presentaciones['crud'].cuerpo.length, [presentaciones['crud'].gInp('input upper', 'text', 'Descripción de la presentación', 
 	[
 		{"atributo": "titulo", "valor":""}, 
 		{"atributo": "placeholder", "valor":"Contenido..."}
 	], 
-	'width: 100%')
+	'width: 100%; padding: 5px;')
 ], [false], ['VALUE'], '', 0])
 
-presentaciones['crud'].cuerpo.push([presentaciones['crud'].columna = presentaciones['crud'].cuerpo.length, [presentaciones['crud'].gBt(['seleccionar btn-seleccionar-flecha', 'Seleccionar presentación', 'height: 25px'], '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-alt-circle-right" class="svg-inline--fa fa-arrow-alt-circle-right fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"></path></svg>')], [false], ['VALUE'], '', 0])
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////
 
 presentaciones['crud']['inputHandler'] = [{"input":0}, true]
-presentaciones['crud']['desplazamientoActivo'] = [true, true, true, true]
+//presentaciones['crud']['desplazamientoActivo'] = [true, true, true, true]
 presentaciones['crud']['ofv'] = true
 presentaciones['crud']['ofvh'] = '400px';
 
@@ -316,7 +336,7 @@ presentaciones['crud']['ofvh'] = '400px';
 ////////////////////////////////////////////////////////////
 presentaciones['crud']['customBodyEvents'] = {
 	"seleccionar": async (e) => {
-		if(e.target.classList.contains('seleccionar')) {
+		if (e.target.classList.contains('seleccionar')) {
 			
 			var pariente = tools.pariente(medicamentos.btnSeleccionado, 'TR')
 
@@ -332,7 +352,7 @@ presentaciones['crud']['customBodyEvents'] = {
 				medicamentos.btnSeleccionado = undefined
 			}, 5);
 
-			notificaciones.mensajeSimple(`Presentación seleccionada`, resultado, 'V')
+			notificaciones.mensajeSimple(`Presentación seleccionada`, false, 'V')
 
 			presenPop.pop()
 

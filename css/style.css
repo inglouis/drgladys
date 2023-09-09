@@ -1647,7 +1647,7 @@ span.numeracion {
     padding: 15px;
     justify-content: center;
     display: flex;
-    width: 300px;
+    width: 50%;
     text-align: center;
     align-items: center;
     flex-direction: column;
@@ -2770,7 +2770,8 @@ span.numeracion {
     height: 100%;
     display: grid;
     align-items: baseline;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 30%;
+    column-gap: 30px;
 }
 
 #crud-recipes-contenedor .derecha,  #crud-recipes-contenedor .izquierda {
@@ -2778,10 +2779,175 @@ span.numeracion {
     display: grid;
     height: 100%;
     grid-template-rows: auto 1fr auto;
+    row-gap: 10px;
+    padding: 5px 10px;
+    background: #2196f30d;
+    border-radius: 10px;
 }
 
 #crud-recipes-contenedor .derecha .tabla-ppal,  #crud-recipes-contenedor .izquierda .tabla-ppal {
     height: 100%;
+}
+
+#crud-recipes-contenedor #tabla-medicamentos thead tr th:nth-child(1) {
+    width: 50px;
+}
+
+#crud-recipes-contenedor #tabla-medicamentos tbody tr td:nth-child(1) {
+    width: 100% !important;
+}
+
+#crud-recipes-contenedor #tabla-medicamentos tbody tr td:nth-child(2) {
+    width: auto !important;
+}
+
+#tabla-medicamentos .crud-botones {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+#tabla-medicamentos .check-seleccionar {
+    position: relative;
+}
+
+#tabla-medicamentos .check-seleccionar:after {
+    border-bottom: 1px dashed;
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: #673ab7;
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    border: none;
+}
+
+#tabla-medicamentos thead tr th:nth-child(1) {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#tabla-medicamentos .btn {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    text-transform: math-auto;
+}
+
+#tabla-medicamentos .crud-contenido {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 5px;
+}
+
+#tabla-medicamentos .crud-contenido .izquierda, #tabla-medicamentos .crud-contenido .derecha {
+    display: grid;
+    grid-template-rows: 25px 25px 25px;
+    justify-content: revert;
+    align-items: end;
+    row-gap: 5px;
+}
+
+ #tabla-medicamentos .derecha .presentacion, #tabla-medicamentos .derecha .tratamiento {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    column-gap: 8px;
+}
+
+#tabla-medicamentos .derecha .genericos {
+    display: grid;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    column-gap: 8px;
+    grid-template-columns: auto 1fr;
+}
+
+#tabla-medicamentos .cruds {
+    padding: 0px;
+    background: transparent;
+}
+
+#tabla-medicamentos .derecha ul {
+    padding-inline-start: 30px;
+}
+
+#tabla-medicamentos thead tr {
+    background: #2f3140;
+    font-weight: bold;
+    margin: 0px;
+    font-size: 16px;
+}
+
+#tabla-medicamentos thead tr th {
+    height: 50px;
+    color: #fff;
+}
+
+#medicamentos-busqueda, #recipes-busqueda {
+    background: #ffffffc7;
+}
+
+#crud-recipes-pop .medicamentos-numeracion {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+
+#crud-recipes-contenedor .derecha .cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+#crud-recipes-contenedor .cabecera .tooltip-filtro::after {
+    content: "Insertar nuevo medicamento" !important;
+}
+
+.recipe-cargar {
+    background: #009688;
+    color: #fff;
+    width: fit-content !important;
+    padding: 5px 25px !important;
+}
+
+.recipe-cargar:hover {
+    background: black;
+}
+
+#tabla-tratamientos thead, #tabla-presentaciones thead {
+    display: none;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(1), #tabla-presentaciones tbody tr td:nth-child(1)  {
+    width: 50px !important;
+}
+
+#tabla-tratamientos tbody tr td:nth-child(2), #tabla-presentaciones tbody tr td:nth-child(2)  {
+    width: auto !important;
+}
+
+#crud-tratamientos-pop .contenido, #crud-presentaciones-pop .contenido {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-rows: 35px 1fr auto;
+    row-gap: 10px;
+    padding: 20px 0px 0px 0px;
+}
+
+.medicamentos-crud .genericos-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #4d5c62;
+    width: 100%;
 }
 
 /*--------------------------------------------------------------*/
@@ -4398,11 +4564,11 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 #tabla-medicamentos tbody tr td:nth-child(1) {
-    width: 10%;
+    width: 3%;
 }
 
 #tabla-medicamentos tbody tr td:nth-child(2) {
-    width: auto;
+    width: 10%;
 }
 
 #tabla-medicamentos tbody tr td:nth-child(3) {
