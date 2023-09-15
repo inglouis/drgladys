@@ -714,6 +714,10 @@ span.numeracion {
     background: #337ab7;
 }
 
+.btn-seleccionar-flecha:hover > svg {
+    color: black;
+}
+
 .botones-cabecera {
     position: absolute;
     top: 0px;
@@ -1134,7 +1138,7 @@ span.numeracion {
     content: "";
     position: absolute;
     top: 30px;
-    border-top: 15px solid rgba(0,0,0,0.3);
+    border-top: 15px solid rgb(255 255 255 / 30%);
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
 }
@@ -1662,7 +1666,8 @@ span.numeracion {
 #crud-insertar-religiones-pop,
 #crud-insertar-medicos-pop,
 #crud-insertar-diagnosticos-pop,
-#crud-notificaciones-pop {
+#crud-notificaciones-pop,
+#crud-medicamentos-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2419,7 +2424,7 @@ span.numeracion {
     background: #151a27;
 }
 
-#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados {
+#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados, #desplegable-recipes {
     width: 300px;
     height: 400px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
@@ -2547,6 +2552,14 @@ span.numeracion {
     height: 60%;
 }
 
+#desplegable-recipes {
+    z-index: 11;
+    background: #669fcd63;
+    width: 300px;
+    overflow: hidden;
+    height: 60%;
+}
+
 /*---------------------------------------*/
 
 #indice-contenido {
@@ -2669,7 +2682,7 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 140px;
+    max-width: 150px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
@@ -2783,6 +2796,22 @@ span.numeracion {
     padding: 5px 10px;
     background: #2196f30d;
     border-radius: 10px;
+    position: relative;
+}
+
+#crud-recipes-contenedor .derecha .bloquear {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-repeat: repeat;
+    background: repeating-linear-gradient( -55deg, #2222229c, #22222296 10px, #33333391 10px, #33333394 20px );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #crud-recipes-contenedor .derecha .tabla-ppal,  #crud-recipes-contenedor .izquierda .tabla-ppal {
@@ -2795,13 +2824,17 @@ span.numeracion {
 
 #crud-recipes-contenedor #tabla-medicamentos tbody tr td:nth-child(1) {
     width: 100% !important;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #crud-recipes-contenedor #tabla-medicamentos tbody tr td:nth-child(2) {
     width: auto !important;
 }
 
-#tabla-medicamentos .crud-botones {
+#crud-recipes-contenedor #tabla-medicamentos .crud-botones {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -2809,11 +2842,11 @@ span.numeracion {
     row-gap: 5px;
 }
 
-#tabla-medicamentos .check-seleccionar {
+#crud-recipes-contenedor #tabla-medicamentos .check-seleccionar {
     position: relative;
 }
 
-#tabla-medicamentos .check-seleccionar:after {
+#crud-recipes-contenedor #tabla-medicamentos .check-seleccionar:after {
     border-bottom: 1px dashed;
     content: "";
     width: 22px;
@@ -2825,25 +2858,25 @@ span.numeracion {
     border: none;
 }
 
-#tabla-medicamentos thead tr th:nth-child(1) {
+#crud-recipes-contenedor #tabla-medicamentos thead tr th:nth-child(1) {
     font-weight: bold;
     font-size: 16px;
 }
 
-#tabla-medicamentos .btn {
+#crud-recipes-contenedor #tabla-medicamentos .btn {
     justify-content: center;
     align-items: center;
     display: flex;
     text-transform: math-auto;
 }
 
-#tabla-medicamentos .crud-contenido {
+#crud-recipes-contenedor #tabla-medicamentos .crud-contenido {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 5px;
 }
 
-#tabla-medicamentos .crud-contenido .izquierda, #tabla-medicamentos .crud-contenido .derecha {
+#crud-recipes-contenedor #tabla-medicamentos .crud-contenido .izquierda, #crud-recipes-contenedor #tabla-medicamentos .crud-contenido .derecha {
     display: grid;
     grid-template-rows: 25px 25px 25px;
     justify-content: revert;
@@ -2851,7 +2884,7 @@ span.numeracion {
     row-gap: 5px;
 }
 
- #tabla-medicamentos .derecha .presentacion, #tabla-medicamentos .derecha .tratamiento {
+ #crud-recipes-contenedor #tabla-medicamentos .derecha .presentacion, #crud-recipes-contenedor #tabla-medicamentos .derecha .tratamiento {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -2859,7 +2892,7 @@ span.numeracion {
     column-gap: 8px;
 }
 
-#tabla-medicamentos .derecha .genericos {
+#crud-recipes-contenedor #tabla-medicamentos .derecha .genericos {
     display: grid;
     justify-content: start;
     align-items: center;
@@ -2868,23 +2901,23 @@ span.numeracion {
     grid-template-columns: auto 1fr;
 }
 
-#tabla-medicamentos .cruds {
+#crud-recipes-contenedor #tabla-medicamentos .cruds {
     padding: 0px;
     background: transparent;
 }
 
-#tabla-medicamentos .derecha ul {
+#crud-recipes-contenedor #tabla-medicamentos .derecha ul {
     padding-inline-start: 30px;
 }
 
-#tabla-medicamentos thead tr {
+#crud-recipes-contenedor #tabla-medicamentos thead tr {
     background: #2f3140;
     font-weight: bold;
     margin: 0px;
     font-size: 16px;
 }
 
-#tabla-medicamentos thead tr th {
+#crud-recipes-contenedor #tabla-medicamentos thead tr th {
     height: 50px;
     color: #fff;
 }
@@ -2911,14 +2944,32 @@ span.numeracion {
     content: "Insertar nuevo medicamento" !important;
 }
 
-.recipe-cargar {
+#crud-recipes-contenedor .recipe-cargar {
     background: #009688;
     color: #fff;
-    width: fit-content !important;
-    padding: 5px 25px !important;
+    width: 13em;
+    padding: 10px 0px !important;
 }
 
-.recipe-cargar:hover {
+
+
+#crud-recipes-contenedor .recipe-notificar {
+    background: #2196f3;
+    color: #fff;
+    width: 13em;
+    padding: 10px 0px !important;
+}
+
+#crud-recipes-contenedor .recipe-previa {
+    background: #e75284;
+    color: #fff;
+    width: 13em;
+    padding: 10px 0px !important;
+}
+
+#crud-recipes-contenedor .recipe-cargar:hover, 
+#crud-recipes-contenedor .recipe-notificar:hover,
+#crud-recipes-contenedor .recipe-previa:hover {
     background: black;
 }
 
@@ -2946,7 +2997,7 @@ span.numeracion {
 .medicamentos-crud .genericos-input {
     background: transparent;
     border: none;
-    border-bottom: 1px solid #4d5c62;
+    border-bottom: 1px solid #adadad;
     width: 100%;
 }
 
@@ -3756,6 +3807,10 @@ span.numeracion {
     padding: 10px 6.5px;
 }
 
+#desplegable-notificados {
+    top: 50px;
+}
+
 #tabla-notificados .nombre {
     text-align: left;
 }
@@ -3770,11 +3825,14 @@ span.numeracion {
 }
 
 #desplegable-abrir-notificados {
-    background: #b9a3cb;
     height: 25px;
     width: 25px;
-    top: 80px;
     z-index: 11;
+}
+
+#desplegable-abrir-notificados {
+    background: #b9a3cb;
+    top: 50px;
 }
 
 div#tabla-notificados-contenedor .titulo {
@@ -3813,6 +3871,144 @@ div#tabla-notificados-contenedor .titulo::after {
 
 .notificados-contenedor .eliminar:hover {
     background: black;
+}
+
+/*-----------------------------------------------------*/
+/*--------------- NOTIDICADOS RECIPES -----------------*/
+/*-----------------------------------------------------*/
+
+#tabla-recipes-notificados thead {
+    display: none
+}
+
+#tabla-recipes-notificados tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-recipes-notificados tbody tr td:nth-child(1) {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+#tabla-recipes-notificados thead {
+    display: none;
+}
+
+#tabla-recipes-notificados tbody tr {
+    width: 360px;
+}
+
+#tabla-recipes-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-recipes-notificados .nombre {
+    text-align: left;
+}
+
+#tabla-recipes-contenedor {
+    padding: 12px;
+    overflow-x: hidden;
+}
+
+#desplegable-recipes {
+    top: 80px;
+}
+
+#desplegable-cerrar-recipes {
+    background: #669fcd;
+}
+
+#desplegable-abrir-recipes {
+    height: 25px;
+    width: 25px;
+    z-index: 11;
+    padding: 0px;
+}
+
+#desplegable-abrir-recipes {
+    background: #669fcd;
+    top: 80px;
+}
+
+#tabla-recipes-contenedor .titulo {
+    border-bottom: 1px solid #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    width: 345px;
+}
+
+#tabla-recipes-contenedor .titulo::after {
+    content: "";
+    left: 0px;
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+}
+
+.recipes-contenedor {
+    position: relative;
+}
+
+.recipes-contenedor .eliminar {
+    position: absolute;
+    background: #009688;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: none;
+    padding: 5px;
+}
+
+.recipes-contenedor .eliminar:hover {
+    background: black;
+}
+
+#tabla-recipes .eliminar-contenedor {
+    right: 50px !important;
+    left: unset;
+    width: 212px;
+    flex-direction: row-reverse;
+    top: 3px;
+}
+
+#tabla-recipes .crud-eliminar-contenedor {
+
+}
+
+#tabla-recipes .eliminar-contenedor::after {
+    border: 10px solid transparent !important;
+    right: -25px;
+    left: unset;
+    border-left: 15px solid #151a27 !important;
+    top: 7px;
+}
+
+#tabla-recipes .eliminar-texto {
+    font-size: 10px;
+}
+
+#tabla-recipes .eliminar-contenedor div {
+    width: auto;
+}
+
+#tabla-recipes .eliminar-contenedor button {
+    margin: 0px;
+}
+
+#tabla-recipes .eliminar-contenedor button:hover {
+    background: black
 }
 
 /*-----------------------------------------------------*/
@@ -4645,7 +4841,27 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 /*-----------------------------------------------------*/
-/*-------------------genericos--------------------------*/
+/*------------------- RECIPES -------------------------*/
+/*-----------------------------------------------------*/
+#tabla-recipes-contenedor {
+    padding: 5px;
+}
+
+#tabla-recipes thead {
+    display: none
+}
+
+#tabla-recipes tbody tr td:nth-child(1) {
+    width: 100%;
+}
+
+#tabla-recipes tbody tr td:nth-child(2) {
+    width: 115px;
+    position: relative;
+}
+
+/*-----------------------------------------------------*/
+/*------------------- GENERICOS -----------------------*/
 /*-----------------------------------------------------*/
 #insertar-genericos::after {
     width: 200px;

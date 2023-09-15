@@ -1,4 +1,4 @@
-//2022 © Luis Daniel Carvajal Chacón
+//2023 © Luis Daniel Carvajal Chacón
 //ldcch2016@gmail.com
 window.qs    = document.querySelector.bind(document)
 window.qsa   = document.querySelectorAll.bind(document)
@@ -1428,6 +1428,7 @@ export class Tabla {
 
   //--------------------------------------
   generar(procesar) {
+
     qs(`#${this.tabla} tbody`).innerHTML = ''
 
     var plantilla = new DocumentFragment(), lista, posicion = 0, th = this;
@@ -1442,6 +1443,7 @@ export class Tabla {
         lista = this.lista
         this.busqueda = this.lista
       }     
+      
     } else {
       lista = this.lista
       this.busqueda = this.lista

@@ -18,7 +18,7 @@
   		<div class="derecha">
   			
 		    <div class="genericos">
-		    	<input class="genericos-input upper" type="text">
+		    	<input class="genericos-input upper" type="text" title="Medicamentos genéricos [editable]">
 		    </div>
 		    <div class="presentacion"><ul><li></li></ul></div>
 		    <div class="tratamiento"><ul><li></li></ul></div>
@@ -45,22 +45,30 @@
     </section> 
 
     <div class="valor-cabecera cabecera-formularios" style="right: 30px;">
-
+    	
       <div>
-        <label>N° de historia</label>
-        <input type="text" autocomplete="off"  data-valor="id_historia" class="recipes-cargar upper visual" disabled style="width: 65px;">
+        <label>Paciente:</label>
+        <input type="text" autocomplete="off"  data-valor="nombre_completo" class="recipes-cargar upper visual" disabled style="width: 10vw; min-width: 150px">
       </div>
 
       <div>
-        <label>Paciente</label>
-        <input type="text" autocomplete="off"  data-valor="nombre_completo" class="recipes-cargar upper visual" disabled style="width: 10vw; min-width: 150px">
+        <label style="width: 85px;">N° de cédula:</label>
+        <input type="text" autocomplete="off"  data-valor="cedula" class="recipes-cargar upper visual" disabled style="width: 10vw; min-width: 150px">
       </div>
 
     </div>
 
     <div id="crud-recipes-contenedor">
       
-      <section class="derecha">
+      <section class="derecha" style="position: relative;">
+
+		<?php  
+		if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') { 
+		?>
+			<!--<div class="bloquear">ACCESO DENEGADO</div>-->
+		<?php  
+		} 
+		?>
 
       	<div class="cabecera">
       		
@@ -102,8 +110,16 @@
 
         </div>
 
-        <div class="botones-reportes" style="justify-content: center">            
-       	 	<button class="recipe-cargar">CARGAR</button>
+        <div id="crud-recipes-botones" class="botones-reportes" style="justify-content: center">
+        	<?php  
+			if ($_SESSION['usuario']['rol'] == 'DOCTOR') { 
+			?>
+				<button class="recipe-notificar">GUARDAR & NOTIFICAR</button>
+			<?php  
+			} 
+			?>
+       	 	<button class="recipe-cargar">GUARDAR & IMPRIMIR</button>
+        	<button class="recipe-previa">VISTA PREVIA</button>
       	</div>
 
       </section>
@@ -115,7 +131,7 @@
           <input type="text" id="recipes-busqueda" autocomplete="off" class="upper borde-estilizado" title="Enfocar cajón de texto [Shift > Shift]&#013Abrir insersión de historia &#013Información primer resultado [Shift > ENTER]&#013Limpiar cajón de busqueda [Supr > Supr]">
         </div>
         
-        <div id="tabla-recipes-contenedor" class="tabla-ppal borde-estilizado">
+        <div id="tabla-recipes-contenedor" class="tabla-ppal borde-estilizado" data-scroll>
 
           <table id="tabla-recipes" class="table table-bordered table-striped">
             <thead></thead>
@@ -145,8 +161,12 @@
 
     <div class="contenido">
 
-      <div class="busqueda-estilizada">
-        <input type="text" name="tratamientos-busqueda" class="borde-estilizado upper" id="tratamientos-busqueda" data-estilo="busqueda" placeholder="Busqueda">
+      <div class="busqueda-estilizada" style="justify-content: center; align-items: center; column-gap: 5px;">
+
+        <input type="text" name="tratamientos-busqueda" class="borde-estilizado upper" id="tratamientos-busqueda" data-estilo="busqueda" placeholder="Busqueda" style="background: #fff">
+
+        <button style="position: relative; top: 0px; height: 100%;" id="nuevo-tratamiento" class="btn-nuevo btn btn-primary" title="Agregar fila">+</button>
+
       </div>
 
       <div class="tabla-ppal scroll" data-estilo="tabla-tratamientos">
@@ -175,8 +195,12 @@
 
     <div class="contenido">
 
-      <div class="busqueda-estilizada">
-        <input type="text" name="presentaciones-busqueda" class="borde-estilizado upper" id="presentaciones-busqueda" data-estilo="busqueda" placeholder="Busqueda">
+      <div class="busqueda-estilizada" style="justify-content: center; align-items: center; column-gap: 5px;">
+        
+        <input type="text" name="presentaciones-busqueda" class="borde-estilizado upper" id="presentaciones-busqueda" data-estilo="busqueda" placeholder="Busqueda" style="background: #fff">
+
+        <button style="position: relative; top: 0px; height: 100%;" id="nueva-presentacion" class="btn-nuevo btn btn-primary" title="Agregar fila">+</button>
+
       </div>
 
       <div class="tabla-ppal scroll" data-estilo="tabla-presentaciones">
@@ -189,3 +213,68 @@
     </div>
   </div>
 </div>
+
+<!-------------------------------------------------------- -->
+<!--------------------- MEDICAMENTOS  -------------------- -->
+<!-------------------------------------------------------- -->
+    <div id="crud-medicamentos-popup" class="popup-oculto" data-crud='popup'>
+
+      <div id="crud-medicamentos-pop" class="popup-oculto" style="width:50%; min-width:600px ;height: fit-content;">
+
+        <button id="crud-medicamentos-cerrar" data-crud='cerrar'>X</button>
+
+        <section id="crud-medicamentos-titulo" data-crud='titulo'>
+          
+          <button id="crud-medicamentos-limpiar" title="Limpiar Contenido" data-crud='limpiar'>
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+          </button>
+
+            Insertar medicamento
+
+        </section> 
+
+        <section class="filas">
+
+          <div class="columnas" style="width:100%;">
+
+            <div>
+              <label class="requerido">Descripción del Medicamento</label>  
+              <input type="text" size="100" minlength="1" maxlength="100" class="medicamentos-valores upper lleno">
+            </div>
+
+          </div>
+
+          <div class="columnas">
+
+            <div style="height: fit-content">
+
+              <section style="width: 100%; display: flex; flex-direction: row; margin: 0px;">
+                <label style="width:50%">Génericos</label>
+                <label style="width:50%">Kit de Génericos</label>
+              </section>
+
+              <section id="cc-medicamentos-genericos" class="contenedor-consulta medicamentos-valores borde-estilizado" data-valor="genericos">
+
+                <span class="tooltip-general">Presionar [ENTER] para agregar</span>
+
+                <section>
+                  <input type="text" data-estilo="cc-input" placeholder="Cargar...">
+                  <select data-limit="" data-estilo="cc-select" data-size="16" data-limit="80" data-scroll></select>
+                </section>
+
+                <div data-estilo="cc-div"></div>
+
+              </section>
+
+            </div>
+
+          </div> 
+
+        </section>
+
+        <section id="crud-medicamentos-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
+          <button class="botones-formularios insertar">CONFIRMAR</button>
+          <button class="botones-formularios cerrar">CANCELAR</button> 
+        </section>
+      </div> 
+    </div>

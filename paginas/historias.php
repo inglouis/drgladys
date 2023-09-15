@@ -38,7 +38,7 @@
     
   <!----------------------------------------- CUERPO -------------------------------------- -->
   <!--------------------------------------------------------------------------------------- -->
-  <body data-scroll id="body">
+  <body id="body">
 
     <div id="cruds" style="width: 100%; height: 100%">
       
@@ -143,48 +143,91 @@
       -->
     </div>
 
-      <!------------------------------------------------------------------------------------------->
-      <!------------------------------ DESPLEGABLE NOTIFICADO ------------------------------------->
-      <!------------------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------------------->
+    <!------------------------------ DESPLEGABLE NOTIFICADO ------------------------------------->
+    <!------------------------------------------------------------------------------------------->
 
-      <?php 
-        if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
-      ?>
-        <button id="desplegable-abrir-notificados" class="desplegable-abrir" title="Reportes preparados para impresión [NOTIFICADOS]" data-hidden> 
-      <?php 
-        } else if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
-      ?>
-        <button id="desplegable-abrir-notificados" class="desplegable-abrir" title="Reportes preparados para impresión [NOTIFICADOS]">
-      <?php 
-        }
-      ?>
-        <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
-      </button>
+    <?php 
+      if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+    ?>
+      <button id="desplegable-abrir-notificados" class="desplegable-abrir" title="Reportes preparados para impresión [NOTIFICADOS]" data-hidden>
+    <?php 
+      } else if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+    ?>
+      <button id="desplegable-abrir-notificados" class="desplegable-abrir" title="Reportes preparados para impresión [NOTIFICADOS]">
+    <?php 
+      }
+    ?>
+      <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
+    </button>
 
-      <div id="desplegable-notificados" class="desplegable-oculto">
-        
-        <section>
-          <button id="desplegable-cerrar-notificados" class='desplegable-cerrar'>
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
-          </button>
-        </section>
+    <div id="desplegable-notificados" class="desplegable-oculto">
+      
+      <section>
+        <button id="desplegable-cerrar-notificados" class='desplegable-cerrar'>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+        </button>
+      </section>
 
 
-        <div id="tabla-notificados-contenedor" class="tabla-ppal" data-scroll>
+      <div id="tabla-notificados-contenedor" class="tabla-ppal" data-scroll>
 
-          <div class="titulo">
-            Reportes notificados corroborados
-          </div>
-
-          <table id="tabla-notificados" class="table table-bordered table-striped">
-            <thead>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+        <div class="titulo">
+          Reportes notificados corroborados
         </div>
-       
+
+        <table id="tabla-notificados" class="table table-bordered table-striped">
+          <thead>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
+     
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!--------------------------------- DESPLEGABLE RECIPES ------------------------------------->
+    <!------------------------------------------------------------------------------------------->
+
+    <?php 
+      if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+    ?>
+      <button id="desplegable-abrir-recipes" class="desplegable-abrir" title="Récipes & indicaciones preparados para ser impresos" data-hidden> 
+    <?php 
+      } else if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+    ?>
+      <button id="desplegable-abrir-recipes" class="desplegable-abrir" title="Récipes & indicaciones preparados para ser impresos"> 
+    <?php 
+      }
+    ?>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos"><path fill="currentColor" d="M168 80c-13.3 0-24 10.7-24 24V408c0 8.4-1.4 16.5-4.1 24H440c13.3 0 24-10.7 24-24V104c0-13.3-10.7-24-24-24H168zM72 480c-39.8 0-72-32.2-72-72V112C0 98.7 10.7 88 24 88s24 10.7 24 24V408c0 13.3 10.7 24 24 24s24-10.7 24-24V104c0-39.8 32.2-72 72-72H440c39.8 0 72 32.2 72 72V408c0 39.8-32.2 72-72 72H72zM176 136c0-13.3 10.7-24 24-24h96c13.3 0 24 10.7 24 24v80c0 13.3-10.7 24-24 24H200c-13.3 0-24-10.7-24-24V136zm200-24h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zM200 272H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg>
+    </button>
+
+    <div id="desplegable-recipes" class="desplegable-oculto">
+      
+      <section>
+        <button id="desplegable-cerrar-recipes" class='desplegable-cerrar'>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+        </button>
+      </section>
+
+
+      <div id="tabla-recipes-contenedor" class="tabla-ppal" data-scroll>
+
+        <div class="titulo">
+          Récipes & indicaciones por imprimir
+        </div>
+
+        <table id="tabla-recipes-notificados" class="table table-bordered table-striped">
+          <thead>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+     
+    </div>
 
     <!---------------------------------------------------------------------->
     <!------------                P A G I N A                  ------------->

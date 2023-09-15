@@ -1,0 +1,40 @@
+///////////////////////////////////////////////////////////////////////////////////////
+
+								---------------------------
+								// CAMBIOS BASE DE DATOS //
+								---------------------------
+
+* SEGUIMIENTO DE LOS CAMBIOS HECHOS EN LA BASE DE DATOS PARA CONSERVAR LA CONSISTENCIA
+* EN EL SISTEMA
+
+- NOTAS
+- CODIGO
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+1)-------------------------------------------------------------------------------------
+SE HICIERON CAMBIOS EN LA ESTRUCTURA DE LOS USUARIOS
+-------------------------------------------------------------------------------------
+CREATE TABLE miscelaneos.usuarios
+(
+  id_usuario bigserial NOT NULL,
+  usuario character varying(100) NOT NULL DEFAULT ''::bpchar,
+  cookie character varying(100) NOT NULL DEFAULT ''::bpchar,
+  rol character varying(100) NOT NULL DEFAULT 'PLACEHOLDER'::bpchar,
+  controlador_cambios boolean NOT NULL DEFAULT false,
+  notificar_usuario bigint NOT NULL DEFAULT 0,
+  status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
+  notificacion_reportes jsonb NOT NULL DEFAULT '[]'::jsonb,
+  notificacion_recipes jsonb NOT NULL DEFAULT '[]'::jsonb,
+  CONSTRAINT pk_id_usuario PRIMARY KEY (id_usuario)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE miscelaneos.usuarios
+  OWNER TO postgres;
+
+- REGENERAR TABLA
+- RECARGAR DATOS 
+		GLADYS DOCTOR 99c5bc82
+		ANDREA ADMINISTRADOR 7bdc719f
