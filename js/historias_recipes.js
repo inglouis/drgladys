@@ -593,6 +593,50 @@ qs('#tabla-recipes').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
+/*      		             INSERTA NUEVO MEDICAMENTOS DESDE RECIPES                 		        */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#crud-medicamentos-botones').addEventListener('click', async e => {
+
+	if (e.target.classList.contains('insertar')) {
+
+		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+
+		var datos = tools.procesar(e.target, 'insertar', 'medicamentos-valores', tools)
+
+		if (datos !== '') {
+
+			var resultado = await tools.fullAsyncQuery('medicamentos', 'crear_medicamentos', datos)
+
+			if (resultado.trim() === 'exito') {
+
+				var resultado = JSON.parse(await tools.fullAsyncQuery('historias_recipes', 'reusar_recipes', [JSON.stringify(medicamentos.crud.checkLista)]))
+
+				medicamentos.cargarTabla(resultado)
+
+				medicamentos.crud.ascDesc(qs('#tabla-medicamentos thead th').classList[0], qs('#tabla-medicamentos thead th')[1])
+
+				notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+				tools.limpiar('.medicamentos-valores', '', {})
+
+				mediPop.pop()
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
+
+		} else {
+
+			notificaciones.mensajeSimple('Campos vacíos', resultado, 'F')
+
+		}
+	}
+})
+
+
+/* -------------------------------------------------------------------------------------------------*/
 /* ------------------------------ ABRIR SECCIÓN DE NOTIFICADOS -------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 qs('#desplegable-abrir-recipes').addEventListener('click', async e => {

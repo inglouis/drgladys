@@ -753,8 +753,6 @@ export class Herramientas {
 
 					}
 
-					
-
 				} else {
 
 					if (contenedores[i].value.trim() === '' && contenedores[i].classList.contains('lleno')) {
@@ -3115,7 +3113,6 @@ export class Rellenar {
 						var array = lista[contenedores[i].dataset[th.grupo]]
 
 					}
-
 
 					contenedores[i].value = ''
 					contenedores[i].texto_base = ''

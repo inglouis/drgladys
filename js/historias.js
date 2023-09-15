@@ -203,9 +203,10 @@ window.animaciones.hider = 'data-hidden'
 /////////////////////////////////////////////////////
 window.contenedores = new ContenedoresEspeciales('historias-status')
 
-window.contenedoresConsultar = new ContenedoresEspeciales('crud-informacion-popup') 
-window.contenedoresEditar    = new ContenedoresEspeciales('crud-editar-popup') 
-window.contenedoresInsertar  = new ContenedoresEspeciales('crud-insertar-popup') 
+window.contenedoresConsultar    = new ContenedoresEspeciales('crud-informacion-popup') 
+window.contenedoresEditar       = new ContenedoresEspeciales('crud-editar-popup') 
+window.contenedoresInsertar     = new ContenedoresEspeciales('crud-insertar-popup') 
+window.contenedoresMedicamentos = new ContenedoresEspeciales('crud-medicamentos-popup')
 /////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
@@ -745,6 +746,14 @@ contenedoresInsertar.eventos().contenedor(
 	['', '', ['', '']],    //informacion de la petición
 	[0, 1], 			   //limitador de busqueda
 	[false, true, [false, false], false, true, false, false, false, [false, true], false, false], //comportamientos extras
+	{} //funciones
+)
+
+contenedoresMedicamentos.eventos().contenedor(
+	'cc-medicamentos-genericos', //elemento
+	['combos', 'combo_genericos', ['', 80]],    //informacion de la petición
+	[0, 2], 			   //limitador de busqueda
+	[true, true, [false, false], true, false, true, true, true, [true, false], false, false], //comportamientos extras
 	{} //funciones
 )
 
