@@ -38,3 +38,9 @@ ALTER TABLE miscelaneos.usuarios
 - RECARGAR DATOS 
 		GLADYS DOCTOR 99c5bc82
 		ANDREA ADMINISTRADOR 7bdc719f
+
+2)-------------------------------------------------------------------------------------
+SE HICIERON CAMBIOS EN LA ESTRUCTURA DE LOS USUARIOS
+---------------------------------------------------------------------------------------
+TENGO QUE CAMBIAR QUE LAS LLAVES FORANEAS DE PRESENTACIONES Y TRATAMIENTOS HAGAN CASCADE
+EN BORRAR

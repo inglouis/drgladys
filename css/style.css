@@ -4819,24 +4819,24 @@ div#tabla-notificados-contenedor .titulo::after {
     bottom: 0px;
 }
 
-#cc-editar-genericos, #cc-insertar-genericos {
+#cc-editar-genericos, #cc-insertar-genericos, #cc-medicamentos-genericos {
     flex-direction: row !important;
 }
 
-#cc-editar-genericos input, #cc-insertar-genericos input {
+#cc-editar-genericos input, #cc-insertar-genericos input, #cc-medicamentos-genericos input {
     height: 40px;
 }
 
-#cc-editar-genericos section, #cc-insertar-genericos section {
+#cc-editar-genericos section, #cc-insertar-genericos section, #cc-medicamentos-genericos section {
     height: fit-content;
 }
 
-#cc-insertar-genericos .cc-div, #cc-editar-genericos .cc-div  {
+#cc-insertar-genericos .cc-div, #cc-editar-genericos .cc-div, #cc-medicamentos-genericos .cc-div  {
     display: flex;
     flex-direction: row;
 }
 
-#cc-insertar-genericos .ccContenedor, #cc-editar-genericos .ccContenedor {
+#cc-insertar-genericos .ccContenedor, #cc-editar-genericos .ccContenedor, #cc-medicamentos-genericos .ccContenedor {
     width: 100%;
 }
 
