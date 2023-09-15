@@ -304,7 +304,7 @@ navegadores.forEach((el,i) => {
 //--------------------------------------------------------
 //activar desactivar modo minimalista
 //--------------------------------------------------------
-qs('#boton-minimalista').addEventListener('click', async e => {
+qs('#boton-minimalista').addEventListener('click', qs('#boton-minimalista').minimalista = async function (e) {
 
     (window.minimalista) ? window.minimalista = 0 : window.minimalista = 1;
 
@@ -342,6 +342,8 @@ qs('#boton-minimalista').addEventListener('click', async e => {
     }
 
 })
+
+//qs('#boton-minimalista').minimalista()
 
 //--------------------------------------------------------
 //activar desactivar modo noche

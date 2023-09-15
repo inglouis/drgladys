@@ -1,5 +1,5 @@
 import { historias, tools, notificaciones, usuario, cambiarSeccionBotones, reporteSeleccionado, reportesDisponibles } from '../js/historias.js';
-import { notificaciones_reportes, notificados_reportes } from '../js/historias.js';
+import { notificaciones_reportes, notificados_reportes, notificacionesPop , notificacionesBoton, notificadosDesplegable, notificadosBoton } from '../js/historias.js';
 import { Paginacion } from '../js/main.js';
 
 var paginacionPosiciones = {
@@ -544,58 +544,3 @@ qs('#desplegable-abrir-notificados').addEventListener('click', async e => {
 	notificados_reportes.posicion = undefined
 
 })
-
-//----------------------------------------------------------------------------------------------------
-//              				NOTIFICACIONES
-//----------------------------------------------------------------------------------------------------
-var notificacionesPop = qs('#crud-notificaciones-popup'),
-	notificacionesBoton = qs('#notificacion-doctor'),
-	notificadosDesplegable = qs('#desplegable-notificados'),
-	notificadosBoton = qs('#desplegable-abrir-notificados')
-
-setInterval(async () => {
-
-    if (Number(await tools.fullAsyncQuery('historias', 'controlador_cambios', []))) {
-
-        //ACTUALIZACION SI CONTENEDOR ESTA ABIERTO
-        //
-        if (notificacionesPop.classList.contains('popup-activo') && usuario.rol.trim() === 'DOCTOR') { //AGREAR ROL A COMPARARCIONES
-
-       		notificaciones_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_notificaciones', 'notificaciones_consultar', [])))
-
-        }
-
-        if (notificadosDesplegable.style.display === '' && usuario.rol.trim() === 'ADMINISTRACION') {
-
-        	notificados_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_notificaciones', 'notificaciones_consultar', [])))
-
-        }
-
-        //ALERTA VISUAL DE NOTIFICACION DE REPORTES 
-        //-----------------------------------------
-        //lnr = longitud_notificaciones_reportes
-
-        var lnr = await tools.fullAsyncQuery('historias_notificaciones', 'notificacion_reportes_cantidad', [])
-
-        if (lnr > 0) {
-
-        	if (!notificacionesPop.classList.contains('popup-activo') && usuario.rol.trim() === 'DOCTOR') {
-
-        		notificacionesBoton.classList.add('notificacion-alerta')
-
-        	}
-
-	        if (notificadosDesplegable.style.display === 'none' && usuario.rol.trim() === 'ADMINISTRACION') {
-	        	
-	        	notificadosBoton.classList.add('notificacion-alerta')
-
-	        }
-
-        }
-
-
-    	await tools.fullAsyncQuery('historias', 'controlador_cambios_desactivar', [])
-
-    }
-
-}, 5000);

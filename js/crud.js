@@ -1,4 +1,4 @@
-//2022 © Luis Daniel Carvajal Chacón
+//2023 © Luis Daniel Carvajal Chacón
 //ldcch2016@gmail.com
 window.qs    = document.querySelector.bind(document)
 window.qsa   = document.querySelectorAll.bind(document)
@@ -97,7 +97,8 @@ export class Tabla {
 
     var domElements = {
       "gSpan": (el) => {th.gSpan(el[1], el[2])},
-      "gBt"  : (el) => {th.gBt()}
+      "gBt"  : (el) => {th.gBt()},
+      "gDiv": (el) => {th.gSpan(el[1], el[2])}
     }
 
     this.columna = this.cuerpo.length
@@ -1392,9 +1393,9 @@ export class Tabla {
         ind = ind + 1
 
         if(typeof this.cabecera[i][0] === 'string') {
-          e.insertAdjacentText('afterbegin', this.cabecera[i][0]+' ▼')   
+          e.insertAdjacentHTML('afterbegin', this.cabecera[i][0]+' ▼')   
         } else {
-          e.insertAdjacentText('afterbegin', this.cabecera[i][0][0]+' ▼')
+          e.insertAdjacentHTML('afterbegin', this.cabecera[i][0][0]+' ▼')
           e.setAttribute('title', this.cabecera[i][0][1])
         }
         
@@ -1405,9 +1406,9 @@ export class Tabla {
       } else {
 
         if(typeof this.cabecera[i][0] === 'string') {
-          e.insertAdjacentText('afterbegin', this.cabecera[i][0])
+          e.insertAdjacentHTML('afterbegin', this.cabecera[i][0])
         } else {
-          e.insertAdjacentText('afterbegin', this.cabecera[i][0][0])
+          e.insertAdjacentHTML('afterbegin', this.cabecera[i][0][0])
           e.setAttribute('title', this.cabecera[i][0][1])  
         }
         fr.appendChild(e)
@@ -1427,6 +1428,7 @@ export class Tabla {
 
   //--------------------------------------
   generar(procesar) {
+
     qs(`#${this.tabla} tbody`).innerHTML = ''
 
     var plantilla = new DocumentFragment(), lista, posicion = 0, th = this;
@@ -1441,6 +1443,7 @@ export class Tabla {
         lista = this.lista
         this.busqueda = this.lista
       }     
+      
     } else {
       lista = this.lista
       this.busqueda = this.lista
@@ -1922,7 +1925,7 @@ export class Tabla {
         }
       })
 
-      qs(`#${this.tabla}`).addEventListener('keydown', (e) => {
+      qs(`#${this.tabla}`).addEventListener('keyup', (e) => {
         if(typeof this.customKeyEvents === 'object' && this.customKeyEvents !== null) {
           Object.keys(this.customKeyEvents).forEach((el,i) => {
             this.customKeyEvents[el](e)
@@ -1950,7 +1953,7 @@ export class Tabla {
 
           this.coordenadas = [cord1, cord2]
 
-          e.target.select()
+          //e.target.select() //ESTO HACE QUE SE SELECCIONE
         }
 
       })

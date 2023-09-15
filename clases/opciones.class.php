@@ -112,78 +112,82 @@
 
 	} 
 
-	//modo minimalista
-	//------------------------------------------------
-	if (!isset($_SESSION['modo_minimalista'])) {
+	if (isset($_SESSION['usuario'])) {
 
-		$_SESSION['modo_minimalista'] = 1;
+		//modo minimalista
+		//------------------------------------------------
+		if (!isset($_SESSION['modo_minimalista'])) {
 
-	}
-
-	if ($_SESSION['modo_minimalista'] == 1) {
-		$dispararModos .= "document.querySelector('body').setAttribute('data-minimalista', '');
-		";
-	}
-
-	//modo noche
-	//------------------------------------------------
-	if (!isset($_SESSION['modo_noche'])) {
-
-		$_SESSION['modo_noche'] = 0;
-
-	}
-
-	if ($_SESSION['modo_noche'] == 1) {
-		$dispararModos .= "document.querySelector('body').setAttribute('data-noche', '');
-		";
-	}
-
-	//modo resaltado
-	//------------------------------------------------
-	if (!isset($_SESSION['modo_resaltado'])) {
-
-		$_SESSION['modo_resaltado'] = 1;
-
-	}
-
-	if ($_SESSION['modo_resaltado'] == 1) {
-		$dispararModos .= "document.querySelector('body').setAttribute('data-resaltar', '');
-		";
-	}
-
-	//modo menu
-	//------------------------------------------------
-	if (!isset($_SESSION['modo_menu'])) {
-
-		$_SESSION['modo_menu'] = 1;
-
-	}
-
-	$dispararModos = "
-		<script type=\"text/javascript\" defer>
-			$dispararModos
-		</script>
-	";
-
-	//modo filas
-	//------------------------------------------------
-	if (!isset($_SESSION['modo_filas'])) {
-
-		if ($_SESSION['usuario']['usuario'] == 'GLADYS') {
-
-			$_SESSION['modo_filas'] = 18;
-
-		} else if ($_SESSION['usuario']['usuario'] == 'ANDREA') {
-
-			$_SESSION['modo_filas'] = 16;
-
-		} else {
-
-			$_SESSION['modo_filas'] = 16;
+			$_SESSION['modo_minimalista'] = 1;
 
 		}
 
+		if ($_SESSION['modo_minimalista'] == 1) {
+			$dispararModos .= "document.querySelector('body').setAttribute('data-minimalista', '');";
+		}
+
+		//modo noche
+		//------------------------------------------------
+		if (!isset($_SESSION['modo_noche'])) {
+
+			$_SESSION['modo_noche'] = 0;
+
+		}
+
+		if ($_SESSION['modo_noche'] == 1) {
+			$dispararModos .= "document.querySelector('body').setAttribute('data-noche', '');
+			";
+		}
+
+		//modo resaltado
+		//------------------------------------------------
+		if (!isset($_SESSION['modo_resaltado'])) {
+
+			$_SESSION['modo_resaltado'] = 1;
+
+		}
+
+		if ($_SESSION['modo_resaltado'] == 1) {
+			$dispararModos .= "document.querySelector('body').setAttribute('data-resaltar', '');
+			";
+		}
+
+		//modo menu
+		//------------------------------------------------
+		if (!isset($_SESSION['modo_menu'])) {
+
+			$_SESSION['modo_menu'] = 1;
+
+		}
+
+		$dispararModos = "
+			<script type=\"text/javascript\" defer>
+				$dispararModos
+			</script>
+		";
+
+		//modo filas
+		//------------------------------------------------
+		if (!isset($_SESSION['modo_filas'])) {
+
+			if ($_SESSION['usuario']['usuario'] == 'GLADYS') {
+
+				$_SESSION['modo_filas'] = 18;
+
+			} else if ($_SESSION['usuario']['usuario'] == 'ANDREA') {
+
+				$_SESSION['modo_filas'] = 16;
+
+			} else {
+
+				$_SESSION['modo_filas'] = 16;
+
+			}
+
+		}
+		
 	}
+
 
 	//botones
 	//------------------------------------------------

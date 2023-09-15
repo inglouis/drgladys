@@ -139,6 +139,37 @@ class ppal extends cbdc
 		$conn = null; 
 
 	}
+//********************************************************************************
+	function init_transaction() {
+
+		$conn  = $this::pdo_conectar(); 
+		
+		$trans = $conn->prepare("SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+		$trans->execute();
+
+		$conn->beginTransaction();
+
+		return $conn;
+
+	}
+//********************************************************************************
+	function handle_transaction($conn, $sql, $datos, $return) {
+
+		$resultado = $conn->prepare($sql);
+		$resultado->execute($datos);
+
+		if ($return) {
+
+			return $resultado;
+
+		} else {
+
+			return true;
+
+		}
+
+	}
+
 
 //********************************************************************************
 	function e_pdo($sql, $transaccion = false, $mensaje = null) {

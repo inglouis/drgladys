@@ -284,8 +284,8 @@ presentacionesEditar['crud'].inputEliminar('eliminar', '', [
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 qs('#nuevo-presentacion-editar').addEventListener('click', e => {
-	idpresentacion = idpresentacion + 1
-	presentacionesEditar.crud.lista.push({"id_presentacion": idpresentacion, "presentacion": ''})
+	idPresentacion = idPresentacion + 1
+	presentacionesEditar.crud.lista.push({"id_presentacion": idPresentacion, "presentacion": ''})
 	presentacionesEditar.cargarTabla(presentacionesEditar.crud.lista)
 })
 
