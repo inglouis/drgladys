@@ -2022,7 +2022,7 @@ export class ContenedoresEspeciales {
 
 									select.setAttribute('data-absoluto', '')
 									select.setAttribute('size', th.sizeSelectMotorBusqueda)
-									select.setAttribute('style', `top:${distancias.height + 20}px !important; min-height: ${th.minSelectMotorBusquedaY};z-index: 2;width: ${th.minSelectMotorBusquedaX};`)
+									select.setAttribute('style', `top:${distancias.height}px !important; min-height: ${th.minSelectMotorBusquedaY};z-index: 2;width: ${th.minSelectMotorBusquedaX};`)
 									select.parentElement.style = `min-height:${altura}px`
 
 								}
@@ -2072,7 +2072,7 @@ export class ContenedoresEspeciales {
 								
 								select.setAttribute('data-absoluto', '')
 								select.setAttribute('size', th.sizeSelectMotorBusqueda)
-								select.setAttribute('style', `top:${distancias.height + 20}px !important; min-height: ${th.minSelectMotorBusquedaY};z-index: 2;width: ${th.minSelectMotorBusquedaX};`)
+								select.setAttribute('style', `top:${distancias.height}px !important; min-height: ${th.minSelectMotorBusquedaY};z-index: 2;width: ${th.minSelectMotorBusquedaX};`)
 
 							}
 
@@ -2094,6 +2094,28 @@ export class ContenedoresEspeciales {
 								
 
 							} else if (elemento.key === 'Enter') {
+								padre.querySelector('input').value = elemento.target.options[elemento.target.selectedIndex].innerHTML
+								padre.querySelector('input').focus()
+								select.setAttribute('size', 1)
+								select.setAttribute('style', ``)
+								select.removeAttribute('data-absoluto')
+								select.parentElement.style = ``
+								padre.querySelector('input').value = ''
+							}
+
+						})
+
+						padre.querySelector('select').addEventListener('focusout', elemento => {
+
+							if(elemento.target.selectedIndex === 0) {
+
+								padre.querySelector('input').focus()
+								select.setAttribute('size', 1)
+								select.removeAttribute('data-absoluto')
+								select.setAttribute('style', ``)
+								select.parentElement.style = ``
+
+							} else {
 								padre.querySelector('input').value = elemento.target.options[elemento.target.selectedIndex].innerHTML
 								padre.querySelector('input').focus()
 								select.setAttribute('size', 1)

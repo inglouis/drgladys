@@ -1435,7 +1435,7 @@ export var medicamentos = new Medicamentos(new Tabla(
 		[['✓', 'Medicamentos seleccionados para el récipe & indicación del paciente'], true, 7],
 		['Contenido del récipe & indicación', false, 0]
 	],
-	'tabla-medicamentos', 'medicamentos-busqueda', 6,'medicamentos-izquierda','medicamentos-derecha','medicamentos-numeracion', false
+	'tabla-medicamentos', 'medicamentos-busqueda', 5,'medicamentos-izquierda','medicamentos-derecha','medicamentos-numeracion', false
 ))
 
 window.medicamentos = medicamentos
