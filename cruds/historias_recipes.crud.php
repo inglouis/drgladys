@@ -36,7 +36,7 @@
 <!---------------------------- RECIPES ------------------------------ -->
 <!------------------------------------------------------------------- -->
 <div id="crud-recipes-popup" class="popup-oculto" data-crud='popup'>
-  <div id="crud-recipes-pop" class="popup-oculto" data-scroll style="padding: 2.5% !important">
+  <div id="crud-recipes-pop" class="popup-oculto" data-scroll style="padding: 2% !important">
     
     <button id="crud-recipes-cerrar" data-crud='cerrar'>X</button>
 

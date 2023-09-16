@@ -172,7 +172,7 @@
 
 			if ($_SESSION['usuario']['usuario'] == 'GLADYS') {
 
-				$_SESSION['modo_filas'] = 18;
+				$_SESSION['modo_filas'] = 16;
 
 			} else if ($_SESSION['usuario']['usuario'] == 'ANDREA') {
 
