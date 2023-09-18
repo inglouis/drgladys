@@ -273,27 +273,64 @@
 
 				          </div>
 				            
-				          <div class="filas" style="height: 100%; position: relative">
+				          <div class="filas" style="position: relative">
 				          
-				            <div class="columnas" style="height: 100%">
+				          	<div class="columnas">
+        
+						        <div>
+						          <label class="requerido">Cabecera del reporte</label>
+						          <select data-valor="cabecera" class="reposo-valores-notificaciones upper lleno">
+						            <option value="0">Por intervención quirúrgica</option>
+						            <option value="1">Por presentar un motivo</option>
+						          </select>
+						        </div>
+
+						    </div>
+
+				            <div class="columnas">
 				              
-				              <div style="height: 100%; margin: 0px">
+				              <div style="margin: 0px">
 				                
-				                <label class="requerido">reposo</label>
+				                <label class="requerido">Motivo de la cabecera</label>
 				                <textarea id="reposo-informacion-notificaciones" data-previa="reposo-previa-notificaciones" data-valor="reposo" rows="6" class="reposo-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
 				              </div>
 
 				            </div>
 
-				            <div class="columnas" style="margin: 5px 0px;">
+				            <div class="columnas">
 
-				              <div style="margin: 0px" title="FECHA SOBRE LA CUÁL SE APLICAN LOS DÍAS AL CALCULAR EL REPOSO">
-				                <label class="requerido">FECHA INICIAL DEL REPOSO:</label>
-				                <input type="date" data-valor="fecha_inicio" id="reposos-inicio-notificaciones" class="reposo-valores-notificaciones lleno textarea-espaciado">
-				              </div>
-				              
-				            </div>
+						        <div style="margin:0px">
+						          <label>Representante</label>        
+						          <input type="checkbox" data-valor="representante" class="reposo-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+						        </div>
+
+					      	</div>
+
+				            <div class="columnas">
+
+						        <div style="margin:0px">
+						          <label>Recomendaciones</label>        
+						          <input type="checkbox" data-valor="recomendaciones" class="reposo-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+						        </div>
+
+					      	</div>
+
+					      	<div class="columnas">
+						        <div>
+						          <label>Recomendaciones tiempo</label>
+						          <input type="text" data-valor="recomendaciones_tiempo" class="reposo-valores-notificaciones upper">
+						        </div>
+						    </div>
+
+						    <div class="columnas">
+
+						        <div style="margin: 0px" title="FECHA SOBRE LA CUÁL SE APLICAN LOS DÍAS AL CALCULAR EL REPOSO">
+						          <label class="requerido">FECHA INICIAL DEL REPOSO:</label>
+						          <input type="date" id="reposos-inicio-notificaciones" data-valor="fecha_inicio" class="reposo-valores-notificaciones lleno textarea-espaciado">
+						        </div>
+					        
+					    	</div>
 
 				            <div class="columnas" style="margin: 5px 0px;">
 

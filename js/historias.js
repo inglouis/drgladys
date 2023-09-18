@@ -80,6 +80,8 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#preeditar-informacion', '#preeditar-previa'],
 	['#reposo-informacion', '#reposo-previa'],
 	['#repeditar-informacion', '#repeditar-previa'],
+	['#referencia-informacion', '#referencia-previa'],
+	['#refeditar-informacion', '#refeditar-previa'],
 
 	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
@@ -107,13 +109,14 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
 window.forPop = new PopUp('crud-infeditar-popup', 'popup', 'subefecto', true, 'infeditar', '', 27);
 window.presPop = new PopUp('crud-preeditar-popup', 'popup', 'subefecto', true, 'preeditar', '', 27);
 window.repoPop = new PopUp('crud-repeditar-popup', 'popup', 'subefecto', true, 'repeditar', '', 27);
+window.refPop = new PopUp('crud-refeditar-popup', 'popup', 'subefecto', true, 'refeditar', '', 27);
 
 window.traPop = new PopUp('crud-tratamientos-popup', 'popup', 'subefecto', true, 'tratamientos', '', 27)
 window.presenPop = new PopUp('crud-presentaciones-popup', 'popup', 'subefecto', true, 'presentaciones', '', 27);
@@ -140,6 +143,7 @@ genPop.evtBotones()
 forPop.evtBotones()
 presPop.evtBotones()
 repoPop.evtBotones()
+refPop.evtBotones()
 
 traPop.evtBotones()
 presenPop.evtBotones()
@@ -168,6 +172,7 @@ window.addEventListener('keyup', (e) => {
 	forPop.evtEscape(e)
 	presPop.evtEscape(e)
 	repoPop.evtEscape(e)
+	refPop.evtEscape(e)
 
 	traPop.evtEscape(e)
 	presenPop.evtEscape(e)
@@ -330,6 +335,7 @@ class Historias extends Acciones {
 		tools.limpiar('.general-valores', '', {})
 		tools.limpiar('.informe-valores', '', {})
 		tools.limpiar('.presupuesto-valores', '', {})
+		tools.limpiar('.referencia-valores', '', {})
 		tools.limpiar('.reposo-valores', '', {
 			"procesado": e => {
 				gid('reposos-inicio-insertar').value = window.dia
@@ -341,6 +347,7 @@ class Historias extends Acciones {
 		informes.cargarTabla([], undefined, undefined)
 		presupuestos.cargarTabla([], undefined, undefined)
 		reposos.cargarTabla([], undefined, undefined)
+		referencias.cargarTabla([], undefined, undefined)
 
 		rellenar.contenedores(this.sublista, '.presupuesto-representante-valores', {}, {})
 		
@@ -351,6 +358,7 @@ class Historias extends Acciones {
 		gid('informe-busqueda').value = ''
 		gid('presupuesto-busqueda').value = ''
 		gid('reposo-busqueda').value = ''
+		gid('referencia-busqueda').value = ''
 
 	}
 
@@ -382,8 +390,7 @@ historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cue
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
 		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
 		historias['crud'].gBt(['reportes btn btn-imprimir', 'Generar reportes del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos-b"><path fill="currentColor" d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`),
-		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`)	
-	
+		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`)
 	], [0, 0, 0, 0], ['VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
 ])
 
@@ -1303,6 +1310,47 @@ export var reposos = new Reposos(new Tabla(
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
+class Referencias extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'referencia_consultar'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha_arreglada']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#referencia-template').content.querySelector('.referencia-crud').cloneNode(true)
+		this.contenidoFecha = qs('#template-fecha').content.querySelector('.template-fecha-contenedor').cloneNode(true)
+	}
+
+	async confirmarActualizacion(popUp) {
+
+		notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+		var resultado = JSON.parse(await tools.fullAsyncQuery(this.clase, this.funcion, []))
+
+		this.cargarTabla(resultado, true)
+
+	}
+
+}
+
+export var referencias = new Referencias(new Tabla(
+	[	
+		['', false, 0],
+		['', false, 0]
+	],
+	'tabla-referencias', 'referencias-busqueda', -1, 'null', 'null', 'null', true
+))
+
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
 class Notificaciones_reportes extends Acciones {
 
 	constructor(crud) {
@@ -1659,6 +1707,9 @@ presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.c
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
+refPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+refPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+
 traPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 traPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
@@ -1676,7 +1727,8 @@ export var reportesDisponibles = {
 	"general": generales,
 	"informe": informes,
 	"presupuesto": presupuestos,
-	"reposo": reposos
+	"reposo": reposos,
+	"referencia": referencias
 }
 
 //----------------------------------------------------------------------------------------------------

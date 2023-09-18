@@ -1,29 +1,29 @@
-import { customDesplegable, Rellenar } from '../js/main.js';
+import { customDesplegable } from '../js/main.js';
 import { historias, tools, notificaciones, reporteSeleccionado } from '../js/historias.js';
-import { informes } from '../js/historias.js';
+import { referencias } from '../js/historias.js';
 
 /* 1)------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------- informeS ---------------------------------------------*/
+/* ---------------------------------------- referenciaS ---------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 
-export const informePrevia = new customDesplegable('#informes-contenedor .desplegable-contenedor', '#informes-contenedor .reporte-previa', '#informes-contenedor .desplegable-cerrar', undefined, 'fit-content')
+export const referenciaPrevia = new customDesplegable('#referencias-contenedor .desplegable-contenedor', '#referencias-contenedor .reporte-previa', '#referencias-contenedor .desplegable-cerrar', undefined, 'fit-content')
 
-informePrevia.eventos()
-informePrevia.prevenir = true
+referenciaPrevia.eventos()
+referenciaPrevia.prevenir = true
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						informe - PROPIEDADES				 					    */
+/*           						referencia - PROPIEDADES				 					    */
 /* -------------------------------------------------------------------------------------------------*/
-informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'informes-contenedor', 0)
-informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+referencias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'referencias-contenedor', 0)
+referencias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
 /////////////////////////////////////////////////////
 ///
-informes['crud']['propiedadesTr'] = {
+referencias['crud']['propiedadesTr'] = {
 	"contenedor": (e) => {
 
 		var fr = new DocumentFragment(),
-			th = informes, 
-			contenedor = e.querySelector('.informes-contenedor'), 
+			th = referencias, 
+			contenedor = e.querySelector('.referencias-contenedor'), 
 			contenido = th.contenido.cloneNode(true)
 
 		contenedor.innerHTML = ''
@@ -32,15 +32,12 @@ informes['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.informe).texto_html
+		var texto = JSON.parse(e.sublista.referencia).texto_html
 
-		contenedor.querySelector('.crud-titulo').innerHTML = e.sublista.titulo.toUpperCase()
-		contenedor.querySelector('.informe').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.referencia').innerHTML = texto.toUpperCase()
 
-		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
-		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
+		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombre_completo}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
 		
 		setTimeout(() => {
 
@@ -51,7 +48,7 @@ informes['crud']['propiedadesTr'] = {
 	},
 	"fecha": (e) => {
 
-		var th = informes, 
+		var th = referencias, 
 			contenedor = e.querySelector('.fecha-contenedor'), 
 			contenido = th.contenidoFecha.cloneNode(true)
 
@@ -63,7 +60,7 @@ informes['crud']['propiedadesTr'] = {
 
 	},
 	"eliminar": (e) => {
-		var th = informes,
+		var th = referencias,
 			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
 		contenedor.setAttribute('data-hidden', '')
@@ -97,7 +94,7 @@ informes['crud']['propiedadesTr'] = {
 }
 /////////////////////////////////////////////////////
 ///
-informes['crud']['customBodyEvents'] = {
+referencias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
@@ -105,10 +102,10 @@ informes['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reusar')) {
 
-			informes.sublista = tools.pariente(e.target, 'TR').sublista
+			referencias.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.informe-valores', '', {})
-			rellenar.contenedores(informes.sublista, '.informe-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.referencia-valores', '', {})
+			rellenar.contenedores(referencias.sublista, '.referencia-valores', {elemento: e.target, id: 'value'}, {})
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -116,19 +113,19 @@ informes['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR LA informe   					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA referencia   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
 		if (e.target.classList.contains('editar')) {
 
-			informes.sublista = tools.pariente(e.target, 'TR').sublista
+			referencias.sublista = tools.pariente(e.target, 'TR').sublista
 
-			tools.limpiar('.infeditar-valores', '', {})	
+			tools.limpiar('.refeditar-valores', '', {})	
 
-			rellenar.contenedores(informes.sublista, '.infeditar-valores', {elemento: e.target, id: 'value'}, {})
+			rellenar.contenedores(referencias.sublista, '.refeditar-valores', {elemento: e.target, id: 'value'}, {})
 
-			forPop.pop()
+			presPop.pop()
 
 		}
 
@@ -140,10 +137,10 @@ informes['crud']['customBodyEvents'] = {
 
 		if (e.target.classList.contains('reimprimir')) {
 
-			informes.sublista = tools.pariente(e.target, 'TR').sublista
+			referencias.sublista = tools.pariente(e.target, 'TR').sublista
 
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(informes.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(referencias.sublista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -162,20 +159,20 @@ informes['crud']['customBodyEvents'] = {
 
 (async () => {
 
-	informes.cargarTabla([], undefined, undefined)
+	referencias.cargarTabla([], undefined, undefined)
 
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							CONSTANCIAS - NOTIFICAR	  								    */
+/*           							referenciaS - NOTIFICAR								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#informes-contenedor').identificador = 'informe'
+qs('#referencias-contenedor').identificador = 'referencia'
 
-qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e => {
+qs("#referencias-contenedor .reporte-notificar").addEventListener('click', async e => {
 
 	if (window.procesar) {
 
-		var elemento = qs('#informes-contenedor')
+		var elemento = qs('#referencias-contenedor')
 
 		window.procesar = false
 
@@ -187,15 +184,12 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 			
 			var lista = {
 				"id_historia": historias.sublista.id_historia,
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
+				"referencia": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				},
-				"titulo": datos[0]
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
 			}
 
 			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
@@ -203,6 +197,8 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 			if (typeof resultado === 'object' && resultado !== null) {
 
 				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
+				
+				rellenar.contenedores(historias.sublista, '.referencia-representante-valores', {}, {})
 
 				notificaciones.mensajeSimple('Notificación enviada', '', 'V')
 
@@ -223,14 +219,14 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           								INFORMES - CARGAR	  								    */
+/*           							referencia - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 
-qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => {
+qs("#referencias-contenedor .reporte-cargar").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#informes-contenedor')
+		var elemento = qs('#referencias-contenedor')
 
 		window.procesar = false
 
@@ -241,15 +237,12 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 		if (datos !== '') {
 			
 			var lista = { 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
+				"referencia": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"titulo": datos[0]
+				}
 			}
 
 			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_insertar`, [lista, historias.sublista.id_historia], [["+", "%2B"]]))
@@ -258,19 +251,21 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 
 				tools.limpiar(`.${elemento.identificador}-valores`, '', {})
 
+				rellenar.contenedores(historias.sublista, '.referencia-representante-valores', {}, {})
+
 				var sesion = [{"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)}]
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				informes.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				referencias.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display !== 'none') {
 
-						informePrevia.prevenir = false
-						informePrevia.accionar()
-						informePrevia.prevenir = true
+						referenciaPrevia.prevenir = false
+						referenciaPrevia.accionar()
+						referenciaPrevia.prevenir = true
 
 					}
 
@@ -295,13 +290,13 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							informe - PREVIA					  					    */
+/*           							referencia - PREVIA				  					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => {
+qs("#referencias-contenedor .reporte-previa").addEventListener('click', async e => {
 
 	if(window.procesar) {
 
-		var elemento = qs('#informes-contenedor')
+		var elemento = qs('#referencias-contenedor')
 
 		window.procesar = false
 
@@ -315,15 +310,12 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 
 			var resultado = {
 				"id_historia": historias.sublista.id_historia, 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
+				"nombre_completo": datos[0], 
+				"cedula": datos[1], 
+				"referencia": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"titulo": datos[0]
+				}
 			}
 
 			if (typeof resultado === 'object' && resultado !== null) {
@@ -332,15 +324,15 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
-				informes.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
+				referencias.cargarTabla(JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_consultar`, [historias.sublista.id_historia])), undefined, undefined)
 
 				setTimeout(() => {
 
 					if (elemento.querySelector('.desplegable-contenedor').style.display === 'none') {
 
-						informePrevia.prevenir = false
-						informePrevia.accionar()
-						informePrevia.prevenir = true
+						referenciaPrevia.prevenir = false
+						referenciaPrevia.accionar()
+						referenciaPrevia.prevenir = true
 
 					}
 
@@ -365,37 +357,37 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							informe - EDITAR			 							    */
+/*           							referencia - EDITAR			 							    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
+qs('#crud-refeditar-botones .confirmar').addEventListener('click', async e => {
 
 	if(window.procesar) {
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-		var elemento = qs('#informes-contenedor')
+		var elemento = qs('#referencias-contenedor')
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `infeditar-valores`, tools);
+		var datos = tools.procesar('', '', `refeditar-valores`, tools);
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var lista = (typeof datos[2] === 'string') ? JSON.parse(datos[2]) : datos[2];
 
-			informes.sublista.informe = JSON.stringify(lista)
+			referencias.sublista.referencia = JSON.stringify(lista)
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(informes.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(referencias.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
 			if (resultado.trim() === 'exito') {
 
-				informes.cargarTabla(informes.crud.lista)
+				referencias.cargarTabla(referencias.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				forPop.pop()
+				presPop.pop()
 
 			} else {
 
@@ -414,35 +406,35 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						informe - ELIMINAR					 					    */
+/*           						referencia - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#informes-contenedor table').addEventListener('click', async e => {
+qs('#referencias-contenedor table').addEventListener('click', async e => {
 
 	if (e.target.classList.contains('eliminar-boton')) {
 
 		if (window.procesar) {
 
-			var elemento = qs('#informes-contenedor')
+			var elemento = qs('#referencias-contenedor')
 
 			window.procesar = false
 			
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')	
 
-			informes.crud.lista.forEach((lista, i) => {
+			referencias.crud.lista.forEach((lista, i) => {
 
 				if (lista.id === Number(e.target.value)) {
 
-					informes.crud.lista.splice(i, 1)
+					referencias.crud.lista.splice(i, 1)
 
 				}
 
 			})
 
-			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(informes.crud.lista), historias.sublista.id_historia])
+			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_eliminar`, [JSON.stringify(referencias.crud.lista), historias.sublista.id_historia])
 
 			if (resultado.trim() === 'exito') {
 
-				informes.cargarTabla(informes.crud.lista)
+				referencias.cargarTabla(referencias.crud.lista)
 
 				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
@@ -461,89 +453,69 @@ qs('#informes-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  INFORME - TEXTO PREVIA	 								    */
+/*           						  referencia - TEXTO PREVIA	 								    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#informes-contenedor .cargar').addEventListener('mouseenter', e => {
+qs('#referencias-contenedor .cargar').addEventListener('mouseenter', e => {
 
-	qs('#informes-contenedor .personalizacion').removeAttribute('data-hidden')	
-
-})
-
-qs('#informes-contenedor .cargar').addEventListener('mouseleave', e => {
-
-	qs('#informes-contenedor .personalizacion').setAttribute('data-hidden', '')
+	qs('#referencias-contenedor .personalizacion').removeAttribute('data-hidden')	
 
 })
 
-qs('#crud-infeditar-pop .filas').addEventListener('mouseenter', e => {
+qs('#referencias-contenedor .cargar').addEventListener('mouseleave', e => {
 
-	qs('#crud-infeditar-personalizacion').removeAttribute('data-hidden')	
+	qs('#referencias-contenedor .personalizacion').setAttribute('data-hidden', '')
 
 })
 
-qs('#crud-infeditar-pop .filas').addEventListener('mouseleave', e => {
+qs('#crud-refeditar-pop .filas').addEventListener('mouseenter', e => {
 
-	qs('#crud-infeditar-personalizacion').setAttribute('data-hidden', '')
+	qs('#crud-refeditar-personalizacion').removeAttribute('data-hidden')	
+
+})
+
+qs('#crud-refeditar-pop .filas').addEventListener('mouseleave', e => {
+
+	qs('#crud-refeditar-personalizacion').setAttribute('data-hidden', '')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						INFORME - LIMPIAR					 						    */
+/*           						referencia - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#informes-contenedor .limpiar').addEventListener('click', e => {
+qs('#referencias-contenedor .limpiar').addEventListener('click', e => {
 
-	tools.limpiar('.informe-valores', '', {})
+	tools.limpiar('.referencia-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						INFORME - SCROLL TOP					 					    */
+/*           						referencia - SCROLL TOP				 					    */
 /* -------------------------------------------------------------------------------------------------*/
-qs('#informe-busqueda').addEventListener('keydown', e => {
-	qs('#tabla-informe').parentElement.scrollTo(0,0)
+qs('#referencia-busqueda').addEventListener('keydown', e => {
+	qs('#tabla-referencia').parentElement.scrollTo(0,0)
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						INFORME - MODELO					 					    	*/
+/*           						referencia - REPRESENTANTE			 					    	*/
 /* -------------------------------------------------------------------------------------------------*/
-var modelos = {
-	"preoperatorio": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "PREOPERATORIO"
-	},
-	"rx": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
-			"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
-		}),
-		"titulo": "RX TORAX"
-	},
-	"cardiovascular": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "VALORACIÓN CARDIOVASCULAR"
-	},
-	"pediatrica": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "VALORACIÓN PEDIÁTRICA"
-	}
-}
-
-qs('#informe-modelos').addEventListener('click', e=> {
+qs('#referencia-agradecimientos').addEventListener('click', e=> {
 
     if (e.target.tagName === 'BUTTON') {
 
-        rellenar.contenedores(modelos[e.target.dataset.identificador], '.informe-valores', {}, {})
+    	var lista = {
+    		"paciente": {
+    			"nombre_completo": historias.sublista.nombre_completo,
+    			"cedula": historias.sublista.cedula
+    		},
+    		"representante": {
+    			"nombre_completo": historias.sublista.emergencia_persona,
+    			"cedula": historias.sublista.emergencia_informacion
+    		}
+    	}
+
+        rellenar.contenedores(lista[e.target.dataset.identificador], '.referencia-representante-valores', {}, {})
         
         notificaciones.mensajeSimple('Datos cargados', false, 'V')
 

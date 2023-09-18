@@ -5,9 +5,10 @@ import { Paginacion } from '../js/main.js';
 var paginacionPosiciones = {
 	"constancia": 0,
 	"informe": 1,
-	"presupuesto": 2,
-	"reposo": 3,
-	"general": 4
+	"referencia": 2,
+	"presupuesto": 3,
+	"reposo": 4,
+	"general": 5
 }
 
 var historiaPopups = {
@@ -39,17 +40,21 @@ window.reportesPaginacion = {
 		cambiarSeccionBotones(qs('#informe'))
 		window.paginacion.animacion(1, true)
 	},
+	"referencia": () => {
+		cambiarSeccionBotones(qs('#referencia'))
+		window.paginacion.animacion(2, true)
+	},
 	"presupuesto": () => {
 		cambiarSeccionBotones(qs('#presupuesto'))
-		window.paginacion.animacion(2, true)
+		window.paginacion.animacion(3, true)
 	},
 	"reposo": () => {
 		cambiarSeccionBotones(qs('#reposo'))
-		window.paginacion.animacion(3, true)
+		window.paginacion.animacion(4, true)
 	},
 	"general": () => {
 		cambiarSeccionBotones(qs('#general'))
-		window.paginacion.animacion(4, true)
+		window.paginacion.animacion(5, true)
 	}
 }
 

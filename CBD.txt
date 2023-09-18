@@ -44,3 +44,39 @@ SE HICIERON CAMBIOS EN LA ESTRUCTURA DE LOS USUARIOS
 ---------------------------------------------------------------------------------------
 TENGO QUE CAMBIAR QUE LAS LLAVES FORANEAS DE PRESENTACIONES Y TRATAMIENTOS HAGAN CASCADE
 EN BORRAR
+
+3)-------------------------------------------------------------------------------------
+CREAR NUEVA COLUMNA EN REPORTES [REFERENCIAS]
+---------------------------------------------------------------------------------------
+
+4)-------------------------------------------------------------------------------------
+CREAR TABLA REFERENCIAS - MEDICOS_REFERENCIADOS
+---------------------------------------------------------------------------------------
+
+CREATE TABLE basicas.referencias
+(
+  id_referencia bigserial NOT NULL,
+  nombre character varying(100) NOT NULL DEFAULT ''::bpchar,
+  descripcion character varying(600) NOT NULL DEFAULT ''::bpchar,
+  status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_id_referencia PRIMARY KEY (id_referencia)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE basicas.referencias
+  OWNER TO postgres;
+
+
+CREATE TABLE basicas.medicos_referenciados
+(
+  id_medico_referenciado bigserial NOT NULL,
+  nombre character varying(100) NOT NULL DEFAULT ''::bpchar,
+  status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
+  CONSTRAINT pk_id_medico_referenciado PRIMARY KEY (id_medico_referenciado)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE basicas.referencias
+  OWNER TO postgres;

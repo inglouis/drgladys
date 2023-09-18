@@ -96,6 +96,7 @@
                   <div class="botones" id="reportes-paginacion-botones">
                     <button id="constancia">Constancias</button>
                     <button id="informe">Informes médicos</button>
+                    <button id="referencia">Referencias</button>
                     <button id="presupuesto">Presupuestos</button>
                     <button id="reposo">Reposos médicos</button>
                     <button id="general">Generales</button>
