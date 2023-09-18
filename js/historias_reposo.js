@@ -34,7 +34,17 @@ reposos['crud']['propiedadesTr'] = {
 
 		var texto = JSON.parse(e.sublista.reposo).texto_html
 
-		contenedor.querySelector('.reposos-motivo').innerHTML = texto.toUpperCase()
+		contenedor.querySelectorAll('.reposos-cabecera option').forEach((el, i) => {
+			if (el.value === e.sublista.cabecera) {
+				el.parentElement.selectedIndex = i
+			}
+		})
+
+		contenedor.querySelector('.reposos-motivo').innerHTML = `<b style="text-decoration:underline">Motivo de la cabecera:</b> ${texto.toUpperCase()}`
+		contenedor.querySelector('.reposos-representante input').checked = (e.sublista.representante === 'X') ? true : false;
+		contenedor.querySelector('.reposos-recomendaciones input').checked = (e.sublista.recomendaciones === 'X') ? true : false;
+		contenedor.querySelector('.reposos-recomendaciones-tiempo div').innerHTML = e.sublista.recomendaciones_tiempo
+
 		contenedor.querySelector('.reposos-fecha-inicio input').value = e.sublista.fecha_inicio
 		contenedor.querySelector('.reposos-fecha-final input').value = e.sublista.fecha_final
 		
@@ -195,10 +205,14 @@ qs("#reposos-contenedor .reporte-notificar").addEventListener('click', async e =
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_naci": historias.sublista.fecha_naci,
-				"fecha_inicio": datos[1],
-				"dias": datos[2].trim(),
-				"fecha_final": datos[3],
-				"fecha_simple": datos[4].toUpperCase(),
+				"cabecera": datos[0],
+				"representante": datos[2],
+				"recomendaciones": datos[3],
+				"recomendaciones_tiempo": datos[4],
+				"fecha_inicio": datos[5],
+				"dias": datos[6].trim(),
+				"fecha_final": datos[7],
+				"fecha_simple": datos[8].toUpperCase(),
 				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
@@ -253,10 +267,14 @@ qs("#reposos-contenedor .reporte-cargar").addEventListener('click', async e => {
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_naci": historias.sublista.fecha_naci,
-				"fecha_inicio": datos[1],
-				"dias": datos[2].trim(),
-				"fecha_final": datos[3],
-				"fecha_simple": datos[4].toUpperCase(),
+				"cabecera": datos[0],
+				"representante": datos[2],
+				"recomendaciones": datos[3],
+				"recomendaciones_tiempo": datos[4],
+				"fecha_inicio": datos[5],
+				"dias": datos[6].trim(),
+				"fecha_final": datos[7],
+				"fecha_simple": datos[8].toUpperCase(),
 				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
@@ -306,7 +324,7 @@ qs("#reposos-contenedor .reporte-cargar").addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							reposo - PREVIA					  					    */
+/*           							REPOSO - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 
@@ -329,10 +347,14 @@ qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_naci": historias.sublista.fecha_naci,
-				"fecha_inicio": datos[1],
-				"dias": datos[2].trim(),
-				"fecha_final": datos[3],
-				"fecha_simple": datos[4].toUpperCase(),
+				"cabecera": datos[0],
+				"representante": datos[2],
+				"recomendaciones": datos[3],
+				"recomendaciones_tiempo": datos[4],
+				"fecha_inicio": datos[5],
+				"dias": datos[6].trim(),
+				"fecha_final": datos[7],
+				"fecha_simple": datos[8].toUpperCase(),
 				"reposo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
@@ -394,9 +416,17 @@ qs('#crud-repeditar-botones .confirmar').addEventListener('click', async e => {
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
+			var lista = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
 
-			reposos.sublista.reposo = JSON.stringify(lista)
+			reposos.sublista.cabecera = datos[0]
+			reposos.sublista.reposo   = JSON.stringify(lista)
+			reposos.sublista.representante   = datos[2]
+			reposos.sublista.recomendaciones = datos[3]
+			reposos.sublista.recomendaciones_tiempo = datos[4]
+			reposos.sublista.fecha_inicio    = datos[5]
+			reposos.sublista.dias            = datos[6]
+			reposos.sublista.fecha_final     = datos[7]
+			reposos.sublista.fecha_simple    = datos[8]
 
 			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(reposos.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 

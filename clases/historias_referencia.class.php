@@ -12,10 +12,10 @@
         ];
 
         /* 1)------------------------------------------------------------------------------------------------*/
-		/*           							reposo 							  					    */
+		/*           							referencia 							  					    */
 		/* -------------------------------------------------------------------------------------------------*/
 
-        public function reposo_insertar($args) {
+        public function referencia_insertar($args) {
 
             $lista = $args[0];
             $id_historia = $args[1];
@@ -26,8 +26,8 @@
             $sql = "
                 update $this->schema.$this->tabla 
                 SET 
-                    reposos = jsonb_insert(
-                        reposos, 
+                    referencias = jsonb_insert(
+                        referencias, 
                         '{0}', 
                         ?::jsonb
                         , true
@@ -49,7 +49,7 @@
 
         }
 
-        public function reposo_consultar($args) {
+        public function referencia_consultar($args) {
 
             $sql = "
                 select
@@ -60,25 +60,15 @@
                     SELECT x.*
                     FROM 
                      jsonb_array_elements(
-                    	(SELECT reposos FROM principales.reportes WHERE id_historia = ?)
+                    	(SELECT referencias FROM principales.reportes WHERE id_historia = ?)
                      ) AS t(doc),
                      jsonb_to_record(t.doc) as x (
-                        nombres character varying(150), 
-                        apellidos character varying(150), 
-                        cedula character varying(14), 
-                        fecha date, 
-                        hora time without time zone, 
-                        cabecera character varying(2),
-                        reposo text,
-                        representante character varying(1),
-                        recomendaciones character varying(1),
-                        recomendaciones_tiempo character varying(100),
-                        fecha_inicio date, 
-                        dias character varying(100), 
-                        fecha_final date, 
-                        fecha_simple text,
-                        fecha_naci date
-                    )
+                     	nombre_completo character varying(300), 
+                     	cedula character varying(14), 
+                     	fecha date, 
+                     	hora time without time zone, 
+                     	referencia jsonb
+                     )
                 ) as t
                 ORDER BY t.fecha desc, t.hora desc
             ";
@@ -87,11 +77,11 @@
 
         }
 
-        public function reposo_editar($args) {
+        public function referencia_editar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set reposos = ?::jsonb
+                set referencias = ?::jsonb
                 where id_historia = ?
             ";
 
@@ -99,11 +89,11 @@
 
         }
 
-        public function reposo_eliminar($args) {
+        public function referencia_eliminar($args) {
 
             $sql = "
                 update $this->schema.$this->tabla 
-                set reposos = ?::jsonb
+                set referencias = ?::jsonb
                 where id_historia = ?
             ";
 

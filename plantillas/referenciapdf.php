@@ -33,10 +33,10 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['reposo']) == 'string') {
-    $reposo = json_decode($datos['reposo'], true);
+  if (gettype($datos['presupuesto']) == 'string') {
+    $presupuesto = json_decode($datos['presupuesto'], true);
   } else {
-    $reposo = $datos['reposo'];
+    $presupuesto = $datos['presupuesto'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -52,57 +52,7 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $fecha_inicio = date("d-m-Y", strtotime($datos['fecha_inicio']));
-  $fecha_final = date("d-m-Y", strtotime($datos['fecha_final']));
-  $fecha_simple = date("d-m-Y", strtotime($datos['fecha_simple']));
-
-  $edad = $obj->calcularEdad($datos['fecha_naci']);
-
-  if ($datos['cabecera'] == '0') {
-
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad AÑOS DE EDAD CON CÉDULA DE IDENTIDAD $datos[cedula] FUE INTERVENIDO QUIRÚRGICAMENTE DE: ". trim(strtoupper($reposo['texto_html']));
-    
-  } else if ($datos['cabecera'] == '1') {
-
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad AÑOS DE EDAD CON CÉDULA DE IDENTIDAD $datos[cedula] PRESENTA: ".trim(strtoupper($reposo['texto_html']));
-
-  } else {
-
-    $cabecera = 'CABECERA SIN ASIGNAR';
-
-  }
-
-  if ($datos['representante'] == 'X') {
-
-    $representante = "AMERITA REPOSO MÉDICO Y CUIDADOS DEL REPRESENTANTE DESDE EL: <b>$fecha_inicio</b> HASTA EL: <b>$fecha_final</b>.";
-
-  } else {
-
-    $representante = "AMERITA REPOSO MÉDICO DESDE EL: <b>$fecha_inicio</b> HASTA EL: <b>$fecha_final</b>.";
-
-  }
-
-  if (empty(trim($datos['recomendaciones_tiempo']))) {
-
-    $recomendaciones_tiempo = '3 MESES';
-
-  } else {
-
-    $recomendaciones_tiempo = strtoupper($datos['recomendaciones_tiempo']);
-
-  }
-
-  if ($datos['recomendaciones'] == 'X') {
-
-    $recomendaciones = "NO DEBE PRACTICAR DEPORTES DE IMPACTO, ACUDIR A RÍOS Y PISCINAS, PLAYAS NI LUGARES CONTAMINADOS DURANTE $recomendaciones_tiempo A PARTIR DE LA FECHA PRESENTE";
-
-  } else {
-
-    $recomendaciones = "";
-
-  }
-
-
+  $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
 ?>
 
@@ -246,62 +196,68 @@
 
   <div class="contenedor">
 
-    <div id="cabecera">
+      <div id="cabecera">
 
-  		<div style="font-family: 'Qwigley'; font-size: 40px; ">
-  			Dra. Gladys A. Chaparro H.
+    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
+    			Dra. Gladys A. Chaparro H.
+    		</div>
+
+        <div style="font-size: 14px">RIF: v-09143081-5</div>
+        <div style="font-size: 14px">Oftalmólogo</div>
+        <div style="font-size: 14px">Infantil y Estrabismo</div>
+        <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
+
   		</div>
 
-      <div style="font-size: 14px">RIF: v-09143081-5</div>
-      <div style="font-size: 14px">Oftalmólogo</div>
-      <div style="font-size: 14px">Infantil y Estrabismo</div>
-      <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
+      <div></div>
+      <div class="separador"></div>
 
-		</div>
+  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+  		</div>
 
-    <div></div>
-    <div class="separador"></div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
 
-		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-		</div>
+	    <div></div>
+	    <div></div>
 
-    <div></div>
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>NOMBRES Y APELLIDOS:</td>
+	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
+	        </tr>
+	      </tbody>
+	    </table>
 
-    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">REPOSO MÉDICO</div>
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>CÉDULA O PASAPORTE:</td>
+	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
+	        </tr>
+	      </tbody>
+	    </table>
 
-    <div></div>
-    <div></div>
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td>FECHA:</td>
+	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
+	          <td>HORA:</td>
+	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
+	        </tr>
+	      </tbody>
+	    </table>
 
-    <div style="left: 7mm; width: 90%; position: relative;">
-      <?php echo strtoupper($cabecera);?>
-    </div>
+  	</div>
 
-    <div></div>
+  	<div></div>
+  	<div></div>
 
-    <div style="left: 7mm; width: 90%; position: relative;">
-      <?php echo strtoupper($representante);?>
-    </div>
-
-    <table style="border:none">
-      <tbody>
-        <tr>
-          <td>(  *  *  <?php echo 'DURANTE: <b>'.$datos['dias']."</b>"?> DÍAS *  *  )</td>
-        </tr> 
-      </tbody>    
-    </table>
-
-    <div></div>
-
-    <div style="left: 7mm; width: 90%; position: relative;">
-      <?php echo strtoupper($recomendaciones);?>
-    </div>
-
-
-  </div>
-
-  <div></div>
-  <div></div>
+	<?php 
+    echo trim(strtoupper($presupuesto['texto_html']));
+  ?>
 
   <div style="width: 100%"></div>
 
@@ -330,12 +286,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/reposos/reposo$nombre.pdf");
-          $html2pdf->output("../reportes/reposos/reposo$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
+          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

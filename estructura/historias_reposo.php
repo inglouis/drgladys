@@ -1,5 +1,5 @@
 <!--1)---------------------------------------------------- -->
-<!---------------- reposoS EDITAR -------------------- -->
+<!-------------------- REPOSOS EDITAR -------------------- -->
 <!-------------------------------------------------------- -->
 <div id="crud-repeditar-popup" class="popup-oculto" data-crud='popup'>
   <div id="crud-repeditar-pop" class="popup-oculto" style="width:30%; min-width: 300px">
@@ -7,7 +7,7 @@
     <button id="crud-repeditar-cerrar" data-crud='cerrar'>X</button>
 
     <section id="crud-repeditar-titulo" data-crud='titulo'>
-      EDITAR reposo
+      EDITAR REPOSO
     </section>
 
     <div class="filas" style="height: fit-content; position:relative;">
@@ -27,10 +27,47 @@
       <div class="columnas">
         
         <div>
-          <label class="requerido">reposo</label>
+          <label class="requerido">Cabecera del reporte</label>
+          <select data-valor="cabecera" class="repeditar-valores upper lleno">
+            <option value="0">Por intervención quirúrgica</option>
+            <option value="1">Por presentar un motivo</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="columnas" style="height: 100%">
+        
+        <div style="height: 100%">
+          <label class="requerido">Motivo de la cabecera</label>
           <textarea rows="4" id="repeditar-informacion" data-previa="repeditar-previa" data-valor="reposo" class="repeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
         </div>
 
+      </div>
+
+      <div class="columnas">
+
+        <div style="margin:0px">
+          <label>Requiere cuidado de representantes</label>        
+          <input type="checkbox" data-valor="representante" class="repeditar-valores check checksmall" style="width: 30px; height: 30px">
+        </div>
+
+      </div>
+
+      <div class="columnas">
+
+        <div style="margin:0px">
+          <label>Recomendaciones</label>        
+          <input type="checkbox" data-valor="recomendaciones" class="repeditar-valores check checksmall" style="width: 30px; height: 30px">
+        </div>
+
+      </div>
+
+      <div class="columnas">
+        <div>
+          <label>Recomendaciones tiempo</label>
+          <input type="text" data-valor="recomendaciones_tiempo" class="repeditar-valores upper">
+        </div>
       </div>
 
       <div class="columnas">
@@ -117,7 +154,27 @@
 
   				<div class="reposo crud-reporte">
   				  
+            <select class="reposos-cabecera input visual" disabled style="margin-top: 5px">
+              <option value="0">Por intervención quirúrgica</option>
+              <option value="1">Por presentar un motivo</option>
+            </select>
+
             <div class="reposos-motivo"></div>
+
+            <div class="reposos-representante">
+              <label>Requiere cuidados del representante</label>
+              <input type="checkbox" disabled class="input check checksmall">
+            </div>
+
+            <div class="reposos-recomendaciones">
+              <label>Recomendaciones</label>
+              <input type="checkbox" disabled class="input check checksmall">
+            </div>
+
+            <div class="reposos-recomendaciones-tiempo">
+              <label>Tiempo recomendado para práctica física</label>
+              <div></div>
+            </div>
 
             <div class="reposos-fecha-inicio" style="margin-bottom: 5px;">
               <label>DESDE:</label>
@@ -173,7 +230,7 @@
 </template>
 
 <!--3)---------------------------------------------------- -->
-<!----------------- reposoS CONTENEDOR --------------- -->
+<!--------------------- REPOSOS CONTENEDOR --------------- -->
 <!-------------------------------------------------------- -->
 <section class="reportes-seccion" data-hide>
                 
@@ -207,15 +264,57 @@
             
           <div class="filas" style="height: 100%; position: relative">
           
+            <div class="columnas">
+              
+              <div>
+                
+                <label class="requerido">Cabecera del reporte</label>
+                <select data-valor="cabecera" class="reposo-valores upper lleno">
+                  <option value="0">Por intervención quirúrgica</option>
+                  <option value="1">Por presentar un motivo</option>
+                </select>
+                
+              </div>
+
+            </div>
+
             <div class="columnas" style="height: 100%">
               
-              <div style="height: 100%; margin: 0px">
+              <div style="height: 100%">
                 
-                <label class="requerido">reposo</label>
-                <textarea id="reposo-informacion" data-previa="reposo-previa" data-valor="reposo" rows="6" class="reposo-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <label class="requerido">Motivo de la cabecera</label>
+                <textarea id="reposo-informacion" data-previa="reposo-previa" data-valor="reposo" rows="6" class="reposo-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll title="
+                  Por intervención quirúrgica cargar -> LA CAUSA QUE MOTIVO AL PROCEDIMIENTO, EL PROCEDIMIENTO QUIRÚRGICO&#013
+                  Por presentación de motivo cargar -> LA CAUSA QUE MOTIVO LA CONSULTA
+                "></textarea>
 
               </div>
 
+            </div>
+
+            <div class="columnas">
+
+              <div style="margin:0px">
+                <label>Requiere cuidado de representantes</label>        
+                <input type="checkbox" data-valor="representante" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
+              </div>
+              
+            </div>
+
+            <div class="columnas">
+
+              <div style="margin:0px">
+                <label>Recomendaciones</label>        
+                <input type="checkbox" data-valor="recomendaciones" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
+              </div>
+
+            </div>
+
+            <div class="columnas">
+              <div>
+                <label>Recomendaciones tiempo</label>
+                <input type="text" data-valor="recomendaciones_tiempo" class="reposo-valores upper">
+              </div>
             </div>
 
             <div class="columnas" style="margin: 5px 0px;">

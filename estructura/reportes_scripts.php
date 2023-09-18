@@ -5,3 +5,4 @@
 <script type="module" src="../js/historias_reposo.js" defer></script>
 <script type="module" src="../js/historias_notificaciones.js" defer></script>
 <script type="module" src="../js/historias_recipes.js" defer></script>
+<script type="module" src="../js/historias_referencias.js" defer></script>
