@@ -81,7 +81,9 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#reposo-informacion', '#reposo-previa'],
 	['#repeditar-informacion', '#repeditar-previa'],
 	['#referencia-informacion', '#referencia-previa'],
+	['#referencia-agradecimiento', '#referencia-previa'],
 	['#refeditar-informacion', '#refeditar-previa'],
+	['#refeditar-agradecimiento', '#refeditar-previa'],
 
 	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
@@ -210,7 +212,8 @@ window.contenedores = new ContenedoresEspeciales('historias-status')
 
 window.contenedoresConsultar    = new ContenedoresEspeciales('crud-informacion-popup') 
 window.contenedoresEditar       = new ContenedoresEspeciales('crud-editar-popup') 
-window.contenedoresInsertar     = new ContenedoresEspeciales('crud-insertar-popup') 
+window.contenedoresInsertar     = new ContenedoresEspeciales('crud-insertar-popup')
+window.contenedoresReportes     = new ContenedoresEspeciales('crud-reportes-popup')
 window.contenedoresMedicamentos = new ContenedoresEspeciales('crud-medicamentos-popup')
 /////////////////////////////////////////////////////
 window.procesar = true
@@ -696,7 +699,9 @@ var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_d
 	comboParentesco   = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_parentescos', [])),
 	comboCivil        = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_estado_civil', [])),
 	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
-	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', []))
+	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', [])),
+	comboReferencia         = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_referencias', [])),
+	comboMedicoReferenciado = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referenciados', []))
 
 contenedores.eventos().checkboxes('status')
 
@@ -715,6 +720,12 @@ contenedoresEditar.eventos().combo('cc-proveniencias-editar', ['combos', 'combo_
 contenedoresConsultar.eventos().combo('cc-estado_civil-consultar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true})
 contenedoresInsertar.eventos().combo('cc-estado_civil-insertar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
 contenedoresEditar.eventos().combo('cc-estado_civil-editar', ['combos', 'combo_estado_civil', ['', '']], false, {}, undefined, undefined, {"lista": comboCivil, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresReportes.eventos().combo('cc-referencias-referencia-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referencia-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresReportes.eventos().combo('cc-referencias-referido-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referido-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
 
 contenedoresConsultar.eventos().combo('cc-religiones-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
 contenedoresInsertar.eventos().combo('cc-religiones-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})

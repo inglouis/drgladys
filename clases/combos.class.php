@@ -47,9 +47,19 @@
             return $this->seleccionar($sql, []);
         }
 
-         public function combo_genericos($args) {
+        public function combo_genericos($args) {
             $sql = "select id_generico, nombre from basicas.genericos";
             return $this->combos($args, [$sql, 'nombre', 'id_generico']);
+        }
+
+        public function combo_referencias($args) {
+            $sql = "select id_referencia, concat(id_referencia,' || ', nombre) from basicas.referencias where status = 'A'";
+            return $this->combos($args, [$sql, 'nombre', 'nombre ASC', '']);
+        }
+
+        public function combo_medicos_referenciados($args) {
+            $sql = "select id_medico_referenciado, concat(id_medico_referenciado,' || ', nombre) from basicas.medicos_referenciados where status = 'A'";
+            return $this->combos($args, [$sql, 'nombre', 'nombre ASC', '']);
         }
 
     }

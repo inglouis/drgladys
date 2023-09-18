@@ -498,24 +498,32 @@ qs('#referencia-busqueda').addEventListener('keydown', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						referencia - REPRESENTANTE			 					    	*/
+/*           						INFORME - MODELO					 					    	*/
 /* -------------------------------------------------------------------------------------------------*/
-qs('#referencia-agradecimientos').addEventListener('click', e=> {
+var modelos = {
+	"preoperatorio": "REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA",
+	"rx": "REALIZAR RX DE TORAX, PREOPERATORIO",
+	"cardiovascular": "REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA", 
+	"pediatrica": "REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA", 
+	"estrabismo": "CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA"
+}
+
+qs('#referencias-modelos').addEventListener('click', e => {
 
     if (e.target.tagName === 'BUTTON') {
 
-    	var lista = {
-    		"paciente": {
-    			"nombre_completo": historias.sublista.nombre_completo,
-    			"cedula": historias.sublista.cedula
-    		},
-    		"representante": {
-    			"nombre_completo": historias.sublista.emergencia_persona,
-    			"cedula": historias.sublista.emergencia_informacion
-    		}
+    	var conector = (qs('#referencia-agradecimiento').value === '') ? '' : ' - '
+
+    	var modelo_final = {
+    		"agradecimiento": JSON.stringify({
+    			"texto_base": `${qs('#referencia-agradecimiento').value}${conector}${modelos[e.target.dataset.identificador]}`,
+    			"texto_html": `${qs('#referencia-agradecimiento').value}${conector}${modelos[e.target.dataset.identificador]}`
+    		})
     	}
 
-        rellenar.contenedores(lista[e.target.dataset.identificador], '.referencia-representante-valores', {}, {})
+    	console.log(modelo_final)
+
+        rellenar.contenedores(modelo_final, '.referencia-agradecimiento', {}, {})
         
         notificaciones.mensajeSimple('Datos cargados', false, 'V')
 

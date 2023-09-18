@@ -262,7 +262,7 @@
 
           </div>
             
-          <div class="filas" style="height: 100%; position: relative">
+          <div class="filas" style="height: 75vh; position: relative; justify-content: flex-start;" data-scroll-invisible>
           
             <div class="columnas">
               

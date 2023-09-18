@@ -261,6 +261,37 @@ body::-webkit-scrollbar-thumb {
 }
 
 /*---------------------------------------------------------------*/
+/*-------------------scroll-bar-invisible------------------------*/
+
+
+[data-scroll-invisible]::-webkit-scrollbar, .scroll-form::-webkit-scrollbar  {
+    width: 0em;
+    height: 0.6em;
+}
+
+[data-scroll-invisible]::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+[data-scroll-invisible]::-webkit-scrollbar-thumb {
+    background: #8f5eff38;
+    -webkit-box-shadow: none;
+    transition: 0.3s ease all;
+}
+ 
+[data-scroll-invisible]::-webkit-scrollbar-thu {
+    background: #ffffff38;
+    border: 2px solid #03a9f421;
+    border-left: none; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    transition: 0.3s ease all;
+}
+
+[data-scroll-invisiblescroll]::-webkit-scrollbar-track-piece  {
+    background: transparent;
+}
+/*---------------------------------------------------------------*/
 /*------------------------estructura-----------------------------*/
 .paginas-contenedor {
     width: 100%;
@@ -3514,13 +3545,16 @@ span.numeracion {
     justify-content: center;
 }
 
-#informe-modelos {
+/*-----------------------------------------------------*/
+/*------------------ REFERENCIAS ----------------------*/
+/*-----------------------------------------------------*/
+#referencias-modelos {
     display: flex;
     flex-direction: row;
     column-gap: 5px;
 }
 
-#informe-modelos button {
+#referencias-modelos button {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -3528,31 +3562,31 @@ span.numeracion {
     font-size: 
 }
 
-#informe-modelos button:nth-child(1)::after {
+#referencias-modelos button:nth-child(1)::after {
     content: "PREOPERATORIO";
     width: 100px;
     font-size: 14px;
 }
 
-#informe-modelos button:nth-child(2)::after {
+#referencias-modelos button:nth-child(2)::after {
     content: "RX THORAX";
     width: 100px;
     font-size: 14px;
 }
 
-#informe-modelos button:nth-child(3)::after {
+#referencias-modelos button:nth-child(3)::after {
     content: "VALORACIÓN CARDIOVASCULAR";
     width: 300px;
     font-size: 14px;
 }
 
-#informe-modelos button:nth-child(3)::after {
+#referencias-modelos button:nth-child(4)::after {
     content: "VALORACIÓN PEDIÁTRICA";
     width: 300px;
     font-size: 14px;
 }
 
-#informe-previa, #infeditar-previa {
+#referencias-previa, #infeditar-previa {
     background: #fff !important;
     color: black !important;
 }
@@ -5579,7 +5613,7 @@ div#tabla-notificados-contenedor .titulo::after {
     height: max-content;
 }
 
-.scroll, [data-scroll] {
+.scroll, [data-scroll], [data-scroll-invisible] {
     overflow-y: scroll;
 }
 
