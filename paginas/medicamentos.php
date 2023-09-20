@@ -99,7 +99,7 @@
                 <span class="tooltip-general">Presionar [ENTER] para agregar</span>
 
                 <section style="width: 50%">
-                  <input type="text" data-estilo="cc-input" placeholder="Cargar...">
+                  <input type="text" data-estilo="cc-input" class="upper" placeholder="Cargar...">
                   <select data-limit="" data-estilo="cc-select" data-size="16" data-limit="80" data-scroll></select>
                 </section>
 
@@ -157,7 +157,7 @@
                 <span class="tooltip-general">Presionar [ENTER] para agregar</span>
 
                 <section style="width: 50%">
-                  <input type="text" data-estilo="cc-input" placeholder="Cargar...">
+                  <input type="text" data-estilo="cc-input" class="upper" placeholder="Cargar...">
                   <select data-limit="" data-estilo="cc-select" data-size="16" data-limit="80" data-scroll></select>
                 </section>
 

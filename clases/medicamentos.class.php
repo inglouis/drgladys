@@ -43,9 +43,9 @@
                     'A'
                 ) returning id_medicamento";
                 
-            $id = $this->insertar($sql, $args)[0]['id_medicamento'];
+            $id = $this->insertar($sql, [$args[0], $genericos])[0]['id_medicamento'];
 
-            if(is_numeric($id)) {
+            if (is_numeric($id)) {
                 $sql = "insert into basicas.presentaciones(id_medicamento, presentaciones, status) VALUES($id, '[]'::json, 'A')";
 
                 $resultado = $this->insertar($sql, []);
