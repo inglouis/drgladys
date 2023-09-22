@@ -57,7 +57,7 @@
       $representante['emergencia_informacion'] = '[SIN REPRESENTANTE ASIGNADO]';
     }
 
-    $menor = "ESTO EN COMPAÑIA DE SU REPRESENTANTE <b>$representante[emergencia_persona]</b> con C.I <b>$representante[emergencia_informacion]</b>";
+    $menor = "ESTO EN COMPAÑIA DE SU REPRESENTANTE <b>$representante[emergencia_persona]</b> con C.I <b>$representante[emergencia_informacion].</b>";
 
   } else {
     $menor = '';
