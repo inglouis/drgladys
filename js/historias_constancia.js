@@ -257,6 +257,7 @@ qs("#constancias-contenedor .reporte-cargar").addEventListener('click', async e 
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 			
 			var lista = { 
+				"id_historia": historias.sublista.id_historia,
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 

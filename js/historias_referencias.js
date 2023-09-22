@@ -254,7 +254,7 @@ qs("#referencias-contenedor .reporte-cargar").addEventListener('click', async e 
 		if (datos !== '') {
 			
 			var lista = { 
-				//"id_historia": historias.sublista.id_historia,
+				"id_historia": historias.sublista.id_historia,
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 

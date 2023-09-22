@@ -71,7 +71,7 @@ ALTER TABLE basicas.referencias
 CREATE TABLE basicas.medicos_referidos
 (
   id_referido bigserial NOT NULL,
-  nombre character varying(100) NOT NULL DEFAULT ''::bpchar,
+  nombre character varying(600) NOT NULL DEFAULT ''::bpchar,
   status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
   CONSTRAINT pk_id_medico_referido PRIMARY KEY (id_referido)
 )

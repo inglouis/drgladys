@@ -57,7 +57,7 @@
       $representante['emergencia_informacion'] = '[SIN REPRESENTANTE ASIGNADO]';
     }
 
-    $menor = "ESTO EN COMPAÑIA DE SU REPRESENTANTE $representante[emergencia_persona] con C.I $representante[emergencia_informacion]";
+    $menor = "ESTO EN COMPAÑIA DE SU REPRESENTANTE <b>$representante[emergencia_persona]</b> con C.I <b>$representante[emergencia_informacion]</b>";
 
   } else {
     $menor = '';
@@ -279,8 +279,7 @@
         if (!empty($recomendaciones['texto_html'])) {
       ?>
         <div style="text-decoration: underline; font-size: 15px; text-transform: uppercase; position: relative; margin-top: 10px">Recomendaciones:</div>
-        <div></div>
-        <div style="font-size: 15px; text-transform: uppercase; position: relative;">
+        <div style="font-size: 15px; text-transform: uppercase; position: relative; margin-top:3px">
           <?php echo strtoupper($recomendaciones['texto_html'])?>
         </div>
       <?php 
