@@ -32,12 +32,20 @@ referencias['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.referencia).texto_html
+		var motivo = JSON.parse(e.sublista.motivo).texto_html,
+			agradecimiento = JSON.parse(e.sublista.agradecimiento).texto_html
 
-		contenedor.querySelector('.referencia').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.referencia-referencia').innerHTML = window.lista_referencias[e.sublista.id_referencia].descripcion
+		contenedor.querySelector('.referencia-referido').innerHTML = window.lista_referidos[e.sublista.id_medico_referido].nombre
 
-		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombre_completo}`)
+		contenedor.querySelector('.referencia-motivo').innerHTML = motivo.toUpperCase()
+
+		contenedor.querySelector('.referencia-agradecimiento').innerHTML = agradecimiento.toUpperCase()
+
+		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
+		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
 		contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
+		contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
 		
 		setTimeout(() => {
 
@@ -125,7 +133,7 @@ referencias['crud']['customBodyEvents'] = {
 
 			rellenar.contenedores(referencias.sublista, '.refeditar-valores', {elemento: e.target, id: 'value'}, {})
 
-			presPop.pop()
+			refPop.pop()
 
 		}
 
@@ -164,7 +172,7 @@ referencias['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							referenciaS - NOTIFICAR								    */
+/*           							REFERENCIAS - NOTIFICAR									    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencias-contenedor').identificador = 'referencia'
 
@@ -184,12 +192,17 @@ qs("#referencias-contenedor .reporte-notificar").addEventListener('click', async
 			
 			var lista = {
 				"id_historia": historias.sublista.id_historia,
-				"referencia": {
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"id_referencia": datos[0],
+				"id_medico_referido": datos[2],
+				"agradecimiento": datos[3], 
+				"motivo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"nombre_completo": datos[0], 
-				"cedula": datos[1], 
+				} 
 			}
 
 			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
@@ -219,7 +232,7 @@ qs("#referencias-contenedor .reporte-notificar").addEventListener('click', async
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							referencia - CARGAR	  								    */
+/*           							REFERENCIAS - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 
 qs("#referencias-contenedor .reporte-cargar").addEventListener('click', async e => {
@@ -237,9 +250,15 @@ qs("#referencias-contenedor .reporte-cargar").addEventListener('click', async e 
 		if (datos !== '') {
 			
 			var lista = { 
-				"nombre_completo": datos[0], 
-				"cedula": datos[1], 
-				"referencia": {
+				//"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"id_referencia": datos[0],
+				"id_medico_referido": datos[2],
+				"agradecimiento": datos[3], 
+				"motivo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -290,7 +309,7 @@ qs("#referencias-contenedor .reporte-cargar").addEventListener('click', async e 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							referencia - PREVIA				  					    */
+/*           							REFERENCIAS - PREVIA				  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#referencias-contenedor .reporte-previa").addEventListener('click', async e => {
 
@@ -309,10 +328,15 @@ qs("#referencias-contenedor .reporte-previa").addEventListener('click', async e 
 			notificaciones.mensajePersonalizado('Cargando reporte...', false, 'CLARO-1', 'PROCESANDO')
 
 			var resultado = {
-				"id_historia": historias.sublista.id_historia, 
-				"nombre_completo": datos[0], 
-				"cedula": datos[1], 
-				"referencia": {
+				"id_historia": historias.sublista.id_historia,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
+				"fecha_nacimiento": historias.sublista.fecha_naci,
+				"id_referencia": datos[0],
+				"id_medico_referido": datos[2],
+				"agradecimiento": datos[3], 
+				"motivo": {
 					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
 					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
 				}
@@ -373,9 +397,13 @@ qs('#crud-refeditar-botones .confirmar').addEventListener('click', async e => {
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[2] === 'string') ? JSON.parse(datos[2]) : datos[2];
+			var motivo = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var agradecimiento = (typeof datos[3] === 'string') ? JSON.parse(datos[3]) : datos[3];
 
-			referencias.sublista.referencia = JSON.stringify(lista)
+			referencias.sublista.id_referencia 		= datos[0]
+			referencias.sublista.motivo 			= JSON.stringify(motivo)
+			referencias.sublista.id_medico_referido = datos[2]
+			referencias.sublista.agradecimiento 	= JSON.stringify(agradecimiento)
 
 			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(referencias.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
@@ -387,7 +415,7 @@ qs('#crud-refeditar-botones .confirmar').addEventListener('click', async e => {
 
 				window.idSeleccionada = historias.sublista.id_historia
 
-				presPop.pop()
+				refPop.pop()
 
 			} else {
 
@@ -521,12 +549,28 @@ qs('#referencias-modelos').addEventListener('click', e => {
     		})
     	}
 
-    	console.log(modelo_final)
-
         rellenar.contenedores(modelo_final, '.referencia-agradecimiento', {}, {})
         
         notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
     }
     
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+qs('#referencia-informacion').addEventListener('click', e => {
+	e.target.focus()
+})
+
+qs('#referencia-agradecimiento').addEventListener('click', e => {
+	e.target.focus()
+})
+
+qs('#referencia-informacion-notificaciones').addEventListener('click', e => {
+	e.target.focus()
+})
+
+qs('#referencia-agradecimiento-notificaciones').addEventListener('click', e => {
+	e.target.focus()
 })

@@ -57,8 +57,8 @@
             return $this->combos($args, [$sql, 'nombre', 'nombre ASC', '']);
         }
 
-        public function combo_medicos_referenciados($args) {
-            $sql = "select id_medico_referenciado, concat(id_medico_referenciado,' || ', nombre) from basicas.medicos_referenciados where status = 'A'";
+        public function combo_medicos_referidos($args) {
+            $sql = "select id_referido, concat(id_referido,' || ', nombre) from basicas.medicos_referidos where status = 'A'";
             return $this->combos($args, [$sql, 'nombre', 'nombre ASC', '']);
         }
 

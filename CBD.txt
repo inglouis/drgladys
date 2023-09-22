@@ -68,15 +68,48 @@ ALTER TABLE basicas.referencias
   OWNER TO postgres;
 
 
-CREATE TABLE basicas.medicos_referenciados
+CREATE TABLE basicas.medicos_referidos
 (
-  id_medico_referenciado bigserial NOT NULL,
+  id_referido bigserial NOT NULL,
   nombre character varying(100) NOT NULL DEFAULT ''::bpchar,
   status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
-  CONSTRAINT pk_id_medico_referenciado PRIMARY KEY (id_medico_referenciado)
+  CONSTRAINT pk_id_medico_referido PRIMARY KEY (id_referido)
 )
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE basicas.referencias
+ALTER TABLE basicas.medicos_referidos
+  OWNER TO postgres;
+
+5)-------------------------------------------------------------------------------------
+EL TRIGGER QUE CREA EL RENGLON DE RECIPES TRAS LA INSERSION DE UNA HISTORIA NO ESTA GENERADO
+--------------------------------------------------------------------------------------- 
+  CREATE TRIGGER historias_reportes_nuevo_renglon
+  AFTER INSERT
+  ON principales.historias
+  FOR EACH ROW
+  EXECUTE PROCEDURE ppal.historias_reportes_nuevo_renglon();
+
+5)-------------------------------------------------------------------------------------
+AÑADIR CONSTRAIN EN AL ELIMINACION DE HISTORIA RESPECTO A TABLA REPORTES
+--------------------------------------------------------------------------------------- 
+  CREATE TABLE principales.reportes
+(
+  id_reporte bigserial NOT NULL,
+  id_historia bigserial NOT NULL,
+  constancias jsonb NOT NULL DEFAULT '[]'::jsonb,
+  generales jsonb DEFAULT '[]'::jsonb,
+  informes jsonb NOT NULL DEFAULT '[]'::jsonb,
+  presupuestos jsonb NOT NULL DEFAULT '[]'::jsonb,
+  reposos jsonb NOT NULL DEFAULT '[]'::jsonb,
+  referencias jsonb NOT NULL DEFAULT '[]'::jsonb,
+  CONSTRAINT pk_id_reportes PRIMARY KEY (id_reporte),
+  CONSTRAINT fk_id_historia_historias_reportes FOREIGN KEY (id_historia)
+      REFERENCES principales.historias (id_historia) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE CASCADE
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE principales.reportes
   OWNER TO postgres;

@@ -1664,7 +1664,8 @@ span.numeracion {
 #crud-preeditar-pop,
 #crud-infeditar-pop,
 #crud-repeditar-pop,
-#crud-geneditar-pop {
+#crud-geneditar-pop,
+#crud-refeditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
     justify-content: center;
@@ -4943,6 +4944,79 @@ div#tabla-notificados-contenedor .titulo::after {
 
 .genericos-status:nth-child(2)::after {
     content: "Solo Medicinas Genéricas Desactivadas [D]";
+}
+
+/*-----------------------------------------------------*/
+/*------------------- REFERENCIAS ---------------------*/
+/*-----------------------------------------------------*/
+#insertar-referencias::after {
+    width: 200px;
+}
+
+#insertar-referencias:hover::after {
+    content: "Agregar Nueva Referencia";
+    opacity: 1;
+    width:230px;
+}
+
+#tabla-referencias tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+
+#tabla-referencias tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+#tabla-referencias tbody tr td:nth-child(3) {
+    width: 115px;
+    position: relative;
+}
+
+.referencias-status:nth-child(1)::after {
+    content:"Solo Referencias Activas [A]";
+}
+
+.referencias-status:nth-child(2)::after {
+    content: "Solo Referencias Desactivadas [D]";
+}
+
+/*-----------------------------------------------------*/
+/*------------------- REFERIDOS ---------------------*/
+/*-----------------------------------------------------*/
+#insertar-referidos::after {
+    width: 200px;
+}
+
+#insertar-referidos:hover::after {
+    content: "Agregar Nuevo Referido";
+    opacity: 1;
+    width:230px;
+}
+
+#tabla-referidos tbody tr td:nth-child(1) {
+    width: 3%
+}
+
+#tabla-referidos tbody tr td:nth-child(2) {
+
+}
+
+#tabla-referidos tbody tr td:nth-child(3) {
+    width: 10%
+}
+
+#tabla-referidos tbody tr td:nth-child(4) {
+    min-width: 50px;
+    width: 5%;
+}
+
+.referidos-status:nth-child(1)::after {
+    content:"Solo Referidos Activas [A]";
+}
+
+.referidos-status:nth-child(2)::after {
+    content: "Solo Referidos Desactivadas [D]";
 }
 
 /*------------------------------------*/

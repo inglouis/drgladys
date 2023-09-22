@@ -177,6 +177,93 @@
 				</section>
 
 				<!-------------------------------------------------------- -->
+				<!----------------- REFERENCIAS CONTENEDOR --------------- -->
+				<!-------------------------------------------------------- -->
+				<section class="notificaciones-seccion" data-hide data-efecto="aparecer">
+				                
+				    <div data-familia class="contenedor contenedor-notificaciones" id="informes-contenedor-notificaciones">
+
+				      <div class="subtitulo">
+				        Modificar reporte de referencia
+				      </div>
+
+				      <div class="cargar" title="[TAB] para enforcar">
+
+				        <div class="personalizacion-notificaciones" data-hidden>
+
+				          <section>Personalización</section>
+				          <section style="width: 100%; border: 1px dashed #fff"></section>
+				          <span>ENTER: SEPARAR LÍNEA</span>
+				          <span>°CENTRAR°</span>
+				          <span>*<b>NEGRITA</b>*</span>
+				          <span>_ <u>SUBRAYADO</u> _</span>
+				          <span>~<i>ITÁLICA</i>~</span>
+
+				          <div id="referencia-previa-notificaciones" data-scroll></div>
+
+				        </div>
+				          
+				        <div class="filas" style="height: 100%; position: relative">
+
+				          <div class="columnas" style="height: 100%">
+
+					        <div style="height: 100%">
+					          
+								<label class="requerido">Referencia para:</label>
+								<section data-grupo="cc-referencias-referencia-notificaciones" class="combo-consulta">
+									<input type="text" autocomplete="off"  data-limit="" placeholder="Buscar..." class="upper">
+									<select class="referencia-valores-notificaciones upper visual" data-valor="id_referencia" data-scroll style="color:#262626"></select>
+								</section>
+
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div>
+						        <label class="requerido">Motivo de la referencia</label>
+						        <textarea rows="4" id="referencia-informacion-notificaciones" data-previa="referencia-previa-notificaciones" data-valor="motivo" class="referencia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 15vh;" data-scroll></textarea>
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div>
+					          
+					            <label>Se recomienda a:</label>
+					            <section data-grupo="cc-referencias-referido-notificaciones" class="combo-consulta">
+					            	<input type="text" autocomplete="off"  data-limit="" placeholder="Buscar..." class="upper">
+					            	<select class="referencia-valores-notificaciones upper visual" data-valor="id_medico_referido" data-scroll style="color:#262626"></select>
+					            </section>
+
+					        </div>
+
+					      </div>
+
+					      <div class="columnas" >
+					              
+					        <div>
+					            <label class="requerido">Se agradece:</label>
+					            <textarea rows="4" id="referencia-agradecimiento-notificaciones" data-previa="referencia-previa-notificaciones" data-valor="agradecimiento" class="referencia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 15vh;" data-scroll></textarea>
+					        </div>
+
+					      </div>
+
+				        </div>
+
+				        <div class="botones-reportes" style="justify-content: center;">
+				          <button class="reporte-actualizar">CONFIRMAR CAMBIOS</button>
+				        </div>
+
+				      </div>
+
+				    </div>
+
+				</section>
+
+				<!-------------------------------------------------------- -->
 				<!---------------- PRESUPUESTOS CONTENEDOR --------------- -->
 				<!-------------------------------------------------------- -->
 				<section class="notificaciones-seccion" data-hide>

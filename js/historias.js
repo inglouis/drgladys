@@ -89,7 +89,9 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
-	['#general-informacion-notificaciones', '#general-previa-notificaciones']
+	['#general-informacion-notificaciones', '#general-previa-notificaciones'],
+	['#referencia-informacion-notificaciones', '#referencia-previa-notificaciones'],
+	['#referencia-agradecimiento-notificaciones', '#referencia-previa-notificaciones']
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
@@ -210,11 +212,13 @@ window.animaciones.hider = 'data-hidden'
 /////////////////////////////////////////////////////
 window.contenedores = new ContenedoresEspeciales('historias-status')
 
-window.contenedoresConsultar    = new ContenedoresEspeciales('crud-informacion-popup') 
-window.contenedoresEditar       = new ContenedoresEspeciales('crud-editar-popup') 
-window.contenedoresInsertar     = new ContenedoresEspeciales('crud-insertar-popup')
-window.contenedoresReportes     = new ContenedoresEspeciales('crud-reportes-popup')
-window.contenedoresMedicamentos = new ContenedoresEspeciales('crud-medicamentos-popup')
+window.contenedoresConsultar      = new ContenedoresEspeciales('crud-informacion-popup') 
+window.contenedoresEditar         = new ContenedoresEspeciales('crud-editar-popup') 
+window.contenedoresInsertar       = new ContenedoresEspeciales('crud-insertar-popup')
+window.contenedoresReportes       = new ContenedoresEspeciales('crud-reportes-popup')
+window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamentos-popup')
+window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
+
 /////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
@@ -282,6 +286,11 @@ window.cargar.revision()
 
 // window.cargarInforme = new paginaCargada('#informe-combo', 'longitud', 'cargar-informes')
 // window.cargarInforme.revision()
+/////////////////////////////////////////////////////
+//DATOS DE REFERENCIAS Y REFERIDOS
+/////////////////////////////////////////////////////
+window.lista_referencias = JSON.parse(await tools.fullAsyncQuery(`referencias`, `traer_referencias`, []))
+window.lista_referidos = JSON.parse(await tools.fullAsyncQuery(`referidos`, `traer_referidos`, []))
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 window.reportes = new Reportes()
@@ -701,7 +710,7 @@ var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_d
 	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
 	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', [])),
 	comboReferencia         = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_referencias', [])),
-	comboMedicoReferenciado = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referenciados', []))
+	comboMedicoReferido = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referidos', []))
 
 contenedores.eventos().checkboxes('status')
 
@@ -724,8 +733,11 @@ contenedoresEditar.eventos().combo('cc-estado_civil-editar', ['combos', 'combo_e
 contenedoresReportes.eventos().combo('cc-referencias-referencia-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
 contenedoresReportes.eventos().combo('cc-referencias-referencia-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresReportes.eventos().combo('cc-referencias-referido-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresReportes.eventos().combo('cc-referencias-referido-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referido-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referido-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresNotificaciones.eventos().combo('cc-referencias-referencia-notificaciones', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresNotificaciones.eventos().combo('cc-referencias-referido-notificaciones', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
 
 contenedoresConsultar.eventos().combo('cc-religiones-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
 contenedoresInsertar.eventos().combo('cc-religiones-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
