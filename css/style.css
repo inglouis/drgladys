@@ -1690,7 +1690,8 @@ span.numeracion {
     position: relative;
 }
 
-#crud-editar-pop, #crud-insertar-pop,
+#crud-editar-pop, 
+#crud-insertar-pop,
 #crud-insertar-ocupaciones-pop,
 #crud-insertar-proveniencias-pop,
 #crud-insertar-parentescos-pop,
@@ -1699,7 +1700,9 @@ span.numeracion {
 #crud-insertar-medicos-pop,
 #crud-insertar-diagnosticos-pop,
 #crud-notificaciones-pop,
-#crud-medicamentos-pop {
+#crud-medicamentos-pop,
+#crud-insertar-referencia-pop,
+#crud-insertar-referido-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;

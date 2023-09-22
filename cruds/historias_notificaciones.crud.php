@@ -95,12 +95,41 @@
 				              
 				              <div style="height: 100%; margin: 0px">
 				                
-				                <label class="requerido">Constancia</label>
-				                <textarea id="constancia-textarea-notificaciones" data-previa="constancia-previa-notificaciones" data-valor="constancia" rows="6" class="constancia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+				                <label class="requerido">Motivo de la constancia:</label>
+				                <textarea id="constancia-informacion-notificaciones" data-previa="constancia-previa-notificaciones" data-valor="motivo" rows="6" class="constancia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
 				              </div>
 
 				            </div>
+
+				            <div class="columnas">
+				              
+				              <div>
+				                
+				                <label class="requerido">Recomendaciones:</label>
+				                <textarea id="constancia-recomendaciones-notificaciones" data-previa="constancia-previa-notificaciones" data-valor="recomendaciones" rows="6" class="constancia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none; height: 15vh" data-scroll></textarea>
+
+				              </div>
+
+				            </div>
+
+				            <div class="columnas">
+
+								<div class="check-alineado">
+									<label>Es menor de edad</label>        
+									<input type="checkbox" data-valor="menor" class="constancia-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+								</div>
+
+								</div>
+
+								<div class="columnas">
+
+								<div class="check-alineado">
+									<label>Priorizar en aula</label>        
+									<input type="checkbox" data-valor="aula" class="constancia-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+								</div>
+
+							</div>
 
 				          </div>
 

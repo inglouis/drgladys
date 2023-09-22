@@ -557,6 +557,73 @@ qs('#referencias-modelos').addEventListener('click', e => {
     
 })
 
+//-------------------------------------------------------------------------------
+//botones que insertan datos básicos desde la edición o insersión de una historia
+//-------------------------------------------------------------------------------
+
+var insersiones_lista  = ['referencia', 'referido'],
+	insersiones_lista_combos = [refInsPop, refeInsPop],
+	ultimoBotonInsersionBasica = '';
+
+insersiones_lista.forEach((grupo, i) => {
+
+	qs(`#insertar-nueva-${grupo}`).addEventListener('click', e => {
+		ultimoBotonInsersionBasica = e.target
+		tools.limpiar(`.insertar-${grupo}-valores`, '', {})
+		insersiones_lista_combos[i].pop()
+	})
+
+	qs(`#crud-insertar-${grupo}-botones`).addEventListener('click', async e => {
+
+		if (e.target.classList.contains('insertar')) {
+
+			var datos = tools.procesar(e.target, 'insertar', `insertar-${grupo}-valores`,  tools)
+
+			if (datos !== '') {
+
+				if (grupo === 'referencia') {
+					datos.splice(2,1)
+				} else {
+					datos.splice(1,1)
+				}
+
+				var resultado = await tools.fullAsyncQuery(`${grupo}s`, `crear_${grupo}s`, datos)
+
+				if(resultado.trim() === 'exito') {
+
+					notificaciones.mensajeSimple(`Información insertada con éxito`, resultado, 'V')
+
+					setTimeout(async () => {
+
+						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}s`, []))
+
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = qs(`#nombre-${grupo}`).value.toUpperCase()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
+
+						qs(`#nombre-${grupo}`).value = ''
+
+						insersiones_lista_combos[i].pop()
+
+						contenedoresReportes.reconstruirCombo(qs(`[data-grupo="cc-referencias-${insersiones_lista[i]}-insertar"] select`), qs(`[data-grupo="cc-referencias-${insersiones_lista[i]}-insertar"] input`), lista)
+						contenedoresReportes.filtrarComboForzado(qs(`[data-grupo="cc-referencias-${insersiones_lista[i]}-insertar"] select`), qs(`[data-grupo="cc-referencias-${insersiones_lista[i]}-insertar"] input`))
+
+					}, 500)
+
+				} else if (resultado.trim() === 'repetido') {
+
+					notificaciones.mensajeSimple(`Este [${grupo.toUpperCase()}] ya existe`, resultado, 'F')
+
+				} else {
+
+					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+				}
+			}
+		}
+	})
+
+})
+
 /* -------------------------------------------------------------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencia-informacion').addEventListener('click', e => {

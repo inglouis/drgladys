@@ -53,7 +53,7 @@
             $resultado = ($this->i_pdo("select id_referencia from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
             if(empty($resultado)) {
-                $sql = "insert into $this->schema.$this->tabla(id_referencia, nombre, descripcion status) VALUES(default, trim(upper(?)), trim(upper(?)), 'A')";
+                $sql = "insert into $this->schema.$this->tabla(id_referencia, nombre, descripcion, status) VALUES(default, trim(upper(?)), trim(upper(?)), 'A')";
                 return $this->insertar($sql, $args);
             } else {
                 return "repetido";
@@ -64,7 +64,7 @@
 
         public function actualizar_referencias($args) { 
 
-            $resultado = ($this->i_pdo("select id_referencia from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) and id_referencia != $args[2] limit 1", [], true))->fetchColumn();
+            $resultado = ($this->i_pdo("select id_referencia from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) and id_referencia != $args[3] limit 1", [], true))->fetchColumn();
 
             if(empty($resultado)) {
                 $sql = "update $this->schema.$this->tabla set nombre = trim(upper(?)), descripcion = trim(upper(?)), status =trim(upper(?)) where id_referencia = ?";

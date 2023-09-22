@@ -116,6 +116,8 @@ constancias['crud']['customBodyEvents'] = {
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
+			constancias.validarRepresentante()
+
 		}
 
 	},
@@ -131,6 +133,8 @@ constancias['crud']['customBodyEvents'] = {
 			tools.limpiar('.coneditar-valores', '', {})	
 
 			rellenar.contenedores(constancias.sublista, '.coneditar-valores', {elemento: e.target, id: 'value'}, {})
+
+			constancias.validarRepresentante()
 
 			conPop.pop()
 
@@ -549,8 +553,17 @@ qs('#constancias-contenedor .limpiar').addEventListener('click', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						CONSTNCIA - SCROLL TOP						 					    */
+/*           						CONSTNCIA - SCROLL TOP						 				    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#constancia-busqueda').addEventListener('keydown', e => {
 	qs('#tabla-constancia').parentElement.scrollTo(0,0)
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						CONSTNCIA - SCROLL TOP						 				    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#constancia-menor').addEventListener('click', e => {
+
+	constancias.validarRepresentante()
+
 })

@@ -81,7 +81,7 @@
 </div>
 
 <!--2)---------------------------------------------------- -->
-<!----------------- referenciaS TEMPLATE ----------------- -->
+<!----------------- REFERENCIAS TEMPLATE ----------------- -->
 <!-------------------------------------------------------- -->
 <template id="referencia-template">
 
@@ -211,7 +211,7 @@
                 </label>
 
                 <section data-grupo="cc-referencias-referencia-insertar" class="combo-consulta">
-                  <input type="text" autocomplete="off" data-limit="" placeholder="Buscar..." class="upper">
+                  <input id="nombre-referencia" type="text" autocomplete="off" data-limit="" placeholder="Buscar..." class="upper">
                   <select class="referencia-valores upper visual lleno" data-valor="id_referencia" data-scroll style="color:#262626"></select>
                 </section>
 
@@ -233,14 +233,14 @@
               <div>
 
                 <label>
-                  <button id="insertar-nuevo-referido" class="boton-ver contenedor-resaltar" title="Cargar nuevo referido" style="left: 75px; top: 4px">
+                  <button id="insertar-nueva-referido" class="boton-ver contenedor-resaltar" title="Cargar nuevo referido" style="left: 75px; top: 4px">
                     +  
                   </button>
                   Se recomienda a:
                 </label>
                     
                 <section data-grupo="cc-referencias-referido-insertar" class="combo-consulta">
-                  <input type="text" autocomplete="off"  data-limit="" placeholder="Buscar..." class="upper">
+                  <input id="nombre-referido" type="text" autocomplete="off"  data-limit="" placeholder="Buscar..." class="upper">
                   <select class="referencia-valores upper visual" data-valor="id_medico_referido" data-scroll style="color:#262626"></select>
                 </section>
 
@@ -355,3 +355,78 @@
     </div>
 
 </section>
+
+<!-------------------------------------------------------- -->
+<!--------------- INSERTAR REFERENCIA -------------------- -->
+<!-------------------------------------------------------- -->
+<div id="crud-insertar-referencia-popup" class="popup-oculto" data-crud='popup'>
+
+  <div id="crud-insertar-referencia-pop" class="popup-oculto" style="width:50%; min-width:600px ;height: fit-content;">
+
+    <button id="crud-insertar-referencia-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-insertar-referencia-titulo" data-crud='titulo'>
+      Insertar referencia
+    </section> 
+
+    <section class="filas">
+
+      <div class="columnas" style="width:100%;">
+
+        <div>
+          <label class="requerido">Descripción de la referencia</label>  
+          <input type="text" data-valor="nombre" size="100" minlength="1" maxlength="100" class="insertar-referencia-valores lleno upper">
+        </div>
+
+      </div>  
+
+      <div class="columnas">
+
+        <div>
+          <label class="requerido">Descripción de la referencia</label>
+          <textarea  data-valor="descripcion" minlength="1" maxlength="600" class="insertar-referencia-valores lleno upper" style="resize: none" rows="4"></textarea> 
+        </div>
+
+      </div> 
+
+    </section>
+
+    <section id="crud-insertar-referencia-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
+      <button class="botones-formularios insertar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+  </div> 
+</div>
+
+<!-------------------------------------------------------- -->
+<!------------------ INSERTAR REFERIDOS ------------------ -->
+<!-------------------------------------------------------- -->
+<div id="crud-insertar-referido-popup" class="popup-oculto" data-crud='popup'>
+
+  <div id="crud-insertar-referido-pop" class="popup-oculto" style="width:50%; min-width:600px ;height: fit-content;">
+
+    <button id="crud-insertar-referido-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-insertar-referido-titulo" data-crud='titulo'>
+      Insertar médico referido
+    </section> 
+
+    <section class="filas">
+
+      <div class="columnas" style="width:100%;">
+
+        <div>
+          <label class="requerido">Nombre del médico</label>  
+          <input id="nombre-referido" type="text" data-valor="nombre" minlength="1" maxlength="100" class="insertar-referido-valores lleno upper">
+        </div>
+
+      </div>  
+
+    </section>
+
+    <section id="crud-insertar-referido-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
+      <button class="botones-formularios insertar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+  </div> 
+</div>

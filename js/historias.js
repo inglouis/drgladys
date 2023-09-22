@@ -87,7 +87,8 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#refeditar-informacion', '#refeditar-previa'],
 	['#refeditar-agradecimiento', '#refeditar-previa'],
 
-	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
+	['#constancia-informacion-notificaciones', '#constancia-previa-notificaciones'],
+	['#constancia-recomendaciones-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
@@ -115,7 +116,7 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
@@ -127,6 +128,9 @@ window.refPop = new PopUp('crud-refeditar-popup', 'popup', 'subefecto', true, 'r
 window.traPop = new PopUp('crud-tratamientos-popup', 'popup', 'subefecto', true, 'tratamientos', '', 27)
 window.presenPop = new PopUp('crud-presentaciones-popup', 'popup', 'subefecto', true, 'presentaciones', '', 27);
 window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true, 'medicamentos', '', 27)
+
+window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
+window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -154,6 +158,9 @@ refPop.evtBotones()
 traPop.evtBotones()
 presenPop.evtBotones()
 mediPop.evtBotones()
+
+refInsPop.evtBotones()
+refeInsPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -183,6 +190,9 @@ window.addEventListener('keyup', (e) => {
 	traPop.evtEscape(e)
 	presenPop.evtEscape(e)
 	mediPop.evtEscape(e)
+
+	refInsPop.evtEscape(e)
+	refeInsPop.evtEscape(e)
 
 })
 
@@ -341,6 +351,8 @@ class Historias extends Acciones {
 
 		this.cargarTabla(resultado, true)
 
+		this.crud.botonForzar(true)
+
 	}
 
 	limpieza() {
@@ -364,8 +376,13 @@ class Historias extends Acciones {
 		referencias.cargarTabla([], undefined, undefined)
 
 		rellenar.contenedores(this.sublista, '.presupuesto-representante-valores', {}, {})
+
 		
 		gid('reposos-fecha-insertar').innerHTML = ''
+		setTimeout(() => {
+			constancias.validarRepresentante()
+			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
+		}, 1000)
 
 		gid('constancia-busqueda').value = ''
 		gid('general-busqueda').value = ''
@@ -1008,8 +1025,8 @@ insersiones_lista.forEach((grupo, i) => {
 
 						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
 
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').value = qs(`#nombre-${grupo}`).value.toUpperCase()
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').focus()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = qs(`#nombre-${grupo}`).value.toUpperCase()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
 						qs(`#nombre-${grupo}`).value = ''
 
@@ -1154,6 +1171,29 @@ class Constancias extends Acciones {
 
 		this.cargarTabla(resultado, true)
 
+	}
+
+	validarRepresentante() {
+		var validar = true
+
+		if (historias.sublista.emergencia_persona.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (historias.sublista.emergencia_informacion.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (validar == false) {
+
+			qs('#constancia-menor').checked = false
+			notificaciones.mensajeSimple('Falta información en la historia: [NOMBRE DE REPRESENTANTE, CÉDULA DE REPRESENTANTE]', null, 'F')
+
+		}
 	}
 
 }
@@ -1705,7 +1745,7 @@ insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.oc
 infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
+repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); constancias.validarRepresentante()}}
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); window.paginacionHistorias.contenedor.style = "z-index: 10"}}

@@ -262,7 +262,7 @@
 
           </div>
             
-          <div class="filas" style="height: 75vh; position: relative; justify-content: flex-start;" data-scroll-invisible>
+          <div id="reposo-contenedor-izquierda" class="filas" style="height: 75vh; position: relative; justify-content: flex-start;" data-scroll-invisible>
           
             <div class="columnas">
               
@@ -294,7 +294,7 @@
 
             <div class="columnas">
 
-              <div class="check-alineado" style="margin:0px">
+              <div class="check-alineado">
                 <label>Requiere cuidado de representantes</label>        
                 <input type="checkbox" data-valor="representante" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
               </div>
