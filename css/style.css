@@ -2133,6 +2133,19 @@ span.numeracion {
     outline: 2px dashed #262626;
 }
 
+.check-alineado {
+    flex-direction: row-reverse !important;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.check-alineado label {
+    position: relative;
+    bottom: 1px;
+    font-size: 16px !important;
+}
+
 /*----------------------chekbox2-------------------------*/
 .check2 {
     -webkit-appearance: none;
@@ -3490,7 +3503,6 @@ span.numeracion {
 /*-----------------------------------------------------*/
 /*------------------ CONSTANCIAS ----------------------*/
 /*-----------------------------------------------------*/
-
 #tabla-constancia thead {
     display: none
 }
@@ -3512,6 +3524,25 @@ span.numeracion {
     align-items: center;
     width: 40px;
     justify-content: center;
+}
+
+#constancia-modelos {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+#constancia-modelos button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 3px;
+}
+
+#constancia-modelos button:nth-child(1)::after {
+    content: "LENTE CORRECTIVO";
+    width: 100px;
+    font-size: 14px;
 }
 
 #constancia-previa, #coneditar-previa {

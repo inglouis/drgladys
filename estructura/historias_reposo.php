@@ -47,7 +47,7 @@
 
       <div class="columnas">
 
-        <div style="margin:0px">
+        <div class="check-alineado" style="margin:0px">
           <label>Requiere cuidado de representantes</label>        
           <input type="checkbox" data-valor="representante" class="repeditar-valores check checksmall" style="width: 30px; height: 30px">
         </div>
@@ -56,7 +56,7 @@
 
       <div class="columnas">
 
-        <div style="margin:0px">
+        <div class="check-alineado" style="margin:0px">
           <label>Recomendaciones</label>        
           <input type="checkbox" data-valor="recomendaciones" class="repeditar-valores check checksmall" style="width: 30px; height: 30px">
         </div>
@@ -294,7 +294,7 @@
 
             <div class="columnas">
 
-              <div style="margin:0px">
+              <div class="check-alineado" style="margin:0px">
                 <label>Requiere cuidado de representantes</label>        
                 <input type="checkbox" data-valor="representante" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
               </div>
@@ -303,7 +303,7 @@
 
             <div class="columnas">
 
-              <div style="margin:0px">
+              <div class="check-alineado" style="margin:0px">
                 <label>Recomendaciones</label>        
                 <input type="checkbox" data-valor="recomendaciones" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
               </div>

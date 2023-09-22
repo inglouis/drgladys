@@ -32,9 +32,14 @@ constancias['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.constancia).texto_html
+		var motivo = JSON.parse(e.sublista.motivo).texto_html,
+			recomendaciones = JSON.parse(e.sublista.recomendaciones).texto_html
 
-		contenedor.querySelector('.constancia').innerHTML = texto.toUpperCase()
+		contenedor.querySelector('.constancia-motivo').innerHTML = motivo.toUpperCase()
+		contenedor.querySelector('.constancia-recomendaciones').innerHTML = recomendaciones.toUpperCase()
+
+		contenedor.querySelector('.constancia-menor').checked = (e.sublista.menor === 'X') ? true : false;
+		contenedor.querySelector('.constancia-aula').checked = (e.sublista.aula === 'X') ? true : false;
 
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
 		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
@@ -186,13 +191,19 @@ qs("#constancias-contenedor .reporte-notificar").addEventListener('click', async
 			
 			var lista = {
 				"id_historia": historias.sublista.id_historia,
-				"nombres": historias.sublista.nombres,
-				"apellidos": historias.sublista.apellidos,
-				"cedula": historias.sublista.cedula,
+				"nombres": historias.sublista.nombres, 
+				"apellidos": historias.sublista.apellidos, 
+				"cedula": historias.sublista.cedula, 
 				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"constancia": {
-					"texto_base": qs(`#${elemento.identificador}-textarea`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-textarea`).texto_html
+				"menor": datos[2],
+				"aula": datos[3],
+				"motivo": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				},
+				"recomendaciones": {
+					"texto_base": qs(`#${elemento.identificador}-recomendaciones`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-recomendaciones`).texto_html
 				}
 			}
 
@@ -242,9 +253,15 @@ qs("#constancias-contenedor .reporte-cargar").addEventListener('click', async e 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"constancia": {
-					"texto_base": qs(`#${elemento.identificador}-textarea`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-textarea`).texto_html
+				"menor": datos[2],
+				"aula": datos[3],
+				"motivo": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				},
+				"recomendaciones": {
+					"texto_base": qs(`#${elemento.identificador}-recomendaciones`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-recomendaciones`).texto_html
 				}
 			}
 
@@ -315,9 +332,15 @@ qs("#constancias-contenedor .reporte-previa").addEventListener('click', async e 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
 				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"constancia": {
-					"texto_base": qs(`#${elemento.identificador}-textarea`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-textarea`).texto_html
+				"menor": datos[2],
+				"aula": datos[3],
+				"motivo": {
+					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
+				},
+				"recomendaciones": {
+					"texto_base": qs(`#${elemento.identificador}-recomendaciones`).texto_base,
+					"texto_html": qs(`#${elemento.identificador}-recomendaciones`).texto_html
 				}
 			}
 
@@ -376,9 +399,13 @@ qs('#crud-coneditar-botones .confirmar').addEventListener('click', async e => {
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
+			var motivo = (typeof datos[0] === 'string') ? JSON.parse(datos[0]) : datos[0];
+			var recomendaciones = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
 
-			constancias.sublista.constancia = JSON.stringify(lista)
+			constancias.sublista.motivo = JSON.stringify(motivo)
+			constancias.sublista.recomendaciones = JSON.stringify(recomendaciones)
+			constancias.sublista.menor  = datos[2]
+			constancias.sublista.aula   = datos[3] 
 
 			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(constancias.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
@@ -453,6 +480,34 @@ qs('#constancias-contenedor table').addEventListener('click', async e => {
 
 	}
 
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						CONSTANCIA - MODELO					 					    	*/
+/* -------------------------------------------------------------------------------------------------*/
+var modelos = {
+	"correctivo": "AMERITA USO CONTÍNUO DE LENTES CORRECTIVOS"
+}
+
+qs('#constancia-modelos').addEventListener('click', e => {
+
+    if (e.target.tagName === 'BUTTON') {
+
+    	var conector = (qs('#constancia-recomendaciones').value === '') ? '' : ' - '
+
+    	var modelo_final = {
+    		"recomendaciones": JSON.stringify({
+    			"texto_base": `${qs('#referencia-agradecimiento').value}${conector}${modelos[e.target.dataset.identificador]}`,
+    			"texto_html": `${qs('#referencia-agradecimiento').value}${conector}${modelos[e.target.dataset.identificador]}`
+    		})
+    	}
+
+        rellenar.contenedores(modelo_final, '.constancia-recomendaciones', {}, {})
+        
+        notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+    }
+    
 })
 
 /* -------------------------------------------------------------------------------------------------*/

@@ -70,8 +70,10 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 
 ([
 	
-	['#constancia-textarea', '#constancia-previa'],
-	['#coneditar-textarea', '#coneditar-previa'],
+	['#constancia-informacion', '#constancia-previa'],
+	['#coneditar-informacion', '#coneditar-previa'],
+	['#constancia-recomendaciones', '#constancia-previa'],
+	['#coneditar-recomendaciones', '#coneditar-previa'],
 	['#general-informacion', '#general-previa'],
 	['#geneditar-informacion', '#geneditar-previa'],
 	['#informe-informacion', '#informe-previa'],
@@ -622,7 +624,7 @@ historias['crud']['customBodyEvents'] = {
 
 			rellenar.contenedores(historias.sublista, '.constancia-cargar', {elemento: button, id: 'value'})
 			
-			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
+			setTimeout(() => {document.querySelector('#constancia-informacion').focus()}, 100)
 
 			rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
 
