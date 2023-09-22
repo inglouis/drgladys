@@ -33,10 +33,16 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['presupuesto']) == 'string') {
-    $presupuesto = json_decode($datos['presupuesto'], true);
+  if (gettype($datos['motivo']) == 'string') {
+    $motivo = json_decode($datos['motivo'], true);
   } else {
-    $presupuesto = $datos['presupuesto'];
+    $motivo = $datos['motivo'];
+  }
+
+  if (gettype($datos['agradecimiento']) == 'string') {
+    $agradecimiento = json_decode($datos['agradecimiento'], true);
+  } else {
+    $agradecimiento = $datos['agradecimiento'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -53,6 +59,28 @@
   $fecha =  $fmt->format($timestamp);
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
+
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+
+  if (!empty($datos['id_referencia'])) {
+
+    $referencia = $obj->i_pdo("select descripcion from basicas.referencias where id_referencia = ?", [(int)$datos['id_referencia']], true)->fetchColumn();
+
+  } else {
+
+    $referencia = '';
+
+  }
+
+  if (!empty($datos['id_medico_referido'])) {
+
+    $referido = $obj->i_pdo("select nombre from basicas.medicos_referidos where id_referido = ?", [(int)$datos['id_referencia']], true)->fetchColumn();
+
+  } else {
+
+    $referido = '';
+
+  }
 
 ?>
 
@@ -216,48 +244,50 @@
   			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
   		</div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
+	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">REFERENCIA</div>
 
 	    <div></div>
 	    <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+        Referencia para: <b><?php echo $referencia?></b>
+      </div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+        paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> años de edad quien presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>
+      </div>
+
+      <div></div>
+
+      <?php 
+        if (!empty($datos['id_medico_referido'])) {
+      ?>
+        <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+          Se recomienda: <?php echo $referido?>
+        </div>
+      <?php 
+        }
+      ?>
+
+      <div></div>
+
+      <?php 
+        if (!empty($motivo['texto_html'])) {
+      ?>
+        <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+          Se agradece: <?php echo trim(strtoupper($motivo['texto_html']))?>
+        </div>
+      <?php 
+        }
+      ?>
 
   	</div>
 
   	<div></div>
   	<div></div>
 
-	<?php 
-    echo trim(strtoupper($presupuesto['texto_html']));
-  ?>
 
   <div style="width: 100%"></div>
 
@@ -286,12 +316,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
+          $html2pdf->output("../reportes/referencias/referencia$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
+          $html2pdf->Output("../reportes/referencias/referencia$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/presupuestos/presupuesto$nombre.pdf");
-          $html2pdf->output("../reportes/presupuestos/presupuesto$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/referencias/referencia$nombre.pdf");
+          $html2pdf->output("../reportes/referencias/referencia$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

@@ -380,7 +380,6 @@ class Historias extends Acciones {
 		
 		gid('reposos-fecha-insertar').innerHTML = ''
 		setTimeout(() => {
-			constancias.validarRepresentante()
 			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
 		}, 1000)
 
@@ -1745,7 +1744,7 @@ insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.oc
 infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); constancias.validarRepresentante()}}
+repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()}}}
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); window.paginacionHistorias.contenedor.style = "z-index: 10"}}

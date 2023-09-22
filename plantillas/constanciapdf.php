@@ -33,10 +33,16 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['constancia']) == 'string') {
-    $constancia = json_decode($datos['constancia'], true);
+  if (gettype($datos['motivo']) == 'string') {
+    $motivo = json_decode($datos['motivo'], true);
   } else {
-    $constancia = $datos['constancia'];
+    $motivo = $datos['motivo'];
+  }
+
+  if (gettype($datos['agradecimiento']) == 'string') {
+    $agradecimiento = json_decode($datos['agradecimiento'], true);
+  } else {
+    $agradecimiento = $datos['agradecimiento'];
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -55,6 +61,8 @@
   $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
+
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
 
 ?>
 

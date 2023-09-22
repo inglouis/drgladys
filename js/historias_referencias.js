@@ -147,8 +147,12 @@ referencias['crud']['customBodyEvents'] = {
 
 			referencias.sublista = tools.pariente(e.target, 'TR').sublista
 
+			var lista = tools.copiaLista(referencias.sublista)
+
+			lista['id_historia'] = historias.sublista.id_historia
+
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(referencias.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(lista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
