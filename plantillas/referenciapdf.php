@@ -249,13 +249,13 @@
 	    <div></div>
 	    <div></div>
 
-      <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+      <div style="font-size: 15px; text-transform: uppercase; position: relative;">
         Referencia para: <b><?php echo $referencia?></b>
       </div>
 
       <div></div>
 
-      <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+      <div style="font-size: 15px; text-transform: uppercase; position: relative;">
         paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> años de edad quien presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>
       </div>
 
@@ -264,7 +264,7 @@
       <?php 
         if (!empty($datos['id_medico_referido'])) {
       ?>
-        <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+        <div style="font-size: 15px; text-transform: uppercase; position: relative;">
           Se recomienda: <?php echo $referido?>
         </div>
       <?php 
@@ -276,7 +276,7 @@
       <?php 
         if (!empty($motivo['texto_html'])) {
       ?>
-        <div style="font-size: 15px; text-transform: uppercase; position: relative; left: 5mm">
+        <div style="font-size: 15px; text-transform: uppercase; position: relative;">
           Se agradece: <?php echo trim(strtoupper($motivo['texto_html']))?>
         </div>
       <?php 

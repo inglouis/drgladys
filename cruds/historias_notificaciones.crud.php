@@ -95,8 +95,8 @@
 				              
 				              <div style="height: 100%; margin: 0px">
 				                
-				                <label class="requerido">Motivo de la constancia:</label>
-				                <textarea id="constancia-informacion-notificaciones" data-previa="constancia-previa-notificaciones" data-valor="motivo" rows="6" class="constancia-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+				                <label>Motivo de la constancia:</label>
+				                <textarea id="constancia-informacion-notificaciones" data-previa="constancia-previa-notificaciones" data-valor="motivo" rows="6" class="constancia-valores-notificaciones upper textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
 				              </div>
 

@@ -27,8 +27,8 @@
       <div class="columnas" style="height: 100%">
         
         <div style="height: 100%">
-          <label class="requerido">Motivo de la constancia</label>
-          <textarea rows="4" id="coneditar-informacion" data-previa="coneditar-previa" data-valor="motivo" class="coneditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; " data-scroll></textarea>
+          <label>Motivo de la constancia</label>
+          <textarea rows="4" id="coneditar-informacion" data-previa="coneditar-previa" data-valor="motivo" class="coneditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; " data-scroll></textarea>
         </div>
 
       </div>
@@ -198,8 +198,8 @@
             <div class="columnas" style="height: 100%">
         
               <div style="height: 100%">
-                <label class="requerido">Motivo de la constancia</label>
-                <textarea rows="4" id="constancia-informacion" data-previa="constancia-previa" data-valor="motivo" class="constancia-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; " data-scroll></textarea>
+                <label>Motivo de la constancia</label>
+                <textarea rows="4" id="constancia-informacion" data-previa="constancia-previa" data-valor="motivo" class="constancia-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; " data-scroll></textarea>
               </div>
 
             </div>
