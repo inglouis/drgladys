@@ -278,6 +278,7 @@
       <?php 
         if (!empty($recomendaciones['texto_html'])) {
       ?>
+        <div></div>
         <div style="text-decoration: underline; font-size: 15px; text-transform: uppercase; position: relative; margin-top: 10px">Recomendaciones:</div>
         <div style="font-size: 15px; text-transform: uppercase; position: relative; margin-top:3px">
           <?php echo strtoupper($recomendaciones['texto_html'])?>
