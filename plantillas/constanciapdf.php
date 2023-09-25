@@ -33,10 +33,44 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['constancia']) == 'string') {
-    $constancia = json_decode($datos['constancia'], true);
+  if (gettype($datos['motivo']) == 'string') {
+    $motivo = json_decode($datos['motivo'], true);
   } else {
-    $constancia = $datos['constancia'];
+    $motivo = $datos['motivo'];
+  }
+
+  if (gettype($datos['recomendaciones']) == 'string') {
+    $recomendaciones = json_decode($datos['recomendaciones'], true);
+  } else {
+    $recomendaciones = $datos['recomendaciones'];
+  }
+
+  if (!empty($datos['menor'])) {
+
+    $representante = $obj->i_pdo("select emergencia_informacion, emergencia_persona from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetch(PDO::FETCH_ASSOC);
+
+    if (empty($representante['emergencia_persona'])) {
+      $representante['emergencia_persona'] = '[SIN REPRESENTANTE ASIGNADO]';
+    }
+
+    if (empty($representante['emergencia_informacion'])) {
+      $representante['emergencia_informacion'] = '[SIN REPRESENTANTE ASIGNADO]';
+    }
+
+    $menor = "ESTO EN COMPAÑIA DE SU REPRESENTANTE <b>$representante[emergencia_persona]</b> con C.I <b>$representante[emergencia_informacion].</b>";
+
+  } else {
+    $menor = '';
+  }
+
+  if (!empty($datos['menor'])) {
+
+    $datos['nombres'] = strtoupper($datos['nombres']);
+    $datos['apellidos'] = strtoupper($datos['apellidos']);
+
+    $aula = "SE AGRADECE LA COLABORACIÓN A LOS DOCENTES DE SENTAR AL PACIENTE EN LOS PRIMEROS PUESTOS DEL SALÓN POR SU CONDICIÓN VISUAL.";
+  } else {
+    $aula = "";
   }
 
   setlocale(LC_TIME,"es_ES");
@@ -52,7 +86,19 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+  $edad = $obj->calcularEdad($datos['fecha_naci']).' AÑOS DE EDAD';
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularMeses($datos['fecha_naci']).' MESES DE EDAD';
+
+  }
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularDias($datos['fecha_naci']).' DÍAS DE EDAD';
+
+  }
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
@@ -223,50 +269,42 @@
 	    <div></div>
 	    <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <?php 
+        if (!empty($motivo['texto_html'])) {
+      ?>
+        <div style="font-size: 15px; text-transform: uppercase;">
+          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica, donde presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>. <?php echo $menor ?>
+        </div>
+      <?php 
+        } else {
+      ?>
+        <div style="font-size: 15px; text-transform: uppercase; position: relative;">
+          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica. <?php echo $menor?>
+        </div>
+      <?php 
+        }
+      ?>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>EDAD:</td>
-	          <td style="font-weight: bold"><?php echo $edad?></td>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
-
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <?php 
+        if (!empty($recomendaciones['texto_html'])) {
+      ?>
+        <div></div>
+        <div style="text-decoration: underline; font-size: 15px; text-transform: uppercase; position: relative; margin-top: 10px">Recomendaciones:</div>
+        <div style="font-size: 15px; text-transform: uppercase; position: relative; margin-top:3px">
+          <?php echo strtoupper($recomendaciones['texto_html'])?>
+        </div>
+      <?php 
+        }
+      ?>
 	    
-	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
-	    <!--</p>-->
+      <div></div>
+
+      <div style="font-size: 15px; text-transform: uppercase; position: relative;">
+        <b><?php echo $aula?></b>
+      </div>
+
 
   	</div>
-
-  	<div></div>
-  	<div></div>
-
-	<?php 
-    echo trim(strtoupper($constancia['texto_html']));
-  ?>
-
-  <div style="width: 100%"></div>
 
 </page>
 

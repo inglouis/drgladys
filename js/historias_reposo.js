@@ -263,6 +263,7 @@ qs("#reposos-contenedor .reporte-cargar").addEventListener('click', async e => {
 		if (datos !== '') {
 			
 			var lista = { 
+				"id_historia": historias.sublista.id_historia, 
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
@@ -343,6 +344,7 @@ qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 			notificaciones.mensajePersonalizado('Cargando reporte...', false, 'CLARO-1', 'PROCESANDO')
 
 			var resultado = {
+				"id_historia": historias.sublista.id_historia, 
 				"nombres": historias.sublista.nombres, 
 				"apellidos": historias.sublista.apellidos, 
 				"cedula": historias.sublista.cedula, 
@@ -646,4 +648,13 @@ qs('#reposos-inicio-notificaciones').addEventListener('change', e => {
 		now.setDate(now.getDate() + reposo)
 
 	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						REPOSO - ES MENOR DE EDAD					 				    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#reposo-menor').addEventListener('click', e => {
+
+	reposos.validarRepresentante()
+
 })

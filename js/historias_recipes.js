@@ -40,7 +40,12 @@ medicamentos['crud']['propiedadesTr'] = {
 		if (e.sublista.presentacion 		  === '') {var presentacion 		  = '---'} else {var presentacion 		    = e.sublista.presentacion}
 		if (e.sublista.tratamiento 			  === '') {var tratamiento 		      = '---'} else {var tratamiento 			= e.sublista.tratamiento}
 
-		medicamentos_genericos = medicamentos_genericos.substring(medicamentos_genericos.length - 3, 3)
+
+		if (medicamentos_genericos.substring(medicamentos_genericos.length, medicamentos_genericos.length -3) === ' - ') {
+		
+			medicamentos_genericos = medicamentos_genericos.substring(- medicamentos_genericos.length, medicamentos_genericos.length -3)
+
+		}
 
 		contenedor.querySelector('.genericos').insertAdjacentHTML('afterbegin', `<b>${e.sublista.nombre}:</b> `)
 		contenedor.querySelector('.genericos input').value = medicamentos_genericos

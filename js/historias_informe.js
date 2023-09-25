@@ -505,48 +505,48 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 	qs('#tabla-informe').parentElement.scrollTo(0,0)
 })
 
-/* -------------------------------------------------------------------------------------------------*/
-/*           						INFORME - MODELO					 					    	*/
-/* -------------------------------------------------------------------------------------------------*/
-var modelos = {
-	"preoperatorio": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "PREOPERATORIO"
-	},
-	"rx": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
-			"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
-		}),
-		"titulo": "RX TORAX"
-	},
-	"cardiovascular": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "VALORACIÓN CARDIOVASCULAR"
-	},
-	"pediatrica": {
-		"informe": JSON.stringify({
-			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
-			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
-		}),
-		"titulo": "VALORACIÓN PEDIÁTRICA"
-	}
-}
+// /* -------------------------------------------------------------------------------------------------*/
+// /*           						INFORME - MODELO					 					    	*/
+// /* -------------------------------------------------------------------------------------------------*/
+// var modelos = {
+// 	"preoperatorio": {
+// 		"informe": JSON.stringify({
+// 			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+// 			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+// 		}),
+// 		"titulo": "PREOPERATORIO"
+// 	},
+// 	"rx": {
+// 		"informe": JSON.stringify({
+// 			"texto_base": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA.", 
+// 			"texto_html": "FAVOR REALIZAR R(X) DE TORAX, PREOPERATORIO, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA."
+// 		}),
+// 		"titulo": "RX TORAX"
+// 	},
+// 	"cardiovascular": {
+// 		"informe": JSON.stringify({
+// 			"texto_base": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+// 			"texto_html": "FAVOR REALIZAR VALORACIÓN CARDIOVASCULAR PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+// 		}),
+// 		"titulo": "VALORACIÓN CARDIOVASCULAR"
+// 	},
+// 	"pediatrica": {
+// 		"informe": JSON.stringify({
+// 			"texto_base": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL.", 
+// 			"texto_html": "FAVOR REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA, CURA QUIRÚRGICA DE ESTRABISMO CON ANESTESIA GENERAL."
+// 		}),
+// 		"titulo": "VALORACIÓN PEDIÁTRICA"
+// 	}
+// }
 
-qs('#informe-modelos').addEventListener('click', e=> {
+// qs('#informe-modelos').addEventListener('click', e=> {
 
-    if (e.target.tagName === 'BUTTON') {
+//     if (e.target.tagName === 'BUTTON') {
 
-        rellenar.contenedores(modelos[e.target.dataset.identificador], '.informe-valores', {}, {})
+//         rellenar.contenedores(modelos[e.target.dataset.identificador], '.informe-valores', {}, {})
         
-        notificaciones.mensajeSimple('Datos cargados', false, 'V')
+//         notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
-    }
+//     }
     
-})
+// })

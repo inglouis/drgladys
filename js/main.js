@@ -1024,6 +1024,8 @@ export class PopUp {
 		this.evtElementosPadres = evtElementosPadres
 		this.evtTecla = (evtTecla) ? evtTecla : 27
 
+		this.popEvtContenedor = qs(`#crud-${this.evtElementos}-popup`)
+
 	}
 
 	pop() {
@@ -1172,13 +1174,13 @@ export class PopUp {
 
 		var th = this
 
-		if (evt.keyCode === this.evtTecla && qs(`#crud-${this.evtElementos}-popup`).classList.contains(`popup-activo`)) {
+		if (evt.keyCode === this.evtTecla && this.popEvtContenedor.classList.contains(`popup-activo`)) {
 
 			if (typeof this.evtElementosPadres !== 'object') {
 
-				if (qs(`#crud-${this.evtElementosPadres}-popup`)) {
+				if (this.popEvtContenedor) {
 
-					if (!qs(`#crud-${this.evtElementosPadres}-popup`).classList.contains('popup-oculto')) {
+					if (!this.popEvtContenedor.classList.contains('popup-oculto')) {
 
 						window.idSeleccionada = 0
 						this.pop()
@@ -1196,9 +1198,11 @@ export class PopUp {
 
 				for (let index = 0; index < this.evtElementosPadres.length + 1; index++) {
    	
-					if (qs(`#crud-${this.evtElementosPadres[index]}-popup`)) {
+					var contenedor = qs(`#crud-${this.evtElementosPadres[index]}-popup`)
 
-						if (qs(`#crud-${this.evtElementosPadres[index]}-popup`).classList.contains('popup-activo')) {
+					if (contenedor) {
+
+						if (contenedor.classList.contains('popup-activo')) {
 
 							window.idSeleccionada = 0
 							procesar = false

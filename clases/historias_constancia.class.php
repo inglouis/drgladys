@@ -68,7 +68,10 @@
                      	fecha date, 
                      	hora time without time zone, 
                      	fecha_nacimiento date,
-                     	constancia jsonb
+                     	motivo jsonb,
+                        recomendaciones jsonb,
+                        menor character varying(1),
+                        aula character varying(1)
                      )
                 ) as t
                 ORDER BY t.fecha desc, t.hora desc

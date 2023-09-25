@@ -62,9 +62,9 @@
 
   }
 
-  // echo "<pre>";
-  // print_r($datos);
-  // echo "</pre>";
+  //echo "<pre>";
+  //print_r($datos);
+  //echo "</pre>";
 
   $dia  = $obj->fechaHora('America/Caracas','d-m-Y');
   $hora = $obj->fechaHora('America/Caracas','H:i:s');
@@ -166,7 +166,7 @@
   }
 
   .subtitulo {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     margin-left: 50px;
     padding-top:11px;
@@ -186,9 +186,29 @@
 // echo "</pre>";
 ?>
 
-<page style="text-align:justify;" backtop="5mm" backbottom="5mm" backleft="10mm" backright="10mm">
+<page style="text-align:justify;" backtop="5mm" backbottom="0mm" backleft="10mm" backright="10mm">
 
-    <div class="contenedor" style="height: 120mm">
+    <page_footer>
+
+      <table style="width: 200mm; border: none; position: relative; left: 10.5mm; margin-bottom: 6px">
+        <tbody>
+          <tr>
+            <td style="width: 75mm; text-align: center; font-size: 12px">NOMBRE: <?php echo $datos['nombres']?></td>
+            <td style="width: 35mm; text-align: center; font-size: 12px">CI: <?php echo $datos['cedula']?></td>
+            <td style="width: 35mm; text-align: center; font-size: 12px">N° HISTORIA: <?php echo $datos['id_historia']?></td>
+            <td style="width: 35mm; text-align: center; font-size: 12px">FECHA: <?php echo $datos['fecha_arreglada']?></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-bottom: 20px">
+        <div style="width: 90%; height: 1px; background: #723200; position: relative; left: 8mm"></div>
+        <div class="centro" style="font-size: 12px; position: relative; top: -6px; left: -2mm">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
+      </div>
+
+    </page_footer>
+
+    <div class="contenedor">
       
       <div id="cabecera">
 
@@ -210,13 +230,12 @@
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
       </div>
 
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm;">RÉCIPE & INDICACIONES</div>
+
+      <div></div>
       <div></div>
 
-      <div class="subtitulo">
-        RP:
-      </div>  
-
-      <div style="height: 180px">
+      <div>
         
         <table style="width: 216mm; border: none; border-collapse: collapse; margin-left: 50px; ">
           <tbody>
@@ -225,18 +244,34 @@
               foreach($datos['medicamentos'] as $r) :?>
 
               <tr style="padding: 0px; height: 10px;">
-                <td style="height: 10px; width:180mm;text-align: left; vertical-align: middle; border-bottom: 1px dashed #ccc; font-size: 10px; font-weight: 100">
+                <td style="height: 10px; width:180mm; text-align: left; vertical-align: middle; font-size: 15px; font-weight: 100">
                   <?php 
 
                     if (isset($r['medicamentos_genericos'])) {
 
-                      $concat = $r['nombre'].' '.strtoupper(substr($r['medicamentos_genericos'], strlen($r['medicamentos_genericos'])));
+                      if (trim($r['medicamentos_genericos']) == '' || trim($r['medicamentos_genericos']) == '-') {
+
+                        $concat = "<b>".$r['nombre'].'</b>';
+
+                      } else {
+
+                        $concat = "<b>".$r['nombre'].'</b> - '.strtoupper($r['medicamentos_genericos']);
+
+                      }
 
                       $concat .= ': '.$r['presentacion'];
                       echo $concat;
 
                     }  
 
+                  ?>
+                </td>
+              </tr>
+              <tr style="padding: 0px; height: 10px; margin-left: 5px;">
+                <td style="padding-left: 50px;width: 140mm; height: 10px; text-align: left; vertical-align: middle; font-size: 15px; font-weight: 100">
+                  <?php 
+                    $concat = $r['tratamiento'];
+                    echo $concat;
                   ?>
                 </td>
               </tr>
@@ -248,257 +283,11 @@
 
       <div></div>
 
-      <table style="position:absolute; top: 110mm; width: 200mm; border: none;">
-        <tbody>
-          <tr>
-            <td style="width: 75mm; text-align: center; font-size: 12px">NOMBRE: <?php echo $datos['nombres']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">CI: <?php echo $datos['cedula']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">N° HISTORIA: <?php echo $datos['id_historia']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">FECHA: <?php echo $datos['fecha_arreglada']?></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div>
-        <div style="width: 95%; height: 1px; background: #723200; position: relative; left: 5mm"></div>
-        <div class="centro" style="font-size: 12px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
-      </div>
 
     </div> 
 
-<?php
-  $longitud = count($datos['medicamentos']);
-  
-  for ($i = 0; $i < $longitud; $i++) {
-
-    $r = $datos['medicamentos'][$i];
-    
-    if (trim($datos['medicamentos'][$i]['tratamiento']) !== '') {
-      $tratamientosRellenos = true;
-    };
-
-  }
-
-  if ($tratamientosRellenos == true) {
-?>
-
-  <!--segunda hoja-->
-  <div class="contenedor" style="margin-top: 40px; position: relative;">
-
-    <div id="cabecera">
-
-      <div style="font-family: 'Qwigley'; font-size: 40px;">
-        Dra. Gladys A. Chaparro H.
-      </div>
-
-      <div style="font-size: 14px">RIF: v-09143081-5</div>
-      <div style="font-size: 14px">Oftalmólogo</div>
-      <div style="font-size: 14px">Infantil y Estrabismo</div>
-      <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
-
-    </div>
-
-    <div></div>
-    <div class="separador"></div>
-
-    <div style="position: absolute;  top: 10mm; left: 5mm; height: 0px;">
-      <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-    </div>
-
-    <div></div>
-
-    <div class="subtitulo">
-      IND:
-    </div>
-
-    <div style="height: 180px">
-      
-      <table style="width: 216mm; border: none; border-collapse: collapse; margin-left: 50px;">
-        <tbody>
-
-          <?php 
-
-            $longitud_final = 0;
-
-            for ($pag = 0; $pag < 4; $pag++) : 
-
-              if(count($datos['medicamentos']) > $pag) {
-
-                $longitud_final = $longitud_final + 1;
-
-          ?>
-
-          <tr style="padding: 0px; height: 10px;">
-            <td style="height: 10px; text-align: left; vertical-align: middle; border-bottom: 1px dashed #ccc; font-size: 10px; font-weight: 100">
-              <?php 
-
-                if (isset($datos['medicamentos'][$pag]['medicamentos_genericos'])) {
-
-                  $concat = $datos['medicamentos'][$pag]['nombre'].' '.strtoupper(substr($datos['medicamentos'][$pag]['medicamentos_genericos'], strlen($datos['medicamentos'][$pag]['medicamentos_genericos'])));
-                  echo $concat;
-
-                }
-
-              ?>
-            </td>
-          </tr>
-          <tr style="padding: 0px; height: 10px; margin-left: 5px;">
-            <td style="padding-left: 50px;width: 140mm; height: 10px; text-align: left; vertical-align: middle; border-bottom: 1px dashed #ccc; font-size: 10px; font-weight: 100">
-              <?php 
-                $concat = $datos['medicamentos'][$pag]['tratamiento'];
-                echo $concat;
-              ?>
-            </td>
-          </tr>
-
-          <?php
-              }
-            endfor;
-          ?>
-    
-        </tbody>
-      </table>  
-
-    </div>
-
-    <div></div>
-
-    <table style="position:absolute; top: 110mm; width: 200mm; border: none;">
-        <tbody>
-          <tr>
-            <td style="width: 75mm; text-align: center; font-size: 12px">NOMBRE: <?php echo $datos['nombres']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">CI: <?php echo $datos['cedula']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">N° HISTORIA: <?php echo $datos['id_historia']?></td>
-            <td style="width: 35mm; text-align: center; font-size: 12px">FECHA: <?php echo $datos['fecha_arreglada']?></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div>
-        <div style="width: 95%; height: 1px; background: #723200; position: relative; left: 5mm"></div>
-        <div class="centro" style="font-size: 12px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
-      </div>
-
-  </div>
-
-<?php 
-}
-?>
 </page>
 
-<?php 
-
-  if ($tratamientosRellenos == true && $longitud_final != count($datos['medicamentos'])) {
-  
-    //$test = 7;
-    //if($test > $maximo) {
-    //$paginas = ceil($test / $maximo);
-    $paginas = floor(count($datos['medicamentos']) / $maximo);
-    $maxPag  = 7;
-    $currentPag = 4;
-
-    for ($i = 0; $i < $paginas; $i++) : ?>
-
-      <page style="width: 216mm" backtop="0mm" backbottom="5mm" backleft="5mm" backright="5mm">
-        
-        <div class="contenedor" style="position: relative;">
-
-          <div id="cabecera">
-
-            <div style="font-family: 'Qwigley'; font-size: 40px;">
-              Dra. Gladys A. Chaparro H.
-            </div>
-
-            <div style="font-size: 14px">RIF: v-09143081-5</div>
-            <div style="font-size: 14px">Oftalmólogo</div>
-            <div style="font-size: 14px">Infantil y Estrabismo</div>
-            <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
-
-          </div>
-
-          <div></div>
-          <div class="separador"></div>
-
-          <div style="position: absolute;  top: 10mm; left: 5mm; height: 0px;">
-            <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-          </div>
-
-          <div></div>
-
-          <div class="subtitulo">
-            IND:
-          </div>
-
-          <div style="height: 180px">
-            
-            <table style="width: 216mm; border: none; border-collapse: collapse; margin-left: 50px;">
-              <tbody>
-
-                <?php for ($pag = $currentPag; $pag < $maxPag; $pag++) : 
-                  if(count($datos['medicamentos']) > $pag) {
-                ?>
-
-                <tr style="padding: 0px; height: 10px;">
-                  <td style="height: 10px; text-align: left; vertical-align: middle; border-bottom: 1px dashed #ccc; font-size: 10px; font-weight: 100">
-                    <?php 
-
-                      $concat = $datos['medicamentos'][$pag]['nombre'].' '.strtoupper(substr($datos['medicamentos'][$pag]['medicamentos_genericos'], strlen($datos['medicamentos'][$pag]['medicamentos_genericos'])));
-                      echo $concat;
-
-                    ?>
-                  </td>
-                </tr>
-                <tr style="padding: 0px; height: 10px; margin-left: 5px;">
-                  <td style="padding-left: 50px;width: 140mm; height: 10px; text-align: left; vertical-align: middle; border-bottom: 1px dashed #ccc; font-size: 10px; font-weight: 100">
-                    <?php 
-                      $concat = $datos['medicamentos'][$pag]['tratamiento'];
-                      echo $concat;
-                    ?>
-                  </td>
-                </tr>
-                
-                <?php
-                  }
-                  endfor;
-
-                  if($pag == $maxPag) {
-                    $currentPag = $pag;
-                    $maxPag = $maxPag + 3;
-                  }
-
-                ?>
-              </tbody>
-            </table>  
-            
-          </div>
-
-        <div></div>
-
-        <table style="position:absolute; top: 110mm; width: 200mm; border: none;">
-          <tbody>
-            <tr>
-              <td style="width: 75mm; text-align: center; font-size: 12px">NOMBRE: <?php echo $datos['nombres']?></td>
-              <td style="width: 35mm; text-align: center; font-size: 12px">CI: <?php echo $datos['cedula']?></td>
-              <td style="width: 35mm; text-align: center; font-size: 12px">N° HISTORIA: <?php echo $datos['id_historia']?></td>
-              <td style="width: 35mm; text-align: center; font-size: 12px">FECHA: <?php echo $datos['fecha_arreglada']?></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div>
-          <div style="width: 95%; height: 1px; background: #723200; position: relative; left: 5mm"></div>
-          <div class="centro" style="font-size: 12px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
-        </div>
-
-
-      </div>
-
-    </page>
-
-    <?php endfor;
-
-  }?>
-    
 <?php
 
   require_once(dirname(__FILE__).'/../vendor/autoload.php');

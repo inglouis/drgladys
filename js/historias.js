@@ -70,8 +70,10 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 
 ([
 	
-	['#constancia-textarea', '#constancia-previa'],
-	['#coneditar-textarea', '#coneditar-previa'],
+	['#constancia-informacion', '#constancia-previa'],
+	['#coneditar-informacion', '#coneditar-previa'],
+	['#constancia-recomendaciones', '#constancia-previa'],
+	['#coneditar-recomendaciones', '#coneditar-previa'],
 	['#general-informacion', '#general-previa'],
 	['#geneditar-informacion', '#geneditar-previa'],
 	['#informe-informacion', '#informe-previa'],
@@ -85,11 +87,14 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#refeditar-informacion', '#refeditar-previa'],
 	['#refeditar-agradecimiento', '#refeditar-previa'],
 
-	['#constancia-textarea-notificaciones', '#constancia-previa-notificaciones'],
+	['#constancia-informacion-notificaciones', '#constancia-previa-notificaciones'],
+	['#constancia-recomendaciones-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
-	['#general-informacion-notificaciones', '#general-previa-notificaciones']
+	['#general-informacion-notificaciones', '#general-previa-notificaciones'],
+	['#referencia-informacion-notificaciones', '#referencia-previa-notificaciones'],
+	['#referencia-agradecimiento-notificaciones', '#referencia-previa-notificaciones']
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
@@ -111,7 +116,7 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
@@ -123,6 +128,9 @@ window.refPop = new PopUp('crud-refeditar-popup', 'popup', 'subefecto', true, 'r
 window.traPop = new PopUp('crud-tratamientos-popup', 'popup', 'subefecto', true, 'tratamientos', '', 27)
 window.presenPop = new PopUp('crud-presentaciones-popup', 'popup', 'subefecto', true, 'presentaciones', '', 27);
 window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true, 'medicamentos', '', 27)
+
+window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
+window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -150,6 +158,9 @@ refPop.evtBotones()
 traPop.evtBotones()
 presenPop.evtBotones()
 mediPop.evtBotones()
+
+refInsPop.evtBotones()
+refeInsPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -179,6 +190,9 @@ window.addEventListener('keyup', (e) => {
 	traPop.evtEscape(e)
 	presenPop.evtEscape(e)
 	mediPop.evtEscape(e)
+
+	refInsPop.evtEscape(e)
+	refeInsPop.evtEscape(e)
 
 })
 
@@ -210,11 +224,13 @@ window.animaciones.hider = 'data-hidden'
 /////////////////////////////////////////////////////
 window.contenedores = new ContenedoresEspeciales('historias-status')
 
-window.contenedoresConsultar    = new ContenedoresEspeciales('crud-informacion-popup') 
-window.contenedoresEditar       = new ContenedoresEspeciales('crud-editar-popup') 
-window.contenedoresInsertar     = new ContenedoresEspeciales('crud-insertar-popup')
-window.contenedoresReportes     = new ContenedoresEspeciales('crud-reportes-popup')
-window.contenedoresMedicamentos = new ContenedoresEspeciales('crud-medicamentos-popup')
+window.contenedoresConsultar      = new ContenedoresEspeciales('crud-informacion-popup') 
+window.contenedoresEditar         = new ContenedoresEspeciales('crud-editar-popup') 
+window.contenedoresInsertar       = new ContenedoresEspeciales('crud-insertar-popup')
+window.contenedoresReportes       = new ContenedoresEspeciales('crud-reportes-popup')
+window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamentos-popup')
+window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
+
 /////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
@@ -283,6 +299,11 @@ window.cargar.revision()
 // window.cargarInforme = new paginaCargada('#informe-combo', 'longitud', 'cargar-informes')
 // window.cargarInforme.revision()
 /////////////////////////////////////////////////////
+//DATOS DE REFERENCIAS Y REFERIDOS
+/////////////////////////////////////////////////////
+window.lista_referencias = JSON.parse(await tools.fullAsyncQuery(`referencias`, `traer_referencias`, []))
+window.lista_referidos = JSON.parse(await tools.fullAsyncQuery(`referidos`, `traer_referidos`, []))
+/////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 window.reportes = new Reportes()
 /////////////////////////////////////////////////////
@@ -330,6 +351,8 @@ class Historias extends Acciones {
 
 		this.cargarTabla(resultado, true)
 
+		this.crud.botonForzar(true)
+
 	}
 
 	limpieza() {
@@ -353,8 +376,13 @@ class Historias extends Acciones {
 		referencias.cargarTabla([], undefined, undefined)
 
 		rellenar.contenedores(this.sublista, '.presupuesto-representante-valores', {}, {})
+
 		
 		gid('reposos-fecha-insertar').innerHTML = ''
+		setTimeout(() => {
+			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
+			qs('#informe-contenedor-izquierda').scrollTo(0,0)
+		}, 1000)
 
 		gid('constancia-busqueda').value = ''
 		gid('general-busqueda').value = ''
@@ -613,7 +641,7 @@ historias['crud']['customBodyEvents'] = {
 
 			rellenar.contenedores(historias.sublista, '.constancia-cargar', {elemento: button, id: 'value'})
 			
-			setTimeout(() => {document.querySelector('#constancia-textarea').focus()}, 100)
+			setTimeout(() => {document.querySelector('#constancia-informacion').focus()}, 100)
 
 			rellenar.contenedores(historias.sublista, '.reportes-cargar', {elemento: button, id: 'value'})
 
@@ -701,7 +729,7 @@ var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_d
 	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
 	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', [])),
 	comboReferencia         = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_referencias', [])),
-	comboMedicoReferenciado = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referenciados', []))
+	comboMedicoReferido = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referidos', []))
 
 contenedores.eventos().checkboxes('status')
 
@@ -724,8 +752,11 @@ contenedoresEditar.eventos().combo('cc-estado_civil-editar', ['combos', 'combo_e
 contenedoresReportes.eventos().combo('cc-referencias-referencia-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
 contenedoresReportes.eventos().combo('cc-referencias-referencia-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
 
-contenedoresReportes.eventos().combo('cc-referencias-referido-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
-contenedoresReportes.eventos().combo('cc-referencias-referido-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferenciado, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referido-insertar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresReportes.eventos().combo('cc-referencias-referido-editar', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
+
+contenedoresNotificaciones.eventos().combo('cc-referencias-referencia-notificaciones', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboReferencia, "seleccionarGenerado": true, "navegacionVertical": true})
+contenedoresNotificaciones.eventos().combo('cc-referencias-referido-notificaciones', ['combos', 'combo_referencias', ['', '']], false, {}, undefined, undefined, {"lista": comboMedicoReferido, "seleccionarGenerado": true, "navegacionVertical": true})
 
 contenedoresConsultar.eventos().combo('cc-religiones-consultar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true})
 contenedoresInsertar.eventos().combo('cc-religiones-insertar', ['combos', 'combo_religiones', ['', '']], false, {}, undefined, undefined, {"lista": comboReligion, "seleccionarGenerado": true, "navegacionVertical": true})
@@ -775,13 +806,13 @@ contenedoresMedicamentos.eventos().contenedor(
 	{} //funciones
 )
 
-// contenedoresInformes.eventos().contenedor(
-// 	'cc-diagnosticos-informes', //elemento
-// 	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
-// 	[0, 0], 			   //limitador de busqueda
-// 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
-// 	{"lista": comboDiagnosticos} //funciones
-// )
+contenedoresReportes.eventos().contenedor(
+	'cc-diagnosticos-informes', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
 
 // contenedoresInformesEditar.eventos().contenedor(
 // 	'cc-diagnosticos-editar', //elemento
@@ -994,8 +1025,8 @@ insersiones_lista.forEach((grupo, i) => {
 
 						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
 
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').value = qs(`#nombre-${grupo}`).value.toUpperCase()
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').focus()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = qs(`#nombre-${grupo}`).value.toUpperCase()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
 						qs(`#nombre-${grupo}`).value = ''
 
@@ -1140,6 +1171,29 @@ class Constancias extends Acciones {
 
 		this.cargarTabla(resultado, true)
 
+	}
+
+	validarRepresentante() {
+		var validar = true
+
+		if (historias.sublista.emergencia_persona.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (historias.sublista.emergencia_informacion.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (validar == false) {
+
+			qs('#constancia-menor').checked = false
+			notificaciones.mensajeSimple('Falta información en la historia: [NOMBRE DE REPRESENTANTE, CÉDULA DE REPRESENTANTE]', null, 'F')
+
+		}
 	}
 
 }
@@ -1307,6 +1361,29 @@ class Reposos extends Acciones {
 
 		this.cargarTabla(resultado, true)
 
+	}
+
+	validarRepresentante() {
+		var validar = true
+
+		if (historias.sublista.emergencia_persona.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (historias.sublista.emergencia_informacion.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (validar == false) {
+
+			qs('#reposo-menor').checked = false
+			notificaciones.mensajeSimple('Falta información en la historia: [NOMBRE DE REPRESENTANTE, CÉDULA DE REPRESENTANTE]', null, 'F')
+
+		}
 	}
 
 }
@@ -1691,7 +1768,12 @@ insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.oc
 infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
+repPop.funciones['apertura'] = {"apertura": () => {
+	window.paginacionHistorias.mostrar(); 
+	if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()};
+	if (reporteSeleccionado === 'reposo') {reposos.validarRepresentante()};
+}}
+
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); window.paginacionHistorias.contenedor.style = "z-index: 10"}}

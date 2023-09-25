@@ -1664,7 +1664,8 @@ span.numeracion {
 #crud-preeditar-pop,
 #crud-infeditar-pop,
 #crud-repeditar-pop,
-#crud-geneditar-pop {
+#crud-geneditar-pop,
+#crud-refeditar-pop {
     background: #f5f5f5d1;
     padding: 15px;
     justify-content: center;
@@ -1689,7 +1690,8 @@ span.numeracion {
     position: relative;
 }
 
-#crud-editar-pop, #crud-insertar-pop,
+#crud-editar-pop, 
+#crud-insertar-pop,
 #crud-insertar-ocupaciones-pop,
 #crud-insertar-proveniencias-pop,
 #crud-insertar-parentescos-pop,
@@ -1698,7 +1700,9 @@ span.numeracion {
 #crud-insertar-medicos-pop,
 #crud-insertar-diagnosticos-pop,
 #crud-notificaciones-pop,
-#crud-medicamentos-pop {
+#crud-medicamentos-pop,
+#crud-insertar-referencia-pop,
+#crud-insertar-referido-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2130,6 +2134,19 @@ span.numeracion {
 .check[type="checkbox"]:focus {
     box-shadow: 0px 0px 1px 2px #b5e8ff;
     outline: 2px dashed #262626;
+}
+
+.check-alineado {
+    flex-direction: row-reverse !important;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.check-alineado label {
+    position: relative;
+    bottom: 1px;
+    font-size: 16px !important;
 }
 
 /*----------------------chekbox2-------------------------*/
@@ -3489,7 +3506,6 @@ span.numeracion {
 /*-----------------------------------------------------*/
 /*------------------ CONSTANCIAS ----------------------*/
 /*-----------------------------------------------------*/
-
 #tabla-constancia thead {
     display: none
 }
@@ -3511,6 +3527,25 @@ span.numeracion {
     align-items: center;
     width: 40px;
     justify-content: center;
+}
+
+#constancia-modelos {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
+
+#constancia-modelos button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 3px;
+}
+
+#constancia-modelos button:nth-child(1)::after {
+    content: "LENTE CORRECTIVO";
+    width: 100px;
+    font-size: 14px;
 }
 
 #constancia-previa, #coneditar-previa {
@@ -4943,6 +4978,79 @@ div#tabla-notificados-contenedor .titulo::after {
 
 .genericos-status:nth-child(2)::after {
     content: "Solo Medicinas Genéricas Desactivadas [D]";
+}
+
+/*-----------------------------------------------------*/
+/*------------------- REFERENCIAS ---------------------*/
+/*-----------------------------------------------------*/
+#insertar-referencias::after {
+    width: 200px;
+}
+
+#insertar-referencias:hover::after {
+    content: "Agregar Nueva Referencia";
+    opacity: 1;
+    width:230px;
+}
+
+#tabla-referencias tbody tr td:nth-child(1) {
+    width: 3%;
+}
+
+
+#tabla-referencias tbody tr td:nth-child(2) {
+    width: 100%;
+}
+
+#tabla-referencias tbody tr td:nth-child(3) {
+    width: 115px;
+    position: relative;
+}
+
+.referencias-status:nth-child(1)::after {
+    content:"Solo Referencias Activas [A]";
+}
+
+.referencias-status:nth-child(2)::after {
+    content: "Solo Referencias Desactivadas [D]";
+}
+
+/*-----------------------------------------------------*/
+/*------------------- REFERIDOS ---------------------*/
+/*-----------------------------------------------------*/
+#insertar-referidos::after {
+    width: 200px;
+}
+
+#insertar-referidos:hover::after {
+    content: "Agregar Nuevo Referido";
+    opacity: 1;
+    width:230px;
+}
+
+#tabla-referidos tbody tr td:nth-child(1) {
+    width: 3%
+}
+
+#tabla-referidos tbody tr td:nth-child(2) {
+
+}
+
+#tabla-referidos tbody tr td:nth-child(3) {
+    width: 10%
+}
+
+#tabla-referidos tbody tr td:nth-child(4) {
+    min-width: 50px;
+    width: 5%;
+}
+
+.referidos-status:nth-child(1)::after {
+    content:"Solo Referidos Activas [A]";
+}
+
+.referidos-status:nth-child(2)::after {
+    content: "Solo Referidos Desactivadas [D]";
 }
 
 /*------------------------------------*/

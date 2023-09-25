@@ -503,11 +503,27 @@
 
       </div>
 
-      <section id="crud-editar-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">
-        <button class="botones-formularios editar">CONFIRMAR</button>
-        <button class="botones-formularios cerrar">CANCELAR</button> 
-      </section>
+      <div class="columnas">
+        
+        <div>
+          <label>Nombres del representante</label>
+          <input type="text" data-valor="emergencia_persona" autocomplete="off"  placeholder="-" class="editar-valores upper">
+        </div>
+
+        <div>
+          <label>N° de cédula del representante</label>
+          <input type="text" data-valor="emergencia_informacion" autocomplete="off"  placeholder="-" class="editar-valores upper">
+        </div>
+
+      </div>
+
     </div>
+    
+    <section id="crud-editar-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">
+      <button class="botones-formularios editar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+
   </div>
 </div>
 
@@ -762,6 +778,20 @@
 
           </section>
 
+        </div>
+
+      </div>
+
+      <div class="columnas">
+        
+        <div>
+          <label>Nombres del representante</label>
+          <input type="text" autocomplete="off"  placeholder="-" class="insertar-valores upper">
+        </div>
+
+        <div>
+          <label>N° de cédula del representante</label>
+          <input type="text" autocomplete="off"  placeholder="-" class="insertar-valores upper">
         </div>
 
       </div>

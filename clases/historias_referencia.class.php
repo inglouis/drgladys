@@ -63,11 +63,16 @@
                     	(SELECT referencias FROM principales.reportes WHERE id_historia = ?)
                      ) AS t(doc),
                      jsonb_to_record(t.doc) as x (
-                     	nombre_completo character varying(300), 
-                     	cedula character varying(14), 
+                        nombres character varying(150), 
+                        apellidos character varying(150),  
+                        cedula character varying(14), 
+                        fecha_nacimiento date,
+                     	id_referencia character varying(100),
+                        id_medico_referido character varying(100),
+                        agradecimiento text,
                      	fecha date, 
                      	hora time without time zone, 
-                     	referencia jsonb
+                     	motivo jsonb
                      )
                 ) as t
                 ORDER BY t.fecha desc, t.hora desc

@@ -189,7 +189,9 @@
                         id_estado_civil,
                         id_religion,
                         telefonos,
-                        otros
+                        otros,
+                        emergencia_persona,
+                        emergencia_informacion
                     ) values (
                         trim(upper(?)), 
                         trim(upper(?)),
@@ -206,7 +208,9 @@
                         ?,
                         ?,
                         ?::jsonb,
-                        ?::jsonb
+                        ?::jsonb,
+                        trim(upper(?)),
+                        trim(upper(?))
                     )
                 ";
 
@@ -234,7 +238,7 @@
             $telefonos = &$args[15];
             $otros     = &$args[16];
 
-            $id_historia = $args[17];
+            $id_historia = $args[19];
             
             if (empty($id_ocupacion)) {$id_ocupacion = 0;}
             if (empty($id_proveniencia)) {$id_proveniencia = 0;}
@@ -254,8 +258,8 @@
             $telefonos = json_encode($telefonos);
             $otros     = json_encode($otros);
 
-            $sql = "select id_historia from principales.historias where concat(cedula, '-' ,nro_hijo) = ?";
-            $resultado = $this->i_pdo($sql, [$cedulaHijo], true)->fetchColumn();
+            $sql = "select id_historia from principales.historias where concat(cedula, '-' ,nro_hijo) = ? and id_historia != ?";
+            $resultado = $this->i_pdo($sql, [$cedulaHijo, $id_historia], true)->fetchColumn();
 
             if (!$resultado || $resultado == $id_historia) {
 
@@ -277,7 +281,9 @@
                         sexo = trim(upper(?)), 
                         status = trim(upper(?)),
                         telefonos = ?::jsonb, 
-                        otros = ?::jsonb
+                        otros = ?::jsonb,
+                        emergencia_persona = trim(upper(?)),
+                        emergencia_informacion = trim(upper(?))
                     where id_historia = ?
                 ";
 

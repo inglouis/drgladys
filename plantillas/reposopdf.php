@@ -56,25 +56,57 @@
   $fecha_final = date("d-m-Y", strtotime($datos['fecha_final']));
   $fecha_simple = date("d-m-Y", strtotime($datos['fecha_simple']));
 
-  $edad = $obj->calcularEdad($datos['fecha_naci']);
+  $edad = $obj->calcularEdad($datos['fecha_naci']).' AÑOS DE EDAD';
 
-  if ($datos['cabecera'] == '0') {
+  if ($edad == 0) {
 
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad AÑOS DE EDAD CON CÉDULA DE IDENTIDAD $datos[cedula] FUE INTERVENIDO QUIRÚRGICAMENTE DE: ". trim(strtoupper($reposo['texto_html']));
-    
-  } else if ($datos['cabecera'] == '1') {
+    $edad = $obj->calcularMeses($datos['fecha_naci']).' MESES DE EDAD';
 
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad AÑOS DE EDAD CON CÉDULA DE IDENTIDAD $datos[cedula] PRESENTA: ".trim(strtoupper($reposo['texto_html']));
+  }
 
-  } else {
+  if ($edad == 0) {
 
-    $cabecera = 'CABECERA SIN ASIGNAR';
+    $edad = $obj->calcularDias($datos['fecha_naci']).' DÍAS DE EDAD';
 
   }
 
   if ($datos['representante'] == 'X') {
 
-    $representante = "AMERITA REPOSO MÉDICO Y CUIDADOS DEL REPRESENTANTE DESDE EL: <b>$fecha_inicio</b> HASTA EL: <b>$fecha_final</b>.";
+    $cedula_cabecera = " ";
+
+  } else {
+
+    $cedula_cabecera = "CON CÉDULA DE IDENTIDAD $datos[cedula] ";
+
+  }
+
+  if ($datos['cabecera'] == '0') {
+
+    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad ".$cedula_cabecera."FUE INTERVENIDO QUIRÚRGICAMENTE DE: ". trim(strtoupper($reposo['texto_html']));
+    
+  } else if ($datos['cabecera'] == '1') {
+
+    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad ".$cedula_cabecera."PRESENTA: ".trim(strtoupper($reposo['texto_html']));
+
+  } else {
+
+    $cabecera = '[CABECERA SIN ASIGNAR]';
+
+  }
+
+  if ($datos['representante'] == 'X') {
+
+    $representante = $obj->i_pdo("select emergencia_informacion, emergencia_persona from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetch(PDO::FETCH_ASSOC);
+
+    if (empty($representante['emergencia_persona'])) {
+      $representante['emergencia_persona'] = '[SIN REPRESENTANTE ASIGNADO]';
+    }
+
+    if (empty($representante['emergencia_informacion'])) {
+      $representante['emergencia_informacion'] = '[SIN REPRESENTANTE ASIGNADO]';
+    }
+
+    $representante = "AMERITA REPOSO MÉDICO Y CUIDADOS DE SU REPRESENTANTE <b>$representante[emergencia_persona]</b> con C.I <b>$representante[emergencia_informacion].</b> DESDE EL: <b>$fecha_inicio</b> HASTA EL: <b>$fecha_final</b>.";
 
   } else {
 
@@ -94,15 +126,13 @@
 
   if ($datos['recomendaciones'] == 'X') {
 
-    $recomendaciones = "NO DEBE PRACTICAR DEPORTES DE IMPACTO, ACUDIR A RÍOS Y PISCINAS, PLAYAS NI LUGARES CONTAMINADOS DURANTE $recomendaciones_tiempo A PARTIR DE LA FECHA PRESENTE";
+    $recomendaciones = "NO DEBE PRACTICAR DEPORTES DE IMPACTO, ACUDIR A RÍOS Y PISCINAS, PLAYAS NI LUGARES CONTAMINADOS DURANTE $recomendaciones_tiempo A PARTIR DE LA FECHA PRESENTE.";
 
   } else {
 
     $recomendaciones = "";
 
   }
-
-
 
 ?>
 
