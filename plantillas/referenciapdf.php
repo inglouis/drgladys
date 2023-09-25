@@ -60,7 +60,6 @@
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
 
   if (!empty($datos['id_referencia'])) {
 
@@ -79,6 +78,20 @@
   } else {
 
     $referido = '';
+
+  }
+  
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']).' AÑOS DE EDAD';
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularMeses($datos['fecha_nacimiento']).' MESES DE EDAD';
+
+  }
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularDias($datos['fecha_nacimiento']).' DÍAS DE EDAD';
 
   }
 
@@ -256,7 +269,7 @@
       <div></div>
 
       <div style="font-size: 15px; text-transform: uppercase; position: relative;">
-        paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> años de edad quien presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>
+        paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> quien presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>
       </div>
 
       <div></div>
@@ -277,7 +290,7 @@
         if (!empty($motivo['texto_html'])) {
       ?>
         <div style="font-size: 15px; text-transform: uppercase; position: relative;">
-          Se agradece: <?php echo trim(strtoupper($motivo['texto_html']))?>
+          Se agradece: <?php echo trim(strtoupper($agradecimiento['texto_html']))?>
         </div>
       <?php 
         }

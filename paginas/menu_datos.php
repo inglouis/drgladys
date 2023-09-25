@@ -88,6 +88,13 @@
 	));
 
 	array_push($lista_menu, array(
+		"ruta" => 'historias,ul,lista,formularios,ul,lista,referencias,bloquear',
+		"nombre"=> 'referencias',
+		"bloquear" => 0, 
+		"editable" => 1
+	));
+
+	array_push($lista_menu, array(
 		"ruta" => 'historias,ul,lista,formularios,ul,lista,religion,bloquear',
 		"nombre"=> 'religion',
 		"bloquear" => 0, 
@@ -282,8 +289,18 @@
 							  		"atributos": "",
 							  		"span": "",
 									"a": {
-										"href": "medicos.php",
+										"href": "referidos.php",
 										"titulo": "Médicos referidos"
+									},
+									"ul": "",
+									"bloquear": 0
+							  	},
+							  	"referencias":  {
+							  		"atributos": "",
+							  		"span": "",
+									"a": {
+										"href": "referencias.php",
+										"titulo": "Referencias"
 									},
 									"ul": "",
 									"bloquear": 0

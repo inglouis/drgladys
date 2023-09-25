@@ -25,17 +25,27 @@
       </div>
 
       <div class="columnas">
+              
         <div>
-          <label class="requerido">Título</label>
-          <input type="text" id="infeditar-titulo" data-valor="titulo" class="infeditar-valores upper lleno">
+          
+          <label class="requerido">Tipo de informe médico</label>
+          <select data-valor="cabecera" class="reposo-valores upper lleno">
+            <option value="0">Resumido</option>
+            <option value="1">Completo</option>
+          </select>
+          
         </div>
+
       </div>
 
       <div class="columnas">
         
         <div>
-          <label class="requerido">informe</label>
-          <textarea rows="4" id="infeditar-informacion" data-previa="infeditar-previa" data-valor="informe" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none; min-height: 30vh;" data-scroll></textarea>
+          <label class="requerido">Motivos o antecedentes</label>
+          <textarea rows="4" id="infeditar-informacion" data-previa="infeditar-previa" data-valor="informe" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+            Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013
+            Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME
+          "></textarea>
         </div>
 
       </div>
@@ -153,45 +163,183 @@
 
           </div>
             
-          <div class="filas" style="height: 100%; position: relative">
+          <div id="informe-contenedor-izquierda" class="filas" style="height: 75vh; position: relative; justify-content: flex-start;" data-scroll-invisible>
           
-            <div class="columnas" id="informe-modelos" style="margin: 0px">
-                
-              <button class="btn btn-general tooltip-filtro" data-identificador="preoperatorio">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="iconos-b"><path fill="currentColor" d="M320 368c0 59.5 29.5 112.1 74.8 144H128.1c-35.3 0-64-28.7-64-64V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L522.1 193.9c-8.5-1.3-17.3-1.9-26.1-1.9c-54.7 0-103.5 24.9-135.8 64H320V208c0-8.8-7.2-16-16-16H272c-8.8 0-16 7.2-16 16v48H208c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h48v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16zM496 224a144 144 0 1 1 0 288 144 144 0 1 1 0-288zm0 240a24 24 0 1 0 0-48 24 24 0 1 0 0 48zm0-192c-8.8 0-16 7.2-16 16v80c0 8.8 7.2 16 16 16s16-7.2 16-16V288c0-8.8-7.2-16-16-16z"/></svg>
-              </button>
-              <button class="btn btn-general tooltip-filtro" data-identificador="rx">
-                <svg clas="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M0 64C0 46.3 14.3 32 32 32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32V416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32V96C14.3 96 0 81.7 0 64zM256 96c-8.8 0-16 7.2-16 16v32H160c-8.8 0-16 7.2-16 16s7.2 16 16 16h80v48H128c-8.8 0-16 7.2-16 16s7.2 16 16 16H240v70.6L189.1 307c-5.2-2-10.6-3-16.2-3h-2.1c-23.6 0-42.8 19.2-42.8 42.8c0 9.6 3.2 18.9 9.1 26.4l18.2 23.2c9.7 12.4 24.6 19.6 40.3 19.6H316.4c15.7 0 30.6-7.2 40.3-19.6l18.2-23.2c5.9-7.5 9.1-16.8 9.1-26.4c0-23.6-19.2-42.8-42.8-42.8H339c-5.5 0-11 1-16.2 3L272 326.6V256H384c8.8 0 16-7.2 16-16s-7.2-16-16-16H272V176h80c8.8 0 16-7.2 16-16s-7.2-16-16-16H272V112c0-8.8-7.2-16-16-16zM208 352a16 16 0 1 1 0 32 16 16 0 1 1 0-32zm80 16a16 16 0 1 1 32 0 16 16 0 1 1 -32 0z"/></svg>
-              </button>
-              <button class="btn btn-general tooltip-filtro" data-identificador="cardiovascular">
-                <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M228.3 469.1L47.6 300.4c-4.2-3.9-8.2-8.1-11.9-12.4h87c22.6 0 43-13.6 51.7-34.5l10.5-25.2 49.3 109.5c3.8 8.5 12.1 14 21.4 14.1s17.8-5 22-13.3L320 253.7l1.7 3.4c9.5 19 28.9 31 50.1 31H476.3c-3.7 4.3-7.7 8.5-11.9 12.4L283.7 469.1c-7.5 7-17.4 10.9-27.7 10.9s-20.2-3.9-27.7-10.9zM503.7 240h-132c-3 0-5.8-1.7-7.2-4.4l-23.2-46.3c-4.1-8.1-12.4-13.3-21.5-13.3s-17.4 5.1-21.5 13.3l-41.4 82.8L205.9 158.2c-3.9-8.7-12.7-14.3-22.2-14.1s-18.1 5.9-21.8 14.8l-31.8 76.3c-1.2 3-4.2 4.9-7.4 4.9H16c-2.6 0-5 .4-7.3 1.1C3 225.2 0 208.2 0 190.9v-5.8c0-69.9 50.5-129.5 119.4-141C165 36.5 211.4 51.4 244 84l12 12 12-12c32.6-32.6 79-47.5 124.6-39.9C461.5 55.6 512 115.2 512 185.1v5.8c0 16.9-2.8 33.5-8.3 49.1z"/></svg>
-              </button>
-              <button class="btn btn-general tooltip-filtro" data-identificador="pediatrica">
-                <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><path fill="currentColor" d="M256 64A64 64 0 1 0 128 64a64 64 0 1 0 128 0zM152.9 169.3c-23.7-8.4-44.5-24.3-58.8-45.8L74.6 94.2C64.8 79.5 45 75.6 30.2 85.4s-18.7 29.7-8.9 44.4L40.9 159c18.1 27.1 42.8 48.4 71.1 62.4V480c0 17.7 14.3 32 32 32s32-14.3 32-32V384h32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V221.6c29.1-14.2 54.4-36.2 72.7-64.2l18.2-27.9c9.6-14.8 5.4-34.6-9.4-44.3s-34.6-5.5-44.3 9.4L291 122.4c-21.8 33.4-58.9 53.6-98.8 53.6c-12.6 0-24.9-2-36.6-5.8c-.9-.3-1.8-.7-2.7-.9z"/></svg>
-              </button>
-            
-            </div>
-
-            <div class="columnas" >
-            
+            <div class="columnas">
+              
               <div>
-                <label class="requerido">Título</label>
-                <input type="text" id="informe-titulo" data-valor="titulo" class="informe-valores upper lleno">
-              </div>        
-
-            </div>
-
-            <div class="columnas" style="height: 100%">
-            
-
-              <div style="height: 100%; margin: 0px">
                 
-                <label class="requerido">Informe</label>
-                <textarea id="informe-informacion" data-previa="informe-previa" data-valor="informe" rows="6" class="informe-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
-
+                <label class="requerido">Tipo de informe médico</label>
+                <select data-valor="tipo" class="informe-valores  upper lleno">
+                  <option value="0">Resumido</option>
+                  <option value="1">Completo</option>
+                </select>
+                
               </div>
 
             </div>
+
+            <div class="columnas">
+              
+              <div>
+                <label class="requerido">Motivos o antecedentes</label>
+                <textarea rows="4" id="informe-informacion" data-previa="informe-previa" data-valor="contenido" class="informe-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+                  Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME
+                "></textarea>
+              </div>
+
+            </div>
+
+            <section id="informes-completo-contenedor">
+              
+              <div class="columnas">
+                
+                <div>     
+                  <label>Control</label>
+                  <textarea rows="4" id="informe-control" data-previa="informe-previa" data-valor="control" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label class="requerido">Agudeza visual</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="agudeza_od" class="informe-valores upper lleno" placeholder="OD">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="agudeza_oi" class="informe-valores upper lleno" placeholder="OI">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div class="check-alineado">
+                  <label>Con corrección</label>        
+                  <input type="checkbox" data-valor="correccion" class="informe-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                <div>  
+                  <label>Estereopsis</label>  
+                  <input type="text" data-valor="estereopsis" class="informe-valores upper lleno" placeholder="0.00">
+                </div>
+
+                <div>
+                  <label>Test</label>
+                  <input type="text" data-valor="test" class="informe-valores upper lleno" placeholder="0.00">
+                </div>
+
+                <div>
+                  <label>Reflejo</label>
+                  <input type="text" data-valor="reflejo" class="informe-valores upper lleno" placeholder="0.00">
+                </div>  
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Motilidad</label>
+                  <textarea rows="4" id="informe-motilidad" data-previa="informe-previa" data-valor="motilidad" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label class="requerido">RX</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="rx_od" class="informe-valores upper lleno" placeholder="OD">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="rx_oi" class="informe-valores upper lleno" placeholder="OI">
+                  </div> 
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>
+                  <label class="requerido">Biomicroscopia</label>
+                  <input type="text" data-valor="biomicroscopia" class="informe-valores upper lleno">
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label class="requerido">PIO</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="pio_od" class="informe-valores upper lleno" placeholder="OD">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="pio_oi" class="informe-valores upper lleno" placeholder="OI">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>
+                  <label class="requerido">Fondo de ojo</label>
+                  <input type="text" data-valor="fondo_ojo" class="informe-valores upper lleno">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div style="position:relative;">
+
+                  <label class="requerido">
+                    <button id="insertar-nueva-diagnostico" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
+                    Diagnóstico
+                  </label>
+                  
+                  <style>
+                    #cc-diagnosticos-informes .ccContenedor {
+                       width: 95%;
+                    }
+                  </style>  
+
+                  <section id="cc-diagnosticos-informes" class="contenedor-consulta informe-valores lleno borde-estilizado" data-valor="diagnosticos">
+
+                    <input type="text" data-estilo="cc-input" class="upper" data-minimo="0" data-ocultar="0" placeholder="Buscar diagnósticos" title="[ENTER] para forzar actualización">
+                    <select id="informe-combo" data-limit="" data-estilo="cc-select" placeholder="Buscar diagnóstico" data-size="5" data-ocultar="1" data-hide data-absoluto="1" data-scroll style="
+                      height: calc(100%);
+                      border: 1px dashed #5eb6fb;
+                      border-top: none;
+                      background: #ddf4ffc2;
+                      padding: 5px;
+                      margin: 0px;
+                      color: black;
+                    "></select>
+                    <div data-estilo="cc-div" style="background: #fff; min-height: 80px; max-height: 85px; border: none;" data-scroll></div>
+
+                  </section>
+
+                </div>
+
+              </div>
+
+            </section>
 
           </div>
 

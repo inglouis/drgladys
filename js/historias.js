@@ -381,6 +381,7 @@ class Historias extends Acciones {
 		gid('reposos-fecha-insertar').innerHTML = ''
 		setTimeout(() => {
 			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
+			qs('#informe-contenedor-izquierda').scrollTo(0,0)
 		}, 1000)
 
 		gid('constancia-busqueda').value = ''
@@ -805,13 +806,13 @@ contenedoresMedicamentos.eventos().contenedor(
 	{} //funciones
 )
 
-// contenedoresInformes.eventos().contenedor(
-// 	'cc-diagnosticos-informes', //elemento
-// 	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
-// 	[0, 0], 			   //limitador de busqueda
-// 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
-// 	{"lista": comboDiagnosticos} //funciones
-// )
+contenedoresReportes.eventos().contenedor(
+	'cc-diagnosticos-informes', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
 
 // contenedoresInformesEditar.eventos().contenedor(
 // 	'cc-diagnosticos-editar', //elemento
@@ -1362,6 +1363,29 @@ class Reposos extends Acciones {
 
 	}
 
+	validarRepresentante() {
+		var validar = true
+
+		if (historias.sublista.emergencia_persona.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (historias.sublista.emergencia_informacion.trim() === '') {
+
+			validar = false
+
+		}
+
+		if (validar == false) {
+
+			qs('#reposo-menor').checked = false
+			notificaciones.mensajeSimple('Falta información en la historia: [NOMBRE DE REPRESENTANTE, CÉDULA DE REPRESENTANTE]', null, 'F')
+
+		}
+	}
+
 }
 
 export var reposos = new Reposos(new Tabla(
@@ -1744,7 +1768,12 @@ insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.oc
 infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-repPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()}}}
+repPop.funciones['apertura'] = {"apertura": () => {
+	window.paginacionHistorias.mostrar(); 
+	if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()};
+	if (reporteSeleccionado === 'reposo') {reposos.validarRepresentante()};
+}}
+
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar(); window.paginacionHistorias.contenedor.style = "z-index: 10"}}

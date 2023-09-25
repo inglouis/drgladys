@@ -565,7 +565,7 @@ qs('#constancia-busqueda').addEventListener('keydown', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						CONSTNCIA - SCROLL TOP						 				    */
+/*           						CONSTNCIA - ES MENOR DE EDAD				 				    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#constancia-menor').addEventListener('click', e => {
 

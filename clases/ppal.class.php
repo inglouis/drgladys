@@ -596,6 +596,16 @@ class ppal extends cbdc
     	$diff = date_diff(date_create($fecha), date_create(date("d-m-Y")));
     	return $diff->format("%y");
 	}
+
+	public function calcularMeses($fecha) {
+    	$diff = date_diff(date_create($fecha), date_create(date("d-m-Y")));
+    	return $diff->format("%m");
+	}
+
+	public function calcularDias($fecha) {
+    	$diff = date_diff(date_create($fecha), date_create(date("d-m-Y")));
+    	return $diff->format("%d");
+	}
 //*******************************************************************
 	public function fechaHora($tz, $formato) {
 	    $timestamp = time();

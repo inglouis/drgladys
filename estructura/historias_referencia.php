@@ -222,8 +222,8 @@
             <div class="columnas" style="height: 100%">
               
               <div style="height: 100%">
-                <label>Motivo de la referencia</label>
-                <textarea rows="4" id="referencia-informacion" data-previa="referencia-previa" data-valor="motivo" class="referencia-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll></textarea>
+                <label class="requerido">Motivo de la referencia</label>
+                <textarea rows="4" id="referencia-informacion" data-previa="referencia-previa" data-valor="motivo" class="referencia-valores lleno upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll></textarea>
               </div>
 
             </div>

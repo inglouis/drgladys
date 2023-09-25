@@ -68,7 +68,7 @@
     $datos['nombres'] = strtoupper($datos['nombres']);
     $datos['apellidos'] = strtoupper($datos['apellidos']);
 
-    $aula = "SE AGRADECE COLABORACIÓN A LOS DOCENTES DE SENTAR AL PACIENTE $datos[nombres] $datos[apellidos] EN LOS PRIMEROS PUESTOS DEL SALÓN POR SU CONDICIÓN VISUAL.";
+    $aula = "SE AGRADECE LA COLABORACIÓN A LOS DOCENTES DE SENTAR AL PACIENTE EN LOS PRIMEROS PUESTOS DEL SALÓN POR SU CONDICIÓN VISUAL.";
   } else {
     $aula = "";
   }
@@ -86,11 +86,21 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+  $edad = $obj->calcularEdad($datos['fecha_naci']).' AÑOS DE EDAD';
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularMeses($datos['fecha_naci']).' MESES DE EDAD';
+
+  }
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularDias($datos['fecha_naci']).' DÍAS DE EDAD';
+
+  }
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
-
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
 
 ?>
 
@@ -263,13 +273,13 @@
         if (!empty($motivo['texto_html'])) {
       ?>
         <div style="font-size: 15px; text-transform: uppercase;">
-          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> años de edad, acudio el día de hoy a consulta oftalmológica, donde presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>. <?php echo $menor ?>
+          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica, donde presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>. <?php echo $menor ?>
         </div>
       <?php 
         } else {
       ?>
         <div style="font-size: 15px; text-transform: uppercase; position: relative;">
-          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b> años de edad, acudio el día de hoy a consulta oftalmológica. <?php echo $menor?>
+          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica. <?php echo $menor?>
         </div>
       <?php 
         }

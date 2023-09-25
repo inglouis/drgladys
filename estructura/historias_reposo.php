@@ -284,8 +284,7 @@
                 
                 <label class="requerido">Motivo de la cabecera</label>
                 <textarea id="reposo-informacion" data-previa="reposo-previa" data-valor="reposo" rows="6" class="reposo-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll title="
-                  Por intervención quirúrgica cargar -> LA CAUSA QUE MOTIVO AL PROCEDIMIENTO, EL PROCEDIMIENTO QUIRÚRGICO&#013
-                  Por presentación de motivo cargar -> LA CAUSA QUE MOTIVO LA CONSULTA
+                  Por intervención quirúrgica cargar -> LA CAUSA QUE MOTIVO AL PROCEDIMIENTO, EL PROCEDIMIENTO QUIRÚRGICO&#013Por presentación de motivo cargar -> LA CAUSA QUE MOTIVO LA CONSULTA
                 "></textarea>
 
               </div>
@@ -296,7 +295,7 @@
 
               <div class="check-alineado">
                 <label>Requiere cuidado de representantes</label>        
-                <input type="checkbox" data-valor="representante" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
+                <input id="reposo-menor" type="checkbox" data-valor="representante" class="reposo-valores check checksmall" style="width: 30px; height: 30px">
               </div>
               
             </div>
