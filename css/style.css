@@ -2031,6 +2031,7 @@ span.numeracion {
 .columnas div {
     margin: 5px 0px;
     width: 100%;
+    margin-top: 0px;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -2123,6 +2124,24 @@ span.numeracion {
 
 .checklarge:checked::after {
     content: "✓";
+    font-size: x-large;
+}
+
+.checksigno {
+    min-width: 32px !important;
+    height: 32px !important;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.checksigno::after {
+    content: "-";
+    font-size: x-large;
+}
+
+.checksigno:checked::after {
+    content: "+";
     font-size: x-large;
 }
 
@@ -3187,10 +3206,6 @@ span.numeracion {
     height: 100%;
 }
 
-.reportes-seccion .contenedor label {
-    font-size: 14px;
-}
-
 .reportes-seccion .busqueda-estilizada .contenedor input {
     height: 35px;
     width: 25vw;
@@ -3578,6 +3593,22 @@ span.numeracion {
     align-items: center;
     width: 40px;
     justify-content: center;
+}
+
+.informe-separador {
+    padding: 5px;
+}
+
+.informe-grado {
+    position: relative;
+    top: -15px;
+    font-size: 20px;
+}
+
+.informe-igual {
+    position: relative;
+    left: -4px;
+    font-size: 20px;
 }
 
 /*-----------------------------------------------------*/

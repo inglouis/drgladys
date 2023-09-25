@@ -137,7 +137,7 @@
                 
     <div data-familia class="contenedor contenedor-reportes" id="informes-contenedor">
 
-      <div class="izquierda">
+      <div class="izquierda" style="width: 35%">
 
         <div class="subtitulo">
           Cargar nuevo informe médico
@@ -201,17 +201,19 @@
 
               </div>
 
+              <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label class="requerido">Agudeza visual</label>
+                <label>Agudeza visual - 4m</label>
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od" class="informe-valores upper lleno" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_4" class="informe-valores upper" placeholder="OD">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi" class="informe-valores upper lleno" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_4" class="informe-valores upper" placeholder="OI">
                   </div>  
                 </div>
 
@@ -220,27 +222,56 @@
               <div class="columnas">
                 
                 <div class="check-alineado">
-                  <label>Con corrección</label>        
-                  <input type="checkbox" data-valor="correccion" class="informe-valores check checksmall" style="width: 30px; height: 30px">
+                  <label>Con corrección - 4m</label>        
+                  <input type="checkbox" data-valor="correccion_4" class="informe-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Agudeza visual - 1.5m</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="agudeza_od_1" class="informe-valores upper" placeholder="OD">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="agudeza_oi_1" class="informe-valores upper" placeholder="OI">
+                  </div>  
                 </div>
 
               </div>
 
               <div class="columnas">
+                
+                <div class="check-alineado">
+                  <label>Con corrección - 1.5m</label>        
+                  <input type="checkbox" data-valor="correccion_1" class="informe-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+              <div class="columnas">
 
                 <div>  
                   <label>Estereopsis</label>  
-                  <input type="text" data-valor="estereopsis" class="informe-valores upper lleno" placeholder="0.00">
+                  <input type="text" data-valor="estereopsis" class="informe-valores upper" placeholder="00s">
                 </div>
 
                 <div>
-                  <label>Test</label>
-                  <input type="text" data-valor="test" class="informe-valores upper lleno" placeholder="0.00">
+                  <label>Ishihara</label>
+                  <input type="text" data-valor="test" class="informe-valores upper" placeholder="00/00">
                 </div>
 
                 <div>
-                  <label>Reflejo</label>
-                  <input type="text" data-valor="reflejo" class="informe-valores upper lleno" placeholder="0.00">
+                  <label>Stereo Fly</label>
+                  <input type="text" data-valor="reflejo" class="informe-valores upper" placeholder="00s">
                 </div>  
 
               </div>
@@ -256,16 +287,34 @@
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label class="requerido">RX</label>
+                <label>RX</label>
 
-                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
-                  <div>    
-                    <input type="text" data-valor="rx_od" class="informe-valores upper lleno" placeholder="OD">
+                <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 3px">OD:</label>
+                    <input type="checkbox" data-valor="rx_od_signo_1" class="informe-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_1" class="informe-valores upper" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_od_signo_2" class="informe-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_2" class="informe-valores upper" placeholder="0.00">
+                    <span   class="informe-separador">X</span>
+                    <input type="text" data-valor="rx_od_grados" class="informe-valores upper" placeholder="0">
+                    <span   class="informe-grado">°</span>
+                    <span   class="informe-igual">=</span>
+                    <input type="text" data-valor="rx_od_resultado" class="informe-valores upper" placeholder="00/00">
                   </div>
 
-                  <div>
-                    <input type="text" data-valor="rx_oi" class="informe-valores upper lleno" placeholder="OI">
-                  </div> 
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 9px">OI:</label>
+                    <input type="checkbox" data-valor="rx_oi_signo_1" class="informe-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_1" class="informe-valores upper" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_oi_signo_2" class="informe-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_2" class="informe-valores upper" placeholder="0.00">
+                    <span   class="informe-separador">X</span>
+                    <input type="text" data-valor="rx_oi_grados" class="informe-valores upper" placeholder="0">
+                    <span   class="informe-grado">°</span>
+                    <span   class="informe-igual">=</span>
+                    <input type="text" data-valor="rx_oi_resultado" class="informe-valores upper" placeholder="00/00">
+                  </div>
                 </div>
 
               </div>
@@ -273,23 +322,23 @@
               <div class="columnas">
                 
                 <div>
-                  <label class="requerido">Biomicroscopia</label>
-                  <input type="text" data-valor="biomicroscopia" class="informe-valores upper lleno">
+                  <label>Biomicroscopia</label>
+                  <input type="text" data-valor="biomicroscopia" class="informe-valores upper">
                 </div>
 
               </div>
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label class="requerido">PIO</label>
+                <label>PIO</label>
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="pio_od" class="informe-valores upper lleno" placeholder="OD">
+                    <input type="text" data-valor="pio_od" class="informe-valores upper" placeholder="OD - 0.00mmHg">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="pio_oi" class="informe-valores upper lleno" placeholder="OI">
+                    <input type="text" data-valor="pio_oi" class="informe-valores upper" placeholder="OI - 0.00mmHg">
                   </div>  
                 </div>
 
@@ -298,8 +347,8 @@
               <div class="columnas">
                 
                 <div>
-                  <label class="requerido">Fondo de ojo</label>
-                  <input type="text" data-valor="fondo_ojo" class="informe-valores upper lleno">
+                  <label>Fondo de ojo</label>
+                  <input type="text" data-valor="fondo_ojo" class="informe-valores upper">
                 </div>
 
               </div>
@@ -308,7 +357,7 @@
                 
                 <div style="position:relative;">
 
-                  <label class="requerido">
+                  <label>
                     <button id="insertar-nueva-diagnostico" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
                     Diagnóstico
                   </label>
@@ -319,15 +368,15 @@
                     }
                   </style>  
 
-                  <section id="cc-diagnosticos-informes" class="contenedor-consulta informe-valores lleno borde-estilizado" data-valor="diagnosticos">
+                  <section id="cc-diagnosticos-informes" class="contenedor-consulta informe-valores borde-estilizado" data-valor="diagnosticos">
 
                     <input type="text" data-estilo="cc-input" class="upper" data-minimo="0" data-ocultar="0" placeholder="Buscar diagnósticos" title="[ENTER] para forzar actualización">
                     <select id="informe-combo" data-limit="" data-estilo="cc-select" placeholder="Buscar diagnóstico" data-size="5" data-ocultar="1" data-hide data-absoluto="1" data-scroll style="
-                      height: calc(100%);
+                      height: auto;
                       border: 1px dashed #5eb6fb;
                       border-top: none;
                       background: #ddf4ffc2;
-                      padding: 5px;
+                      padding: 0px 5px;
                       margin: 0px;
                       color: black;
                     "></select>
@@ -335,6 +384,15 @@
 
                   </section>
 
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Plan</label>
+                  <textarea rows="4" id="informe-plan" data-previa="informe-previa" data-valor="plan" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
