@@ -3367,6 +3367,21 @@ span.numeracion {
     min-width: 150px;
 }
 
+.personalizacion-c {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: #000000ba;
+    padding: 10px;
+    color: #fff;
+    z-index: 2;
+    width: 25% !important;
+    border-radius: 10px;
+    top: 30% !important;
+    right: 50px;
+    position: fixed;
+}
+
 .reportes-seccion .personalizacion::after, .personalizacion-b::after {
     content: "";
     background: #000000ba;

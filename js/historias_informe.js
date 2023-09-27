@@ -3,7 +3,7 @@ import { historias, tools, notificaciones, reporteSeleccionado } from '../js/his
 import { informes } from '../js/historias.js';
 
 /* 1)------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------- informeS ---------------------------------------------*/
+/* ---------------------------------------- INFORMES 	---------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------*/
 
 export const informePrevia = new customDesplegable('#informes-contenedor .desplegable-contenedor', '#informes-contenedor .reporte-previa', '#informes-contenedor .desplegable-cerrar', undefined, 'fit-content')
@@ -12,10 +12,14 @@ informePrevia.eventos()
 informePrevia.prevenir = true
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						informe - PROPIEDADES				 					    */
+/*           						INFORME - PROPIEDADES				 					    */
 /* -------------------------------------------------------------------------------------------------*/
 informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'informes-contenedor', 0)
 informes['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], 'fecha-contenedor', 0)
+
+informes['crud']['ofv']  = true
+informes['crud']['ofvh'] = '85vh'
+
 /////////////////////////////////////////////////////
 ///
 informes['crud']['propiedadesTr'] = {
@@ -32,10 +36,81 @@ informes['crud']['propiedadesTr'] = {
 		
 		contenedor.querySelector('.crud-datos-contenedor').setAttribute('id', `a-id-${e.sublista.id}-${reporteSeleccionado}`)
 
-		var texto = JSON.parse(e.sublista.informe).texto_html
+		//tipo
+		contenedor.querySelectorAll('.informe-tipo option').forEach((el, i) => {
+			if (el.value === e.sublista.tipo) {
+				el.parentElement.selectedIndex = i
+			}
+		})
 
-		contenedor.querySelector('.crud-titulo').innerHTML = e.sublista.titulo.toUpperCase()
-		contenedor.querySelector('.informe').innerHTML = texto.toUpperCase()
+		if (e.sublista.tipo !== '1') {
+			contenedor.querySelector('.informe-aplica-completo').setAttribute('data-hidden', '')
+		}
+
+		//contenido
+		var contenido = JSON.parse(e.sublista.contenido).texto_html
+			contenedor.querySelector('.informe-contenido div').innerHTML = contenido.toUpperCase()
+
+		//agudeza 4
+		contenedor.querySelector('.informe-agudeza-4 span').innerHTML = `OD: ${e.sublista.agudeza_od_4.toUpperCase()} - OI: ${e.sublista.agudeza_oi_4.toUpperCase()}`
+		contenedor.querySelector('.informe-agudeza-4 input').checked = (e.sublista.correccion_4 === 'X') ? true : false;
+
+		//agudeza 1
+		contenedor.querySelector('.informe-agudeza-1 span').innerHTML = `OD: ${e.sublista.agudeza_od_1.toUpperCase()} - OI: ${e.sublista.agudeza_oi_1.toUpperCase()}`
+		contenedor.querySelector('.informe-agudeza-1 input').checked = (e.sublista.correccion_1 === 'X') ? true : false;
+
+		//agudeza lectura
+		contenedor.querySelector('.informe-agudeza-lectura span').innerHTML = `OD: ${e.sublista.agudeza_od_lectura.toUpperCase()} - OI: ${e.sublista.agudeza_oi_lectura.toUpperCase()}`
+		contenedor.querySelector('.informe-agudeza-lectura input').checked = (e.sublista.correccion_lectura === 'X') ? true : false;
+
+		//pruebas
+		contenedor.querySelector('.informe-agudeza-test div').innerHTML = `Estereopsis: ${e.sublista.estereopsis}S - Ishihara: ${e.sublista.test} - Stereo Fly: ${e.sublista.reflejo}`
+
+		//motilidad
+		var motilidad = JSON.parse(e.sublista.motilidad).texto_html
+			contenedor.querySelector('.informe-motilidad div').innerHTML = motilidad.toUpperCase()
+
+		//rx
+		contenedor.querySelectorAll('.informe-agudeza-rx div')[0].innerHTML = 
+			`
+				OD: ${(e.sublista.rx_od_signo_1 === 'X') ? '+' : '-'}
+					${e.sublista.rx_od_valor_1} 
+					${(e.sublista.rx_od_signo_2 === 'X') ? '+' : '-'}
+					${e.sublista.rx_od_valor_2} X
+					${e.sublista.rx_od_grados}° = 
+					${e.sublista.rx_od_resultado}
+			`
+
+		contenedor.querySelectorAll('.informe-agudeza-rx div')[1].innerHTML = 
+			`
+				OI: &nbsp;&nbsp;${(e.sublista.rx_oi_signo_1 === 'X') ? '+' : '-'}
+					${e.sublista.rx_oi_valor_1} 
+					${(e.sublista.rx_oi_signo_2 === 'X') ? '+' : '-'}
+					${e.sublista.rx_oi_valor_2} X
+					${e.sublista.rx_oi_grados}° = 
+					${e.sublista.rx_oi_resultado}
+			`
+
+		//PIO
+		contenedor.querySelector('.informe-agudeza-pio div').innerHTML = `
+				OD: ${e.sublista.pio_od} - OI: ${e.sublista.pio_oi}
+			`
+
+		//fondo de ojo
+		contenedor.querySelector('.informe-agudeza-fondo div').innerHTML = e.sublista.fondo_ojo.toUpperCase()
+
+		//diagnosticos
+		var diagnostico = JSON.parse(e.sublista.diagnosticos_procesados)
+			diagnostico.forEach(d => {
+
+				contenedor.querySelector('.informe-diagnosticos div').insertAdjacentHTML('beforeend',  `<span>${d.nombre}</span>`)
+
+			})
+
+		//plan
+		var plan = JSON.parse(e.sublista.plan).texto_html
+			contenedor.querySelector('.informe-plan div').innerHTML = plan.toUpperCase()
+
 
 		contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
 		contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
@@ -108,7 +183,18 @@ informes['crud']['customBodyEvents'] = {
 			informes.sublista = tools.pariente(e.target, 'TR').sublista
 
 			tools.limpiar('.informe-valores', '', {})
-			rellenar.contenedores(informes.sublista, '.informe-valores', {elemento: e.target, id: 'value'}, {})
+			rellenar.contenedores(informes.sublista, '.informe-valores', {elemento: e.target, id: 'value'}, {
+				"contenedorConsulta": function fn(lista, grupo) {
+
+					var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+					peticion.onreadystatechange = function() {
+				        if (this.readyState == 4 && this.status == 200) {
+				        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+				        }
+				    };		
+
+				}
+			})
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -116,7 +202,7 @@ informes['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR LA informe   					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA INFORME   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
@@ -126,7 +212,18 @@ informes['crud']['customBodyEvents'] = {
 
 			tools.limpiar('.infeditar-valores', '', {})	
 
-			rellenar.contenedores(informes.sublista, '.infeditar-valores', {elemento: e.target, id: 'value'}, {})
+			rellenar.contenedores(informes.sublista, '.infeditar-valores', {elemento: e.target, id: 'value'}, {
+				"contenedorConsulta": function fn(lista, grupo) {
+
+					var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+					peticion.onreadystatechange = function() {
+				        if (this.readyState == 4 && this.status == 200) {
+				        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+				        }
+				    };		
+
+				}
+			})
 
 			forPop.pop()
 
@@ -134,7 +231,7 @@ informes['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           				ENVIAR LOS DATOS PARA REIMPRIMIR EL ANTECENDENTE   					    */
+	/*           				ENVIAR LOS DATOS PARA REIMPRIMIR EL INFORME 	  					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reimprimir": async (e) => {
 
@@ -167,7 +264,7 @@ informes['crud']['customBodyEvents'] = {
 })()
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							CONSTANCIAS - NOTIFICAR	  								    */
+/*           								INFORME - NOTIFICAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-contenedor').identificador = 'informe'
 
@@ -179,26 +276,20 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools, {"asociativa": true, "id": 'id_historia'});
 
 		if (datos !== '') {
 		
 			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 			
-			var lista = {
-				"id_historia": historias.sublista.id_historia,
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
-					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"titulo": datos[0]
-			}
+			datos['id_historia'] =  historias.sublista.id_historia
+			datos['nombres'] =  historias.sublista.nombres
+			datos['apellidos'] = historias.sublista.apellidos
+			datos['cedula'] = historias.sublista.cedula
+			datos['fecha_nacimiento'] = historias.sublista.fecha_naci
+			datos['diagnosticos'] = JSON.stringify(datos['diagnosticos'])
 
-			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [datos, elemento.identificador], [["+", "%2B"]]))
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
@@ -223,7 +314,7 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           								INFORMES - CARGAR	  								    */
+/*           								INFORME - CARGAR	  								    */
 /* -------------------------------------------------------------------------------------------------*/
 
 qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => {
@@ -236,23 +327,17 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 
 		notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
-		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools, {"asociativa": true, "id": 'id_historia'});
 
 		if (datos !== '') {
 			
-			var lista = { 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
-					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"titulo": datos[0]
-			}
+			datos['id_historia'] =  historias.sublista.id_historia
+			datos['nombres'] =  historias.sublista.nombres
+			datos['apellidos'] = historias.sublista.apellidos
+			datos['cedula'] = historias.sublista.cedula
+			datos['fecha_nacimiento'] = historias.sublista.fecha_naci
 
-			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_insertar`, [lista, historias.sublista.id_historia], [["+", "%2B"]]))
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_insertar`, [datos, historias.sublista.id_historia], [["+", "%2B"]]))
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
@@ -295,7 +380,7 @@ qs("#informes-contenedor .reporte-cargar").addEventListener('click', async e => 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							informe - PREVIA					  					    */
+/*           							INFORME - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => {
 
@@ -305,30 +390,23 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools);
-
+		var datos = tools.procesar('', '', `${elemento.identificador}-valores`, tools, {"asociativa": true, "id": 'id_historia'});
+		
 		elemento.querySelector('.desplegable-iframe').src = ''
 
 		if (datos !== '') {
+		
+			notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
+			
+			datos['id_historia'] =  historias.sublista.id_historia
+			datos['nombres'] =  historias.sublista.nombres
+			datos['apellidos'] = historias.sublista.apellidos
+			datos['cedula'] = historias.sublista.cedula
+			datos['fecha_nacimiento'] = historias.sublista.fecha_naci
 
-			notificaciones.mensajePersonalizado('Cargando reporte...', false, 'CLARO-1', 'PROCESANDO')
+			if (typeof datos === 'object' && datos !== null) {
 
-			var resultado = {
-				"id_historia": historias.sublista.id_historia, 
-				"nombres": historias.sublista.nombres, 
-				"apellidos": historias.sublista.apellidos, 
-				"cedula": historias.sublista.cedula, 
-				"fecha_nacimiento": historias.sublista.fecha_naci,
-				"informe": {
-					"texto_base": qs(`#${elemento.identificador}-informacion`).texto_base,
-					"texto_html": qs(`#${elemento.identificador}-informacion`).texto_html
-				},
-				"titulo": datos[0]
-			}
-
-			if (typeof resultado === 'object' && resultado !== null) {
-
-				var sesion = [ {"sesion": 'datos_pdf', "parametros": JSON.stringify(resultado)} ]
+				var sesion = [ {"sesion": 'datos_pdf', "parametros": JSON.stringify(datos)} ]
 
 				await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
 
@@ -350,7 +428,7 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 
@@ -365,7 +443,7 @@ qs("#informes-contenedor .reporte-previa").addEventListener('click', async e => 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							informe - EDITAR			 							    */
+/*           							INFORME - EDITAR			 							    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 
@@ -377,13 +455,49 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 
 		window.procesar = false
 
-		var datos = tools.procesar('', '', `infeditar-valores`, tools);
+		var datos = tools.procesar('', '', `infeditar-valores`, tools, {});
 
 		if (datos !== '') {
 
-			var lista = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var contenido = (typeof datos[1] === 'string') ? JSON.parse(datos[1]) : datos[1];
+			var control   = (typeof datos[2] === 'string') ? JSON.parse(datos[2]) : datos[2];
+			var motilidad = (typeof datos[15] === 'string') ? JSON.parse(datos[15]) : datos[15];
+			var plan 	  = (typeof datos[33] === 'string') ? JSON.parse(datos[33]) : datos[33];
 
-			informes.sublista.informe = JSON.stringify(lista)
+			informes.sublista.tipo          = datos[0]
+			informes.sublista.contenido     = JSON.stringify(contenido)
+			informes.sublista.control       = JSON.stringify(control)
+			informes.sublista.agudeza_od_4  = datos[3]
+			informes.sublista.agudeza_oi_4  = datos[4]
+			informes.sublista.correccion_4  = datos[5]
+			informes.sublista.agudeza_od_1  = datos[6]
+			informes.sublista.agudeza_oi_1  = datos[7]
+			informes.sublista.correccion_1  = datos[8]
+			informes.sublista.agudeza_od_lectura  = datos[9]
+			informes.sublista.agudeza_oi_lectura  = datos[10]
+			informes.sublista.correccion_lectura  = datos[11]
+			informes.sublista.estereopsis  = datos[12]
+			informes.sublista.test  	   = datos[13]
+			informes.sublista.reflejo  	   = datos[14]
+			informes.sublista.motilidad    = JSON.stringify(motilidad)
+			informes.sublista.rx_od_signo_1  = datos[16]
+			informes.sublista.rx_od_valor_1  = datos[17]
+			informes.sublista.rx_od_signo_2  = datos[18]
+			informes.sublista.rx_od_valor_2  = datos[19]
+			informes.sublista.rx_od_grados   = datos[20]
+			informes.sublista.rx_od_resultado= datos[21]
+			informes.sublista.rx_oi_signo_1  = datos[22]
+			informes.sublista.rx_oi_valor_1  = datos[23]
+			informes.sublista.rx_oi_signo_2  = datos[24]
+			informes.sublista.rx_oi_valor_2  = datos[25]
+			informes.sublista.rx_oi_grados   = datos[26]
+			informes.sublista.rx_oi_resultado = datos[27]
+			informes.sublista.biomicroscopia  = datos[28]
+			informes.sublista.pio_od  	 	  = datos[29]
+			informes.sublista.pio_oi  	 	  = datos[30]
+			informes.sublista.fondo_ojo  	  = datos[31]
+			informes.sublista.diagnosticos    = JSON.stringify(datos[32])
+			informes.sublista.plan  		  = JSON.stringify(plan)
 
 			var resultado = await tools.fullAsyncQuery(`historias_${elemento.identificador}`, `${elemento.identificador}_editar`, [JSON.stringify(informes.crud.lista), historias.sublista.id_historia], [["+", "%2B"]])
 
@@ -414,7 +528,7 @@ qs('#crud-infeditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						informe - ELIMINAR					 					    */
+/*           							INFORME - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#informes-contenedor table').addEventListener('click', async e => {
 

@@ -14,7 +14,7 @@ window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores} from '../js/main.js';
+import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
 
 /////////////////////////////////////////////////////
 //DESPLEGABLES DE LA PAGINA
@@ -77,7 +77,13 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#general-informacion', '#general-previa'],
 	['#geneditar-informacion', '#geneditar-previa'],
 	['#informe-informacion', '#informe-previa'],
+	['#informe-control', '#informe-previa'],
+	['#informe-motilidad', '#informe-previa'],
+	['#informe-plan', '#informe-previa'],
 	['#infeditar-informacion', '#infeditar-previa'],
+	['#infeditar-control', '#infeditar-previa'],
+	['#infeditar-motilidad', '#infeditar-previa'],
+	['#infeditar-plan', '#infeditar-previa'],
 	['#presupuesto-informacion', '#presupuesto-previa'],
 	['#preeditar-informacion', '#preeditar-previa'],
 	['#reposo-informacion', '#reposo-previa'],
@@ -90,6 +96,9 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#constancia-informacion-notificaciones', '#constancia-previa-notificaciones'],
 	['#constancia-recomendaciones-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-control-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-motilidad-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-plan-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
 	['#general-informacion-notificaciones', '#general-previa-notificaciones'],
@@ -99,6 +108,12 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
 window.camposTextosPersonalizables.init()
+
+/////////////////////////////////////////////////////
+//INPUTS QUE MANEJAN DECIMALES
+/////////////////////////////////////////////////////
+var inputsDecimales = new InputsDecimales('.decimales')
+	inputsDecimales.init()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
@@ -228,6 +243,7 @@ window.contenedoresConsultar      = new ContenedoresEspeciales('crud-informacion
 window.contenedoresEditar         = new ContenedoresEspeciales('crud-editar-popup') 
 window.contenedoresInsertar       = new ContenedoresEspeciales('crud-insertar-popup')
 window.contenedoresReportes       = new ContenedoresEspeciales('crud-reportes-popup')
+window.contenedoresInformeEditar  = new ContenedoresEspeciales('crud-infeditar-popup')
 window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamentos-popup')
 window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
 
@@ -808,6 +824,22 @@ contenedoresMedicamentos.eventos().contenedor(
 
 contenedoresReportes.eventos().contenedor(
 	'cc-diagnosticos-informes', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
+
+contenedoresInformeEditar.eventos().contenedor(
+	'cc-diagnosticos-infeditar', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
+
+contenedoresNotificaciones.eventos().contenedor(
+	'cc-diagnosticos-informe-notificaciones', //elemento
 	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
 	[0, 0], 			   //limitador de busqueda
 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
@@ -1772,6 +1804,7 @@ repPop.funciones['apertura'] = {"apertura": () => {
 	window.paginacionHistorias.mostrar(); 
 	if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()};
 	if (reporteSeleccionado === 'reposo') {reposos.validarRepresentante()};
+	if (reporteSeleccionado === 'informe') {qs('#tabla-informe').parentElement.scrollTo(0,0)}
 }}
 
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
@@ -1791,7 +1824,7 @@ conPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 genPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
-forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"; qs('#crud-infeditar-pop').scrollTo(0, 0)}}
 forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
 
 presPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}

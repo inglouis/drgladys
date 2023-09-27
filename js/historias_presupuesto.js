@@ -342,7 +342,7 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 

@@ -293,7 +293,7 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							general - PREVIA					  					    */
+/*           							GENERAL - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#generales-contenedor .reporte-previa").addEventListener('click', async e => {
 
@@ -348,7 +348,7 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 

@@ -699,16 +699,28 @@ export class Herramientas {
 				datos = [],
 				contenedores = (typeof(elementos) !== 'object' && elementos !== null) ? qsa(`.${elementos}`) : qsa(elementos[0]),
 				e = 0,
-				asociativa = false
+				asociativa = false,
+				incluirSeleccionado = true
 
-			if(typeof(params) !== 'undefined') {
-				if(typeof(params['asociativa']) !== 'undefined' && params['asociativa'] === true) {
+			if (typeof(params) !== 'undefined') {
+
+				if (typeof(params['incluirSeleccionado']) !== 'undefined') {
+
+					incluirSeleccionado = params['incluirSeleccionado']
+
+				}
+
+				if (typeof(params['asociativa']) !== 'undefined' && params['asociativa'] === true) {
 
 					if (typeof params['id'] === 'undefined') {
 
-						console.log('el modo ASOCIATIVO requiere la asignacion del nombre de la ID desde parametros [PARAMS]')
-						window.procesar = true
-						return ''
+						if (incluirSeleccionado) {
+
+							console.log('el modo ASOCIATIVO requiere la asignacion del nombre de la ID desde parametros [PARAMS]')
+							window.procesar = true
+							return ''
+
+						}
 
 					} else {
 						
@@ -717,6 +729,7 @@ export class Herramientas {
 					}
 
 				}
+				
 			}
 
 			if (asociativa) {datos = {}}
@@ -786,8 +799,15 @@ export class Herramientas {
 			}
 
 			if(procesar) {
+
 				if(window.idSeleccionada !== 0) {
-					(!asociativa) ? datos.push(window.idSeleccionada) : datos[params['id']] = window.idSeleccionada;	
+
+					if (incluirSeleccionado) {
+						
+						(!asociativa) ? datos.push(window.idSeleccionada) : datos[params['id']] = window.idSeleccionada;	
+
+					}
+
 				}
 				window.procesar = true
 				return datos
@@ -3777,6 +3797,14 @@ export class textoPersonalizable {
 
 			})
 
+			objeto.elemento.addEventListener('click', e => {
+
+				th.elementoActual = objeto.elemento.id
+
+			  	th.logica(e.target.value)
+
+			})
+
 
 		} else {
 
@@ -3806,6 +3834,63 @@ export class textoPersonalizable {
 		}
 
 	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+export class InputsDecimales {
+	constructor(inputs, separador, decimales) {
+  
+  	this._inputs    = document.querySelectorAll(`${inputs}`)
+    this._separador = (separador) ? separador : '.';
+    this._decimales = (decimales) ? decimales : 2;
+  
+  }
+  
+  replaceAll (find, replace) {
+    var str = this;
+    return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+  };
+  
+  comportamiento (valor) {
+  
+  	var linea = ''
+  
+  	valor = valor.replaceAll(this._separador, '');
+   
+   	if (valor.length === this._decimales) {
+
+      linea = valor.substring(0, valor.length - 1) + this._separador + valor.substring(valor.length, valor.length - 1);
+      
+    } else if (valor.length > this._decimales) {
+
+      linea = valor.substring(0, valor.length - this._decimales) + this._separador + valor.substring(valor.length, valor.length - this._decimales);
+      
+    } else {
+    
+    	linea = valor
+    
+    }
+    
+    return linea
+  
+  }
+  
+  init () {
+  
+  		var th = this
+  	
+    	this._inputs.forEach(input => {
+      
+      	input.addEventListener('keyup', el => {
+        
+        	el.target.value = th.comportamiento(el.target.value)
+          
+        })
+      
+      })
+    
+  }
+  	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
