@@ -52,7 +52,19 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_nacimiento']);
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']).' AÑOS DE EDAD';
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularMeses($datos['fecha_nacimiento']).' MESES DE EDAD';
+
+  }
+
+  if ($edad == 0) {
+
+    $edad = $obj->calcularDias($datos['fecha_nacimiento']).' DÍAS DE EDAD';
+
+  }
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
