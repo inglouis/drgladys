@@ -1803,14 +1803,14 @@ window.paginacionHistorias.cambiarUltimoSeleccionado('informacion')
 window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .informacion'), 'TR'))
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
-ediPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
+ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 10"; window.paginacionHistorias.mostrar()}}
+ediPop.funciones['cierre']   = {"cierre": ()   => { window.paginacionHistorias.ocultar()}}
 
 insPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
-infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
+infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 10"; window.paginacionHistorias.mostrar()}}
+infPop.funciones['cierre']   = {"cierre": ()   => { window.paginacionHistorias.ocultar()}}
 
 repPop.funciones['apertura'] = {"apertura": () => {
 	window.paginacionHistorias.mostrar(); 
@@ -1825,28 +1825,49 @@ recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mo
 recPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 prePop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 insPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 conPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-conPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+conPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+ocuPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+ocuPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+proPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+proPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+parPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+parPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+civPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+civPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+relPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+relPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+medPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+medPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 genPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+diaPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+diaPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"; qs('#crud-infeditar-pop').scrollTo(0, 0)}}
-forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 presPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 refPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-refPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+refPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 traPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 traPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
