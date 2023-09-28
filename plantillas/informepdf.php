@@ -260,7 +260,7 @@
 
 <!------------------------------------------------------------------------------------------------->
 
-<page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
+<page style="text-align:justify;" backtop="10mm" backbottom="35mm" backleft="10mm" backright="10mm">
 
 	<page_footer>
     <div style="position:absolute; bottom: 5mm">
