@@ -65,6 +65,16 @@
 
       </div>
 
+      <div class="columnas">
+        
+        <div>     
+          <label>Plan o indicaciones</label>
+          <textarea rows="4" id="infeditar-plan" data-previa="infeditar-previa" data-valor="plan" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LAS INDICACIONES DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA EL PLAN DEL INFORME
+        "></textarea>
+        </div>
+
+      </div>
+
       <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
 
       <div class="columnas" style="flex-direction: column; align-items: baseline;">
@@ -178,7 +188,10 @@
 
       <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-        <label>RX</label>
+        <label>
+          RX
+          <input type="checkbox" data-valor="rx_cicloplegia" class="infeditar-valores check" title="CICLOPLEGIA">
+        </label>
 
         <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
           <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -212,9 +225,9 @@
 
       <div class="columnas">
         
-        <div>
+        <div>     
           <label>Biomicroscopia</label>
-          <input type="text" data-valor="biomicroscopia" class="infeditar-valores upper">
+          <textarea rows="2" id="infeditar-biomicroscopia" data-previa="infeditar-previa" data-valor="biomicroscopia" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
         </div>
 
       </div>
@@ -236,10 +249,10 @@
       </div>
 
       <div class="columnas">
-        
-        <div>
+      
+        <div>     
           <label>Fondo de ojo</label>
-          <input type="text" data-valor="fondo_ojo" class="infeditar-valores upper">
+          <textarea rows="2" id="infeditar-fondo" data-previa="infeditar-previa" data-valor="fondo_ojo" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
         </div>
 
       </div>
@@ -274,15 +287,6 @@
 
           </section>
 
-        </div>
-
-      </div>
-
-      <div class="columnas">
-        
-        <div>     
-          <label>Plan</label>
-          <textarea rows="4" id="infeditar-plan" data-previa="infeditar-previa" data-valor="plan" class="infeditar-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
         </div>
 
       </div>
@@ -383,7 +387,7 @@
 
             <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px; padding-top: 5px"></section>
 
-            <div class="informe-agudeza-test">
+            <div class="informe-test">
               <label>Pruebas</label>
               <div></div>
             </div>
@@ -393,18 +397,26 @@
               <div></div>
             </div>
 
-            <div class="informe-agudeza-rx">
-              <label>Rx</label>
+            <div class="informe-rx">
+              <label>
+                Rx
+                <input type="checkbox" class="input check checksmall rx-cicloplegia" title="CICLOPLEGIA" disabled>
+              </label>
               <div></div>
               <div></div>
             </div>
 
-            <div class="informe-agudeza-pio">
+            <div class="informe-bio">
+              <label>Biomiscroscopia</label>
+              <div></div>
+            </div>
+
+            <div class="informe-pio">
               <label>PIO</label>
               <div></div>
             </div>
 
-            <div class="informe-agudeza-fondo">
+            <div class="informe-fondo">
               <label>Fondo de ojo</label>
               <div></div>
             </div>
@@ -522,6 +534,16 @@
 
               </div>
 
+              <div class="columnas">
+                
+                <div>     
+                  <label>Plan o indicaciones</label>
+                  <textarea rows="4" id="informe-plan" data-previa="informe-previa" data-valor="plan" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LAS INDICACIONES DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA EL PLAN DEL INFORME
+                "></textarea>
+                </div>
+
+              </div>
+
               <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
@@ -635,7 +657,10 @@
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label>RX</label>
+                <label>
+                  RX
+                  <input type="checkbox" data-valor="rx_cicloplegia" class="informe-valores check" title="CICLOPLEGIA">
+                </label>
 
                 <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
                   <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -669,9 +694,9 @@
 
               <div class="columnas">
                 
-                <div>
+                <div>     
                   <label>Biomicroscopia</label>
-                  <input type="text" data-valor="biomicroscopia" class="informe-valores upper">
+                  <textarea rows="2" id="informe-biomicroscopia" data-previa="informe-previa" data-valor="biomicroscopia" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -694,9 +719,9 @@
 
               <div class="columnas">
                 
-                <div>
+                <div>     
                   <label>Fondo de ojo</label>
-                  <input type="text" data-valor="fondo_ojo" class="informe-valores upper">
+                  <textarea rows="2" id="informe-fondo" data-previa="informe-previa" data-valor="fondo_ojo" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -732,15 +757,6 @@
 
                   </section>
 
-                </div>
-
-              </div>
-
-              <div class="columnas">
-                
-                <div>     
-                  <label>Plan</label>
-                  <textarea rows="4" id="informe-plan" data-previa="informe-previa" data-valor="plan" class="informe-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -825,3 +841,32 @@
     </div>
 
 </section>
+
+<!-------------------------------------------------------- -->
+<!------------------- INSERTAR DIAGNOSTICO --------------- -->
+<!-------------------------------------------------------- -->
+<div id="crud-insertar-diagnostico-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-insertar-diagnostico-pop" class="popup-oculto" style="width: 50%">
+    <button id="crud-insertar-diagnostico-cerrar" data-crud='cerrar'>X</button>
+    <section id="crud-insertar-diagnostico-titulo" data-crud='titulo'>
+      AGREGAR DIAGNÓSTICO
+    </section> 
+
+    <div class="filas">
+
+      <div class="columnas" style="align-items: baseline;">
+
+        <div>
+          <label class="requerido">Nombre</label>  
+          <input type="text" placeholder="Nombre del diagnóstico" class="insertar-diagnostico lleno upper">
+        </div>
+      </div>
+    </div>
+
+    <section id="crud-insertar-diagnostico-botones" data-crud='botones' style="column-gap: 10px">
+      <button class="botones-formularios insertar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+
+  </div>
+</div>

@@ -156,7 +156,7 @@
 
 				      <div class="cargar" title="[TAB] para enforcar" style="height: auto">
 
-				        <div class="personalizacion-c" data-hidden>
+				        <div class="personalizacion-c" data-hidden style="right: 20%; top: 35% !important;">
 
 				          <section>Personalización</section>
 				          <section style="width: 100%; border: 1px dashed #fff"></section>
@@ -206,6 +206,16 @@
 					        </div>
 
 					      </div>
+
+					      <div class="columnas">
+                
+			                <div>     
+			                  <label>Plan o indicaciones</label>
+			                  <textarea rows="4" id="informe-plan-notificaciones" data-previa="informe-previa-notificaciones" data-valor="plan" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LAS INDICACIONES DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA EL PLAN DEL INFORME
+			                "></textarea>
+			                </div>
+
+			              </div>
 
 					      <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
 
@@ -320,7 +330,10 @@
 
 					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-					        <label>RX</label>
+					        <label>
+					        	RX
+					        	<input type="checkbox" data-valor="rx_cicloplegia" class="informe-valores-notificaciones check" title="CICLOPLEGIA">
+					        </label>
 
 					        <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
 					          <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -353,13 +366,13 @@
 					      </div>
 
 					      <div class="columnas">
-					        
-					        <div>
-					          <label>Biomicroscopia</label>
-					          <input type="text" data-valor="biomicroscopia" class="informe-valores-notificaciones upper">
-					        </div>
+                
+			                <div>     
+			                  <label>Biomicroscopia</label>
+			                  <textarea rows="2" id="informe-biomicroscopia-notificaciones" data-previa="informe-previa-notificaciones" data-valor="biomicroscopia" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+			                </div>
 
-					      </div>
+			              </div>
 
 					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
@@ -378,13 +391,13 @@
 					      </div>
 
 					      <div class="columnas">
-					        
-					        <div>
-					          <label>Fondo de ojo</label>
-					          <input type="text" data-valor="fondo_ojo" class="informe-valores-notificaciones upper">
-					        </div>
+                
+			                <div>     
+			                  <label>Fondo de ojo</label>
+			                  <textarea rows="2" id="informe-fondo-notificaciones" data-previa="informe-previa-notificaciones" data-valor="fondo_ojo" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+			                </div>
 
-					      </div>
+			              </div>
 
 					      <div class="columnas">
 					        
@@ -416,15 +429,6 @@
 
 					          </section>
 
-					        </div>
-
-					      </div>
-
-					      <div class="columnas">
-					        
-					        <div>     
-					          <label>Plan</label>
-					          <textarea rows="4" id="informe-plan-notificaciones" data-previa="informe-previa-notificaciones" data-valor="plan" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
 					        </div>
 
 					      </div>

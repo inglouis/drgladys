@@ -530,13 +530,13 @@ previas.forEach((reporte) => {
 
 	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseenter', e => {
 
-		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).removeAttribute('data-hidden')	
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-c`).removeAttribute('data-hidden')	
 
 	})
 
 	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseleave', e => {
 
-		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).setAttribute('data-hidden', '')
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-c`).setAttribute('data-hidden', '')
 
 	})
 

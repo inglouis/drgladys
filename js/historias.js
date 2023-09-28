@@ -79,10 +79,14 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#informe-informacion', '#informe-previa'],
 	['#informe-control', '#informe-previa'],
 	['#informe-motilidad', '#informe-previa'],
+	['#informe-biomicroscopia', '#informe-previa'],
+	['#informe-fondo', '#informe-previa'],
 	['#informe-plan', '#informe-previa'],
 	['#infeditar-informacion', '#infeditar-previa'],
 	['#infeditar-control', '#infeditar-previa'],
 	['#infeditar-motilidad', '#infeditar-previa'],
+	['#infeditar-biomicroscopia', '#infeditar-previa'],
+	['#infeditar-fondo', '#infeditar-previa'],
 	['#infeditar-plan', '#infeditar-previa'],
 	['#presupuesto-informacion', '#presupuesto-previa'],
 	['#preeditar-informacion', '#preeditar-previa'],
@@ -98,6 +102,8 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
 	['#informe-control-notificaciones', '#informe-previa-notificaciones'],
 	['#informe-motilidad-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-biomicroscopia-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-fondo-notificaciones', '#informe-previa-notificaciones'],
 	['#informe-plan-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
@@ -131,7 +137,7 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido', 'insertar-diagnostico'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
@@ -146,6 +152,8 @@ window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true
 
 window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
 window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
+
+window.diaPop = new PopUp('crud-insertar-diagnostico-popup', 'popup', 'subefecto', true, 'insertar-diagnostico', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -176,6 +184,8 @@ mediPop.evtBotones()
 
 refInsPop.evtBotones()
 refeInsPop.evtBotones()
+
+diaPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -208,6 +218,8 @@ window.addEventListener('keyup', (e) => {
 
 	refInsPop.evtEscape(e)
 	refeInsPop.evtEscape(e)
+
+	diaPop.evtEscape(e)
 
 })
 

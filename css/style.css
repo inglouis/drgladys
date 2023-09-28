@@ -1702,7 +1702,8 @@ span.numeracion {
 #crud-notificaciones-pop,
 #crud-medicamentos-pop,
 #crud-insertar-referencia-pop,
-#crud-insertar-referido-pop {
+#crud-insertar-referido-pop,
+#crud-insertar-diagnostico-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -3420,7 +3421,7 @@ span.numeracion {
     right: -14px;
 }
 
-.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div {
+.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div, .personalizacion-c div  {
     background: #fff;
     color: black;
     padding: 5px;
@@ -3428,6 +3429,10 @@ span.numeracion {
     margin-top: 5px;
     text-transform: uppercase;
     max-height: 30vh;
+}
+
+.personalizacion-c section, .personalizacion-c span, .personalizacion-c div {
+    text-align: left;
 }
 
 .reportes-seccion .previa {
