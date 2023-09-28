@@ -33,26 +33,57 @@
   // print_r($datos);
   // echo "</pre>";
 
-  if (gettype($datos['informe']) == 'string') {
-    $informe = json_decode($datos['informe'], true);
-  } else {
-    $informe = $datos['informe'];
-  }
+ // [nombres] => PEPE
+ // [apellidos] => PEPE
+ // [cedula] => 414324234
+ // [fecha] => 2023-09-28
+ // [hora] => 10:47:06
+ // [fecha_nacimiento] => 2000-12-20
+ // [agudeza_od_1] => 0.00
+ // [agudeza_od_4] => 1.50
+ // [agudeza_od_lectura] => 0.00
+ // [agudeza_oi_1] => 0.00
+ // [agudeza_oi_4] => 1.50
+ // [agudeza_oi_lectura] => 0.00
+ // [biomicroscopia] => {"texto_base": "bio DEL INFORME", "texto_html": "bio DEL INFORME"}
+ // [contenido] => {"texto_base": "motivo del informe", "texto_html": "motivo del informe"}
+ // [control] => {"texto_base": "control DEL INFORME", "texto_html": "control DEL INFORME"}
+ // [correccion_1] =>
+ // [correccion_4] => X
+ // [correccion_lectura] =>
+ // [diagnosticos] => [{"id": 4, "value": "4 || CARCINOMA ESPINOCELUAR", "autoincremento": "0"}]
+ // [estereopsis] => 10
+ // [fondo_ojo] => {"texto_base": "fondo DEL INFORME", "texto_html": "fondo DEL INFORME"}
+ // [motilidad] => {"texto_base": "motilidad DEL INFORME", "texto_html": "motilidad DEL INFORME"}
+ // [pio_od] => 3.00
+ // [pio_oi] => 3.00
+ // [plan] => {"texto_base": "plan DEL INFORME", "texto_html": "plan DEL INFORME"}
+ // [reflejo] => 10/10
+ // [rx_od_grados] => 80
+ // [rx_od_resultado] => 15/15
+ // [rx_od_signo_1] => X
+ // [rx_od_signo_2] =>
+ // [rx_od_valor_1] => 1.20
+ // [rx_od_valor_2] => 1.20
+ // [rx_oi_grados] => 90
+ // [rx_oi_resultado] => 30
+ // [rx_oi_signo_1] =>
+ // [rx_oi_signo_2] => X
+ // [rx_oi_valor_1] => 1.70
+ // [rx_oi_valor_2] => 1.70
+ // [rx_cicloplegia] => X
+ // [test] => 20/20
+ // [tipo] => 1
+ // [diagnosticos_procesados] => [{"nombre": "CARCINOMA ESPINOCELUAR", "id_diagnostico": 4}]
+ // [fecha_arreglada] => 28-09-2023,
+ // [id_historia] => 11371
 
-  setlocale(LC_TIME,"es_ES");
-
-  $fmt = new IntlDateFormatter('es_ES',
-    IntlDateFormatter::LONG,
-    IntlDateFormatter::NONE,
-    'Europe/Berlin',
-    IntlDateFormatter::GREGORIAN
-  );
-
-  $timestamp = strtotime($datos['fecha']);
-
-  $fecha =  $fmt->format($timestamp);
-
+  ////////////////////////////////////////////////////////////////
+  //EDAD
+  ////////////////////////////////////////////////////////////////
   $edad = $obj->calcularEdad($datos['fecha_nacimiento']).' AÑOS DE EDAD';
+
+  $edad_anos = (int)$obj->calcularEdad($datos['fecha_nacimiento']);
 
   if ($edad == 0) {
 
@@ -65,6 +96,56 @@
     $edad = $obj->calcularDias($datos['fecha_nacimiento']).' DÍAS DE EDAD';
 
   }
+
+  /////////////////////////////////////////////////////////////////
+  //CABECERA
+  /////////////////////////////////////////////////////////////////
+
+  if ($edad_anos < 9) {
+    $cedula = "CON N° CÉDULA DE REPRESENTANTE $datos[cedula]";
+  } else {
+    $cedula = "CON N° CÉDULA $datos[cedula]";
+  }
+
+  if ($datos['tipo'] == "0") {
+    $cabecera = "el paciente $datos[nombres] $datos[apellidos] $cedula de $edad, quien presenta:";
+  } else if ($datos['tipo'] == "1") {
+    $cabecera = "paciente $datos[nombres] $datos[apellidos] $cedula de $edad, quien presenta:";
+  } else if ($datos['tipo'] == "2") {
+    $cabecera = "paciente $datos[nombres] $datos[apellidos] $cedula de $edad";
+  } else {
+    $cabecera = "[CABECERA INVÁLIDA]";
+  }
+
+  /////////////////////////////////////////////////////////////////
+  //TEXTOS DE HTML
+  /////////////////////////////////////////////////////////////////
+  if (gettype($datos['contenido']) == 'string') { $contenido = json_decode($datos['contenido'], true); } else { $contenido = $datos['contenido'];}
+  if (gettype($datos['biomicroscopia']) == 'string') { $biomicroscopia = json_decode($datos['biomicroscopia'], true); } else { $biomicroscopia = $datos['biomicroscopia'];}
+  if (gettype($datos['control']) == 'string') { $control = json_decode($datos['control'], true); } else { $control = $datos['control'];}
+  if (gettype($datos['fondo_ojo']) == 'string') { $fondo_ojo = json_decode($datos['fondo_ojo'], true); } else { $fondo_ojo = $datos['fondo_ojo'];}
+  if (gettype($datos['motilidad']) == 'string') { $motilidad = json_decode($datos['motilidad'], true); } else { $motilidad = $datos['motilidad'];}
+  if (gettype($datos['plan']) == 'string') { $plan = json_decode($datos['plan'], true); } else { $plan = $datos['plan'];}
+  
+  /////////////////////////////////////////////////////////////////
+  //DIAGNOSTICOS
+  /////////////////////////////////////////////////////////////////
+  $diagnosticos = json_decode($datos['diagnosticos_procesados'], true);
+
+  ////////////////////////////////////////////////////////////////
+  setlocale(LC_TIME,"es_ES");
+
+  $fmt = new IntlDateFormatter('es_ES',
+    IntlDateFormatter::LONG,
+    IntlDateFormatter::NONE,
+    'Europe/Berlin',
+    IntlDateFormatter::GREGORIAN
+  );
+
+  ////////////////////////////////////////////////////////////////
+  $timestamp = strtotime($datos['fecha']);
+
+  $fecha =  $fmt->format($timestamp);
 
   $fecha_arreglada = date("d-m-Y", strtotime($datos['fecha']));
 
@@ -84,7 +165,7 @@
 
   table {
     font-size: 15px;
-    left: 7mm;
+    left: 5mm;
     position: relative;
   }
 
@@ -230,55 +311,265 @@
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
       </div>
 
-      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;"><?php echo strtoupper($datos['titulo'])?></div>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">INFORME MÉDICO</div>
 
       <div></div>
       <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <!-------------------------------------------------------------->
+      <!----------------------- RESUMIDO ----------------------------->
+      <!-------------------------------------------------------------->
+	    <?php if ($datos['tipo'] == "0") { ?>
+        <!--echo trim(strtoupper($informe['texto_html']));-->
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>EDAD:</td>
-	          <td style="font-weight: bold"><?php echo $edad?></td>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+        <div>
+          <?php echo trim(strtoupper($cabecera));?>
+        </div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
-	    
-	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
-	    <!--</p>-->
+        <div></div>
 
-  	</div>
+        <div>
+          <?php echo trim(strtoupper($contenido['texto_html']));?>.
+        </div>
 
-  	<div></div>
-  	<div></div>
+        <div></div>
+        <div></div>
 
-	<?php 
-    echo trim(strtoupper($informe['texto_html']));
-  ?>
+        <div>
+          <b>SE INDICA:</b><?php echo trim(strtoupper($plan['texto_html']));?>.
+        </div>
 
-  <div style="width: 100%"></div>
+        <div></div>
+
+        <div>
+          <b>DEBE VOLVER A CONTROL:</b> <?php echo trim(strtoupper($control['texto_html']));?>.
+        </div>
+
+      <!-------------------------------------------------------------->
+      <!----------------------- COMPLETO ----------------------------->
+      <!-------------------------------------------------------------->
+      <?php } else if ($datos['tipo'] == "1") { ?>
+
+        <div>
+          <?php echo trim(strtoupper($cabecera));?>
+        </div>
+
+        <div></div>
+
+        <div>
+          <?php echo trim(strtoupper($contenido['texto_html']));?>.
+        </div>
+
+        <div></div>
+        <div></div>
+
+        <div style="text-transform: uppercase;">Al examen oftalmológico actual:</div>
+
+        <div></div>
+        <?php 
+
+          if ($datos['agudeza_od_4'] !== '0.00' && $datos['agudeza_oi_4'] !== '0.00') {
+
+            if (!empty($datos['correccion_4'])) {
+              $correccion_4 = "APLICA CORRECCIÓN";
+            } else {
+              $correccion_4 = "NO APLICA CORRECCIÓN";
+            }
+
+            echo "<b>AGUDEZA VISUAL - 4 METROS</b>";
+            echo "<br>";
+            echo "<div style='padding-left: 10px'>OI:&nbsp; $datos[agudeza_oi_4] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $correccion_4</div>";
+            echo "<div style='padding-left: 10px'>OD: $datos[agudeza_od_4]</div>";
+            echo "<div></div>";
+
+          }
+
+        ?>
+
+        <?php 
+
+          if ($datos['agudeza_od_1'] !== '0.00' && $datos['agudeza_oi_1'] !== '0.00') {
+
+            if (!empty($datos['correccion_1'])) {
+              $correccion_1 = "APLICA CORRECCIÓN";
+            } else {
+              $correccion_1 = "NO APLICA CORRECCIÓN";
+            }
+
+            echo "<b>AGUDEZA VISUAL - 1,5 METROS</b>";
+            echo "<br>";
+            echo "<div style='padding-left: 10px'>OI:&nbsp; $datos[agudeza_oi_1] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $correccion_1</div>";
+            echo "<div style='padding-left: 10px'>OD: $datos[agudeza_od_1]</div>";
+            echo "<div></div>";
+
+          }
+
+        ?>
+
+        <?php 
+
+          if ($datos['agudeza_od_lectura'] !== '0.00' && $datos['agudeza_oi_lectura'] !== '0.00') {
+
+            if (!empty($datos['correccion_lectura'])) {
+              $correccion_lectura = "APLICA CORRECCIÓN";
+            } else {
+              $correccion_lectura = "NO APLICA CORRECCIÓN";
+            }
+
+            echo "<b>AGUDEZA VISUAL - LECTURA</b>";
+            echo "<br>";
+            echo "<div style='padding-left: 10px'>OI:&nbsp; $datos[agudeza_oi_lectura] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $correccion_lectura</div>";
+            echo "<div style='padding-left: 10px'>OD: $datos[agudeza_od_lectura]</div>";
+            echo "<div></div>";
+
+          }
+
+        ?>
+
+        <?php 
+          if (!empty($motilidad['texto_html'])) {
+        ?>
+
+          <b>MOTILIDAD</b><br>
+          <div>
+            <?php echo trim(strtoupper($motilidad['texto_html']));?>.
+          </div>
+
+        <?php 
+          }
+        ?>
+
+        <?php 
+          if (!empty($datos['rx_od_resultado']) && !empty($datos['rx_oi_resultado'])) {
+        ?>
+
+          <div></div>
+
+          <?php 
+            if (!empty($datos['rx_cicloplegia'])) {
+              echo "<b>RX: CICLOPLEGIA</b>";
+            } else {
+              echo "<b>RX</b>";
+            }
+
+            if (!empty($datos['rx_od_signo_1'])) {$rx_od_signo_1 = ' + ';} else {$rx_od_signo_1 = ' - ';}
+            if (!empty($datos['rx_od_signo_2'])) {$rx_od_signo_2 = ' + ';} else {$rx_od_signo_2 = ' - ';}
+            if (!empty($datos['rx_oi_signo_1'])) {$rx_oi_signo_1 = ' + ';} else {$rx_oi_signo_1 = ' - ';}
+            if (!empty($datos['rx_oi_signo_2'])) {$rx_oi_signo_2 = ' + ';} else {$rx_oi_signo_2 = ' - ';}
+          ?>          
+
+          <br>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="width: 30px">OI:</td>
+                <td><?php echo $rx_oi_signo_1.$datos['rx_oi_valor_1'].$rx_oi_signo_2.$datos['rx_oi_valor_2']." X ".$datos['rx_oi_grados']."° = ".$datos['rx_oi_resultado']?></td>
+              </tr>
+              <tr>
+                <td style="width: 30px">OD:</td>
+                <td><?php echo $rx_od_signo_1.$datos['rx_od_valor_1'].$rx_od_signo_2.$datos['rx_od_valor_2']." X ".$datos['rx_od_grados']."° = ".$datos['rx_od_resultado']?></td>
+              </tr>
+            </tbody>
+          </table>
+
+        <?php 
+          }
+        ?>
+
+        <?php 
+          if (!empty($biomicroscopia['texto_html'])) {
+        ?>
+          <div></div>
+          <b>BIOMICROSCOPIA</b><br>
+          <div>
+            <?php echo trim(strtoupper($biomicroscopia['texto_html']));?>.
+          </div>
+
+        <?php 
+          }
+        ?>
+
+        <?php 
+
+          if ($datos['pio_od'] !== '0.00' && $datos['pio_oi'] !== '0.00') {
+
+            echo "<div></div>";
+            echo "<b>PIO:</b>";
+            echo "<br>";
+            echo "<div style='padding-left: 10px'>OI:&nbsp; $datos[pio_od] mmHg</div>";
+            echo "<div style='padding-left: 10px'>OD: $datos[pio_oi] mmHg</div>";
+
+          }
+
+        ?>
+
+        <?php 
+          if (!empty($fondo_ojo['texto_html'])) {
+        ?>
+          <div></div>
+          <b>FONDO DE OJO</b><br>
+          <div>
+            <?php echo trim(strtoupper($fondo_ojo['texto_html']));?>.
+          </div>
+
+        <?php 
+          }
+        ?>
+
+        <?php  if (count($diagnosticos) > 0) {?>
+          <div></div>
+          <b>IDX</b>
+          <br>
+          <?php
+            foreach ($diagnosticos as $key => $r) {
+              
+              echo "- ".$r['nombre'].'<br>';
+
+            };
+          ?>
+
+        <?php } ?>
+
+        <?php 
+          if (!empty($plan['texto_html'])) {
+        ?>
+          <div></div>
+          <b>PLAN</b><br>
+          <div>
+            <?php echo trim(strtoupper($plan['texto_html']));?>.
+          </div>
+
+        <?php 
+          }
+        ?>
+
+      <!-------------------------------------------------------------->
+      <!------------------------- SIMPLE ----------------------------->
+      <!-------------------------------------------------------------->
+      <?php } else if ($datos['tipo'] == "2") { ?>
+
+        <div>
+          <?php echo trim(strtoupper($cabecera));?>.
+        </div>
+
+        <div></div>
+
+        <div>
+          <?php echo trim(strtoupper($contenido['texto_html']));?>.
+        </div>
+
+      <?php } ?>
+
+    <div></div>
+    <div></div>
+
+  </div>
 
 </page>
 

@@ -246,8 +246,12 @@ informes['crud']['customBodyEvents'] = {
 
 			informes.sublista = tools.pariente(e.target, 'TR').sublista
 
+			var lista = tools.copiaLista(informes.sublista)
+
+			lista['id_historia'] =  historias.sublista.id_historia
+
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(informes.sublista)}
+					{"sesion": 'datos_pdf', "parametros": JSON.stringify(lista)}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -635,6 +639,9 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
+var insersiones_lista = ['diagnostico'],
+	insersiones_lista_combos = [diaPop],
+	ultimoBotonInsersionBasica = '';
 
 qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
 
@@ -642,11 +649,9 @@ qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
 
 	diaPop.pop()
 
-})
+	ultimoBotonInsersionBasica = e.target
 
-var insersiones_lista = ['diagnostico'],
-	insersiones_lista_combos = [diaPop],
-	ultimoBotonInsersionBasica = '';
+})
 
 insersiones_lista.forEach((grupo, i) => {
 
@@ -654,7 +659,7 @@ insersiones_lista.forEach((grupo, i) => {
 
 		if (e.target.classList.contains('insertar')) {
 
-			var datos = tools.procesar(e.target, 'insertar', `insertar-${grupo}`,  tools)
+			var datos = tools.procesar('', '', `insertar-${grupo}`, tools)
 
 			if (datos !== '') {
 
@@ -670,18 +675,15 @@ insersiones_lista.forEach((grupo, i) => {
 
 						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}s`, []))
 
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').value = datos[0].toUpperCase()
-						ultimoBotonInsersionBasica.parentElement.querySelector('input').focus()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos[0].toUpperCase()
+						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
 						tools.limpiar('.insertar-diagnostico', '', {})
 
 						insersiones_lista_combos[i].pop()
 
 						contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-
-						setTimeout(() => {
-							contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
-						}, 500)
+						contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
 
 					}, 500)
 

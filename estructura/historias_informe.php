@@ -48,7 +48,7 @@
       <div class="columnas">
         
         <div>
-          <label class="requerido">Motivos o antecedentes</label>
+          <label class="requerido">Motivos / antecedentes / simple</label>
           <textarea rows="4" id="infeditar-informacion" data-previa="infeditar-previa" data-valor="contenido" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
             Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
           "></textarea>
@@ -515,7 +515,7 @@
             <div class="columnas">
               
               <div>
-                <label class="requerido">Motivos o antecedentes</label>
+                <label class="requerido">Motivos / antecedentes / simple</label>
                 <textarea rows="4" id="informe-informacion" data-previa="informe-previa" data-valor="contenido" class="informe-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
                   Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
                 "></textarea>
