@@ -2123,9 +2123,9 @@ span.numeracion {
     font-size: xx-small;
 }
 
-.checklarge:checked::after {
+.checklarge:checked::after, .checklarge:checked::before {
     content: "✓";
-    font-size: x-large;
+    font-size: large;
 }
 
 .checksigno {
