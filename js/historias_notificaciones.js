@@ -38,6 +38,7 @@ window.reportesPaginacion = {
 	},
 	"informe": () => {
 		cambiarSeccionBotones(qs('#informe'))
+		qs('#informes-contenedor-notificaciones').scrollTo(0,0)
 		window.paginacion.animacion(1, true)
 	},
 	"referencia": () => {
@@ -159,7 +160,21 @@ notificaciones_reportes['crud']['customBodyEvents'] = {
 
 		tools.limpiar(`.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, '', {})
 
-		rellenar.contenedores(JSON.parse(notificaciones_reportes.sublista.datos), `.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, {}, {})
+		rellenar.contenedores(JSON.parse(notificaciones_reportes.sublista.datos), `.${notificaciones_reportes.sublista.reporte}-valores-notificaciones`, {}, {
+			"contenedorConsulta": function fn(lista, grupo) {
+
+				if (notificaciones_reportes.sublista.reporte === 'informe') {
+
+					var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+					peticion.onreadystatechange = function() {
+				        if (this.readyState == 4 && this.status == 200) {
+				        	contenedoresNotificaciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+				        }
+				    };	
+
+				}
+			}
+		})
 
 		notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -338,7 +353,21 @@ notificados_reportes['crud']['customBodyEvents'] = {
 			reportesPaginacion[notificados_reportes.sublista.reporte]()
 
 			//LLENA LOS DATOS DEL REPORTE
-			rellenar.contenedores(datos, `.${notificados_reportes.sublista.reporte}-valores`, {}, {})
+			rellenar.contenedores(datos, `.${notificados_reportes.sublista.reporte}-valores`, {}, {
+				"contenedorConsulta": function fn(lista, grupo) {
+
+					if (notificados_reportes.sublista.reporte === 'informe') {
+
+						var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+						peticion.onreadystatechange = function() {
+					        if (this.readyState == 4 && this.status == 200) {
+					        	contenedoresNotificaciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+					        }
+					    };	
+
+					}
+				}
+			})
 
 			//ENVIA NOTIFICACION
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
@@ -437,6 +466,10 @@ qs("#edicion-notificaciones").addEventListener('click', async e => {
 					datos_notificados['cedula'] 	      = x.cedula
 					datos_notificados['fecha_nacimiento'] = x.fecha_nacimiento
 
+					if (notificaciones_reportes.sublista.reporte === 'informe') {
+						datos_notificados['diagnosticos'] = JSON.stringify(datos_notificados['diagnosticos'])
+					}
+
 					// notificaciones_reportes.crud.lista.forEach(e => {
 
 					//     if (e.id !== notificaciones_reportes.posicion) {
@@ -497,13 +530,13 @@ previas.forEach((reporte) => {
 
 	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseenter', e => {
 
-		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).removeAttribute('data-hidden')	
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-c`).removeAttribute('data-hidden')	
 
 	})
 
 	qs(`#${reporte}-contenedor-notificaciones .cargar`).addEventListener('mouseleave', e => {
 
-		qs(`#${reporte}-contenedor-notificaciones .personalizacion-notificaciones`).setAttribute('data-hidden', '')
+		qs(`#${reporte}-contenedor-notificaciones .personalizacion-c`).setAttribute('data-hidden', '')
 
 	})
 

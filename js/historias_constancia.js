@@ -103,6 +103,22 @@ constancias['crud']['propiedadesTr'] = {
 ///
 constancias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			constancias.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(constancias.sublista), reporte: 'constancia'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -554,6 +570,36 @@ qs('#constancias-contenedor .limpiar').addEventListener('click', e => {
 	tools.limpiar('.constancia-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						CONSTANCIA - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#constancias-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'constancia') {
+
+			tools.limpiar('.constancia-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.constancia-valores', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
 
 })
 

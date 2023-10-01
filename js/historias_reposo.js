@@ -113,6 +113,22 @@ reposos['crud']['propiedadesTr'] = {
 ///
 reposos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(reposos.sublista), reporte: 'reposo'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -387,7 +403,7 @@ qs("#reposos-contenedor .reporte-previa").addEventListener('click', async e => {
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 
@@ -548,6 +564,36 @@ qs('#reposos-contenedor .limpiar').addEventListener('click', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
+/*           							REPOSO - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#reposos-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'reposo') {
+
+			tools.limpiar('.reposo-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.reposo-valores', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
 /*           						REPOSO - SCROLL TOP						 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#reposo-busqueda').addEventListener('keydown', e => {
@@ -564,7 +610,7 @@ qs('#reposos-dias-insertar').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-insertar').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -583,7 +629,7 @@ qs('#reposos-inicio-insertar').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-insertar').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -596,7 +642,7 @@ qs('#reposos-dias-editar').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-editar').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -615,7 +661,7 @@ qs('#reposos-inicio-editar').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-editar').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -628,7 +674,7 @@ qs('#reposos-dias-notificaciones').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-notificaciones').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -647,7 +693,7 @@ qs('#reposos-inicio-notificaciones').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-notificaciones').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/

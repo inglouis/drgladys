@@ -14,7 +14,7 @@ window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores} from '../js/main.js';
+import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
 
 /////////////////////////////////////////////////////
 //DESPLEGABLES DE LA PAGINA
@@ -77,7 +77,17 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#general-informacion', '#general-previa'],
 	['#geneditar-informacion', '#geneditar-previa'],
 	['#informe-informacion', '#informe-previa'],
+	['#informe-control', '#informe-previa'],
+	['#informe-motilidad', '#informe-previa'],
+	['#informe-biomicroscopia', '#informe-previa'],
+	['#informe-fondo', '#informe-previa'],
+	['#informe-plan', '#informe-previa'],
 	['#infeditar-informacion', '#infeditar-previa'],
+	['#infeditar-control', '#infeditar-previa'],
+	['#infeditar-motilidad', '#infeditar-previa'],
+	['#infeditar-biomicroscopia', '#infeditar-previa'],
+	['#infeditar-fondo', '#infeditar-previa'],
+	['#infeditar-plan', '#infeditar-previa'],
 	['#presupuesto-informacion', '#presupuesto-previa'],
 	['#preeditar-informacion', '#preeditar-previa'],
 	['#reposo-informacion', '#reposo-previa'],
@@ -90,6 +100,11 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#constancia-informacion-notificaciones', '#constancia-previa-notificaciones'],
 	['#constancia-recomendaciones-notificaciones', '#constancia-previa-notificaciones'],
 	['#informe-informacion-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-control-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-motilidad-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-biomicroscopia-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-fondo-notificaciones', '#informe-previa-notificaciones'],
+	['#informe-plan-notificaciones', '#informe-previa-notificaciones'],
 	['#presupuesto-informacion-notificaciones', '#presupuesto-previa-notificaciones'],
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
 	['#general-informacion-notificaciones', '#general-previa-notificaciones'],
@@ -99,6 +114,15 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
 window.camposTextosPersonalizables.init()
+
+/////////////////////////////////////////////////////
+//INPUTS QUE MANEJAN DECIMALES
+/////////////////////////////////////////////////////
+var inputsDecimales = new InputsDecimales('.decimales')
+	inputsDecimales.init()
+
+var inputsFracciones = new InputsDecimales('.fracciones', '/')
+	inputsFracciones.init()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
@@ -116,7 +140,7 @@ window.relPop = new PopUp('crud-insertar-religiones-popup','popup', 'subefecto',
 window.medPop = new PopUp('crud-insertar-medicos-popup','popup', 'subefecto', true, 'insertar-medicos', '', 27)
 
 window.prePop = new PopUp('crud-previas-popup', 'popup', 'subefecto', true, 'previas', '', 27)
-window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido'], 27)
+window.repPop = new PopUp('crud-reportes-popup', 'popup', 'subefecto', true, 'reportes', ['previas', 'coneditar', 'geneditar', 'infeditar', 'preeditar', 'repeditar', 'refeditar', 'insertar-referencia', 'insertar-referido', 'insertar-diagnostico'], 27)
 
 window.conPop = new PopUp('crud-coneditar-popup', 'popup', 'subefecto', true, 'coneditar', '', 27)
 window.genPop = new PopUp('crud-geneditar-popup', 'popup', 'subefecto', true, 'geneditar', '', 27);
@@ -131,6 +155,8 @@ window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true
 
 window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
 window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
+
+window.diaPop = new PopUp('crud-insertar-diagnostico-popup', 'popup', 'subefecto', true, 'insertar-diagnostico', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -161,6 +187,8 @@ mediPop.evtBotones()
 
 refInsPop.evtBotones()
 refeInsPop.evtBotones()
+
+diaPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -193,6 +221,8 @@ window.addEventListener('keyup', (e) => {
 
 	refInsPop.evtEscape(e)
 	refeInsPop.evtEscape(e)
+
+	diaPop.evtEscape(e)
 
 })
 
@@ -228,19 +258,23 @@ window.contenedoresConsultar      = new ContenedoresEspeciales('crud-informacion
 window.contenedoresEditar         = new ContenedoresEspeciales('crud-editar-popup') 
 window.contenedoresInsertar       = new ContenedoresEspeciales('crud-insertar-popup')
 window.contenedoresReportes       = new ContenedoresEspeciales('crud-reportes-popup')
+window.contenedoresInformeEditar  = new ContenedoresEspeciales('crud-infeditar-popup')
 window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamentos-popup')
 window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
 
 /////////////////////////////////////////////////////
+//VARIABLES GLOBALES
+/////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
-/////////////////////////////////////////////////////
+
 export var 
 	prevenirCierrePop = false,
 	permitirLimpiezaReportes = true,
 	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
 
+window.reporteModeloSeleccionado = {}
 window.prevenirCierreReporte = false
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
@@ -808,6 +842,22 @@ contenedoresMedicamentos.eventos().contenedor(
 
 contenedoresReportes.eventos().contenedor(
 	'cc-diagnosticos-informes', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
+
+contenedoresInformeEditar.eventos().contenedor(
+	'cc-diagnosticos-infeditar', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
+
+contenedoresNotificaciones.eventos().contenedor(
+	'cc-diagnosticos-informe-notificaciones', //elemento
 	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
 	[0, 0], 			   //limitador de busqueda
 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
@@ -1759,19 +1809,20 @@ window.paginacionHistorias.cambiarUltimoSeleccionado('informacion')
 window.paginacionHistorias.actualizarFamiliaDeBotones(tools.pariente(qs('#tabla-historias tbody tr .informacion'), 'TR'))
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
-ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
-ediPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
+ediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 10"; window.paginacionHistorias.mostrar()}}
+ediPop.funciones['cierre']   = {"cierre": ()   => { window.paginacionHistorias.ocultar()}}
 
 insPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
 insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
-infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mostrar()}}
-infPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
+infPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 10"; window.paginacionHistorias.mostrar()}}
+infPop.funciones['cierre']   = {"cierre": ()   => { window.paginacionHistorias.ocultar()}}
 
 repPop.funciones['apertura'] = {"apertura": () => {
 	window.paginacionHistorias.mostrar(); 
 	if (reporteSeleccionado === 'constancia') {constancias.validarRepresentante()};
 	if (reporteSeleccionado === 'reposo') {reposos.validarRepresentante()};
+	if (reporteSeleccionado === 'informe') {qs('#tabla-informe').parentElement.scrollTo(0,0)}
 }}
 
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
@@ -1780,28 +1831,49 @@ recPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.mo
 recPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
 prePop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+prePop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 insPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+insPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 conPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-conPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+conPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+ocuPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+ocuPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+proPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+proPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+parPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+parPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+civPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+civPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+relPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+relPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+medPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+medPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 genPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
-forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+diaPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
+diaPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"; qs('#crud-infeditar-pop').scrollTo(0, 0)}}
+forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 presPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+presPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 repoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+repoPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 refPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-refPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 1"}}
+refPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
 traPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 traPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}

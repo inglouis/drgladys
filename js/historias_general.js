@@ -99,6 +99,22 @@ generales['crud']['propiedadesTr'] = {
 ///
 generales['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			generales.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(generales.sublista), reporte: 'general'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -293,7 +309,7 @@ qs("#generales-contenedor .reporte-cargar").addEventListener('click', async e =>
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							general - PREVIA					  					    */
+/*           							GENERAL - PREVIA					  					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs("#generales-contenedor .reporte-previa").addEventListener('click', async e => {
 
@@ -348,7 +364,7 @@ qs("#generales-contenedor .reporte-previa").addEventListener('click', async e =>
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 
@@ -494,6 +510,36 @@ qs('#generales-contenedor .limpiar').addEventListener('click', e => {
 	tools.limpiar('.general-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						GENERAL - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#generales-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'general') {
+
+			tools.limpiar('.general-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.general-valores', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
 
 })
 

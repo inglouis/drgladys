@@ -148,15 +148,15 @@
 				<!-------------------------------------------------------- -->
 				<section class="notificaciones-seccion" data-hide data-efecto="aparecer">
 				                
-				    <div data-familia class="contenedor contenedor-notificaciones" id="informes-contenedor-notificaciones">
+				    <div data-familia class="contenedor contenedor-notificaciones" id="informes-contenedor-notificaciones" data-scroll style="justify-content: flex-start; overflow-x: hidden; height: 72vh;">
 
 				      <div class="subtitulo">
 				        Modificar reporte de informe médico
 				      </div>
 
-				      <div class="cargar" title="[TAB] para enforcar">
+				      <div class="cargar" title="[TAB] para enforcar" style="height: auto">
 
-				        <div class="personalizacion-notificaciones" data-hidden>
+				        <div class="personalizacion-c" data-hidden style="right: 20%; top: 35% !important;">
 
 				          <section>Personalización</section>
 				          <section style="width: 100%; border: 1px dashed #fff"></section>
@@ -172,26 +172,266 @@
 				          
 				        <div class="filas" style="height: 100%; position: relative">
 
-				          <div class="columnas" >
-				          
-				            <div>
-				              <label class="requerido">Título</label>
-				              <input type="text" id="informe-titulo-notificaciones" data-valor="titulo" class="informe-valores-notificaciones upper lleno">
-				            </div>        
+				        <div class="columnas">
+					              
+					        <div>
+					          
+					          <label class="requerido">Tipo de informe médico</label>
+					          <select data-valor="tipo" class="informe-valores-notificaciones  upper lleno">
+					            <option value="0">Resumido</option>
+					            <option value="1">Completo</option>
+					            <option value="2">Simple</option>
+					          </select>
+					          
+					        </div>
 
-				          </div>
+					      </div>
 
-				          <div class="columnas" style="height: 100%">
-				          
+				          <div class="columnas">
+        
+					        <div>
+					          <label class="requerido">Motivos / antecedentes / simple</label>
+					          <textarea rows="4" id="informe-informacion-notificaciones" data-previa="informe-previa-notificaciones" data-valor="contenido" class="informe-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+					            Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
+					          "></textarea>
+					        </div>
 
-				            <div style="height: 100%; margin: 0px">
-				              
-				              <label class="requerido">Informe</label>
-				              <textarea id="informe-informacion-notificaciones" data-previa="informe-previa" data-valor="informe" rows="6" class="informe-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+					      </div>
 
-				            </div>
+					      <div class="columnas">
+					                
+					        <div>     
+					          <label>Control</label>
+					          <textarea rows="4" id="informe-control-notificaciones" data-previa="informe-previa-notificaciones" data-valor="control" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+					        </div>
 
-				          </div>
+					      </div>
+
+					      <div class="columnas">
+                
+			                <div>     
+			                  <label>Plan o indicaciones</label>
+			                  <textarea rows="4" id="informe-plan-notificaciones" data-previa="informe-previa-notificaciones" data-valor="plan" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LAS INDICACIONES DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA EL PLAN DEL INFORME
+			                "></textarea>
+			                </div>
+
+			              </div>
+
+					      <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+					        <label>Agudeza visual - 4m</label>
+
+					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+					          <div>    
+					            <input type="text" data-valor="agudeza_od_4" class="informe-valores-notificaciones upper fracciones" placeholder="OD">
+					          </div>
+
+					          <div>
+					            <input type="text" data-valor="agudeza_oi_4" class="informe-valores-notificaciones upper fracciones" placeholder="OI">
+					          </div>  
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div class="check-alineado">
+					          <label>Con corrección - 4m</label>        
+					          <input type="checkbox" data-valor="correccion_4" class="informe-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+					        </div>
+
+					      </div>
+
+					      <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+					        <label>Agudeza visual - 1.5m</label>
+
+					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+					          <div>    
+					            <input type="text" data-valor="agudeza_od_1" class="informe-valores-notificaciones upper fracciones" placeholder="OD">
+					          </div>
+
+					          <div>
+					            <input type="text" data-valor="agudeza_oi_1" class="informe-valores-notificaciones upper fracciones" placeholder="OI">
+					          </div>  
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div class="check-alineado">
+					          <label>Con corrección - 1.5m</label>        
+					          <input type="checkbox" data-valor="correccion_1" class="informe-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+					        </div>
+
+					      </div>
+
+					      <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+					        <label>Agudeza visual - Lectura</label>
+
+					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+					          <div>    
+					            <input type="text" data-valor="agudeza_od_lectura" class="informe-valores-notificaciones upper" placeholder="OD">
+					          </div>
+
+					          <div>
+					            <input type="text" data-valor="agudeza_oi_lectura" class="informe-valores-notificaciones upper" placeholder="OI">
+					          </div>  
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div class="check-alineado">
+					          <label>Con corrección - Lectura</label>        
+					          <input type="checkbox" data-valor="correccion_lectura" class="informe-valores-notificaciones check checksmall" style="width: 30px; height: 30px">
+					        </div>
+
+					      </div>
+
+					      <section style="border-bottom: 1px dashed #b9a3cb; width: 100%; height: 1px;"></section>
+
+					      <div class="columnas">
+
+					        <div>  
+					          <label>Estereopsis</label>  
+					          <input type="text" data-valor="estereopsis" class="informe-valores-notificaciones upper" placeholder="00s">
+					        </div>
+
+					        <div>
+					          <label>Ishihara</label>
+					          <input type="text" data-valor="test" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
+					        </div>
+
+					        <div>
+					          <label>Stereo Fly</label>
+					          <input type="text" data-valor="reflejo" class="informe-valores-notificaciones upper" placeholder="00s">
+					        </div>  
+
+					      </div>
+
+					      <div class="columnas">
+					        
+					        <div>     
+					          <label>Motilidad</label>
+					          <textarea rows="4" id="informe-motilidad-notificaciones" data-previa="informe-previa-notificaciones" data-valor="motilidad" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+					        </div>
+
+					      </div>
+
+					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+					        <label>
+					        	RX
+					        	<input type="checkbox" data-valor="rx_cicloplegia" class="informe-valores-notificaciones check" title="CICLOPLEGIA">
+					        </label>
+
+					        <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
+					          <div style="flex-direction: row; justify-content: center; align-items: center;">
+					            <label style="padding-right: 3px">OD:</label>
+					            <input type="checkbox" data-valor="rx_od_signo_1" class="informe-valores-notificaciones check checksigno">
+					            <input type="text" data-valor="rx_od_valor_1" class="informe-valores-notificaciones upper decimales" placeholder="0.00">
+					            <input type="checkbox" data-valor="rx_od_signo_2" class="informe-valores-notificaciones check checksigno">
+					            <input type="text" data-valor="rx_od_valor_2" class="informe-valores-notificaciones upper decimales" placeholder="0.00">
+					            <span   class="informe-separador">X</span>
+					            <input type="text" data-valor="rx_od_grados" class="informe-valores-notificaciones upper" placeholder="0">
+					            <span   class="informe-grado">°</span>
+					            <span   class="informe-igual">=</span>
+					            <input type="text" data-valor="rx_od_resultado" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
+					          </div>
+
+					          <div style="flex-direction: row; justify-content: center; align-items: center;">
+					            <label style="padding-right: 9px">OI:</label>
+					            <input type="checkbox" data-valor="rx_oi_signo_1" class="informe-valores-notificaciones check checksigno">
+					            <input type="text" data-valor="rx_oi_valor_1" class="informe-valores-notificaciones upper decimales" placeholder="0.00">
+					            <input type="checkbox" data-valor="rx_oi_signo_2" class="informe-valores-notificaciones check checksigno">
+					            <input type="text" data-valor="rx_oi_valor_2" class="informe-valores-notificaciones upper decimales" placeholder="0.00">
+					            <span   class="informe-separador">X</span>
+					            <input type="text" data-valor="rx_oi_grados" class="informe-valores-notificaciones upper" placeholder="0">
+					            <span   class="informe-grado">°</span>
+					            <span   class="informe-igual">=</span>
+					            <input type="text" data-valor="rx_oi_resultado" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
+					          </div>
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+                
+			                <div>     
+			                  <label>Biomicroscopia</label>
+			                  <textarea rows="2" id="informe-biomicroscopia-notificaciones" data-previa="informe-previa-notificaciones" data-valor="biomicroscopia" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+			                </div>
+
+			              </div>
+
+					      <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+					        <label>PIO</label>
+
+					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+					          <div>    
+					            <input type="text" data-valor="pio_od" class="informe-valores-notificaciones upper decimales" placeholder="OD - 0.00mmHg">
+					          </div>
+
+					          <div>
+					            <input type="text" data-valor="pio_oi" class="informe-valores-notificaciones upper decimales" placeholder="OI - 0.00mmHg">
+					          </div>  
+					        </div>
+
+					      </div>
+
+					      <div class="columnas">
+                
+			                <div>     
+			                  <label>Fondo de ojo</label>
+			                  <textarea rows="2" id="informe-fondo-notificaciones" data-previa="informe-previa-notificaciones" data-valor="fondo_ojo" class="informe-valores-notificaciones upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+			                </div>
+
+			              </div>
+
+					      <div class="columnas">
+					        
+					        <div style="position:relative;">
+
+					          <label>
+					            IDX:
+					          </label>
+					          
+					          <style>
+					            #cc-diagnosticos-informe .ccContenedor {
+					               width: 95%;
+					            }
+					          </style>  
+
+					          <section id="cc-diagnosticos-informe-notificaciones" class="contenedor-consulta informe-valores-notificaciones borde-estilizado" data-valor="diagnosticos">
+
+					            <input type="text" data-estilo="cc-input" class="upper" data-minimo="0" data-ocultar="0" placeholder="Buscar diagnósticos" title="[ENTER] para forzar actualización">
+					            <select id="informe-combo-notificaciones" data-limit="" data-estilo="cc-select" placeholder="Buscar diagnóstico" data-size="5" data-ocultar="1" data-hide data-absoluto="1" data-scroll style="
+					              height: auto;
+					              border: 1px dashed #5eb6fb;
+					              border-top: none;
+					              background: #ddf4ffc2;
+					              padding: 0px 5px;
+					              margin: 0px;
+					              color: black;
+					            "></select>
+					            <div data-estilo="cc-div" style="background: #fff; min-height: 80px; max-height: 85px; border: none; display: flex;" data-scroll></div>
+
+					          </section>
+
+					        </div>
+
+					      </div>
 
 				        </div>
 

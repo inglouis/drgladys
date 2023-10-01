@@ -1083,7 +1083,7 @@ span.numeracion {
     transition: 0.3s ease all;
 }
 
-[data-crud='limpiar'] {
+[data-crud='limpiar'], [data-crud='reutilizar'] {
     position: relative;
     top: 0px;
     left: 2px;
@@ -1103,7 +1103,7 @@ span.numeracion {
     z-index: 1;
 }
 
-[data-crud='limpiar']:hover {
+[data-crud='limpiar']:hover, [data-crud='reutilizar']:hover {
     border: 2px dashed #262626 !important;
     transition:0.3s ease all;
 }
@@ -1114,7 +1114,7 @@ span.numeracion {
     justify-content: normal !important;
 }
 
-[data-noche] [data-crud='limpiar'] svg {
+[data-noche] [data-crud='limpiar'] svg, [data-noche] [data-crud='reutilizar'] svg {
     color: #fff !important;
 }
 
@@ -1702,7 +1702,8 @@ span.numeracion {
 #crud-notificaciones-pop,
 #crud-medicamentos-pop,
 #crud-insertar-referencia-pop,
-#crud-insertar-referido-pop {
+#crud-insertar-referido-pop,
+#crud-insertar-diagnostico-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2122,9 +2123,9 @@ span.numeracion {
     font-size: xx-small;
 }
 
-.checklarge:checked::after {
+.checklarge:checked::after, .checklarge:checked::before {
     content: "✓";
-    font-size: x-large;
+    font-size: large;
 }
 
 .checksigno {
@@ -3367,6 +3368,21 @@ span.numeracion {
     min-width: 150px;
 }
 
+.personalizacion-c {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: #000000ba;
+    padding: 10px;
+    color: #fff;
+    z-index: 2;
+    width: 25% !important;
+    border-radius: 10px;
+    top: 30% !important;
+    right: 50px;
+    position: fixed;
+}
+
 .reportes-seccion .personalizacion::after, .personalizacion-b::after {
     content: "";
     background: #000000ba;
@@ -3405,7 +3421,7 @@ span.numeracion {
     right: -14px;
 }
 
-.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div {
+.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div, .personalizacion-c div  {
     background: #fff;
     color: black;
     padding: 5px;
@@ -3413,6 +3429,10 @@ span.numeracion {
     margin-top: 5px;
     text-transform: uppercase;
     max-height: 30vh;
+}
+
+.personalizacion-c section, .personalizacion-c span, .personalizacion-c div {
+    text-align: left;
 }
 
 .reportes-seccion .previa {

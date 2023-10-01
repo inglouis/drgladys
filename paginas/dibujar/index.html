@@ -3,8 +3,12 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Fabric.js Demo</title>
+    <title>Fabric pruebas</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script defer src="../../librerias/fabric.min.js"></script>
+    <script defer type="module" src="dibujos.js"></script>
+
     <style>
         button {
             background-color: #ffffff;
@@ -20,24 +24,36 @@
     </style>
 </head>
 <body>
-    <button id="select">Seleccionar</button>
-    <button id="draw">Dibujo libre</button>
-    <button id="rectangle">Añadir rectangulo</button>
-    <button id="circle">Añadir circulo</button>
-    <button id="text">Añadir texto</button>
-    <button id="remove" disabled="disabled">Quitar</button>
-    <button id="tosvg">Generar imagen PNG</button>
-    <br><br>
-    <div>
-        <canvas id="canvas" width="500" height="333"></canvas>
+    
+    <div style="display: flex; flex-direction: column; width: 100px;">
+        <button class="dibujar" style="background: black" data-color="black">.</button>
+        <button class="dibujar" style="background: red" data-color="red">.</button>
+
+        <div style="display: flex; flex-direction: row;">
+            <input type="range" min="1" max="5" value="5" class="slider" id="rango" style="width: 100px;">
+            <div id="valor"></div>
+        </div>
+
     </div>
+
+    <button id="seleccionar">Seleccionar</button>
+    <button id="cuadrado">Rectangulo</button>
+    <button id="circulo">Circulo</button>
+    <button id="corazon">Corazon</button>
+    <button id="forma">FORMA</button>
+    <button id="texto">Texto</button>
+    <button id="remover" disabled="disabled">Quitar</button>
+    <button id="capturar">Capturar</button>
+
+    <br><br>
+
+    <div>
+        <canvas id="contenedor" width="467" height="272"></canvas>
+    </div>
+
     <br>
-    <div id="svg"></div>
 
     <img src="" id="imagen">
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fabric@5.2.4/dist/fabric.min.js"></script>
-    <script src="main.js"></script>
 </body>
 </html>

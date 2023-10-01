@@ -39,77 +39,68 @@ ALTER TABLE miscelaneos.usuarios
 		GLADYS DOCTOR 99c5bc82
 		ANDREA ADMINISTRADOR 7bdc719f
 
-2)-------------------------------------------------------------------------------------
-SE HICIERON CAMBIOS EN LA ESTRUCTURA DE LOS USUARIOS
+1)-------------------------------------------------------------------------------------
+REEMPLAZAR LA FUNCION QUE TRAE LOS DIAGNOSTICOS COMPLETOS POR ESTAS
 ---------------------------------------------------------------------------------------
-TENGO QUE CAMBIAR QUE LAS LLAVES FORANEAS DE PRESENTACIONES Y TRATAMIENTOS HAGAN CASCADE
-EN BORRAR
+DROP FUNCTION ppal.historias_diagnosticos_armar_lista(jsonb);
 
-3)-------------------------------------------------------------------------------------
-CREAR NUEVA COLUMNA EN REPORTES [REFERENCIAS]
----------------------------------------------------------------------------------------
+CREATE OR REPLACE FUNCTION ppal.basicas_diagnosticos_armar_lista(lista jsonb)
+  RETURNS jsonb AS
+$BODY$
+    DECLARE 
+   datos jsonb;
+    BEGIN
 
-4)-------------------------------------------------------------------------------------
-CREAR TABLA REFERENCIAS - MEDICOS_REFERENCIADOS
----------------------------------------------------------------------------------------
+  datos = (
+    SELECT json_agg(t.diagnosticos) from (
+      SELECT
+          json_build_object(
+            'id_diagnostico', id_diagnostico,
+            'nombre', nombre
+          ) as diagnosticos
+      FROM ppal.basicas_traer_nombres_diagnosticos_lista(lista)
+    ) as t
+  )::jsonb;
 
-CREATE TABLE basicas.referencias
-(
-  id_referencia bigserial NOT NULL,
-  nombre character varying(100) NOT NULL DEFAULT ''::bpchar,
-  descripcion character varying(600) NOT NULL DEFAULT ''::bpchar,
-  status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
-  CONSTRAINT pk_id_referencia PRIMARY KEY (id_referencia)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE basicas.referencias
+  return datos;
+    END; 
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION ppal.basicas_diagnosticos_armar_lista(jsonb)
+  OWNER TO postgres;
+
+/*-------------------------------------------------------------*/
+DROP FUNCTION ppal.historias_traer_nombres_diagnosticos_lista(jsonb);
+
+CREATE OR REPLACE FUNCTION ppal.basicas_traer_nombres_diagnosticos_lista(IN lista jsonb)
+  RETURNS TABLE(id_diagnostico bigint, nombre text) AS
+$BODY$
+    DECLARE 
+
+    BEGIN
+
+  return query
+
+  SELECT
+      b.id_diagnostico,
+      b.nombre::text
+  FROM (
+      SELECT x.*
+      FROM 
+         jsonb_array_elements(
+        (select lista::jsonb) --codigo_historia
+         ) AS t(doc),
+         jsonb_to_record(t.doc) as x (id bigint)
+  ) AS t
+  left join basicas.diagnosticos as b on b.id_diagnostico = t.id;
+  
+    END; 
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION ppal.basicas_traer_nombres_diagnosticos_lista(jsonb)
   OWNER TO postgres;
 
 
-CREATE TABLE basicas.medicos_referidos
-(
-  id_referido bigserial NOT NULL,
-  nombre character varying(600) NOT NULL DEFAULT ''::bpchar,
-  status character varying(1) NOT NULL DEFAULT 'A'::bpchar,
-  CONSTRAINT pk_id_medico_referido PRIMARY KEY (id_referido)
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE basicas.medicos_referidos
-  OWNER TO postgres;
-
-5)-------------------------------------------------------------------------------------
-EL TRIGGER QUE CREA EL RENGLON DE RECIPES TRAS LA INSERSION DE UNA HISTORIA NO ESTA GENERADO
---------------------------------------------------------------------------------------- 
-  CREATE TRIGGER historias_reportes_nuevo_renglon
-  AFTER INSERT
-  ON principales.historias
-  FOR EACH ROW
-  EXECUTE PROCEDURE ppal.historias_reportes_nuevo_renglon();
-
-5)-------------------------------------------------------------------------------------
-AÑADIR CONSTRAIN EN AL ELIMINACION DE HISTORIA RESPECTO A TABLA REPORTES
---------------------------------------------------------------------------------------- 
-  CREATE TABLE principales.reportes
-(
-  id_reporte bigserial NOT NULL,
-  id_historia bigserial NOT NULL,
-  constancias jsonb NOT NULL DEFAULT '[]'::jsonb,
-  generales jsonb DEFAULT '[]'::jsonb,
-  informes jsonb NOT NULL DEFAULT '[]'::jsonb,
-  presupuestos jsonb NOT NULL DEFAULT '[]'::jsonb,
-  reposos jsonb NOT NULL DEFAULT '[]'::jsonb,
-  referencias jsonb NOT NULL DEFAULT '[]'::jsonb,
-  CONSTRAINT pk_id_reportes PRIMARY KEY (id_reporte),
-  CONSTRAINT fk_id_historia_historias_reportes FOREIGN KEY (id_historia)
-      REFERENCES principales.historias (id_historia) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE CASCADE
-)
-WITH (
-  OIDS=FALSE
-);
-ALTER TABLE principales.reportes
-  OWNER TO postgres;

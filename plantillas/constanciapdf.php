@@ -86,17 +86,17 @@
 
   $fecha =  $fmt->format($timestamp);
 
-  $edad = $obj->calcularEdad($datos['fecha_naci']).' AÑOS DE EDAD';
+  $edad = $obj->calcularEdad($datos['fecha_nacimiento']).' AÑOS DE EDAD';
 
   if ($edad == 0) {
 
-    $edad = $obj->calcularMeses($datos['fecha_naci']).' MESES DE EDAD';
+    $edad = $obj->calcularMeses($datos['fecha_nacimiento']).' MESES DE EDAD';
 
   }
 
   if ($edad == 0) {
 
-    $edad = $obj->calcularDias($datos['fecha_naci']).' DÍAS DE EDAD';
+    $edad = $obj->calcularDias($datos['fecha_nacimiento']).' DÍAS DE EDAD';
 
   }
 

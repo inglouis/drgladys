@@ -96,6 +96,24 @@ presupuestos['crud']['propiedadesTr'] = {
 ///
 presupuestos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			presupuestos.sublista = tools.pariente(e.target, 'TR').sublista
+
+			var lista = tools.copiaLista(presupuestos.sublista)
+
+			reporteModeloSeleccionado = {datos: {presupuesto: lista.presupuesto}, reporte: 'presupuesto'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -342,7 +360,7 @@ qs("#presupuestos-contenedor .reporte-previa").addEventListener('click', async e
 
 			} else {
 
-				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+				notificaciones.mensajeSimple('Error al procesar la petición', null, 'F')
 
 			}
 
@@ -487,6 +505,36 @@ qs('#presupuestos-contenedor .limpiar').addEventListener('click', e => {
 	tools.limpiar('.presupuesto-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						PRESUPUESTO - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#presupuestos-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'presupuesto') {
+
+			tools.limpiar('.presupuesto-valores-modelo', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.presupuesto-valores-modelo', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
 
 })
 
