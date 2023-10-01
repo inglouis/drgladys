@@ -130,7 +130,26 @@
   /////////////////////////////////////////////////////////////////
   //DIAGNOSTICOS
   /////////////////////////////////////////////////////////////////
-  $diagnosticos = json_decode($datos['diagnosticos_procesados'], true);
+
+  if (isset($datos['diagnosticos_procesados'])) {
+
+    $diagnosticos = json_decode($datos['diagnosticos_procesados'], true);
+
+    if (empty($diagnosticos)) {
+      $diagnosticos = array();
+    }
+
+  } else {
+
+    $sql = "select ppal.basicas_diagnosticos_armar_lista(?) as diagnosticos_procesados";
+
+    $diagnosticos = json_decode($obj->i_pdo($sql, [json_encode($datos['diagnosticos'])], true)->fetchColumn(), true);
+
+    if (empty($diagnosticos)) {
+      $diagnosticos = array();
+    }
+
+  }
 
   ////////////////////////////////////////////////////////////////
   setlocale(LC_TIME,"es_ES");

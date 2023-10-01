@@ -113,6 +113,22 @@ reposos['crud']['propiedadesTr'] = {
 ///
 reposos['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			reposos.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(reposos.sublista), reporte: 'reposo'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -544,6 +560,36 @@ qs('#reposos-contenedor .limpiar').addEventListener('click', e => {
 	})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							REPOSO - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#reposos-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'reposo') {
+
+			tools.limpiar('.reposo-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.reposo-valores', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
 
 })
 

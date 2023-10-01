@@ -104,6 +104,22 @@ referencias['crud']['propiedadesTr'] = {
 ///
 referencias['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			referencias.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(referencias.sublista), reporte: 'referencia'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -385,7 +401,7 @@ qs("#referencias-contenedor .reporte-previa").addEventListener('click', async e 
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           							referencia - EDITAR			 							    */
+/*           							REFERENCIAS - EDITAR									    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#crud-refeditar-botones .confirmar').addEventListener('click', async e => {
 
@@ -438,7 +454,7 @@ qs('#crud-refeditar-botones .confirmar').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						referencia - ELIMINAR					 					    */
+/*           						REFERENCIAS - ELIMINAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencias-contenedor table').addEventListener('click', async e => {
 
@@ -485,7 +501,7 @@ qs('#referencias-contenedor table').addEventListener('click', async e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						  referencia - TEXTO PREVIA	 								    */
+/*           						  REFERENCIAS - TEXTO PREVIA	 							    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencias-contenedor .cargar').addEventListener('mouseenter', e => {
 
@@ -512,7 +528,7 @@ qs('#crud-refeditar-pop .filas').addEventListener('mouseleave', e => {
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						referencia - LIMPIAR					 					    */
+/*           						REFERENCIAS - LIMPIAR					 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencias-contenedor .limpiar').addEventListener('click', e => {
 
@@ -522,15 +538,46 @@ qs('#referencias-contenedor .limpiar').addEventListener('click', e => {
 
 })
 
+
 /* -------------------------------------------------------------------------------------------------*/
-/*           						referencia - SCROLL TOP				 					    */
+/*           						REFERENCIAS - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#referencias-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'referencia') {
+
+			tools.limpiar('.referencia-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.referencia-valores', {elemento: e.target, id: 'value'}, {})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           						REFERENCIAS - SCROLL TOP				 					    */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#referencia-busqueda').addEventListener('keydown', e => {
 	qs('#tabla-referencia').parentElement.scrollTo(0,0)
 })
 
 /* -------------------------------------------------------------------------------------------------*/
-/*           						INFORME - MODELO					 					    	*/
+/*           						REFERENCIAS - MODELO					 				    	*/
 /* -------------------------------------------------------------------------------------------------*/
 var modelos = {
 	"preoperatorio": "REALIZAR VALORACIÓN PEDIÁTRICA PREOPERATORIA",

@@ -190,7 +190,7 @@
 				          <div class="columnas">
         
 					        <div>
-					          <label class="requerido">Motivos o antecedentes</label>
+					          <label class="requerido">Motivos / antecedentes / simple</label>
 					          <textarea rows="4" id="informe-informacion-notificaciones" data-previa="informe-previa-notificaciones" data-valor="contenido" class="informe-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
 					            Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
 					          "></textarea>
@@ -225,11 +225,11 @@
 
 					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
 					          <div>    
-					            <input type="text" data-valor="agudeza_od_4" class="informe-valores-notificaciones upper decimales" placeholder="OD">
+					            <input type="text" data-valor="agudeza_od_4" class="informe-valores-notificaciones upper fracciones" placeholder="OD">
 					          </div>
 
 					          <div>
-					            <input type="text" data-valor="agudeza_oi_4" class="informe-valores-notificaciones upper decimales" placeholder="OI">
+					            <input type="text" data-valor="agudeza_oi_4" class="informe-valores-notificaciones upper fracciones" placeholder="OI">
 					          </div>  
 					        </div>
 
@@ -252,11 +252,11 @@
 
 					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
 					          <div>    
-					            <input type="text" data-valor="agudeza_od_1" class="informe-valores-notificaciones upper decimales" placeholder="OD">
+					            <input type="text" data-valor="agudeza_od_1" class="informe-valores-notificaciones upper fracciones" placeholder="OD">
 					          </div>
 
 					          <div>
-					            <input type="text" data-valor="agudeza_oi_1" class="informe-valores-notificaciones upper decimales" placeholder="OI">
+					            <input type="text" data-valor="agudeza_oi_1" class="informe-valores-notificaciones upper fracciones" placeholder="OI">
 					          </div>  
 					        </div>
 
@@ -279,11 +279,11 @@
 
 					        <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
 					          <div>    
-					            <input type="text" data-valor="agudeza_od_lectura" class="informe-valores-notificaciones upper decimales" placeholder="OD">
+					            <input type="text" data-valor="agudeza_od_lectura" class="informe-valores-notificaciones upper" placeholder="OD">
 					          </div>
 
 					          <div>
-					            <input type="text" data-valor="agudeza_oi_lectura" class="informe-valores-notificaciones upper decimales" placeholder="OI">
+					            <input type="text" data-valor="agudeza_oi_lectura" class="informe-valores-notificaciones upper" placeholder="OI">
 					          </div>  
 					        </div>
 
@@ -309,12 +309,12 @@
 
 					        <div>
 					          <label>Ishihara</label>
-					          <input type="text" data-valor="test" class="informe-valores-notificaciones upper" placeholder="00/00">
+					          <input type="text" data-valor="test" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
 					        </div>
 
 					        <div>
 					          <label>Stereo Fly</label>
-					          <input type="text" data-valor="reflejo" class="informe-valores-notificaciones upper" placeholder="00/00">
+					          <input type="text" data-valor="reflejo" class="informe-valores-notificaciones upper" placeholder="00s">
 					        </div>  
 
 					      </div>
@@ -346,7 +346,7 @@
 					            <input type="text" data-valor="rx_od_grados" class="informe-valores-notificaciones upper" placeholder="0">
 					            <span   class="informe-grado">°</span>
 					            <span   class="informe-igual">=</span>
-					            <input type="text" data-valor="rx_od_resultado" class="informe-valores-notificaciones upper" placeholder="00/00">
+					            <input type="text" data-valor="rx_od_resultado" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
 					          </div>
 
 					          <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -359,7 +359,7 @@
 					            <input type="text" data-valor="rx_oi_grados" class="informe-valores-notificaciones upper" placeholder="0">
 					            <span   class="informe-grado">°</span>
 					            <span   class="informe-igual">=</span>
-					            <input type="text" data-valor="rx_oi_resultado" class="informe-valores-notificaciones upper" placeholder="00/00">
+					            <input type="text" data-valor="rx_oi_resultado" class="informe-valores-notificaciones upper fracciones" placeholder="00/00">
 					          </div>
 					        </div>
 

@@ -181,6 +181,22 @@ informes['crud']['propiedadesTr'] = {
 ///
 informes['crud']['customBodyEvents'] = {
 	/* -------------------------------------------------------------------------------------------------*/
+	/*           								  MODELO 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"modelo": async (e) => {
+
+		if (e.target.classList.contains('modelo')) {
+
+			informes.sublista = tools.pariente(e.target, 'TR').sublista
+
+			reporteModeloSeleccionado = {datos: tools.copiaLista(informes.sublista), reporte: 'informe'}
+
+			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
 	/*           								REUTILIZAR 											    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"reusar": async (e) => {
@@ -623,6 +639,47 @@ qs('#informes-contenedor .limpiar').addEventListener('click', e => {
 	tools.limpiar('.informe-valores', '', {})
 
 	notificaciones.mensajeSimple('Datos limpiados', false, 'V')
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							INFORME - REUSAR MODELO				 					    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#informes-contenedor .reutilizar').addEventListener('click', e => {
+
+	if (typeof reporteModeloSeleccionado['reporte'] !== 'undefined') {
+
+		if (reporteModeloSeleccionado['reporte'] === 'informe') {
+
+			tools.limpiar('.informe-valores', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.informe-valores', {elemento: e.target, id: 'value'}, {
+				"contenedorConsulta": function fn(lista, grupo) {
+
+					var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+					peticion.onreadystatechange = function() {
+				        if (this.readyState == 4 && this.status == 200) {
+				        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+				        }
+				    };		
+
+				}
+			})
+			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
+
+		} else {
+
+			notificaciones.mensajeSimple('El modelo seleccionado no es válido para este reporte', false, 'F')
+
+			setTimeout(() => {notificaciones.mensajeSimple(`El modelo requerido es: ${reporteModeloSeleccionado['reporte'].toUpperCase()}`, false, 'V')}, 2000)
+
+		}
+
+
+	} else {
+
+		notificaciones.mensajeSimple('Ningún modelo ha sido seleccionado', false, 'F')
+
+	}
 
 })
 

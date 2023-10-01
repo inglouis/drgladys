@@ -1083,7 +1083,7 @@ span.numeracion {
     transition: 0.3s ease all;
 }
 
-[data-crud='limpiar'] {
+[data-crud='limpiar'], [data-crud='reutilizar'] {
     position: relative;
     top: 0px;
     left: 2px;
@@ -1103,7 +1103,7 @@ span.numeracion {
     z-index: 1;
 }
 
-[data-crud='limpiar']:hover {
+[data-crud='limpiar']:hover, [data-crud='reutilizar']:hover {
     border: 2px dashed #262626 !important;
     transition:0.3s ease all;
 }
@@ -1114,7 +1114,7 @@ span.numeracion {
     justify-content: normal !important;
 }
 
-[data-noche] [data-crud='limpiar'] svg {
+[data-noche] [data-crud='limpiar'] svg, [data-noche] [data-crud='reutilizar'] svg {
     color: #fff !important;
 }
 

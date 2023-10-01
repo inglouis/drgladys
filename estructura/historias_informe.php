@@ -83,11 +83,11 @@
 
         <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
           <div>    
-            <input type="text" data-valor="agudeza_od_4" class="infeditar-valores upper decimales" placeholder="OD">
+            <input type="text" data-valor="agudeza_od_4" class="infeditar-valores upper fracciones" placeholder="OD">
           </div>
 
           <div>
-            <input type="text" data-valor="agudeza_oi_4" class="infeditar-valores upper decimales" placeholder="OI">
+            <input type="text" data-valor="agudeza_oi_4" class="infeditar-valores upper fracciones" placeholder="OI">
           </div>  
         </div>
 
@@ -110,11 +110,11 @@
 
         <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
           <div>    
-            <input type="text" data-valor="agudeza_od_1" class="infeditar-valores upper decimales" placeholder="OD">
+            <input type="text" data-valor="agudeza_od_1" class="infeditar-valores upper fracciones" placeholder="OD">
           </div>
 
           <div>
-            <input type="text" data-valor="agudeza_oi_1" class="infeditar-valores upper decimales" placeholder="OI">
+            <input type="text" data-valor="agudeza_oi_1" class="infeditar-valores upper fracciones" placeholder="OI">
           </div>  
         </div>
 
@@ -137,11 +137,11 @@
 
         <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
           <div>    
-            <input type="text" data-valor="agudeza_od_lectura" class="infeditar-valores upper decimales" placeholder="OD">
+            <input type="text" data-valor="agudeza_od_lectura" class="infeditar-valores upper" placeholder="OD">
           </div>
 
           <div>
-            <input type="text" data-valor="agudeza_oi_lectura" class="infeditar-valores upper decimales" placeholder="OI">
+            <input type="text" data-valor="agudeza_oi_lectura" class="infeditar-valores upper" placeholder="OI">
           </div>  
         </div>
 
@@ -167,12 +167,12 @@
 
         <div>
           <label>Ishihara</label>
-          <input type="text" data-valor="test" class="infeditar-valores upper" placeholder="00/00">
+          <input type="text" data-valor="test" class="infeditar-valores upper fracciones" placeholder="00/00">
         </div>
 
         <div>
           <label>Stereo Fly</label>
-          <input type="text" data-valor="reflejo" class="infeditar-valores upper" placeholder="00/00">
+          <input type="text" data-valor="reflejo" class="infeditar-valores upper" placeholder="00s">
         </div>  
 
       </div>
@@ -204,7 +204,7 @@
             <input type="text" data-valor="rx_od_grados" class="infeditar-valores upper" placeholder="0">
             <span   class="informe-grado">°</span>
             <span   class="informe-igual">=</span>
-            <input type="text" data-valor="rx_od_resultado" class="infeditar-valores upper" placeholder="00/00">
+            <input type="text" data-valor="rx_od_resultado" class="infeditar-valores upper fracciones" placeholder="00/00">
           </div>
 
           <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -217,7 +217,7 @@
             <input type="text" data-valor="rx_oi_grados" class="infeditar-valores upper" placeholder="0">
             <span   class="informe-grado">°</span>
             <span   class="informe-igual">=</span>
-            <input type="text" data-valor="rx_oi_resultado" class="infeditar-valores upper" placeholder="00/00">
+            <input type="text" data-valor="rx_oi_resultado" class="infeditar-valores upper fracciones" placeholder="00/00">
           </div>
         </div>
 
@@ -313,6 +313,10 @@
 	    <div style="display: flex; flex-direction: column">
 
 			<div class="crud-botones">
+
+        <button class="modelo btn btn-reusar" title="Reutilizar información del reporte para cualquier historia">
+          <?php echo $_SESSION['botones']['reportes_modelo']?>
+        </button>
 
         <button class="reusar btn btn-reusar" title="Reutilizar información del reporte">
           <?php echo $_SESSION['botones']['reportes_reusar']?>
@@ -477,6 +481,10 @@
           <button class="limpiar" title="Limpiar Contenido" data-crud="limpiar">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
           </button>
+
+          <button class="reutilizar" title="Reutilizar modelo" data-crud="reutilizar">
+            <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M32 96l320 0V32c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l96 96c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-96 96c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160L32 160c-17.7 0-32-14.3-32-32s14.3-32 32-32zM480 352c17.7 0 32 14.3 32 32s-14.3 32-32 32H160v64c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-96-96c-6-6-9.4-14.1-9.4-22.6s3.4-16.6 9.4-22.6l96-96c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 64H480z"/></svg>
+          </button>
         </div>
 
         <div class="cargar" title="[TAB] para enforcar">
@@ -552,11 +560,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_4" class="informe-valores upper decimales" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_4" class="informe-valores upper fracciones" placeholder="OD">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_4" class="informe-valores upper decimales" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_4" class="informe-valores upper fracciones" placeholder="OI">
                   </div>  
                 </div>
 
@@ -579,11 +587,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_1" class="informe-valores upper decimales" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_1" class="informe-valores upper fracciones" placeholder="OD">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_1" class="informe-valores upper decimales" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_1" class="informe-valores upper fracciones" placeholder="OI">
                   </div>  
                 </div>
 
@@ -606,11 +614,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_lectura" class="informe-valores upper decimales" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_lectura" class="informe-valores upper" placeholder="OD">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_lectura" class="informe-valores upper decimales" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_lectura" class="informe-valores upper" placeholder="OI">
                   </div>  
                 </div>
 
@@ -636,12 +644,12 @@
 
                 <div>
                   <label>Ishihara</label>
-                  <input type="text" data-valor="test" class="informe-valores upper" placeholder="00/00">
+                  <input type="text" data-valor="test" class="informe-valores upper fracciones" placeholder="00/00">
                 </div>
 
                 <div>
                   <label>Stereo Fly</label>
-                  <input type="text" data-valor="reflejo" class="informe-valores upper" placeholder="00/00">
+                  <input type="text" data-valor="reflejo" class="informe-valores upper" placeholder="00s">
                 </div>  
 
               </div>
@@ -673,7 +681,7 @@
                     <input type="text" data-valor="rx_od_grados" class="informe-valores upper" placeholder="0">
                     <span   class="informe-grado">°</span>
                     <span   class="informe-igual">=</span>
-                    <input type="text" data-valor="rx_od_resultado" class="informe-valores upper" placeholder="00/00">
+                    <input type="text" data-valor="rx_od_resultado" class="informe-valores upper fracciones" placeholder="00/00">
                   </div>
 
                   <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -686,7 +694,7 @@
                     <input type="text" data-valor="rx_oi_grados" class="informe-valores upper" placeholder="0">
                     <span   class="informe-grado">°</span>
                     <span   class="informe-igual">=</span>
-                    <input type="text" data-valor="rx_oi_resultado" class="informe-valores upper" placeholder="00/00">
+                    <input type="text" data-valor="rx_oi_resultado" class="informe-valores upper fracciones" placeholder="00/00">
                   </div>
                 </div>
 

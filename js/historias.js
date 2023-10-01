@@ -120,6 +120,9 @@ window.camposTextosPersonalizables.init()
 /////////////////////////////////////////////////////
 var inputsDecimales = new InputsDecimales('.decimales')
 	inputsDecimales.init()
+
+var inputsFracciones = new InputsDecimales('.fracciones', '/')
+	inputsFracciones.init()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
@@ -260,15 +263,18 @@ window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamento
 window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
 
 /////////////////////////////////////////////////////
+//VARIABLES GLOBALES
+/////////////////////////////////////////////////////
 window.procesar = true
 window.idSeleccionada = 0
-/////////////////////////////////////////////////////
+
 export var 
 	prevenirCierrePop = false,
 	permitirLimpiezaReportes = true,
 	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
 
+window.reporteModeloSeleccionado = {}
 window.prevenirCierreReporte = false
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
