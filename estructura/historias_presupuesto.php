@@ -204,7 +204,7 @@
               <div style="height: 100%; margin: 0px">
                 
                 <label class="requerido">Presupuesto</label>
-                <textarea id="presupuesto-informacion" data-previa="presupuesto-previa" data-valor="presupuesto" rows="6" class="presupuesto-valores upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
+                <textarea id="presupuesto-informacion" data-previa="presupuesto-previa" data-valor="presupuesto" rows="6" class="presupuesto-valores presupuesto-valores-modelo upper lleno textarea-espaciado contenedor-personalizable" placeholder="Cargar información..." style="resize: none" data-scroll></textarea>
 
               </div>
 

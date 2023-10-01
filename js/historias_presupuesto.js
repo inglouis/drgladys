@@ -104,7 +104,9 @@ presupuestos['crud']['customBodyEvents'] = {
 
 			presupuestos.sublista = tools.pariente(e.target, 'TR').sublista
 
-			reporteModeloSeleccionado = {datos: tools.copiaLista(presupuestos.sublista), reporte: 'presupuesto'}
+			var lista = tools.copiaLista(presupuestos.sublista)
+
+			reporteModeloSeleccionado = {datos: {presupuesto: lista.presupuesto}, reporte: 'presupuesto'}
 
 			notificaciones.mensajeSimple('Modelo copiado', false, 'V')
 
@@ -515,8 +517,8 @@ qs('#presupuestos-contenedor .reutilizar').addEventListener('click', e => {
 
 		if (reporteModeloSeleccionado['reporte'] === 'presupuesto') {
 
-			tools.limpiar('.presupuesto-valores', '', {})
-			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.presupuesto-valores', {elemento: e.target, id: 'value'}, {})
+			tools.limpiar('.presupuesto-valores-modelo', '', {})
+			rellenar.contenedores(reporteModeloSeleccionado['datos'], '.presupuesto-valores-modelo', {elemento: e.target, id: 'value'}, {})
 			notificaciones.mensajeSimple('Modelo cargado', false, 'V')
 
 		} else {

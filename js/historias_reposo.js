@@ -610,7 +610,7 @@ qs('#reposos-dias-insertar').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-insertar').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -629,7 +629,7 @@ qs('#reposos-inicio-insertar').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-insertar').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-insertar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -642,7 +642,7 @@ qs('#reposos-dias-editar').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-editar').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -661,7 +661,7 @@ qs('#reposos-inicio-editar').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-editar').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-editar').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -674,7 +674,7 @@ qs('#reposos-dias-notificaciones').addEventListener('input', e => {
 	var now = new Date(qs('#reposos-inicio-notificaciones').value)
 		now.setDate(now.getDate() + Number(e.target.value) - 1)
 
-	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 
 })
 
@@ -693,7 +693,7 @@ qs('#reposos-inicio-notificaciones').addEventListener('change', e => {
 	var now = new Date(qs('#reposos-inicio-notificaciones').value)
 		now.setDate(now.getDate() + reposo)
 
-	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+	qs('#reposos-fecha-notificaciones').value = now.toLocaleDateString('es-CA',{timeZone: "America/Caracas", weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()
 })
 
 /* -------------------------------------------------------------------------------------------------*/
