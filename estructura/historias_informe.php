@@ -473,7 +473,7 @@
                 
     <div data-familia class="contenedor contenedor-reportes" id="informes-contenedor">
 
-      <div class="izquierda" style="width: 35%">
+      <div class="izquierda" style="width: 40%">
 
         <div class="subtitulo">
           Cargar nuevo informe médico
