@@ -135,6 +135,44 @@
             return json_encode($this->i_pdo($sql, $args, true)->fetch(PDO::FETCH_ASSOC));
         }
 
+        public function historias_notificar($args) {
+
+            $sql = "update miscelaneos.usuarios SET notificacion_historias = ? WHERE id_usuario = ?;";
+
+            if ($args[1] == 1) {
+
+                $id_usuario = $_SESSION['usuario']['notificar_usuario'];
+
+            } else {
+
+                $id_usuario = $_SESSION['usuario']['id_usuario'];
+
+            }
+
+            $resultado = $this->actualizar($sql, [$args[0], $id_usuario]);
+
+            if ($resultado == 'exito') {
+                
+                return 'exito';
+
+            } else {
+
+                return 'ERROR'.$resultado;
+
+            }
+
+        }
+
+        public function historias_notificar_consultar($args) {
+
+            $sql = "select notificacion_historias FROM miscelaneos.usuarios WHERE id_usuario = ?;";
+
+            $resultado = json_decode($this->i_pdo($sql, [$_SESSION['usuario']['id_usuario']], true)->fetchColumn(), true);
+
+            return $resultado;
+
+        }
+
         public function insertar_historia($args) {
 
             $cedulaHijo = $args[0].'-'.$args[1];
@@ -214,7 +252,29 @@
                     )
                 ";
 
-                return $this->insertar($sql, $args);
+                $resultado = $this->insertar($sql, $args);
+
+                if ($resultado == 'exito') {
+
+                    $notificacion = $this->historias_notificar([1, 1]);
+                    
+                    if ($notificacion == 'exito') {
+
+                        $this->controlador_cambios_activar([]);
+
+                        return $resultado;
+
+                    } else {
+
+                        return 'ERROR'.$resultado;
+
+                    }
+
+                } else {
+
+                    return 'ERROR'.$resultado;
+
+                }
 
             } else {
 

@@ -751,6 +751,14 @@ historias['crud']['customBodyEvents'] = {
 
 historias['crud'].botonBuscar('buscar', false)
 
+qs('#buscar').addEventListener('click', async e => {
+
+	await tools.fullAsyncQuery('historias', 'historias_notificar', [0, 0])
+
+	e.target.classList.remove('notificacion-alerta-before')
+
+}) 
+
 //3)---------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //								EVENTOS RELACIONADOS A LA HISTORIA                                              
@@ -1906,7 +1914,8 @@ export var
 	notificadosBoton = qs('#desplegable-abrir-notificados')
 
 var recipesDesplegable = qs('#desplegable-recipes'),
-	recipesBoton = qs('#desplegable-abrir-recipes')
+	recipesBoton       = qs('#desplegable-abrir-recipes'),
+	historiasBoton     = qs('#buscar')
 
 setInterval(async () => {
 
@@ -1932,11 +1941,11 @@ setInterval(async () => {
 
         //ALERTA VISUAL DE NOTIFICACION DE REPORTES 
         //-----------------------------------------
-        //lnr = longitud_notificaciones_reportes
+        //consulta = longitud de los reportes
 
-        var lnr = await tools.fullAsyncQuery('historias_notificaciones', 'notificacion_reportes_cantidad', [])
+        var consulta = await tools.fullAsyncQuery('historias_notificaciones', 'notificacion_reportes_cantidad', [])
 
-        if (lnr > 0) {
+        if (consulta > 0) {
 
         	if (!notificacionesPop.classList.contains('popup-activo') && usuario.rol.trim() === 'DOCTOR') {
 
@@ -1966,11 +1975,11 @@ setInterval(async () => {
 
         //ALERTA VISUAL DE NOTIFICACION DE REPORTES 
         //-----------------------------------------
-        //lnr = longitud_notificaciones_reportes
+        //consulta = longitud_notificaciones_reportes
 
-        var lnr = await tools.fullAsyncQuery('historias_recipes', 'notificacion_recipes_cantidad', [])
+        consulta = await tools.fullAsyncQuery('historias_recipes', 'notificacion_recipes_cantidad', [])
 
-        if (lnr > 0) {
+        if (consulta > 0) {
 
 	        if (recipesDesplegable.style.display === 'none' && usuario.rol.trim() === 'ADMINISTRACION') {
 	        	
@@ -1980,6 +1989,20 @@ setInterval(async () => {
 
         }
 
+        //------------------------------------------------------------------
+    	//					NOTIFICACIONES HISTORIAS
+        //------------------------------------------------------------------
+        //consulta = estado de la historia booleana
+
+        consulta = await tools.fullAsyncQuery('historias', 'historias_notificar_consultar', [])
+
+        if (consulta.trim() === '1') {
+
+	        historiasBoton.classList.add('notificacion-alerta-before')
+
+        }
+
+        //--------------------------------------------------------------------------=
     	await tools.fullAsyncQuery('historias', 'controlador_cambios_desactivar', [])
 
     }
