@@ -397,7 +397,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #buscar:hover::after, [data-estilo="buscar"]:hover::after {
-    content: "Buscar o refrescar tabla";
+    content: "BUSCAR / REFRESCAR LISTA";
     opacity: 1;
     min-width:300px;
 }
@@ -2736,7 +2736,7 @@ span.numeracion {
 /*-----------------------------------------------------------*/
 
 #historias-insertar:hover::after {
-    content: "Cargar Nueva Historia";
+    content: "CARGAR NUEVA HISTORIA";
     opacity: 1;
     width:350px;
 }
@@ -2814,7 +2814,7 @@ span.numeracion {
 
 }
 
-.notificacion-alerta::after {
+.notificacion-alerta::after, .notificacion-alerta-before::before {
     content: "!";
     width: 20px;
     height: 20px;
@@ -2828,8 +2828,15 @@ span.numeracion {
     color: #fff;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
     animation: notificacion-alerta 0.8s infinite;
+}
+
+.notificacion-alerta-before::before {
+    align-items: center;
+}
+
+.notificacion-alerta::after {
+    align-items: flex-end;
 }
 
 @keyframes notificacion-alerta {
