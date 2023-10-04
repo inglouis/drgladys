@@ -43,6 +43,10 @@ qs('#bio-rango').addEventListener('input', e => {
     qs('#bio-valor').innerHTML = e.target.value
 
 })
+////////////////////////////////////////////////////////////////////////////////////////////////
+qs('#bio-reiniciar').addEventListener('click', e => {
+	imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
+})
 
 /* -------------------------------------------------------------------------------------------------*/
 /* ----------------------------------- CANVAS - FONDO DE OJO ---------------------------------------*/
@@ -65,6 +69,10 @@ qs('#fondo-rango').addEventListener('input', e => {
 
     qs('#fondo-valor').innerHTML = e.target.value
 
+})
+////////////////////////////////////////////////////////////////////////////////////////////////
+qs('#fondo-reiniciar').addEventListener('click', e => {
+	fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //COMO CAPTURAR LAS IMAGENES
