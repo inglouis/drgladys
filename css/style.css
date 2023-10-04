@@ -4499,6 +4499,26 @@ div#tabla-notificados-contenedor .titulo::after {
     text-align: center;
 }
 
+.evolucion-separador {
+    padding: 5px;
+}
+
+.evolucion-grado {
+    position: relative;
+    top: -15px;
+    font-size: 20px;
+}
+
+.evolucion-igual {
+    position: relative;
+    left: -4px;
+    font-size: 20px;
+}
+
+#evoluciones-cargar-contenedor .rx input {
+    height: 32px !important;
+}
+
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/

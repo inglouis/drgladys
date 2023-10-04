@@ -380,6 +380,88 @@
 
               </div>
 
+              <div class="titulo">
+                <div>3</div>
+                <div>Refracción</div>
+              </div>
+
+              <div class="columnas rx" style="flex-direction: column; align-items: baseline;">
+
+                <label style="font-size: 20px; height: 25px; border-bottom: 1px solid; width: 100%; margin-bottom: 10px;">
+                  RX
+                </label>
+
+                <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 3px">OD:</label>
+                    <input type="checkbox" data-valor="rx_od_signo_1" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_1" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_od_signo_2" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_2" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="informe-separador">X</span>
+                    <input type="text" data-valor="rx_od_grados" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="informe-grado">°</span>
+                    <span   class="informe-igual">=</span>
+                    <input type="text" data-valor="rx_od_resultado" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  </div>
+
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 9px">OI:</label>
+                    <input type="checkbox" data-valor="rx_oi_signo_1" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_1" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_oi_signo_2" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_2" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="informe-separador">X</span>
+                    <input type="text" data-valor="rx_oi_grados" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="informe-grado">°</span>
+                    <span   class="informe-igual">=</span>
+                    <input type="text" data-valor="rx_oi_resultado" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="columnas rx" style="flex-direction: column; align-items: baseline;">
+
+                <label style="font-size: 20px; height: 25px; border-bottom: 1px solid; width: 100%; margin-bottom: 10px;">
+                  RX: CICLOPLAGIA
+                </label>
+
+                <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 3px">OD:</label>
+                    <input type="checkbox" data-valor="rx_od_signo_1_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_1_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_od_signo_2_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_od_valor_2_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="evolucion-separador">X</span>
+                    <input type="text" data-valor="rx_od_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="evolucion-grado">°</span>
+                    <span   class="evolucion-igual">=</span>
+                    <input type="text" data-valor="rx_od_resultado_ciclo" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  </div>
+
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 9px">OI:</label>
+                    <input type="checkbox" data-valor="rx_oi_signo_1_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_1_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="rx_oi_signo_2_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="rx_oi_valor_2_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="evolucion-separador">X</span>
+                    <input type="text" data-valor="rx_oi_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="evolucion-grado">°</span>
+                    <span   class="evolucion-igual">=</span>
+                    <input type="text" data-valor="rx_oi_resultado_ciclo" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="titulo">
+                <div>4</div>
+                <div>Biomicroscopía</div>
+              </div>
+
             </section>
 
             <section id="crud-notificaciones-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">
