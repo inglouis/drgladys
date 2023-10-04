@@ -4451,10 +4451,52 @@ div#tabla-notificados-contenedor .titulo::after {
     transition: 0.3s easea all;
 }
 
+#evoluciones-cargar-contenedor .pruebas {
+
+}
+
 .evoluciones-seccion {
     background: #ffffff91;
     height: 100%;
     display: flex;
+}
+
+#evoluciones-cargar-contenedor .pruebas {
+    background: url(../imagenes/pruebas.jpg);
+}
+
+#evoluciones-cargar-contenedor .motilidad {
+    background: url(../imagenes/motilidad.jpg); 
+}
+
+#evoluciones-cargar-contenedor .pruebas, #evoluciones-cargar-contenedor .motilidad {
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    height: 330px;
+    width: 330px;
+    column-gap: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 4px 8px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section {
+    display: grid;
+    justify-content: stretch;
+    align-items: center;
+    column-gap: 60px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section div {
+    margin: 0px !important;
+}
+
+#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input {
+    position: relative;
+    text-align: center;
 }
 
 /*-----------------------------------------------------*/

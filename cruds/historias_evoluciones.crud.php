@@ -72,7 +72,7 @@
 
               </div>
 
-              <div class="titulo" id="evoluciones-titulo-examen">
+              <div class="titulo">
                 <div>1</div>
                 <div>Examen oftalmológico</div>
               </div>
@@ -240,7 +240,7 @@
 
               </div>
 
-              <div class="titulo" id="evoluciones-titulo-examen">
+              <div class="titulo">
                 <div>2</div>
                 <div>Pruebas & Motilidad</div>
               </div>
@@ -264,46 +264,119 @@
 
               </div>
 
-              <div class="columnas" style="margin-top: 20px">
+              <div class="columnas" style="margin-top: 10px">
 
-                <div class="pruebas">
-                  <section>
-                    <input type="text">
-                  </section>
-
-                  <section>
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
-                  </section>
-
-                  <section>
-                    <input type="text">
-                    <input type="text">
-                  </section>
+                <div style="display: flex; flex-direction: row; column-gap: 10px;">
+                  <label style="width: 50%; font-size: 16px">OD:</label>
+                  <label style="width: 50%; font-size: 16px">OI:</label>
                 </div>
 
-                <div class="pruebas">
-                  <section>
-                    <input type="text">
+              </div>
+
+              <div class="columnas">
+
+                <div class="pruebas borde-estilizado">
+
+                  <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
+                    <input type="text" data-valor="pruebas_od_1" class="evoluciones-valores upper" placeholder="---" style="width: 70px;">
                   </section>
 
-                  <section>
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
+                  <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
+                    <input type="text" data-valor="pruebas_od_2" class="evoluciones-valores upper" placeholder="---">
+                    <input type="text" data-valor="pruebas_od_3" class="evoluciones-valores upper" placeholder="---">
+                    <input type="text" data-valor="pruebas_od_4" class="evoluciones-valores upper" placeholder="---">
                   </section>
 
-                  <section>
-                    <input type="text">
-                    <input type="text">
-                    <input type="text">
+                  <section style="grid-template-columns: auto auto auto; align-self: end;">
+                    <input type="text" data-valor="pruebas_od_5" class="evoluciones-valores upper" placeholder="---" style="height: inherit; align-self: start; display: grid; top: -30px; left: 30px;">
+                    <div style="width: 100%">
+                        <input type="text" data-valor="pruebas_od_6" class="evoluciones-valores upper" placeholder="---" style="height: 20px">
+                        <input type="text" data-valor="pruebas_od_7" class="evoluciones-valores upper" placeholder="---" style="height: 20px">
+                    </div>
+                    <input type="text" data-valor="pruebas_od_8" class="evoluciones-valores upper" placeholder="---" style="height: inherit; align-self: start; display: grid; top: -30px; right: 30px;">
                   </section>
                   
-                  <section>
-                    <input type="text">
-                  </section>
                 </div>
+
+                <div class="pruebas borde-estilizado">
+
+                  <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
+                    <input type="text" data-valor="pruebas_oi_1" class="evoluciones-valores upper" placeholder="---" style="width: 70px;">
+                  </section>
+
+                  <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
+                    <input type="text" data-valor="pruebas_oi_2" class="evoluciones-valores upper" placeholder="---">
+                    <input type="text" data-valor="pruebas_oi_3" class="evoluciones-valores upper" placeholder="---">
+                    <input type="text" data-valor="pruebas_oi_4" class="evoluciones-valores upper" placeholder="---">
+                  </section>
+
+                  <section style="grid-template-columns: auto auto auto; align-self: end;">
+                    <input type="text" data-valor="pruebas_oi_5" class="evoluciones-valores upper" placeholder="---" style="height: inherit; align-self: start; display: grid; top: -30px; left: 30px;">
+                    <div style="width: 100%">
+                        <input type="text" data-valor="pruebas_oi_6" class="evoluciones-valores upper" placeholder="---" style="height: 20px">
+                        <input type="text" data-valor="pruebas_oi_7" class="evoluciones-valores upper" placeholder="---" style="height: 20px">
+                    </div>
+                    <input type="text" data-valor="pruebas_oi_8" class="evoluciones-valores upper" placeholder="---" style="height: inherit; align-self: start; display: grid; top: -30px; right: 30px;">
+                  </section>
+                  
+                </div>
+
+              </div>
+
+              <div class="columnas" style="margin-top: 10px">
+                <div>
+                  <label>MOTILIDAD</label>
+                </div>
+              </div>
+
+              <div class="columnas">
+
+                <div style="display: flex; flex-direction: row; column-gap: 10px;">
+                  <label style="width: 50%; font-size: 16px">OD:</label>
+                  <label style="width: 50%; font-size: 16px">OI:</label>
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                  <div class="motilidad borde-estilizado">
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                  </div>
+
+                  <div class="motilidad borde-estilizado">
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                    <section>
+                      <input type="text" placeholder="---">
+                      <input type="text" placeholder="---">
+                    </section>
+
+                  </div>
 
               </div>
 
