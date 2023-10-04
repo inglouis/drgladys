@@ -4299,7 +4299,88 @@ div#tabla-notificados-contenedor .titulo::after {
 .antecedentes-status:nth-child(2)::after {
     content: "Solo antecedentes Desactivadas [D]";
 }
+/*-----------------------------------------------------*/
+/*---------------------- DIBUJAR ----------------------*/
+/*-----------------------------------------------------*/
 
+.dibujar-contenedor-v {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    align-self: flex-start;
+}
+
+.dibujar-contenedor-v .titulo {
+    margin: 0px;
+    display: flex;
+    height: 20px;
+    align-items: end;
+}
+
+.dibujar-herramientas-v {
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+}
+
+.dibujar-colores-v {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.dibujar-colores-v button {
+    height: 30px;
+    border-radius: 5px;
+}
+
+.dibujar-colores-v button:hover {
+    margin: 0px 5px;
+}
+
+.dibujar-rango-v {
+    display: flex; 
+    flex-direction: row !important;
+}
+
+.dibujar-rango-v input {
+    height: 100%;
+}
+
+.dibujar-rango-v div {
+
+}
+
+.dibujar-botones-v {
+    display: flex !important;
+    flex-direction: row !important;
+    border-top: 1px dashed #262626;
+    padding-top: 10px;
+    justify-content: space-evenly;
+}
+
+.dibujar-botones-v button {
+    width: 25px;
+    border: 1px solid #262626;
+    height: 20px;
+}
+
+.dibujar-formas-v {
+    display: grid !important;
+    border-top: 1px dashed #262626;
+    padding-top: 10px;
+    grid-template-columns: auto auto auto;
+    justify-content: space-evenly;
+    row-gap: 10px;
+}
+
+.dibujar-formas-v button {
+    width: 25px;
+    border: 1px solid #262626;
+    height: 20px;
+}
 
 /*-----------------------------------------------------*/
 /*--------------------EVOLUCIONES----------------------*/

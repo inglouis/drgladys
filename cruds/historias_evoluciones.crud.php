@@ -72,6 +72,15 @@
 
               </div>
 
+              <div class="columnas">
+                
+                <div>     
+                  <label>Nota inicial:</label>
+                  <textarea rows="2" id="evoluciones-nota" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
               <div class="titulo">
                 <div>1</div>
                 <div>Examen oftalmológico</div>
@@ -462,41 +471,94 @@
                 <div>Biomicroscopía</div>
               </div>
 
-              <div class="columnas">
+              <div class="columnas" style="align-items: baseline;">
                 
-                <section>
+                <section class="dibujar-herramientas-v">
                   
-                  <div style="display: flex; flex-direction: column; width: 100px;">
+                  <div class="dibujar-colores-v">
           
-                    <button class="bio-dibujar" style="background: black" data-color="black"></button>
-                    <button class="bio-dibujar" style="background: red" data-color="red"></button>
-
-                    <div style="display: flex; flex-direction: row;">
-                        <input id="bio-rango" type="range" min="1" max="5" value="5" class="bio-slider" style="width: 100px;">
-                        <div id="bio-valor"></div>
-                    </div>
+                    <button class="bio-dibujar" data-color="black"></button>
+                    <button class="bio-dibujar" data-color="red"></button>
+                    <button class="bio-dibujar" data-color="blue"></button>
+                    <button class="bio-dibujar" data-color="yellow"></button>
+                    <button class="bio-dibujar" data-color="orange"></button>
+                    <button class="bio-dibujar" data-color="green"></button>
+                    <button class="bio-dibujar" data-color="purple"></button>
+                    <button class="bio-dibujar" data-color="pink"></button>
+                    <button class="bio-dibujar" data-color="brown"></button>
 
                   </div>
 
-                  <div>
+                  <div class="dibujar-rango-v">
+                      <input id="bio-rango" type="range" min="1" max="5" value="5" class="bio-slider">
+                      <div id="bio-valor"></div>
+                  </div>
+
+                  <div class="dibujar-botones-v">
                     
-                    <button id="bio-seleccionar">Seleccionar</button>
-                    <button id="bio-texto">Texto</button>
-                    <button id="bio-remover" disabled="disabled">Quitar</button>
-                    <!--<button id="bio-capturar">Capturar</button>-->
+                    <button id="bio-seleccionar" title="Seleccionar objeto">
+                      <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path fill="currentColor" d="M0 55.2V426c0 12.2 9.9 22 22 22c6.3 0 12.4-2.7 16.6-7.5L121.2 346l58.1 116.3c7.9 15.8 27.1 22.2 42.9 14.3s22.2-27.1 14.3-42.9L179.8 320H297.9c12.2 0 22.1-9.9 22.1-22.1c0-6.3-2.7-12.3-7.4-16.5L38.6 37.9C34.3 34.1 28.9 32 23.2 32C10.4 32 0 42.4 0 55.2z"/></svg>
+                    </button>
+                    <button id="bio-texto" title="Escribir">
+                      <svg class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+                    </button>
+                    <button id="bio-remover" disabled="disabled" title="Eliminar objeto seleccionado">
+                      <svg class="iconos-b" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                    </button>
 
                   </div>
 
+                  <div class="dibujar-formas-v">
+                    
+                    <button id="bio-forma-1" title="Forma1">F</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
 
+                  </div>
+
+                </section>
+
+                <section class="dibujar-contenedor-v">
+                  
+                  <section class="titulo">
+                    <label style="width: 50%; text-align: center; font-size: 20px; font-weight: bold; border-bottom: 1px solid; margin-bottom: 2px;">OD:</label>
+                    <label style="width: 50%; text-align: center; font-size: 20px; font-weight: bold; border-bottom: 1px solid; margin-bottom: 2px;">OI:</label>
                   </section>
 
-                <section>
-                  
-                  <canvas id="bio-imagen" width="467" height="272"></canvas>
+                  <canvas id="bio-imagen" width="513" height="309"></canvas>
 
                 </section>
 
               </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Nota biomicroscopía OD:</label>
+                  <textarea rows="3" id="evoluciones-nota-b-od" data-previa="evoluciones-previa" data-valor="nota-b-od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+                <div>     
+                  <label>Nota biomicroscopía OI:</label>
+                  <textarea rows="3" id="evoluciones-nota-b-oi" data-previa="evoluciones-previa" data-valor="nota-b-oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
+              <div class="titulo">
+                <div>5</div>
+                <div>Fondo de ojo</div>
+              </div>
+
 
             </section>
 

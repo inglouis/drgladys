@@ -123,6 +123,8 @@ export class Canvas {
 
         document.querySelectorAll(elementos).forEach(btn => {
 
+            btn.style.background = btn.dataset.color;;
+
             btn.addEventListener('click', e => {
 
                 th._canvas.isDrawingMode = true;
