@@ -254,11 +254,17 @@
                 <div>Pruebas & Motilidad</div>
               </div>
 
+              <div class="columnas" style="margin-top: 10px">
+                <div>
+                  <label style="font-size: 20px; border-bottom: 1px solid; width: 100%;">PRUEBAS</label>
+                </div>
+              </div>
+
+
               <div class="columnas" style="align-items: end;">
               
                 <div>
                   
-                  <label>Pruebas</label>
                   <select data-valor="pruebas" class="evoluciones-valores upper">
                     <option value="0">COVER TEST (CT)</option>
                     <option value="1">KRIMSKY TEST (KY)</option>
@@ -334,7 +340,7 @@
 
               <div class="columnas" style="margin-top: 10px">
                 <div>
-                  <label>MOTILIDAD</label>
+                  <label style="font-size: 20px; border-bottom: 1px solid; width: 100%;">MOTILIDAD</label>
                 </div>
               </div>
 
@@ -351,38 +357,38 @@
 
                   <div class="motilidad borde-estilizado">
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: end;">
+                      <input type="text" data-valor="motilidad_od_1" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_2" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: center;">
+                      <input type="text" data-valor="motilidad_od_3" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_4" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: start;">
+                      <input type="text" data-valor="motilidad_od_5" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_6" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
                   </div>
 
                   <div class="motilidad borde-estilizado">
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                   <section style="grid-template-columns: auto auto; align-self: end;">
+                      <input type="text" data-valor="motilidad_oi_1" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_2" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: center;">
+                      <input type="text" data-valor="motilidad_oi_3" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_4" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: start;">
+                      <input type="text" data-valor="motilidad_oi_5" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_6" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
                   </div>
@@ -618,7 +624,7 @@
 
                 <section class="dibujar-contenedor-v">
                 
-                  <canvas id="fondo-imagen" width="513" height="309"></canvas>
+                  <canvas id="fondo-imagen" width="513" height="360"></canvas>
 
                 </section>
 

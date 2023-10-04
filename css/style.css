@@ -4580,6 +4580,11 @@ div#tabla-notificados-contenedor .titulo::after {
     text-align: center;
 }
 
+#evoluciones-cargar-contenedor .motilidad {
+    row-gap: 30px;
+    justify-content: stretch;
+}
+
 .evolucion-separador {
     padding: 5px;
 }
