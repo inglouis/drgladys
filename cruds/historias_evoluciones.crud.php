@@ -528,12 +528,7 @@
                 </section>
 
                 <section class="dibujar-contenedor-v">
-                  
-                  <section class="titulo">
-                    <label style="width: 50%; text-align: center; font-size: 20px; font-weight: bold; border-bottom: 1px solid; margin-bottom: 2px;">OD:</label>
-                    <label style="width: 50%; text-align: center; font-size: 20px; font-weight: bold; border-bottom: 1px solid; margin-bottom: 2px;">OI:</label>
-                  </section>
-
+                
                   <canvas id="bio-imagen" width="513" height="309"></canvas>
 
                 </section>
@@ -559,6 +554,210 @@
                 <div>Fondo de ojo</div>
               </div>
 
+              <div class="columnas" style="align-items: baseline;">
+                
+                <section class="dibujar-herramientas-v">
+                  
+                  <div class="dibujar-colores-v">
+          
+                    <button class="fondo-dibujar" data-color="black"></button>
+                    <button class="fondo-dibujar" data-color="red"></button>
+                    <button class="fondo-dibujar" data-color="blue"></button>
+                    <button class="fondo-dibujar" data-color="yellow"></button>
+                    <button class="fondo-dibujar" data-color="orange"></button>
+                    <button class="fondo-dibujar" data-color="green"></button>
+                    <button class="fondo-dibujar" data-color="purple"></button>
+                    <button class="fondo-dibujar" data-color="pink"></button>
+                    <button class="fondo-dibujar" data-color="brown"></button>
+
+                  </div>
+
+                  <div class="dibujar-rango-v">
+                      <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
+                      <div id="fondo-valor"></div>
+                  </div>
+
+                  <div class="dibujar-botones-v">
+                    
+                    <button id="fondo-seleccionar" title="Seleccionar objeto">
+                      <svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path fill="currentColor" d="M0 55.2V426c0 12.2 9.9 22 22 22c6.3 0 12.4-2.7 16.6-7.5L121.2 346l58.1 116.3c7.9 15.8 27.1 22.2 42.9 14.3s22.2-27.1 14.3-42.9L179.8 320H297.9c12.2 0 22.1-9.9 22.1-22.1c0-6.3-2.7-12.3-7.4-16.5L38.6 37.9C34.3 34.1 28.9 32 23.2 32C10.4 32 0 42.4 0 55.2z"/></svg>
+                    </button>
+                    <button id="fondo-texto" title="Escribir">
+                      <svg class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>
+                    </button>
+                    <button id="fondo-remover" disabled="disabled" title="Eliminar objeto seleccionado">
+                      <svg class="iconos-b" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path></svg>
+                    </button>
+
+                  </div>
+
+                  <div class="dibujar-formas-v">
+                    
+                    <button id="fondo-forma-1" title="Forma1">F</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+                    <button title="---">-</button>
+
+                  </div>
+
+                </section>
+
+                <section class="dibujar-contenedor-v">
+                
+                  <canvas id="fondo-imagen" width="513" height="309"></canvas>
+
+                </section>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Fondo de ojo OD:</label>
+                  <textarea rows="3" id="evoluciones-nota-f-od" data-previa="evoluciones-previa" data-valor="nota-f-od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+                <div>     
+                  <label>Fondo de ojo OI:</label>
+                  <textarea rows="3" id="evoluciones-nota-f-oi" data-previa="evoluciones-previa" data-valor="nota-f-oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
+              <div class="titulo">
+                <div>6</div>
+                <div>PIO, Estudios, IDX</div>
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>PIO</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="pio_od" class="evoluciones-valores upper decimales" placeholder="OD - 0.00mmHg">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="pio_oi" class="evoluciones-valores upper decimales" placeholder="OI - 0.00mmHg">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div style="position:relative;">
+
+                  <label>
+                    Estudios:
+                  </label>
+                  
+                  <style>
+                    #cc-estudios-evoluciones .ccContenedor {
+                       width: 95%;
+                    }
+                  </style>
+
+                  <section id="cc-estudios-evoluciones" class="contenedor-consulta evoluciones-valores borde-estilizado" data-valor="referencias">
+
+                    <input type="text" data-estilo="cc-input" class="upper" data-minimo="0" data-ocultar="0" placeholder="Buscar estudios" title="[ENTER] para forzar actualización">
+                    <select data-limit="" data-estilo="cc-select" placeholder="Buscar estudios" data-size="5" data-ocultar="1" data-hide data-absoluto="1" data-scroll style="
+                      height: auto;
+                      border: 1px dashed #5eb6fb;
+                      border-top: none;
+                      background: #ddf4ffc2;
+                      padding: 0px 5px;
+                      margin: 0px;
+                      color: black;
+                    "></select>
+                    <div data-estilo="cc-div" style="background: #fff; min-height: 80px; max-height: 85px; border: none;" data-scroll></div>
+
+                  </section>
+
+                </div>
+
+                <div style="position:relative;">
+
+                  <label>
+                    IDX:
+                  </label>
+                  
+                  <style>
+                    #cc-diagnosticos-evoluciones .ccContenedor {
+                       width: 95%;
+                    }
+                  </style>
+
+                  <section id="cc-diagnosticos-evoluciones" class="contenedor-consulta evoluciones-valores borde-estilizado" data-valor="diagnosticos">
+
+                    <input type="text" data-estilo="cc-input" class="upper" data-minimo="0" data-ocultar="0" placeholder="Buscar diagnósticos" title="[ENTER] para forzar actualización">
+                    <select data-limit="" data-estilo="cc-select" placeholder="Buscar diagnóstico" data-size="5" data-ocultar="1" data-hide data-absoluto="1" data-scroll style="
+                      height: auto;
+                      border: 1px dashed #5eb6fb;
+                      border-top: none;
+                      background: #ddf4ffc2;
+                      padding: 0px 5px;
+                      margin: 0px;
+                      color: black;
+                    "></select>
+                    <div data-estilo="cc-div" style="background: #fff; min-height: 80px; max-height: 85px; border: none;" data-scroll></div>
+
+                  </section>
+
+                </div>
+
+              </div>
+
+              <div class="titulo">
+                <div>7</div>
+                <div>Plan & fórmula</div>
+              </div>
+
+              <div class="columnas rx" style="flex-direction: column; align-items: baseline;">
+
+                <label style="font-size: 20px; height: 25px; border-bottom: 1px solid; width: 100%; margin-bottom: 10px;">
+                  Fórmula
+                </label>
+
+                <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 3px">OD:</label>
+                    <input type="checkbox" data-valor="formula_od_signo_1_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="formula_od_valor_1_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="formula_od_signo_2_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="formula_od_valor_2_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="evolucion-separador">X</span>
+                    <input type="text" data-valor="formula_od_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="evolucion-grado">°</span>
+                  </div>
+
+                  <div style="flex-direction: row; justify-content: center; align-items: center;">
+                    <label style="padding-right: 9px">OI:</label>
+                    <input type="checkbox" data-valor="formula_oi_signo_1_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="formula_oi_valor_1_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <input type="checkbox" data-valor="formula_oi_signo_2_ciclo" class="evoluciones-valores check checksigno">
+                    <input type="text" data-valor="formula_oi_valor_2_ciclo" class="evoluciones-valores upper decimales" placeholder="0.00">
+                    <span   class="evolucion-separador">X</span>
+                    <input type="text" data-valor="formula_oi_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
+                    <span   class="evolucion-grado">°</span>
+                  </div>
+                </div>
+
+              </div>
+
+              <div>     
+                <label>Plan:</label>
+                <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+              </div>
 
             </section>
 
