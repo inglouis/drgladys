@@ -5,6 +5,7 @@ export class Canvas {
         this._canvas = new fabric.Canvas(contenedor, {isDrawingMode: false});
         this._img = undefined
         this._resultado = undefined
+        this._resultado_json = undefined
         this._elementos = {}
 
         this._formato = {
@@ -91,15 +92,23 @@ export class Canvas {
 
     }
 
-    asignarImagen(img) {
+    asignarImagen(img, clase) {
+
+        var th = (typeof clase !== 'undefined') ? clase : this;
 
         if (typeof img !== undefined) {
 
-            this._img = img    
+            th._img = img    
 
         }
         
-        this._canvas.setBackgroundImage(this._img, this._canvas.renderAll.bind(this._canvas));
+        th._canvas.setBackgroundImage(th._img, th._canvas.renderAll.bind(th._canvas));
+
+    }
+
+    asignarImagenJSON(img, json) {
+
+        this._canvas.loadFromJSON(json, this.asignarImagen(img, this))
 
     }
 
@@ -245,6 +254,12 @@ export class Canvas {
 
     }
 
+    capturarImagenJSON() {
+        this._resultado_json = this._canvas.toJSON(this._formato);
+
+        return this._resultado
+    }
+
     removerTeclado(evento) {
         if (evento.keyCode === 46) {
             this._canvas.remove(this._canvas.getActiveObject());
@@ -266,6 +281,11 @@ export class Canvas {
 // window.imgBio = new Canvas('contenedor', 'seleccionar', 'remover', true) //imagen biometria
 
 // imgBio.asignarImagen('/paginas/dibujar/bg.jpg')
+// imgBio.asignarImagenJSON(
+//     '/paginas/dibujar/bg.jpg',
+//     JSON.parse('{"version":"5.3.0","objects":[{"type":"path","version":"5.3.0","originX":"left","originY":"top","left":141.5,"top":71.5,"width":121,"height":95,"fill":null,"stroke":"black","strokeWidth":5,"strokeDashArray":null,"strokeLineCap":"round","strokeDashOffset":0,"strokeLineJoin":"round","strokeUniform":false,"strokeMiterLimit":10,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"path":[["M",194.005,74],["Q",194,74,193.5,74],["Q",193,74,191.5,74],["Q",190,74,188.5,74],["Q",187,74,184.5,74],["Q",182,74,179.5,74],["Q",177,74,174,74.5],["Q",171,75,168,75.5],["Q",165,76,162,76.5],["Q",159,77,157.5,77.5],["Q",156,78,150,84.5],["Q",144,91,144,92],["Q",144,93,144,94.5],["Q",144,96,144,98.5],["Q",144,101,144,102.5],["Q",144,104,145.5,106],["Q",147,108,149.5,110.5],["Q",152,113,154.5,115],["Q",157,117,159.5,119],["Q",162,121,166.5,123],["Q",171,125,174.5,126.5],["Q",178,128,181.5,129],["Q",185,130,188,131],["Q",191,132,201.5,133.5],["Q",212,135,215.5,135.5],["Q",219,136,224,136.5],["Q",229,137,233.5,137.5],["Q",238,138,241.5,138],["Q",245,138,248,138],["Q",251,138,254.5,138],["Q",258,138,260,138],["Q",262,138,263.5,138],["Q",265,138,265,137.5],["Q",265,137,265,136.5],["Q",265,136,263,136],["Q",261,136,258.5,135],["Q",256,134,253,133.5],["Q",250,133,247.5,132.5],["Q",245,132,241.5,132],["Q",238,132,236,132],["Q",234,132,232,132],["Q",230,132,228.5,132],["Q",227,132,226,132],["Q",225,132,224,132],["Q",223,132,222.5,132.5],["Q",222,133,221.5,134.5],["Q",221,136,221,136.5],["Q",221,137,221,138],["Q",221,139,221,141],["Q",221,143,221,144.5],["Q",221,146,221,148.5],["Q",221,151,221,152.5],["Q",221,154,221,155.5],["Q",221,157,221,159],["Q",221,161,221,162.5],["Q",221,164,221,165.5],["Q",221,167,221,167.5],["Q",221,168,221.5,168.5],["L",222.005,169.005]]}],"backgroundImage":{"type":"image","version":"5.3.0","originX":"left","originY":"top","left":0,"top":0,"width":467,"height":272,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeUniform":false,"strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"http://drgladys/paginas/dibujar/bg.jpg","crossOrigin":null,"filters":[]}}')
+// )
+
 // imgBio.asignarDibujadoInicial('black', 5)
 // imgBio.asignarDibujados('.dibujar')
 // imgBio.asignarGrosores('.slider')
@@ -297,6 +317,8 @@ export class Canvas {
  
 //     console.log(imgBio.capturarImagen())
 //     //IMAGEN GUARDADA EN FORMATO BASE64 - ESTE FORMATO SE PUEDE ENVIAR A PHP PARA GENERAR LA IMAGEN Y GUARDARLA EN UNA RUTA
+//     console.log(imgBio.capturarImagenJSON())
+
 //     document.querySelector('#imagen').src = imgBio._resultado;
 
 // });
