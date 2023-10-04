@@ -92,6 +92,10 @@ export class Canvas {
 
     }
 
+    reiniciar() {
+        this._canvas.clear()
+    }
+
     asignarImagen(img, clase) {
 
         var th = (typeof clase !== 'undefined') ? clase : this;
