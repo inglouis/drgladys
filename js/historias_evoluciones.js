@@ -84,3 +84,45 @@ qs('#fondo-reiniciar').addEventListener('click', e => {
 //     console.log(imgBio.capturarImagenJSON())
 
 // });
+
+/* -------------------------------------------------------------------------------------------------*/
+/* --------------------------------------- SALTAR PAGINA -------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+var secciones = qsa('#crud-evoluciones-contenedor .radios input'),
+	saltos = qsa('#crud-evoluciones-contenedor .evoluciones-saltar'),
+	contenedor = qs('#crud-evoluciones-contenedor .filas')
+
+qsa('#crud-evoluciones-contenedor .radios input').forEach((radios, i) => {
+
+	radios.addEventListener('click', e => {
+
+		var altura = saltos[i].getBoundingClientRect().top + contenedor.scrollTop - 170
+
+		contenedor.scrollTo(0, 0)
+		contenedor.scrollTo(0, altura)
+
+	})
+
+})
+
+
+//VOY A TENER QUE USAR DATASETS CON LAS POSICIONES PREESTABLECIDAS PARA CONSEGUIR ESTE COMPORTAMIENTO
+// contenedor.addEventListener("scroll", e => {
+
+//     const maxHeight = contenedor.scrollTop
+
+//     secciones.forEach((seccion) => {
+
+//     	var altura = seccion.getBoundingClientRect().top + contenedor.scrollTop - 170
+
+
+//     	if (altura > maxHeight) {
+
+//     		seccion.checked = true
+
+//     	} else {
+//     		seccion.checked = false
+//     	}
+
+//     })
+// });

@@ -51,11 +51,11 @@
               
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Examen oftalmológico" class="radio-estilizado-1" checked></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pruebas & motilidad" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Refracción" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Biomicroscopía" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Fondo de ojo" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pio, Estudios, IDX" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Plan & Fórmula" class="radio-estilizado-1"></label>
 
               <button id="crud-evoluciones-consejo">i</button>
 
@@ -81,7 +81,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>1</div>
                 <div>Examen oftalmológico</div>
               </div>
@@ -249,7 +249,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>2</div>
                 <div>Pruebas & Motilidad</div>
               </div>
@@ -395,7 +395,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>3</div>
                 <div>Refracción</div>
               </div>
@@ -472,7 +472,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>4</div>
                 <div>Biomicroscopía</div>
               </div>
@@ -558,7 +558,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>5</div>
                 <div>Fondo de ojo</div>
               </div>
@@ -582,8 +582,8 @@
                   </div>
 
                   <div class="dibujar-rango-v">
-                      <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
-                      <div id="fondo-valor"></div>
+                    <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
+                    <div id="fondo-valor"></div>
                   </div>
 
                   <div class="dibujar-botones-v">
@@ -644,7 +644,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>6</div>
                 <div>PIO, Estudios, IDX</div>
               </div>
@@ -729,7 +729,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>7</div>
                 <div>Plan & fórmula</div>
               </div>
