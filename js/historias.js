@@ -131,6 +131,7 @@ window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'in
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', ['presentaciones', 'tratamientos', 'medicamentos'], 27)
+window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'recipes', [], 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -163,6 +164,7 @@ insPop.evtBotones()
 infPop.evtBotones()
 notPop.evtBotones()
 recPop.evtBotones()
+evoPop.evtBotones()
 
 ocuPop.evtBotones()
 proPop.evtBotones()
@@ -197,6 +199,7 @@ window.addEventListener('keyup', (e) => {
 	infPop.evtEscape(e)
 	notPop.evtEscape(e)
 	recPop.evtEscape(e)
+	evoPop.evtEscape(e)
 
 	ocuPop.evtEscape(e)
 	proPop.evtEscape(e)
@@ -455,8 +458,9 @@ historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cue
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
 		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
 		historias['crud'].gBt(['reportes btn btn-imprimir', 'Generar reportes del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos-b"><path fill="currentColor" d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`),
-		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`)
-	], [0, 0, 0, 0], ['VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
+		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`),
+		historias['crud'].gBt(['evoluciones btn btn-general', 'Generar y consultar evoluciones del paciente'], `<svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg>`)
+	], [0, 0, 0, 0, 0], ['VALUE', 'VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
 ])
 
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
@@ -737,6 +741,46 @@ historias['crud']['customBodyEvents'] = {
 			//recipes.cargarTabla(JSON.parse(resultado))
 
 			recPop.pop()
+
+		}
+
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           								EVOLUCIONES											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"evoluciones": async (e) => {
+
+		var button
+
+		if (tools.esDOM(e)) {
+
+			button = e
+
+		} else {
+
+			button = e.target
+			permitirLimpiezaReportes = true
+
+		}
+
+		if (button.classList.contains('evoluciones')) {
+
+			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .evoluciones')
+
+			historias.tr = tools.pariente(button, 'TR')
+			historias.sublista = historias.tr.sublista
+
+			if (permitirLimpiezaReportes) {
+				historias.limpieza()
+				permitirLimpiezaReportes = true
+			}
+
+			rellenar.contenedores(historias.sublista, '.evoluciones-cargar', {elemento: button, id: 'value'}, {})
+
+			//var resultado = await tools.fullAsyncQuery('historias_recipes', 'cargar_recipes', [historias.sublista.id_historia])
+			//recipes.cargarTabla(JSON.parse(resultado))
+
+			evoPop.pop()
 
 		}
 
@@ -1806,6 +1850,10 @@ window.paginacionHistorias = new PaginacionContenedores(
 		"recipes": {
 			"pop": () => {recPop.pop(); permitirLimpiezaReportes = false},
 			"boton": ''
+		},
+		"evoluciones": {
+			"pop": () => {evoPop.pop(); permitirLimpiezaReportes = false},
+			"boton": ''
 		}
 	},
 	historias,
@@ -1832,6 +1880,9 @@ repPop.funciones['apertura'] = {"apertura": () => {
 	if (reporteSeleccionado === 'reposo') {reposos.validarRepresentante()};
 	if (reporteSeleccionado === 'informe') {qs('#tabla-informe').parentElement.scrollTo(0,0)}
 }}
+
+evoPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 10"; window.paginacionHistorias.mostrar()}}
+evoPop.funciones['cierre']   = {"cierre": ()   => { window.paginacionHistorias.ocultar()}}
 
 repPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.ocultar()}}
 
