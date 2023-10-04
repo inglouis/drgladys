@@ -462,6 +462,42 @@
                 <div>Biomicroscopía</div>
               </div>
 
+              <div class="columnas">
+                
+                <section>
+                  
+                  <div style="display: flex; flex-direction: column; width: 100px;">
+          
+                    <button class="bio-dibujar" style="background: black" data-color="black"></button>
+                    <button class="bio-dibujar" style="background: red" data-color="red"></button>
+
+                    <div style="display: flex; flex-direction: row;">
+                        <input id="bio-rango" type="range" min="1" max="5" value="5" class="bio-slider" style="width: 100px;">
+                        <div id="bio-valor"></div>
+                    </div>
+
+                  </div>
+
+                  <div>
+                    
+                    <button id="bio-seleccionar">Seleccionar</button>
+                    <button id="bio-texto">Texto</button>
+                    <button id="bio-remover" disabled="disabled">Quitar</button>
+                    <!--<button id="bio-capturar">Capturar</button>-->
+
+                  </div>
+
+
+                  </section>
+
+                <section>
+                  
+                  <canvas id="bio-imagen" width="467" height="272"></canvas>
+
+                </section>
+
+              </div>
+
             </section>
 
             <section id="crud-notificaciones-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">

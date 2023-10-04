@@ -30,6 +30,7 @@
       </script>
       <script type="module" src="../js/historias.js" defer></script>
       <script type="module" src="../js/historias_evoluciones.js" defer></script>
+      <script src="../librerias/fabric.min.js" defer></script>
       <!--<script type="module" src="../js/main.js" defer></script>-->
       <?php
         include_once('../estructura/reportes_scripts.php');
