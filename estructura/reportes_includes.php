@@ -6,5 +6,4 @@
   include_once('historias_presupuesto.php');
   include_once('historias_reposo.php');
   include_once('historias_general.php');
-
 ?>

@@ -1703,7 +1703,8 @@ span.numeracion {
 #crud-medicamentos-pop,
 #crud-insertar-referencia-pop,
 #crud-insertar-referido-pop,
-#crud-insertar-diagnostico-pop {
+#crud-insertar-diagnostico-pop,
+#crud-evoluciones-pop {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -1952,6 +1953,34 @@ span.numeracion {
     color: #3269a7;
 }
 
+.filas .titulo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 5px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.filas .titulo div:nth-child(1) {
+    background: #009688;
+    color: #fff;
+    border-radius: 100px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: fantasy;
+}
+
+.filas .titulo div:nth-child(2) {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #009688;
+}
+
 .filas-ajustar-1 {
     max-width: 15%; 
     min-width: 40px; 
@@ -2146,6 +2175,32 @@ span.numeracion {
     font-size: x-large;
 }
 
+.checkexpresion {
+    background: #3fa143 !important;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.checkexpresion:checked {
+    background: red !important;
+}
+
+.checkexpresion::after {
+    content: "😊";
+    font-size: x-large;
+    top: -7px;
+    left: -2px;
+    position: relative;
+}
+
+.checkexpresion:checked::after {
+    content: "😠";
+    font-size: x-large;
+    top: 0px;
+    left: 0px;
+    position: relative;
+}
+
 .check[type="checkbox"]:hover {
     box-shadow: 0px 0px 1px 1px #64cfffc2;
     cursor: pointer;
@@ -2246,66 +2301,57 @@ span.numeracion {
 }
 
 /*------------------------radio-----------------------*/
-.radio input[type="radio"] {
-    height: 0;
-    width: 0;
-    visibility: hidden;
+.radio-estilizado-1[type=radio] {
+    --s: 1em;     /* control the size */
+    --c: #009688; /* the active color */
+
+    height: var(--s);
+    aspect-ratio: 1;
+    border: calc(var(--s)/8) solid #939393;
+    padding: calc(var(--s)/8);
+    background: 
+     radial-gradient(farthest-side,var(--c) 94%,#0000) 
+     50%/0 0 no-repeat content-box;
+    border-radius: 50%;
+    outline-offset: calc(var(--s)/10);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    font-size: inherit;
+    transition: .3s;
+    margin: 0px;
 }
 
-.radio {
-    border: 1px solid;
-    border-radius: 100px;
-    width: 20px;
-    left: -20px;
-    top: 3px;
-    display: inline-block;
-    height: 20px;
-    position: relative;
+.radio-estilizado-1[type=radio]:checked {
+    border-color: var(--c);
+    background-size: 100% 100%;
 }
 
-.radio::after {
-    visibility: hidden;
-    background: #fff;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left: 4px;
-    top: 4px;
-    transform: scale(0.2);
-    content: "";
-    transition: 0.1s ease-in;
+.radio-estilizado-1[type=radio]:disabled {
+    background: 
+     linear-gradient(#939393 0 0) 
+     50%/100% 20% no-repeat content-box;
+    opacity: .5;
+    cursor: not-allowed;
 }
 
-.radio-opciones:checked + .radio::after {
-    visibility: visible;
-    transform: scale(1.5);
-    border-radius: 100%;
-    transition: 0.1s ease-in;
+@media print {
+  .radio-estilizado-1[type=radio] {
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    appearance: auto;
+    background: none;
+  }
 }
 
-.radio-opciones:not(:checked) + .radio::after {
-    opacity:0;
-    visibility:hidden;
-    transform: scale(3);
-    border-radius: 100%;
-    transition: 0.2s ease-in;
-}
-
-.radio {
-    background: #fff;
-    border-color: black;
-}
-
-.radio::after {
-    background: #fff;
-}
-
-.radio-opciones:checked + .radio::after {
-    background: red;
-}
-
-.radio-opciones:not(:checked) + .radio::after {
-    background: black;
+.label-radio-estilizado-1 {
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin: 0px;
+    cursor: pointer;
+    height: fit-content;
 }
 
 /*------------------------switch-----------------------*/
@@ -2750,7 +2796,7 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 150px;
+    max-width: 185px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
@@ -4253,10 +4299,91 @@ div#tabla-notificados-contenedor .titulo::after {
 .antecedentes-status:nth-child(2)::after {
     content: "Solo antecedentes Desactivadas [D]";
 }
+/*-----------------------------------------------------*/
+/*---------------------- DIBUJAR ----------------------*/
+/*-----------------------------------------------------*/
 
+.dibujar-contenedor-v {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    align-self: flex-start;
+}
+
+.dibujar-contenedor-v .titulo {
+    margin: 0px;
+    display: flex;
+    height: 20px;
+    align-items: end;
+}
+
+.dibujar-herramientas-v {
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+}
+
+.dibujar-colores-v {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.dibujar-colores-v button {
+    height: 30px;
+    border-radius: 5px;
+}
+
+.dibujar-colores-v button:hover {
+    margin: 0px 5px;
+}
+
+.dibujar-rango-v {
+    display: flex; 
+    flex-direction: row !important;
+}
+
+.dibujar-rango-v input {
+    height: 100%;
+}
+
+.dibujar-rango-v div {
+
+}
+
+.dibujar-botones-v {
+    display: flex !important;
+    flex-direction: row !important;
+    border-top: 1px dashed #262626;
+    padding-top: 10px;
+    justify-content: space-evenly;
+}
+
+.dibujar-botones-v button {
+    width: 25px;
+    border: 1px solid #262626;
+    height: 20px;
+}
+
+.dibujar-formas-v {
+    display: grid !important;
+    border-top: 1px dashed #262626;
+    padding-top: 10px;
+    grid-template-columns: auto auto auto;
+    justify-content: space-evenly;
+    row-gap: 10px;
+}
+
+.dibujar-formas-v button {
+    width: 25px;
+    border: 1px solid #262626;
+    height: 20px;
+}
 
 /*-----------------------------------------------------*/
-/*----------------evoluciones--------------------------*/
+/*--------------------EVOLUCIONES----------------------*/
 /*-----------------------------------------------------*/
 #insertar-evoluciones::after {
     width: 200px;
@@ -4320,6 +4447,158 @@ div#tabla-notificados-contenedor .titulo::after {
     content: "Solo evoluciones Desactivadas [D]";
 }
 
+#crud-evoluciones-pop {
+    min-height: 90%;
+    display: grid;
+    width: 60%;
+    grid-template-rows: 1fr;
+    justify-content: stretch;
+}
+
+#crud-evoluciones-contenedor {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding-top: 20px;
+}
+
+#evoluciones-cargar-contenedor {
+    padding: 10px;
+    column-gap: 10px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-content: stretch;
+    align-items: center;
+}
+
+#crud-evoluciones-secciones {
+    display: flex;
+    column-gap: 10px;
+}
+
+#crud-evoluciones-consejo {
+    background: #d3d3d3;
+    border-radius: 100px;
+    margin-left: 5px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0px 0px 3px 1px #787474;
+}
+
+#crud-evoluciones-secciones button {
+    padding: 2px 0px;
+    padding-left: 10px;
+    background: transparent;
+    text-transform: uppercase;
+    border-bottom: 1px dashed #262626;
+    width: fit-content;
+    font-weight: bold;
+    color: #262626;
+    position: relative;
+}
+
+#crud-evoluciones-contenedor .radios {
+    display: flex;
+    justify-content: center;
+    column-gap: 5px;
+    padding: 0px 0px 8px 0px;
+}
+
+#crud-evoluciones-secciones button::before {
+    content: "";
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: 0.3s easea all;
+}
+
+#crud-evoluciones-secciones button:hover {
+    background: #009688;
+    color: #fff;
+    padding-right: 5px;
+    border-bottom: 1px dashed #fff;
+}
+
+#crud-evoluciones-secciones button:hover::before {
+    background: #fff;
+    transition: 0.3s easea all;
+}
+
+#evoluciones-cargar-contenedor .pruebas {
+
+}
+
+.evoluciones-seccion {
+    background: #ffffff91;
+    height: 100%;
+    display: flex;
+}
+
+#evoluciones-cargar-contenedor .pruebas {
+    background: url(../imagenes/pruebas.jpg);
+}
+
+#evoluciones-cargar-contenedor .motilidad {
+    background: url(../imagenes/motilidad.jpg); 
+}
+
+#evoluciones-cargar-contenedor .pruebas, #evoluciones-cargar-contenedor .motilidad {
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    height: 330px;
+    width: 330px;
+    column-gap: 10px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+    padding: 4px 8px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section {
+    display: grid;
+    justify-content: stretch;
+    align-items: center;
+    column-gap: 60px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section div {
+    margin: 0px !important;
+}
+
+#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input {
+    position: relative;
+    text-align: center;
+}
+
+.evolucion-separador {
+    padding: 5px;
+}
+
+.evolucion-grado {
+    position: relative;
+    top: -15px;
+    font-size: 20px;
+}
+
+.evolucion-igual {
+    position: relative;
+    left: -4px;
+    font-size: 20px;
+}
+
+#evoluciones-cargar-contenedor .rx input {
+    height: 32px !important;
+}
 
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
