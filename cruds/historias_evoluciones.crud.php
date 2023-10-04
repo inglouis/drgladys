@@ -762,7 +762,7 @@
 
               <div>     
                 <label>Plan:</label>
-                <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; margin-bottom: 10px;" data-scroll ></textarea>
               </div>
 
             </section>
