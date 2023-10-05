@@ -158,36 +158,36 @@
                     <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 
@@ -206,36 +206,36 @@
                     <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 

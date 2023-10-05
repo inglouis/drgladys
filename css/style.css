@@ -4355,10 +4355,12 @@ div#tabla-notificados-contenedor .titulo::after {
 
 .dibujar-rango-v input {
     height: 100%;
+    width: 119px;
 }
 
 .dibujar-rango-v div {
-
+    font-weight: bold;
+    border-bottom: 1px dashed;
 }
 
 .dibujar-botones-v {
@@ -4641,7 +4643,7 @@ div#tabla-notificados-contenedor .titulo::after {
     height: 32px !important;
 }
 
-#evoluciones-cargar-contenedor .correccion
+#evoluciones-cargar-contenedor .correccion,
 #evoluciones-cargar-contenedor .allen,
 #evoluciones-cargar-contenedor .jagger,
 #evoluciones-cargar-contenedor .e-direcional,
