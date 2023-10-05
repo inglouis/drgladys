@@ -131,7 +131,7 @@ window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'in
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', ['presentaciones', 'tratamientos', 'medicamentos'], 27)
-window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'recipes', [], 27)
+window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', [], 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -419,6 +419,7 @@ class Historias extends Acciones {
 		setTimeout(() => {
 			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
 			qs('#informe-contenedor-izquierda').scrollTo(0,0)
+			qs('#crud-evoluciones-contenedor .filas').scrollTo(0,0)
 		}, 1000)
 
 		gid('constancia-busqueda').value = ''

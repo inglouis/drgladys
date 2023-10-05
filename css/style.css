@@ -1311,7 +1311,7 @@ span.numeracion {
     column-gap: 5px;
 }
 
-#notas-importantes-contenedor, .notas-importantes-contenedor {
+#notas-importantes-contenedor, .notas-importantes-contenedor, .consejos-contenedor {
   position: absolute;
   right: 35px;
   z-index: 1;
@@ -1322,8 +1322,16 @@ span.numeracion {
   color: #fff;
 }
 
-#notas-importantes-contenedor li {
+#notas-importantes-contenedor li, .consejos-contenedor li {
   padding-top: 10px;
+}
+
+.consejos-contenedor .titulo {
+    font-size: 20px !important; 
+    text-align: left; 
+    border-bottom: 1px dashed #ccc; 
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 /*-------------------reportes------------------*/
 #impresion {
@@ -4477,7 +4485,7 @@ div#tabla-notificados-contenedor .titulo::after {
     column-gap: 10px;
 }
 
-#crud-evoluciones-consejo {
+#crud-evoluciones-aconsejar {
     background: #d3d3d3;
     border-radius: 100px;
     margin-left: 5px;
@@ -4489,6 +4497,34 @@ div#tabla-notificados-contenedor .titulo::after {
     font-weight: bold;
     box-shadow: 0px 0px 3px 1px #787474;
 }
+
+.evoluciones-notificar {
+    background: #ff8100;
+    color: #fff;
+    width: 35px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.evoluciones-confirmar {
+    background: #009688;
+    color: #fff;
+    padding: 10px;
+}
+
+.evoluciones-cancelar {
+    background: #f43659;
+    color: #fff;
+    padding: 10px;
+}
+
+#crud-evoluciones-contenedor button:hover, 
+#crud-evoluciones-contenedor button:hover,
+#crud-evoluciones-contenedor button:hover {
+    background: black;
+}
+
 
 #crud-evoluciones-secciones button {
     padding: 2px 0px;
@@ -4603,6 +4639,49 @@ div#tabla-notificados-contenedor .titulo::after {
 
 #evoluciones-cargar-contenedor .rx input {
     height: 32px !important;
+}
+
+#evoluciones-cargar-contenedor .correccion
+#evoluciones-cargar-contenedor .allen,
+#evoluciones-cargar-contenedor .jagger,
+#evoluciones-cargar-contenedor .e-direcional,
+#evoluciones-cargar-contenedor .numeros,
+#evoluciones-cargar-contenedor .decimales,
+#evoluciones-cargar-contenedor .fracciones,
+#evoluciones-cargar-contenedor .letras {
+    position: relative;
+}
+
+#evoluciones-cargar-contenedor .correccion .tooltip-filtro-reverso::after {
+    content: "CORRECCIÓN";
+}
+
+#evoluciones-cargar-contenedor .allen .tooltip-filtro-reverso::after {
+    content: "ALLEN";
+}
+
+#evoluciones-cargar-contenedor .jagger .tooltip-filtro-reverso::after {
+    content: "JAGGER";
+}
+
+#evoluciones-cargar-contenedor .e-direcional .tooltip-filtro-reverso::after {
+    content: "E - DIRECCIONAL";
+}
+
+#evoluciones-cargar-contenedor .numeros .tooltip-filtro-reverso::after {
+    content: "NÚMEROS";
+}
+
+#evoluciones-cargar-contenedor .decimales .tooltip-filtro-reverso::after {
+    content: "DECIMALES";
+}
+
+#evoluciones-cargar-contenedor .fracciones .tooltip-filtro-reverso::after {
+    content: "FRACCIONES";
+}
+
+#evoluciones-cargar-contenedor .letras .tooltip-filtro-reverso::after {
+    content: "LETRAS";
 }
 
 /*-----------------------------------------------------*/

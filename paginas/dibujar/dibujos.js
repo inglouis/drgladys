@@ -257,7 +257,7 @@ class Canvas {
     capturarImagenJSON() {
         this._resultado_json = this._canvas.toJSON(this._formato);
 
-        return this._resultado
+        return this._resultado_json
     }
 
     removerTeclado(evento) {
@@ -315,7 +315,7 @@ document.querySelector('#rango').addEventListener('input', e => {
 
 document.querySelector('#capturar').addEventListener('click', function () {
  
-    console.log(imgBio.capturarImagen())
+    //console.log(imgBio.capturarImagen())
     //IMAGEN GUARDADA EN FORMATO BASE64 - ESTE FORMATO SE PUEDE ENVIAR A PHP PARA GENERAR LA IMAGEN Y GUARDARLA EN UNA RUTA
     console.log(imgBio.capturarImagenJSON())
 

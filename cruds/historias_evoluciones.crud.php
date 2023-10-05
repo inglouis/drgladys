@@ -49,15 +49,26 @@
 
             <section class="radios">
               
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Examen oftalmológico" class="radio-estilizado-1" checked></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Examen oftalmológico" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pruebas & motilidad" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Refracción" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Biomicroscopía" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Fondo de ojo" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pio, Estudios, IDX" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Plan & Fórmula" class="radio-estilizado-1"></label>
 
-              <button id="crud-evoluciones-consejo">i</button>
+              <div style="position: relative;">
+
+                <button id="crud-evoluciones-aconsejar" title="Consejos para la navegación del formulario">i</button>
+
+                <div id="crud-evoluciones-consejos" data-hidden class="consejos-contenedor" style="right: -277px; top: 25px; width: 700px;">
+
+                  <div class="titulo">Consejo para la navegación del formulario</div>
+
+                  <img src="../imagenes/teclado.png" style="width: 100%; height: 100%;">
+
+                </div>
+                
+              </div>
 
             </section>
 
@@ -99,36 +110,36 @@
                     <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 
@@ -773,9 +784,33 @@
 
             </section>
 
-            <section id="crud-notificaciones-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">
-              <button class="botones-formularios confirmar">CONFIRMAR</button>
-              <button class="botones-formularios cerrar">CANCELAR</button> 
+            <section id="crud-notificaciones-botones" data-crud='botones-evoluciones' style="column-gap: 10px; padding: 10px 10px 0px 10px; justify-content: center; display: flex;">
+
+              <?php 
+                if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+              ?>
+                <button class="evoluciones-notificar" title="Envía una notificación informativa a recepción" data-hidden>
+                  <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
+                </button>
+              <?php 
+                } else if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+              ?>
+                <button class="evoluciones-notificar" title="Envía una notificación informativa a recepción">
+                  <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
+                </button>
+
+                <div style="
+                  width: 1px;
+                  height: 100%;
+                  border-left: 2px dashed #ff8101;
+                  height: 35px;
+                "></div>
+              <?php 
+                }
+              ?>
+
+              <button class="evoluciones-confirmar botones-formularios">CONFIRMAR</button>
+              <button class="evoluciones-cancelar botones-formularios">CANCELAR</button> 
             </section>
 
           </div>

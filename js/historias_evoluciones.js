@@ -1,5 +1,5 @@
 import {historias, tools, notificaciones} from '../js/historias.js';
-import { Paginacion } from '../js/main.js';
+import { Paginacion, Animaciones } from '../js/main.js';
 import { Canvas } from '../js/dibujar.js';
 
 /* -------------------------------------------------------------------------------------------------*/
@@ -92,37 +92,58 @@ var secciones = qsa('#crud-evoluciones-contenedor .radios input'),
 	saltos = qsa('#crud-evoluciones-contenedor .evoluciones-saltar'),
 	contenedor = qs('#crud-evoluciones-contenedor .filas')
 
+saltos[0]['altura'] = 122.546875
+saltos[1]['altura'] = 431.546875
+saltos[2]['altura'] = 1345.546875
+saltos[3]['altura'] = 1672.546875
+saltos[4]['altura'] = 2137.546875
+saltos[5]['altura'] = 2653.546875
+//saltos[6]['altura'] = 2916.546875}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 qsa('#crud-evoluciones-contenedor .radios input').forEach((radios, i) => {
 
 	radios.addEventListener('click', e => {
 
-		var altura = saltos[i].getBoundingClientRect().top + contenedor.scrollTop - 170
+		saltos[i]['altura'] = saltos[i].getBoundingClientRect().top + contenedor.scrollTop - 170
 
 		contenedor.scrollTo(0, 0)
-		contenedor.scrollTo(0, altura)
+		contenedor.scrollTo(0, saltos[i]['altura'])
 
 	})
 
 })
+////////////////////////////////////////////////////////////////////////////////////////////////
+contenedor.addEventListener("scroll", e => {
 
+    const scrollContenedor = contenedor.scrollTop + 80
 
-//VOY A TENER QUE USAR DATASETS CON LAS POSICIONES PREESTABLECIDAS PARA CONSEGUIR ESTE COMPORTAMIENTO
-// contenedor.addEventListener("scroll", e => {
+    secciones.forEach((seccion, i) => {
 
-//     const maxHeight = contenedor.scrollTop
+    	if (scrollContenedor > saltos[i]['altura'] && scrollContenedor < saltos[i + 1]['altura']) {
 
-//     secciones.forEach((seccion) => {
+    		seccion.checked = true
 
-//     	var altura = seccion.getBoundingClientRect().top + contenedor.scrollTop - 170
+    	} else {
 
+    		if (scrollContenedor > saltos[i]['altura']) {
 
-//     	if (altura > maxHeight) {
+				seccion.checked = true
 
-//     		seccion.checked = true
+    		} else {
 
-//     	} else {
-//     		seccion.checked = false
-//     	}
+    			seccion.checked = false
 
-//     })
-// });
+    		}
+
+    	}
+
+    })
+});
+
+/* -------------------------------------------------------------------------------------------------*/
+/* ------------------------------------------- CONSEJOS --------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+var animaciones = new Animaciones({on: 'aparecer', off: 'desaparecer'})
+	animaciones.hider = 'data-hidden'
+	animaciones.generar('#crud-evoluciones-aconsejar', ['#crud-evoluciones-consejos'])

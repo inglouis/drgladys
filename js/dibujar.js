@@ -263,7 +263,7 @@ export class Canvas {
     capturarImagenJSON() {
         this._resultado_json = this._canvas.toJSON(this._formato);
 
-        return this._resultado
+        return this._resultado_json
     }
 
     removerTeclado(evento) {
