@@ -78,7 +78,7 @@
 
                 <div class="check-alineado" style="column-gap: 5px;">
                   <label>Aplica como paciente problemático</label>
-                  <input type="checkbox" data-valor="problematico" class="evoluciones-valores check checkexpresion" style="width: 30px; height: 30px">
+                  <input type="checkbox" data-valor="problematico" class="evoluciones-valores check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center;">
                 </div>
 
               </div>
