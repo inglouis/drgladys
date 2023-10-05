@@ -2196,15 +2196,15 @@ span.numeracion {
 .checkexpresion::after {
     content: "😊";
     font-size: x-large;
-    top: -7px;
-    left: -2px;
+    top: -1px;
+    left: 0px;
     position: relative;
 }
 
 .checkexpresion:checked::after {
     content: "😠";
     font-size: x-large;
-    top: 0px;
+    top: -1px;
     left: 0px;
     position: relative;
 }
