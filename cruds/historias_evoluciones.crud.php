@@ -72,7 +72,7 @@
 
             </section>
 
-            <section class="filas borde-estilizado" data-scroll style="padding: 10px; justify-content: flex-start; height: 70vh;">
+            <section class="filas borde-estilizado" data-scroll style="padding: 10px; justify-content: flex-start; height: 70vh; background-image: none;">
               
               <div class="columnas">
 
