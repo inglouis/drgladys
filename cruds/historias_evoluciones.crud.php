@@ -44,22 +44,22 @@
       <!------------------- EVOLUCIONES CARGAR ----------------- -->
       <!-------------------------------------------------------- -->
       <section class="evoluciones-seccion">
+
+          <div class="personalizacion-c" data-hidden style="right: 5%; top: 20% !important; width: 20% !important;">
+
+            <section>Personalización</section>
+            <section style="width: 100%; border: 1px dashed #fff"></section>
+            <span>ENTER: SEPARAR LÍNEA</span>
+            <span>°CENTRAR°</span>
+            <span>*<b>NEGRITA</b>*</span>
+            <span>_ <u>SUBRAYADO</u> _</span>
+            <span>~<i>ITÁLICA</i>~</span>
+
+            <div id="evoluciones-previa" data-scroll></div>
+
+          </div>
                       
-          <div data-familia class="contenedor cargar" id="evoluciones-cargar-contenedor">
-
-            <div class="personalizacion-c" data-hidden style="right: 5%; top: 20% !important; width: 20% !important;">
-
-              <section>Personalización</section>
-              <section style="width: 100%; border: 1px dashed #fff"></section>
-              <span>ENTER: SEPARAR LÍNEA</span>
-              <span>°CENTRAR°</span>
-              <span>*<b>NEGRITA</b>*</span>
-              <span>_ <u>SUBRAYADO</u> _</span>
-              <span>~<i>ITÁLICA</i>~</span>
-
-              <div id="evoluciones-previa" data-scroll></div>
-
-            </div>
+          <div data-familia class="contenedor cargar" id="evoluciones-cargar-contenedor"> 
 
             <section class="radios">
               
