@@ -63,14 +63,14 @@
 
             <section class="radios">
               
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Examen oftalmológico" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pruebas & motilidad" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Refracción" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Biomicroscopía" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Fondo de ojo" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pio, Estudios, IDX" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Plan & fórmula" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Anexos" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
 
               <div style="position: relative;">
 

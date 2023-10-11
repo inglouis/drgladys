@@ -4686,6 +4686,42 @@ div#tabla-notificados-contenedor .titulo::after {
     content: "LETRAS";
 }
 
+#crud-evoluciones-contenedor label {
+    position: relative;
+}
+
+#crud-evoluciones-contenedor label:nth-child(1) .tooltip-filtro-reverso::after{
+    content: "Examen oftalmológico";
+}
+
+#crud-evoluciones-contenedor label:nth-child(2) .tooltip-filtro-reverso::after{
+    content: "Pruebas & motilidad";
+}
+
+#crud-evoluciones-contenedor label:nth-child(3) .tooltip-filtro-reverso::after{
+    content: "Refracción";
+}
+
+#crud-evoluciones-contenedor label:nth-child(4) .tooltip-filtro-reverso::after{
+    content: "Biomicroscopía";
+}
+
+#crud-evoluciones-contenedor label:nth-child(5) .tooltip-filtro-reverso::after{
+    content: "Fondo de ojo";
+}
+
+#crud-evoluciones-contenedor label:nth-child(6) .tooltip-filtro-reverso::after{
+    content: "Pio, Estudios, IDX";
+}
+
+#crud-evoluciones-contenedor label:nth-child(7) .tooltip-filtro-reverso::after{
+    content: "Plan & fórmula";
+}
+
+#crud-evoluciones-contenedor label:nth-child(8) .tooltip-filtro-reverso::after{
+    content: "Anexos";
+}
+
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/
