@@ -109,7 +109,16 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#reposo-informacion-notificaciones', '#reposo-previa-notificaciones'],
 	['#general-informacion-notificaciones', '#general-previa-notificaciones'],
 	['#referencia-informacion-notificaciones', '#referencia-previa-notificaciones'],
-	['#referencia-agradecimiento-notificaciones', '#referencia-previa-notificaciones']
+	['#referencia-agradecimiento-notificaciones', '#referencia-previa-notificaciones'],
+
+	['#evoluciones-nota', '#evoluciones-previa'],
+	['#evoluciones-nota-b-od', '#evoluciones-previa'],
+	['#evoluciones-nota-b-oi', '#evoluciones-previa'],
+	['#evoluciones-nota-f-od', '#evoluciones-previa'],
+	['#evoluciones-nota-f-oi', '#evoluciones-previa'],
+	['#evoluciones-plan', '#evoluciones-previa'],
+	['#evoluciones-nota', '#evoluciones-previa'],
+	['#evoluciones-nota', '#evoluciones-previa'],
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
@@ -131,7 +140,7 @@ window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'in
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', ['presentaciones', 'tratamientos', 'medicamentos'], 27)
-window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'recipes', [], 27)
+window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', [], 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -193,6 +202,12 @@ refeInsPop.evtBotones()
 diaPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
+
+	imgBio.removerTeclado(e)
+    imgBio.seleccionarTeclado(e)
+
+    fondBio.removerTeclado(e)
+    fondBio.seleccionarTeclado(e)
 
 	ediPop.evtEscape(e)
 	insPop.evtEscape(e)
@@ -264,7 +279,7 @@ window.contenedoresReportes       = new ContenedoresEspeciales('crud-reportes-po
 window.contenedoresInformeEditar  = new ContenedoresEspeciales('crud-infeditar-popup')
 window.contenedoresMedicamentos   = new ContenedoresEspeciales('crud-medicamentos-popup')
 window.contenedoresNotificaciones = new ContenedoresEspeciales('crud-notificaciones-popup')
-
+window.contenedoresEvoluciones    = new ContenedoresEspeciales('crud-evoluciones-popup')
 /////////////////////////////////////////////////////
 //VARIABLES GLOBALES
 /////////////////////////////////////////////////////
@@ -419,6 +434,7 @@ class Historias extends Acciones {
 		setTimeout(() => {
 			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
 			qs('#informe-contenedor-izquierda').scrollTo(0,0)
+			qs('#crud-evoluciones-contenedor .filas').scrollTo(0,0)
 		}, 1000)
 
 		gid('constancia-busqueda').value = ''
@@ -775,7 +791,19 @@ historias['crud']['customBodyEvents'] = {
 				permitirLimpiezaReportes = true
 			}
 
+			tools.limpiar('.evoluciones-valores', '', {})
+			tools.limpiar('.evoluciones-cargar', '', {})
 			rellenar.contenedores(historias.sublista, '.evoluciones-cargar', {elemento: button, id: 'value'}, {})
+
+			gid('evoluciones-fecha').value = window.dia
+			window.galeriaAntes.limpiar()
+			window.galeriaDespues.limpiar()
+
+			imgBio.reiniciar()
+			imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
+
+			fondBio.reiniciar()
+			fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
 
 			//var resultado = await tools.fullAsyncQuery('historias_recipes', 'cargar_recipes', [historias.sublista.id_historia])
 			//recipes.cargarTabla(JSON.parse(resultado))
@@ -916,14 +944,13 @@ contenedoresNotificaciones.eventos().contenedor(
 	{"lista": comboDiagnosticos} //funciones
 )
 
-// contenedoresInformesEditar.eventos().contenedor(
-// 	'cc-diagnosticos-editar', //elemento
-// 	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
-// 	[0, 0], 			   //limitador de busqueda
-// 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
-// 	{"lista": comboDiagnosticos} //funciones
-// )
-
+contenedoresEvoluciones.eventos().contenedor(
+	'cc-diagnosticos-evoluciones', //elemento
+	['combos', 'combo_diagnosticos', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboDiagnosticos} //funciones
+)
 //4)---------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 //						Evento del botón de aplicar filtros en la tabla principal
@@ -1942,6 +1969,25 @@ presenPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias
 
 mediPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 mediPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+
+
+evoPop.ejecutarAntes['funcion'] = () => {
+
+	if (qs('.pswp1').classList.contains('pswp--open')) {
+
+		throw 'GALERIA ABIERTA'
+
+	}
+
+	if (qs('.pswp2').classList.contains('pswp--open')) {
+
+		throw 'GALERIA ABIERTA'
+
+	}
+
+}
+
+
 /* -------------------------------------------------------------------------------------------------*/
 /*           					LISTADO DE TABLAS DE REPORTES 									    */
 /* -------------------------------------------------------------------------------------------------*/

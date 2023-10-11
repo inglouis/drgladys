@@ -44,44 +44,80 @@
       <!------------------- EVOLUCIONES CARGAR ----------------- -->
       <!-------------------------------------------------------- -->
       <section class="evoluciones-seccion">
+
+          <div class="personalizacion-c" data-hidden style="right: 5%; top: 20% !important; width: 20% !important;">
+
+            <section>Personalización</section>
+            <section style="width: 100%; border: 1px dashed #fff"></section>
+            <span>ENTER: SEPARAR LÍNEA</span>
+            <span>°CENTRAR°</span>
+            <span>*<b>NEGRITA</b>*</span>
+            <span>_ <u>SUBRAYADO</u> _</span>
+            <span>~<i>ITÁLICA</i>~</span>
+
+            <div id="evoluciones-previa" data-scroll></div>
+
+          </div>
                       
-          <div data-familia class="contenedor" id="evoluciones-cargar-contenedor">
+          <div data-familia class="contenedor cargar" id="evoluciones-cargar-contenedor"> 
 
             <section class="radios">
               
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Examen oftalmológico" class="radio-estilizado-1" checked></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pruebas & motilidad" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
-              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" class="radio-estilizado-1 tooltip-filtro-reverso"></label>
 
-              <button id="crud-evoluciones-consejo">i</button>
+              <div style="position: relative;">
+
+                <button id="crud-evoluciones-aconsejar" title="Consejos para la navegación del formulario">i</button>
+
+                <div id="crud-evoluciones-consejos" data-hidden class="consejos-contenedor" style="right: -277px; top: 25px; width: 700px;">
+
+                  <div class="titulo">Consejo para la navegación del formulario</div>
+
+                  <img src="../imagenes/teclado.png" style="width: 100%; height: 100%;">
+
+                </div>
+                
+              </div>
 
             </section>
 
-            <section class="filas borde-estilizado" data-scroll style="padding: 10px; justify-content: flex-start; height: 70vh;">
+            <section class="filas borde-estilizado" data-scroll style="padding: 10px; justify-content: flex-start; height: 70vh; background-image: none;">
               
               <div class="columnas">
 
                 <div class="check-alineado" style="column-gap: 5px;">
                   <label>Aplica como paciente problemático</label>
-                  <input type="checkbox" data-valor="problematico" class="evoluciones-valores check checkexpresion" style="width: 30px; height: 30px">
+                  <input type="checkbox" data-valor="problematico" class="evoluciones-valores check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;">
                 </div>
 
+              </div>
+
+              <div class="columnas">
+
+                <div>
+                  <label class="requerido">FECHA DE LA EVOLUCION:</label>
+                  <input type="date" id="evoluciones-fecha" data-valor="fecha" class="evoluciones-valores lleno textarea-espaciado">
+                </div>
+                
               </div>
 
               <div class="columnas">
                 
                 <div>     
                   <label>Nota inicial:</label>
-                  <textarea rows="2" id="evoluciones-nota" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>1</div>
                 <div>Examen oftalmológico</div>
               </div>
@@ -99,36 +135,36 @@
                     <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_4" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_4" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 
@@ -147,36 +183,36 @@
                     <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_1" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_1" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 
@@ -195,36 +231,36 @@
                     <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper fracciones" placeholder="OI">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="correccion_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="correccion">
+                    <input type="checkbox" data-valor="correccion_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="allen_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="allen">
+                    <input type="checkbox" data-valor="allen_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="jagger_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="jagger">
+                    <input type="checkbox" data-valor="jagger_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="e_direccional_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="e-direcional">
+                    <input type="checkbox" data-valor="e_direccional_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="numeros_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="numeros">
+                    <input type="checkbox" data-valor="numeros_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="decimales_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="decimales">
+                    <input type="checkbox" data-valor="decimales_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="fracciones_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="fracciones">
+                    <input type="checkbox" data-valor="fracciones_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
 
-                  <div style="width: fit-content;">
-                    <input type="checkbox" data-valor="letras_lectura" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <div style="width: fit-content;" class="letras">
+                    <input type="checkbox" data-valor="letras_lectura" class="evoluciones-valores check checksmall tooltip-filtro-reverso" style="width: 30px; height: 30px">
                   </div>
                 </div>
 
@@ -249,16 +285,22 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>2</div>
                 <div>Pruebas & Motilidad</div>
               </div>
+
+              <div class="columnas" style="margin-top: 10px">
+                <div>
+                  <label style="font-size: 20px; border-bottom: 1px solid; width: 100%;">PRUEBAS</label>
+                </div>
+              </div>
+
 
               <div class="columnas" style="align-items: end;">
               
                 <div>
                   
-                  <label>Pruebas</label>
                   <select data-valor="pruebas" class="evoluciones-valores upper">
                     <option value="0">COVER TEST (CT)</option>
                     <option value="1">KRIMSKY TEST (KY)</option>
@@ -334,7 +376,7 @@
 
               <div class="columnas" style="margin-top: 10px">
                 <div>
-                  <label>MOTILIDAD</label>
+                  <label style="font-size: 20px; border-bottom: 1px solid; width: 100%;">MOTILIDAD</label>
                 </div>
               </div>
 
@@ -351,45 +393,45 @@
 
                   <div class="motilidad borde-estilizado">
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: end;">
+                      <input type="text" data-valor="motilidad_od_1" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_2" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: center;">
+                      <input type="text" data-valor="motilidad_od_3" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_4" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: start;">
+                      <input type="text" data-valor="motilidad_od_5" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_od_6" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
                   </div>
 
                   <div class="motilidad borde-estilizado">
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                   <section style="grid-template-columns: auto auto; align-self: end;">
+                      <input type="text" data-valor="motilidad_oi_1" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_2" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: center;">
+                      <input type="text" data-valor="motilidad_oi_3" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_4" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
-                    <section>
-                      <input type="text" placeholder="---">
-                      <input type="text" placeholder="---">
+                    <section style="grid-template-columns: auto auto; align-self: start;">
+                      <input type="text" data-valor="motilidad_oi_5" placeholder="---" class="evoluciones-valores upper" style="width: 80px">
+                      <input type="text" data-valor="motilidad_oi_6" placeholder="---" class="evoluciones-valores upper" style="width: 80px; justify-self: flex-end;">
                     </section>
 
                   </div>
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>3</div>
                 <div>Refracción</div>
               </div>
@@ -433,7 +475,7 @@
               <div class="columnas rx" style="flex-direction: column; align-items: baseline;">
 
                 <label style="font-size: 20px; height: 25px; border-bottom: 1px solid; width: 100%; margin-bottom: 10px;">
-                  RX: CICLOPLAGIA
+                  RX: CICLOPLEGIA
                 </label>
 
                 <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
@@ -466,7 +508,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>4</div>
                 <div>Biomicroscopía</div>
               </div>
@@ -552,7 +594,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>5</div>
                 <div>Fondo de ojo</div>
               </div>
@@ -576,8 +618,8 @@
                   </div>
 
                   <div class="dibujar-rango-v">
-                      <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
-                      <div id="fondo-valor"></div>
+                    <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
+                    <div id="fondo-valor"></div>
                   </div>
 
                   <div class="dibujar-botones-v">
@@ -618,7 +660,7 @@
 
                 <section class="dibujar-contenedor-v">
                 
-                  <canvas id="fondo-imagen" width="513" height="309"></canvas>
+                  <canvas id="fondo-imagen" width="513" height="360"></canvas>
 
                 </section>
 
@@ -638,7 +680,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>6</div>
                 <div>PIO, Estudios, IDX</div>
               </div>
@@ -664,6 +706,7 @@
                 <div style="position:relative;">
 
                   <label>
+                    <button id="evoluciones-nueva-estudio" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
                     Estudios:
                   </label>
                   
@@ -694,6 +737,7 @@
                 <div style="position:relative;">
 
                   <label>
+                    <button id="evoluciones-nueva-diagnostico" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
                     IDX:
                   </label>
                   
@@ -723,7 +767,7 @@
 
               </div>
 
-              <div class="titulo">
+              <div class="titulo evoluciones-saltar">
                 <div>7</div>
                 <div>Plan & fórmula</div>
               </div>
@@ -760,16 +804,185 @@
 
               </div>
 
-              <div>     
-                <label>Plan:</label>
-                <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; margin-bottom: 10px;" data-scroll ></textarea>
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Curva base</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="curva_od" class="evoluciones-valores upper decimales" placeholder="OD - 0.00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="curva_oi" class="evoluciones-valores upper decimales" placeholder="OI - 0.00">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Distancia intraocular</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="distancia_intraocular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_intraocular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Distancia interpopular</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="distancia_interpopular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_interpopular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_interpopular_add" class="evoluciones-valores upper" min="0" max="3" placeholder="ADD">
+                  </div> 
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <div>    
+                  <label>PJP</label>
+                  <input type="text" data-valor="pjp" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                </div>
+
+              </div>
+
+              <div class="columnas" style="display: grid; grid-template-columns: auto auto auto; justify-content: stretch;">
+
+                <div class="check-alineado">
+                  <label>Bifocal - Kriptok</label>        
+                  <input type="checkbox" data-valor="bifocal_kriptok" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Flap Top</label>        
+                  <input type="checkbox" data-valor="bifocal_flat_top" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Ultex</label>        
+                  <input type="checkbox" data-valor="bifocal_ultex" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Kriptop</label>        
+                  <input type="checkbox" data-valor="bifocal_kriptok" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Ejecutivo</label>        
+                  <input type="checkbox" data-valor="bifocal_ejecutivo" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Multifocal</label>        
+                  <input type="checkbox" data-valor="multifocal" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Plan:</label>
+                  <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; margin-bottom: 10px;" data-scroll ></textarea>
+                </div>
+                
+              </div>
+
+
+              <div class="titulo evoluciones-saltar">
+                <div>8</div>
+                <div>Anexos</div>
+              </div>
+
+              <div class="columnas">
+                  
+                <div style="width: fit-content;">
+                  <label style="font-size: 20px">ANTES DE LA CIRUGÍA</label>
+                  <input type="file" id="anexos-antes-cargar" multiple class="galeria-cargar evoluciones-valores">
+                </div>
+
+                <div class="check-alineado" style="top: 13px; position: relative;">
+                  <label>APLICA EL USO DE LENTES</label>        
+                  <input type="checkbox" data-valor="anexos_antes_lentes" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                <div id="anexos-antes-contenedor" class="galeria-contenedor"></div>
+                
+              </div>
+
+              <div class="columnas" style="margin-top: 30px;">
+                  
+                <div style="width: fit-content;">
+                  <label style="font-size: 20px">DESPUÉS DE LA CIRUGÍA</label>
+                  <input type="file" id="anexos-despues-cargar" multiple class="galeria-cargar evoluciones-valores">
+                </div>
+
+                <div class="check-alineado" style="top: 13px; position: relative;">
+                  <label>APLICA EL USO DE LENTES</label>        
+                  <input type="checkbox" data-valor="anexos_despues_lentes" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                <div id="anexos-despues-contenedor" class="galeria-contenedor"></div>
+
               </div>
 
             </section>
 
-            <section id="crud-notificaciones-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;">
-              <button class="botones-formularios confirmar">CONFIRMAR</button>
-              <button class="botones-formularios cerrar">CANCELAR</button> 
+            <section id="crud-evoluciones-botones" data-crud='botones-evoluciones' style="column-gap: 10px; padding: 10px 10px 0px 10px; justify-content: center; display: flex;">
+
+              <?php 
+                if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+              ?>
+                <button class="evoluciones-notificar" title="Envía una notificación informativa a recepción" data-hidden>
+                  <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
+                </button>
+              <?php 
+                } else if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+              ?>
+                <button class="evoluciones-notificar" title="Envía una notificación informativa a recepción">
+                  <svg style="width: 15px; height: 15px;" class="iconos" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path fill="currentColor" d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/></svg>
+                </button>
+
+                <div style="
+                  width: 1px;
+                  height: 100%;
+                  border-left: 2px dashed #ff8101;
+                  height: 35px;
+                "></div>
+              <?php 
+                }
+              ?>
+
+              <button class="evoluciones-confirmar botones-formularios">CONFIRMAR</button>
+              <button class="evoluciones-cancelar botones-formularios cancelar">CANCELAR</button> 
             </section>
 
           </div>

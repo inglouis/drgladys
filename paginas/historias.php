@@ -28,10 +28,14 @@
       <script type="text/javascript">
         window.dia = '<?php echo "$dia"?>'
       </script>
+
+      <link rel="stylesheet" href="../librerias/PhotoSwipe-master/dist/photoswipe.css" defer> 
+      <link rel="stylesheet" href="../librerias/PhotoSwipe-master/dist/default-skin/default-skin.css" defer> 
+      <script src="../librerias/PhotoSwipe-master/dist/photoswipe.js" defer></script> 
+      <script src="../librerias/PhotoSwipe-master/dist/photoswipe-ui-default.js" defer></script>
+
       <script type="module" src="../js/historias.js" defer></script>
-      <script type="module" src="../js/historias_evoluciones.js" defer></script>
       <script src="../librerias/fabric.min.js" defer></script>
-      <!--<script type="module" src="../js/main.js" defer></script>-->
       <?php
         include_once('../estructura/reportes_scripts.php');
       ?>
@@ -358,5 +362,85 @@
       </div>
     </div>
     <?php echo $dispararModos;?> 
+
+    <!---------------------------------------------------------------------------------------->
+    <!------------------------------ CONTENEDOR DE GALERIA ----------------------------------->
+    <!---------------------------------------------------------------------------------------->
+    <div class="pswp1 pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Cerrar (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Compartir"></button>
+                    <button class="pswp__button pswp__button--fs" title="Pantalla completa"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom +/-"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                          <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Imagen previa (izquierda)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Imagen siguiente (derecha)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pswp2 pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Cerrar (Esc)"></button>
+                    <button class="pswp__button pswp__button--share" title="Compartir"></button>
+                    <button class="pswp__button pswp__button--fs" title="Pantalla completa"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom +/-"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                          <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div> 
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Imagen previa (izquierda)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Imagen siguiente (derecha)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------------------------------------------------------------------->
+    <!---------------------------------------------------------------------------------------->
+
   </body>
 </html>
