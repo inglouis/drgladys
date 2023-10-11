@@ -3455,7 +3455,7 @@ span.numeracion {
     left: -19px;
 }
 
-.notificaciones-seccion .personalizacion-notificaciones  {
+.notificaciones-seccion .personalizacion-notificaciones, .personalizacion-evoluciones  {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -3471,7 +3471,7 @@ span.numeracion {
     text-align: initial;
 }
 
-.notificaciones-seccion .personalizacion-notificaciones::after {
+.notificaciones-seccion .personalizacion-notificaciones::after, .personalizacion-evoluciones::after {
     content: "";
     background: #000000ba;
     clip-path: polygon(100% 50%, 0 0, 0 100%);
@@ -3482,7 +3482,7 @@ span.numeracion {
     right: -14px;
 }
 
-.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div, .personalizacion-c div  {
+.personalizacion div, .personalizacion-b div, .personalizacion-notificaciones div, .personalizacion-c div, .personalizacion-evoluciones div  {
     background: #fff;
     color: black;
     padding: 5px;
@@ -5499,7 +5499,77 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 /*-----------------------------------------------------*/
-/*------------------sistema filtros--------------------*/
+/*---------------------- GALERIA ----------------------*/
+/*-----------------------------------------------------*/
+
+.galeria-cargar {
+    padding: 10px 5px;
+    background: #fff;
+    width: 190px;
+}
+
+.galeria-cargar::file-selector-button {
+    padding: 5px;
+    border: 1px solid #262626;
+    background: #262626;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.galeria-contenedor {
+    display: grid !important;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto auto auto;
+    column-gap: 8px;
+    row-gap: 8px;
+    min-height: 200px;
+    border: 1px dashed #262626;
+    padding: 10px;
+    background: #fff;
+    position: relative;
+}
+
+.galeria-contenedor::before {
+    content: "Imagenes...";
+    display: flex;
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+}
+
+.galeria-img {
+    position: relative;
+    height: fit-content;
+    width: fit-content !important;
+    padding: 4px;
+    border: 1px solid #959393;
+    background: #fff;
+}
+
+.galeria-img select {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 0px 2px !important;
+    border: 1px solid #afafaf !important;
+    width: 40px !important;
+    height: 20px !important;
+    color: black !important;
+    border-radius: 8px;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.galeria-img img {
+    width: 200px;
+    height: 180px;
+    cursor: nw-resize;;
+}
+
+/*-----------------------------------------------------*/
+/*--------------------- FILTROS -----------------------*/
 /*-----------------------------------------------------*/
 .filtros section {
     height: fit-content;

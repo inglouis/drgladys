@@ -1,6 +1,7 @@
 import {historias, tools, notificaciones} from '../js/historias.js';
 import { Paginacion, Animaciones } from '../js/main.js';
 import { Canvas } from '../js/dibujar.js';
+import { Galeria } from '../js/galeria.js';
 
 /* -------------------------------------------------------------------------------------------------*/
 /* -----------------------------------PAGINACIÓN DE REPORTES----------------------------------------*/
@@ -98,7 +99,8 @@ saltos[2]['altura'] = 1345.546875
 saltos[3]['altura'] = 1672.546875
 saltos[4]['altura'] = 2137.546875
 saltos[5]['altura'] = 2653.546875
-//saltos[6]['altura'] = 2916.546875}
+saltos[6]['altura'] = 2916.546875
+saltos[7]['altura'] = 3216.546875
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 qsa('#crud-evoluciones-contenedor .radios input').forEach((radios, i) => {
@@ -120,7 +122,19 @@ contenedor.addEventListener("scroll", e => {
 
     secciones.forEach((seccion, i) => {
 
-    	if (scrollContenedor > saltos[i]['altura'] && scrollContenedor < saltos[i + 1]['altura']) {
+    	var maximo = undefined
+
+    	if (saltos[i + 1]) {
+
+    		maximo = saltos[i + 1]
+
+    	} else {
+
+    		maximo = saltos[i]
+
+    	}
+
+    	if (scrollContenedor > saltos[i]['altura'] && scrollContenedor < maximo['altura']) {
 
     		seccion.checked = true
 
@@ -142,8 +156,102 @@ contenedor.addEventListener("scroll", e => {
 });
 
 /* -------------------------------------------------------------------------------------------------*/
+/*           					  NOTIFICACIONES - TEXTAREAS PREVIAS	 						    */
+/* -------------------------------------------------------------------------------------------------*/
+
+qs(`#crud-evoluciones-contenedor .cargar`).addEventListener('mouseenter', e => {
+
+	qs(`#crud-evoluciones-contenedor .personalizacion-c`).removeAttribute('data-hidden')	
+
+})
+
+qs(`#crud-evoluciones-contenedor .cargar`).addEventListener('mouseleave', e => {
+
+	qs(`#crud-evoluciones-contenedor .personalizacion-c`).setAttribute('data-hidden', '')
+
+})
+
+
+/* -------------------------------------------------------------------------------------------------*/
 /* ------------------------------------------- CONSEJOS --------------------------------------------*/
 /* -------------------------------------------------------------------------------------------------*/
 var animaciones = new Animaciones({on: 'aparecer', off: 'desaparecer'})
 	animaciones.hider = 'data-hidden'
 	animaciones.generar('#crud-evoluciones-aconsejar', ['#crud-evoluciones-consejos'])
+
+/* -------------------------------------------------------------------------------------------------*/
+/* ------------------------------------------- ANEXOS ----------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------*/
+
+//ANTES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+window.galeriaAntes = new Galeria('#anexos-antes-cargar', '#anexos-antes-contenedor')
+
+galeriaAntes._pswp = '.pswp1'
+galeriaAntes._rutaImagenes = '#anexos-antes-contenedor .galeria-img img'
+
+qs('#anexos-antes-cargar').addEventListener('change', () => {
+
+	galeriaAntes.cargar()
+
+})
+
+qs('#anexos-antes-contenedor').addEventListener('change', e => {
+
+	if (e.target.tagName === 'SELECT') {
+
+		galeriaAntes.reposicionar(e.target)
+
+	}
+
+})
+
+qs('#anexos-antes-contenedor').addEventListener('click', e => {
+
+	if (e.target.tagName === 'IMG') {
+
+		galeriaAntes.imagenesExpandirConfiguracion(Number(e.target.dataset.posicion), '.galeria-img');
+		galeriaAntes.imagenesExpandirConstruir();
+
+	}
+
+})
+
+//DESPUES
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+window.galeriaDespues = new Galeria('#anexos-despues-cargar', '#anexos-despues-contenedor')
+
+galeriaDespues._pswp = '.pswp2'
+galeriaDespues._rutaImagenes = '#anexos-despues-contenedor .galeria-img img'
+
+qs('#anexos-despues-cargar').addEventListener('change', () => {
+
+	galeriaDespues.cargar()
+
+})
+
+qs('#anexos-despues-contenedor').addEventListener('change', e => {
+
+	if (e.target.tagName === 'SELECT') {
+
+		galeriaDespues.reposicionar(e.target)
+
+	}
+
+})
+
+qs('#anexos-despues-contenedor').addEventListener('click', e => {
+
+	if (e.target.tagName === 'IMG') {
+
+		galeriaDespues.imagenesExpandirConfiguracion(Number(e.target.dataset.posicion), '.galeria-img');
+		galeriaDespues.imagenesExpandirConstruir();
+
+	}
+
+})
+
+
+//"img".src = URL.createObjectURL("input".files[0])
+//https://stackoverflow.com/questions/29477906/send-photo-from-javascript-to-php
+//https://stackoverflow.com/questions/54888848/multiple-images-upload-using-javascript-php-mysql ----> ESTA TIENE MEJOR PINTA EN AYUDAR

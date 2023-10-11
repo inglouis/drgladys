@@ -1,15 +1,21 @@
 <?php 
+
+	// print_r($_GET);
+	// print_r($_POST);
+	// print_r($_FILES);
+	// print_r($_REQUEST);
+
 	$func  = trim($_REQUEST["funcion"]); //funcion
 	$clase = trim($_REQUEST["clase"]);   //modelo
 	$datos = json_decode($_REQUEST["datos"], true); //parametros
 
 	require_once("../clases/".$clase.".class.php");
 
-	class Controller {
-	    public function llamar(Model $model): Model {
-	        return $model;
-	    }
-	}
+	// class Controller {
+	//     public function llamar(Model $model): Model {
+	//         return $model;
+	//     }
+	// }
 
 	class View {
 		public $funcion;
@@ -26,7 +32,7 @@
 	}
 
 	$model = new Model();
-	$controller = new Controller();
+	//$controller = new Controller();
 	$view = new View($func, $datos);
 	//if (isset($action)) {  $model = $controller->{$action}($model);}
 	echo $view->salida($model);

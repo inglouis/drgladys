@@ -45,7 +45,21 @@
       <!-------------------------------------------------------- -->
       <section class="evoluciones-seccion">
                       
-          <div data-familia class="contenedor" id="evoluciones-cargar-contenedor">
+          <div data-familia class="contenedor cargar" id="evoluciones-cargar-contenedor">
+
+            <div class="personalizacion-c" data-hidden style="right: 5%; top: 20% !important; width: 20% !important;">
+
+              <section>Personalización</section>
+              <section style="width: 100%; border: 1px dashed #fff"></section>
+              <span>ENTER: SEPARAR LÍNEA</span>
+              <span>°CENTRAR°</span>
+              <span>*<b>NEGRITA</b>*</span>
+              <span>_ <u>SUBRAYADO</u> _</span>
+              <span>~<i>ITÁLICA</i>~</span>
+
+              <div id="evoluciones-previa" data-scroll></div>
+
+            </div>
 
             <section class="radios">
               
@@ -55,6 +69,8 @@
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Biomicroscopía" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Fondo de ojo" class="radio-estilizado-1"></label>
               <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Pio, Estudios, IDX" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Plan & fórmula" class="radio-estilizado-1"></label>
+              <label class="label-radio-estilizado-1"><input type="radio" name="evoluciones-seccion" title="Anexos" class="radio-estilizado-1"></label>
 
               <div style="position: relative;">
 
@@ -84,10 +100,19 @@
               </div>
 
               <div class="columnas">
+
+                <div>
+                  <label class="requerido">FECHA DE LA EVOLUCION:</label>
+                  <input type="date" id="evoluciones-fecha" data-valor="fecha" class="evoluciones-valores lleno textarea-espaciado">
+                </div>
+                
+              </div>
+
+              <div class="columnas">
                 
                 <div>     
                   <label>Nota inicial:</label>
-                  <textarea rows="2" id="evoluciones-nota" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -450,7 +475,7 @@
               <div class="columnas rx" style="flex-direction: column; align-items: baseline;">
 
                 <label style="font-size: 20px; height: 25px; border-bottom: 1px solid; width: 100%; margin-bottom: 10px;">
-                  RX: CICLOPLAGIA
+                  RX: CICLOPLEGIA
                 </label>
 
                 <div style="margin: 0px; flex-direction: column; row-gap: 10px;">
@@ -681,6 +706,7 @@
                 <div style="position:relative;">
 
                   <label>
+                    <button id="evoluciones-nueva-estudio" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
                     Estudios:
                   </label>
                   
@@ -711,6 +737,7 @@
                 <div style="position:relative;">
 
                   <label>
+                    <button id="evoluciones-nueva-diagnostico" class="boton-ver contenedor-resaltar" title="Cargar nuevo diagnóstico" style="left: 105px;">+</button>
                     IDX:
                   </label>
                   
@@ -777,14 +804,159 @@
 
               </div>
 
-              <div>     
-                <label>Plan:</label>
-                <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; margin-bottom: 10px;" data-scroll ></textarea>
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Curva base</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="curva_od" class="evoluciones-valores upper decimales" placeholder="OD - 0.00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="curva_oi" class="evoluciones-valores upper decimales" placeholder="OI - 0.00">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Distancia intraocular</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="distancia_intraocular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_intraocular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                  </div>  
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <label>Distancia interpopular</label>
+
+                <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
+                  <div>    
+                    <input type="text" data-valor="distancia_interpopular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_interpopular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                  </div>
+
+                  <div>
+                    <input type="text" data-valor="distancia_interpopular_add" class="evoluciones-valores upper" min="0" max="3" placeholder="ADD">
+                  </div> 
+                </div>
+
+              </div>
+
+              <div class="columnas" style="flex-direction: column; align-items: baseline;">
+
+                <div>    
+                  <label>PJP</label>
+                  <input type="text" data-valor="pjp" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                </div>
+
+              </div>
+
+              <div class="columnas" style="display: grid; grid-template-columns: auto auto auto; justify-content: stretch;">
+
+                <div class="check-alineado">
+                  <label>Bifocal - Kriptok</label>        
+                  <input type="checkbox" data-valor="bifocal_kriptok" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Flap Top</label>        
+                  <input type="checkbox" data-valor="bifocal_flat_top" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Ultex</label>        
+                  <input type="checkbox" data-valor="bifocal_ultex" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Kriptop</label>        
+                  <input type="checkbox" data-valor="bifocal_kriptok" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Bifocal - Ejecutivo</label>        
+                  <input type="checkbox" data-valor="bifocal_ejecutivo" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+                <div class="check-alineado">
+                  <label>Multifocal</label>        
+                  <input type="checkbox" data-valor="multifocal" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Plan:</label>
+                  <textarea rows="6" id="evoluciones-plan" data-previa="evoluciones-previa" data-valor="plan" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none; margin-bottom: 10px;" data-scroll ></textarea>
+                </div>
+                
+              </div>
+
+
+              <div class="titulo evoluciones-saltar">
+                <div>8</div>
+                <div>Anexos</div>
+              </div>
+
+              <div class="columnas">
+                  
+                <div style="width: fit-content;">
+                  <label style="font-size: 20px">ANTES DE LA CIRUGÍA</label>
+                  <input type="file" id="anexos-antes-cargar" multiple class="galeria-cargar evoluciones-valores">
+                </div>
+
+                <div class="check-alineado" style="top: 13px; position: relative;">
+                  <label>APLICA EL USO DE LENTES</label>        
+                  <input type="checkbox" data-valor="anexos_antes_lentes" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                <div id="anexos-antes-contenedor" class="galeria-contenedor"></div>
+                
+              </div>
+
+              <div class="columnas" style="margin-top: 30px;">
+                  
+                <div style="width: fit-content;">
+                  <label style="font-size: 20px">DESPUÉS DE LA CIRUGÍA</label>
+                  <input type="file" id="anexos-despues-cargar" multiple class="galeria-cargar evoluciones-valores">
+                </div>
+
+                <div class="check-alineado" style="top: 13px; position: relative;">
+                  <label>APLICA EL USO DE LENTES</label>        
+                  <input type="checkbox" data-valor="anexos_despues_lentes" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                </div>
+
+              </div>
+
+              <div class="columnas">
+
+                <div id="anexos-despues-contenedor" class="galeria-contenedor"></div>
+
               </div>
 
             </section>
 
-            <section id="crud-notificaciones-botones" data-crud='botones-evoluciones' style="column-gap: 10px; padding: 10px 10px 0px 10px; justify-content: center; display: flex;">
+            <section id="crud-evoluciones-botones" data-crud='botones-evoluciones' style="column-gap: 10px; padding: 10px 10px 0px 10px; justify-content: center; display: flex;">
 
               <?php 
                 if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
@@ -810,7 +982,7 @@
               ?>
 
               <button class="evoluciones-confirmar botones-formularios">CONFIRMAR</button>
-              <button class="evoluciones-cancelar botones-formularios">CANCELAR</button> 
+              <button class="evoluciones-cancelar botones-formularios cancelar">CANCELAR</button> 
             </section>
 
           </div>

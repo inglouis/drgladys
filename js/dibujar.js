@@ -174,6 +174,11 @@ export class Canvas {
 
     }
 
+    //hacer borrador mañana
+    asignarBorrador(elemento) {
+        
+    }
+
     asignarTexto(elemento) {
 
         var th = this
@@ -274,7 +279,7 @@ export class Canvas {
 
     seleccionarTeclado(evento) {
         if (evento.keyCode === 13) {
-            this._canvas.isDrawingMode = false;
+            this._canvas.isDrawingMode = !this._canvas.isDrawingMode;
         }
     }
 

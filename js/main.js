@@ -295,25 +295,74 @@ export class Herramientas {
 	    return peticion
 	}
 
-	async fullAsyncQuery(clase, funcion, datos, excepciones, cola) {
+	async fullAsyncQuery(clase, funcion, datos, excepciones, cola, procesarArchivos) {
 
-		var datos = JSON.stringify(datos), th = this
-	    
-	    if(typeof(excepciones) !== 'undefined') {
-	    	excepciones.forEach((e,i) => {
-		    	datos = datos.replaceAll(e[0], e[1]); //excepcion, reemplazo
-		    });
-	    }
+		var th = this
 
-	    var params = `funcion=${funcion}&clase=${clase}&datos=${datos}`;
+		if (procesarArchivos) {
+
+			var archivos = new FormData();
+
+			datos.forEach((archivo, index) => {
+
+				if (th.esDOM(archivo)) {			
+
+					if (archivo.type === 'file') {
+
+						var llaves = Object.keys(archivo.files)
+
+						llaves.forEach(llave => {
+
+							archivos.append(`${archivo.id}-${llave}`, archivo.files[llave]);
+
+						})
+
+						datos[index] = archivo.id
+
+					}
+
+				}
+
+			})
+
+			var datos = JSON.stringify(datos)
+
+			if (typeof(excepciones) !== 'undefined') {
+		    	excepciones.forEach((e,i) => {
+			    	datos = datos.replaceAll(e[0], e[1]); //excepcion, reemplazo
+			    });
+		    }
+
+			archivos.append('datos', datos)
+			archivos.append('funcion',funcion)
+			archivos.append('clase', clase)
+
+		} else {
+		    
+		    var datos = JSON.stringify(datos)
+
+			if (typeof(excepciones) !== 'undefined') {
+	    		excepciones.forEach((e,i) => {
+			    	datos = datos.replaceAll(e[0], e[1]); //excepcion, reemplazo
+			    });
+		    }
+
+		    var params = `funcion=${funcion}&clase=${clase}&datos=${datos}`;
+
+		}  
 
 		if (cola === undefined) {
 
 			var peticion = new XMLHttpRequest();
-	        	peticion.overrideMimeType("application/json");
-		    	peticion.open('POST', '../controladores/controlador.php', true);  
-		    	peticion.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		    	peticion.send(params);
+				peticion.overrideMimeType("application/json");
+		    	peticion.open('POST', '../controladores/controlador.php', true); 
+
+		    	if (procesarArchivos) {
+		    		peticion.send(archivos);
+		    	} else {	
+		    		peticion.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    		peticion.send(params);
+		    	}
 
 			const resultado = await new Promise(resolve => {
 				peticion.onreadystatechange = function() {
@@ -335,8 +384,14 @@ export class Herramientas {
 		    this.peticion = new XMLHttpRequest();
 	        this.peticion.overrideMimeType("application/json");
 		    this.peticion.open('POST', '../controladores/controlador.php', true);  
-		    this.peticion.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		    this.peticion.send(params);
+
+		    if (procesarArchivos) {
+	    		this.peticion.send(archivos);
+	    	} else {
+	    		this.peticion.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		    	this.peticion.send(params);
+	    	}
 
 			const resultado = await new Promise(resolve => {
 				th.peticion.onreadystatechange = function() {
@@ -788,6 +843,10 @@ export class Herramientas {
 								(!asociativa) ? datos.push('') : datos[contenedores[i].dataset.valor] = '';
 							}
 
+						} else if (contenedores[i].type === 'file') {
+
+							(!asociativa) ? datos.push(contenedores[i]) : datos[contenedores[i].dataset.valor] = contenedores[i];
+
 						} else {
 
 							(!asociativa) ? datos.push(contenedores[i].value) : datos[contenedores[i].dataset.valor] = contenedores[i].value;
@@ -809,18 +868,24 @@ export class Herramientas {
 					}
 
 				}
+
 				window.procesar = true
 				return datos
+
 			} else {
+
 				tools['mensaje']  = 'Combos sin seleccionar ó campos vacíos'
 				tools.mensajes(false)
 				window.procesar = true
 				return ''
-			}	
+
+			}
+
 		} else {
 			window.procesar = true
 			return ''
 		}
+
 	}
 
 	limpiar(grupo, funciones, params) {
@@ -1046,6 +1111,8 @@ export class PopUp {
 
 		this.popEvtContenedor = qs(`#crud-${this.evtElementos}-popup`)
 
+		this.ejecutarAntes = {"funcion": () => {}}
+
 	}
 
 	pop() {
@@ -1053,6 +1120,8 @@ export class PopUp {
 		var th = this
 		var elemento = document.querySelector('#'+this.el)
 		var hijo = elemento.children[0]
+
+		this.ejecutarAntes.funcion()
 
 		if (!this.estado) {
 			window.setTimeout(( ) => {
@@ -1107,7 +1176,6 @@ export class PopUp {
 					this.forzarNoScrollUnaVez = false
 
 				}
-
 
 				window.setTimeout(() => {
 					elemento.classList.add('popup-oculto')
