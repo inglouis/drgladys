@@ -74,11 +74,11 @@
 
               <div style="position: relative;">
 
-                <button id="crud-evoluciones-aconsejar" title="Consejos para la navegación del formulario">i</button>
+                <button id="crud-evoluciones-aconsejar">i</button>
 
                 <div id="crud-evoluciones-consejos" data-hidden class="consejos-contenedor" style="right: -277px; top: 25px; width: 700px;">
 
-                  <div class="titulo">Consejo para la navegación del formulario</div>
+                  <div class="titulo">Consejos para la navegación del formulario</div>
 
                   <img src="../imagenes/teclado.png" style="width: 100%; height: 100%;">
 
