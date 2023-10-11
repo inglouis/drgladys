@@ -229,17 +229,31 @@ export class Galeria {
 		};
 	}
 	
-	imagenesExpandirCargar() {
+	async imagenesExpandirCargar() {
 		
 		var th = this,
 			imagenes = qsa(this._rutaImagenes) //.galeria-img img
 
+		var cola = []
+
+		cola.push(this.retardar().then(x => {}));
+
+		await Promise.all(cola);
+
 		for (var i = 0; i < imagenes.length; i++) {
+
+			var height = imagenes[i].naturalHeight,
+				width  = imagenes[i].naturalWidth
+
+			if (height < 400) {height = 800}
+			if (width  < 400) {width  = 800}
+
 			th._imagenes.push({
 				src: imagenes[i].src,
-				w:800,
-				h:800
+				w:width,
+				h:height
 			})
+		
 		}
 
 	}
