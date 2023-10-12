@@ -660,7 +660,7 @@
 
                 <section class="dibujar-contenedor-v">
                 
-                  <canvas id="fondo-imagen" width="513" height="360"></canvas>
+                  <canvas id="fondo-imagen" width="513" height="309"></canvas>
 
                 </section>
 
