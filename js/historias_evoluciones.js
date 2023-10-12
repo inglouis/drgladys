@@ -189,6 +189,7 @@ window.galeriaAntes = new Galeria('#anexos-antes-cargar', '#anexos-antes-contene
 
 galeriaAntes._pswp = '.pswp1'
 galeriaAntes._rutaImagenes = '#anexos-antes-contenedor .galeria-img img'
+galeriaAntes._retardo = 3000
 
 qs('#anexos-antes-cargar').addEventListener('change', () => {
 
@@ -223,6 +224,7 @@ window.galeriaDespues = new Galeria('#anexos-despues-cargar', '#anexos-despues-c
 
 galeriaDespues._pswp = '.pswp2'
 galeriaDespues._rutaImagenes = '#anexos-despues-contenedor .galeria-img img'
+galeriaDespues._retardo = 3000
 
 qs('#anexos-despues-cargar').addEventListener('change', () => {
 

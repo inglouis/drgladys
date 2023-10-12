@@ -838,19 +838,19 @@
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label>Distancia interpopular</label>
+                <label>Distancia interpupilar</label>
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="distancia_interpopular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                    <input type="text" data-valor="distancia_interpupilar_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="distancia_interpopular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                    <input type="text" data-valor="distancia_interpupilar_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="distancia_interpopular_add" class="evoluciones-valores upper" min="0" max="3" placeholder="ADD">
+                    <input type="text" data-valor="distancia_interpupilar_add" class="evoluciones-valores upper" min="0" max="3" placeholder="ADD">
                   </div> 
                 </div>
 
@@ -859,8 +859,8 @@
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
                 <div>    
-                  <label>PJP</label>
-                  <input type="text" data-valor="pjp" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  <label>DIP</label>
+                  <input type="text" data-valor="dip" class="evoluciones-valores upper fracciones" placeholder="00/00">
                 </div>
 
               </div>
@@ -875,7 +875,7 @@
                 <div class="check-alineado">
                   <label>Bifocal - Flap Top</label>        
                   <input type="checkbox" data-valor="bifocal_flat_top" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
-                </div>
+                </div> 
 
                 <div class="check-alineado">
                   <label>Bifocal - Ultex</label>        
@@ -883,18 +883,13 @@
                 </div>
 
                 <div class="check-alineado">
-                  <label>Bifocal - Kriptop</label>        
-                  <input type="checkbox" data-valor="bifocal_kriptok" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
+                  <label>Multifocal</label>        
+                  <input type="checkbox" data-valor="multifocal" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
                 </div>
 
                 <div class="check-alineado">
                   <label>Bifocal - Ejecutivo</label>        
                   <input type="checkbox" data-valor="bifocal_ejecutivo" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
-                </div>
-
-                <div class="check-alineado">
-                  <label>Multifocal</label>        
-                  <input type="checkbox" data-valor="multifocal" class="evoluciones-valores check checksmall" style="width: 30px; height: 30px">
                 </div>
 
               </div>
