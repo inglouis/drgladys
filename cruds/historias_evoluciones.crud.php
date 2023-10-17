@@ -2,13 +2,100 @@
 <!--////////////////////////  evoluciones TEMPLATE //////////////////////////////////-->
 <!--//////////////////////////////////////////////////////////////////////////////////-->
 
-<!-- <template id="evoluciones-template">
+<template id="evoluciones-template">
 
-  <section class="evoluciones-contenido">
+  <section class="evoluciones-contenido filas">
+
+    <div class="columnas">
+
+      <div data-template="problematico" class="check-alineado" style="column-gap: 5px;">
+        <input type="checkbox" class="check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;    position: absolute; right: 12px; top: 5px;" disabled>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="nota">
+        <label class="title">Nota previa a la evolución:</label>
+        <div class="notas"></div>
+      </div>
+
+    </div>
+
+    <div class="columnas" style="flex-direction: column;">
+      
+      <div data-template="agudeza_4" style="margin: 0px;">
+        <label class="title">Agudeza visual - 4m</label>
+        <div></div>
+      </div>
+
+      <div data-template="agudeza_4_pruebas">
+        <label class="subtitle">Pruebas:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="columnas" style="flex-direction: column;">
+      
+      <div data-template="agudeza_1" style="margin: 0px;">
+        <label class="title">Agudeza visual - 1m</label>
+        <div></div>
+      </div>
+
+      <div data-template="agudeza_1_pruebas">
+        <label class="subtitle">Pruebas:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="columnas" style="flex-direction: column;">
+      
+      <div data-template="agudeza_lectura" style="margin: 0px;">
+        <label class="title">Agudeza visual - lectura</label>
+        <div></div>
+      </div>
+
+      <div data-template="agudeza_lectura_pruebas">
+        <label class="subtitle">Pruebas:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="estereopsis" class="dato-simple">
+        <label class="title">Estereopsis:</label>
+      </div>
+
+      <div data-template="test" class="dato-simple">
+        <label class="title">Ishihara:</label>
+      </div>
+
+      <div data-template="reflejo" class="dato-simple">
+        <label class="title">Stereo Fly:</label>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="pruebas" class="dato-simple">
+        <label class="title">Prueba realizada:</label>
+      </div>
+
+      <div data-template="pruebas_correccion" class="dato-simple">
+        <label class="title">Aplicó corrección:</label>
+      </div>
+
+    </div>
 
   </section>
 
-</template> -->
+</template>
 
 <!------------------------------------------------------------------- -->
 <!---------------------- EVOLUCIONES CRUD --------------------------- -->
@@ -584,12 +671,12 @@
                 
                 <div>     
                   <label>Nota biomicroscopía OD:</label>
-                  <textarea rows="3" id="evoluciones-nota-b-od" data-previa="evoluciones-previa" data-valor="nota-b-od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota-b-od" data-previa="evoluciones-previa" data-valor="nota_b_od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
                 <div>     
                   <label>Nota biomicroscopía OI:</label>
-                  <textarea rows="3" id="evoluciones-nota-b-oi" data-previa="evoluciones-previa" data-valor="nota-b-oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota-b-oi" data-previa="evoluciones-previa" data-valor="nota_b_oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -670,12 +757,12 @@
                 
                 <div>     
                   <label>Fondo de ojo OD:</label>
-                  <textarea rows="3" id="evoluciones-nota-f-od" data-previa="evoluciones-previa" data-valor="nota-f-od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota-f-od" data-previa="evoluciones-previa" data-valor="nota_f_od" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
                 <div>     
                   <label>Fondo de ojo OI:</label>
-                  <textarea rows="3" id="evoluciones-nota-f-oi" data-previa="evoluciones-previa" data-valor="nota-f-oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-nota-f-oi" data-previa="evoluciones-previa" data-valor="nota_f_oi" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -860,7 +947,7 @@
 
                 <div>    
                   <label>DIP</label>
-                  <input type="text" data-valor="dip" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                  <input type="text" data-valor="dip" class="evoluciones-valores upper" placeholder="00mm">
                 </div>
 
               </div>
@@ -991,7 +1078,24 @@
                       
           <div data-familia class="contenedor" id="evoluciones-consultar-contenedor" data-efecto="derecha-1">
 
-            CONSULTA
+            <div style="display: none">
+              <input type="text" id="evoluciones-busqueda" autocomplete="off">
+              <button id="evoluciones-buscar" class="btn">- </button>
+            </div>
+
+            <div id="evoluciones-consulta-fechas">
+              <label>Seleccionar evolución por fecha:</label>
+              <select></select>
+            </div>
+
+            <div id="tabla-evoluciones-consultar-contenedor" class="tabla-ppal" data-scroll>
+              <table id="tabla-evoluciones-consultar" class="table table-bordered table-striped">
+                <thead>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
 
           </div>
 

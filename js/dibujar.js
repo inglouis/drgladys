@@ -9,7 +9,7 @@ export class Canvas {
         this._elementos = {}
 
         this._formato = {
-            format: 'jpeg',
+            format: 'png',
             width: 467,
             height: 272,
             quality: 1

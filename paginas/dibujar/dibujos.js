@@ -92,6 +92,10 @@ class Canvas {
 
     }
 
+    reiniciar() {
+        this._canvas.clear()
+    }
+
     asignarImagen(img, clase) {
 
         var th = (typeof clase !== 'undefined') ? clase : this;
@@ -122,6 +126,8 @@ class Canvas {
         var th = this
 
         document.querySelectorAll(elementos).forEach(btn => {
+
+            btn.style.background = btn.dataset.color;;
 
             btn.addEventListener('click', e => {
 
@@ -166,6 +172,11 @@ class Canvas {
 
         })
 
+    }
+
+    //hacer borrador mañana
+    asignarBorrador(elemento) {
+        
     }
 
     asignarTexto(elemento) {
@@ -268,7 +279,7 @@ class Canvas {
 
     seleccionarTeclado(evento) {
         if (evento.keyCode === 13) {
-            this._canvas.isDrawingMode = false;
+            this._canvas.isDrawingMode = !this._canvas.isDrawingMode;
         }
     }
 

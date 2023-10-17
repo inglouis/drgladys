@@ -778,17 +778,21 @@ span.numeracion {
     justify-content: center;
 }
 
-.crud-botones button {
+.crud-botones2 {
+
+}
+
+.crud-botones button, .crud-botones2 button {
     width: 25px;
     height: 25px;
     padding: 2px;
     margin: 0px 5px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
 
-.crud-botones {
+.crud-botones, .crud-botones2 {
     border: none !important;
 }
 
@@ -2155,7 +2159,7 @@ span.numeracion {
     color: #fff;
 }
 
-.checksmall:checked::after{
+.checksmall:checked::after {
     content: "✓";
     font-size: xx-small;
 }
@@ -2804,27 +2808,30 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 185px;
+    max-width: 145px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
-    width: 10%;
+    max-width: 55px;
 }
 
-
 #tabla-historias tbody tr td:nth-child(4) {
-    width: 45%;
+    width: 15%;
 }
 
 #tabla-historias tbody tr td:nth-child(5) {
-    width: 23%;
+    width: 40%;
 }
 
 #tabla-historias tbody tr td:nth-child(6) {
-    width: 10%;
+    width: 23%;
 }
 
 #tabla-historias tbody tr td:nth-child(7) {
+    width: 10%;
+}
+
+#tabla-historias tbody tr td:nth-child(8) {
     width: 20%;
 }
 
@@ -4448,7 +4455,6 @@ div#tabla-notificados-contenedor .titulo::after {
     min-width: 100px;
 }
 
-
 .evoluciones-status:nth-child(1)::after {
     content:"Solo Ocupaciónes Activadas [A]";
 }
@@ -4720,6 +4726,80 @@ div#tabla-notificados-contenedor .titulo::after {
 
 #crud-evoluciones-contenedor label:nth-child(8) .tooltip-filtro-reverso::after{
     content: "Anexos";
+}
+
+#evoluciones-consulta-fechas {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4a6d95;
+}
+
+#evoluciones-consulta-fechas select {
+    border: 1px solid #4a6d95;
+    min-width: 200px;
+    padding: 8px;
+}
+
+#evoluciones-consulta-fechas label {
+    width: fit-content;
+    padding-right: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #4a6d95;
+}
+
+#tabla-evoluciones-consultar-contenedor {
+    background: #fff;
+}
+
+#tabla-evoluciones-consultar thead {
+    display: none;
+}
+
+#tabla-evoluciones-consultar tbody tr td:nth-child(1) {
+    width: 100%;
+}
+
+.evoluciones-contenido {
+    padding: 15px;
+    background: #fff;
+}
+
+.evoluciones-contenido ul {
+    margin: 0px;
+    padding-inline-start: 30px;
+}
+
+.evoluciones-contenido .title {
+    position: relative;
+    font-weight: bold;
+}
+
+.evoluciones-contenido .subtitle {
+    color: black;
+    text-decoration: underline;
+}
+
+.evoluciones-contenido .notas {
+    border: 1px solid #949494;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.evoluciones-contenido .dato-simple {
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: 10px;
+    width: fit-content;
+    margin-right: 20px;
 }
 
 /*-----------------------------------------------------*/

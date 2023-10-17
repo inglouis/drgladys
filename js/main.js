@@ -303,6 +303,7 @@ export class Herramientas {
 
 			var archivos = new FormData();
 
+			//esto tiene que ser capaz de manejar datos asociativos
 			datos.forEach((archivo, index) => {
 
 				if (th.esDOM(archivo)) {			
@@ -3105,7 +3106,9 @@ export class Rellenar {
 		}
 
 		for (var i = 0; i < contenedores.length; i++) {
+
 			if (contenedores[i].tagName === 'INPUT') {
+
 				if (contenedores[i].type === 'checkbox') {
 
 					if (contenedores[i].getAttribute('value') !== null) {
@@ -3150,6 +3153,7 @@ export class Rellenar {
 					}
 				}
 			} else if (contenedores[i].tagName === 'SELECT') {
+
 				var encontrado = false
 				Array.from(contenedores[i]).forEach((el,index) => {
 				    if (String(el.value).trim() === String(lista[contenedores[i].dataset[th.grupo]]).trim()) {
@@ -3165,6 +3169,7 @@ export class Rellenar {
 						contenedores[i].appendChild(inicial)
 					}		
 				}
+				
 			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV') {
 				
 				if (contenedores[i].classList.contains('contenedor-consulta')) {

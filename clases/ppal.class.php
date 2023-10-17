@@ -641,17 +641,17 @@ class ppal extends cbdc
     	}
     	return $lista;
     }
-
+    //*******************************************************************
     public function version () {
 
     	return $this->i_pdo("select version from miscelaneos.version where id_version = 1", [], true)->fetchColumn();
 
     }
-
+    //*******************************************************************
     public function monedasPpal () {
     	return json_encode($this->e_pdo("select * from miscelaneos.monedas order by id_moneda")->fetchAll(PDO::FETCH_ASSOC));
     }
-
+    //*******************************************************************
     public function consultarCookie($args) {
 
     	echo $_COOKIE["se_cookie"];

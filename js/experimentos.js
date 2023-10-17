@@ -18,6 +18,7 @@ class Galeria {
 
 		this._select = undefined
 		this._ruta = '../imagenes/anexos/'
+		this._retardo = 3000
 
 		/////////////////////////////////////////////////////////////
 		this.div = document.createElement('div')
@@ -28,6 +29,7 @@ class Galeria {
 		this._opciones = {}
 		this._imagenes = []
 		this._rutaImagenes = '#galeria-contenedor .galeria-img img'
+		this._pswp = '.pswp'
 		
 	}
 
@@ -106,11 +108,29 @@ class Galeria {
 
 	}
 
+	async limpiar() {
+
+		this._selector.value = ''
+
+		var cola = []
+
+		cola.push(this.retardar().then(x => {}));
+		cola.push(this.retardar().then(x => {}));
+
+		await Promise.all(cola);
+
+		this.cargar()
+
+	}
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	async retardar() {
-	  return new Promise((resolve, reject) => {
-	    setTimeout(resolve, 1000);
-	  });
+
+		var th = this
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, th._retardo);
+		});
 	}
 
 	async buscarImagenRuta(src, fileName, mimeType){
@@ -187,8 +207,18 @@ class Galeria {
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	imagenesExpandirConstruir() {
-		this.photo = new PhotoSwipe(document.querySelectorAll('.pswp')[0], PhotoSwipeUI_Default, this._imagenes, this._opciones)
-		this.photo.init()
+
+		if (PhotoSwipe !== undefined) {
+
+			this.photo = new PhotoSwipe(document.querySelectorAll(this._pswp)[0], PhotoSwipeUI_Default, this._imagenes, this._opciones)
+			this.photo.init()
+
+		} else {
+
+			console.log('PhotoSwipe es necesario para el funcionamiento de esta clase')
+
+		}
+
 	}
 
 	imagenesExpandirConfiguracion(index, imagenes) {
@@ -196,6 +226,7 @@ class Galeria {
 		    index: index,
 		    showHideOpacity:true,
 		    bgOpacity:0.9,
+		    closeOnScroll: false,
 		    getThumbBoundsFn: (index) => {
 			    var thumbnail = document.querySelectorAll(imagenes)[index];
 			    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
@@ -205,17 +236,33 @@ class Galeria {
 		};
 	}
 	
-	imagenesExpandirCargar() {
+	async imagenesExpandirCargar() {
 		
 		var th = this,
 			imagenes = qsa(this._rutaImagenes) //.galeria-img img
 
+		var cola = []
+
+		cola.push(this.retardar().then(x => {}));
+
+		await Promise.all(cola);
+
+		this._imagenes = []
+
 		for (var i = 0; i < imagenes.length; i++) {
+
+			var height = imagenes[i].naturalHeight,
+				width  = imagenes[i].naturalWidth
+
+			if (height < 400) {height = 800}
+			if (width  < 400) {width  = 800}
+
 			th._imagenes.push({
 				src: imagenes[i].src,
-				w:800,
-				h:800
+				w:width,
+				h:height
 			})
+		
 		}
 
 	}
@@ -223,6 +270,10 @@ class Galeria {
 }
 
 window.galeria = new Galeria('#galeria-cargar', '#galeria-contenedor')
+
+galeria._pswp = '.pswp'
+galeria._rutaImagenes = '#galeria-contenedor .galeria-img img'
+galeria._retardo = 3000
 
 qs('#galeria-cargar').addEventListener('change', () => {
 
@@ -257,6 +308,48 @@ qs('#galeria-enviar').addEventListener('click', async e => {
 
 })
 
+/////////////////////////////////////////////////////////////
+window.galeria2 = new Galeria('#galeria-cargar2', '#galeria-contenedor2')
+
+galeria2._pswp = '.pswp2'
+galeria2._rutaImagenes = '#galeria-contenedor2 .galeria-img img'
+galeria2._retardo = 3000
+
+qs('#galeria-cargar2').addEventListener('change', () => {
+
+	galeria2.cargar()
+
+})
+
+qs('#galeria-contenedor2').addEventListener('change', e => {
+
+	if (e.target.tagName === 'SELECT') {
+
+		galeria2.reposicionar(e.target)
+
+	}
+
+})
+
+qs('#galeria-contenedor2').addEventListener('click', e => {
+
+	if (e.target.tagName === 'IMG') {		
+		galeria2.imagenesExpandirConfiguracion(Number(e.target.dataset.posicion), '.galeria-img');
+		galeria2.imagenesExpandirConstruir();
+	}
+
+})
+
+qs('#galeria-enviar2').addEventListener('click', async e => {
+
+	var datos = tools.procesar('', '', 'valores', tools)
+
+	console.log(await tools.fullAsyncQuery('experimentos', 'imagenes', datos, [["+", "%2B"]], undefined, true))
+
+})
+
+
+/////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
 class textoPersonalizable {
 

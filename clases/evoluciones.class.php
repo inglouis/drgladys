@@ -2,7 +2,7 @@
     require('../clases/ppal.class.php');
     class Model extends ppal {
         public $schema ='principales';
-        public $tabla = 'evoluciones';
+        public $tabla = 'evoluciones_antiguas';
         public $filtroMapa = [
             0 => "status = '?'",
             1 => "status = '?'"
