@@ -71,6 +71,27 @@
             $sql = "select id_diagnostico, trim(nombre) as nombre, trim(status) as status from $this->schema.$this->tabla";   
             $this->aplicar_filtros([$sql, $args, 0, false]);
         }
+
+        public function traer_diagnosticos() {
+
+            $datos = json_decode($this->cargar_diagnosticos([]), true);
+
+            $nueva_lista = array();
+
+            foreach ($datos as &$r) {
+                
+                $nueva_lista[$r['id_diagnostico']] = null;
+
+                $nueva_lista[$r['id_diagnostico']] = array(
+                    "nombre" => $r['nombre'],
+                    "status" => $r['status']
+                ); 
+
+            }
+
+            return json_encode($nueva_lista);
+
+        }
     }
 ?>
 

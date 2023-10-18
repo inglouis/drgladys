@@ -23,7 +23,7 @@
                 select
                     t.*,
                     ppal.basicas_diagnosticos_armar_lista(t.diagnosticos) as diagnosticos_procesados,
-                    ppal.basicas_referencias_armar_lista(t.referencias) as diagnosticos_procesados,
+                    ppal.basicas_referencias_armar_lista(t.referencias) as referencias_procesados,
                     TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada
                 FROM principales.evoluciones as t
                 WHERE t.id_historia = ?
@@ -39,8 +39,8 @@
 	            $valor['txt_bio'] = $this->directorios->traer_txt($ruta, 'biomicroscopia');
 	            $valor['txt_fondo'] = $this->directorios->traer_txt($ruta, 'fondo_ojo');
 
-	            $valor['imagen_biomicroscopia'] = $ruta."biomicroscopia.png";
-	            $valor['imagen_fondo_ojo'] = $ruta."fondo_ojo.png";
+	            $valor['imagen_biomicroscopia'] = $ruta."/biomicroscopia.png";
+	            $valor['imagen_fondo_ojo'] = $ruta."/fondo_ojo.png";
 
 	            $valor['imagenes_antes_cirugia'] = glob($ruta.'/antes_cirugia/*.*');
 	            $valor['imagenes_despues_cirugia'] = glob($ruta.'/despues_cirugia/*.*');

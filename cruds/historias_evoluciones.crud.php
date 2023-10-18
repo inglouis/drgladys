@@ -8,8 +8,8 @@
 
     <div class="columnas">
 
-      <div data-template="problematico" class="check-alineado" style="column-gap: 5px;">
-        <input type="checkbox" class="check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;    position: absolute; right: 12px; top: 5px;" disabled>
+      <div data-template="problematico" class="check-alineado" style="column-gap: 5px; height: 8px">
+        <input type="checkbox" class="check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;    position: absolute; right: 21px; top: 15px;" disabled>
       </div>
 
     </div>
@@ -17,16 +17,18 @@
     <div class="columnas">
       
       <div data-template="nota">
-        <label class="title">Nota previa a la evolución:</label>
+        <label class="title">Nota inicial:</label>
         <div class="notas"></div>
       </div>
 
     </div>
 
-    <div class="columnas" style="flex-direction: column;">
+    <div class="separador">Examen oftalmológico</div>
+
+    <div class="columnas" style="flex-direction: column; align-items: baseline; margin-top: 10px;">
       
-      <div data-template="agudeza_4" style="margin: 0px;">
-        <label class="title">Agudeza visual - 4m</label>
+      <div data-template="agudeza_4" style="margin: 0px;" class="dato-simple">
+        <label class="title">Agudeza visual - 4m:</label>
         <div></div>
       </div>
 
@@ -37,10 +39,10 @@
 
     </div>
 
-    <div class="columnas" style="flex-direction: column;">
+    <div class="columnas" style="flex-direction: column; align-items: baseline;">
       
-      <div data-template="agudeza_1" style="margin: 0px;">
-        <label class="title">Agudeza visual - 1m</label>
+      <div data-template="agudeza_1" style="margin: 0px;" class="dato-simple">
+        <label class="title">Agudeza visual - 1m:</label>
         <div></div>
       </div>
 
@@ -51,10 +53,10 @@
 
     </div>
 
-    <div class="columnas" style="flex-direction: column;">
+    <div class="columnas" style="flex-direction: column; align-items: baseline;">
       
-      <div data-template="agudeza_lectura" style="margin: 0px;">
-        <label class="title">Agudeza visual - lectura</label>
+      <div data-template="agudeza_lectura" style="margin: 0px;" class="dato-simple">
+        <label class="title">Agudeza visual - lectura:</label>
         <div></div>
       </div>
 
@@ -65,7 +67,7 @@
 
     </div>
 
-    <div class="columnas">
+    <div class="columnas" style="margin-top: 10px;">
       
       <div data-template="estereopsis" class="dato-simple">
         <label class="title">Estereopsis:</label>
@@ -81,7 +83,9 @@
 
     </div>
 
-    <div class="columnas">
+    <div class="separador">Pruebas</div>
+
+    <div class="columnas" style="margin-top: 10px;">
       
       <div data-template="pruebas" class="dato-simple">
         <label class="title">Prueba realizada:</label>
@@ -92,6 +96,283 @@
       </div>
 
     </div>
+
+    <div class="columnas"><label style="font-weight: bold; margin-top: 15px; text-decoration: underline; font-size: 18px;">Prueba</label></div>
+
+    <div class="columnas">
+
+      <div class="pruebas borde-estilizado">
+
+        <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
+          <input type="text" data-template="pruebas_od_1" class="evoluciones-valores upper visual" disabled placeholder="---" style="width: 70px;">
+        </section>
+
+        <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
+          <input type="text" data-template="pruebas_od_2" class="upper visual" disabled placeholder="---">
+          <input type="text" data-template="pruebas_od_3" class="upper visual" disabled placeholder="---">
+          <input type="text" data-template="pruebas_od_4" class="upper visual" disabled placeholder="---">
+        </section>
+
+        <section style="grid-template-columns: auto auto auto; align-self: end;">
+          <input type="text" data-template="pruebas_od_5" class="upper visual" disabled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; left: 10px;">
+          <div style="width: 100%">
+              <input type="text" data-template="pruebas_od_6" class="upper visual" disabled placeholder="---" style="height: 20px">
+              <input type="text" data-template="pruebas_od_7" class="upper visual" disabled placeholder="---" style="height: 20px">
+          </div>
+          <input type="text" data-template="pruebas_od_8" class="upper visual" disabled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; right: 10px;">
+        </section>
+        
+      </div>
+
+      <div class="pruebas borde-estilizado">
+
+        <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
+          <input type="text" data-template="pruebas_oi_1" class="evoluciones-valores upper visual" disbled placeholder="---" style="width: 70px;">
+        </section>
+
+        <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
+          <input type="text" data-template="pruebas_oi_2" class="upper visual" disbled placeholder="---">
+          <input type="text" data-template="pruebas_oi_3" class="upper visual" disbled placeholder="---">
+          <input type="text" data-template="pruebas_oi_4" class="upper visual" disbled placeholder="---">
+        </section>
+
+        <section style="grid-template-columns: auto auto auto; align-self: end;">
+          <input type="text" data-template="pruebas_oi_5" class="upper visual" disbled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; left: 10px;">
+          <div style="width: 100%">
+              <input type="text" data-template="pruebas_oi_6" class="upper visual" disbled placeholder="---" style="height: 20px">
+              <input type="text" data-template="pruebas_oi_7" class="upper visual" disbled placeholder="---" style="height: 20px">
+          </div>
+          <input type="text" data-template="pruebas_oi_8" class="upper visual" disbled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; right: 10px;">
+        </section>
+        
+      </div>
+
+    </div>
+
+    <div class="columnas"><label style="font-weight: bold; margin-top: 15px; text-decoration: underline; font-size: 18px;">Motilidad</label></div>
+
+    <div class="columnas">
+
+      <div class="motilidad borde-estilizado">
+
+        <section style="grid-template-columns: auto auto; align-self: end;">
+          <input type="text" data-template="motilidad_od_1" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_od_2" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+        <section style="grid-template-columns: auto auto; align-self: center;">
+          <input type="text" data-template="motilidad_od_3" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_od_4" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+        <section style="grid-template-columns: auto auto; align-self: start;">
+          <input type="text" data-template="motilidad_od_5" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_od_6" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+      </div>
+
+      <div class="motilidad borde-estilizado">
+
+       <section style="grid-template-columns: auto auto; align-self: end;">
+          <input type="text" data-template="motilidad_oi_1" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_oi_2" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+        <section style="grid-template-columns: auto auto; align-self: center;">
+          <input type="text" data-template="motilidad_oi_3" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_oi_4" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+        <section style="grid-template-columns: auto auto; align-self: start;">
+          <input type="text" data-template="motilidad_oi_5" placeholder="---" disabled class="upper visual" style="width: 80px">
+          <input type="text" data-template="motilidad_oi_6" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
+        </section>
+
+      </div>
+
+    </div>
+
+    <div class="separador">Refracción</div>
+
+    <div class="columnas">
+
+      <div data-template="rx" style="margin: 0px;">
+        <label class="title">RX:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+
+      <div data-template="rx_ciclo" style="margin: 0px;">
+        <label class="title">RX - CICLOPLEGIA:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="separador">Biomicroscopía</div>
+
+    <div class="columnas">
+
+      <div data-template="biomicroscopia_img" style="margin: 0px;justify-content: center; display: flex; align-items: center;">
+        <img src="" width="513" height="309">
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="nota_bio_od">
+        <label class="title">OD:</label>
+        <div class="notas"></div>
+      </div>
+
+      <div data-template="nota_bio_oi">
+        <label class="title">OI:</label>
+        <div class="notas"></div>
+      </div>
+
+    </div>
+
+    <div class="separador">Fondo de ojo</div>
+
+    <div class="columnas">
+
+      <div data-template="fondo_img" style="margin: 0px;justify-content: center; display: flex; align-items: center;">
+        <img src="" width="513" height="309">
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="nota_f_od">
+        <label class="title">OD:</label>
+        <div class="notas"></div>
+      </div>
+
+      <div data-template="nota_f_oi">
+        <label class="title">OI:</label>
+        <div class="notas"></div>
+      </div>
+
+    </div>
+
+    <div class="separador">Pio, Estudios, IDX</div>
+
+    <div class="columnas" style="flex-direction: column; align-items: baseline; margin-top: 10px;">
+      
+      <div data-template="pio" style="margin: 0px;" class="dato-simple">
+        <label class="title">Pio:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="referencias">
+        <label class="subtitle">Estudios:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+
+      <div data-template="idx">
+        <label class="subtitle">Idx:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="separador">Fórmula</div>
+
+    <div class="columnas">
+
+      <div data-template="formula" style="margin: 0px;">
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="curva" style="margin: 0px;" class="dato-simple">
+        <label class="title">Curva base:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="intraocular" style="margin: 0px;" class="dato-simple">
+        <label class="title">Distancia intraocular:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="interpupilar" style="margin: 0px;" class="dato-simple">
+        <label class="title">Distancia interpupilar:</label>
+        <div></div>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+
+      <div data-template="formula_estudios">
+        <label class="subtitle">Estudios:</label>
+        <ul></ul>
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="plan">
+        <label class="title">Plan</label>
+        <div class="notas"></div>
+      </div>
+
+    </div>
+
+    <div class="separador">Anexos</div>
+
+
+    <div class="columnas"><label style="font-weight: bold; margin-top: 15px; text-decoration: underline; font-size: 18px;">Antes de la cirugía:</label></div>
+    
+    <div class="columnas">
+      
+      <div data-template="anexos_lentes_antes" class="dato-simple">
+        <label class="title">Aplicó uso de lentes:</label>
+      </div>
+
+    </div>
+
+    <div id="galeria-contenedor-antes"data-template="img-antes" class="columnas galeria-contenedor">
+      
+    </div>
+
+    <div class="columnas"><label style="font-weight: bold; margin-top: 15px; text-decoration: underline; font-size: 18px;">Después de la cirugía:</label></div>
+    
+    <div class="columnas">
+      
+      <div data-template="anexos_lentes_despues" class="dato-simple">
+        <label class="title">Aplicó uso de lentes:</label>
+      </div>
+
+    </div>
+
+    <div id="galeria-contenedor-despues"data-template="img-despues" class="columnas galeria-contenedor">
 
   </section>
 

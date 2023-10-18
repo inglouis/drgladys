@@ -17,6 +17,11 @@ var evoluciones_pruebas = {
 	"2": "HIRSCHBERG TEST (HT)"
 }
 
+var evoluciones_signos = {
+	"X": '+',
+	"": '-'
+}
+
 /////////////////////////////////////////////////////
 ///
 evoluciones['crud']['propiedadesTr'] = {
@@ -34,11 +39,12 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="problematico"] input').checked = (e.sublista.problematico === 'X') ? true : false;
 
 		//nota
-		var nota = JSON.parse(e.sublista.nota).texto_html
-			contenedor.querySelector('[data-template="nota"] div').innerHTML = nota.toUpperCase()
+		var texto = JSON.parse(e.sublista.nota).texto_html
+			contenedor.querySelector('[data-template="nota"] div').innerHTML = texto.toUpperCase()
 
 		//examen oftalmológico
-		contenedor.querySelector('[data-template="agudeza_4"] div').innerHTML = `OD:${e.sublista.agudeza_od_4} - OI: ${e.sublista.agudeza_oi_4}`
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="agudeza_4"] div').innerHTML = `OD: ${e.sublista.agudeza_od_4} - OI: ${e.sublista.agudeza_oi_4}`
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.correccion_4 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.allen_4 === 'X') ? '<li>ALLEN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.jagger_4 === 'X') ? '<li>JAGGER</li>' : '')) 
@@ -75,95 +81,159 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="pruebas"]').insertAdjacentHTML('beforeend', evoluciones_pruebas[e.sublista.pruebas])
 		contenedor.querySelector('[data-template="pruebas_correccion"]').insertAdjacentHTML('beforeend', ((e.sublista.correccion_pruebas === 'X') ? 'SÍ' : 'NO')) 
 
+		//pruebas
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="pruebas_od_1"]').value = e.sublista.pruebas_od_1
+		contenedor.querySelector('[data-template="pruebas_od_2"]').value = e.sublista.pruebas_od_2
+		contenedor.querySelector('[data-template="pruebas_od_3"]').value = e.sublista.pruebas_od_3
+		contenedor.querySelector('[data-template="pruebas_od_4"]').value = e.sublista.pruebas_od_4
+		contenedor.querySelector('[data-template="pruebas_od_5"]').value = e.sublista.pruebas_od_5
+		contenedor.querySelector('[data-template="pruebas_od_6"]').value = e.sublista.pruebas_od_6
+		contenedor.querySelector('[data-template="pruebas_od_7"]').value = e.sublista.pruebas_od_7
+		contenedor.querySelector('[data-template="pruebas_od_8"]').value = e.sublista.pruebas_od_8
+
+		contenedor.querySelector('[data-template="pruebas_oi_1"]').value = e.sublista.pruebas_oi_1
+		contenedor.querySelector('[data-template="pruebas_oi_2"]').value = e.sublista.pruebas_oi_2
+		contenedor.querySelector('[data-template="pruebas_oi_3"]').value = e.sublista.pruebas_oi_3
+		contenedor.querySelector('[data-template="pruebas_oi_4"]').value = e.sublista.pruebas_oi_4
+		contenedor.querySelector('[data-template="pruebas_oi_5"]').value = e.sublista.pruebas_oi_5
+		contenedor.querySelector('[data-template="pruebas_oi_6"]').value = e.sublista.pruebas_oi_6
+		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = e.sublista.pruebas_oi_7
+		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = e.sublista.pruebas_oi_8
+
+		contenedor.querySelector('[data-template="motilidad_od_1"]').value = e.sublista.motilidad_od_1
+		contenedor.querySelector('[data-template="motilidad_od_2"]').value = e.sublista.motilidad_od_2
+		contenedor.querySelector('[data-template="motilidad_od_3"]').value = e.sublista.motilidad_od_3
+		contenedor.querySelector('[data-template="motilidad_od_4"]').value = e.sublista.motilidad_od_4
+		contenedor.querySelector('[data-template="motilidad_od_5"]').value = e.sublista.motilidad_od_5
+		contenedor.querySelector('[data-template="motilidad_od_6"]').value = e.sublista.motilidad_od_6
+
+		contenedor.querySelector('[data-template="motilidad_oi_1"]').value = e.sublista.motilidad_oi_1
+		contenedor.querySelector('[data-template="motilidad_oi_2"]').value = e.sublista.motilidad_oi_2
+		contenedor.querySelector('[data-template="motilidad_oi_3"]').value = e.sublista.motilidad_oi_3
+		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = e.sublista.motilidad_oi_4
+		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = e.sublista.motilidad_oi_5
+		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = e.sublista.motilidad_oi_6
+
+		//rx
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="rx"] div').insertAdjacentHTML('afterbegin', `
+			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+			<br>
+			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+		`) 
+
+		contenedor.querySelector('[data-template="rx_ciclo"] div').insertAdjacentHTML('afterbegin', `
+			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+			<br>
+			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+		`) 
+
+		//biomicroscopia
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="biomicroscopia_img"] img').src = e.sublista.imagen_biomicroscopia
+
+		texto = JSON.parse(e.sublista.nota_b_od).texto_html
+		contenedor.querySelector('[data-template="nota_bio_od"] div').innerHTML = texto.toUpperCase()
+
+		texto = JSON.parse(e.sublista.nota_b_oi).texto_html
+		contenedor.querySelector('[data-template="nota_bio_oi"] div').innerHTML = texto.toUpperCase()
+
+		//fondo de ojo
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="fondo_img"] img').src = e.sublista.imagen_fondo_ojo
+
+		texto = JSON.parse(e.sublista.nota_f_od).texto_html
+		contenedor.querySelector('[data-template="nota_f_od"] div').innerHTML = texto.toUpperCase()
+
+		texto = JSON.parse(e.sublista.nota_f_oi).texto_html
+		contenedor.querySelector('[data-template="nota_f_oi"] div').innerHTML = texto.toUpperCase()
+
+		//pio, estudio, idx
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="pio"] div').innerHTML = `OD: ${e.sublista.pio_od} - OI: ${e.sublista.pio_oi}`
+
+		var referencias = JSON.parse(e.sublista.referencias_procesados),
+			idx = JSON.parse(e.sublista.diagnosticos_procesados)
+
+		referencias.forEach(valor => {
+			contenedor.querySelector('[data-template="referencias"] ul').insertAdjacentHTML('afterbegin', `[${valor.nombre}]: ${valor.descripcion}`)
+		})
+
+		idx.forEach(valor => {
+			contenedor.querySelector('[data-template="idx"] ul').insertAdjacentHTML('afterbegin', valor.nombre)
+		})
+
+		//formula
+		//------------------------------------------------
+		contenedor.querySelector('[data-template="formula"] div').insertAdjacentHTML('afterbegin', `
+			OD: ${evoluciones_signos[e.sublista.formula_od_signo_1_ciclo]}${e.sublista.formula_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_od_signo_2_ciclo]}${e.sublista.formula_od_valor_2_ciclo} X ${e.sublista.formula_od_grados_ciclo}°
+			<br>
+			OI: ${evoluciones_signos[e.sublista.formula_oi_signo_1_ciclo]}${e.sublista.formula_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_oi_signo_2_ciclo]}${e.sublista.formula_oi_valor_2_ciclo} X ${e.sublista.formula_oi_grados_ciclo}°
+		`) 
+
+		contenedor.querySelector('[data-template="curva"] div').innerHTML = `OD: ${e.sublista.curva_od} - OI: ${e.sublista.curva_oi}`
+		contenedor.querySelector('[data-template="intraocular"] div').innerHTML = `OD:${e.sublista.distancia_intraocular_od} - OI: ${e.sublista.distancia_intraocular_oi}`
+		contenedor.querySelector('[data-template="interpupilar"] div').innerHTML = `OD:${e.sublista.distancia_interpupilar_od} - OI: ${e.sublista.distancia_interpupilar_oi} - ADD: ${e.sublista.distancia_interpupilar_add} - DIP: ${e.sublista.dip}`
+
+		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_kriptok !== '') ? `<li>BIFOCAL KRIPTOK</li>` : ''))
+		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.multifocal !== '') ? `<li>MULTIFOCAL</li>` : ''))
+		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_flat_top !== '') ? `<li>BIFOCAL FLAP TOP</li>` : ''))
+		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ejecutivo !== '') ? `<li>BIFOCAL EJECUTIVO</li>` : ''))
+		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ultex !== '') ? `<li>BIFOCAL ULTEX</li>` : ''))
+
+		texto = JSON.parse(e.sublista.plan).texto_html
+		contenedor.querySelector('[data-template="plan"] div').innerHTML = texto.toUpperCase()
+
+		//anexos
+		//------------------------------------------------
+		var index = 0
+
+		e.sublista.imagenes_antes_cirugia.forEach((imagen) => {
+
+			var div = th.div.cloneNode(true)
+				div.classList.add('galeria-img')
+
+			var img = th.img.cloneNode(true)
+				img.src = imagen
+				img.setAttribute('data-posicion', index)
+
+			index++
+
+			div.appendChild(img)
+
+			contenedor.querySelector('[data-template="img-antes"]').appendChild(div)
+
+		})
+
+		e.sublista.imagenes_despues_cirugia.forEach((imagen) => {
+
+			var div = th.div.cloneNode(true)
+				div.classList.add('galeria-img')
+
+			var img = th.img.cloneNode(true)
+				img.src = imagen
+				img.setAttribute('data-posicion', index)
+
+			index++
+
+			div.appendChild(img)
+
+			contenedor.querySelector('[data-template="img-despues"]').appendChild(div)
+
+		})
+
+		contenedor.querySelector('[data-template="anexos_lentes_antes"]').insertAdjacentHTML('beforeend', ((e.sublista.anexos_antes_lentes === 'X') ? 'SÍ' : 'NO')) 
+		contenedor.querySelector('[data-template="anexos_lentes_despues"]').insertAdjacentHTML('beforeend', ((e.sublista.anexos_despues_lentes === 'X') ? 'SÍ' : 'NO')) 
+
+
+		//------------------------------------------------
+		//------------------------------------------------
 		e.querySelector('.evoluciones-contenedor').innerHTML = ''
 		e.querySelector('.evoluciones-contenedor').appendChild(contenedor)
 
-		// //tipo
-		// contenedor.querySelectorAll('.informe-tipo option').forEach((el, i) => {
-		// 	if (el.value === e.sublista.tipo) {
-		// 		el.parentElement.selectedIndex = i
-		// 	}
-		// })
-
-		// if (e.sublista.tipo !== '1') {
-		// 	contenedor.querySelector('.informe-aplica-completo').setAttribute('data-hidden', '')
-		// }
-
-		// //contenido
-		// var contenido = JSON.parse(e.sublista.contenido).texto_html
-		// 	contenedor.querySelector('.informe-contenido div').innerHTML = contenido.toUpperCase()
-
-		// //agudeza 4
-		// contenedor.querySelector('.informe-agudeza-4 span').innerHTML = `OD: ${e.sublista.agudeza_od_4.toUpperCase()} - OI: ${e.sublista.agudeza_oi_4.toUpperCase()}`
-		// contenedor.querySelector('.informe-agudeza-4 input').checked = (e.sublista.correccion_4 === 'X') ? true : false;
-
-		// //agudeza 1
-		// contenedor.querySelector('.informe-agudeza-1 span').innerHTML = `OD: ${e.sublista.agudeza_od_1.toUpperCase()} - OI: ${e.sublista.agudeza_oi_1.toUpperCase()}`
-		// contenedor.querySelector('.informe-agudeza-1 input').checked = (e.sublista.correccion_1 === 'X') ? true : false;
-
-		// //agudeza lectura
-		// contenedor.querySelector('.informe-agudeza-lectura span').innerHTML = `OD: ${e.sublista.agudeza_od_lectura.toUpperCase()} - OI: ${e.sublista.agudeza_oi_lectura.toUpperCase()}`
-		// contenedor.querySelector('.informe-agudeza-lectura input').checked = (e.sublista.correccion_lectura === 'X') ? true : false;
-
-		// //pruebas
-		// contenedor.querySelector('.informe-test div').innerHTML = `Estereopsis: ${e.sublista.estereopsis}S - Ishihara: ${e.sublista.test} - Stereo Fly: ${e.sublista.reflejo}`
-
-		// //motilidad
 		
-
-		// //rx
-		// contenedor.querySelector('.rx-cicloplegia').checked = (e.sublista.rx_cicloplegia === 'X') ? true : false;
-
-		// contenedor.querySelectorAll('.informe-rx div')[0].innerHTML = 
-		// 	`
-		// 		OD: ${(e.sublista.rx_od_signo_1 === 'X') ? '+' : '-'}
-		// 			${e.sublista.rx_od_valor_1} 
-		// 			${(e.sublista.rx_od_signo_2 === 'X') ? '+' : '-'}
-		// 			${e.sublista.rx_od_valor_2} X
-		// 			${e.sublista.rx_od_grados}° = 
-		// 			${e.sublista.rx_od_resultado}
-		// 	`
-
-		// contenedor.querySelectorAll('.informe-rx div')[1].innerHTML = 
-		// 	`
-		// 		OI: &nbsp;&nbsp;${(e.sublista.rx_oi_signo_1 === 'X') ? '+' : '-'}
-		// 			${e.sublista.rx_oi_valor_1} 
-		// 			${(e.sublista.rx_oi_signo_2 === 'X') ? '+' : '-'}
-		// 			${e.sublista.rx_oi_valor_2} X
-		// 			${e.sublista.rx_oi_grados}° = 
-		// 			${e.sublista.rx_oi_resultado}
-		// 	`
-
-		// //biomicroscopia
-		// var bio = JSON.parse(e.sublista.biomicroscopia).texto_html
-		// 	contenedor.querySelector('.informe-bio div').innerHTML = bio.toUpperCase()
-
-		// //PIO
-		// contenedor.querySelector('.informe-pio div').innerHTML = `
-		// 		OD: ${e.sublista.pio_od} - OI: ${e.sublista.pio_oi}
-		// 	`
-
-		// //fondo de ojo
-		// var fondo = JSON.parse(e.sublista.fondo_ojo).texto_html
-		// 	contenedor.querySelector('.informe-fondo div').innerHTML = fondo.toUpperCase()
-
-		// //diagnosticos
-		// var diagnostico = JSON.parse(e.sublista.diagnosticos_procesados)
-		// 	diagnostico.forEach(d => {
-
-		// 		contenedor.querySelector('.informe-diagnosticos div').insertAdjacentHTML('beforeend',  `<span>${d.nombre}</span>`)
-
-		// 	})
-
-		// //plan
-		// var plan = JSON.parse(e.sublista.plan).texto_html
-		// 	contenedor.querySelector('.informe-plan div').innerHTML = plan.toUpperCase()
-
-
-		// contenedor.querySelector('.nombre').insertAdjacentHTML('afterbegin', `<b>- Nombre:</b> ${e.sublista.nombres}`)
-		// contenedor.querySelector('.apellido').insertAdjacentHTML('afterbegin', `<b>- Apellido:</b> ${e.sublista.apellidos}`)
-		// contenedor.querySelector('.cedula').insertAdjacentHTML('afterbegin', `<b>- Cédula/pasaporte:</b> ${e.sublista.cedula}`)
-		// contenedor.querySelector('.edad').insertAdjacentHTML('afterbegin', `<b>- Edad:</b> ${tools.calcularFecha(new Date(e.sublista.fecha_nacimiento))}`)
+		th.imagenesExpandirCargar()
 
 	},
 	"eliminar": (e) => {
@@ -199,6 +269,21 @@ evoluciones['crud']['propiedadesTr'] = {
 
 	}
 }
+
+qs('#evoluciones-consultar-contenedor').addEventListener('click', e => {
+
+	if (e.target.tagName === 'IMG') {
+
+		if (e.target.parentElement.classList.contains('galeria-img')) {
+
+			evoluciones.imagenesExpandirConfiguracion(Number(e.target.dataset.posicion));
+			evoluciones.imagenesExpandirConstruir();
+
+		}
+
+	}
+
+})
 /////////////////////////////////////////////////////
 ///
 evoluciones['crud']['customBodyEvents'] = {
@@ -630,5 +715,9 @@ qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
 
 	qs('#evoluciones-busqueda').value = e.target.value
     evoluciones.crud.botonForzar(true)
+
+    setTimeout(() => {
+		qs('#tabla-evoluciones-consultar-contenedor').scrollTo(0,0)
+	}, 1000)
 
 })

@@ -356,6 +356,7 @@ window.cargar.revision()
 /////////////////////////////////////////////////////
 window.lista_referencias = JSON.parse(await tools.fullAsyncQuery(`referencias`, `traer_referencias`, []))
 window.lista_referidos = JSON.parse(await tools.fullAsyncQuery(`referidos`, `traer_referidos`, []))
+window.lista_diagnosticos = JSON.parse(await tools.fullAsyncQuery(`diagnosticos`, `traer_diagnosticos`, []))
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 window.reportes = new Reportes()
@@ -1903,6 +1904,90 @@ class Evoluciones extends Acciones {
 		this.select = qs('#evoluciones-consulta-fechas select')
 		this.option = document.createElement('option')
 		this.ul = document.createElement('ul')
+		this.img = document.createElement('img')
+
+		//-------------------------------
+		this._opciones = {}
+
+		this._imagenes = []
+		this._rutaImagenes = '#evoluciones-consultar-contenedor .galeria-img img'
+		this._pswp = '.pswp2'
+		this._retardo = 3000
+
+	}
+
+	imagenesExpandirConstruir() {
+
+		if (PhotoSwipe !== undefined) {
+
+			this.photo = new PhotoSwipe(document.querySelectorAll(this._pswp)[0], PhotoSwipeUI_Default, this._imagenes, this._opciones)
+			this.photo.init()
+
+		} else {
+
+			console.log('PhotoSwipe es necesario para el funcionamiento de esta clase')
+
+		}
+
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////	
+	async retardar() {
+
+		var th = this
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, th._retardo);
+		});
+	}
+
+	imagenesExpandirConfiguracion(index) {
+
+		var th = this
+
+		this._opciones = {
+		    index: index,
+		    showHideOpacity:true,
+		    bgOpacity:0.9,
+		    closeOnScroll: false,
+		    getThumbBoundsFn: (index) => {
+			    var thumbnail = document.querySelectorAll(th._rutaImagenes)[index];
+			    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+			    var rect = thumbnail.getBoundingClientRect(); 
+			    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+			}
+		};
+	}
+	
+	async imagenesExpandirCargar() {
+		
+		var th = this,
+			cola = []
+
+		cola.push(this.retardar().then(x => {}));
+
+		await Promise.all(cola);
+
+		var imagenes = qsa(this._rutaImagenes) //.galeria-img img
+
+		this._imagenes = []
+
+		for (var i = 0; i < imagenes.length; i++) {
+
+			var height = imagenes[i].naturalHeight,
+				width  = imagenes[i].naturalWidth
+
+			if (height < 400) {height = 800}
+			if (width  < 400) {width  = 800}
+
+			th._imagenes.push({
+				src: imagenes[i].src,
+				w:width,
+				h:height
+			})
+		
+		}
+
 	}
 
 	async traer_lista() {

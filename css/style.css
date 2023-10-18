@@ -4586,20 +4586,37 @@ div#tabla-notificados-contenedor .titulo::after {
     display: flex;
 }
 
-#evoluciones-cargar-contenedor .pruebas {
+#evoluciones-consultar-contenedor input {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+    box-shadow: unset !important;
+}
+
+#evoluciones-consultar-contenedor .galeria-contenedor img {
+    width: 186px !important;
+    height: 174px !important;
+}
+
+#evoluciones-cargar-contenedor .pruebas,
+#evoluciones-consultar-contenedor .pruebas {
     background: url(../imagenes/pruebas.jpg);
 }
 
-#evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .motilidad {
     background: url(../imagenes/motilidad.jpg); 
 }
 
-#evoluciones-cargar-contenedor .pruebas, #evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .pruebas, 
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .pruebas, 
+#evoluciones-consultar-contenedor .motilidad
+ {
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-    height: 330px;
-    width: 330px;
     column-gap: 10px;
     display: grid;
     justify-content: center;
@@ -4608,23 +4625,39 @@ div#tabla-notificados-contenedor .titulo::after {
     padding: 4px 8px;
 }
 
-#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section {
+#evoluciones-cargar-contenedor .pruebas, 
+#evoluciones-cargar-contenedor .motilidad {
+    height: 330px;
+    width: 330px;
+}
+
+#evoluciones-consultar-contenedor .pruebas, 
+#evoluciones-consultar-contenedor .motilidad {
+    height: 310px;
+    width: 310px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section,
+#evoluciones-consultar-contenedor .pruebas section, #evoluciones-consultar-contenedor .motilidad section {
     display: grid;
     justify-content: stretch;
     align-items: center;
     column-gap: 60px;
 }
 
-#evoluciones-cargar-contenedor .pruebas section div {
+#evoluciones-cargar-contenedor .pruebas section div,
+#evoluciones-consultar-contenedor .pruebas section div {
     margin: 0px !important;
 }
 
-#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input {
+#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input,
+#evoluciones-consultar-contenedor .pruebas input, #evoluciones-consultar-contenedor .motilidad input {
     position: relative;
     text-align: center;
 }
 
-#evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .motilidad {
     row-gap: 30px;
     justify-content: stretch;
 }
@@ -4776,6 +4809,7 @@ div#tabla-notificados-contenedor .titulo::after {
 .evoluciones-contenido ul {
     margin: 0px;
     padding-inline-start: 30px;
+    font-size: 13px;
 }
 
 .evoluciones-contenido .title {
@@ -4789,9 +4823,9 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 .evoluciones-contenido .notas {
-    border: 1px solid #949494;
+    border: 1px dashed #949494;
     padding: 10px;
-    border-radius: 10px;
+    display: block !important;
 }
 
 .evoluciones-contenido .dato-simple {
@@ -4800,6 +4834,31 @@ div#tabla-notificados-contenedor .titulo::after {
     column-gap: 10px;
     width: fit-content;
     margin-right: 20px;
+}
+
+.evoluciones-contenido label {
+    white-space: nowrap;
+}
+
+.evoluciones-contenido div {
+    margin: 0px;
+}
+
+#evoluciones-consultar-contenedor .separador {
+    margin-top: 20px;
+    border-bottom: 1px dashed #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+}
+
+#evoluciones-consultar-contenedor .separador::before {
+    content: "";
+    height: 100%;
+    left: 0px;
+    background: #262626;
+    width: 4px;
+    position: absolute;
 }
 
 /*-----------------------------------------------------*/
