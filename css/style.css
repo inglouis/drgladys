@@ -242,7 +242,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scroll::-webkit-scrollbar-thumb, [data-scroll]::-webkit-scrollbar-thumb {
-    background: #8f5eff38;
+    background: #8f5eff4d;
     -webkit-box-shadow: none;
     transition: 0.3s ease all;
 }
