@@ -12,14 +12,12 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
+
 1)-------------------------------------------------------------------------------------
-CAMBIAR TABLA DE EVOLUCIONES A EVOLUCIONES_ANTIGUAS
+NUEVA TABLA DE EVOLUCIONES - CON ARREGLOS
 ---------------------------------------------------------------------------------------
+DROP TABLE principales.evoluciones;
 
-
-2)-------------------------------------------------------------------------------------
-NUEVA TABLA DE EVOLUCIONES
----------------------------------------------------------------------------------------
 CREATE TABLE principales.evoluciones
 (
 	id_evolucion bigserial NOT NULL,
@@ -77,6 +75,7 @@ CREATE TABLE principales.evoluciones
 	pruebas_oi_6 character varying(30) not null default ''::bpchar,
 	pruebas_oi_7 character varying(30) not null default ''::bpchar,
 	pruebas_oi_8 character varying(30) not null default ''::bpchar,
+	pruebas_nota jsonb not null default '{}'::jsonb,
 	motilidad_od_1 character varying(30) not null default ''::bpchar,
 	motilidad_od_2 character varying(30) not null default ''::bpchar,
 	motilidad_od_3 character varying(30) not null default ''::bpchar,
@@ -89,6 +88,7 @@ CREATE TABLE principales.evoluciones
 	motilidad_oi_4 character varying(30) not null default ''::bpchar,
 	motilidad_oi_5 character varying(30) not null default ''::bpchar,
 	motilidad_oi_6 character varying(30) not null default ''::bpchar,
+	motilidad_nota jsonb not null default '{}'::jsonb,
 	rx_od_signo_1 character varying(1) not null default ''::bpchar,
 	rx_od_valor_1 numeric(7,2) not null default 0.00,
 	rx_od_signo_2 character varying(1) not null default ''::bpchar,
@@ -159,66 +159,3 @@ WITH (
 ALTER TABLE principales.evoluciones
   OWNER TO postgres;
 
-
-
-3)-------------------------------------------------------------------------------------
-CREAR FUNCIONES PARA TRAER DATOS DE REFERENCIAS
----------------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION ppal.basicas_traer_referencias_lista(IN lista jsonb)
-  RETURNS TABLE(id_referencia bigint, nombre character varying(100), descripcion character varying(600)) AS
-$BODY$
-    DECLARE 
-
-    BEGIN
-
-	return query
-
-	SELECT
-	    b.id_referencia,
-	    b.nombre::character varying(100),
-	    b.descripcion::character varying(600)
-	FROM (
-	    SELECT x.*
-	    FROM 
-		     jsonb_array_elements(
-		    (select lista::jsonb)
-		     ) AS t(doc),
-		     jsonb_to_record(t.doc) as x (id bigint)
-	) AS t
-	left join basicas.referencias as b on b.id_referencia = t.id;
-	
-    END; 
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100
-  ROWS 1000;
-ALTER FUNCTION ppal.basicas_traer_referencias_lista(jsonb)
-  OWNER TO postgres;
-
----------------------------------------------------------------------------------------
-CREATE OR REPLACE FUNCTION ppal.basicas_referencias_armar_lista(lista jsonb)
-  RETURNS jsonb AS
-$BODY$
-    DECLARE 
-	 datos jsonb;
-    BEGIN
-
-	datos = (
-		SELECT json_agg(t.referencias) from (
-			SELECT
-			    json_build_object(
-			      'id_referencia', id_referencia,
-			      'nombre', nombre,
-			      'descripcion', descripcion
-			    ) as referencias
-			FROM ppal.basicas_traer_referencias_lista(lista)
-		) as t
-	)::jsonb;
-
-	return datos;
-    END; 
-$BODY$
-  LANGUAGE plpgsql VOLATILE
-  COST 100;
-ALTER FUNCTION ppal.basicas_referencias_armar_lista(jsonb)
-  OWNER TO postgres;

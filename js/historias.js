@@ -117,8 +117,8 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#evoluciones-nota-f-od', '#evoluciones-previa'],
 	['#evoluciones-nota-f-oi', '#evoluciones-previa'],
 	['#evoluciones-plan', '#evoluciones-previa'],
-	['#evoluciones-nota', '#evoluciones-previa'],
-	['#evoluciones-nota', '#evoluciones-previa'],
+	['#evoluciones-prueba', '#evoluciones-previa'],
+	['#evoluciones-motilidad', '#evoluciones-previa']
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 

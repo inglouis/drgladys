@@ -173,6 +173,15 @@
 
     </div>
 
+    <div class="columnas">
+      
+      <div data-template="pruebas-nota">
+        <label class="title">Nota de las pruebas:</label>
+        <div class="notas"></div>
+      </div>
+
+    </div>
+
     <div class="columnas"><label style="font-weight: bold; margin-top: 15px; text-decoration: underline; font-size: 18px;">Motilidad</label></div>
 
     <div class="columnas">
@@ -213,6 +222,15 @@
           <input type="text" data-template="motilidad_oi_6" placeholder="---" disabled class="upper visual" style="width: 80px; justify-self: flex-end;">
         </section>
 
+      </div>
+
+    </div>
+
+    <div class="columnas">
+      
+      <div data-template="motilidad-nota">
+        <label class="title">Nota de la motilidad:</label>
+        <div class="notas"></div>
       </div>
 
     </div>
@@ -766,6 +784,15 @@
 
               </div>
 
+              <div class="columnas">
+                
+                <div>     
+                  <label>Notas de la prueba:</label>
+                  <textarea rows="3" id="evoluciones-prueba" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
+
+              </div>
+
               <div class="columnas" style="margin-top: 10px">
                 <div>
                   <label style="font-size: 20px; border-bottom: 1px solid; width: 100%;">MOTILIDAD</label>
@@ -820,6 +847,15 @@
                     </section>
 
                   </div>
+
+              </div>
+
+              <div class="columnas">
+                
+                <div>     
+                  <label>Notas de la motilidad:</label>
+                  <textarea rows="3" id="evoluciones-motilidad" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                </div>
 
               </div>
 

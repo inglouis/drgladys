@@ -57,39 +57,45 @@
     		//DATOS
     		///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    		// echo "<pre>";
+   			// print_r($args);
+   			// echo "</pre>";
+
     		$dia = $this->fechaHora('America/Caracas','Y-m-d');
 
-    		$id_historia = $args[130];
+    		$id_historia = $args[132];
 
-    		$referencia_galeria_antes = $args[122];
-    		$referencia_galeria_despues = $args[124];
+    		$referencia_galeria_antes = $args[124];
+    		$referencia_galeria_despues = $args[126];
 
-    		$json_biomicroscopia = $args[126];
-    		$json_fondo_ojo = $args[127];
+    		$json_biomicroscopia = $args[128];
+    		$json_fondo_ojo = $args[129];
 
-    		$img_biomicroscopia = str_replace('%2B', '+', $args[128]);
-    		$img_fondo_ojo = str_replace('%2B', '+', $args[129]);
+    		$img_biomicroscopia = str_replace('%2B', '+', $args[130]);
+    		$img_fondo_ojo = str_replace('%2B', '+', $args[131]);
 
     		$img_biomicroscopia = str_replace('%27', "'", $img_biomicroscopia);
     		$img_fondo_ojo = str_replace('%27', "'", $img_fondo_ojo);
 
-    		unset($args[122]);
-			unset($args[124]);
+    		unset($args[124]);
 			unset($args[126]);
-			unset($args[127]);
 			unset($args[128]);
 			unset($args[129]);
+			unset($args[130]);
+			unset($args[131]);
 
 			$args = array_values($args);
 
-			$args[2]   = json_encode($args[2]);   // nota
-			$args[90]  = json_encode($args[90]);  //nota_b_od
-			$args[91]  = json_encode($args[91]);  //nota_b_oi
-			$args[92]  = json_encode($args[92]);  //nota_f_od
-			$args[93]  = json_encode($args[93]);  //nota_f_oi
-			$args[96]  = json_encode($args[96]);  //referencias
-			$args[97]  = json_encode($args[97]);  //diagnosticos
-			$args[121] = json_encode($args[121]); //plan
+			$args[2]   = json_encode($args[2]);   //nota
+			$args[54]  = json_encode($args[54]);  //pruebas_nota
+			$args[67]  = json_encode($args[67]);  //motilidad_nota
+			$args[92]  = json_encode($args[92]);  //nota_b_od
+			$args[93]  = json_encode($args[93]);  //nota_b_oi
+			$args[94]  = json_encode($args[94]);  //nota_f_od
+			$args[95]  = json_encode($args[95]);  //nota_f_oi
+			$args[98]  = json_encode($args[98]);  //referencias
+			$args[99]  = json_encode($args[99]);  //diagnosticos
+			$args[123] = json_encode($args[123]); //plan
 
 			//echo "<pre>";
    			//print_r($args);
@@ -230,6 +236,7 @@
 						pruebas_oi_6,
 						pruebas_oi_7,
 						pruebas_oi_8,
+						pruebas_nota,
 						motilidad_od_1,
 						motilidad_od_2,
 						motilidad_od_3,
@@ -242,6 +249,7 @@
 						motilidad_oi_4,
 						motilidad_oi_5,
 						motilidad_oi_6,
+						motilidad_nota,
 						rx_od_signo_1,
 						rx_od_valor_1,
 						rx_od_signo_2,
@@ -358,6 +366,7 @@
 					    trim(upper(?)),
 					    trim(upper(?)),
 					    trim(upper(?)),
+					    ?::jsonb,
 					    trim(upper(?)),
 					    trim(upper(?)),
 					    trim(upper(?)),
@@ -370,6 +379,7 @@
 					    trim(upper(?)),
 					    trim(upper(?)),
 					    trim(upper(?)),
+					    ?::jsonb,
 					    trim(upper(?)),
 					    coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
 					    trim(upper(?)),
@@ -456,6 +466,185 @@
     	}
 
     }
+
+/*
+[0] => 
+    [1] => 2023-10-19
+    [2] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [3] => 
+    [4] => 
+    [5] => 
+    [6] => 
+    [7] => 
+    [8] => 
+    [9] => 
+    [10] => 
+    [11] => 
+    [12] => 
+    [13] => 
+    [14] => 
+    [15] => 
+    [16] => 
+    [17] => 
+    [18] => 
+    [19] => 
+    [20] => 
+    [21] => 
+    [22] => 
+    [23] => 
+    [24] => 
+    [25] => 
+    [26] => 
+    [27] => 
+    [28] => 
+    [29] => 
+    [30] => 
+    [31] => 
+    [32] => 
+    [33] => 
+    [34] => 
+    [35] => 
+    [36] => 0
+    [37] => 
+    [38] => 
+    [39] => 
+    [40] => 
+    [41] => 
+    [42] => 
+    [43] => 
+    [44] => 
+    [45] => 
+    [46] => 
+    [47] => 
+    [48] => 
+    [49] => 
+    [50] => 
+    [51] => 
+    [52] => 
+    [53] => 
+    [54] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [55] => 
+    [56] => 
+    [57] => 
+    [58] => 
+    [59] => 
+    [60] => 
+    [61] => 
+    [62] => 
+    [63] => 
+    [64] => 
+    [65] => 
+    [66] => 
+    [67] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [68] => 
+    [69] => 
+    [70] => 
+    [71] => 
+    [72] => 
+    [73] => 
+    [74] => 
+    [75] => 
+    [76] => 
+    [77] => 
+    [78] => 
+    [79] => 
+    [80] => 
+    [81] => 
+    [82] => 
+    [83] => 
+    [84] => 
+    [85] => 
+    [86] => 
+    [87] => 
+    [88] => 
+    [89] => 
+    [90] => 
+    [91] => 
+    [92] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [93] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [94] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [95] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [96] => 
+    [97] => 
+    [98] => Array
+        (
+        )
+
+    [99] => Array
+        (
+        )
+
+    [100] => 
+    [101] => 
+    [102] => 
+    [103] => 
+    [104] => 
+    [105] => 
+    [106] => 
+    [107] => 
+    [108] => 
+    [109] => 
+    [110] => 
+    [111] => 
+    [112] => 
+    [113] => 
+    [114] => 
+    [115] => 
+    [116] => 
+    [117] => 
+    [118] => 
+    [119] => 
+    [120] => 
+    [121] => 
+    [122] => 
+    [123] => Array
+        (
+            [texto_base] => 
+            [texto_html] => 
+        )
+
+    [124] => anexos-antes-cargar
+    [125] => 
+    [126] => anexos-despues-cargar
+    [127] => 
+    [128] => Array
+*/
+
 //
 /*
 (

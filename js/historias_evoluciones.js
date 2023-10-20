@@ -101,6 +101,9 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = decodeURIComponent(e.sublista.pruebas_oi_7)
 		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = decodeURIComponent(e.sublista.pruebas_oi_8)
 
+		texto = JSON.parse(e.sublista.pruebas_nota).texto_html
+		contenedor.querySelector('[data-template="pruebas-nota"] div').innerHTML = texto.toUpperCase()
+
 		contenedor.querySelector('[data-template="motilidad_od_1"]').value = decodeURIComponent(e.sublista.motilidad_od_1)
 		contenedor.querySelector('[data-template="motilidad_od_2"]').value = decodeURIComponent(e.sublista.motilidad_od_2)
 		contenedor.querySelector('[data-template="motilidad_od_3"]').value = decodeURIComponent(e.sublista.motilidad_od_3)
@@ -114,6 +117,10 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = decodeURIComponent(e.sublista.motilidad_oi_4)
 		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = decodeURIComponent(e.sublista.motilidad_oi_5)
 		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = decodeURIComponent(e.sublista.motilidad_oi_6)
+
+		texto = JSON.parse(e.sublista.motilidad_nota).texto_html
+		contenedor.querySelector('[data-template="motilidad-nota"] div').innerHTML = texto.toUpperCase()
+
 
 		//rx
 		//------------------------------------------------
