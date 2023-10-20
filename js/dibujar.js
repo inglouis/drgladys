@@ -8,6 +8,11 @@ export class Canvas {
         this._resultado_json = undefined
         this._elementos = {}
 
+        this._fn = {
+            "remover": () => {},
+            "color": () => {}
+        }
+
         this._formato = {
             format: 'png',
             width: 467,
@@ -62,9 +67,31 @@ export class Canvas {
         ////////////////////////////////////////////////
         if (typeof remover !== 'undefined') {
 
+            var th = this
+
             document.querySelector(`#${remover}`).addEventListener('click', e => {
                 this._canvas.isDrawingMode = false;
-                this._canvas.remove(this._canvas.getActiveObject());
+
+                if (this._canvas.getActiveObject() !== undefined) {
+
+                    if ('_objects' in this._canvas.getActiveObject()) {
+
+                        this._canvas.getActiveObject()._objects.forEach((objeto) => {
+
+                            th._canvas.remove(objeto);
+
+                        })
+
+                    } else {
+
+                        this._canvas.remove(this._canvas.getActiveObject());
+
+                    }
+
+                }
+
+                this._fn['remover']()
+
             })
 
         } else {
@@ -136,6 +163,8 @@ export class Canvas {
                 if (typeof btn.dataset.color !== 'undefined') {
 
                     th._canvas.freeDrawingBrush.color = btn.dataset.color;
+
+                    this._fn['color']()
 
                 } else {
 
@@ -272,8 +301,30 @@ export class Canvas {
     }
 
     removerTeclado(evento) {
+
+        var th = this
+
         if (evento.keyCode === 46) {
-            this._canvas.remove(this._canvas.getActiveObject());
+
+            if (this._canvas.getActiveObject() !== undefined) {
+
+                if ('_objects' in this._canvas.getActiveObject()) {
+
+                    this._canvas.getActiveObject()._objects.forEach((objeto) => {
+
+                        th._canvas.remove(objeto);
+
+                    })
+
+                } else {
+
+                    this._canvas.remove(this._canvas.getActiveObject());
+
+                }
+
+            }
+            
+            this._fn['remover']()
         }
     }
 

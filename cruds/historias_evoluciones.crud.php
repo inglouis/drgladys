@@ -6,10 +6,34 @@
 
   <section class="evoluciones-contenido filas">
 
+    <div class="evoluciones-botones">
+
+      <button class="reusar btn btn-reusar" title="Reutilizar información de la evolución">
+        <?php echo $_SESSION['botones']['reportes_reusar']?>
+      </button>
+
+      <button class="editar btn btn-editar" title="Editar evolución">
+        <?php echo $_SESSION['botones']['reportes_editar']?>
+      </button>
+
+      <button class="notificar btn btn-notificar" title="Notificar evolución">
+        <?php echo $_SESSION['botones']['evoluciones_notificar']?>
+      </button>
+      
+      <div class="crud-eliminar-contenedor">
+        
+        <button class="eliminar btn btn-eliminar">
+          <?php echo $_SESSION['botones']['reportes_eliminar']?>
+        </button>
+        
+      </div>
+
+    </div>
+
     <div class="columnas">
 
       <div data-template="problematico" class="check-alineado" style="column-gap: 5px; height: 8px">
-        <input type="checkbox" class="check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;    position: absolute; right: 21px; top: 15px;" disabled>
+        <input type="checkbox" class="check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;    position: absolute; right: 21px; top: 40px;" disabled>
       </div>
 
     </div>
@@ -104,7 +128,7 @@
       <div class="pruebas borde-estilizado">
 
         <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
-          <input type="text" data-template="pruebas_od_1" class="evoluciones-valores upper visual" disabled placeholder="---" style="width: 70px;">
+          <input type="text" data-template="pruebas_od_1" class="upper visual" disabled placeholder="---" style="width: 70px;">
         </section>
 
         <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
@@ -127,7 +151,7 @@
       <div class="pruebas borde-estilizado">
 
         <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
-          <input type="text" data-template="pruebas_oi_1" class="evoluciones-valores upper visual" disbled placeholder="---" style="width: 70px;">
+          <input type="text" data-template="pruebas_oi_1" class="upper visual" disbled placeholder="---" style="width: 70px;">
         </section>
 
         <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
@@ -637,7 +661,7 @@
               <div class="columnas">
 
                 <div>  
-                  <label>Estereopsis</label>  
+                  <label>Estereopsis (SEG)</label>  
                   <input type="text" data-valor="estereopsis" class="evoluciones-valores upper" placeholder="00s">
                 </div>
 
@@ -647,7 +671,7 @@
                 </div>
 
                 <div>
-                  <label>Stereo Fly</label>
+                  <label>Stereo Fly (SEG)</label>
                   <input type="text" data-valor="reflejo" class="evoluciones-valores upper" placeholder="00s">
                 </div>  
 
@@ -900,7 +924,7 @@
                   </div>
 
                   <div class="dibujar-rango-v">
-                      <input id="bio-rango" type="range" min="1" max="5" value="5" class="bio-slider">
+                      <input id="bio-rango" type="range" min="1" max="5" value="2" class="bio-slider">
                       <div id="bio-valor"></div>
                   </div>
 
@@ -986,7 +1010,7 @@
                   </div>
 
                   <div class="dibujar-rango-v">
-                    <input id="fondo-rango" type="range" min="1" max="5" value="5" class="fondo-slider">
+                    <input id="fondo-rango" type="range" min="1" max="5" value="2" class="fondo-slider">
                     <div id="fondo-valor"></div>
                   </div>
 
@@ -1055,7 +1079,7 @@
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label>PIO</label>
+                <label>PIO (mmHg)</label>
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    

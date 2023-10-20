@@ -74,46 +74,46 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="agudeza_lectura_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.fracciones_lectura === 'X') ? '<li>FRACCIONES</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_lectura_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.letras_lectura === 'X') ? '<li>LETRAS</li>' : '')) 
 
-		contenedor.querySelector('[data-template="estereopsis"]').insertAdjacentHTML('beforeend', ((e.sublista.estereopsis !== '') ? e.sublista.estereopsis : '---'))
+		contenedor.querySelector('[data-template="estereopsis"]').insertAdjacentHTML('beforeend', ((e.sublista.estereopsis !== '') ? `${e.sublista.estereopsis} SEG` : '---'))
 		contenedor.querySelector('[data-template="test"]').insertAdjacentHTML('beforeend', ((e.sublista.test !== '') ? e.sublista.test : '---'))
-		contenedor.querySelector('[data-template="reflejo"]').insertAdjacentHTML('beforeend', ((e.sublista.reflejo !== '') ? e.sublista.reflejo : '---'))
+		contenedor.querySelector('[data-template="reflejo"]').insertAdjacentHTML('beforeend', ((e.sublista.reflejo !== '') ? `${e.sublista.reflejo} SEG` : '---'))
 
 		contenedor.querySelector('[data-template="pruebas"]').insertAdjacentHTML('beforeend', evoluciones_pruebas[e.sublista.pruebas])
 		contenedor.querySelector('[data-template="pruebas_correccion"]').insertAdjacentHTML('beforeend', ((e.sublista.correccion_pruebas === 'X') ? 'SÍ' : 'NO')) 
 
 		//pruebas
 		//------------------------------------------------
-		contenedor.querySelector('[data-template="pruebas_od_1"]').value = e.sublista.pruebas_od_1
-		contenedor.querySelector('[data-template="pruebas_od_2"]').value = e.sublista.pruebas_od_2
-		contenedor.querySelector('[data-template="pruebas_od_3"]').value = e.sublista.pruebas_od_3
-		contenedor.querySelector('[data-template="pruebas_od_4"]').value = e.sublista.pruebas_od_4
-		contenedor.querySelector('[data-template="pruebas_od_5"]').value = e.sublista.pruebas_od_5
-		contenedor.querySelector('[data-template="pruebas_od_6"]').value = e.sublista.pruebas_od_6
-		contenedor.querySelector('[data-template="pruebas_od_7"]').value = e.sublista.pruebas_od_7
-		contenedor.querySelector('[data-template="pruebas_od_8"]').value = e.sublista.pruebas_od_8
+		contenedor.querySelector('[data-template="pruebas_od_1"]').value = decodeURIComponent(e.sublista.pruebas_od_1)
+		contenedor.querySelector('[data-template="pruebas_od_2"]').value = decodeURIComponent(e.sublista.pruebas_od_2)
+		contenedor.querySelector('[data-template="pruebas_od_3"]').value = decodeURIComponent(e.sublista.pruebas_od_3)
+		contenedor.querySelector('[data-template="pruebas_od_4"]').value = decodeURIComponent(e.sublista.pruebas_od_4)
+		contenedor.querySelector('[data-template="pruebas_od_5"]').value = decodeURIComponent(e.sublista.pruebas_od_5)
+		contenedor.querySelector('[data-template="pruebas_od_6"]').value = decodeURIComponent(e.sublista.pruebas_od_6)
+		contenedor.querySelector('[data-template="pruebas_od_7"]').value = decodeURIComponent(e.sublista.pruebas_od_7)
+		contenedor.querySelector('[data-template="pruebas_od_8"]').value = decodeURIComponent(e.sublista.pruebas_od_8)
 
-		contenedor.querySelector('[data-template="pruebas_oi_1"]').value = e.sublista.pruebas_oi_1
-		contenedor.querySelector('[data-template="pruebas_oi_2"]').value = e.sublista.pruebas_oi_2
-		contenedor.querySelector('[data-template="pruebas_oi_3"]').value = e.sublista.pruebas_oi_3
-		contenedor.querySelector('[data-template="pruebas_oi_4"]').value = e.sublista.pruebas_oi_4
-		contenedor.querySelector('[data-template="pruebas_oi_5"]').value = e.sublista.pruebas_oi_5
-		contenedor.querySelector('[data-template="pruebas_oi_6"]').value = e.sublista.pruebas_oi_6
-		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = e.sublista.pruebas_oi_7
-		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = e.sublista.pruebas_oi_8
+		contenedor.querySelector('[data-template="pruebas_oi_1"]').value = decodeURIComponent(e.sublista.pruebas_oi_1)
+		contenedor.querySelector('[data-template="pruebas_oi_2"]').value = decodeURIComponent(e.sublista.pruebas_oi_2)
+		contenedor.querySelector('[data-template="pruebas_oi_3"]').value = decodeURIComponent(e.sublista.pruebas_oi_3)
+		contenedor.querySelector('[data-template="pruebas_oi_4"]').value = decodeURIComponent(e.sublista.pruebas_oi_4)
+		contenedor.querySelector('[data-template="pruebas_oi_5"]').value = decodeURIComponent(e.sublista.pruebas_oi_5)
+		contenedor.querySelector('[data-template="pruebas_oi_6"]').value = decodeURIComponent(e.sublista.pruebas_oi_6)
+		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = decodeURIComponent(e.sublista.pruebas_oi_7)
+		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = decodeURIComponent(e.sublista.pruebas_oi_8)
 
-		contenedor.querySelector('[data-template="motilidad_od_1"]').value = e.sublista.motilidad_od_1
-		contenedor.querySelector('[data-template="motilidad_od_2"]').value = e.sublista.motilidad_od_2
-		contenedor.querySelector('[data-template="motilidad_od_3"]').value = e.sublista.motilidad_od_3
-		contenedor.querySelector('[data-template="motilidad_od_4"]').value = e.sublista.motilidad_od_4
-		contenedor.querySelector('[data-template="motilidad_od_5"]').value = e.sublista.motilidad_od_5
-		contenedor.querySelector('[data-template="motilidad_od_6"]').value = e.sublista.motilidad_od_6
+		contenedor.querySelector('[data-template="motilidad_od_1"]').value = decodeURIComponent(e.sublista.motilidad_od_1)
+		contenedor.querySelector('[data-template="motilidad_od_2"]').value = decodeURIComponent(e.sublista.motilidad_od_2)
+		contenedor.querySelector('[data-template="motilidad_od_3"]').value = decodeURIComponent(e.sublista.motilidad_od_3)
+		contenedor.querySelector('[data-template="motilidad_od_4"]').value = decodeURIComponent(e.sublista.motilidad_od_4)
+		contenedor.querySelector('[data-template="motilidad_od_5"]').value = decodeURIComponent(e.sublista.motilidad_od_5)
+		contenedor.querySelector('[data-template="motilidad_od_6"]').value = decodeURIComponent(e.sublista.motilidad_od_6)
 
-		contenedor.querySelector('[data-template="motilidad_oi_1"]').value = e.sublista.motilidad_oi_1
-		contenedor.querySelector('[data-template="motilidad_oi_2"]').value = e.sublista.motilidad_oi_2
-		contenedor.querySelector('[data-template="motilidad_oi_3"]').value = e.sublista.motilidad_oi_3
-		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = e.sublista.motilidad_oi_4
-		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = e.sublista.motilidad_oi_5
-		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = e.sublista.motilidad_oi_6
+		contenedor.querySelector('[data-template="motilidad_oi_1"]').value = decodeURIComponent(e.sublista.motilidad_oi_1)
+		contenedor.querySelector('[data-template="motilidad_oi_2"]').value = decodeURIComponent(e.sublista.motilidad_oi_2)
+		contenedor.querySelector('[data-template="motilidad_oi_3"]').value = decodeURIComponent(e.sublista.motilidad_oi_3)
+		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = decodeURIComponent(e.sublista.motilidad_oi_4)
+		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = decodeURIComponent(e.sublista.motilidad_oi_5)
+		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = decodeURIComponent(e.sublista.motilidad_oi_6)
 
 		//rx
 		//------------------------------------------------
@@ -151,7 +151,7 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		//pio, estudio, idx
 		//------------------------------------------------
-		contenedor.querySelector('[data-template="pio"] div').innerHTML = `OD: ${e.sublista.pio_od} - OI: ${e.sublista.pio_oi}`
+		contenedor.querySelector('[data-template="pio"] div').innerHTML = `OD: ${e.sublista.pio_od} mmHg - OI: ${e.sublista.pio_oi} mmHg`
 
 		var referencias = JSON.parse(e.sublista.referencias_procesados),
 			idx = JSON.parse(e.sublista.diagnosticos_procesados)
@@ -417,7 +417,15 @@ imgBio._formato['height'] = 309
 
 imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
 
-imgBio.asignarDibujadoInicial('black', 5)
+imgBio._fn['remover'] = () => {
+	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+}
+
+imgBio._fn['color'] = () => {
+	notificaciones.mensajeSimple('Colores cambiados', false, 'V')
+}
+
+imgBio.asignarDibujadoInicial('black', 2)
 imgBio.asignarDibujados('.bio-dibujar')
 imgBio.asignarGrosores('.bio-slider')
 imgBio.asignarTexto('bio-texto')
@@ -448,7 +456,15 @@ fondBio._formato['height'] = 309
 
 fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
 
-fondBio.asignarDibujadoInicial('black', 5)
+fondBio._fn['remover'] = () => {
+	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+}
+
+fondBio._fn['color'] = () => {
+	notificaciones.mensajeSimple('Color cambiado', false, 'V')
+}
+
+fondBio.asignarDibujadoInicial('black', 2)
 fondBio.asignarDibujados('.fondo-dibujar')
 fondBio.asignarGrosores('.fondo-slider')
 fondBio.asignarTexto('fondo-texto')
@@ -674,7 +690,7 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
 				notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
-				var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'cargar_evolucion', datos, [["+", "%2B"]], undefined, true)
+				var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'cargar_evolucion', datos, [["+", "%2B"], ["'", "%27"]], undefined, true)
 
 				//console.log(resultado)
 
@@ -712,6 +728,8 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 /*   							EVENTOS GENERALES DE LAS EVOLUCIONES     					        */
 /* -------------------------------------------------------------------------------------------------*/
 qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
+
+	notificaciones.mensajePersonalizado('Cargando evolución...', false, 'CLARO-1', 'PROCESANDO')
 
 	qs('#evoluciones-busqueda').value = e.target.value
     evoluciones.crud.botonForzar(true)

@@ -22,9 +22,9 @@
             $sql = "
                 select
                     t.*,
-                    ppal.basicas_diagnosticos_armar_lista(t.diagnosticos) as diagnosticos_procesados,
-                    ppal.basicas_referencias_armar_lista(t.referencias) as referencias_procesados,
-                    TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada
+				    coalesce(NULLIF(ppal.basicas_diagnosticos_armar_lista(t.diagnosticos), null),'[]'::jsonb) as diagnosticos_procesados,
+				    coalesce(NULLIF(ppal.basicas_referencias_armar_lista(t.referencias), null), '[]'::jsonb) as referencias_procesados,
+				    TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada
                 FROM principales.evoluciones as t
                 WHERE t.id_historia = ?
                 ORDER BY t.fecha desc, t.hora desc
@@ -70,6 +70,9 @@
     		$img_biomicroscopia = str_replace('%2B', '+', $args[128]);
     		$img_fondo_ojo = str_replace('%2B', '+', $args[129]);
 
+    		$img_biomicroscopia = str_replace('%27', "'", $img_biomicroscopia);
+    		$img_fondo_ojo = str_replace('%27', "'", $img_fondo_ojo);
+
     		unset($args[122]);
 			unset($args[124]);
 			unset($args[126]);
@@ -88,7 +91,7 @@
 			$args[97]  = json_encode($args[97]);  //diagnosticos
 			$args[121] = json_encode($args[121]); //plan
 
-			// echo "<pre>";
+			//echo "<pre>";
    			//print_r($args);
    			//echo "</pre>";
 
