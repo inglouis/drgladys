@@ -120,8 +120,8 @@
 
 	    		if (!$existe_archivo) {
 
-	    			$this->directorios->crear_directorio($id_historia, "../imagenes/evoluciones/");
-	    			$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia");
+	    			$this->directorios->crear_directorio($id_historia.'/', "../imagenes/evoluciones/");
+	    			$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia/");
 	    			$this->directorios->copiar_directorio("../imagenes/evoluciones/modelo", $ruta);
 
 	    		} else {
@@ -294,8 +294,8 @@
 						formula_oi_grados_ciclo,
 						curva_od,
 						curva_oi,
-						distancia_intraocular_od,
-						distancia_intraocular_oi,
+						altura_pupilar_od,
+						altura_pupilar_oi,
 						distancia_interpupilar_od,
 						distancia_interpupilar_oi,
 						distancia_interpupilar_add,

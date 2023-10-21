@@ -1974,17 +1974,21 @@ class Evoluciones extends Acciones {
 
 		for (var i = 0; i < imagenes.length; i++) {
 
-			var height = imagenes[i].naturalHeight,
-				width  = imagenes[i].naturalWidth
+			if (!imagenes[i].src.includes('init.txt')) {
 
-			if (height < 400) {height = 800}
-			if (width  < 400) {width  = 800}
+				var height = imagenes[i].naturalHeight,
+					width  = imagenes[i].naturalWidth
 
-			th._imagenes.push({
-				src: imagenes[i].src,
-				w:width,
-				h:height
-			})
+				if (height < 400) {height = 800}
+				if (width  < 400) {width  = 800}
+
+				th._imagenes.push({
+					src: imagenes[i].src,
+					w:width,
+					h:height
+				})
+
+			}
 		
 		}
 

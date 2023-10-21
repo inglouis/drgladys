@@ -260,6 +260,8 @@ export class Canvas {
         propiedades['stroke'] = (typeof propiedades['stroke'] !== 'undefined') ? propiedades['stroke'] : 'black';
         propiedades['top']  = (typeof propiedades['top']  !== 'undefined') ? propiedades['top']  : 0;
         propiedades['left'] = (typeof propiedades['left'] !== 'undefined') ? propiedades['left'] : 20;
+        propiedades['width']  = (typeof propiedades['width']  !== 'undefined') ? propiedades['width']  : undefined;
+        propiedades['height'] = (typeof propiedades['height'] !== 'undefined') ? propiedades['height'] : undefined;
 
         this._elementos[elemento]['propiedades'] = propiedades
         this._elementos[elemento]['patron'] = patron
@@ -268,11 +270,23 @@ export class Canvas {
 
             th._canvas.isDrawingMode = false;
 
-            var path = new fabric.Path(th._elementos[elemento]['patron']);   
-            var escala = 100 / path.width;
+            var path = new fabric.Path(th._elementos[elemento]['patron']);
+
+            if (propiedades['width'] !== undefined && propiedades['height'] !== undefined) {
+
+                var escalaX = propiedades['width']
+                var escalaY = propiedades['height']
+
+            } else {
+
+                var escalaX = 100 / path.width;
+                var escalaY = 100 / path.width;
+
+            }
+
             var props = { 
-                scaleX: escala, 
-                scaleY: escala, 
+                scaleX: escalaX, 
+                scaleY: escalaY, 
                 top: th._elementos[elemento].propiedades.top,
                 left: th._elementos[elemento].propiedades.left,
                 fill: th._elementos[elemento].propiedades.fill,

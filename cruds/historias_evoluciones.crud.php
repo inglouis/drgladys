@@ -353,8 +353,8 @@
 
     <div class="columnas">
       
-      <div data-template="intraocular" style="margin: 0px;" class="dato-simple">
-        <label class="title">Distancia intraocular:</label>
+      <div data-template="altura_pupilar" style="margin: 0px;" class="dato-simple">
+        <label class="title">Altura pupilar:</label>
         <div></div>
       </div>
 
@@ -503,7 +503,6 @@
               <div class="columnas">
 
                 <div class="check-alineado" style="column-gap: 5px;">
-                  <label>Aplica como paciente problemático</label>
                   <input type="checkbox" data-valor="problematico" class="evoluciones-valores check checkexpresion" style="width: 30px; height: 30px; justify-content: center; align-items: center; display:flex;">
                 </div>
 
@@ -538,11 +537,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_4" class="evoluciones-valores upper fracciones" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_4" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper fracciones" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -586,11 +585,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_1" class="evoluciones-valores upper fracciones" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_1" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper fracciones" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -634,11 +633,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_lectura" class="evoluciones-valores upper fracciones" placeholder="OD">
+                    <input type="text" data-valor="agudeza_od_lectura" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper fracciones" placeholder="OI">
+                    <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -728,8 +727,8 @@
               <div class="columnas" style="margin-top: 10px">
 
                 <div style="display: flex; flex-direction: row; column-gap: 10px;">
-                  <label style="width: 50%; font-size: 16px">OD:</label>
-                  <label style="width: 50%; font-size: 16px">OI:</label>
+                  <label style="width: 50%; font-size: 16px">CON CORRECCIÓN:</label>
+                  <label style="width: 50%; font-size: 16px">SIN CORRECCIÓN:</label>
                 </div>
 
               </div>
@@ -788,7 +787,7 @@
                 
                 <div>     
                   <label>Notas de la prueba:</label>
-                  <textarea rows="3" id="evoluciones-prueba" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-prueba" data-previa="evoluciones-previa" data-valor="pruebas-nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -854,7 +853,7 @@
                 
                 <div>     
                   <label>Notas de la motilidad:</label>
-                  <textarea rows="3" id="evoluciones-motilidad" data-previa="evoluciones-previa" data-valor="nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-motilidad" data-previa="evoluciones-previa" data-valor="motilidad-nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -948,14 +947,14 @@
                   <div class="dibujar-colores-v">
           
                     <button class="bio-dibujar" data-color="black"></button>
-                    <button class="bio-dibujar" data-color="red"></button>
+                    <button class="bio-dibujar" data-color="#ca3f3f"></button>
                     <button class="bio-dibujar" data-color="blue"></button>
-                    <button class="bio-dibujar" data-color="yellow"></button>
+                    <button class="bio-dibujar" data-color="rgb(255 207 34)"></button>
                     <button class="bio-dibujar" data-color="orange"></button>
-                    <button class="bio-dibujar" data-color="green"></button>
+                    <button class="bio-dibujar" data-color="#529b62"></button>
                     <button class="bio-dibujar" data-color="purple"></button>
                     <button class="bio-dibujar" data-color="pink"></button>
-                    <button class="bio-dibujar" data-color="brown"></button>
+                    <button class="bio-dibujar" data-color="#8d8d8d"></button>
 
                   </div>
 
@@ -983,12 +982,32 @@
 
                   <div class="dibujar-formas-v">
                     
-                    <button id="bio-forma-1" title="Forma1">F</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
+                    <button id="dendritis" title="Dendritis">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="116.551 73 42.58 44.54">
+                        <path d="M 126 73 q -12 1 -4 5 C 125 80 130 82 122 84 c -7 2 -6 5 -3 6 c 2 1 5 2 8 3 c 13 5 -7 5 -10 8 s 10 4 10 7 s -9 1 -9 4 s 8 7 29 5 c 18 -4 13 -7 4 -11 c -12 -4 3 -4 4 -7.2649 c 1 -4.7351 -5 -3 -8 -4.7351 c -6.2646 -5.4146 11 -1 12 -8 c -1 -5 -16.2245 0.3909 -17 -3 c -1.1372 -5.4146 7 -2 10 -5 c 1 -2 -3 -4 -10 -4 C 138 74 135 73 131 73 Z" stroke="#529b62" stroke-width="1" fill="none"/>
+                      </svg>
+                    </button>
+
+                    <button id="ulceras_redondas" title="Ulceras redondas">
+                      <svg id="eCxcd3DV0lf1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(15 15)" fill="rgba(210,219,237,0)" stroke="#529b62"/></svg>
+                    </button>
+
+                    <button id="lente_intraocular" title="Lente intraocular">
+                      <svg cache-id="c22f2e73c95946b6b41776ce31cf12cc" id="ewu43p8jZvo1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(30 30)" fill="rgba(210,219,237,0)" stroke="#8d8d8d"/><path d="M17.670667,30c-10.905211-6.154473-15.627304-20.125299,0-30" fill="none" stroke="#8d8d8d" stroke-width="0.5"/><path d="M42.329333,30c10.640452,7.179181,13.221354,21.949768,0,30" fill="none" stroke="#8d8d8d" stroke-width="0.5"/><ellipse rx="6" ry="6" transform="translate(30 30)" fill="none" stroke="#8d8d8d"/></svg>
+                    </button>
+
+                    <button id="congestion_ocular" title="Congestión ocular">  
+                      <svg id="eZafsCov2LJ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(0 25.227145)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(50.007996 25.227145)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(50.007996-.01)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0-2.659433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-2.669433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0-4.749433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-4.759433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                    </button>
+
+                    <button id="papilas_arriba" title="Papilas arriba">    
+                      <svg id="eNjmdPTogGZ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243-6.258423-10.268734)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 3.757494-18.102782)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 14.773409-23.93683)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 26.457937-29.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 38.457937-34.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 52.457937-38.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 65.457937-41.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                    </button>
+
+                    <button id="papilas_abajo" title="Papilas abajo">
+                      <svg id="eKDjukC59nm1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 22.617808 56.769524)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 33.633723 66.990132)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 45.318251 75.741204)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 57.318253 81.575252)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 71.318253 84.492276)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 84.318252 87.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 97.96803 89.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                    </button>
+
                     <button title="---">-</button>
                     <button title="---">-</button>
                     <button title="---">-</button>
@@ -1250,15 +1269,15 @@
 
               <div class="columnas" style="flex-direction: column; align-items: baseline;">
 
-                <label>Distancia intraocular</label>
+                <label>Altura pupilar</label>
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="distancia_intraocular_od" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                    <input type="text" data-valor="altura_pupilar_od" class="evoluciones-valores upper decimales" placeholder="OD - 0.00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="distancia_intraocular_oi" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                    <input type="text" data-valor="altura_pupilar_oi" class="evoluciones-valores upper decimales" placeholder="OI - 0.00">
                   </div>  
                 </div>
 

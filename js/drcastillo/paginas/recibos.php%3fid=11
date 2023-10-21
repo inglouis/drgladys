@@ -1,0 +1,29 @@
+
+            content: "NO VÁLIDOS";
+            position: absolute;
+            width: 5.5vw;
+            height: 4vh;
+            right: 1.5vw;
+            top: 2.5vh;
+            background: #dc354557;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            font-weight: bold;
+            text-shadow: 0px 0px 5px #fff;
+        
+            content: "NO VÁLIDOS";
+            position: absolute;
+            width: 5.5vw;
+            height: 4vh;
+            right: 2.5vw;
+            top: 2.5vh;
+            background: #dc354557;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            font-weight: bold;
+            text-shadow: 0px 0px 5px #fff;
+        

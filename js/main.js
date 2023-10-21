@@ -3142,13 +3142,19 @@ export class Rellenar {
 
 					if(lista[contenedores[i].dataset[th.grupo]] !== null && typeof lista[contenedores[i].dataset[th.grupo]] !== 'undefined') {
 
-						contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
-						
-						if (contenedores[i].title === '') {
 
-							contenedores[i].title = lista[contenedores[i].dataset[th.grupo]]
+						if (contenedores[i].type !== 'file') {
+
+							contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
+							
+							if (contenedores[i].title === '') {
+
+								contenedores[i].title = lista[contenedores[i].dataset[th.grupo]]
+
+							}
 
 						}
+
 
 					}
 				}

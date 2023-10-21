@@ -2,34 +2,6 @@
 
 	class Directorios {
 
-		// public function ejemplos($args) {
-
-		// 	$this->crearTxt("../otros/dctTexto/empr$idEmpresa.txt", "
-		// 			directorios: empr$idEmpresa,
-		// 			nombreSiae: $empresa,
-		// 			nacionalidad: $nac,
-		// 			primer nombre: $prNombre,
-		// 			segundo nombre: $sgNombre,
-		// 			primer apellido: $prApellido,
-		// 			segundo apellido: $sgApellido,
-		// 			sexo: $sexo,
-		// 			usuario web/siae: $usuario,
-		// 			clave:[[$clave]],
-		// 			correo: $correo,
-		// 			direccion: $direccion,
-		// 			telefono: $telefono
-		// 		", LOCK_EX );
-
-		// 	$this->crearDirectorio("../empr2", "../empr$idEmpresa");
-		// 	$this->crearDirectorio("../imagenes/empr2", "../imagenes/empr$idEmpresa");
-		// 	mkdir("../siae/imagenes/empr$idEmpresa", 0777, true);
-		// 	mkdir("../reportes/empr$idEmpresa", 0777, true);  
-
-		// 	$this->eliminarDirectorio("../empr$idEmpresa");
-		// 	unlink("../otros/dctTexto/empr$idEmpresa.txt"); 
-
-		// }
-
 		//*******************************************************************
 		public function consultar_directorio($source) {
 		    if (file_exists($source)) {
@@ -49,11 +21,11 @@
 
 		public function crear_directorio($nombre, $ruta) {
 
-			if (!file_exists($nombre.$ruta)) {
+			if (!file_exists($ruta.$nombre)) {
 
 				clearstatcache();
 				
-				@mkdir($nombre.$ruta, 0777, true);
+				@mkdir($ruta.$nombre, 0777, true);
 
 			}
 
