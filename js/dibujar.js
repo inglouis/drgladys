@@ -72,7 +72,7 @@ export class Canvas {
             document.querySelector(`#${remover}`).addEventListener('click', e => {
                 this._canvas.isDrawingMode = false;
 
-                if (this._canvas.getActiveObject() !== undefined) {
+                if (this._canvas.getActiveObject() !== undefined && this._canvas.getActiveObject() !== null) {
 
                     if ('_objects' in this._canvas.getActiveObject()) {
 
@@ -320,7 +320,7 @@ export class Canvas {
 
         if (evento.keyCode === 46) {
 
-            if (this._canvas.getActiveObject() !== undefined) {
+            if (this._canvas.getActiveObject() !== undefined && this._canvas.getActiveObject() !== null) {
 
                 if ('_objects' in this._canvas.getActiveObject()) {
 

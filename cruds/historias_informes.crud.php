@@ -401,34 +401,6 @@
   </div>
 </div>
 
-<!------------------------------------------------------------------- -->
-<!---------------------- INSERTAR DIAGNOSTICOS ---------------------- -->
-<!------------------------------------------------------------------- -->
-<div id="crud-insertar-diagnosticos-popup" class="popup-oculto" data-crud='popup'>
-  <div id="crud-insertar-diagnosticos-pop" class="popup-oculto" style="width:30%;">
-
-    <button id="crud-insertar-diagnosticos-cerrar" data-crud='cerrar'>X</button>
-
-    <section id="crud-insertar-diagnosticos-titulo" data-crud='titulo'>
-      Insertar diagnósticos
-    </section> 
-
-    <section class="filas">
-      <div class="columnas">
-        <div>
-          <label class="requerido">Nombre del diagnósticos</label>  
-          <input type="text" minlength="1" id="nombre-diagnosticos" maxlength="100" class="nuevas-diagnosticos lleno upper" placeholder="...">
-        </div>
-      </div> 
-
-    </section>
-    <section id="crud-insertar-diagnosticos-botones" data-crud='botones' style="column-gap: 10px; padding: 10px;">
-      <button class="botones-formularios insertar">CONFIRMAR</button>
-      <button class="botones-formularios cerrar">CANCELAR</button> 
-    </section>
-  </div> 
-</div>
-
 <!-------------------------------------------------------- -->
 <!----------------- INFORMES PREVIA ---------------------- -->
 <!-------------------------------------------------------- -->

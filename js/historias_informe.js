@@ -696,9 +696,26 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
-var insersiones_lista = ['diagnostico'],
+var insersiones_lista = ['diagnosticos'],
 	insersiones_lista_combos = [diaPop],
 	ultimoBotonInsersionBasica = '';
+
+var insersiones_logica = {
+	"diagnosticos": (contenedor, datos, lista) => {
+
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
+
+		tools.limpiar('.insertar-diagnostico', '', {})
+
+		insersiones_lista_combos[i].pop()
+
+		contenedor.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
+		contenedor.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+
+	}
+}
+
 
 qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
 
@@ -732,15 +749,7 @@ insersiones_lista.forEach((grupo, i) => {
 
 						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}s`, []))
 
-						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos[0].toUpperCase()
-						ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
-
-						tools.limpiar('.insertar-diagnostico', '', {})
-
-						insersiones_lista_combos[i].pop()
-
-						contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-						contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+						insersiones_logica[grupo](contenedoresReportes, datos[0], lista)
 
 					}, 500)
 

@@ -433,7 +433,11 @@ imgBio._formato['height'] = 309
 imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
 
 imgBio._fn['remover'] = () => {
-	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+
+	if (qs('#crud-evoluciones-popup').classList.contains('pop-on') && imgBio._canvas.isDrawingMode === false) {
+		notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+	}
+	
 }
 
 imgBio._fn['color'] = () => {
@@ -509,7 +513,9 @@ fondBio._formato['height'] = 309
 fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
 
 fondBio._fn['remover'] = () => {
-	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+	if (qs('#crud-evoluciones-popup').classList.contains('pop-on') && fondBio._canvas.isDrawingMode === false) {
+		notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
+	}
 }
 
 fondBio._fn['color'] = () => {
