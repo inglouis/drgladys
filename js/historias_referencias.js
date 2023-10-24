@@ -225,7 +225,7 @@ qs("#referencias-contenedor .reporte-notificar").addEventListener('click', async
 				} 
 			}
 
-			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"]]))
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [lista, elemento.identificador], [["+", "%2B"], ["'", "%27"], ['"', "%22"]]))
 
 			if (typeof resultado === 'object' && resultado !== null) {
 

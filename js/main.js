@@ -135,6 +135,7 @@ export class Herramientas {
 		this.tiempo = 2000
 		this.tiempoFijo = 2000
 		this.tiempoAnimacionTermina = 800
+		this._retardo = 1000
 		this.cola = 0
 		this.peticion = ''
 		this.marcador = 'X'
@@ -738,6 +739,16 @@ export class Herramientas {
                     .split("T")[0];
 
         return dateString 
+	}
+
+	async retardar() {
+
+		var th = this
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, th._retardo);
+		});
+		
 	}
 
 	procesar(boton, comparacion, elementos, tools, params) {
@@ -3142,19 +3153,13 @@ export class Rellenar {
 
 					if(lista[contenedores[i].dataset[th.grupo]] !== null && typeof lista[contenedores[i].dataset[th.grupo]] !== 'undefined') {
 
+						contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
+						
+						if (contenedores[i].title === '') {
 
-						if (contenedores[i].type !== 'file') {
-
-							contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
-							
-							if (contenedores[i].title === '') {
-
-								contenedores[i].title = lista[contenedores[i].dataset[th.grupo]]
-
-							}
+							contenedores[i].title = lista[contenedores[i].dataset[th.grupo]]
 
 						}
-
 
 					}
 				}

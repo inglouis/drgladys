@@ -12,8 +12,8 @@
         ];
 
         /* 1)------------------------------------------------------------------------------------------------*/
-		/*           							informe 							  					    */
-		/* -------------------------------------------------------------------------------------------------*/
+        /*                                      informe                                                     */
+        /* -------------------------------------------------------------------------------------------------*/
 
         public function informe_insertar($args) {
 
@@ -95,7 +95,7 @@
                     t.rx_cicloplegia,
                     t.test,
                     t.tipo,
-                    ppal.basicas_diagnosticos_armar_lista(t.diagnosticos) as diagnosticos_procesados,
+                    coalesce(NULLIF(ppal.basicas_diagnosticos_armar_lista(t.diagnosticos), null),'[]'::jsonb) as diagnosticos_procesados,
                     TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada
                 FROM (
                     SELECT x.*

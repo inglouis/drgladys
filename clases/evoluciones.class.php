@@ -10,7 +10,7 @@
      
         public function cargar_evoluciones($args) {
 
-        	$sql ="
+            $sql ="
                 select 
                     a.id_evolucion,trim(a.cedula) as cedula, 
                     trim(nhist) as id_historia, 
@@ -26,8 +26,8 @@
                     trim(a.plan) as plan, 
                     trim(a.evo) as evo, 
                     trim(a.status) as status
-				from $this->schema.$this->tabla as a
-				left join principales.historias as b ON nhist = b.id_historia::character varying(100) order by nhist desc limit 800";
+                from $this->schema.$this->tabla as a
+                left join principales.historias as b ON nhist = b.id_historia::character varying(100) order by nhist desc limit 800";
                 return $this->seleccionar($sql, $args);
         }
 
@@ -41,8 +41,8 @@
             }
 
             $sql = "select a.id_evolucion,a.cedula,nhist,trim(b.nombres),trim(b.apellidos),trim(a.diag1),trim(a.diag2),trim(a.fecha),trim(a.avod),trim(a.avoi),trim(a.rxod),trim(a.rxoi),trim(a.plan),trim(a.evo),trim(a.status)
-				from $this->schema.$this->tabla as a
-				left join principales.historias as b ON nhist = b.id_historia::character varying(100) where a.status='A' and nombres like '%'|| UPPER('$busqueda') ||'%' $conc order by id_evolucion order by nhist DESC limit 8000";
+                from $this->schema.$this->tabla as a
+                left join principales.historias as b ON nhist = b.id_historia::character varying(100) where a.status='A' and nombres like '%'|| UPPER('$busqueda') ||'%' $conc order by id_evolucion order by nhist DESC limit 8000";
                 return $this->seleccionar($sql, []);
         }
 
@@ -84,8 +84,8 @@
 
         public function filtrar($args) {
             $sql = "select a.id_evolucion,a.cedula,nhist,trim(b.nombres),trim(b.apellidos),trim(a.diag1),trim(a.diag2),trim(a.fecha),trim(a.avod),trim(a.avoi),trim(a.rxod),trim(a.rxoi),trim(a.plan),trim(a.evo),trim(a.status)
-				from principales.evolucion as a
-				left join principales.historias as b ON nhist = b.id_historia::character varying(100) where a.status='A'  where trim(status='A' order by nhist desc limit 800";   
+                from principales.evolucion as a
+                left join principales.historias as b ON nhist = b.id_historia::character varying(100) where a.status='A'  where trim(status='A' order by nhist desc limit 800";   
             $this->aplicar_filtros([$sql, $args, 0, false]);
         }
     }

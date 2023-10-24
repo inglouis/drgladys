@@ -81,6 +81,7 @@
   ////////////////////////////////////////////////////////////////
   //EDAD
   ////////////////////////////////////////////////////////////////
+
   $edad = $obj->calcularEdad($datos['fecha_nacimiento']).' AÑOS DE EDAD';
 
   $edad_anos = (int)$obj->calcularEdad($datos['fecha_nacimiento']);
@@ -101,18 +102,26 @@
   //CABECERA
   /////////////////////////////////////////////////////////////////
 
-  if ($edad_anos < 9) {
-    $cedula = "CON N° CÉDULA DE REPRESENTANTE $datos[cedula]";
+  $sexo = $obj->i_pdo("select sexo from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetchColumn();
+
+  $cedula = $datos['cedula'];
+
+  if ($sexo == 'M') {
+
+    $genero = 'Masculino';
+
   } else {
-    $cedula = "CON N° CÉDULA $datos[cedula]";
+
+    $genero = "Femenina";
+
   }
 
   if ($datos['tipo'] == "0") {
-    $cabecera = "el paciente $datos[nombres] $datos[apellidos] $cedula de $edad, quien presenta:";
+    $cabecera = "paciente $genero de $edad,";
   } else if ($datos['tipo'] == "1") {
-    $cabecera = "paciente $datos[nombres] $datos[apellidos] $cedula de $edad, quien presenta:";
+    $cabecera = "paciente $genero de $edad,";
   } else if ($datos['tipo'] == "2") {
-    $cabecera = "paciente $datos[nombres] $datos[apellidos] $cedula de $edad";
+    $cabecera = "paciente $genero de $edad,";
   } else {
     $cabecera = "[CABECERA INVÁLIDA]";
   }
@@ -281,7 +290,7 @@
 
 <page style="text-align:justify;" backtop="10mm" backbottom="35mm" backleft="10mm" backright="10mm">
 
-	<page_footer>
+  <page_footer>
     <div style="position:absolute; bottom: 5mm">
       
       <div style="font-size: 14px;" class="centro">
@@ -324,10 +333,20 @@
       </div>
 
       <div></div>
-      <div class="separador"></div>
+      <div></div>
 
       <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+      </div>
+
+      <div></div>
+
+      <div style="text-align: right;">
+        NOMBRE: <?php echo trim(strtoupper($datos['nombres'].' '.$datos['apellidos']));?>
+      </div>
+
+      <div style="text-align: right;">
+        C.I: <?php echo trim(strtoupper($datos['cedula']));?>
       </div>
 
       <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">INFORME MÉDICO</div>
@@ -338,30 +357,32 @@
       <!-------------------------------------------------------------->
       <!----------------------- RESUMIDO ----------------------------->
       <!-------------------------------------------------------------->
-	    <?php if ($datos['tipo'] == "0") { ?>
+      <?php if ($datos['tipo'] == "0") { ?>
         <!--echo trim(strtoupper($informe['texto_html']));-->
 
         <div>
-          <?php echo trim(strtoupper($cabecera));?>
-        </div>
-
-        <div></div>
-
-        <div>
-          <?php echo trim(strtoupper($contenido['texto_html']));?>.
+          <?php echo trim(strtoupper($cabecera)).' '.trim(strtoupper($contenido['texto_html']));?>
         </div>
 
         <div></div>
         <div></div>
 
         <div>
-          <b>SE INDICA:</b><?php echo trim(strtoupper($plan['texto_html']));?>.
+          <?php 
+            if (!empty($plan['texto_html'])) {
+              echo '<b>SE INDICA:</b>'.trim(strtoupper($plan['texto_html']));
+            }
+          ?>
         </div>
 
         <div></div>
 
         <div>
-          <b>DEBE VOLVER A CONTROL:</b> <?php echo trim(strtoupper($control['texto_html']));?>.
+          <?php 
+            if (!empty($control['texto_html'])) {
+              echo '<b>DEBE VOLVER A CONTROL:</b>'.trim(strtoupper($control['texto_html']));
+            }
+          ?>
         </div>
 
       <!-------------------------------------------------------------->
@@ -615,12 +636,12 @@
         $nombre = /*$datos->id_historia.*/'-'.$dia.'-'.$hora;
 
         if ($pdf == 1) {
-          $html2pdf->output("../reportes/informees/informe$nombre.pdf", "f");
+          $html2pdf->output("../reportes/informes/informe$nombre.pdf", "f");
         } else if ($pdf == 2) {
-          $html2pdf->Output("../reportes/informees/informe$nombre.pdf");
+          $html2pdf->Output("../reportes/informes/informe$nombre.pdf");
         } else {  
-          $html2pdf->Output("../reportes/informees/informe$nombre.pdf");
-          $html2pdf->output("../reportes/informees/informe$nombre.pdf", "f");
+          $html2pdf->Output("../reportes/informes/informe$nombre.pdf");
+          $html2pdf->output("../reportes/informes/informe$nombre.pdf", "f");
         }
     }
     catch(HTML2PDF_exception $e) {

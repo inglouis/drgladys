@@ -1,5 +1,5 @@
 <!--//////////////////////////////////////////////////////////////////////////////////-->
-<!--////////////////////////  evoluciones TEMPLATE //////////////////////////////////-->
+<!--/////////////////////////  EVOLUCIONES TEMPLATE //////////////////////////////////-->
 <!--//////////////////////////////////////////////////////////////////////////////////-->
 
 <template id="evoluciones-template">
@@ -1008,7 +1008,10 @@
                       <svg id="eKDjukC59nm1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 22.617808 56.769524)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 33.633723 66.990132)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 45.318251 75.741204)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 57.318253 81.575252)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 71.318253 84.492276)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 84.318252 87.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 97.96803 89.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
                     </button>
 
-                    <button title="---">-</button>
+                    <button id="cicatriz_linea_izquierda" title="Cicatriz línea izquierda">
+                      <svg id="eAjo27iYgT81" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M15,15l-30-30" transform="translate(15 15)" fill="none" stroke="#000" stroke-width="0.6" stroke-miterlimit="6"/></svg>
+                    </button>
+                    
                     <button title="---">-</button>
                     <button title="---">-</button>
                     <button title="---">-</button>

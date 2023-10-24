@@ -51,6 +51,12 @@ informes['crud']['propiedadesTr'] = {
 		var contenido = JSON.parse(e.sublista.contenido).texto_html
 			contenedor.querySelector('.informe-contenido div').innerHTML = contenido.toUpperCase()
 
+			contenido = JSON.parse(e.sublista.control).texto_html
+			contenedor.querySelector('.informe-control div').innerHTML = contenido.toUpperCase()
+
+			contenido = JSON.parse(e.sublista.plan).texto_html
+			contenedor.querySelector('.informe-plan div').innerHTML = contenido.toUpperCase()
+
 		//agudeza 4
 		contenedor.querySelector('.informe-agudeza-4 span').innerHTML = `OD: ${e.sublista.agudeza_od_4.toUpperCase()} - OI: ${e.sublista.agudeza_oi_4.toUpperCase()}`
 		contenedor.querySelector('.informe-agudeza-4 input').checked = (e.sublista.correccion_4 === 'X') ? true : false;
@@ -264,10 +270,13 @@ informes['crud']['customBodyEvents'] = {
 
 			var lista = tools.copiaLista(informes.sublista)
 
-			lista['id_historia'] =  historias.sublista.id_historia
+			lista['id_historia'] = historias.sublista.id_historia
+
+			lista = JSON.stringify(lista)
+			lista = lista.replaceAll('+', '%2B');
 
 			var sesion = [
-					{"sesion": 'datos_pdf', "parametros": JSON.stringify(lista)}
+					{"sesion": 'datos_pdf', "parametros": lista}
 				]
 
 			await tools.fullAsyncQuery('historias', 'modificar_sesion', sesion)
@@ -316,7 +325,7 @@ qs("#informes-contenedor .reporte-notificar").addEventListener('click', async e 
 			datos['fecha_nacimiento'] = historias.sublista.fecha_naci
 			datos['diagnosticos'] = JSON.stringify(datos['diagnosticos'])
 
-			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [datos, elemento.identificador], [["+", "%2B"]]))
+			var resultado = JSON.parse(await tools.fullAsyncQuery(`historias_notificaciones`, `notificar`, [datos, elemento.identificador], [["+", "%2B"], ["'", "%27"], ['"', "%22"]]))
 
 			if (typeof resultado === 'object' && resultado !== null) {
 
@@ -696,26 +705,41 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
-var insersiones_lista = ['diagnosticos'],
-	insersiones_lista_combos = [diaPop],
+var insersiones_lista = ['diagnosticos', 'estudios'],
+	insersiones_lista_combos = [diaPop, estPop],
 	ultimoBotonInsersionBasica = '';
 
-var insersiones_logica = {
-	"diagnosticos": (contenedor, datos, lista) => {
+var insersiones_procesado = {
+	"diagnosticos": (datos, lista, posicion) => {
 
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
 		tools.limpiar('.insertar-diagnostico', '', {})
 
-		insersiones_lista_combos[i].pop()
+		insersiones_lista_combos[posicion].pop()
 
-		contenedor.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-		contenedor.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+		contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+
+		contenedoresEvoluciones.reconstruirCombo(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`), lista)
+		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`))
+
+
+	},
+	"estudios": (datos, lista, posicion) => {
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
+
+		tools.limpiar('.insertar-estudio', '', {})
+
+		insersiones_lista_combos[posicion].pop()
+
+		contenedoresReportes.reconstruirCombo(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`), lista)
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`))
 
 	}
 }
-
 
 qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
 
@@ -739,7 +763,7 @@ insersiones_lista.forEach((grupo, i) => {
 
 				datos.splice(1,1)
 
-				var resultado = await tools.fullAsyncQuery(`${grupo}s`, `crear_${grupo}s`, datos)
+				var resultado = await tools.fullAsyncQuery(`${grupo}`, `crear_${grupo}`, datos)
 
 				if(resultado.trim() === 'exito') {
 
@@ -747,9 +771,9 @@ insersiones_lista.forEach((grupo, i) => {
 
 					setTimeout(async () => {
 
-						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}s`, []))
+						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
 
-						insersiones_logica[grupo](contenedoresReportes, datos[0], lista)
+						insersiones_procesado[grupo](datos[0], lista, i)
 
 					}, 500)
 

@@ -842,7 +842,8 @@
     2 => ["parentescos", "parentesco"],
     3 => ["estado_civil", "estado civil"],
     4 => ["religiones", "religión"],
-    5 => ["estudios", "estudios"]
+    5 => ["diagnosticos", "diagnóstico"],
+    6 => ["estudios", "estudios"]
   );
 
   foreach ($insersiones as $r) {
@@ -862,7 +863,7 @@
       <div class="columnas">
         <div>
           <label class="requerido">Nombre de la <?php echo $r[1]?></label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-<?php echo $r[0]?>" maxlength="100" class="nuevas-<?php echo $r[0]?> lleno upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="nombre-<?php echo $r[0]?>" maxlength="100" class="insertar-<?php echo $r[0]?> lleno upper" placeholder="...">
         </div>
       </div> 
 
@@ -880,9 +881,8 @@
   }
 ?>
 
-
 <!------------------------------------------------------------------- -->
-<!---------------------- INSERTAR MEDICAMENTOS ---------------------- -->
+<!------------------------ INSERTAR MÉDICO -------------------------- -->
 <!------------------------------------------------------------------- -->
 <div id="crud-insertar-medicos-popup" class="popup-oculto" data-crud='popup'>
   <div id="crud-insertar-medicos-pop" class="popup-oculto" style="width:50%;">
@@ -898,14 +898,14 @@
       <div class="columnas">
         <div>
           <label class="requerido">Nombre del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-medicos" maxlength="100" class="nuevas-medicos lleno upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="nombre-medicos" maxlength="100" class="insertar-medicos lleno upper" placeholder="...">
         </div>
       </div>
 
       <div class="columnas">
         <div>
           <label>Dirección del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="direccion-medicos" maxlength="100" class="nuevas-medicos upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="direccion-medicos" maxlength="100" class="insertar-medicos upper" placeholder="...">
         </div>
       </div> 
 
@@ -916,33 +916,5 @@
       <button class="botones-formularios cerrar">CANCELAR</button> 
     </section>
 
-  </div> 
-</div>
-
-<!------------------------------------------------------------------- -->
-<!---------------------- INSERTAR DIAGNOSTICOS ---------------------- -->
-<!------------------------------------------------------------------- -->
-<div id="crud-insertar-diagnosticos-popup" class="popup-oculto" data-crud='popup'>
-  <div id="crud-insertar-diagnosticos-pop" class="popup-oculto" style="width:30%;">
-
-    <button id="crud-insertar-diagnosticos-cerrar" data-crud='cerrar'>X</button>
-
-    <section id="crud-insertar-diagnosticos-titulo" data-crud='titulo'>
-      Insertar diagnósticos
-    </section> 
-
-    <section class="filas">
-      <div class="columnas">
-        <div>
-          <label class="requerido">Nombre del diagnósticos</label>  
-          <input type="text" minlength="1" id="nombre-diagnosticos" maxlength="100" class="nuevas-diagnosticos lleno upper" placeholder="...">
-        </div>
-      </div> 
-
-    </section>
-    <section id="crud-insertar-diagnosticos-botones" class="diagnosticos-llamado" data-crud='botones' style="column-gap: 10px; padding: 10px;">
-      <button class="botones-formularios insertar">CONFIRMAR</button>
-      <button class="botones-formularios cerrar">CANCELAR</button> 
-    </section>
   </div> 
 </div>

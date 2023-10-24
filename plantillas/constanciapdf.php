@@ -45,6 +45,20 @@
     $recomendaciones = $datos['recomendaciones'];
   }
 
+  $sexo = $obj->i_pdo("select sexo from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetchColumn();
+
+  $cedula = $datos['cedula'];
+
+  if ($sexo == 'M') {
+
+    $genero = 'Masculino';
+
+  } else {
+
+    $genero = "Femenina";
+
+  }
+
   if (!empty($datos['menor'])) {
 
     $representante = $obj->i_pdo("select emergencia_informacion, emergencia_persona from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetch(PDO::FETCH_ASSOC);
@@ -107,7 +121,7 @@
 <style>
 
   page {
-  	font-size: 15px;
+    font-size: 15px;
     font-family: arial;
   }
 
@@ -215,19 +229,19 @@
 
 <page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
 
-	<page_footer>
-		<div style="position:absolute; bottom: 5mm">
-		  
-		  <div style="font-size: 14px;" class="centro">
-		    Dra. Gladys A. Chaparro H.
-		  </div>
-		  <div style="font-size: 14px;" class="centro">
-		    Oftalmólogo
-		  </div>
+  <page_footer>
+    <div style="position:absolute; bottom: 5mm">
+      
+      <div style="font-size: 14px;" class="centro">
+        Dra. Gladys A. Chaparro H.
+      </div>
+      <div style="font-size: 14px;" class="centro">
+        Oftalmólogo
+      </div>
 
-		  <div style="font-size: 14px;" class="centro">
-		    M.S.D.S.: 34.989 C.M.: 1.915
-		  </div>
+      <div style="font-size: 14px;" class="centro">
+        M.S.D.S.: 34.989 C.M.: 1.915
+      </div>
 
       <div style="text-align: right; font-size: 13px; position: relative; right: 26px; font-weight: bold">
         San Cristóbal, <?php echo $fecha?>
@@ -239,41 +253,51 @@
 
       <div class="centro" style="font-size: 12px; position: relative; top: -8px">Av. Guayana, C.C. Villa Etapa "C", Edificio CEMOC - Consultorio 103, San Cristóbal - Edo. Táchira., (0276) 4121329, (0276) 5108011</div>
 
-		</div>
-	</page_footer> 
+    </div>
+  </page_footer> 
 
   <div class="contenedor">
 
       <div id="cabecera">
 
-    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
-    			Dra. Gladys A. Chaparro H.
-    		</div>
+        <div style="font-family: 'Qwigley'; font-size: 40px; ">
+          Dra. Gladys A. Chaparro H.
+        </div>
 
         <div style="font-size: 14px">RIF: v-09143081-5</div>
         <div style="font-size: 14px">Oftalmólogo</div>
         <div style="font-size: 14px">Infantil y Estrabismo</div>
         <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
-  		</div>
+      </div>
 
       <div></div>
-      <div class="separador"></div>
+      <div></div>
 
-  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-  		</div>
+      <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+        <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+      </div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">CONSTANCIA</div>
+      <div></div>
 
-	    <div></div>
-	    <div></div>
+      <div style="text-align: right;">
+        NOMBRE: <?php echo trim(strtoupper($datos['nombres'].' '.$datos['apellidos']));?>
+      </div>
+
+      <div style="text-align: right;">
+        C.I: <?php echo trim(strtoupper($datos['cedula']));?>
+      </div>
+
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">CONSTANCIA</div>
+
+      <div></div>
+      <div></div>
 
       <?php 
         if (!empty($motivo['texto_html'])) {
       ?>
         <div style="font-size: 15px; text-transform: uppercase;">
-          Se hace constar que el paciente <b><?php echo $datos['nombres'].' '.$datos['apellidos']?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica, donde presenta: <?php echo trim(strtoupper($motivo['texto_html']));?>. <?php echo $menor ?>
+          Se hace constar que el paciente <b><?php echo $genero?></b> de <b><?php echo $edad?></b>, acudio el día de hoy a consulta oftalmológica, por presentar: <?php echo trim(strtoupper($motivo['texto_html']));?>. <?php echo $menor ?>
         </div>
       <?php 
         } else {
@@ -296,7 +320,7 @@
       <?php 
         }
       ?>
-	    
+      
       <div></div>
 
       <div style="font-size: 15px; text-transform: uppercase; position: relative;">
@@ -304,7 +328,7 @@
       </div>
 
 
-  	</div>
+    </div>
 
 </page>
 

@@ -301,7 +301,13 @@ notificados_reportes['crud']['customBodyEvents'] = {
 			qs('#busqueda').value = datos.id_historia
 
 			//FUERZA LA BUSQUEDA EN EL CRUD
-			historias.crud.botonForzar()
+
+			await historias.crud.btnBuscar.forzar()
+
+			var cola = []
+			cola.push(tools.retardar().then(x => {}));
+			await Promise.all(cola);
+			//window.medicamentos.crud.botonForzar(true)
 
 			//CIERRA LOS POPUPS ACTIVOS
 			qsa('.popup-activo').forEach(el => {
@@ -323,10 +329,12 @@ notificados_reportes['crud']['customBodyEvents'] = {
 			})
 
 			//CAPTURA EL TR DE LA TABLA
-			qsa('#tabla-historias tbody tr').forEach(el => {
-			    
-			    if (el.sublista.id_historia === datos.id_historia) {
-			        tr = el
+			qsa('#tabla-historias tbody tr').forEach(lista_historias => {
+
+			    if (lista_historias.sublista.id_historia === datos.id_historia) {
+
+			        tr = lista_historias
+
 			    }
 			    
 			})

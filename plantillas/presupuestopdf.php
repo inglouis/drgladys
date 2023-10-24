@@ -59,7 +59,7 @@
 <style>
 
   page {
-  	font-size: 15px;
+    font-size: 15px;
     font-family: arial;
   }
 
@@ -167,7 +167,7 @@
 
 <page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
 
-	<page_footer>
+  <page_footer>
     <div style="position:absolute; bottom: 5mm">
       
       <div style="font-size: 14px;" class="centro">
@@ -198,64 +198,64 @@
 
       <div id="cabecera">
 
-    		<div style="font-family: 'Qwigley'; font-size: 40px; ">
-    			Dra. Gladys A. Chaparro H.
-    		</div>
+        <div style="font-family: 'Qwigley'; font-size: 40px; ">
+          Dra. Gladys A. Chaparro H.
+        </div>
 
         <div style="font-size: 14px">RIF: v-09143081-5</div>
         <div style="font-size: 14px">Oftalmólogo</div>
         <div style="font-size: 14px">Infantil y Estrabismo</div>
         <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
-  		</div>
+      </div>
 
       <div></div>
-      <div class="separador"></div>
+      <div></div>
 
-  		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-  			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-  		</div>
+      <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+        <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+      </div>
 
-	    <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
+      <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">PRESUPUESTO</div>
 
-	    <div></div>
-	    <div></div>
+      <div></div>
+      <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>NOMBRES Y APELLIDOS:</td>
+            <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombre_completo'])?></td>
+          </tr>
+        </tbody>
+      </table>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>CÉDULA O PASAPORTE:</td>
+            <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
+          </tr>
+        </tbody>
+      </table>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>FECHA:</td>
+            <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
+            <td>HORA:</td>
+            <td style="font-weight: bold"><?php echo $datos['hora']?></td>
+          </tr>
+        </tbody>
+      </table>
 
-  	</div>
+    </div>
 
-  	<div></div>
-  	<div></div>
+    <div></div>
+    <div></div>
 
-	<?php 
+  <?php 
     echo trim(strtoupper($presupuesto['texto_html']));
   ?>
 

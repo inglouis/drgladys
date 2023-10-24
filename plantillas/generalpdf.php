@@ -169,7 +169,7 @@
 
 <page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
 
-	<page_footer>
+  <page_footer>
     <div style="position:absolute; bottom: 5mm">
       
       <div style="font-size: 14px;" class="centro">
@@ -212,7 +212,7 @@
       </div>
 
       <div></div>
-      <div class="separador"></div>
+      <div></div>
 
       <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
         <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
@@ -223,46 +223,46 @@
       <div></div>
       <div></div>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>NOMBRES Y APELLIDOS:</td>
-	          <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>NOMBRES Y APELLIDOS:</td>
+            <td style="font-weight: bold; width: 100%"><?php echo strtoupper($datos['nombres'].''.$datos['apellidos'])?></td>
+          </tr>
+        </tbody>
+      </table>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>EDAD:</td>
-	          <td style="font-weight: bold"><?php echo $edad?></td>
-	          <td>CÉDULA O PASAPORTE:</td>
-	          <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
-	        </tr>
-	      </tbody>
-	    </table>
+      <table>
+        <tbody>
+          <tr>
+            <td>EDAD:</td>
+            <td style="font-weight: bold"><?php echo $edad?></td>
+            <td>CÉDULA O PASAPORTE:</td>
+            <td style="font-weight: bold"><?php echo strtoupper($datos['cedula'])?></td>
+          </tr>
+        </tbody>
+      </table>
 
-	    <table>
-	      <tbody>
-	        <tr>
-	          <td>FECHA:</td>
-	          <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
-	          <td>HORA:</td>
-	          <td style="font-weight: bold"><?php echo $datos['hora']?></td>
-	        </tr>
-	      </tbody>
-	    </table>
-	    
-	    <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
-	    <!--</p>-->
+      <table>
+        <tbody>
+          <tr>
+            <td>FECHA:</td>
+            <td style="font-weight: bold"><?php echo $fecha_arreglada?></td>
+            <td>HORA:</td>
+            <td style="font-weight: bold"><?php echo $datos['hora']?></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!--<p style="text-align: justify; margin: 0px; padding: 0px; height: auto">-->
+      <!--</p>-->
 
-  	</div>
+    </div>
 
-  	<div></div>
-  	<div></div>
+    <div></div>
+    <div></div>
 
-	<?php 
+  <?php 
     echo trim(strtoupper($general['texto_html']));
   ?>
 

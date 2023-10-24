@@ -29,6 +29,20 @@
     $pdf = 1;
   }
 
+  $sexo = $obj->i_pdo("select sexo from principales.historias where id_historia = ?", [(int)$datos['id_historia']], true)->fetchColumn();
+
+  $cedula = $datos['cedula'];
+
+  if ($sexo == 'M') {
+
+    $genero = 'Masculino';
+
+  } else {
+
+    $genero = "Femenina";
+
+  }
+
   // echo "<pre>";
   // print_r($datos);
   // echo "</pre>";
@@ -82,11 +96,11 @@
 
   if ($datos['cabecera'] == '0') {
 
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad ".$cedula_cabecera."FUE INTERVENIDO QUIRÚRGICAMENTE DE: ". trim(strtoupper($reposo['texto_html']));
+    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE <b>$genero</b> DE $edad ".$cedula_cabecera."FUE INTERVENIDO QUIRÚRGICAMENTE DE: ". trim(strtoupper($reposo['texto_html']));
     
   } else if ($datos['cabecera'] == '1') {
 
-    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE $datos[nombres] $datos[apellidos] DE $edad ".$cedula_cabecera."PRESENTA: ".trim(strtoupper($reposo['texto_html']));
+    $cabecera = "SE HACE CONSTAR QUE EL PACIENTE <b>$genero</b> DE $edad ".$cedula_cabecera."PRESENTA: ".trim(strtoupper($reposo['texto_html']));
 
   } else {
 
@@ -139,7 +153,7 @@
 <style>
 
   page {
-  	font-size: 15px;
+    font-size: 15px;
     font-family: arial;
   }
 
@@ -247,7 +261,7 @@
 
 <page style="text-align:justify;" backtop="10mm" backbottom="25mm" backleft="10mm" backright="10mm">
 
-	<page_footer>
+  <page_footer>
     <div style="position:absolute; bottom: 5mm">
       
       <div style="font-size: 14px;" class="centro">
@@ -278,25 +292,34 @@
 
     <div id="cabecera">
 
-  		<div style="font-family: 'Qwigley'; font-size: 40px; ">
-  			Dra. Gladys A. Chaparro H.
-  		</div>
+      <div style="font-family: 'Qwigley'; font-size: 40px; ">
+        Dra. Gladys A. Chaparro H.
+      </div>
 
       <div style="font-size: 14px">RIF: v-09143081-5</div>
       <div style="font-size: 14px">Oftalmólogo</div>
       <div style="font-size: 14px">Infantil y Estrabismo</div>
       <div style="font-size: 14px">M.S.D.S.: 34.989 C.M.: 1.915</div>
 
-		</div>
+    </div>
 
     <div></div>
-    <div class="separador"></div>
+    <div></div>
 
-		<div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
-			<img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
-		</div>
+    <div style="position: absolute;  top: 15mm; left: 5mm; height: 0px;">
+      <img src="../imagenes/logo_cemoc.jpg" style="width: 45mm; height: 25mm;">
+    </div>
 
     <div></div>
+
+    <div style="text-align: right;">
+      NOMBRE: <?php echo trim(strtoupper($datos['nombres'].' '.$datos['apellidos']));?>
+    </div>
+
+    <div style="text-align: right;">
+      C.I: <?php echo trim(strtoupper($datos['cedula']));?>
+    </div>
+
 
     <div class="centro" style="font-size: 16px; font-weight: bold; position:relative; top: 7mm; text-decoration: underline;">REPOSO MÉDICO</div>
 

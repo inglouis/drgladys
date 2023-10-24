@@ -433,11 +433,7 @@ imgBio._formato['height'] = 309
 imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
 
 imgBio._fn['remover'] = () => {
-
-	if (qs('#crud-evoluciones-popup').classList.contains('pop-on') && imgBio._canvas.isDrawingMode === false) {
-		notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
-	}
-	
+	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
 }
 
 imgBio._fn['color'] = () => {
@@ -449,7 +445,7 @@ imgBio.asignarDibujados('.bio-dibujar')
 imgBio.asignarGrosores('.bio-slider')
 imgBio.asignarTexto('bio-texto')
 
-imgBio.formaPersonalizada('dendritis', {fill: 'transparent', stroke: '#529b62', width: 0.5, height: 0.5}, `M 126 73 q -12 1 -4 5 C 125 80 130 82 122 84 c -7 2 -6 5 -3 6 c 2 1 5 2 8 3 c 13 5 -7 5 -10 8 s 10 4 10 7 s -9 1 -9 4 s 8 7 29 5 c 18 -4 13 -7 4 -11 c -12 -4 3 -4 4 -7.2649 c 1 -4.7351 -5 -3 -8 -4.7351 c -6.2646 -5.4146 11 -1 12 -8 c -1 -5 -16.2245 0.3909 -17 -3 c -1.1372 -5.4146 7 -2 10 -5 c 1 -2 -3 -4 -10 -4 C 138 74 135 73 131 73 Z`)
+imgBio.formaPersonalizada('dendritis', {fill: 'transparent', stroke: '#529b62', width: 0.5, height: 0.5}, `M120.8602,63.449056q-35.096527,12.657935,1.231457,16.110097c-33.733296,1.493948-24.361628,9.178024-19.13719,12.65793c5.954242,4.009143,8.235845,6.572201,19.137189,5.41465c15.917545,2.858628,10.301356,7.253808-10.467384,14.147614s9.150424,6.306059,24.002112,9.876084-6.940727,9.16262-24.002112,15.137051s6.463382,11.089412,54.223099,12.978716c29.557498-2.378651,26.944529-10.507104,0-18.735085-6.85772-4.456182,8.674524-10.753465,21.258366-19.832125c9.604973-14.443615-3.017407-16.348224-30.841146-13.572255-6.26459-5.41465,9.58278-3.113205,9.58278-18.07258-20.111397,7.916884-34.124788,8.305147-25.873841-2.301445c4.656984-5.986552,17.376705-3.438281,16.291061-16.110098q-.307863-10.356493-35.40439,2.301445Z`)
 imgBio.formaPersonalizada('ulceras_redondas', {fill: 'transparent', stroke: '#529b62', width: 1.5, height: 1.5}, `M-12.3293 0a12.3293 12.3293 0 1 0 24.6587 0a12.3293 12.3293 0 1 0 -24.6587 0`)
 imgBio.formaPersonalizada('lente_intraocular', {fill: 'transparent', stroke: '#8d8d8d', width: 1, height: 1}, `
 	M17.3293 30a12.3293 12.3293 0 1 0 24.6587 0a12.3293 12.3293 0 1 0 -24.6587 0 \
@@ -488,6 +484,9 @@ imgBio.formaPersonalizada('papilas_abajo', {top: 165, left: 30, fill: 'transpare
     M0,0c.000383-2.099525.687491-4.315556,2.297012-4.892647.594924-.270683,1.803133-.294431,2.421697,0c1.868574.667539,1.978392,2.796979,2.199992,4.892647 
 `)
 
+imgBio.formaPersonalizada('cicatriz_linea_izquierda', {top: 165, left: 30, fill: 'transparent', stroke: 'black', width: 0.6, height: 0.6}, `
+  	M15,15l-30-30
+`)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 qs('#bio-valor').innerHTML = qs('#bio-rango').value
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -513,9 +512,7 @@ fondBio._formato['height'] = 309
 fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
 
 fondBio._fn['remover'] = () => {
-	if (qs('#crud-evoluciones-popup').classList.contains('pop-on') && fondBio._canvas.isDrawingMode === false) {
-		notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
-	}
+	notificaciones.mensajeSimple('Objetos eliminados', false, 'V')
 }
 
 fondBio._fn['color'] = () => {

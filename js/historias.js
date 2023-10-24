@@ -140,7 +140,7 @@ window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'in
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', ['presentaciones', 'tratamientos', 'medicamentos'], 27)
-window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', [], 27)
+window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', ['insertar-diagnosticos', 'insertar-estudios'], 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -166,7 +166,8 @@ window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true
 window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
 window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
 
-window.diaPop = new PopUp('crud-insertar-diagnostico-popup', 'popup', 'subefecto', true, 'insertar-diagnostico', '', 27)
+window.diaPop = new PopUp('crud-insertar-diagnosticos-popup', 'popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
+window.estPop = new PopUp('crud-insertar-estudios-popup', 'popup', 'subefecto', true, 'insertar-estudios', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -200,6 +201,7 @@ refInsPop.evtBotones()
 refeInsPop.evtBotones()
 
 diaPop.evtBotones()
+estPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -241,6 +243,7 @@ window.addEventListener('keyup', (e) => {
 	refeInsPop.evtEscape(e)
 
 	diaPop.evtEscape(e)
+	estPop.evtEscape(e)
 
 })
 
@@ -1147,13 +1150,13 @@ insersiones_lista.forEach((grupo, i) => {
 
 	qs(`#editar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		tools.limpiar(`.nuevas-${grupo}`, '', {})
+		tools.limpiar(`.insertar-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
 	qs(`#insertar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		tools.limpiar(`.nuevas-${grupo}`, '', {})
+		tools.limpiar(`.insertar-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
@@ -1161,14 +1164,18 @@ insersiones_lista.forEach((grupo, i) => {
 
 		if (e.target.classList.contains('insertar')) {
 
-			var datos = tools.procesar(e.target, 'insertar', `nuevas-${grupo}`,  tools)
+			var datos = tools.procesar(e.target, 'insertar', `insertar-${grupo}`,  tools)
 
 			if (datos !== '') {
 
 				if (grupo === 'medicos') {
+
 					datos.splice(2,1)
+
 				} else {
+
 					datos.splice(1,1)
+
 				}
 
 				var resultado = await tools.fullAsyncQuery(grupo, `crear_${grupo}`, datos)
@@ -1445,6 +1452,8 @@ export var informes = new Informes(new Tabla(
 	],
 	'tabla-informe', 'informe-busqueda', -1, 'null', 'null', 'null', true
 ))
+
+window.informes = informes
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
@@ -1974,21 +1983,17 @@ class Evoluciones extends Acciones {
 
 		for (var i = 0; i < imagenes.length; i++) {
 
-			if (!imagenes[i].src.includes('init.txt')) {
+			var height = imagenes[i].naturalHeight,
+				width  = imagenes[i].naturalWidth
 
-				var height = imagenes[i].naturalHeight,
-					width  = imagenes[i].naturalWidth
+			if (height < 400) {height = 800}
+			if (width  < 400) {width  = 800}
 
-				if (height < 400) {height = 800}
-				if (width  < 400) {width  = 800}
-
-				th._imagenes.push({
-					src: imagenes[i].src,
-					w:width,
-					h:height
-				})
-
-			}
+			th._imagenes.push({
+				src: imagenes[i].src,
+				w:width,
+				h:height
+			})
 		
 		}
 
