@@ -1716,6 +1716,7 @@ span.numeracion {
 #crud-medicamentos-pop,
 #crud-insertar-referencia-pop,
 #crud-insertar-referido-pop,
+#crud-insertar-estudios-pop,
 #crud-insertar-diagnostico-pop,
 #crud-evoluciones-pop {
     height: fit-content;

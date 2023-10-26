@@ -842,8 +842,7 @@
     2 => ["parentescos", "parentesco"],
     3 => ["estado_civil", "estado civil"],
     4 => ["religiones", "religión"],
-    5 => ["diagnosticos", "diagnóstico"],
-    6 => ["estudios", "estudios"]
+    5 => ["diagnosticos", "diagnóstico"]
   );
 
   foreach ($insersiones as $r) {
@@ -912,6 +911,44 @@
     </section>
 
     <section id="crud-insertar-medicos-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
+      <button class="botones-formularios insertar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+
+  </div> 
+</div>
+
+<!------------------------------------------------------------------- -->
+<!------------------------ INSERTAR ESTUDIO -------------------------- -->
+<!------------------------------------------------------------------- -->
+<div id="crud-insertar-estudios-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-insertar-estudios-pop" class="popup-oculto" style="width:50%;">
+
+    <button id="crud-insertar-estudios-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-insertar-estudios-titulo" data-crud='titulo'>
+      Insertar estudio/referencia
+    </section> 
+
+    <section class="filas">
+
+      <div class="columnas">
+        <div>
+          <label class="requerido">Nombre del estudio</label>  
+          <input type="text" autocomplete="off"  size="100" minlength="1" maxlength="100" id="nombre-estudios" class="insertar-estudios lleno upper" placeholder="...">
+        </div>
+      </div>
+
+      <div class="columnas">
+        <div>
+          <label>Descripción del estudio/referencia</label>  
+          <textarea id="descripcion-estudios" minlength="1" maxlength="600" class="insertar-estudios lleno upper" style="resize: none" rows="4"></textarea> 
+        </div>
+      </div> 
+
+    </section>
+
+    <section id="crud-insertar-estudios-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
       <button class="botones-formularios insertar">CONFIRMAR</button>
       <button class="botones-formularios cerrar">CANCELAR</button> 
     </section>

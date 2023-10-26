@@ -705,8 +705,8 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
-var insersiones_lista = ['diagnosticos', 'estudios'],
-	insersiones_lista_combos = [diaPop, estPop],
+var insersiones_lista = ['diagnosticos'],
+	insersiones_lista_combos = [diaPop],
 	ultimoBotonInsersionBasica = '';
 
 var insersiones_procesado = {
@@ -726,30 +726,8 @@ var insersiones_procesado = {
 		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`))
 
 
-	},
-	"estudios": (datos, lista, posicion) => {
-		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
-		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
-
-		tools.limpiar('.insertar-estudio', '', {})
-
-		insersiones_lista_combos[posicion].pop()
-
-		contenedoresReportes.reconstruirCombo(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`), lista)
-		contenedoresReportes.filtrarComboForzado(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`))
-
 	}
 }
-
-qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
-
-	tools.limpiar('.insertar-diagnostico', '', {})
-
-	diaPop.pop()
-
-	ultimoBotonInsersionBasica = e.target
-
-})
 
 insersiones_lista.forEach((grupo, i) => {
 
@@ -789,5 +767,15 @@ insersiones_lista.forEach((grupo, i) => {
 			}
 		}
 	})
+
+})
+
+qs('#insertar-nueva-diagnostico').addEventListener('click', e => {
+
+	tools.limpiar('.insertar-diagnosticos', '', {})
+
+	diaPop.pop()
+
+	ultimoBotonInsersionBasica = e.target
 
 })

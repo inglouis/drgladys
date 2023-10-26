@@ -2126,8 +2126,11 @@ medPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 genPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
-diaPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-diaPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+diaPop.funciones['apertura'] = {"apertura": () => {qs('#crud-insertar-diagnosticos-popup').style = "z-index: 11"}}
+diaPop.funciones['cierre']   = {"cierre": ()   => {qs('#crud-insertar-diagnosticos-popup').style = "z-index: 0"}}
+
+estPop.funciones['apertura'] = {"apertura": () => {qs('#crud-insertar-estudios-popup').style = "z-index: 11"}}
+estPop.funciones['cierre']   = {"cierre": ()   => {qs('#crud-insertar-estudios-popup').style = "z-index: 0"}}
 
 forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"; qs('#crud-infeditar-pop').scrollTo(0, 0)}}
 forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}

@@ -794,3 +794,114 @@ qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
 	}, 1000)
 
 })
+
+// /* -------------------------------------------------------------------------------------------------*/
+// /*           						EVOLUCIONES - INSERTAR					 				    	*/
+// /* -------------------------------------------------------------------------------------------------*/
+//-------------------------------------------------------------------------------
+//botones que insertan datos básicos desde la edición o insersión de una historia
+//-------------------------------------------------------------------------------
+var insersiones_lista = ['diagnosticos', 'estudios'],
+	insersiones_lista_combos = [diaPop, estPop],
+	ultimoBotonInsersionBasica = '';
+
+var insersiones_procesado = {
+	"diagnosticos": (datos, lista, posicion) => {
+
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
+
+		tools.limpiar('.insertar-diagnostico', '', {})
+
+		insersiones_lista_combos[posicion].pop()
+
+		contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+
+		contenedoresEvoluciones.reconstruirCombo(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`), lista)
+		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`))
+
+
+	},
+	"estudios": (datos, lista, posicion) => {
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
+		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
+
+		tools.limpiar('.insertar-estudio', '', {})
+
+		insersiones_lista_combos[posicion].pop()
+
+		contenedoresReportes.reconstruirCombo(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`), lista)
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`))
+
+	}
+}
+
+insersiones_lista.forEach((grupo, i) => {
+
+	qs(`#crud-insertar-${grupo}-botones`).addEventListener('click', async e => {
+
+		if (e.target.classList.contains('insertar')) {
+
+			var datos = tools.procesar('', '', `insertar-${grupo}`, tools)
+
+			if (datos !== '') {
+
+				datos.splice(1,1)
+
+				if (grupo === 'estudios') {
+
+					var resultado = await tools.fullAsyncQuery('referencias', `crear_referencia`, datos)
+
+				} else {
+
+					var resultado = await tools.fullAsyncQuery(`${grupo}`, `crear_${grupo}`, datos)
+
+				}
+
+				if(resultado.trim() === 'exito') {
+
+					notificaciones.mensajeSimple(`${grupo.toUpperCase()} insertada con éxito`, resultado, 'V')
+
+					setTimeout(async () => {
+
+						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
+
+						insersiones_procesado[grupo](datos[0], lista, i)
+
+					}, 500)
+
+				} else if (resultado.trim() === 'repetido') {
+
+					notificaciones.mensajeSimple(`Este [${grupo.toUpperCase()}] ya existe`, resultado, 'F')
+
+				} else {
+
+					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+				}
+			}
+		}
+	})
+
+})
+
+qs('#evoluciones-nueva-estudio').addEventListener('click', e => {
+
+	tools.limpiar('.insertar-estudios', '', {})
+
+	estPop.pop()
+
+	ultimoBotonInsersionBasica = e.target
+
+})
+
+qs('#evoluciones-nueva-diagnostico').addEventListener('click', e => {
+
+	tools.limpiar('.insertar-diagnosticos', '', {})
+
+	diaPop.pop()
+
+	ultimoBotonInsersionBasica = e.target
+
+})
