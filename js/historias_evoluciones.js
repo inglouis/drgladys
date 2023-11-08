@@ -891,6 +891,20 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
 						await evoluciones.traer_lista()
 
+						tools.limpiar('.evoluciones-valores', '', {})
+						tools.limpiar('.evoluciones-cargar', '', {})
+						rellenar.contenedores(historias.sublista, '.evoluciones-cargar', {}, {})
+
+						gid('evoluciones-fecha').value = window.dia
+						window.galeriaAntes.limpiar()
+						window.galeriaDespues.limpiar()
+
+						imgBio.reiniciar()
+						imgBio.asignarImagen('../imagenes/biomicroscopia.jpg')
+
+						fondBio.reiniciar()
+						fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
+
 						paginacionEvoluciones.animacion(1, true)
 
 					}
