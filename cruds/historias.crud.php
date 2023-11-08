@@ -27,7 +27,7 @@
   <div class="eliminar-contenedor">
 
     <div class="eliminar-texto" style="color: #fff;">
-      ¿DESEA ELIMINAR ESTE REPORTE?: 
+      ¿DESEA ELIMINAR ESTE REGISTRO?: 
     </div>
 
     <div>

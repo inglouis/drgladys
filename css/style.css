@@ -3557,7 +3557,7 @@ span.numeracion {
 
 /*---------------template eliminar reporte----------------------*/
 .eliminar-contenedor {
-    width: 265px;
+    width: auto !important;
     position: absolute;
     background: #151a27;
     padding: 5px;
@@ -3568,6 +3568,10 @@ span.numeracion {
     align-items: center;
     column-gap: 8px;
     left: 40px;
+}
+
+.eliminar-contenedor div {
+    width: fit-content;
 }
 
 .eliminar-contenedor::after {
@@ -3586,6 +3590,7 @@ span.numeracion {
 }
 
 .eliminar-texto {
+    width: 230px !important;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;

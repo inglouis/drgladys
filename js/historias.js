@@ -292,12 +292,12 @@ window.idSeleccionada = 0
 export var 
 	prevenirCierrePop = false,
 	permitirLimpiezaReportes = true,
-	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
 
 window.reporteModeloSeleccionado = {}
 window.evolucionModeloSeleccionado = {}
 window.prevenirCierreReporte = false
+window.ultimoBotonInsersionBasica = ''
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
 /////////////////////////////////////////////////////
@@ -792,6 +792,8 @@ historias['crud']['customBodyEvents'] = {
 		}
 
 		if (button.classList.contains('evoluciones')) {
+
+			evoluciones.modalidad = 'insertar'
 
 			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .evoluciones')
 
@@ -1923,6 +1925,9 @@ class Evoluciones extends Acciones {
 		this._pswp = '.pswp2'
 		this._retardo = 3000
 
+		//-------------------------------
+		this.modalidad = 'insertar' //insertar - editar
+
 	}
 
 	imagenesExpandirConstruir() {
@@ -2011,7 +2016,7 @@ class Evoluciones extends Acciones {
 		lista.forEach(e => {
 
 			var option = th.option.cloneNode(true)
-				option.value = e.fecha
+				option.value = e.fecha_arreglada
 				option.innerHTML = e.fecha_arreglada
 
 			fr.appendChild(option)

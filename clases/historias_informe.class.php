@@ -190,7 +190,7 @@
                 
                 $lista = [];
                 
-                $resultado = $this->e_pdo("select id_diagnostico, concat(id_diagnostico,'||',nombre) as nombre from basicas.diagnosticos where id_diagnostico in ($diagnosticos)")->fetchAll(PDO::FETCH_ASSOC);
+                $resultado = $this->e_pdo("select id_diagnostico, nombre from basicas.diagnosticos where id_diagnostico in ($diagnosticos)")->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($resultado as $i => &$r) {
                     $lista[$i] = array(

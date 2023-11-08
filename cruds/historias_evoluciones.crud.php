@@ -20,7 +20,7 @@
         <?php echo $_SESSION['botones']['evoluciones_notificar']?>
       </button>
       
-      <div class="crud-eliminar-contenedor">
+      <div class="crud-eliminar-contenedor" style="position: relative;">
         
         <button class="eliminar btn btn-eliminar">
           <?php echo $_SESSION['botones']['reportes_eliminar']?>
@@ -151,22 +151,22 @@
       <div class="pruebas borde-estilizado">
 
         <section style="grid-template-columns: auto; align-self: baseline; justify-content: center;">
-          <input type="text" data-template="pruebas_oi_1" class="upper visual" disbled placeholder="---" style="width: 70px;">
+          <input type="text" data-template="pruebas_oi_1" class="upper visual" disabled placeholder="---" style="width: 70px;">
         </section>
 
         <section style="grid-template-columns: auto auto auto; align-self: center; top: 3px; position: relative;">
-          <input type="text" data-template="pruebas_oi_2" class="upper visual" disbled placeholder="---">
-          <input type="text" data-template="pruebas_oi_3" class="upper visual" disbled placeholder="---">
-          <input type="text" data-template="pruebas_oi_4" class="upper visual" disbled placeholder="---">
+          <input type="text" data-template="pruebas_oi_2" class="upper visual" disabled placeholder="---">
+          <input type="text" data-template="pruebas_oi_3" class="upper visual" disabled placeholder="---">
+          <input type="text" data-template="pruebas_oi_4" class="upper visual" disabled placeholder="---">
         </section>
 
         <section style="grid-template-columns: auto auto auto; align-self: end;">
-          <input type="text" data-template="pruebas_oi_5" class="upper visual" disbled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; left: 10px;">
+          <input type="text" data-template="pruebas_oi_5" class="upper visual" disabled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; left: 10px;">
           <div style="width: 100%">
-              <input type="text" data-template="pruebas_oi_6" class="upper visual" disbled placeholder="---" style="height: 20px">
-              <input type="text" data-template="pruebas_oi_7" class="upper visual" disbled placeholder="---" style="height: 20px">
+              <input type="text" data-template="pruebas_oi_6" class="upper visual" disabled placeholder="---" style="height: 20px">
+              <input type="text" data-template="pruebas_oi_7" class="upper visual" disabled placeholder="---" style="height: 20px">
           </div>
-          <input type="text" data-template="pruebas_oi_8" class="upper visual" disbled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; right: 10px;">
+          <input type="text" data-template="pruebas_oi_8" class="upper visual" disabled placeholder="---" style="height: inherit; align-self: start; display: grid; top: -10px; right: 10px;">
         </section>
         
       </div>
@@ -787,7 +787,7 @@
                 
                 <div>     
                   <label>Notas de la prueba:</label>
-                  <textarea rows="3" id="evoluciones-prueba" data-previa="evoluciones-previa" data-valor="pruebas-nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-prueba" data-previa="evoluciones-previa" data-valor="pruebas_nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>
@@ -853,7 +853,7 @@
                 
                 <div>     
                   <label>Notas de la motilidad:</label>
-                  <textarea rows="3" id="evoluciones-motilidad" data-previa="evoluciones-previa" data-valor="motilidad-nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
+                  <textarea rows="3" id="evoluciones-motilidad" data-previa="evoluciones-previa" data-valor="motilidad_nota" class="evoluciones-valores upper textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll ></textarea>
                 </div>
 
               </div>

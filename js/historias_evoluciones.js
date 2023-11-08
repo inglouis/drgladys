@@ -83,40 +83,72 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		//pruebas
 		//------------------------------------------------
-		contenedor.querySelector('[data-template="pruebas_od_1"]').value = decodeURIComponent(e.sublista.pruebas_od_1)
-		contenedor.querySelector('[data-template="pruebas_od_2"]').value = decodeURIComponent(e.sublista.pruebas_od_2)
-		contenedor.querySelector('[data-template="pruebas_od_3"]').value = decodeURIComponent(e.sublista.pruebas_od_3)
-		contenedor.querySelector('[data-template="pruebas_od_4"]').value = decodeURIComponent(e.sublista.pruebas_od_4)
-		contenedor.querySelector('[data-template="pruebas_od_5"]').value = decodeURIComponent(e.sublista.pruebas_od_5)
-		contenedor.querySelector('[data-template="pruebas_od_6"]').value = decodeURIComponent(e.sublista.pruebas_od_6)
-		contenedor.querySelector('[data-template="pruebas_od_7"]').value = decodeURIComponent(e.sublista.pruebas_od_7)
-		contenedor.querySelector('[data-template="pruebas_od_8"]').value = decodeURIComponent(e.sublista.pruebas_od_8)
+		e.sublista.pruebas_od_1 = decodeURIComponent(e.sublista.pruebas_od_1)
+		e.sublista.pruebas_od_2 = decodeURIComponent(e.sublista.pruebas_od_2)
+		e.sublista.pruebas_od_3 = decodeURIComponent(e.sublista.pruebas_od_3)
+		e.sublista.pruebas_od_4 = decodeURIComponent(e.sublista.pruebas_od_4)
+		e.sublista.pruebas_od_5 = decodeURIComponent(e.sublista.pruebas_od_5)
+		e.sublista.pruebas_od_6 = decodeURIComponent(e.sublista.pruebas_od_6)
+		e.sublista.pruebas_od_7 = decodeURIComponent(e.sublista.pruebas_od_7)
+		e.sublista.pruebas_od_8 = decodeURIComponent(e.sublista.pruebas_od_8)
 
-		contenedor.querySelector('[data-template="pruebas_oi_1"]').value = decodeURIComponent(e.sublista.pruebas_oi_1)
-		contenedor.querySelector('[data-template="pruebas_oi_2"]').value = decodeURIComponent(e.sublista.pruebas_oi_2)
-		contenedor.querySelector('[data-template="pruebas_oi_3"]').value = decodeURIComponent(e.sublista.pruebas_oi_3)
-		contenedor.querySelector('[data-template="pruebas_oi_4"]').value = decodeURIComponent(e.sublista.pruebas_oi_4)
-		contenedor.querySelector('[data-template="pruebas_oi_5"]').value = decodeURIComponent(e.sublista.pruebas_oi_5)
-		contenedor.querySelector('[data-template="pruebas_oi_6"]').value = decodeURIComponent(e.sublista.pruebas_oi_6)
-		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = decodeURIComponent(e.sublista.pruebas_oi_7)
-		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = decodeURIComponent(e.sublista.pruebas_oi_8)
+		contenedor.querySelector('[data-template="pruebas_od_1"]').value = e.sublista.pruebas_od_1
+		contenedor.querySelector('[data-template="pruebas_od_2"]').value = e.sublista.pruebas_od_2
+		contenedor.querySelector('[data-template="pruebas_od_3"]').value = e.sublista.pruebas_od_3
+		contenedor.querySelector('[data-template="pruebas_od_4"]').value = e.sublista.pruebas_od_4
+		contenedor.querySelector('[data-template="pruebas_od_5"]').value = e.sublista.pruebas_od_5
+		contenedor.querySelector('[data-template="pruebas_od_6"]').value = e.sublista.pruebas_od_6
+		contenedor.querySelector('[data-template="pruebas_od_7"]').value = e.sublista.pruebas_od_7
+		contenedor.querySelector('[data-template="pruebas_od_8"]').value = e.sublista.pruebas_od_8
+
+		e.sublista.pruebas_oi_1 = decodeURIComponent(e.sublista.pruebas_oi_1)
+		e.sublista.pruebas_oi_2 = decodeURIComponent(e.sublista.pruebas_oi_2)
+		e.sublista.pruebas_oi_3 = decodeURIComponent(e.sublista.pruebas_oi_3)
+		e.sublista.pruebas_oi_4 = decodeURIComponent(e.sublista.pruebas_oi_4)
+		e.sublista.pruebas_oi_5 = decodeURIComponent(e.sublista.pruebas_oi_5)
+		e.sublista.pruebas_oi_6 = decodeURIComponent(e.sublista.pruebas_oi_6)
+		e.sublista.pruebas_oi_7 = decodeURIComponent(e.sublista.pruebas_oi_7)
+		e.sublista.pruebas_oi_8 = decodeURIComponent(e.sublista.pruebas_oi_8)
+
+		contenedor.querySelector('[data-template="pruebas_oi_1"]').value = e.sublista.pruebas_oi_1 
+		contenedor.querySelector('[data-template="pruebas_oi_2"]').value = e.sublista.pruebas_oi_2 
+		contenedor.querySelector('[data-template="pruebas_oi_3"]').value = e.sublista.pruebas_oi_3 
+		contenedor.querySelector('[data-template="pruebas_oi_4"]').value = e.sublista.pruebas_oi_4 
+		contenedor.querySelector('[data-template="pruebas_oi_5"]').value = e.sublista.pruebas_oi_5 
+		contenedor.querySelector('[data-template="pruebas_oi_6"]').value = e.sublista.pruebas_oi_6 
+		contenedor.querySelector('[data-template="pruebas_oi_7"]').value = e.sublista.pruebas_oi_7 
+		contenedor.querySelector('[data-template="pruebas_oi_8"]').value = e.sublista.pruebas_oi_8 
 
 		texto = JSON.parse(e.sublista.pruebas_nota).texto_html
 		contenedor.querySelector('[data-template="pruebas-nota"] div').innerHTML = texto.toUpperCase()
 
-		contenedor.querySelector('[data-template="motilidad_od_1"]').value = decodeURIComponent(e.sublista.motilidad_od_1)
-		contenedor.querySelector('[data-template="motilidad_od_2"]').value = decodeURIComponent(e.sublista.motilidad_od_2)
-		contenedor.querySelector('[data-template="motilidad_od_3"]').value = decodeURIComponent(e.sublista.motilidad_od_3)
-		contenedor.querySelector('[data-template="motilidad_od_4"]').value = decodeURIComponent(e.sublista.motilidad_od_4)
-		contenedor.querySelector('[data-template="motilidad_od_5"]').value = decodeURIComponent(e.sublista.motilidad_od_5)
-		contenedor.querySelector('[data-template="motilidad_od_6"]').value = decodeURIComponent(e.sublista.motilidad_od_6)
+		e.sublista.motilidad_od_1 = decodeURIComponent(e.sublista.motilidad_od_1)
+		e.sublista.motilidad_od_2 = decodeURIComponent(e.sublista.motilidad_od_2)
+		e.sublista.motilidad_od_3 = decodeURIComponent(e.sublista.motilidad_od_3)
+		e.sublista.motilidad_od_4 = decodeURIComponent(e.sublista.motilidad_od_4)
+		e.sublista.motilidad_od_5 = decodeURIComponent(e.sublista.motilidad_od_5)
+		e.sublista.motilidad_od_6 = decodeURIComponent(e.sublista.motilidad_od_6)
 
-		contenedor.querySelector('[data-template="motilidad_oi_1"]').value = decodeURIComponent(e.sublista.motilidad_oi_1)
-		contenedor.querySelector('[data-template="motilidad_oi_2"]').value = decodeURIComponent(e.sublista.motilidad_oi_2)
-		contenedor.querySelector('[data-template="motilidad_oi_3"]').value = decodeURIComponent(e.sublista.motilidad_oi_3)
-		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = decodeURIComponent(e.sublista.motilidad_oi_4)
-		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = decodeURIComponent(e.sublista.motilidad_oi_5)
-		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = decodeURIComponent(e.sublista.motilidad_oi_6)
+		contenedor.querySelector('[data-template="motilidad_od_1"]').value = e.sublista.motilidad_od_1 
+		contenedor.querySelector('[data-template="motilidad_od_2"]').value = e.sublista.motilidad_od_2 
+		contenedor.querySelector('[data-template="motilidad_od_3"]').value = e.sublista.motilidad_od_3 
+		contenedor.querySelector('[data-template="motilidad_od_4"]').value = e.sublista.motilidad_od_4 
+		contenedor.querySelector('[data-template="motilidad_od_5"]').value = e.sublista.motilidad_od_5 
+		contenedor.querySelector('[data-template="motilidad_od_6"]').value = e.sublista.motilidad_od_6 
+
+		e.sublista.motilidad_oi_1 = decodeURIComponent(e.sublista.motilidad_oi_1)
+		e.sublista.motilidad_oi_2 = decodeURIComponent(e.sublista.motilidad_oi_2)
+		e.sublista.motilidad_oi_3 = decodeURIComponent(e.sublista.motilidad_oi_3)
+		e.sublista.motilidad_oi_4 = decodeURIComponent(e.sublista.motilidad_oi_4)
+		e.sublista.motilidad_oi_5 = decodeURIComponent(e.sublista.motilidad_oi_5)
+		e.sublista.motilidad_oi_6 = decodeURIComponent(e.sublista.motilidad_oi_6)
+
+		contenedor.querySelector('[data-template="motilidad_oi_1"]').value = e.sublista.motilidad_oi_1 
+		contenedor.querySelector('[data-template="motilidad_oi_2"]').value = e.sublista.motilidad_oi_2 
+		contenedor.querySelector('[data-template="motilidad_oi_3"]').value = e.sublista.motilidad_oi_3 
+		contenedor.querySelector('[data-template="motilidad_oi_4"]').value = e.sublista.motilidad_oi_4 
+		contenedor.querySelector('[data-template="motilidad_oi_5"]').value = e.sublista.motilidad_oi_5 
+		contenedor.querySelector('[data-template="motilidad_oi_6"]').value = e.sublista.motilidad_oi_6 
 
 		texto = JSON.parse(e.sublista.motilidad_nota).texto_html
 		contenedor.querySelector('[data-template="motilidad-nota"] div').innerHTML = texto.toUpperCase()
@@ -252,35 +284,37 @@ evoluciones['crud']['propiedadesTr'] = {
 
 	},
 	"eliminar": (e) => {
-		// var th = informes,
-		// 	contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
-		// contenedor.setAttribute('data-hidden', '')
-		// contenedor.querySelector('.eliminar-boton').value = e.sublista.id
+		var th = evoluciones,
+			contenedor = historias.contenedorEliminarBoton.cloneNode(true)
 
-		// e.querySelector('.crud-eliminar-contenedor').appendChild(contenedor)
+		contenedor.setAttribute('data-hidden', '')
+		contenedor.querySelector('.eliminar-boton').value = e.sublista.id
 
-		// contenedor = e.querySelector('.eliminar-contenedor')
+		e.querySelector('.crud-eliminar-contenedor').appendChild(contenedor)
+
+		contenedor = e.querySelector('.eliminar-contenedor')
 		
-		// e.addEventListener('mouseover', el => {
+		e.addEventListener('mouseover', el => {
 
-		// 	if (el.target.classList.contains('eliminar')) {
-		// 		var coordenadas = e.querySelector('.eliminar').getBoundingClientRect()
-		// 		//contenedor.setAttribute('style', `left: ${coordenadas.left - 310}px`)
-		// 		contenedor.removeAttribute('data-hidden')	
-		// 	}	
+			if (el.target.classList.contains('eliminar')) {
 
-		// })
+				var coordenadas = e.querySelector('.eliminar').getBoundingClientRect()
+				contenedor.removeAttribute('data-hidden')
 
-		// e.querySelector('.eliminar').addEventListener('mouseleave', el => {
-		// 	if (!contenedor.matches(':hover')) {
-		// 		contenedor.setAttribute('data-hidden', '')
-		// 	}
-		// })
+			}	
 
-		// contenedor.addEventListener('mouseleave', el => {
-		// 	contenedor.setAttribute('data-hidden', '')
-		// })
+		})
+
+		e.querySelector('.eliminar').addEventListener('mouseleave', el => {
+			if (!contenedor.matches(':hover')) {
+				contenedor.setAttribute('data-hidden', '')
+			}
+		})
+
+		contenedor.addEventListener('mouseleave', el => {
+			contenedor.setAttribute('data-hidden', '')
+		})
 
 	}
 }
@@ -328,32 +362,38 @@ evoluciones['crud']['customBodyEvents'] = {
 			evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
 
 			tools.limpiar('.evoluciones-valores', '', {})
-			rellenar.contenedores(informes.sublista, '.evoluciones-valores', {elemento: e.target, id: 'value'}, {
+
+			rellenar.contenedores(evoluciones.sublista, '.evoluciones-valores', {elemento: e.target, id: 'value'}, {
 				"contenedorConsulta": function fn(lista, grupo) {
 
-					if (grupo === 'diagnosticos') {
+					if (grupo === 'cc-diagnosticos-evoluciones') {
 
-						var peticion = tools.fullQuery('evoluciones', 'estandar_diagnosticos', lista)
+						var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
 
 						peticion.onreadystatechange = function() {
 					        if (this.readyState == 4 && this.status == 200) {
-					        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+					        	contenedoresEvoluciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
 					        }
 					    };
 
 					}
 
-					if (grupo === 'referencias') {
+					if (grupo === 'cc-estudios-evoluciones') {
 
-						var peticion = tools.fullQuery('evoluciones', 'estandar_referencias', lista)
+						var peticion = tools.fullQuery('historias_evoluciones', 'estandar_referencias', lista)
 
 						peticion.onreadystatechange = function() {
 					        if (this.readyState == 4 && this.status == 200) {
-					        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_referencia', 'nombre'])
+					        	contenedoresEvoluciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_referencia', 'nombre'])
 					        }
 					    };
 
 					}
+
+					gid('evoluciones-fecha').value = window.dia
+					imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
+					fondBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_fondo)
+					paginacionEvoluciones.animacion(0, true)
 
 				}
 			})
@@ -364,7 +404,7 @@ evoluciones['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR LA INFORME   					    */
+	/*           					ENVIAR LOS DATOS PARA EDITAR LA EVOLUCION   					    */
 	/* -------------------------------------------------------------------------------------------------*/
 	"editar": async (e) => {
 
@@ -390,7 +430,82 @@ evoluciones['crud']['customBodyEvents'] = {
 			// forPop.pop()
 
 		}
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           								ELIMINAR 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"eliminar": async(e) => {
 
+		if (e.target.classList.contains('eliminar-boton')) {
+
+			evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
+
+			var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'eliminar_evolucion', [evoluciones.sublista.id_evolucion, evoluciones.sublista.id_historia])
+
+			if (resultado.trim() === 'exito') {
+
+				await evoluciones.traer_lista()
+
+				notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F') 
+
+			}
+
+		}
+		
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           								EDITAR 												    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"editar": async (e) => {
+		if (e.target.classList.contains('editar')) {
+
+			evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
+			evoluciones.modalidad = 'editar'
+
+			tools.limpiar('.evoluciones-valores', '', {})
+
+			rellenar.contenedores(evoluciones.sublista, '.evoluciones-valores', {elemento: e.target, id: 'value'}, {
+				"contenedorConsulta": function fn(lista, grupo) {
+
+					if (grupo === 'cc-diagnosticos-evoluciones') {
+
+						var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
+
+						peticion.onreadystatechange = function() {
+					        if (this.readyState == 4 && this.status == 200) {
+					        	contenedoresEvoluciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
+					        }
+					    };
+
+					}
+
+					if (grupo === 'cc-estudios-evoluciones') {
+
+						var peticion = tools.fullQuery('historias_evoluciones', 'estandar_referencias', lista)
+
+						peticion.onreadystatechange = function() {
+					        if (this.readyState == 4 && this.status == 200) {
+					        	contenedoresEvoluciones.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_referencia', 'nombre'])
+					        }
+					    };
+
+					}
+
+					gid('evoluciones-fecha').value = window.dia
+					imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
+					fondBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_fondo)
+					paginacionEvoluciones.animacion(0, true)
+
+				}
+			})
+
+			notificaciones.mensajeSimple('Datos cargados', false, 'V')
+
+		}
 	}
 };
 
@@ -730,6 +845,8 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
 			window.procesar = false
 
+			window.idSeleccionada = 0
+
 			var datos = tools.procesar(e.target, 'evoluciones-confirmar', 'evoluciones-valores', tools)
 
 			if (datos !== '') {
@@ -737,23 +854,46 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 				//datos['img_bio']  = imgBio.capturarImagenJSON()
 				//datos['fond_bio'] = fondBio.capturarImagenJSON()
 
-				datos.splice(datos.length - 1, 0, imgBio.capturarImagenJSON())
-				datos.splice(datos.length - 1, 0, fondBio.capturarImagenJSON())
+				datos.splice(datos.length, 0, imgBio.capturarImagenJSON())
+				datos.splice(datos.length, 0, fondBio.capturarImagenJSON())
 				
-				datos.splice(datos.length - 1, 0, imgBio.capturarImagen())
-				datos.splice(datos.length - 1, 0, fondBio.capturarImagen())
+				datos.splice(datos.length, 0, imgBio.capturarImagen())
+				datos.splice(datos.length, 0, fondBio.capturarImagen())
+				datos[datos.length] = historias.sublista.id_historia
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				notificaciones.mensajePersonalizado('Procesando...', false, 'CLARO-1', 'PROCESANDO')
 
-				var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'cargar_evolucion', datos, [["+", "%2B"], ["'", "%27"]], undefined, true)
+				if (evoluciones.modalidad === 'insertar') {
 
-				//console.log(resultado)
+					var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'cargar_evolucion', datos, [["+", "%2B"], ["'", "%27"]], undefined, true)
+
+				} else if (evoluciones.modalidad === 'editar') {
+
+					datos[datos.length] = evoluciones.sublista.id_evolucion
+
+					var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'editar_evolucion', datos, [["+", "%2B"], ["'", "%27"]], undefined, true)
+
+				}
 
 				if (resultado.trim() === 'exito') {
 
 					notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
-					evoPop.pop()
+					if (evoluciones.modalidad === 'insertar') {
+
+						evoPop.pop()
+
+					} else if (evoluciones.modalidad === 'editar') {
+
+						evoluciones.modalidad = 'insertar'
+
+						await evoluciones.traer_lista()
+
+						paginacionEvoluciones.animacion(1, true)
+
+					}
 
 					//historias.tr.sublista = JSON.parse(await tools.fullAsyncQuery('historias', 'traer_historia', [historias.sublista.id_historia]))
 
@@ -801,29 +941,12 @@ qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
-var insersiones_lista = ['diagnosticos', 'estudios'],
-	insersiones_lista_combos = [diaPop, estPop],
-	ultimoBotonInsersionBasica = '';
+var insersiones_lista = ['estudios'],
+	insersiones_lista_combos = [estPop]
 
 var insersiones_procesado = {
-	"diagnosticos": (datos, lista, posicion) => {
-
-		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
-		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
-
-		tools.limpiar('.insertar-diagnostico', '', {})
-
-		insersiones_lista_combos[posicion].pop()
-
-		contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-		contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
-
-		contenedoresEvoluciones.reconstruirCombo(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`), lista)
-		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`))
-
-
-	},
 	"estudios": (datos, lista, posicion) => {
+
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
@@ -832,7 +955,9 @@ var insersiones_procesado = {
 		insersiones_lista_combos[posicion].pop()
 
 		contenedoresReportes.reconstruirCombo(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`), lista)
-		contenedoresReportes.filtrarComboForzado(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`))
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-estudios-evoluciones select`), qs(`#cc-estudios-evoluciones input`), true)
+
+		ultimoBotonInsersionBasica = ''
 
 	}
 }
@@ -851,7 +976,7 @@ insersiones_lista.forEach((grupo, i) => {
 
 				if (grupo === 'estudios') {
 
-					var resultado = await tools.fullAsyncQuery('referencias', `crear_referencia`, datos)
+					var resultado = await tools.fullAsyncQuery('referencias', `crear_referencias`, datos)
 
 				} else {
 
@@ -865,7 +990,15 @@ insersiones_lista.forEach((grupo, i) => {
 
 					setTimeout(async () => {
 
-						var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
+						if (grupo === 'estudios') {
+
+							var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_referencias`, []))
+
+						} else {
+
+							var lista = JSON.parse(await tools.fullAsyncQuery('combos', `combo_${grupo}`, []))
+
+						}	
 
 						insersiones_procesado[grupo](datos[0], lista, i)
 

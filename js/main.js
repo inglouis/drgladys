@@ -1542,12 +1542,18 @@ export class ContenedoresEspeciales {
 
 	}
 
-	filtrarComboForzado(select, input) {
+	filtrarComboForzado(select, input, mostrar) {
 		var filtrado = this.herramientas.filtrar(input['lista'], input.value, [], true, undefined)
 
 	    if(filtrado !== '') {
 	    	select.innerHTML = ''
-	    	select.appendChild(this.herramientas.generarContenidoCombo(filtrado, false))	
+	    	select.appendChild(this.herramientas.generarContenidoCombo(filtrado, false))
+
+	    	if (mostrar) {
+	    		
+	    		select.removeAttribute('data-hide')	
+
+	    	}
 	    }
 	}
 

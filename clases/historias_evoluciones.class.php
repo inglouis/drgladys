@@ -24,17 +24,18 @@
                     t.*,
 				    coalesce(NULLIF(ppal.basicas_diagnosticos_armar_lista(t.diagnosticos), null),'[]'::jsonb) as diagnosticos_procesados,
 				    coalesce(NULLIF(ppal.basicas_referencias_armar_lista(t.referencias), null), '[]'::jsonb) as referencias_procesados,
-				    TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada
+				    TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada,
+				    TO_CHAR(t.fecha_real :: DATE, 'dd-mm-yyyy') as fecha_arreglada_real
                 FROM principales.evoluciones as t
                 WHERE t.id_historia = ?
-                ORDER BY t.fecha desc, t.hora desc
+                ORDER BY t.fecha_real desc, t.hora desc
             ";
 
             $datos = $this->i_pdo($sql, $args, true)->fetchAll(PDO::FETCH_ASSOC);
 
             foreach ($datos as &$valor) {
 
-            	$ruta = "../imagenes/evoluciones/$valor[id_historia]/$valor[fecha]";
+            	$ruta = "../imagenes/evoluciones/$valor[id_historia]/$valor[fecha_real]";
 
 	            $valor['txt_bio'] = $this->directorios->traer_txt($ruta, 'biomicroscopia');
 	            $valor['txt_fondo'] = $this->directorios->traer_txt($ruta, 'fondo_ojo');
@@ -108,6 +109,8 @@
             
             $repetido = $this->i_pdo($sql, [$id_historia, $dia], true)->fetchColumn();
 
+            $repetido = false;
+
             if (!$repetido) {
 
 	    		///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,6 +123,7 @@
 
 	    		if (!$existe_archivo) {
 
+
 	    			$this->directorios->crear_directorio($id_historia.'/', "../imagenes/evoluciones/");
 	    			$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia/");
 	    			$this->directorios->copiar_directorio("../imagenes/evoluciones/modelo", $ruta);
@@ -130,7 +134,7 @@
 
 	    			if (!$existe_archivo) {
 
-	    				$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia");
+	    				$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia/");
 	    				$this->directorios->copiar_directorio("../imagenes/evoluciones/modelo", $ruta);
 
 	    			}
@@ -177,7 +181,7 @@
 	    		//$txt_bio = $this->directorios->traer_txt($ruta, 'biomicroscopia');
 
 	    		///////////////////////////////////////////////////////////////////////////////////////////////////////
-	    		//INSERTAR HISTORIA
+	    		//INSERTAR EVOLUCION
 	    		///////////////////////////////////////////////////////////////////////////////////////////////////////
 	    		
 	    		$sql = "
@@ -462,8 +466,329 @@
 
         	}
 
+    	}
+
+    	public function editar_evolucion($args) {
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		//DATOS
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    		// echo "<pre>";
+   			// print_r($args);
+   			// echo "</pre>";
+
+    		$id_historia  = $args[132];
+    		$id_evolucion = $args[133];
+
+    		$referencia_galeria_antes = $args[124];
+    		$referencia_galeria_despues = $args[126];
+
+    		$json_biomicroscopia = $args[128];
+    		$json_fondo_ojo = $args[129];
+
+    		$img_biomicroscopia = str_replace('%2B', '+', $args[130]);
+    		$img_fondo_ojo = str_replace('%2B', '+', $args[131]);
+
+    		$img_biomicroscopia = str_replace('%27', "'", $img_biomicroscopia);
+    		$img_fondo_ojo = str_replace('%27', "'", $img_fondo_ojo);
+
+    		unset($args[124]);
+			unset($args[126]);
+			unset($args[128]);
+			unset($args[129]);
+			unset($args[130]);
+			unset($args[131]);
+			unset($args[132]);
+
+			$args = array_values($args);
+
+			$args[2]   = json_encode($args[2]);   //nota
+			$args[54]  = json_encode($args[54]);  //pruebas_nota
+			$args[67]  = json_encode($args[67]);  //motilidad_nota
+			$args[92]  = json_encode($args[92]);  //nota_b_od
+			$args[93]  = json_encode($args[93]);  //nota_b_oi
+			$args[94]  = json_encode($args[94]);  //nota_f_od
+			$args[95]  = json_encode($args[95]);  //nota_f_oi
+			$args[98]  = json_encode($args[98]);  //referencias
+			$args[99]  = json_encode($args[99]);  //diagnosticos
+			$args[123] = json_encode($args[123]); //plan
+
+			$sql = "select fecha_real from principales.evoluciones where id_evolucion = ?";
+    		$dia = $this->i_pdo($sql, [$id_evolucion], true)->fetchColumn();
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		//GENERA LA CARPETA DE IMAGENES DEL PACIENTE
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    		$existe_archivo = $this->directorios->consultar_directorio("../imagenes/evoluciones/$id_historia");
+
+    		$ruta = "../imagenes/evoluciones/$id_historia/$dia";
+
+    		if (!$existe_archivo) {
+
+    			$this->directorios->crear_directorio($id_historia.'/', "../imagenes/evoluciones/");
+    			$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia/");
+    			$this->directorios->copiar_directorio("../imagenes/evoluciones/modelo", $ruta);
+
+    		} else {
+
+    			$existe_archivo = $this->directorios->consultar_directorio("../imagenes/evoluciones/$id_historia/$dia");
+
+    			if (!$existe_archivo) {
+
+    				$this->directorios->crear_directorio($dia, "../imagenes/evoluciones/$id_historia/");
+    				$this->directorios->copiar_directorio("../imagenes/evoluciones/modelo", $ruta);
+
+    			}
+
+    		}
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		//ASIGNAR IMAGENES
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    		$galeria_antes = $this->directorios->categorizar_imagenes($referencia_galeria_antes);
+    		$galeria_despues = $this->directorios->categorizar_imagenes($referencia_galeria_despues);
+
+    		foreach($galeria_antes as $llave => $valor) {
+
+        		$tmp_name = $valor["tmp_name"];
+        		$ext = pathinfo($valor['name'], PATHINFO_EXTENSION);
+        		
+        		move_uploaded_file($tmp_name, "$ruta/antes_cirugia/img-$llave.$ext");
+
+			}
+
+			foreach($galeria_despues as $llave => $valor) {
+
+				$tmp_name = $valor["tmp_name"];
+        		$ext = pathinfo($valor['name'], PATHINFO_EXTENSION);
+        		
+        		move_uploaded_file($tmp_name, "$ruta/despues_cirugia/img-$llave.$ext");
+
+			}
+
+			$this->directorios->base64_imagen("$ruta/biomicroscopia.png", $img_biomicroscopia, $flags = 0);
+			$this->directorios->base64_imagen("$ruta/fondo_ojo.png", $img_fondo_ojo, $flags = 0);
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		//ASIGNAR TXT
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		$this->directorios->editar_txt("$ruta/biomicroscopia.txt", json_encode($json_biomicroscopia), $flags = 0);
+    		$this->directorios->editar_txt("$ruta/fondo_ojo.txt", json_encode($json_fondo_ojo), $flags = 0);
+
+    		//TRAER DATOS DE TXT -- ESTO ES PARA LA CONSULTA
+    		//$txt_bio = $this->directorios->traer_txt($ruta, 'biomicroscopia');
+
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		//EDITAR EVOLUCION
+    		///////////////////////////////////////////////////////////////////////////////////////////////////////
+    		
+    		$sql = "
+    			update principales.evoluciones 
+    			set 
+    				problematico = trim(upper(?)),
+    				fecha = ?::date,
+				    nota  = ?::jsonb,
+				    agudeza_od_4 = trim(upper(?)),
+				    agudeza_oi_4 = trim(upper(?)),
+				    correccion_4 = trim(upper(?)),
+				    allen_4  = trim(upper(?)),
+				    jagger_4 = trim(upper(?)),
+				    e_direccional_4 = trim(upper(?)),
+				    numeros_4    = trim(upper(?)),
+				    decimales_4  = trim(upper(?)),
+				    fracciones_4 = trim(upper(?)),
+				    letras_4 = trim(upper(?)),
+				    agudeza_od_1 = trim(upper(?)),
+				    agudeza_oi_1 = trim(upper(?)),
+				    correccion_1 = trim(upper(?)),
+				    allen_1  = trim(upper(?)),
+				    jagger_1 = trim(upper(?)),
+				    e_direccional_1 = trim(upper(?)),
+				    numeros_1    = trim(upper(?)),
+				    decimales_1  = trim(upper(?)),
+				    fracciones_1 = trim(upper(?)),
+				    letras_1     = trim(upper(?)),
+				    agudeza_od_lectura = trim(upper(?)),
+				    agudeza_oi_lectura = trim(upper(?)),
+				    correccion_lectura = trim(upper(?)),
+				    allen_lectura  = trim(upper(?)),
+				    jagger_lectura = trim(upper(?)),
+				    e_direccional_lectura = trim(upper(?)),
+				    numeros_lectura    = trim(upper(?)),
+				    decimales_lectura  = trim(upper(?)),
+				    fracciones_lectura = trim(upper(?)),
+				    letras_lectura = trim(upper(?)),
+				    estereopsis    = trim(upper(?)),
+				    test = trim(upper(?)),
+				    reflejo = trim(upper(?)),
+				    pruebas = trim(upper(?)),
+				    correccion_pruebas = trim(upper(?)),
+				    pruebas_od_1 = trim(upper(?)),
+				    pruebas_od_2 = trim(upper(?)),
+				    pruebas_od_3 = trim(upper(?)),
+				    pruebas_od_4 = trim(upper(?)),
+				    pruebas_od_5 = trim(upper(?)),
+				    pruebas_od_6 = trim(upper(?)),
+				    pruebas_od_7 = trim(upper(?)),
+				    pruebas_od_8 = trim(upper(?)),
+				    pruebas_oi_1 = trim(upper(?)),
+				    pruebas_oi_2 = trim(upper(?)),
+				    pruebas_oi_3 = trim(upper(?)),
+				    pruebas_oi_4 = trim(upper(?)),
+				    pruebas_oi_5 = trim(upper(?)),
+				    pruebas_oi_6 = trim(upper(?)),
+				    pruebas_oi_7 = trim(upper(?)),
+				    pruebas_oi_8 = trim(upper(?)),
+				    pruebas_nota = ?::jsonb,
+				    motilidad_od_1 = trim(upper(?)),
+				    motilidad_od_2 = trim(upper(?)),
+				    motilidad_od_3 = trim(upper(?)),
+				    motilidad_od_4 = trim(upper(?)),
+				    motilidad_od_5 = trim(upper(?)),
+				    motilidad_od_6 = trim(upper(?)),
+				    motilidad_oi_1 = trim(upper(?)),
+				    motilidad_oi_2 = trim(upper(?)),
+				    motilidad_oi_3 = trim(upper(?)),
+				    motilidad_oi_4 = trim(upper(?)),
+				    motilidad_oi_5 = trim(upper(?)),
+				    motilidad_oi_6 = trim(upper(?)),
+				    motilidad_nota = ?::jsonb,
+				    rx_od_signo_1 = trim(upper(?)),
+				    rx_od_valor_1 = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_od_signo_2 = trim(upper(?)),
+				    rx_od_valor_2 = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_od_grados  = trim(upper(?)),
+				    rx_od_resultado = trim(upper(?)),
+				    rx_oi_signo_1 = trim(upper(?)),
+				    rx_oi_valor_1 = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_oi_signo_2 = trim(upper(?)),
+				    rx_oi_valor_2 = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_oi_grados  = trim(upper(?)),
+				    rx_oi_resultado = trim(upper(?)),
+				    rx_od_signo_1_ciclo = trim(upper(?)),
+				    rx_od_valor_1_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_od_signo_2_ciclo = trim(upper(?)),
+				    rx_od_valor_2_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_od_grados_ciclo  = trim(upper(?)),
+				    rx_od_resultado_ciclo = trim(upper(?)),
+				    rx_oi_signo_1_ciclo = trim(upper(?)),
+				    rx_oi_valor_1_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_oi_signo_2_ciclo = trim(upper(?)),
+				    rx_oi_valor_2_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    rx_oi_grados_ciclo  = trim(upper(?)),
+				    rx_oi_resultado_ciclo = trim(upper(?)),
+				    nota_b_od = ?::jsonb,
+				    nota_b_oi = ?::jsonb,
+				    nota_f_od = ?::jsonb,
+				    nota_f_oi = ?::jsonb,
+				    pio_od = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    pio_oi = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    referencias  = ?::jsonb,
+				    diagnosticos = ?::jsonb,
+				    formula_od_signo_1_ciclo = trim(upper(?)),
+				    formula_od_valor_1_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    formula_od_signo_2_ciclo = trim(upper(?)),
+				    formula_od_valor_2_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    formula_od_grados_ciclo  = trim(upper(?)),
+				    formula_oi_signo_1_ciclo = trim(upper(?)),
+				    formula_oi_valor_1_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    formula_oi_signo_2_ciclo = trim(upper(?)),
+				    formula_oi_valor_2_ciclo = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    formula_oi_grados_ciclo = trim(upper(?)),
+				    curva_od = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    curva_oi = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
+				    altura_pupilar_od = trim(upper(?)),
+				    altura_pupilar_oi = trim(upper(?)),
+				    distancia_interpupilar_od  = trim(upper(?)),
+				    distancia_interpupilar_oi  = trim(upper(?)),
+				    distancia_interpupilar_add = trim(upper(?)),
+				    dip = trim(upper(?)),
+				    bifocal_kriptok  = trim(upper(?)),
+				    bifocal_flat_top = trim(upper(?)),
+				    bifocal_ultex    = trim(upper(?)),
+				    multifocal = trim(upper(?)),
+				    bifocal_ejecutivo = trim(upper(?)),
+				    plan = ?::jsonb,
+				    anexos_antes_lentes = trim(upper(?)),
+				    anexos_despues_lentes = trim(upper(?))
+    			where id_evolucion = ?
+    		";
+
+    		$resultado = $this->actualizar($sql, $args);
+
+            if ($resultado == 'exito') {
+
+            	return 'exito';
+
+            } else {
+
+            	return 'ERROR: '.$resultado;
+
+            }
 
     	}
+
+    	public function eliminar_evolucion($args) {
+
+    		$id_evolucion = $args[0];
+    		$id_historia = $args[1];
+
+    		$sql = "select fecha_real from principales.evoluciones where id_evolucion = ?";
+    		$dia = $this->i_pdo($sql, [$id_evolucion], true)->fetchColumn();
+			$ruta = "../imagenes/evoluciones/$id_historia/$dia";
+
+			$sql = "delete from principales.evoluciones where id_evolucion = ?";
+			
+			$resultado = $this->eliminar($sql, [$id_evolucion], true);
+
+			if ($resultado == 'exito') {
+
+				$this->directorios->eliminar_directorio($ruta);
+
+				return 'exito';
+
+			} else {
+
+				return 'ERROR:'.$resultado;
+
+			}
+
+    	}
+
+    	public function estandar_referencias($args) {
+            
+            $referencias = '';
+            
+            foreach ($args as $r) {$referencias.= $r['id'].',';}
+            
+            $referencias = substr($referencias, 0, strlen($referencias) - 1);
+
+            if(strlen($referencias) > 0) {
+                
+                $lista = [];
+                
+                $resultado = $this->e_pdo("select id_referencia, nombre as nombre from basicas.referencias where id_referencia in ($referencias)")->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($resultado as $i => &$r) {
+                    $lista[$i] = array(
+                        "id_referencia" => $r['id_referencia'],
+                        "nombre" => $r['nombre']
+                    );
+                }
+
+                $args = $lista;
+
+            } else {
+
+                $args = [];
+
+            }
+
+            return json_encode($args);
+        }
 
     }
 

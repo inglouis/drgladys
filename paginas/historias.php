@@ -13,7 +13,7 @@
   //---------------------------------------
   $_SESSION['refrescar'] = '..'.$_SERVER['REQUEST_URI'];
   //---------------------------------------
-  $dia = $obj->fechaHora('America/Caracas','Y-m-d');
+  $dia = $obj->i_pdo("select current_date", [], true)->fetchColumn(); //$obj->fechaHora('America/Caracas','Y-m-d');
 
 ?>
 <!DOCTYPE html>

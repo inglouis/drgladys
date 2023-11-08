@@ -56,7 +56,8 @@
 		}
 
 		//*******************************************************************
-		public function eliminar_directorio($src) { 
+		public function eliminar_directorio($src) {
+
 		    $dir = opendir($src);
 		    while(false !== ( $file = readdir($dir)) ) { 
 		        if (( $file != '.' ) && ( $file != '..' )) { 
@@ -70,6 +71,7 @@
 		    } 
 		    closedir($dir); 
 		    rmdir($src);
+		    
 		}
 
 		//*******************************************************************

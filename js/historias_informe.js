@@ -706,12 +706,11 @@ qs('#informe-busqueda').addEventListener('keydown', e => {
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
 var insersiones_lista = ['diagnosticos'],
-	insersiones_lista_combos = [diaPop],
-	ultimoBotonInsersionBasica = '';
+	insersiones_lista_combos = [diaPop]
 
 var insersiones_procesado = {
 	"diagnosticos": (datos, lista, posicion) => {
-
+	
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').value = datos.toUpperCase()
 		ultimoBotonInsersionBasica.parentElement.parentElement.querySelector('input').focus()
 
@@ -719,12 +718,27 @@ var insersiones_procesado = {
 
 		insersiones_lista_combos[posicion].pop()
 
+		var diagInforme = false, diagEvo = false
+
+		if (ultimoBotonInsersionBasica.id === 'evoluciones-nueva-diagnostico') {
+
+			diagInforme = false 
+			diagEvo     = true
+
+		} else {
+
+			diagInforme = true 
+			diagEvo     = false
+
+		}
+
 		contenedoresReportes.reconstruirCombo(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), lista)
-		contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`))
+		contenedoresReportes.filtrarComboForzado(qs(`#cc-diagnosticos-informes select`), qs(`#cc-diagnosticos-informes input`), diagInforme)
 
 		contenedoresEvoluciones.reconstruirCombo(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`), lista)
-		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`))
+		contenedoresEvoluciones.filtrarComboForzado(qs(`#cc-diagnosticos-evoluciones select`), qs(`#cc-diagnosticos-evoluciones input`), diagEvo)
 
+		ultimoBotonInsersionBasica = ''
 
 	}
 }
