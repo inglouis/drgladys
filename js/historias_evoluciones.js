@@ -1,4 +1,4 @@
-import {historias, tools, notificaciones, evoluciones } from '../js/historias.js';
+import {historias, tools, notificaciones, evoluciones, evoluciones_notificadas, desplazar_evolucion } from '../js/historias.js';
 import { Paginacion, Animaciones } from '../js/main.js';
 import { Canvas } from '../js/dibujar.js';
 import { Galeria } from '../js/galeria.js';
@@ -950,8 +950,9 @@ qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
 })
 
 // /* -------------------------------------------------------------------------------------------------*/
-// /*           						EVOLUCIONES - INSERTAR					 				    	*/
+// /*           						EVOLUCIONES - INSERTAR					 				  	   */
 // /* -------------------------------------------------------------------------------------------------*/
+
 //-------------------------------------------------------------------------------
 //botones que insertan datos básicos desde la edición o insersión de una historia
 //-------------------------------------------------------------------------------
@@ -1050,5 +1051,255 @@ qs('#evoluciones-nueva-diagnostico').addEventListener('click', e => {
 	diaPop.pop()
 
 	ultimoBotonInsersionBasica = e.target
+
+})
+
+//----------------------------------------------------------------------------------------------------
+//									EVOLUCIONES NOTIFICADAS - PROPIEDADES                                          
+//----------------------------------------------------------------------------------------------------
+//voluciones_notificadas['crud'].cuerpo.push([evoluciones_notificadas['crud'].columna = evoluciones_notificadas['crud'].cuerpo.length, [evoluciones_notificadas['crud'].gSpan(null,null)], [false], ['HTML'], '', 2])
+
+evoluciones_notificadas['crud'].cuerpo.push([evoluciones_notificadas['crud'].columna = evoluciones_notificadas['crud'].cuerpo.length, [
+		evoluciones_notificadas['crud'].gSpan(null, null),
+		evoluciones_notificadas['crud'].gSpan(null, null),
+	], [135, 134], ['HTML', 'HTML'], '', false
+])
+evoluciones_notificadas['crud'].cuerpo.push([evoluciones_notificadas['crud'].columna = evoluciones_notificadas['crud'].cuerpo.length, [
+		evoluciones_notificadas['crud'].gBt(['eliminar btn btn-eliminar', 'Confirmar revisión de la evolución'], `x`)
+	], [false], ['VALUE'], 'crud-botones', 0
+])
+
+evoluciones_notificadas.crud['ofv'] = true
+evoluciones_notificadas['crud']['ofvh'] = 'auto';
+
+evoluciones_notificadas['crud']['customBodyEvents'] = {
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           								ELIMINAR 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"eliminar": async (e) => {
+
+		if (e.target.tagName === 'BUTTON') {
+
+			if(e.target.classList.contains('eliminar')) {
+
+				evoluciones_notificadas.sublista = tools.pariente(e.target, 'TR').sublista
+
+				await tools.fullAsyncQuery('historias_evoluciones', 'notificaciones_evoluciones_revisado', [])
+
+				await evoluciones_notificadas.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_evoluciones', 'notificaciones_evoluciones_consultar', [])))
+				
+				notificaciones.mensajeSimple(`Revisión y uso de la evolución finalizado con éxito`, undefined, 'V')
+			}
+
+		}
+	},
+	/* -------------------------------------------------------------------------------------------------*/
+	/*           								CONSULTAR 											    */
+	/* -------------------------------------------------------------------------------------------------*/
+	"consultar": async (e) => {
+
+		if (e.target.tagName !== 'BUTTON') {
+
+			if (!e.target.classList.contains('eliminar')) {
+
+				evoluciones_notificadas.sublista = tools.pariente(e.target, 'TR').sublista
+
+				desplazar_evolucion.abrir()
+
+				//cabecera
+				evoluciones_notificadas.contenido.querySelector('.cabecera b').insertAdjacentHTML('afterbegin', evoluciones_notificadas.sublista.nombre_completo)
+
+				//nota
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota).texto_html) 
+
+				//examen oftalmológico
+				// //------------------------------------------------
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_4} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_4}`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_4 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.allen_4 === 'X') ? '<li>ALLEN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.jagger_4 === 'X') ? '<li>JAGGER</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.e_direccional_4 === 'X') ? '<li>E - DIRECCIONAL</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.numeros_4 === 'X') ? '<li>NÚMEROS</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.decimales_4 === 'X') ? '<li>DECIMALES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.fracciones_4 === 'X') ? '<li>FRACCIONES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_4 === 'X') ? '<li>LETRAS</li>' : ''))
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_1} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_1}`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_1 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.allen_1 === 'X') ? '<li>ALLEN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.jagger_1 === 'X') ? '<li>JAGGER</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.e_direccional_1 === 'X') ? '<li>E - DIRECCIONAL</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.numeros_1 === 'X') ? '<li>NÚMEROS</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.decimales_1 === 'X') ? '<li>DECIMALES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.fracciones_1 === 'X') ? '<li>FRACCIONES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_1 === 'X') ? '<li>LETRAS</li>' : ''))
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_lectura} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_lectura}`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_lectura === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.allen_lectura === 'X') ? '<li>ALLEN</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.jagger_lectura === 'X') ? '<li>JAGGER</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.e_direccional_lectura === 'X') ? '<li>E - DIRECCIONAL</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.numeros_lectura === 'X') ? '<li>NÚMEROS</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.decimales_lectura === 'X') ? '<li>DECIMALES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.fracciones_lectura === 'X') ? '<li>FRACCIONES</li>' : '')) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_lectura === 'X') ? '<li>LETRAS</li>' : ''))
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="estereopsis"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.estereopsis !== '') ? `${evoluciones_notificadas.sublista.estereopsis} SEG` : '---'))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="test"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.test !== '') ? evoluciones_notificadas.sublista.test : '---'))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="reflejo"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.reflejo !== '') ? `${evoluciones_notificadas.sublista.reflejo} SEG` : '---'))
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas"]').insertAdjacentHTML('beforeend', evoluciones_pruebas[evoluciones_notificadas.sublista.pruebas])
+
+				// //pruebas
+				// //------------------------------------------------
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas_nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.pruebas_nota).texto_html) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="motilidad_nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.motilidad_nota).texto_html) 
+
+				// //rx
+				// //------------------------------------------------
+				// contenedor.querySelector('[data-template="rx"] div').insertAdjacentHTML('afterbegin', `
+				// 	OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+				// 	<br>
+				// 	OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+				// `) 
+
+				// contenedor.querySelector('[data-template="rx_ciclo"] div').insertAdjacentHTML('afterbegin', `
+				// 	OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+				// 	<br>
+				// 	OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+				// `) 
+
+				// //biomicroscopia
+				// //------------------------------------------------
+				// contenedor.querySelector('[data-template="biomicroscopia_img"] img').src = e.sublista.imagen_biomicroscopia
+
+				// texto = JSON.parse(e.sublista.nota_b_od).texto_html
+				// contenedor.querySelector('[data-template="nota_bio_od"] div').innerHTML = texto.toUpperCase()
+
+				// texto = JSON.parse(e.sublista.nota_b_oi).texto_html
+				// contenedor.querySelector('[data-template="nota_bio_oi"] div').innerHTML = texto.toUpperCase()
+
+				// //fondo de ojo
+				// //------------------------------------------------
+				// contenedor.querySelector('[data-template="fondo_img"] img').src = e.sublista.imagen_fondo_ojo
+
+				// texto = JSON.parse(e.sublista.nota_f_od).texto_html
+				// contenedor.querySelector('[data-template="nota_f_od"] div').innerHTML = texto.toUpperCase()
+
+				// texto = JSON.parse(e.sublista.nota_f_oi).texto_html
+				// contenedor.querySelector('[data-template="nota_f_oi"] div').innerHTML = texto.toUpperCase()
+
+				// //pio, estudio, idx
+				// //------------------------------------------------
+				// contenedor.querySelector('[data-template="pio"] div').innerHTML = `OD: ${e.sublista.pio_od} mmHg - OI: ${e.sublista.pio_oi} mmHg`
+
+				// var referencias = JSON.parse(e.sublista.referencias_procesados),
+				// 	idx = JSON.parse(e.sublista.diagnosticos_procesados)
+
+				// referencias.forEach(valor => {
+				// 	contenedor.querySelector('[data-template="referencias"] ul').insertAdjacentHTML('afterbegin', `[${valor.nombre}]: ${valor.descripcion}`)
+				// })
+
+				// idx.forEach(valor => {
+				// 	contenedor.querySelector('[data-template="idx"] ul').insertAdjacentHTML('afterbegin', valor.nombre)
+				// })
+
+				// //formula
+				// //------------------------------------------------
+				// contenedor.querySelector('[data-template="formula"] div').insertAdjacentHTML('afterbegin', `
+				// 	OD: ${evoluciones_signos[e.sublista.formula_od_signo_1_ciclo]}${e.sublista.formula_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_od_signo_2_ciclo]}${e.sublista.formula_od_valor_2_ciclo} X ${e.sublista.formula_od_grados_ciclo}°
+				// 	<br>
+				// 	OI: ${evoluciones_signos[e.sublista.formula_oi_signo_1_ciclo]}${e.sublista.formula_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_oi_signo_2_ciclo]}${e.sublista.formula_oi_valor_2_ciclo} X ${e.sublista.formula_oi_grados_ciclo}°
+				// `) 
+
+				// contenedor.querySelector('[data-template="curva"] div').innerHTML = `OD: ${e.sublista.curva_od} - OI: ${e.sublista.curva_oi}`
+				// contenedor.querySelector('[data-template="altura_pupilar"] div').innerHTML = `OD:${e.sublista.altura_pupilar_od} - OI: ${e.sublista.altura_pupilar_oi}`
+				// contenedor.querySelector('[data-template="interpupilar"] div').innerHTML = `OD:${e.sublista.distancia_interpupilar_od} - OI: ${e.sublista.distancia_interpupilar_oi} - ADD: ${e.sublista.distancia_interpupilar_add} - DIP: ${e.sublista.dip}`
+
+				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_kriptok !== '') ? `<li>BIFOCAL KRIPTOK</li>` : ''))
+				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.multifocal !== '') ? `<li>MULTIFOCAL</li>` : ''))
+				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_flat_top !== '') ? `<li>BIFOCAL FLAP TOP</li>` : ''))
+				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ejecutivo !== '') ? `<li>BIFOCAL EJECUTIVO</li>` : ''))
+				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ultex !== '') ? `<li>BIFOCAL ULTEX</li>` : ''))
+
+				// texto = JSON.parse(e.sublista.plan).texto_html
+				// contenedor.querySelector('[data-template="plan"] div').innerHTML = texto.toUpperCase()
+
+				console.log(evoluciones_notificadas.sublista)
+
+			}
+
+		}
+
+	}
+}
+
+evoluciones_notificadas['crud']['propiedadesTr'] = {
+	"informacion": (e) => {
+		var fr = new DocumentFragment(), th = evoluciones_notificadas
+		var div = th.div.cloneNode(true);
+
+		var d1 = th.div.cloneNode(true)
+			d1.insertAdjacentHTML('afterbegin', `<b>N° DE EVOLUCION: </b>${e.sublista.id_evolucion}`)
+			d1.setAttribute('style', `min-width:250px; color:#fff;  border-bottom: 1px solid #fff; margin-bottom: 5px`)
+
+		div.appendChild(d1)
+
+		var d1 = th.div.cloneNode(true)
+			d1.insertAdjacentHTML('afterbegin', `<b>N° DE HISTORIA: </b> ${e.sublista.id_historia}`)
+			d1.setAttribute('style', `min-width:250px; color:#fff`)
+
+
+		div.appendChild(d1)
+
+		div.setAttribute('style', `padding: 6px; width:fit-content; text-align: left;font-size: 1.1em; position:fixed; background:#262626`)
+		div.setAttribute('title', 'Desplegar contenedor desplazable')
+		div.setAttribute('class', 'tooltip-crud')
+		div.setAttribute('data-hidden', '')
+
+		e.addEventListener('mousemove', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').style.top = (e.clientY - 50)+'px'
+			this.querySelector('.tooltip-crud').style.left = (e.clientX + 15)+'px'
+		})
+
+		e.addEventListener('mouseenter', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').removeAttribute('data-hidden')	
+		})
+
+		e.addEventListener('mouseleave', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').setAttribute('data-hidden', '')
+		})
+
+		e.appendChild(div)
+	}
+}
+
+qs('#desplegable-evoluciones-desplazador-cerrar').addEventListener('click', e => {
+
+	desplazar_evolucion.cerrar()
+
+})
+
+qs('#desplegable-evoluciones-contenido').addEventListener('click', e => {
+
+	if (e.target.classList.contains('copiable')) {
+
+		tools.copiarPortapapeles(e.target.innerHTML)
+		notificaciones.mensajeSimple(`Contenido copiado al portapapeles`, undefined, 'V')
+
+	}
+
+})
+
+/* -------------------------------------------------------------------------------------------------*/
+/*           							ABRIR DESPLEGALBE 										    */
+/* -------------------------------------------------------------------------------------------------*/
+qs('#desplegable-abrir-evoluciones').addEventListener('click', async e => {
+
+	//PETICION PARA ACTUALIZAR LISTA DE DATOS DE NOTIFIACION
+	await evoluciones_notificadas.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_evoluciones', 'notificaciones_evoluciones_consultar', [])))
+
+	//QUITAR ALERTA
+	e.target.classList.remove('notificacion-alerta')
 
 })

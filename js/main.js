@@ -1001,6 +1001,20 @@ export class Herramientas {
 	        myField.value += myValue;
 	    }
 	}
+
+	copiarPortapapeles(valor) {
+
+		var input = document.createElement('input')
+	    	input.setAttribute('type', 'text')
+	    	input.setAttribute('value', valor) 
+	    	input.select();
+		document.body.appendChild(input);
+		input.select();
+		input.setSelectionRange(0, 99999);
+		document.execCommand("copy");
+		document.body.removeChild(input);
+
+	}
 	
 }
 
@@ -4065,7 +4079,100 @@ export class PaginacionContenedores {
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////77//////
+/////////////////////////////////////////////////////////////////////////////////////////
+export class Desplazar {
+
+	constructor(contenedor, desplazador) {
+  	
+		//////////////////////////////////////////////////////////
+		if (document.querySelector(contenedor)) { 
+
+			this._contenedor = document.querySelector(contenedor) 
+
+		} else { throw 'contenedor necesario' }
+		//////////////////////////////////////////////////////////
+		if (document.querySelector(desplazador)) { 
+
+			this._desplazador = document.querySelector(desplazador) 
+
+		} else { throw 'desplazador necesario' }
+		//////////////////////////////////////////////////////////
+
+		this._click = false
+		this._x = undefined
+		this._y = undefined
+
+		this._offsetX = 30
+		this._offsetY = 25
+
+		this._inicialX = 0
+		this._inicialY = 20
+
+		this._operadorPosicionesY = 'px'
+		this._operadorPosicionesX = 'px'
+    
+  }
+  
+  init() {
+  
+  	var th = this
+    
+    this._desplazador.addEventListener('click', e => {
+  
+    	th._click = !th._click
+      
+    })
+    
+  }
+  
+  seleccionar(e) {
+
+    if (this._click && this._contenedor.getAttribute('data-hidden') === null) {
+
+  		this._x = e.clientX 
+    	this._y = e.clientY
+
+		this._contenedor.setAttributeNS(
+			null, 
+			'style', 
+			`top: ${this._y - this._offsetY}px; left: ${this._x - this._offsetX}px`
+		) 
+      
+    }
+
+  }
+  
+  abrir() {
+  
+  	this._contenedor.setAttributeNS(
+      null, 
+      'style', 
+      `top: ${this._inicialY}${this._operadorPosicionesY}; left: ${this._inicialX}${this._operadorPosicionesX}`
+    ) 
+  
+  	this._contenedor.removeAttribute('data-hidden')
+    
+    this._click = false
+  
+  }
+  
+  cerrar() {
+  
+  	this._contenedor.setAttributeNS(
+      null, 
+      'style', 
+      `top: ${this._inicialY}${this._operadorPosicionesY}; left: ${this._inicialX}${this._operadorPosicionesX}`
+    ) 
+  
+  	this._contenedor.setAttribute('data-hidden', '')
+    
+    this._click = false
+  
+  }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
 export default '';
 
 /////////////////////////////////////////////////////////////////////////////////////////

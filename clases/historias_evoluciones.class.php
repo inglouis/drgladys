@@ -790,6 +790,60 @@
             return json_encode($args);
         }
 
+        /*-----------------------------------------------------------------------------------*/
+        public function notificaciones_evoluciones_consultar($args) {
+
+            $sql = "
+			    select 
+					t.*,
+					coalesce(NULLIF(ppal.basicas_diagnosticos_armar_lista(t.diagnosticos), null),'[]'::jsonb) as diagnosticos_procesados,
+					coalesce(NULLIF(ppal.basicas_referencias_armar_lista(t.referencias), null), '[]'::jsonb) as referencias_procesados,
+					TO_CHAR(t.fecha :: DATE, 'dd-mm-yyyy') as fecha_arreglada,
+					TO_CHAR(t.fecha_real :: DATE, 'dd-mm-yyyy') as fecha_arreglada_real,
+					concat(h.nombres, ' ', h.apellidos) as nombre_completo,
+					h.cedula
+			    FROM (select jsonb_array_elements_text(notificacion_evoluciones) as id_evolucion from miscelaneos.usuarios where id_usuario = ?) AS x
+			    INNER JOIN principales.evoluciones as t on x.id_evolucion::bigint = t.id_evolucion
+			    LEFT JOIN principales.historias as h using (id_historia)
+            ";
+
+            return $this->seleccionar($sql, [$_SESSION['usuario']['id_usuario']]);
+
+        }
+
+        public function notificaciones_evoluciones_revisado($args) {
+
+            $id_evolucione = $args[0];
+
+            $sql = "  
+                update miscelaneos.usuarios
+                SET 
+                    notificacion_evoluciones = (
+                        select 
+                            coalesce(NULLIF(JSONB_AGG(j) , null), '[]'::jsonb)    
+                        AS recipes
+                        FROM miscelaneos.usuarios as a
+                        CROSS JOIN JSONB_ARRAY_ELEMENTS(a.notificacion_evoluciones) 
+                        WITH ORDINALITY arr(j,idx)
+                        WHERE (select  cast(to_jsonb(j::text) #>> '{}' as integer)) != ? and a.id_usuario = ?
+                    )::jsonb
+                WHERE id_usuario = ?
+            ";
+
+            return $this->actualizar($sql, [$id_recipe, $_SESSION['usuario']['id_usuario'], $_SESSION['usuario']['id_usuario']]);
+
+        }
+
+        public function notificacion_evoluciones_cantidad($args) {
+
+            $sql = "select notificacion_evoluciones from miscelaneos.usuarios where id_usuario = ?";
+
+            $lista = json_decode($this->i_pdo($sql, [$_SESSION['usuario']['id_usuario']], true)->fetchColumn(), true);
+
+            return count($lista);
+
+        }
+
     }
 
 /*

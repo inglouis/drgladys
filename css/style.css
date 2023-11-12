@@ -800,7 +800,7 @@ span.numeracion {
 .datos {
     position: relative;
     display: flex;
-    width: 100%;
+    width: 90%;
     height: fit-content;
     padding: 5px 0px;
 }
@@ -2552,7 +2552,7 @@ span.numeracion {
     background: #151a27;
 }
 
-#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados, #desplegable-recipes {
+#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados, #desplegable-recipes, #desplegable-evoluciones {
     width: 300px;
     height: 400px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
@@ -2683,6 +2683,14 @@ span.numeracion {
 #desplegable-recipes {
     z-index: 11;
     background: #669fcd63;
+    width: 300px;
+    overflow: hidden;
+    height: 60%;
+}
+
+#desplegable-evoluciones {
+    z-index: 11;
+    background: #00968838;
     width: 300px;
     overflow: hidden;
     height: 60%;
@@ -4210,6 +4218,251 @@ div#tabla-notificados-contenedor .titulo::after {
     background: black
 }
 
+/*-----------------------------------------------------*/
+/*------------- NOTIFICADOS EVOLUCIONES ---------------*/
+/*-----------------------------------------------------*/
+#tabla-evoluciones-notificados thead {
+    display: none
+}
+
+#tabla-evoluciones-notificados tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: baseline;
+    cursor: row-resize;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(1) {
+    border-bottom: 1px solid #262626;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(1):before {
+    content: "PACIENTE: ";
+    font-weight: bold;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(2):before {
+    content: "FECHA: ";
+    font-weight: bold;
+}
+
+#tabla-evoluciones-notificados .crud-botones {
+    align-items: center;
+}
+
+#tabla-evoluciones-notificados thead {
+    display: none;
+}
+
+#tabla-evoluciones-notificados tbody tr {
+    width: 360px;
+}
+
+#tabla-evoluciones-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-evoluciones-notificados .nombre {
+    text-align: left;
+}
+
+#tabla-evoluciones-contenedor {
+    padding: 12px;
+    overflow-x: hidden;
+}
+
+#desplegable-evoluciones {
+    top: 110px;
+}
+
+#desplegable-cerrar-evoluciones {
+    background: #009688;
+}
+
+#desplegable-abrir-evoluciones {
+    height: 25px;
+    width: 25px;
+    z-index: 11;
+    padding: 0px;
+}
+
+#desplegable-abrir-evoluciones {
+    background: #009688;
+    top: 110px;
+}
+
+#tabla-evoluciones-contenedor .titulo {
+    border-bottom: 1px solid #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    width: 345px;
+    text-align: left;
+}
+
+#tabla-evoluciones-contenedor .titulo::after {
+    content: "";
+    left: 0px;
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+}
+
+.evoluciones-contenedor {
+    position: relative;
+}
+
+.evoluciones-contenedor .eliminar {
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.evoluciones-contenedor .eliminar:hover {
+    background: black;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor {
+    right: 50px !important;
+    left: unset;
+    width: 212px;
+    flex-direction: row-reverse;
+    top: 3px;
+}
+
+#tabla-evoluciones-notificados .crud-eliminar-contenedor {
+
+}
+
+#tabla-evoluciones .eliminar-contenedor::after {
+    border: 10px solid transparent !important;
+    right: -25px;
+    left: unset;
+    border-left: 15px solid #151a27 !important;
+    top: 7px;
+}
+
+#tabla-evoluciones-notificados .eliminar-texto {
+    font-size: 10px;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor div {
+    width: auto;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor button {
+    margin: 0px;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor button:hover {
+    background: black
+}
+
+
+#desplagable-evoluciones-contenedor {
+    width: 400px;
+    height: 600px;
+    background: #00968873;
+    position: absolute;
+    color: white;
+    border-radius: 15px;
+    z-index: 100;
+    box-shadow: 2px 2px 6px 1px #6c6c6c;
+}
+
+#desplegable-evoluciones-desplazador {
+    background: linear-gradient(45deg, #009688, transparent);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 30px !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#desplegable-evoluciones-desplazador-cerrar {
+    position: relative;
+    right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    top: 2px;
+}
+
+#desplegable-evoluciones-desplazador-cerrar:hover {
+    color: black;
+}
+
+#desplegable-evoluciones-contenido {
+    background: #ffffffd9;
+    margin: 10px;
+    height: 550px;
+    color: #262626;
+    padding: 10px;
+}
+
+#desplegable-evoluciones-contenido .cabecera {
+    display: block;
+    border-bottom: 1px dashed #262626;
+    margin-bottom: 10px;
+}
+
+#desplegable-evoluciones-contenido .cabecera b {
+    text-transform: uppercase;
+}
+
+#desplegable-evoluciones-contenido .title {
+    font-weight: bold;
+    color: #3269a7;
+    border-bottom: 1px solid #3269a7;
+}
+
+#desplegable-evoluciones-contenido .subtitle {
+    color: black;
+    font-weight: bold
+}
+
+#desplegable-evoluciones-contenido .contenido {
+    text-transform: uppercase;
+}
+
+#desplegable-evoluciones-contenido .copiable {
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#desplegable-evoluciones-contenido .dato-simple {
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: 10px;
+    width: fit-content;
+    margin-right: 20px;
+    display: flex;
+}
+
+#desplegable-evoluciones-contenido ul {
+    padding-inline-start: 30px;
+    margin: 5px 0px;
+}
 /*-----------------------------------------------------*/
 /*---------------------- Iva --------------------------*/
 /*-----------------------------------------------------*/

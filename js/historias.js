@@ -14,7 +14,7 @@ window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
+import {PopUp, Acciones, Desplazar, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
 
 /////////////////////////////////////////////////////
 //DESPLEGABLES DE LA PAGINA
@@ -30,6 +30,29 @@ window.notificados = new customDesplegable('#desplegable-notificados', '#despleg
 
 window.recipes_desplegable = new customDesplegable('#desplegable-recipes', '#desplegable-abrir-recipes', '#desplegable-cerrar-recipes', undefined, '400px')
 	   recipes_desplegable.eventos()
+
+window.evoluciones_desplegable = new customDesplegable('#desplegable-evoluciones', '#desplegable-abrir-evoluciones', '#desplegable-cerrar-evoluciones', undefined, '400px')
+	   evoluciones_desplegable.eventos()
+
+/////////////////////////////////////////////////////
+//DESPLAZARDOR DE EVOLUCIONES
+/////////////////////////////////////////////////////
+export var desplazar_evolucion = new Desplazar('#desplagable-evoluciones-contenedor', '#desplegable-evoluciones-desplazador')
+	desplazar_evolucion.init()
+    desplazar_evolucion._offsetX = 200
+    desplazar_evolucion._offsetY = 15
+
+    desplazar_evolucion._inicialY = 10
+    desplazar_evolucion._inicialX = 40
+
+    desplazar_evolucion._operadorPosicionesY = 'vh'
+    desplazar_evolucion._operadorPosicionesX = 'vw'
+
+onmousemove = function(e) {
+
+	desplazar_evolucion.seleccionar(e)
+
+}
 
 /////////////////////////////////////////////////////
 //BOTONES PAGINACION
@@ -1702,6 +1725,7 @@ export var notificados_recipes = new Notificados_recipes(new Tabla(
 
 window.notificados_recipes = notificados_recipes
 
+
 /////////////////////////////////////////////////////
 /*					MEDICAMENTOS 				   */
 /////////////////////////////////////////////////////
@@ -2040,6 +2064,44 @@ export var evoluciones = new Evoluciones(new Tabla(
 
 window.evoluciones = evoluciones
 
+
+/////////////////////////////////////////////////////
+/*				EVOLUCIONES NOTIFICADOS			   */
+/////////////////////////////////////////////////////
+class Evoluciones_notificadas extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['id_recipe', 'fecha']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		this.tr = {}
+		this.posicion = undefined
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenedorEliminarBoton = qs('#eliminar-template').content.querySelector('.eliminar-contenedor').cloneNode(true)
+		this.contenido = qs('#desplegable-evoluciones-contenido')
+	}
+
+}
+
+export var evoluciones_notificadas = new Evoluciones_notificadas(new Tabla(
+	[	
+		['Paciente', true, 2],
+		['Acciones', false, 0]
+	],
+	'tabla-evoluciones-notificados', 'null', -1, 'null', 'null', 'null', false
+))
+
+window.evoluciones_notificadas = evoluciones_notificadas
+evoluciones_notificadas.cargarTabla([])
+
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
 /*           							PAGINACION HISTORIAS			 	  					    */
@@ -2193,10 +2255,12 @@ export var reportesDisponibles = {
 //              				NOTIFICACIONES
 //----------------------------------------------------------------------------------------------------
 export var 
-	notificacionesPop = qs('#crud-notificaciones-popup'),
-	notificacionesBoton = qs('#notificacion-doctor'),
+	notificacionesPop      = qs('#crud-notificaciones-popup'),
+	notificacionesBoton    = qs('#notificacion-doctor'),
 	notificadosDesplegable = qs('#desplegable-notificados'),
-	notificadosBoton = qs('#desplegable-abrir-notificados')
+	notificadosBoton       = qs('#desplegable-abrir-notificados'),
+	evolucionesDesplegable = qs('#desplegable-evoluciones'),
+	evolucionesBoton       = qs('#desplegable-abrir-evoluciones')
 
 var recipesDesplegable = qs('#desplegable-recipes'),
 	recipesBoton       = qs('#desplegable-abrir-recipes'),
@@ -2254,7 +2318,7 @@ setInterval(async () => {
         //
         if (recipesDesplegable.style.display === '' && usuario.rol.trim() === 'ADMINISTRACION') {
 
-        	notificados_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_recipes', 'notificaciones_recipes_consultar', [])))
+        	notificados_recipes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_recipes', 'notificaciones_recipes_consultar', [])))
 
         }
 
@@ -2284,6 +2348,33 @@ setInterval(async () => {
         if (consulta.trim() === '1') {
 
 	        historiasBoton.classList.add('notificacion-alerta-before')
+
+        }
+
+        //------------------------------------------------------------------
+    	//					NOTIFICACIONES EVOLUCION
+        //------------------------------------------------------------------
+
+        //ACTUALIZACION SI CONTENEDOR ESTA ABIERTO
+        //
+        if (evolucionesDesplegable.style.display === '' && usuario.rol.trim() === 'ADMINISTRACION') {
+
+        	evoluciones_notificadas.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_evoluciones', 'notificaciones_evoluciones_consultar', [])))
+
+        }
+
+        //ALERTA VISUAL DE NOTIFICACION DE EVOLUCIONES 
+        //-----------------------------------------
+
+        consulta = await tools.fullAsyncQuery('historias_evoluciones', 'notificacion_evoluciones_cantidad', [])
+
+        if (consulta > 0) {
+
+	        if (evolucionesDesplegable.style.display === 'none' && usuario.rol.trim() === 'ADMINISTRACION') {
+	        	
+	        	evolucionesBoton.classList.add('notificacion-alerta')
+
+	        }
 
         }
 

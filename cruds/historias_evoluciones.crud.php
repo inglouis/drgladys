@@ -22,9 +22,21 @@
       
       <div class="crud-eliminar-contenedor" style="position: relative;">
         
-        <button class="eliminar btn btn-eliminar">
-          <?php echo $_SESSION['botones']['reportes_eliminar']?>
-        </button>
+        <?php 
+          if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+        ?>
+          <button class="eliminar btn btn-eliminar" data-hidden>
+            <?php echo $_SESSION['botones']['reportes_eliminar']?>
+          </button>
+        <?php 
+          } else if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+        ?>
+          <button class="eliminar btn btn-eliminar">
+            <?php echo $_SESSION['botones']['reportes_eliminar']?>
+          </button>
+        <?php 
+          }
+        ?>      
         
       </div>
 
