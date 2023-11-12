@@ -404,30 +404,29 @@ evoluciones['crud']['customBodyEvents'] = {
 
 	},
 	/* -------------------------------------------------------------------------------------------------*/
-	/*           					ENVIAR LOS DATOS PARA EDITAR LA EVOLUCION   					    */
+	/*           							NOTIFICAR EVOLUCIÓN										    */
 	/* -------------------------------------------------------------------------------------------------*/
-	"editar": async (e) => {
+	"notificar": async (e) => {
 
-		if (e.target.classList.contains('editar')) {
+		if (e.target.classList.contains('notificar')) {
 
-			// evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
+			evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
 
-			// tools.limpiar('.evoluciones-valores', '', {})	
+			var resultado = await tools.fullAsyncQuery('historias_evoluciones', 'notificar_evolucion', [evoluciones.sublista.id_evolucion])
 
-			// rellenar.contenedores(informes.sublista, '.evoluciones-valores', {elemento: e.target, id: 'value'}, {
-			// 	"contenedorConsulta": function fn(lista, grupo) {
+			if (resultado.trim() === 'exito') {
 
-			// 		var peticion = tools.fullQuery('historias_informe', 'estandar_diagnosticos', lista)
-			// 		peticion.onreadystatechange = function() {
-			// 	        if (this.readyState == 4 && this.status == 200) {
-			// 	        	contenedoresReportes.estandarizarContenedor(grupo, JSON.parse(this.responseText), ['id_diagnostico', 'nombre'])
-			// 	        }
-			// 	    };		
+				notificaciones.mensajeSimple('Evolución notificada con éxito', false, 'V')
 
-			// 	}
-			// })
+			} else if (resultado.trim() === 'repetido') {
 
-			// forPop.pop()
+				notificaciones.mensajeSimple('Esta evolución ya fué notificada', false, 'F')
+
+			} else {
+
+				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
+
+			}
 
 		}
 	},
@@ -560,15 +559,15 @@ imgBio.asignarDibujados('.bio-dibujar')
 imgBio.asignarGrosores('.bio-slider')
 imgBio.asignarTexto('bio-texto')
 
-imgBio.formaPersonalizada('dendritis', {fill: 'transparent', stroke: '#529b62', width: 0.5, height: 0.5}, `M120.8602,63.449056q-35.096527,12.657935,1.231457,16.110097c-33.733296,1.493948-24.361628,9.178024-19.13719,12.65793c5.954242,4.009143,8.235845,6.572201,19.137189,5.41465c15.917545,2.858628,10.301356,7.253808-10.467384,14.147614s9.150424,6.306059,24.002112,9.876084-6.940727,9.16262-24.002112,15.137051s6.463382,11.089412,54.223099,12.978716c29.557498-2.378651,26.944529-10.507104,0-18.735085-6.85772-4.456182,8.674524-10.753465,21.258366-19.832125c9.604973-14.443615-3.017407-16.348224-30.841146-13.572255-6.26459-5.41465,9.58278-3.113205,9.58278-18.07258-20.111397,7.916884-34.124788,8.305147-25.873841-2.301445c4.656984-5.986552,17.376705-3.438281,16.291061-16.110098q-.307863-10.356493-35.40439,2.301445Z`)
-imgBio.formaPersonalizada('ulceras_redondas', {fill: 'transparent', stroke: '#529b62', width: 1.5, height: 1.5}, `M-12.3293 0a12.3293 12.3293 0 1 0 24.6587 0a12.3293 12.3293 0 1 0 -24.6587 0`)
-imgBio.formaPersonalizada('lente_intraocular', {fill: 'transparent', stroke: '#8d8d8d', width: 1, height: 1}, `
+imgBio.formaPersonalizada('dendritis', {fill: 'transparent', stroke: '#529b62', width: 0.3, height: 0.3, strokeWidth: 6.5, left: 185, top: 236 }, `M120.8602,63.449056q-35.096527,12.657935,1.231457,16.110097c-33.733296,1.493948-24.361628,9.178024-19.13719,12.65793c5.954242,4.009143,8.235845,6.572201,19.137189,5.41465c15.917545,2.858628,10.301356,7.253808-10.467384,14.147614s9.150424,6.306059,24.002112,9.876084-6.940727,9.16262-24.002112,15.137051s6.463382,11.089412,54.223099,12.978716c29.557498-2.378651,26.944529-10.507104,0-18.735085-6.85772-4.456182,8.674524-10.753465,21.258366-19.832125c9.604973-14.443615-3.017407-16.348224-30.841146-13.572255-6.26459-5.41465,9.58278-3.113205,9.58278-18.07258-20.111397,7.916884-34.124788,8.305147-25.873841-2.301445c4.656984-5.986552,17.376705-3.438281,16.291061-16.110098q-.307863-10.356493-35.40439,2.301445Z`)
+imgBio.formaPersonalizada('ulceras_redondas', {fill: 'transparent', stroke: '#529b62', width: 1.5, height: 1.5, left: 156, top: 68}, `M-12.3293 0a12.3293 12.3293 0 1 0 24.6587 0a12.3293 12.3293 0 1 0 -24.6587 0`)
+imgBio.formaPersonalizada('lente_intraocular', {fill: 'transparent', stroke: '#8d8d8d', width: 1, height: 1, left: 152, top: 56}, `
 	M17.3293 30a12.3293 12.3293 0 1 0 24.6587 0a12.3293 12.3293 0 1 0 -24.6587 0 \
 	M17.670667,30c-10.905211-6.154473-15.627304-20.125299,0-30 \
 	M42.329333,30c10.640452,7.179181,13.221354,21.949768,0,30 \
 	M24 30a6 6 0 1 0 12 0a6 6 0 1 0 -12 0
 `)
-imgBio.formaPersonalizada('congestion_ocular', {fill: 'transparent', stroke: '#ca3f3f', width: 1, height: 1}, `
+imgBio.formaPersonalizada('congestion_ocular', {fill: 'transparent', stroke: '#ca3f3f', width: 0.8, height: 1.5, strokeWidth: 1.5, left: 95, top: 191}, `
 	M0,1.933023h20.992004 /
 	M0,4.933023h20.992004 /
 	M0,23.933023h20.992004 /
@@ -589,7 +588,7 @@ imgBio.formaPersonalizada('papilas_arriba', {top: 135, left: 30, fill: 'transpar
     M-65,30c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513 /
     M-78,40c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513 
 `)
-imgBio.formaPersonalizada('papilas_abajo', {top: 165, left: 30, fill: 'transparent', stroke: '#ca3f3f', width: 2.2, height: 1.8}, `
+imgBio.formaPersonalizada('papilas_abajo', {top: 231, left: 48, fill: 'transparent', stroke: '#ca3f3f', width: 2.3, height: 1.7}, `
   	M60,25c.000383-2.099525.687491-4.315556,2.297012-4.892647.594924-.270683,1.803133-.294431,2.421697,0c1.868574.667539,1.978392,2.796979,2.199992,4.892647 /
     M50,24c.000383-2.099525.687491-4.315556,2.297012-4.892647.594924-.270683,1.803133-.294431,2.421697,0c1.868574.667539,1.978392,2.796979,2.199992,4.892647 /
     M40,22c.000383-2.099525.687491-4.315556,2.297012-4.892647.594924-.270683,1.803133-.294431,2.421697,0c1.868574.667539,1.978392,2.796979,2.199992,4.892647 /
@@ -599,9 +598,48 @@ imgBio.formaPersonalizada('papilas_abajo', {top: 165, left: 30, fill: 'transpare
     M0,0c.000383-2.099525.687491-4.315556,2.297012-4.892647.594924-.270683,1.803133-.294431,2.421697,0c1.868574.667539,1.978392,2.796979,2.199992,4.892647 
 `)
 
-imgBio.formaPersonalizada('cicatriz_linea_izquierda', {top: 165, left: 30, fill: 'transparent', stroke: 'black', width: 0.6, height: 0.6}, `
+imgBio.formaPersonalizada('cicatriz_linea_izquierda', {top: 175, left: 110, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 3.5 }, `
   	M15,15l-30-30
 `)
+
+imgBio.formaPersonalizada('cicatriz_linea_derecha', {top: 175, left: 170, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 3.5 }, `
+  	M15,15l+30-30
+`)
+
+imgBio.formaPersonalizada('cicatriz_curva_izquierda', {top: 194, left: 97, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 3.5 }, `
+  	M55.331512,76.859199c0,0-13.299621,3.80734-20.331512,3.741496s-15.115352,1.834351-21.003112-3.741496-7.456833-22.105993-7.482992-31.859199s1.237851-26.072729,7.215743-31.478986s14.330499-2.876883,21.270361-2.672497s20.331512,2.672497,20.331512,2.672497
+`)
+
+imgBio.formaPersonalizada('cicatriz_curva_derecha', {top: 194, left: 174, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 3.5 }, `
+  	M39.486195,9.86556c9.080945-1.988472,21.755256-5.975467,30.457406,0s10.221826,23.159429,10.235686,35.13444-1.555871,29.357441-10.235686,35.267104-20.705831,2.007771-29.708454,0
+`)
+
+imgBio.formaPersonalizada('cataratas_1', {top: 88, left: 94, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 2.5 }, `
+  	M0,29.985638L9.873448,0L20,40L29.46694,0L40,29.985638
+`)
+
+imgBio.formaPersonalizada('cataratas_2', {top: 68, left: 94, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 2.5 }, `
+  	M-0.000002,9.910635L9.941195,40L19.999999,0L30.129545,40L39.999998,9.910635
+`)
+
+imgBio.formaPersonalizada('cataratas_3', {top: 75, left: 138, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 2.5 }, `
+  	M10.108489,0L40,10.15791L0,20l40,9.947408L10.108489,40
+`)
+
+imgBio.formaPersonalizada('cataratas_4', {top: 75, left: 192, fill: 'transparent', stroke: 'black', width: 0.5, height: 0.5, strokeWidth: 2.5 }, `
+  	M29.897987,-0.000002L0,10.023287l40,9.976712L0,30.216652l29.897987,9.783346
+`)
+
+imgBio.formaPersonalizada('pliegues_epicantales_pronunciados', {top: 145, left: 161, fill: 'transparent', stroke: '#af3613', width: 1.3, height: 1.3, strokeWidth: 2.5 }, `
+  	M10.264146,100c0,0,10.140372-34.701505,10.18871-50s-9.860042-50-9.860042-50 /
+	M150.276741,0c0,0-10.18871,34.691738-10.18871,50s10.18871,50,10.18871,50 / 
+	M+11.5,8.933023h135.992004 /
+	M+16,26.933023h125.992004 /
+	M+21,46.933023h118.992004 /
+	M+17.5,64.933023h125.992004 /
+	M+13,84.933023h132.992004 
+`)
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 qs('#bio-valor').innerHTML = qs('#bio-rango').value
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -839,15 +877,15 @@ qs('#anexos-despues-contenedor').addEventListener('click', e => {
 /* -------------------------------------------------------------------------------------------------*/
 qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
-	if(e.target.classList.contains('evoluciones-confirmar')) {
+	if (e.target.classList.contains('evoluciones-confirmar') || e.target.classList.contains('evoluciones-notificar')) {
 
-		if(window.procesar) {
+		if (window.procesar) {
 
 			window.procesar = false
 
 			window.idSeleccionada = 0
 
-			var datos = tools.procesar(e.target, 'evoluciones-confirmar', 'evoluciones-valores', tools)
+			var datos = tools.procesar(e.target, e.target.classList[0], 'evoluciones-valores', tools)
 
 			if (datos !== '') {
 
@@ -877,7 +915,7 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
 				}
 
-				if (resultado.trim() === 'exito') {
+				if (!isNaN(resultado)) {
 
 					notificaciones.mensajeSimple('Petición realiza con éxito', false, 'V')
 
@@ -909,11 +947,13 @@ qs('#crud-evoluciones-botones').addEventListener('click', async e => {
 
 					}
 
-					//historias.tr.sublista = JSON.parse(await tools.fullAsyncQuery('historias', 'traer_historia', [historias.sublista.id_historia]))
+					if (e.target.classList.contains('evoluciones-notificar')) {
 
-					//historias.confirmarActualizacion()
+						await tools.fullAsyncQuery('historias_evoluciones', 'notificar_evolucion', [resultado])
+
+					}
 				
-				} else if (resultado.trim() === 'repetido') {
+				} else if (String(resultado).trim() === 'repetido') {
 
 					notificaciones.mensajeSimple('Una evolución ya fué cargada hoy para este paciente', resultado, 'F') 
 
@@ -1104,16 +1144,24 @@ evoluciones_notificadas['crud']['customBodyEvents'] = {
 
 				evoluciones_notificadas.sublista = tools.pariente(e.target, 'TR').sublista
 
+				tools.limpiar('.evolucion-desplazable-limpiar', '', {})
+
 				desplazar_evolucion.abrir()
 
 				//cabecera
-				evoluciones_notificadas.contenido.querySelector('.cabecera b').insertAdjacentHTML('afterbegin', evoluciones_notificadas.sublista.nombre_completo)
+				//------------------------------------------------
+				evoluciones_notificadas.contenido.querySelector('.cabecera div').insertAdjacentHTML('afterbegin', evoluciones_notificadas.sublista.nombre_completo);
 
 				//nota
-				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota).texto_html) 
+				//------------------------------------------------
+				(JSON.parse(evoluciones_notificadas.sublista.nota).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="nota"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_oi"]').parentElement.removeAttribute('data-hidden');
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota).texto_html);
 
 				//examen oftalmológico
-				// //------------------------------------------------
+				//------------------------------------------------
+				(evoluciones_notificadas.sublista.agudeza_od_4 === '' && evoluciones_notificadas.sublista.agudeza_oi_4 === '') ? (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4"]').parentElement.setAttribute('data-hidden', ''), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').parentElement.setAttribute('data-hidden', '')) : (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4"]').parentElement.removeAttribute('data-hidden'), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').parentElement.removeAttribute('data-hidden'));
+
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_4} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_4}`
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_4 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.allen_4 === 'X') ? '<li>ALLEN</li>' : '')) 
@@ -1122,8 +1170,10 @@ evoluciones_notificadas['crud']['customBodyEvents'] = {
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.numeros_4 === 'X') ? '<li>NÚMEROS</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.decimales_4 === 'X') ? '<li>DECIMALES</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.fracciones_4 === 'X') ? '<li>FRACCIONES</li>' : '')) 
-				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_4 === 'X') ? '<li>LETRAS</li>' : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_4_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_4 === 'X') ? '<li>LETRAS</li>' : ''));
 
+				(evoluciones_notificadas.sublista.agudeza_od_1 === '' && evoluciones_notificadas.sublista.agudeza_oi_1 === '') ? (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1"]').parentElement.setAttribute('data-hidden', ''), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').parentElement.setAttribute('data-hidden', '')) : (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1"]').parentElement.removeAttribute('data-hidden'), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').parentElement.removeAttribute('data-hidden'));
+				
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_1} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_1}`
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_1 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.allen_1 === 'X') ? '<li>ALLEN</li>' : '')) 
@@ -1132,7 +1182,9 @@ evoluciones_notificadas['crud']['customBodyEvents'] = {
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.numeros_1 === 'X') ? '<li>NÚMEROS</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.decimales_1 === 'X') ? '<li>DECIMALES</li>' : '')) 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.fracciones_1 === 'X') ? '<li>FRACCIONES</li>' : '')) 
-				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_1 === 'X') ? '<li>LETRAS</li>' : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_1_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.letras_1 === 'X') ? '<li>LETRAS</li>' : ''));
+
+				(evoluciones_notificadas.sublista.agudeza_od_lectura === '' && evoluciones_notificadas.sublista.agudeza_oi_lectura === '') ? (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura"]').parentElement.setAttribute('data-hidden', ''), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').parentElement.setAttribute('data-hidden', '')) : (evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura"]').parentElement.removeAttribute('data-hidden'), evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').parentElement.removeAttribute('data-hidden'));
 
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.agudeza_od_lectura} - OI: ${evoluciones_notificadas.sublista.agudeza_oi_lectura}`
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="agudeza_lectura_pruebas"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.correccion_lectura === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
@@ -1148,84 +1200,101 @@ evoluciones_notificadas['crud']['customBodyEvents'] = {
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="test"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.test !== '') ? evoluciones_notificadas.sublista.test : '---'))
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="reflejo"]').insertAdjacentHTML('afterbegin', ((evoluciones_notificadas.sublista.reflejo !== '') ? `${evoluciones_notificadas.sublista.reflejo} SEG` : '---'))
 
-				evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas"]').insertAdjacentHTML('beforeend', evoluciones_pruebas[evoluciones_notificadas.sublista.pruebas])
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas"]').insertAdjacentHTML('beforeend', evoluciones_pruebas[evoluciones_notificadas.sublista.pruebas]);
 
-				// //pruebas
-				// //------------------------------------------------
+				//pruebas
+				//------------------------------------------------
+				(JSON.parse(evoluciones_notificadas.sublista.pruebas_nota).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas_nota"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas_nota"]').parentElement.removeAttribute('data-hidden');
+				(JSON.parse(evoluciones_notificadas.sublista.motilidad_nota).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="motilidad_nota"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="motilidad_nota"]').parentElement.removeAttribute('data-hidden');
+
 				evoluciones_notificadas.contenido.querySelector('[data-consulta="pruebas_nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.pruebas_nota).texto_html) 
-				evoluciones_notificadas.contenido.querySelector('[data-consulta="motilidad_nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.motilidad_nota).texto_html) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="motilidad_nota"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.motilidad_nota).texto_html);
 
-				// //rx
-				// //------------------------------------------------
-				// contenedor.querySelector('[data-template="rx"] div').insertAdjacentHTML('afterbegin', `
-				// 	OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
-				// 	<br>
-				// 	OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
-				// `) 
+				//rx
+				//------------------------------------------------
+				(evoluciones_notificadas.sublista.rx_od_valor_1 === '0.00' && evoluciones_notificadas.sublista.rx_oi_valor_1 === '0.00')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="rx"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="rx"]').parentElement.removeAttribute('data-hidden');
+				(evoluciones_notificadas.sublista.rx_od_valor_1_ciclo === '0.00' && evoluciones_notificadas.sublista.rx_oi_valor_1_ciclo === '0.00')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="rx_ciclo"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="rx_ciclo"]').parentElement.removeAttribute('data-hidden');
 
-				// contenedor.querySelector('[data-template="rx_ciclo"] div').insertAdjacentHTML('afterbegin', `
-				// 	OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
-				// 	<br>
-				// 	OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
-				// `) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="rx"]').insertAdjacentHTML('afterbegin', `
+					OD: ${evoluciones_signos[evoluciones_notificadas.sublista.rx_od_signo_1]}${evoluciones_notificadas.sublista.rx_od_valor_1} ${evoluciones_signos[evoluciones_notificadas.sublista.rx_od_signo_2]}${evoluciones_notificadas.sublista.rx_od_valor_2} X ${evoluciones_notificadas.sublista.rx_od_grados}° = ${evoluciones_notificadas.sublista.rx_od_resultado}
+					<br>
+					OI: ${evoluciones_signos[evoluciones_notificadas.sublista.rx_oi_signo_1]}${evoluciones_notificadas.sublista.rx_oi_valor_1} ${evoluciones_signos[evoluciones_notificadas.sublista.rx_oi_signo_2]}${evoluciones_notificadas.sublista.rx_oi_valor_2} X ${evoluciones_notificadas.sublista.rx_oi_grados}° = ${evoluciones_notificadas.sublista.rx_oi_resultado}
+				`) 
 
-				// //biomicroscopia
-				// //------------------------------------------------
-				// contenedor.querySelector('[data-template="biomicroscopia_img"] img').src = e.sublista.imagen_biomicroscopia
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="rx_ciclo"]').insertAdjacentHTML('afterbegin', `
+					OD: ${evoluciones_signos[evoluciones_notificadas.sublista.rx_od_signo_1_ciclo]}${evoluciones_notificadas.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[evoluciones_notificadas.sublista.rx_od_signo_2_ciclo]}${evoluciones_notificadas.sublista.rx_od_valor_2_ciclo} X ${evoluciones_notificadas.sublista.rx_od_grados_ciclo}° = ${evoluciones_notificadas.sublista.rx_od_resultado_ciclo}
+					<br>
+					OI: ${evoluciones_signos[evoluciones_notificadas.sublista.rx_oi_signo_1_ciclo]}${evoluciones_notificadas.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[evoluciones_notificadas.sublista.rx_oi_signo_2_ciclo]}${evoluciones_notificadas.sublista.rx_oi_valor_2_ciclo} X ${evoluciones_notificadas.sublista.rx_oi_grados_ciclo}° = ${evoluciones_notificadas.sublista.rx_oi_resultado_ciclo}
+				`);
 
-				// texto = JSON.parse(e.sublista.nota_b_od).texto_html
-				// contenedor.querySelector('[data-template="nota_bio_od"] div').innerHTML = texto.toUpperCase()
+				//biomicroscopia
+				//------------------------------------------------
+				(JSON.parse(evoluciones_notificadas.sublista.nota_b_od).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_od"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_od"]').parentElement.removeAttribute('data-hidden');
+				(JSON.parse(evoluciones_notificadas.sublista.nota_b_oi).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_oi"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_oi"]').parentElement.removeAttribute('data-hidden');
 
-				// texto = JSON.parse(e.sublista.nota_b_oi).texto_html
-				// contenedor.querySelector('[data-template="nota_bio_oi"] div').innerHTML = texto.toUpperCase()
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_od"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota_b_od).texto_html) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_oi"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota_b_oi).texto_html);
 
-				// //fondo de ojo
-				// //------------------------------------------------
-				// contenedor.querySelector('[data-template="fondo_img"] img').src = e.sublista.imagen_fondo_ojo
+				//fondo de ojo
+				//------------------------------------------------
+				(JSON.parse(evoluciones_notificadas.sublista.nota_f_od).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_od"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_od"]').parentElement.removeAttribute('data-hidden');
+				(JSON.parse(evoluciones_notificadas.sublista.nota_f_oi).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_oi"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_oi"]').parentElement.removeAttribute('data-hidden');
 
-				// texto = JSON.parse(e.sublista.nota_f_od).texto_html
-				// contenedor.querySelector('[data-template="nota_f_od"] div').innerHTML = texto.toUpperCase()
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_od"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota_f_od).texto_html) 
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_f_oi"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.nota_f_oi).texto_html);
 
-				// texto = JSON.parse(e.sublista.nota_f_oi).texto_html
-				// contenedor.querySelector('[data-template="nota_f_oi"] div').innerHTML = texto.toUpperCase()
+				//pio, estudio, idx
+				//------------------------------------------------
+				(evoluciones_notificadas.sublista.pio_od === '0.00' && evoluciones_notificadas.sublista.pio_oi === '0.00')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="pio"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="pio"]').parentElement.removeAttribute('data-hidden');
 
-				// //pio, estudio, idx
-				// //------------------------------------------------
-				// contenedor.querySelector('[data-template="pio"] div').innerHTML = `OD: ${e.sublista.pio_od} mmHg - OI: ${e.sublista.pio_oi} mmHg`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="pio"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.pio_od} mmHg - OI: ${evoluciones_notificadas.sublista.pio_oi} mmHg`
 
-				// var referencias = JSON.parse(e.sublista.referencias_procesados),
-				// 	idx = JSON.parse(e.sublista.diagnosticos_procesados)
+				var referencias = JSON.parse(evoluciones_notificadas.sublista.referencias_procesados),
+					idx = JSON.parse(evoluciones_notificadas.sublista.diagnosticos_procesados);
 
-				// referencias.forEach(valor => {
-				// 	contenedor.querySelector('[data-template="referencias"] ul').insertAdjacentHTML('afterbegin', `[${valor.nombre}]: ${valor.descripcion}`)
-				// })
+				(referencias.length < 1) ? evoluciones_notificadas.contenido.querySelector('[data-consulta="referencias"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="referencias"]').parentElement.removeAttribute('data-hidden');
+				(idx.length < 1) ? evoluciones_notificadas.contenido.querySelector('[data-consulta="idx"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="idx"]').parentElement.removeAttribute('data-hidden');
 
-				// idx.forEach(valor => {
-				// 	contenedor.querySelector('[data-template="idx"] ul').insertAdjacentHTML('afterbegin', valor.nombre)
-				// })
+				referencias.forEach(valor => {
+					evoluciones_notificadas.contenido.querySelector('[data-consulta="referencias"]').insertAdjacentHTML('afterbegin', `<li class="copiable">[${valor.nombre}]: ${valor.descripcion}</li>`)
+				})
 
-				// //formula
-				// //------------------------------------------------
-				// contenedor.querySelector('[data-template="formula"] div').insertAdjacentHTML('afterbegin', `
-				// 	OD: ${evoluciones_signos[e.sublista.formula_od_signo_1_ciclo]}${e.sublista.formula_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_od_signo_2_ciclo]}${e.sublista.formula_od_valor_2_ciclo} X ${e.sublista.formula_od_grados_ciclo}°
-				// 	<br>
-				// 	OI: ${evoluciones_signos[e.sublista.formula_oi_signo_1_ciclo]}${e.sublista.formula_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.formula_oi_signo_2_ciclo]}${e.sublista.formula_oi_valor_2_ciclo} X ${e.sublista.formula_oi_grados_ciclo}°
-				// `) 
+				idx.forEach(valor => {
+					evoluciones_notificadas.contenido.querySelector('[data-consulta="idx"]').insertAdjacentHTML('afterbegin', `<li class="copiable">${valor.nombre}</li>`)
+				});
 
-				// contenedor.querySelector('[data-template="curva"] div').innerHTML = `OD: ${e.sublista.curva_od} - OI: ${e.sublista.curva_oi}`
-				// contenedor.querySelector('[data-template="altura_pupilar"] div').innerHTML = `OD:${e.sublista.altura_pupilar_od} - OI: ${e.sublista.altura_pupilar_oi}`
-				// contenedor.querySelector('[data-template="interpupilar"] div').innerHTML = `OD:${e.sublista.distancia_interpupilar_od} - OI: ${e.sublista.distancia_interpupilar_oi} - ADD: ${e.sublista.distancia_interpupilar_add} - DIP: ${e.sublista.dip}`
+				//formula
+				//------------------------------------------------
+				(evoluciones_notificadas.sublista.formula_od_signo_1_ciclo === '0.00' && evoluciones_notificadas.sublista.formula_oi_signo_1_ciclo === '0.00')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="formula"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="formula"]').parentElement.removeAttribute('data-hidden');
+				(evoluciones_notificadas.sublista.curva_od === '0.00' && evoluciones_notificadas.sublista.curva_oi === '0.00')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="curva"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="curva"]').parentElement.removeAttribute('data-hidden');
+				(evoluciones_notificadas.sublista.altura_pupilar_od === '0' && evoluciones_notificadas.sublista.altura_pupilar_oi === '0')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="altura_pupilar"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="altura_pupilar"]').parentElement.removeAttribute('data-hidden');
+				(evoluciones_notificadas.sublista.distancia_interpupilar_od === '0' && evoluciones_notificadas.sublista.distancia_interpupilar_oi === '0' && evoluciones_notificadas.sublista.distancia_interpupilar_add === '0' && evoluciones_notificadas.sublista.dip === '0')  ? evoluciones_notificadas.contenido.querySelector('[data-consulta="interpupilar"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="interpupilar"]').parentElement.removeAttribute('data-hidden');
 
-				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_kriptok !== '') ? `<li>BIFOCAL KRIPTOK</li>` : ''))
-				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.multifocal !== '') ? `<li>MULTIFOCAL</li>` : ''))
-				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_flat_top !== '') ? `<li>BIFOCAL FLAP TOP</li>` : ''))
-				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ejecutivo !== '') ? `<li>BIFOCAL EJECUTIVO</li>` : ''))
-				// contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_ultex !== '') ? `<li>BIFOCAL ULTEX</li>` : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula"]').insertAdjacentHTML('afterbegin', `
+					OD: ${evoluciones_signos[evoluciones_notificadas.sublista.formula_od_signo_1_ciclo]}${evoluciones_notificadas.sublista.formula_od_valor_1_ciclo} ${evoluciones_signos[evoluciones_notificadas.sublista.formula_od_signo_2_ciclo]}${evoluciones_notificadas.sublista.formula_od_valor_2_ciclo} X ${evoluciones_notificadas.sublista.formula_od_grados_ciclo}°
+					<br>
+					OI: ${evoluciones_signos[evoluciones_notificadas.sublista.formula_oi_signo_1_ciclo]}${evoluciones_notificadas.sublista.formula_oi_valor_1_ciclo} ${evoluciones_signos[evoluciones_notificadas.sublista.formula_oi_signo_2_ciclo]}${evoluciones_notificadas.sublista.formula_oi_valor_2_ciclo} X ${evoluciones_notificadas.sublista.formula_oi_grados_ciclo}°
+				`) 
 
-				// texto = JSON.parse(e.sublista.plan).texto_html
-				// contenedor.querySelector('[data-template="plan"] div').innerHTML = texto.toUpperCase()
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="curva"]').innerHTML = `OD: ${evoluciones_notificadas.sublista.curva_od} - OI: ${evoluciones_notificadas.sublista.curva_oi}`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="altura_pupilar"]').innerHTML = `OD:${evoluciones_notificadas.sublista.altura_pupilar_od} - OI: ${evoluciones_notificadas.sublista.altura_pupilar_oi}`
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="interpupilar"]').innerHTML = `OD:${evoluciones_notificadas.sublista.distancia_interpupilar_od} - OI: ${evoluciones_notificadas.sublista.distancia_interpupilar_oi} - ADD: ${evoluciones_notificadas.sublista.distancia_interpupilar_add} - DIP: ${evoluciones_notificadas.sublista.dip}`
 
-				console.log(evoluciones_notificadas.sublista)
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula_estudios"]').insertAdjacentHTML('beforeend', ((evoluciones_notificadas.sublista.bifocal_kriptok !== '') ? `<li class="copiable">BIFOCAL KRIPTOK</li>` : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula_estudios"]').insertAdjacentHTML('beforeend', ((evoluciones_notificadas.sublista.multifocal !== '') ? `<li class="copiable">MULTIFOCAL</li>` : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula_estudios"]').insertAdjacentHTML('beforeend', ((evoluciones_notificadas.sublista.bifocal_flat_top !== '') ? `<li class="copiable">BIFOCAL FLAP TOP</li>` : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula_estudios"]').insertAdjacentHTML('beforeend', ((evoluciones_notificadas.sublista.bifocal_ejecutivo !== '') ? `<li class="copiable">BIFOCAL EJECUTIVO</li>` : ''))
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="formula_estudios"]').insertAdjacentHTML('beforeend', ((evoluciones_notificadas.sublista.bifocal_ultex !== '') ? `<li class="copiable">BIFOCAL ULTEX</li>` : ''));
+
+				//plan
+				//------------------------------------------------
+				(JSON.parse(evoluciones_notificadas.sublista.plan).texto_html === '') ? evoluciones_notificadas.contenido.querySelector('[data-consulta="plan"]').parentElement.setAttribute('data-hidden', '') : evoluciones_notificadas.contenido.querySelector('[data-consulta="nota_b_oi"]').parentElement.removeAttribute('data-hidden');
+
+				evoluciones_notificadas.contenido.querySelector('[data-consulta="plan"]').insertAdjacentHTML('afterbegin', JSON.parse(evoluciones_notificadas.sublista.plan).texto_html) 
+
+				setTimeout(() => {
+					qs('#desplegable-evoluciones-contenido').scrollTo(0,0)
+				}, 10)
 
 			}
 

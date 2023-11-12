@@ -428,12 +428,12 @@
 					    trim(upper(?)),
 					    coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
 					    coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
-					    trim(upper(?)),
-					    trim(upper(?)),
-					    trim(upper(?)),
-					    trim(upper(?)),
-					    trim(upper(?)),
-					    trim(upper(?)),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+					    trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
 					    trim(upper(?)),
 					    trim(upper(?)),
 					    trim(upper(?)),
@@ -445,14 +445,14 @@
 					    ?::bigint,
 					    current_time,
 					    current_date
-	    			)
+	    			) returning id_evolucion
 	    		";
 
-	    		$resultado = $this->insertar($sql, $args);
+	    		$resultado = $this->i_pdo($sql, $args, true)->fetchColumn();
 
-	            if ($resultado == 'exito') {
+	            if (is_numeric($resultado)) {
 
-	            	return 'exito';
+	            	return $resultado;
 
 	            } else {
 
@@ -700,12 +700,12 @@
 				    formula_oi_grados_ciclo = trim(upper(?)),
 				    curva_od = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
 				    curva_oi = coalesce(NULLIF(?, ''), '0.00')::numeric(7,2),
-				    altura_pupilar_od = trim(upper(?)),
-				    altura_pupilar_oi = trim(upper(?)),
-				    distancia_interpupilar_od  = trim(upper(?)),
-				    distancia_interpupilar_oi  = trim(upper(?)),
-				    distancia_interpupilar_add = trim(upper(?)),
-				    dip = trim(upper(?)),
+				    altura_pupilar_od = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+				    altura_pupilar_oi = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+				    distancia_interpupilar_od  = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+				    distancia_interpupilar_oi  = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+				    distancia_interpupilar_add = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
+				    dip = trim(upper(coalesce(NULLIF(?, ''), '0')::character varying(100))),
 				    bifocal_kriptok  = trim(upper(?)),
 				    bifocal_flat_top = trim(upper(?)),
 				    bifocal_ultex    = trim(upper(?)),
@@ -721,7 +721,7 @@
 
             if ($resultado == 'exito') {
 
-            	return 'exito';
+            	return $id_evolucion;
 
             } else {
 
@@ -791,6 +791,61 @@
         }
 
         /*-----------------------------------------------------------------------------------*/
+        public function notificar_evolucion($args) {
+
+            $id_evolucion = &$args[0];
+
+            $sql = "
+            	select 1 where ? in (
+
+					select 
+						t.id_evolucion
+					FROM (select jsonb_array_elements_text(notificacion_evoluciones) as id_evolucion from miscelaneos.usuarios where id_usuario = ?) AS x
+					INNER JOIN principales.evoluciones as t on x.id_evolucion::bigint = t.id_evolucion
+					LEFT JOIN principales.historias as h using (id_historia)
+					
+				) 
+            ";
+
+            $resultado = $this->i_pdo($sql, [$id_evolucion, $_SESSION['usuario']['notificar_usuario']], true)->fetchColumn();
+
+            if (!$resultado) {
+
+	            $sql = "
+	                update miscelaneos.usuarios
+	                SET 
+	                    notificacion_evoluciones = jsonb_insert(
+	                        notificacion_evoluciones, 
+	                        '{0}', 
+	                        ?::jsonb
+	                        , false
+	                    )
+	                WHERE id_usuario = ?;
+	            ";
+
+	            $resultado = $this->actualizar($sql, [$id_evolucion, $_SESSION['usuario']['notificar_usuario']]);
+
+	            if ($resultado == 'exito') {
+
+	                $this->controlador_cambios_activar([]);
+
+	                return 'exito';
+
+	            } else {
+
+	                return 'ERROR'.$resultado;
+
+	            }
+
+            } else { 
+
+            	return 'repetido';
+
+            }
+
+
+        }
+
         public function notificaciones_evoluciones_consultar($args) {
 
             $sql = "

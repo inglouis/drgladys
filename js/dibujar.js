@@ -262,6 +262,7 @@ export class Canvas {
         propiedades['left'] = (typeof propiedades['left'] !== 'undefined') ? propiedades['left'] : 20;
         propiedades['width']  = (typeof propiedades['width']  !== 'undefined') ? propiedades['width']  : undefined;
         propiedades['height'] = (typeof propiedades['height'] !== 'undefined') ? propiedades['height'] : undefined;
+        propiedades['strokeWidth'] = (typeof propiedades['strokeWidth'] !== 'undefined') ? propiedades['strokeWidth'] : 1;
 
         this._elementos[elemento]['propiedades'] = propiedades
         this._elementos[elemento]['patron'] = patron
@@ -290,7 +291,8 @@ export class Canvas {
                 top: th._elementos[elemento].propiedades.top,
                 left: th._elementos[elemento].propiedades.left,
                 fill: th._elementos[elemento].propiedades.fill,
-                stroke: th._elementos[elemento].propiedades.stroke
+                stroke: th._elementos[elemento].propiedades.stroke,
+                strokeWidth: th._elementos[elemento].propiedades.strokeWidth
             }
    
             path.set(props);

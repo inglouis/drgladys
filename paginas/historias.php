@@ -39,6 +39,12 @@
       <?php
         include_once('../estructura/reportes_scripts.php');
       ?>
+
+      <style type="text/css">
+        #body {
+          overflow: hidden;
+        }
+      </style>
   </head>
     
   <!----------------------------------------- CUERPO -------------------------------------- -->
@@ -287,76 +293,155 @@
         <div id="desplegable-evoluciones-contenido" data-scroll>
           
           <div class="cabecera">
-            Información de la evolución del paciente: <b></b>
+            Información de la evolución del paciente: <div style="font-weight: bold" class="evolucion-desplazable-limpiar"></div>
           </div>
 
           <div>
             <label class="title">Nota inicial:</label>
-            <div data-consulta="nota" class="contenido copiable" title="Click para copiar al portapapeles"></div>
+            <div data-consulta="nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
           </div>
 
           <div>
             <label class="title">Agudeza visual - 4m:</label>
-            <div data-consulta="agudeza_4" class="contenido"></div>
+            <div data-consulta="agudeza_4" class="contenido evolucion-desplazable-limpiar"></div>
           </div>
 
           <div >
             <label class="subtitle">Pruebas:</label>
-            <ul data-consulta="agudeza_4_pruebas"></ul>
+            <ul data-consulta="agudeza_4_pruebas" class="evolucion-desplazable-limpiar"></ul>
           </div>
 
           <div>
             <label class="title">Agudeza visual - 1m:</label>
-            <div data-consulta="agudeza_1" class="contenido"></div>
+            <div data-consulta="agudeza_1" class="contenido evolucion-desplazable-limpiar"></div>
           </div>
 
           <div >
             <label class="subtitle">Pruebas:</label>
-            <ul data-consulta="agudeza_1_pruebas"></ul>
+            <ul data-consulta="agudeza_1_pruebas" class="evolucion-desplazable-limpiar"></ul>
           </div>
 
           <div>
             <label class="title">Agudeza visual - Lectura:</label>
-            <div data-consulta="agudeza_lectura" class="contenido"></div>
+            <div data-consulta="agudeza_lectura" class="contenido evolucion-desplazable-limpiar"></div>
           </div>
 
-          <div >
+          <div>
             <label class="subtitle">Pruebas:</label>
-            <ul data-consulta="agudeza_lectura_pruebas"></ul>
+            <ul data-consulta="agudeza_lectura_pruebas" class="evolucion-desplazable-limpiar"></ul>
           </div>
 
           <section class="dato-simple">
             
             <div>
               <label class="title">Estereopsis:</label>
-              <div data-consulta="estereopsis" class="contenido"></div>
+              <div data-consulta="estereopsis" class="contenido evolucion-desplazable-limpiar"></div>
             </div>
 
             <div>
               <label class="title">Ishihara:</label>
-              <div data-consulta="test" class="contenido"></div>
+              <div data-consulta="test" class="contenido evolucion-desplazable-limpiar"></div>
             </div>
 
             <div>
               <label class="title">Stereo Fly:</label>
-              <div data-consulta="reflejo" class="contenido"></div>
+              <div data-consulta="reflejo" class="contenido evolucion-desplazable-limpiar"></div>
             </div>
 
           </section>
 
           <div>
             <label class="title">Prueba realizada:</label>
-            <div data-consulta="pruebas" class="contenido copiable"></div>
+            <div data-consulta="pruebas" class="contenido copiable evolucion-desplazable-limpiar"></div>
           </div>
 
           <div>
             <label class="subtitle">Nota de la prueba:</label>
-            <div data-consulta="pruebas_nota" class="contenido copiable" title="Click para copiar al portapapeles"></div>
+            <div data-consulta="pruebas_nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
           </div>
 
           <div>
             <label class="subtitle">Nota de la prueba de motilidad:</label>
-            <div data-consulta="motilidad_nota" class="contenido copiable" title="Click para copiar al portapapeles"></div>
+            <div data-consulta="motilidad_nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">RX:</label>
+            <div data-consulta="rx" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">RX Cicloplegia:</label>
+            <div data-consulta="rx_ciclo" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">Biomicroscopía OD:</label>
+            <div data-consulta="nota_b_od" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Biomicroscopía OI:</label>
+            <div data-consulta="nota_b_oi" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Fondo de ojo OD:</label>
+            <div data-consulta="nota_f_od" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Fondo de ojo OI:</label>
+            <div data-consulta="nota_f_oi" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">PIO:</label>
+            <div data-consulta="pio" class="contenido evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div >
+            <label class="title">Estudios:</label>
+            <ul data-consulta="referencias" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div >
+            <label class="title">IDX:</label>
+            <ul data-consulta="idx" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div>
+            <label class="title">Fórmula:</label>
+            <div data-consulta="formula" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">Curva base:</label>
+            <div data-consulta="curva" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <section class="dato-simple">
+
+            <div>
+              <label class="title">Altura pupilar:</label>
+              <div data-consulta="altura_pupilar" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+            <div>
+              <label class="title">Distancia interpupilar:</label>
+              <div data-consulta="interpupilar" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+          </section>
+
+          <div >
+            <label class="title">Estudios focales:</label>
+            <ul data-consulta="formula_estudios" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div>
+            <label class="title">Plan:</label>
+            <div data-consulta="plan" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
           </div>
 
         </div>

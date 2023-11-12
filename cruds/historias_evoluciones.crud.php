@@ -16,9 +16,21 @@
         <?php echo $_SESSION['botones']['reportes_editar']?>
       </button>
 
-      <button class="notificar btn btn-notificar" title="Notificar evolución">
-        <?php echo $_SESSION['botones']['evoluciones_notificar']?>
-      </button>
+      <?php 
+        if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+      ?>
+        <button class="notificar btn btn-notificar" title="Notificar evolución" data-hidden>
+          <?php echo $_SESSION['botones']['evoluciones_notificar']?>
+        </button>
+      <?php 
+        } else if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+      ?>
+        <button class="notificar btn btn-notificar" title="Notificar evolución">
+          <?php echo $_SESSION['botones']['evoluciones_notificar']?>
+        </button>
+      <?php 
+        }
+      ?>   
       
       <div class="crud-eliminar-contenedor" style="position: relative;">
         
@@ -960,12 +972,12 @@
           
                     <button class="bio-dibujar" data-color="black"></button>
                     <button class="bio-dibujar" data-color="#ca3f3f"></button>
-                    <button class="bio-dibujar" data-color="blue"></button>
-                    <button class="bio-dibujar" data-color="rgb(255 207 34)"></button>
+                    <button class="bio-dibujar" data-color="#62b9ff"></button>
+                    <button class="bio-dibujar" data-color="#de564c"></button>
                     <button class="bio-dibujar" data-color="orange"></button>
                     <button class="bio-dibujar" data-color="#529b62"></button>
-                    <button class="bio-dibujar" data-color="purple"></button>
-                    <button class="bio-dibujar" data-color="pink"></button>
+                    <button class="bio-dibujar" data-color="#8543a2"></button>
+                    <button class="bio-dibujar" data-color="#fda3b3"></button>
                     <button class="bio-dibujar" data-color="#8d8d8d"></button>
 
                   </div>
@@ -996,39 +1008,65 @@
                     
                     <button id="dendritis" title="Dendritis">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="116.551 73 42.58 44.54">
-                        <path d="M 126 73 q -12 1 -4 5 C 125 80 130 82 122 84 c -7 2 -6 5 -3 6 c 2 1 5 2 8 3 c 13 5 -7 5 -10 8 s 10 4 10 7 s -9 1 -9 4 s 8 7 29 5 c 18 -4 13 -7 4 -11 c -12 -4 3 -4 4 -7.2649 c 1 -4.7351 -5 -3 -8 -4.7351 c -6.2646 -5.4146 11 -1 12 -8 c -1 -5 -16.2245 0.3909 -17 -3 c -1.1372 -5.4146 7 -2 10 -5 c 1 -2 -3 -4 -10 -4 C 138 74 135 73 131 73 Z" stroke="#529b62" stroke-width="1" fill="none"/>
+                        <path stroke-width="2.5" d="M 126 73 q -12 1 -4 5 C 125 80 130 82 122 84 c -7 2 -6 5 -3 6 c 2 1 5 2 8 3 c 13 5 -7 5 -10 8 s 10 4 10 7 s -9 1 -9 4 s 8 7 29 5 c 18 -4 13 -7 4 -11 c -12 -4 3 -4 4 -7.2649 c 1 -4.7351 -5 -3 -8 -4.7351 c -6.2646 -5.4146 11 -1 12 -8 c -1 -5 -16.2245 0.3909 -17 -3 c -1.1372 -5.4146 7 -2 10 -5 c 1 -2 -3 -4 -10 -4 C 138 74 135 73 131 73 Z" stroke="#529b62"  fill="none"/>
                       </svg>
                     </button>
 
                     <button id="ulceras_redondas" title="Ulceras redondas">
-                      <svg id="eCxcd3DV0lf1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(15 15)" fill="rgba(210,219,237,0)" stroke="#529b62"/></svg>
+                      <svg id="eCxcd3DV0lf1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(15 15)" fill="rgba(210,219,237,0)" stroke="#529b62" stroke-width="2.5"/></svg>
                     </button>
 
                     <button id="lente_intraocular" title="Lente intraocular">
-                      <svg cache-id="c22f2e73c95946b6b41776ce31cf12cc" id="ewu43p8jZvo1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(30 30)" fill="rgba(210,219,237,0)" stroke="#8d8d8d"/><path d="M17.670667,30c-10.905211-6.154473-15.627304-20.125299,0-30" fill="none" stroke="#8d8d8d" stroke-width="0.5"/><path d="M42.329333,30c10.640452,7.179181,13.221354,21.949768,0,30" fill="none" stroke="#8d8d8d" stroke-width="0.5"/><ellipse rx="6" ry="6" transform="translate(30 30)" fill="none" stroke="#8d8d8d"/></svg>
+                      <svg cache-id="c22f2e73c95946b6b41776ce31cf12cc" id="ewu43p8jZvo1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><ellipse rx="12.329333" ry="12.329332" transform="translate(30 30)" fill="rgba(210,219,237,0)" stroke="#8d8d8d" stroke-width="2.5"/><path d="M17.670667,30c-10.905211-6.154473-15.627304-20.125299,0-30" fill="none" stroke="#8d8d8d" stroke-width="2.5"/><path d="M42.329333,30c10.640452,7.179181,13.221354,21.949768,0,30" fill="none" stroke="#8d8d8d" stroke-width="2.5"/><ellipse rx="6" ry="6" transform="translate(30 30)" fill="none" stroke="#8d8d8d"/></svg>
                     </button>
 
                     <button id="congestion_ocular" title="Congestión ocular">  
-                      <svg id="eZafsCov2LJ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(0 25.227145)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(50.007996 25.227145)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="" transform="translate(50.007996-.01)" fill="none" stroke="#3f5787" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0-2.659433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-2.669433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0-4.749433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(0 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-4.759433)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                      <svg id="eZafsCov2LJ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="" transform="translate(0 25.227145)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="" transform="translate(50.007996 25.227145)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="" transform="translate(50.007996-.01)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(0-2.659433)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(0 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 22.567712)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(0 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 24.647033)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-2.669433)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(0-4.749433)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(0 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996 20.477712)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M0,19.933023h9.992004" transform="translate(50.007996-4.759433)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/></svg>
                     </button>
 
                     <button id="papilas_arriba" title="Papilas arriba">    
-                      <svg id="eNjmdPTogGZ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243-6.258423-10.268734)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 3.757494-18.102782)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 14.773409-23.93683)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 26.457937-29.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 38.457937-34.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 52.457937-38.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 65.457937-41.111274)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                      <svg id="eNjmdPTogGZ1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243-6.258423-10.268734)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 3.757494-18.102782)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 14.773409-23.93683)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 26.457937-29.111274)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 38.457937-34.111274)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 52.457937-38.111274)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(1 0 0 1.003243 65.457937-41.111274)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/></svg>
                     </button>
 
                     <button id="papilas_abajo" title="Papilas abajo">
-                      <svg id="eKDjukC59nm1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 22.617808 56.769524)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 33.633723 66.990132)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 45.318251 75.741204)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 57.318253 81.575252)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 71.318253 84.492276)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 84.318252 87.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 97.96803 89.4093)" fill="none" stroke="#ca3f3f" stroke-width="0.5"/></svg>
+                      <svg id="eKDjukC59nm1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 90 50" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 22.617808 56.769524)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 33.633723 66.990132)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 45.318251 75.741204)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 57.318253 81.575252)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 71.318253 84.492276)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 84.318252 87.4093)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/><path d="M10.784961,45.026368c.423796,2.176743.686605,2.929212,1.806605,4.462512c1.5,1.836257,4.379268,1.774804,5.54,0c1.070963-1.53327.982978-1.974812,1.669311-4.462513" transform="matrix(-1 0 0-1.003243 97.96803 89.4093)" fill="none" stroke="#ca3f3f" stroke-width="2.5"/></svg>
                     </button>
 
                     <button id="cicatriz_linea_izquierda" title="Cicatriz línea izquierda">
-                      <svg id="eAjo27iYgT81" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M15,15l-30-30" transform="translate(15 15)" fill="none" stroke="#000" stroke-width="0.6" stroke-miterlimit="6"/></svg>
+                      <svg id="eAjo27iYgT81" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M15,15l-30-30" transform="translate(15 15)" fill="none" stroke="#000" stroke-miterlimit="6" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="cicatriz_linea_derecha" title="Cicatriz línea derecha">
+                      <svg id="eYGgc85ONHz1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 30 30" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M15,15l-30-30" transform="matrix(.004802 0.999988-.999988 0.004802 15.071853 15.071853)" fill="none" stroke="#000" stroke-width="2.5" stroke-miterlimit="6"/></svg>
+                    </button>
+
+                    <button id="cicatriz_curva_izquierda" title="Cicatriz curva izquierda">
+                      <svg id="eY8R3S6vQdq1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 70 90" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M55.331512,76.859199c0,0-13.299621,3.80734-20.331512,3.741496s-15.115352,1.834351-21.003112-3.741496-7.456833-22.105993-7.482992-31.859199s1.237851-26.072729,7.215743-31.478986s14.330499-2.876883,21.270361-2.672497s20.331512,2.672497,20.331512,2.672497" transform="translate(0 0.000001)" fill="none" stroke="black" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="cicatriz_curva_derecha" title="Cicatriz curva derecha">
+                      <svg id="exkEDzLrOBT1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 70 90" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M19.647477,16.177422c0,0,10.757773-4.323389,19.838718-6.311862s21.755256-5.975467,30.457406,0s10.221826,23.159429,10.235686,35.13444-1.555871,29.357441-10.235686,35.267104-20.705831,2.007771-29.708454,0-20.58767-7.276619-20.58767-7.276619" transform="translate(-14.913392-.054795)" fill="none" stroke="black" stroke-width="2.5"/><path d="" fill="none" stroke="black" stroke-width="2.5"/></svg>
                     </button>
                     
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
-                    <button title="---">-</button>
+                    <button id="cataratas_1" title="Cataratas">
+                      <svg id="e2ckOLKuDTx1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M0,29.985638L9.873448,0L20,40L29.46694,0L40,29.985638" fill="none" stroke="black" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="cataratas_2" title="Cataratas">
+                      <svg cache-id="64f30619bf824146bbe5b2ffb5e1f984" id="ejX6qcbzMfF1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M-0.000002,9.910635L9.941195,40L19.999999,0L30.129545,40L39.999998,9.910635" transform="translate(.000002 0)" fill="none" stroke="black" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="cataratas_3" title="Cataratas">
+                      <svg id="e3Yi10dPLJV1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.108489,0L40,10.15791L0,20l40,9.947408L10.108489,40" fill="none" stroke="black" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="cataratas_4" title="Cataratas">
+                      <svg id="eDyG4R5kJ6v1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 40 40" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M29.897987,-0.000002L0,10.023287l40,9.976712L0,30.216652l29.897987,9.783346" transform="translate(0 0.000002)" fill="none" stroke="black" stroke-width="2.5"/></svg>
+                    </button>
+
+                    <button id="pliegues_epicantales_pronunciados" title="Pliegues epicantales pronunciados">
+                      <svg id="evDaGXly1N21" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 160 100" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M10.264146,100c0,0,10.140372-34.701505,10.18871-50s-9.860042-50-9.860042-50" fill="none" stroke="#af3613" stroke-width="2.5"/><path d="M150.276741,0c0,0-10.18871,34.691738-10.18871,50s10.18871,50,10.18871,50" fill="none" stroke="#af3613" stroke-width="2.5"/><line x1="-67.459083" y1="0.164334" x2="67.459083" y2="-0.164334" transform="translate(80 10)" fill="none" stroke="#af3613"/><line x1="-62.36469" y1="0.228242" x2="62.364691" y2="-0.228242" transform="translate(80.270519 30)" fill="none" stroke="#af3613"/><line x1="-59.817512" y1="0" x2="59.817513" y2="0" transform="translate(80.270519 50)" fill="none" stroke="#af3613"/><line x1="-62.364728" y1="0.142651" x2="62.364728" y2="-0.142651" transform="translate(80 69)" fill="none" stroke="#af3613"/><line x1="-67.459083" y1="0.427953" x2="67.459083" y2="-0.427953" transform="translate(80 90)" fill="none" stroke="#af3613"/></svg>
+                    </button>
 
                   </div>
 
@@ -1068,14 +1106,14 @@
                   <div class="dibujar-colores-v">
           
                     <button class="fondo-dibujar" data-color="black"></button>
-                    <button class="fondo-dibujar" data-color="red"></button>
-                    <button class="fondo-dibujar" data-color="blue"></button>
-                    <button class="fondo-dibujar" data-color="yellow"></button>
+                    <button class="fondo-dibujar" data-color="#ca3f3f"></button>
+                    <button class="fondo-dibujar" data-color="#62b9ff"></button>
+                    <button class="fondo-dibujar" data-color="#de564c"></button>
                     <button class="fondo-dibujar" data-color="orange"></button>
-                    <button class="fondo-dibujar" data-color="green"></button>
-                    <button class="fondo-dibujar" data-color="purple"></button>
-                    <button class="fondo-dibujar" data-color="pink"></button>
-                    <button class="fondo-dibujar" data-color="brown"></button>
+                    <button class="fondo-dibujar" data-color="#529b62"></button>
+                    <button class="fondo-dibujar" data-color="#8543a2"></button>
+                    <button class="fondo-dibujar" data-color="#fda3b3"></button>
+                    <button class="fondo-dibujar" data-color="#8d8d8d"></button>
 
                   </div>
 

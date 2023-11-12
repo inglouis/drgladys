@@ -929,7 +929,7 @@ export class Herramientas {
 				}
 				
 				contenedores[i].selectedIndex = 0
-			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV') {
+			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV' || contenedores[i].tagName === 'UL') {
 
 				if(contenedores[i].classList.contains('contenedor-consulta')) {
 
@@ -941,6 +941,10 @@ export class Herramientas {
 
 					contenedores[i].innerHTML = ''
 
+				} else {
+
+					contenedores[i].innerHTML = ''
+					
 				}
 
 			} else if (contenedores[i].classList.contains('contenedor-personalizable')) {

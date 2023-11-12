@@ -46,11 +46,11 @@
       <!------------------------------------------------------------------------------------------->
       <!------------------------------- DESPLEGABLE CONTACTOS ------------------------------------->
       <!------------------------------------------------------------------------------------------->
-      <button id="desplegable-abrir-contactos" class="desplegable-abrir" title="Contactos" style="height: 50px; top: 150px;">
+      <button id="desplegable-abrir-contactos" class="desplegable-abrir" title="Contactos" style="height: 50px; top: 175px;">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-left" class="svg-inline--fa fa-caret-left fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path></svg>
       </button>
 
-      <div id="desplegable-contactos" class="desplegable-oculto" style="height: fit-content; background: #ffffffe6; top: 150px;">
+      <div id="desplegable-contactos" class="desplegable-oculto" style="height: fit-content; background: #ffffffe6; top: 175px;">
         <section>
           <button id="desplegable-cerrar-contactos" class='desplegable-cerrar'>
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
@@ -106,11 +106,11 @@
       <!------------------------------------------------------------------------------------------->
       <!------------------------------- DESPLEGABLE EDICIONES ------------------------------------->
       <!------------------------------------------------------------------------------------------->
-      <button id="desplegable-abrir-ediciones" class="desplegable-abrir" title="Edición de parámetros generales" style="top: 205px; background: #198754; height: 50px">
+      <button id="desplegable-abrir-ediciones" class="desplegable-abrir" title="Edición de parámetros generales" style="top: 230px; background: #198754; height: 50px">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-left" class="svg-inline--fa fa-caret-left fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M192 127.338v257.324c0 17.818-21.543 26.741-34.142 14.142L29.196 270.142c-7.81-7.81-7.81-20.474 0-28.284l128.662-128.662c12.599-12.6 34.142-3.676 34.142 14.142z"></path></svg>
       </button>
 
-      <div id="desplegable-ediciones" class="desplegable-oculto" style="height: 420px; background: linear-gradient(0deg, rgb(234 255 236 / 83%) 0%, rgba(255,255,255,1) 92%, rgb(255 255 255 / 75%) 100%); width: fit-content; top: 205px">
+      <div id="desplegable-ediciones" class="desplegable-oculto" style="height: 420px; background: linear-gradient(0deg, rgb(234 255 236 / 83%) 0%, rgba(255,255,255,1) 92%, rgb(255 255 255 / 75%) 100%); width: fit-content; top: 230px">
         <section style="height: 100%">
           <button id="desplegable-cerrar-ediciones" class='desplegable-cerrar' style="height: 100%; background: #198754;">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
