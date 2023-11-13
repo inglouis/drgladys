@@ -156,7 +156,7 @@
                 padding: 0px 5px;
               ">
                 
-                <button id="antecedentes-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
+                <button id="antecedentes-insertar" class="btn btn-nuevo tooltip-filtro" data-hidden>+</button>
 
               </div>
 

@@ -3104,10 +3104,13 @@ span.numeracion {
 
 
 #crud-recipes-contenedor .recipe-notificar {
-    background: #2196f3;
-    color: #fff;
-    width: 13em;
     padding: 10px 0px !important;
+    background: #ff8100;
+    color: #fff;
+    width: 45px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #crud-recipes-contenedor .recipe-previa {
@@ -4336,6 +4339,22 @@ div#tabla-notificados-contenedor .titulo::after {
     background: black;
 }
 
+#tabla-evoluciones-contenedor .btn-eliminar {
+    background: #009688;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: none;
+    padding: 5px;
+}
+
+#tabla-evoluciones-contenedor .btn-eliminar:hover {
+    background: black !important;
+}
+
 #tabla-evoluciones-notificados .eliminar-contenedor {
     right: 50px !important;
     left: unset;
@@ -5153,12 +5172,12 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-ocupaciones::after {
+#ocupaciones-insertar::after {
     width: 200px;
 }
 
-#insertar-ocupaciones:hover::after {
-    content: "Agregar Nueva Ocupación";
+#ocupaciones-insertar:hover::after {
+    content: "Agregar nueva ocupación";
     opacity: 1;
     width:230px;
 }
@@ -5200,12 +5219,12 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------religiones--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-religiones::after {
+#religiones-insertar::after {
     width: 200px;
 }
 
-#insertar-religiones:hover::after {
-    content: "Agregar Nueva Religiòn";
+#religiones-insertar:hover::after {
+    content: "Agregar nueva religiòn";
     opacity: 1;
     width:230px;
 }
@@ -5304,14 +5323,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------estado_civil--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-estado_civil::after {
-    width: 200px;
+#estado_civil-insertar::after {
+    width: 250px;
 }
 
-#insertar-estado_civil:hover::after {
-    content: "Agregar Nuevo Estado";
+#estado_civil-insertar:hover::after {
+    content: "Agregar nuevo estado civil";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 .estado_civil-contenedor {
     width: 99%;
@@ -5398,14 +5417,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------parentescos--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-parentescos::after {
-    width: 200px;
+#parentescos-insertar::after {
+    width: 230px;
 }
 
-#insertar-parentescos:hover::after {
-    content: "Agregar Nuevo Parentesco";
+#parentescos-insertar:hover::after {
+    content: "Agregar nuevo parentesco";
     opacity: 1;
-    width:230px;
+    width:250px;
 }
 .parentescos-contenedor {
     width: 99%;
@@ -5445,14 +5464,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------diagnosticos--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-diagnosticos::after {
-    width: 200px;
+#diagnosticos-insertar::after {
+    width: 230px;
 }
 
-#insertar-diagnosticos:hover::after {
-    content: "Agregar Nueva Ocupación";
+#diagnosticos-insertar:hover::after {
+    content: "Agregar nuevo diagnóstico";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 .diagnosticos-contenedor {
     width: 99%;
@@ -5540,14 +5559,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- TRATAMIENTOS --------------------*/
 /*-----------------------------------------------------*/
-#insertar-tratamientos::after {
-    width: 200px;
+#tratamientos-insertar::after {
+    width: 250px;
 }
 
-#insertar-tratamientos:hover::after {
+#tratamientos-insertar:hover::after {
     content: "Agregar nuevo tratamiento";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .tratamientos-contenedor {
@@ -5619,14 +5638,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- PRESENTACIONES ------------------*/
 /*-----------------------------------------------------*/
-#insertar-presentaciones::after {
-    width: 200px;
+#presentaciones-insertar::after {
+    width: 250px;
 }
 
-#insertar-presentaciones:hover::after {
+#presentaciones-insertar:hover::after {
     content: "Agregar nueva presentación";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .presentaciones-contenedor {
@@ -5687,7 +5706,7 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 #presentaciones-insertar:hover::after {
-    content: "Cargar nuevo presentaciones";
+    content: "Cargar nueva presentación";
 }
 
 #regresar-medicamentos .tooltip-filtro-reverso:after {
@@ -5698,14 +5717,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- MEDICAMENTOS --------------------*/
 /*-----------------------------------------------------*/
-#insertar-medicamentos::after {
-    width: 200px;
+#medicamentos-insertar::after {
+    width: 250px;
 }
 
-#insertar-medicamentos:hover::after {
+#medicamentos-insertar:hover::after {
     content: "Agregar nuevo medicamento";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .medicamentos-contenedor {
@@ -5823,14 +5842,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- GENERICOS -----------------------*/
 /*-----------------------------------------------------*/
-#insertar-genericos::after {
-    width: 200px;
+#genericos-insertar::after {
+    width: 340px;
 }
 
-#insertar-genericos:hover::after {
-    content: "Agregar Nueva Medicina Genérica";
+#genericos-insertar:hover::after {
+    content: "Agregar nuevo medicamento genérico";
     opacity: 1;
-    width:230px;
+    width:350px;
 }
 .genericos-contenedor {
     width: 99%;
@@ -5870,12 +5889,12 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- REFERENCIAS ---------------------*/
 /*-----------------------------------------------------*/
-#insertar-referencias::after {
+#referencias-insertar::after {
     width: 200px;
 }
 
-#insertar-referencias:hover::after {
-    content: "Agregar Nueva Referencia";
+#referencias-insertar:hover::after {
+    content: "Agregar nueva referencia";
     opacity: 1;
     width:230px;
 }
@@ -5905,14 +5924,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- REFERIDOS ---------------------*/
 /*-----------------------------------------------------*/
-#insertar-referidos::after {
-    width: 200px;
+#referidos-insertar::after {
+    width: 260px;
 }
 
-#insertar-referidos:hover::after {
-    content: "Agregar Nuevo Referido";
+#referidos-insertar:hover::after {
+    content: "Agregar nuevo médico referido";
     opacity: 1;
-    width:230px;
+    width:270px;
 }
 
 #tabla-referidos tbody tr td:nth-child(1) {
