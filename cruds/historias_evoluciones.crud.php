@@ -561,11 +561,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_4" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                    <input type="text" data-valor="agudeza_od_4" class="evoluciones-valores upper" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                    <input type="text" data-valor="agudeza_oi_4" class="evoluciones-valores upper" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -609,11 +609,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_1" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                    <input type="text" data-valor="agudeza_od_1" class="evoluciones-valores upper" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                    <input type="text" data-valor="agudeza_oi_1" class="evoluciones-valores upper" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -657,11 +657,11 @@
 
                 <div style="margin: 0px; flex-direction: row; column-gap: 10px;">
                   <div>    
-                    <input type="text" data-valor="agudeza_od_lectura" class="evoluciones-valores upper fracciones" placeholder="OD - 00/00">
+                    <input type="text" data-valor="agudeza_od_lectura" class="evoluciones-valores upper" placeholder="OD - 00/00">
                   </div>
 
                   <div>
-                    <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper fracciones" placeholder="OI - 00/00">
+                    <input type="text" data-valor="agudeza_oi_lectura" class="evoluciones-valores upper" placeholder="OI - 00/00">
                   </div>
 
                   <div style="width: fit-content;" class="correccion">
@@ -703,7 +703,7 @@
 
                 <div>  
                   <label>Estereopsis (SEG)</label>  
-                  <input type="text" data-valor="estereopsis" class="evoluciones-valores upper" placeholder="00s">
+                  <input type="number" data-valor="estereopsis" class="evoluciones-valores upper" placeholder="00s">
                 </div>
 
                 <div>
@@ -713,7 +713,7 @@
 
                 <div>
                   <label>Stereo Fly (SEG)</label>
-                  <input type="text" data-valor="reflejo" class="evoluciones-valores upper" placeholder="00s">
+                  <input type="number" data-valor="reflejo" class="evoluciones-valores upper" placeholder="00s">
                 </div>  
 
               </div>
@@ -904,7 +904,7 @@
                     <input type="text" data-valor="rx_od_grados" class="evoluciones-valores upper" placeholder="0">
                     <span   class="informe-grado">°</span>
                     <span   class="informe-igual">=</span>
-                    <input type="text" data-valor="rx_od_resultado" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                    <input type="text" data-valor="rx_od_resultado" class="evoluciones-valores upper" placeholder="00/00">
                   </div>
 
                   <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -917,7 +917,7 @@
                     <input type="text" data-valor="rx_oi_grados" class="evoluciones-valores upper" placeholder="0">
                     <span   class="informe-grado">°</span>
                     <span   class="informe-igual">=</span>
-                    <input type="text" data-valor="rx_oi_resultado" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                    <input type="text" data-valor="rx_oi_resultado" class="evoluciones-valores upper" placeholder="00/00">
                   </div>
                 </div>
 
@@ -940,7 +940,7 @@
                     <input type="text" data-valor="rx_od_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
                     <span   class="evolucion-grado">°</span>
                     <span   class="evolucion-igual">=</span>
-                    <input type="text" data-valor="rx_od_resultado_ciclo" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                    <input type="text" data-valor="rx_od_resultado_ciclo" class="evoluciones-valores upper" placeholder="00/00">
                   </div>
 
                   <div style="flex-direction: row; justify-content: center; align-items: center;">
@@ -953,7 +953,7 @@
                     <input type="text" data-valor="rx_oi_grados_ciclo" class="evoluciones-valores upper" placeholder="0">
                     <span   class="evolucion-grado">°</span>
                     <span   class="evolucion-igual">=</span>
-                    <input type="text" data-valor="rx_oi_resultado_ciclo" class="evoluciones-valores upper fracciones" placeholder="00/00">
+                    <input type="text" data-valor="rx_oi_resultado_ciclo" class="evoluciones-valores upper" placeholder="00/00">
                   </div>
                 </div>
 
@@ -1360,7 +1360,7 @@
 
                 <div>    
                   <label>DIP</label>
-                  <input type="text" data-valor="dip" class="evoluciones-valores upper" placeholder="00mm">
+                  <input type="number" data-valor="dip" class="evoluciones-valores upper" placeholder="00mm">
                 </div>
 
               </div>

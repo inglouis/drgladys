@@ -22,6 +22,37 @@ var evoluciones_signos = {
 	"": '-'
 }
 
+var elementos = {
+ "el1": qs('[data-valor="rx_od_valor_1"]'),
+ "el2": qs('[data-valor="rx_od_valor_2"]'),
+ "el3": qs('[data-valor="rx_od_grados"]'),
+ "el4": qs('[data-valor="rx_oi_valor_1"]'),
+ "el5": qs('[data-valor="rx_oi_valor_2"]'),
+ "el6": qs('[data-valor="rx_oi_grados"]'),
+ "el7": qs('[data-valor="rx_od_valor_1_ciclo"]'),
+ "el8": qs('[data-valor="rx_od_valor_2_ciclo"]'),
+ "el9": qs('[data-valor="rx_od_grados_ciclo"]'),
+ "el10": qs('[data-valor="rx_oi_valor_1_ciclo"]'),
+ "el11": qs('[data-valor="rx_oi_valor_2_ciclo"]'),
+ "el12": qs('[data-valor="rx_oi_grados_ciclo"]'),
+ "el13": qs('[data-valor="formula_od_valor_1_ciclo"]'),
+ "el14": qs('[data-valor="formula_od_valor_2_ciclo"]'),
+ "el15": qs('[data-valor="formula_od_grados_ciclo"]'),
+ "el16": qs('[data-valor="formula_oi_valor_1_ciclo"]'),
+ "el17": qs('[data-valor="formula_oi_valor_2_ciclo"]'),
+ "el18": qs('[data-valor="formula_oi_grados_ciclo"]'),
+ "el19": qs('[data-valor="curva_od"]'),
+ "el20": qs('[data-valor="curva_oi"]'),
+ "el21": qs('[data-valor="pio_od"]'),
+ "el22": qs('[data-valor="pio_oi"]'),
+ "el23": qs('[data-valor="altura_pupilar_od"]'),
+ "el24": qs('[data-valor="altura_pupilar_oi"]'),
+ "el25": qs('[data-valor="distancia_interpupilar_od"]'),
+ "el26": qs('[data-valor="distancia_interpupilar_oi"]'),
+ "el27": qs('[data-valor="distancia_interpupilar_add"]'),
+ "el28": qs('[data-valor="dip"]')
+}
+
 /////////////////////////////////////////////////////
 ///
 evoluciones['crud']['propiedadesTr'] = {
@@ -44,7 +75,7 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		//examen oftalmológico
 		//------------------------------------------------
-		contenedor.querySelector('[data-template="agudeza_4"] div').innerHTML = `OD: ${e.sublista.agudeza_od_4} - OI: ${e.sublista.agudeza_oi_4}`
+		contenedor.querySelector('[data-template="agudeza_4"] div').innerHTML = `OD: ${decodeURIComponent(e.sublista.agudeza_od_4)} - OI: ${decodeURIComponent(e.sublista.agudeza_oi_4)}`
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.correccion_4 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.allen_4 === 'X') ? '<li>ALLEN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.jagger_4 === 'X') ? '<li>JAGGER</li>' : '')) 
@@ -54,7 +85,7 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.fracciones_4 === 'X') ? '<li>FRACCIONES</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_4_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.letras_4 === 'X') ? '<li>LETRAS</li>' : ''))
 
-		contenedor.querySelector('[data-template="agudeza_1"] div').innerHTML = `OD:${e.sublista.agudeza_od_4} - OI: ${e.sublista.agudeza_oi_1}`
+		contenedor.querySelector('[data-template="agudeza_1"] div').innerHTML = `OD:${decodeURIComponent(e.sublista.agudeza_od_1)} - OI: ${decodeURIComponent(e.sublista.agudeza_oi_1)}`
 		contenedor.querySelector('[data-template="agudeza_1_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.correccion_1 === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_1_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.allen_1 === 'X') ? '<li>ALLEN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_1_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.jagger_1 === 'X') ? '<li>JAGGER</li>' : '')) 
@@ -64,7 +95,7 @@ evoluciones['crud']['propiedadesTr'] = {
 		contenedor.querySelector('[data-template="agudeza_1_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.fracciones_1 === 'X') ? '<li>FRACCIONES</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_1_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.letras_1 === 'X') ? '<li>LETRAS</li>' : '')) 
 
-		contenedor.querySelector('[data-template="agudeza_lectura"] div').innerHTML = `OD:${e.sublista.agudeza_od_4} - OI: ${e.sublista.agudeza_oi_lectura}`
+		contenedor.querySelector('[data-template="agudeza_lectura"] div').innerHTML = `OD:${decodeURIComponent(e.sublista.agudeza_od_lectura)} - OI: ${decodeURIComponent(e.sublista.agudeza_oi_lectura)}`
 		contenedor.querySelector('[data-template="agudeza_lectura_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.correccion_lectura === 'X') ? '<li>CORRECCIÓN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_lectura_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.allen_lectura === 'X') ? '<li>ALLEN</li>' : '')) 
 		contenedor.querySelector('[data-template="agudeza_lectura_pruebas"] ul').insertAdjacentHTML('afterbegin', ((e.sublista.jagger_lectura === 'X') ? '<li>JAGGER</li>' : '')) 
@@ -157,15 +188,15 @@ evoluciones['crud']['propiedadesTr'] = {
 		//rx
 		//------------------------------------------------
 		contenedor.querySelector('[data-template="rx"] div').insertAdjacentHTML('afterbegin', `
-			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1]}${e.sublista.rx_od_valor_1} ${evoluciones_signos[e.sublista.rx_od_signo_2]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados}° = ${decodeURIComponent(e.sublista.rx_od_resultado)}
 			<br>
-			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1]}${e.sublista.rx_oi_valor_1} ${evoluciones_signos[e.sublista.rx_oi_signo_2]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados}° = ${decodeURIComponent(e.sublista.rx_oi_resultado)}
 		`) 
 
 		contenedor.querySelector('[data-template="rx_ciclo"] div').insertAdjacentHTML('afterbegin', `
-			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${e.sublista.rx_od_resultado_ciclo}
+			OD: ${evoluciones_signos[e.sublista.rx_od_signo_1_ciclo]}${e.sublista.rx_od_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_od_signo_2_ciclo]}${e.sublista.rx_od_valor_2_ciclo} X ${e.sublista.rx_od_grados_ciclo}° = ${decodeURIComponent(e.sublista.rx_od_resultado_ciclo)}
 			<br>
-			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${e.sublista.rx_oi_resultado_ciclo}
+			OI: ${evoluciones_signos[e.sublista.rx_oi_signo_1_ciclo]}${e.sublista.rx_oi_valor_1_ciclo} ${evoluciones_signos[e.sublista.rx_oi_signo_2_ciclo]}${e.sublista.rx_oi_valor_2_ciclo} X ${e.sublista.rx_oi_grados_ciclo}° = ${decodeURIComponent(e.sublista.rx_oi_resultado_ciclo)}
 		`) 
 
 		//biomicroscopia
@@ -398,6 +429,45 @@ evoluciones['crud']['customBodyEvents'] = {
 				}
 			})
 
+			if (evoluciones.sublista.rx_od_valor_1 == false) {elementos['el1'].value = ''}
+			if (evoluciones.sublista.rx_od_valor_2 == false) {elementos['el2'].value = ''}
+			if (evoluciones.sublista.rx_od_grados == false) {elementos['el3'].value = ''}
+
+			if (evoluciones.sublista.rx_oi_valor_1 == false) {elementos['el4'].value = ''}
+			if (evoluciones.sublista.rx_oi_valor_2 == false) {elementos['el5'].value = ''}
+			if (evoluciones.sublista.rx_oi_grados == false) {elementos['el6'].value = ''}
+
+			if (evoluciones.sublista.rx_od_valor_1_ciclo == false) {elementos['el7'].value = ''}
+			if (evoluciones.sublista.rx_od_valor_2_ciclo == false) {elementos['el8'].value = ''}
+			if (evoluciones.sublista.rx_od_grados_ciclo == false) {elementos['el9'].value = ''}
+
+			if (evoluciones.sublista.rx_oi_valor_1_ciclo == false) {elementos['el10'].value = ''}
+			if (evoluciones.sublista.rx_oi_valor_2_ciclo == false) {elementos['el11'].value = ''}
+			if (evoluciones.sublista.rx_oi_grados_ciclo == false) {elementos['el12'].value = ''}
+
+			if (evoluciones.sublista.formula_od_valor_1_ciclo == false) {elementos['el13'].value = ''}
+			if (evoluciones.sublista.formula_od_valor_2_ciclo == false) {elementos['el14'].value = ''}
+			if (evoluciones.sublista.formula_od_grados_ciclo == false) {elementos['el15'].value = ''}
+
+			if (evoluciones.sublista.formula_oi_valor_1_ciclo == false) {elementos['el16'].value = ''}
+			if (evoluciones.sublista.formula_oi_valor_2_ciclo == false) {elementos['el17'].value = ''}
+			if (evoluciones.sublista.formula_oi_grados_ciclo == false) {elementos['el18'].value = ''}
+
+			if (evoluciones.sublista.curva_od == false) {elementos['el19'].value = ''}
+			if (evoluciones.sublista.curva_oi == false) {elementos['el20'].value = ''}
+
+			if (evoluciones.sublista.pio_od == false) {elementos['el21'].value = ''}
+			if (evoluciones.sublista.pio_oi == false) {elementos['el22'].value = ''}
+
+			if (evoluciones.sublista.altura_pupilar_od == false) {elementos['el23'].value = ''}
+			if (evoluciones.sublista.altura_pupilar_oi == false) {elementos['el24'].value = ''}
+
+			if (evoluciones.sublista.distancia_interpupilar_od == false) {elementos['el25'].value = ''}	
+			if (evoluciones.sublista.distancia_interpupilar_oi == false) {elementos['el26'].value = ''}
+
+			if (evoluciones.sublista.distancia_interpupilar_add == false) {elementos['el27'].value = ''}
+			if (evoluciones.sublista.dip == false) {elementos['el28'].value = ''}
+
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
 		}
@@ -501,6 +571,45 @@ evoluciones['crud']['customBodyEvents'] = {
 
 				}
 			})
+
+			if (evoluciones.sublista.rx_od_valor_1 == false) {elementos['el1'].value = ''}
+			if (evoluciones.sublista.rx_od_valor_2 == false) {elementos['el2'].value = ''}
+			if (evoluciones.sublista.rx_od_grados == false) {elementos['el3'].value = ''}
+
+			if (evoluciones.sublista.rx_oi_valor_1 == false) {elementos['el4'].value = ''}
+			if (evoluciones.sublista.rx_oi_valor_2 == false) {elementos['el5'].value = ''}
+			if (evoluciones.sublista.rx_oi_grados == false) {elementos['el6'].value = ''}
+
+			if (evoluciones.sublista.rx_od_valor_1_ciclo == false) {elementos['el7'].value = ''}
+			if (evoluciones.sublista.rx_od_valor_2_ciclo == false) {elementos['el8'].value = ''}
+			if (evoluciones.sublista.rx_od_grados_ciclo == false) {elementos['el9'].value = ''}
+
+			if (evoluciones.sublista.rx_oi_valor_1_ciclo == false) {elementos['el10'].value = ''}
+			if (evoluciones.sublista.rx_oi_valor_2_ciclo == false) {elementos['el11'].value = ''}
+			if (evoluciones.sublista.rx_oi_grados_ciclo == false) {elementos['el12'].value = ''}
+
+			if (evoluciones.sublista.formula_od_valor_1_ciclo == false) {elementos['el13'].value = ''}
+			if (evoluciones.sublista.formula_od_valor_2_ciclo == false) {elementos['el14'].value = ''}
+			if (evoluciones.sublista.formula_od_grados_ciclo == false) {elementos['el15'].value = ''}
+
+			if (evoluciones.sublista.formula_oi_valor_1_ciclo == false) {elementos['el16'].value = ''}
+			if (evoluciones.sublista.formula_oi_valor_2_ciclo == false) {elementos['el17'].value = ''}
+			if (evoluciones.sublista.formula_oi_grados_ciclo == false) {elementos['el18'].value = ''}
+
+			if (evoluciones.sublista.curva_od == false) {elementos['el19'].value = ''}
+			if (evoluciones.sublista.curva_oi == false) {elementos['el20'].value = ''}
+
+			if (evoluciones.sublista.pio_od == false) {elementos['el21'].value = ''}
+			if (evoluciones.sublista.pio_oi == false) {elementos['el22'].value = ''}
+
+			if (evoluciones.sublista.altura_pupilar_od == false) {elementos['el23'].value = ''}
+			if (evoluciones.sublista.altura_pupilar_oi == false) {elementos['el24'].value = ''}
+
+			if (evoluciones.sublista.distancia_interpupilar_od == false) {elementos['el25'].value = ''}	
+			if (evoluciones.sublista.distancia_interpupilar_oi == false) {elementos['el26'].value = ''}
+
+			if (evoluciones.sublista.distancia_interpupilar_add == false) {elementos['el27'].value = ''}
+			if (evoluciones.sublista.dip == false) {elementos['el28'].value = ''}
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -1027,13 +1136,13 @@ insersiones_lista.forEach((grupo, i) => {
 
 			if (datos !== '') {
 
-				datos.splice(1,1)
-
 				if (grupo === 'estudios') {
 
 					var resultado = await tools.fullAsyncQuery('referencias', `crear_referencias`, datos)
 
 				} else {
+
+					datos.splice(1,1)
 
 					var resultado = await tools.fullAsyncQuery(`${grupo}`, `crear_${grupo}`, datos)
 

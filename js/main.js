@@ -3177,7 +3177,7 @@ export class Rellenar {
 
 					if(lista[contenedores[i].dataset[th.grupo]] !== null && typeof lista[contenedores[i].dataset[th.grupo]] !== 'undefined') {
 
-						contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
+						contenedores[i].value = decodeURIComponent(lista[contenedores[i].dataset[th.grupo]])
 						
 						if (contenedores[i].title === '') {
 
