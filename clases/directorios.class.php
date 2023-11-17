@@ -101,7 +101,13 @@
  			$txt = "$ruta/$nombre.txt";
 			$txt = file($txt);//file in to an array
 
-			return json_decode($txt[0], true);
+			if (isset($txt[0])) {
+				return json_decode($txt[0], true);
+			} else {
+				return '[]';
+			}
+
+			
 
 		}
 

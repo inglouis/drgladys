@@ -391,6 +391,7 @@ evoluciones['crud']['customBodyEvents'] = {
 		if (e.target.classList.contains('reusar')) {
 
 			evoluciones.sublista = tools.pariente(e.target, 'TR').sublista
+			evoluciones.modalidad = 'insertar'
 
 			tools.limpiar('.evoluciones-valores', '', {})
 
@@ -419,15 +420,15 @@ evoluciones['crud']['customBodyEvents'] = {
 					        }
 					    };
 
-					}
-
-					gid('evoluciones-fecha').value = window.dia
-					imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
-					fondBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_fondo)
-					paginacionEvoluciones.animacion(0, true)
+					}		
 
 				}
 			})
+
+			gid('evoluciones-fecha').value = window.dia
+			imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
+			fondBio.asignarImagenJSON('../imagenes/fondo_ojo.jpg', evoluciones.sublista.txt_fondo)
+			paginacionEvoluciones.animacion(0, true)
 
 			if (evoluciones.sublista.rx_od_valor_1 == false) {elementos['el1'].value = ''}
 			if (evoluciones.sublista.rx_od_valor_2 == false) {elementos['el2'].value = ''}
@@ -565,12 +566,13 @@ evoluciones['crud']['customBodyEvents'] = {
 					}
 
 					gid('evoluciones-fecha').value = window.dia
-					imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
-					fondBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_fondo)
-					paginacionEvoluciones.animacion(0, true)
 
 				}
 			})
+
+			imgBio.asignarImagenJSON('../imagenes/biomicroscopia.jpg', evoluciones.sublista.txt_bio)
+			fondBio.asignarImagenJSON('../imagenes/fondo_ojo.jpg', evoluciones.sublista.txt_fondo)
+			paginacionEvoluciones.animacion(0, true)
 
 			if (evoluciones.sublista.rx_od_valor_1 == false) {elementos['el1'].value = ''}
 			if (evoluciones.sublista.rx_od_valor_2 == false) {elementos['el2'].value = ''}

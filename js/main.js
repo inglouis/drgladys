@@ -3951,6 +3951,7 @@ export class InputsDecimales {
   	this._inputs    = document.querySelectorAll(`${inputs}`)
     this._separador = (separador) ? separador : '.';
     this._decimales = (decimales) ? decimales : 2;
+    this._excepciones = {}
   
   }
   
@@ -3990,8 +3991,16 @@ export class InputsDecimales {
     	this._inputs.forEach(input => {
       
       	input.addEventListener('keyup', el => {
-        
-        	el.target.value = th.comportamiento(el.target.value)
+
+      		if (typeof th._excepciones[el.key] === 'undefined') {
+
+      			el.target.value = th.comportamiento(el.target.value)
+
+      		} else {
+
+      			el.target.value = el.target.value.substring(0,(el.target.value.length - 1))
+
+      		}
           
         })
       

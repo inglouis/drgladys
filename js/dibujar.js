@@ -139,6 +139,7 @@ export class Canvas {
 
     asignarImagenJSON(img, json) {
 
+        this._canvas._object = []
         this._canvas.loadFromJSON(json, this.asignarImagen(img, this))
 
     }

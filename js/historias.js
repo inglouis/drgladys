@@ -151,6 +151,7 @@ window.camposTextosPersonalizables.init()
 //INPUTS QUE MANEJAN DECIMALES
 /////////////////////////////////////////////////////
 var inputsDecimales = new InputsDecimales('.decimales')
+	inputsDecimales._excepciones = {',': '', '-': '', '+': ''}
 	inputsDecimales.init()
 
 var inputsFracciones = new InputsDecimales('.fracciones', '/')
