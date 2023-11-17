@@ -49,7 +49,7 @@
         
         <div>
           <label class="requerido">Motivos / antecedentes / simple</label>
-          <textarea rows="4" id="infeditar-informacion" data-previa="infeditar-previa" data-valor="contenido" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+          <textarea rows="16" id="infeditar-informacion" data-previa="infeditar-previa" data-valor="contenido" class="infeditar-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
             Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
           "></textarea>
         </div>
@@ -308,11 +308,11 @@
 
   <section class="informe-crud cruds">
 
-  	<div class="crud-contenido">
-  		
-	    <div style="display: flex; flex-direction: column">
+    <div class="crud-contenido">
+      
+      <div style="display: flex; flex-direction: column">
 
-			<div class="crud-botones">
+      <div class="crud-botones">
 
         <button class="modelo btn btn-reusar" title="Reutilizar información del reporte para cualquier historia">
           <?php echo $_SESSION['botones']['reportes_modelo']?>
@@ -322,30 +322,30 @@
           <?php echo $_SESSION['botones']['reportes_reusar']?>
         </button>
 
-				<button class="editar btn btn-editar" title="Editar reporte">
-					<?php echo $_SESSION['botones']['reportes_editar']?>
-				</button>
+        <button class="editar btn btn-editar" title="Editar reporte">
+          <?php echo $_SESSION['botones']['reportes_editar']?>
+        </button>
 
-				<button class="reimprimir btn btn-imprimir" title="Reimprimir reporte">
-					<?php echo $_SESSION['botones']['reportes_reimprimir']?>
-				</button>
-				
-				<div class="crud-eliminar-contenedor">
-					
-					<button class="eliminar btn btn-eliminar">
-						<?php echo $_SESSION['botones']['reportes_eliminar']?>
-					</button>
-					
-				</div>
+        <button class="reimprimir btn btn-imprimir" title="Reimprimir reporte">
+          <?php echo $_SESSION['botones']['reportes_reimprimir']?>
+        </button>
+        
+        <div class="crud-eliminar-contenedor">
+          
+          <button class="eliminar btn btn-eliminar">
+            <?php echo $_SESSION['botones']['reportes_eliminar']?>
+          </button>
+          
+        </div>
 
-			</div>
+      </div>
 
-			<div class="crud-informacion">
+      <div class="crud-informacion">
 
-				<label class="crud-titulo">INFORME MÉDICO</label>
+        <label class="crud-titulo">INFORME MÉDICO</label>
 
-				<div class="informe crud-reporte">
-				  
+        <div class="informe crud-reporte">
+          
           <select class="informe-tipo input visual" disabled style="margin-top: 5px">
             <option value="0">Resumido</option>
             <option value="1">Completo</option>
@@ -354,6 +354,16 @@
 
           <div class="informe-contenido">
             <label>Contenido principal del informe</label>
+            <div></div>
+          </div>
+
+          <div class="informe-control">
+            <label>Control</label>
+            <div></div>
+          </div>
+
+          <div class="informe-plan">
+            <label>Plan / Indicaciones</label>
             <div></div>
           </div>
 
@@ -437,29 +447,29 @@
 
           </div>
 
-				</div>
+        </div>
 
-			</div>
+      </div>
 
-	    </div>
+      </div>
 
-	    <div class="crud-datos" title="Click para expandir">
-	      Ver más información <b>...</b>
+      <div class="crud-datos" title="Click para expandir">
+        Ver más información <b>...</b>
 
-	      <section class="crud-datos-contenedor" data-hidden data-efecto="cerrar">
-	      
-	      	<div style="border-bottom: 1px solid;">Información</div>
+        <section class="crud-datos-contenedor" data-hidden data-efecto="cerrar">
+        
+          <div style="border-bottom: 1px solid;">Información</div>
 
-	      	<div class="crud-dato nombre"></div>
-	      	<div class="crud-dato apellido"></div>
-	      	<div class="crud-dato cedula"></div>
-	      	<div class="crud-dato edad"></div>
+          <div class="crud-dato nombre"></div>
+          <div class="crud-dato apellido"></div>
+          <div class="crud-dato cedula"></div>
+          <div class="crud-dato edad"></div>
 
-	      </section>
+        </section>
 
-	    </div>
+      </div>
 
-  	</div>
+    </div>
 
 
   </section>
@@ -524,7 +534,7 @@
               
               <div>
                 <label class="requerido">Motivos / antecedentes / simple</label>
-                <textarea rows="4" id="informe-informacion" data-previa="informe-previa" data-valor="contenido" class="informe-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+                <textarea rows="16" id="informe-informacion" data-previa="informe-previa" data-valor="contenido" class="informe-valores upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
                   Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
                 "></textarea>
               </div>
@@ -849,32 +859,3 @@
     </div>
 
 </section>
-
-<!-------------------------------------------------------- -->
-<!------------------- INSERTAR DIAGNOSTICO --------------- -->
-<!-------------------------------------------------------- -->
-<div id="crud-insertar-diagnostico-popup" class="popup-oculto" data-crud='popup'>
-  <div id="crud-insertar-diagnostico-pop" class="popup-oculto" style="width: 50%">
-    <button id="crud-insertar-diagnostico-cerrar" data-crud='cerrar'>X</button>
-    <section id="crud-insertar-diagnostico-titulo" data-crud='titulo'>
-      AGREGAR DIAGNÓSTICO
-    </section> 
-
-    <div class="filas">
-
-      <div class="columnas" style="align-items: baseline;">
-
-        <div>
-          <label class="requerido">Nombre</label>  
-          <input type="text" placeholder="Nombre del diagnóstico" class="insertar-diagnostico lleno upper">
-        </div>
-      </div>
-    </div>
-
-    <section id="crud-insertar-diagnostico-botones" data-crud='botones' style="column-gap: 10px">
-      <button class="botones-formularios insertar">CONFIRMAR</button>
-      <button class="botones-formularios cerrar">CANCELAR</button> 
-    </section>
-
-  </div>
-</div>

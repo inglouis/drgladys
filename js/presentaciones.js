@@ -63,7 +63,7 @@ window.atajos = new Atajos('Shift', [
 ])
 window.atajos.eventos()
 /////////////////////////////////////////////////////
-var sesiones = await window.sesiones()
+var sesiones = await window.sesiones(false)
 /////////////////////////////////////////////////////
 
 window.URLquery = new URLSearchParams(window. location. search)

@@ -13,7 +13,7 @@
         }
 
         public function combo_diagnosticos($args) {
-            $sql = "select id_diagnostico, concat(id_diagnostico,' || ', nombre) from basicas.diagnosticos where status = 'A'";
+            $sql = "select id_diagnostico, nombre from basicas.diagnosticos where status = 'A'";
             return $this->combos($args, [$sql, 'nombre', 'id_diagnostico ASC', '']);
         }
 
@@ -53,7 +53,7 @@
         }
 
         public function combo_referencias($args) {
-            $sql = "select id_referencia, concat(id_referencia,' || ', nombre) from basicas.referencias where status = 'A'";
+            $sql = "select id_referencia, nombre from basicas.referencias where status = 'A'";
             return $this->combos($args, [$sql, 'nombre', 'id_referencia DESC', '']);
         }
 

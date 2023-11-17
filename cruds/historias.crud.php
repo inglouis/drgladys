@@ -27,7 +27,7 @@
   <div class="eliminar-contenedor">
 
     <div class="eliminar-texto" style="color: #fff;">
-      ¿DESEA ELIMINAR ESTE REPORTE?: 
+      ¿DESEA ELIMINAR ESTE REGISTRO?: 
     </div>
 
     <div>
@@ -841,7 +841,8 @@
     1 => ["proveniencias", "proveniencia"],
     2 => ["parentescos", "parentesco"],
     3 => ["estado_civil", "estado civil"],
-    4 => ["religiones", "religión"]
+    4 => ["religiones", "religión"],
+    5 => ["diagnosticos", "diagnóstico"]
   );
 
   foreach ($insersiones as $r) {
@@ -861,7 +862,7 @@
       <div class="columnas">
         <div>
           <label class="requerido">Nombre de la <?php echo $r[1]?></label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-<?php echo $r[0]?>" maxlength="100" class="nuevas-<?php echo $r[0]?> lleno upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="nombre-<?php echo $r[0]?>" maxlength="100" class="insertar-<?php echo $r[0]?> lleno upper" placeholder="...">
         </div>
       </div> 
 
@@ -879,6 +880,9 @@
   }
 ?>
 
+<!------------------------------------------------------------------- -->
+<!------------------------ INSERTAR MÉDICO -------------------------- -->
+<!------------------------------------------------------------------- -->
 <div id="crud-insertar-medicos-popup" class="popup-oculto" data-crud='popup'>
   <div id="crud-insertar-medicos-pop" class="popup-oculto" style="width:50%;">
 
@@ -893,20 +897,58 @@
       <div class="columnas">
         <div>
           <label class="requerido">Nombre del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="nombre-medicos" maxlength="100" class="nuevas-medicos lleno upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="nombre-medicos" maxlength="100" class="insertar-medicos lleno upper" placeholder="...">
         </div>
       </div>
 
       <div class="columnas">
         <div>
           <label>Dirección del médico</label>  
-          <input type="text" autocomplete="off"  minlength="1" id="direccion-medicos" maxlength="100" class="nuevas-medicos upper" placeholder="...">
+          <input type="text" autocomplete="off"  minlength="1" id="direccion-medicos" maxlength="100" class="insertar-medicos upper" placeholder="...">
         </div>
       </div> 
 
     </section>
 
     <section id="crud-insertar-medicos-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
+      <button class="botones-formularios insertar">CONFIRMAR</button>
+      <button class="botones-formularios cerrar">CANCELAR</button> 
+    </section>
+
+  </div> 
+</div>
+
+<!------------------------------------------------------------------- -->
+<!------------------------ INSERTAR ESTUDIO -------------------------- -->
+<!------------------------------------------------------------------- -->
+<div id="crud-insertar-estudios-popup" class="popup-oculto" data-crud='popup'>
+  <div id="crud-insertar-estudios-pop" class="popup-oculto" style="width:50%;">
+
+    <button id="crud-insertar-estudios-cerrar" data-crud='cerrar'>X</button>
+
+    <section id="crud-insertar-estudios-titulo" data-crud='titulo'>
+      Insertar estudio/referencia
+    </section> 
+
+    <section class="filas">
+
+      <div class="columnas">
+        <div>
+          <label class="requerido">Nombre del estudio</label>  
+          <input type="text" autocomplete="off"  size="100" minlength="1" maxlength="100" id="nombre-estudios" class="insertar-estudios lleno upper" placeholder="...">
+        </div>
+      </div>
+
+      <div class="columnas">
+        <div>
+          <label>Descripción del estudio/referencia</label>  
+          <textarea id="descripcion-estudios" minlength="1" maxlength="600" class="insertar-estudios lleno upper" style="resize: none" rows="4"></textarea> 
+        </div>
+      </div> 
+
+    </section>
+
+    <section id="crud-insertar-estudios-botones" data-crud='botones' style="column-gap: 10px; padding: 10px 10px 0px 10px;;">
       <button class="botones-formularios insertar">CONFIRMAR</button>
       <button class="botones-formularios cerrar">CANCELAR</button> 
     </section>

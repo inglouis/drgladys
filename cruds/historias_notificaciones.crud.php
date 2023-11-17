@@ -191,7 +191,7 @@
         
 					        <div>
 					          <label class="requerido">Motivos / antecedentes / simple</label>
-					          <textarea rows="4" id="informe-informacion-notificaciones" data-previa="informe-previa-notificaciones" data-valor="contenido" class="informe-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
+					          <textarea rows="16" id="informe-informacion-notificaciones" data-previa="informe-previa-notificaciones" data-valor="contenido" class="informe-valores-notificaciones upper lleno textarea-espaciado contenedor-personalizable" style="resize:none;" data-scroll title="
 					            Resumido -> EL CONTENIDO SERÁ UTILIZADO PARA LOS MOTIVOS DEL INFORME&#013Completo -> EL CONTENIDO SERÁ UTILIZADO PARA LOS ANTECEDENTES DEL INFORME&#013Simple -> EL CONTENIDO SERÁ UTILIZADO COMO MODELO DE TODO EL REPORTE
 					          "></textarea>
 					        </div>

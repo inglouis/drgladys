@@ -97,6 +97,7 @@ footer p {
 label {
     margin-bottom: 0px;
     font-size: 16px;
+    /*white-space: nowrap;*/
 }
 
 textarea {
@@ -242,7 +243,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .scroll::-webkit-scrollbar-thumb, [data-scroll]::-webkit-scrollbar-thumb {
-    background: #8f5eff38;
+    background: #8f5eff4d;
     -webkit-box-shadow: none;
     transition: 0.3s ease all;
 }
@@ -778,17 +779,21 @@ span.numeracion {
     justify-content: center;
 }
 
-.crud-botones button {
+.crud-botones2 {
+
+}
+
+.crud-botones button, .crud-botones2 button {
     width: 25px;
     height: 25px;
     padding: 2px;
     margin: 0px 5px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
 
-.crud-botones {
+.crud-botones, .crud-botones2 {
     border: none !important;
 }
 
@@ -972,18 +977,18 @@ span.numeracion {
 
 [data-crud='cerrar'] {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 0px;
-    top: 0px;
+    width: 21px;
+    height: 21px;
+    left: 2px;
+    top: 2px;
     cursor: pointer;
-    color: #9e9e9e;
+    color: #787878;
     border: none;
     font-size: 12px;
     font-weight: 100;
     background: transparent;
     transition: 0.3s ease all;
-    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     z-index: 1;
 }
 
@@ -991,7 +996,6 @@ span.numeracion {
     transition: 0.3s ease all;
     background-color: #ea3b2e;
     color: #fff;
-    border-bottom-left-radius: 5px;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -1711,6 +1715,7 @@ span.numeracion {
 #crud-medicamentos-pop,
 #crud-insertar-referencia-pop,
 #crud-insertar-referido-pop,
+#crud-insertar-estudios-pop,
 #crud-insertar-diagnostico-pop,
 #crud-evoluciones-pop {
     height: fit-content;
@@ -2155,7 +2160,7 @@ span.numeracion {
     color: #fff;
 }
 
-.checksmall:checked::after{
+.checksmall:checked::after {
     content: "✓";
     font-size: xx-small;
 }
@@ -2546,7 +2551,7 @@ span.numeracion {
     background: #151a27;
 }
 
-#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados, #desplegable-recipes {
+#desplegable-contactos, #desplegable-recibos, #desplegable-medicos, #desplegable-indice, #desplegable-paginacion, #desplegable-ediciones, #desplegable-pagos, #desplegable-notificados, #desplegable-recipes, #desplegable-evoluciones {
     width: 300px;
     height: 400px;
     background: rgb(255, 255, 255) none repeat scroll 0% 0%;
@@ -2682,6 +2687,14 @@ span.numeracion {
     height: 60%;
 }
 
+#desplegable-evoluciones {
+    z-index: 11;
+    background: #00968838;
+    width: 300px;
+    overflow: hidden;
+    height: 60%;
+}
+
 /*---------------------------------------*/
 
 #indice-contenido {
@@ -2804,27 +2817,30 @@ span.numeracion {
 }
 
 #tabla-historias tbody tr td:nth-child(2) {
-    max-width: 185px;
+    max-width: 145px;
 }
 
 #tabla-historias tbody tr td:nth-child(3) {
-    width: 10%;
+    max-width: 55px;
 }
 
-
 #tabla-historias tbody tr td:nth-child(4) {
-    width: 45%;
+    width: 15%;
 }
 
 #tabla-historias tbody tr td:nth-child(5) {
-    width: 23%;
+    width: 40%;
 }
 
 #tabla-historias tbody tr td:nth-child(6) {
-    width: 10%;
+    width: 23%;
 }
 
 #tabla-historias tbody tr td:nth-child(7) {
+    width: 10%;
+}
+
+#tabla-historias tbody tr td:nth-child(8) {
     width: 20%;
 }
 
@@ -3087,10 +3103,13 @@ span.numeracion {
 
 
 #crud-recipes-contenedor .recipe-notificar {
-    background: #2196f3;
-    color: #fff;
-    width: 13em;
     padding: 10px 0px !important;
+    background: #ff8100;
+    color: #fff;
+    width: 45px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #crud-recipes-contenedor .recipe-previa {
@@ -3184,7 +3203,7 @@ span.numeracion {
 
 .cargar {
     padding: 10px 15px;
-    background: #e0efed;
+    background: #f7fffe;
     border-radius: 10px;
     height: 100%;
     display: flex;
@@ -3548,7 +3567,7 @@ span.numeracion {
 
 /*---------------template eliminar reporte----------------------*/
 .eliminar-contenedor {
-    width: 265px;
+    width: auto !important;
     position: absolute;
     background: #151a27;
     padding: 5px;
@@ -3559,6 +3578,10 @@ span.numeracion {
     align-items: center;
     column-gap: 8px;
     left: 40px;
+}
+
+.eliminar-contenedor div {
+    width: fit-content;
 }
 
 .eliminar-contenedor::after {
@@ -3577,6 +3600,7 @@ span.numeracion {
 }
 
 .eliminar-texto {
+    width: 230px !important;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -4197,6 +4221,273 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 /*-----------------------------------------------------*/
+/*------------- NOTIFICADOS EVOLUCIONES ---------------*/
+/*-----------------------------------------------------*/
+#tabla-evoluciones-notificados thead {
+    display: none
+}
+
+#tabla-evoluciones-notificados tbody tr {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: baseline;
+    cursor: row-resize;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(1) {
+    border-bottom: 1px solid #262626;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(1):before {
+    content: "PACIENTE: ";
+    font-weight: bold;
+}
+
+#tabla-evoluciones-notificados tbody tr td:nth-child(1) span:nth-child(2):before {
+    content: "FECHA: ";
+    font-weight: bold;
+}
+
+#tabla-evoluciones-notificados .crud-botones {
+    align-items: center;
+}
+
+#tabla-evoluciones-notificados thead {
+    display: none;
+}
+
+#tabla-evoluciones-notificados tbody tr {
+    width: 360px;
+}
+
+#tabla-evoluciones-notificados .seleccionado {
+    background: linear-gradient(360deg, #4700c933, #004c962e) !important;
+    padding: 10px 6.5px;
+}
+
+#tabla-evoluciones-notificados .nombre {
+    text-align: left;
+}
+
+#tabla-evoluciones-contenedor {
+    padding: 12px;
+    overflow-x: hidden;
+}
+
+#desplegable-evoluciones {
+    top: 110px;
+}
+
+#desplegable-cerrar-evoluciones {
+    background: #009688;
+}
+
+#desplegable-abrir-evoluciones {
+    height: 25px;
+    width: 25px;
+    z-index: 11;
+    padding: 0px;
+}
+
+#desplegable-abrir-evoluciones {
+    background: #009688;
+    top: 110px;
+}
+
+#tabla-evoluciones-contenedor .titulo {
+    border-bottom: 1px solid #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+    width: 345px;
+    text-align: left;
+}
+
+#tabla-evoluciones-contenedor .titulo::after {
+    content: "";
+    left: 0px;
+    height: 100%;
+    width: 5px;
+    background: #262626;
+    position: absolute;
+}
+
+.evoluciones-contenedor {
+    position: relative;
+}
+
+.evoluciones-contenedor .eliminar {
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.evoluciones-contenedor .eliminar:hover {
+    background: black;
+}
+
+#tabla-evoluciones-contenedor .btn-eliminar {
+    background: #009688;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    border: none;
+    padding: 5px;
+}
+
+#tabla-evoluciones-contenedor .btn-eliminar:hover {
+    background: black !important;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor {
+    right: 50px !important;
+    left: unset;
+    width: 212px;
+    flex-direction: row-reverse;
+    top: 3px;
+}
+
+#tabla-evoluciones-notificados .crud-eliminar-contenedor {
+
+}
+
+#tabla-evoluciones .eliminar-contenedor::after {
+    border: 10px solid transparent !important;
+    right: -25px;
+    left: unset;
+    border-left: 15px solid #151a27 !important;
+    top: 7px;
+}
+
+#tabla-evoluciones-notificados .eliminar-texto {
+    font-size: 10px;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor div {
+    width: auto;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor button {
+    margin: 0px;
+}
+
+#tabla-evoluciones-notificados .eliminar-contenedor button:hover {
+    background: black
+}
+
+
+#desplagable-evoluciones-contenedor {
+    width: 400px;
+    height: 600px;
+    background: #00968873;
+    position: absolute;
+    color: white;
+    border-radius: 15px;
+    z-index: 100;
+    box-shadow: 2px 2px 6px 1px #6c6c6c;
+}
+
+#desplegable-evoluciones-desplazador {
+    background: linear-gradient(45deg, #009688, transparent);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 30px !important;
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#desplegable-evoluciones-desplazador-cerrar {
+    position: relative;
+    right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    top: 2px;
+}
+
+#desplegable-evoluciones-desplazador-cerrar:hover {
+    color: black;
+}
+
+#desplegable-evoluciones-contenido {
+    background: #ffffffd9;
+    margin: 10px;
+    height: 550px;
+    color: #262626;
+    padding: 10px;
+}
+
+#desplegable-evoluciones-contenido .cabecera {
+    display: block;
+    border-bottom: 1px dashed #262626;
+    margin-bottom: 10px;
+}
+
+#desplegable-evoluciones-contenido .cabecera b {
+    text-transform: uppercase;
+}
+
+#desplegable-evoluciones-contenido .title {
+    font-weight: bold;
+    color: #3269a7;
+    border-bottom: 1px solid #3269a7;
+}
+
+#desplegable-evoluciones-contenido .subtitle {
+    color: black;
+    font-weight: bold
+}
+
+#desplegable-evoluciones-contenido .contenido {
+    text-transform: uppercase;
+    transition: 0.3s ease all;
+}
+
+#desplegable-evoluciones-contenido .copiable:hover {
+    box-shadow: 0px 2px 3px -1px #4a9ee18a;
+    transition: 0.3s ease all;
+}
+
+#desplegable-evoluciones-contenido .copiable {
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+#desplegable-evoluciones-contenido .dato-simple {
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: 10px;
+    width: fit-content;
+    margin-right: 20px;
+    display: flex;
+}
+
+#desplegable-evoluciones-contenido ul {
+    padding-inline-start: 30px;
+    margin: 5px 0px;
+}
+/*-----------------------------------------------------*/
 /*---------------------- Iva --------------------------*/
 /*-----------------------------------------------------*/
 #insertar-iva::after {
@@ -4310,6 +4601,9 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*---------------------- DIBUJAR ----------------------*/
 /*-----------------------------------------------------*/
+/*-----------------------------------------------------*/
+/*---------------------- DIBUJAR ----------------------*/
+/*-----------------------------------------------------*/
 
 .dibujar-contenedor-v {
     width: 100%;
@@ -4345,7 +4639,7 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 .dibujar-colores-v button:hover {
-    margin: 0px 5px;
+    box-shadow: 0px 0px 5px 2px #ace5ff;
 }
 
 .dibujar-rango-v {
@@ -4387,9 +4681,16 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 .dibujar-formas-v button {
-    width: 25px;
+    width: 35px;
     border: 1px solid #262626;
-    height: 20px;
+    height: 30px;
+    display: flex;
+    background: #fff;
+}
+
+.dibujar-formas-v button svg {
+    align-self: center;
+    width: 25px;
 }
 
 /*-----------------------------------------------------*/
@@ -4404,6 +4705,7 @@ div#tabla-notificados-contenedor .titulo::after {
     opacity: 1;
     width:230px;
 }
+
 .evoluciones-contenedor {
     width: 99%;
     padding: 0px;
@@ -4447,7 +4749,6 @@ div#tabla-notificados-contenedor .titulo::after {
     width: 10%;
     min-width: 100px;
 }
-
 
 .evoluciones-status:nth-child(1)::after {
     content:"Solo Ocupaciónes Activadas [A]";
@@ -4580,20 +4881,37 @@ div#tabla-notificados-contenedor .titulo::after {
     display: flex;
 }
 
-#evoluciones-cargar-contenedor .pruebas {
+#evoluciones-consultar-contenedor input {
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background: transparent;
+    box-shadow: unset !important;
+}
+
+#evoluciones-consultar-contenedor .galeria-contenedor img {
+    width: 186px !important;
+    height: 174px !important;
+}
+
+#evoluciones-cargar-contenedor .pruebas,
+#evoluciones-consultar-contenedor .pruebas {
     background: url(../imagenes/pruebas.jpg);
 }
 
-#evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .motilidad {
     background: url(../imagenes/motilidad.jpg); 
 }
 
-#evoluciones-cargar-contenedor .pruebas, #evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .pruebas, 
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .pruebas, 
+#evoluciones-consultar-contenedor .motilidad
+ {
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-    height: 330px;
-    width: 330px;
     column-gap: 10px;
     display: grid;
     justify-content: center;
@@ -4602,23 +4920,39 @@ div#tabla-notificados-contenedor .titulo::after {
     padding: 4px 8px;
 }
 
-#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section {
+#evoluciones-cargar-contenedor .pruebas, 
+#evoluciones-cargar-contenedor .motilidad {
+    height: 330px;
+    width: 330px;
+}
+
+#evoluciones-consultar-contenedor .pruebas, 
+#evoluciones-consultar-contenedor .motilidad {
+    height: 310px;
+    width: 310px;
+}
+
+#evoluciones-cargar-contenedor .pruebas section, #evoluciones-cargar-contenedor .motilidad section,
+#evoluciones-consultar-contenedor .pruebas section, #evoluciones-consultar-contenedor .motilidad section {
     display: grid;
     justify-content: stretch;
     align-items: center;
     column-gap: 60px;
 }
 
-#evoluciones-cargar-contenedor .pruebas section div {
+#evoluciones-cargar-contenedor .pruebas section div,
+#evoluciones-consultar-contenedor .pruebas section div {
     margin: 0px !important;
 }
 
-#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input {
+#evoluciones-cargar-contenedor .pruebas input, #evoluciones-cargar-contenedor .motilidad input,
+#evoluciones-consultar-contenedor .pruebas input, #evoluciones-consultar-contenedor .motilidad input {
     position: relative;
     text-align: center;
 }
 
-#evoluciones-cargar-contenedor .motilidad {
+#evoluciones-cargar-contenedor .motilidad,
+#evoluciones-consultar-contenedor .motilidad {
     row-gap: 30px;
     justify-content: stretch;
 }
@@ -4722,15 +5056,127 @@ div#tabla-notificados-contenedor .titulo::after {
     content: "Anexos";
 }
 
+#evoluciones-consulta-fechas {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4a6d95;
+}
+
+#evoluciones-consulta-fechas select {
+    border: 1px solid #4a6d95;
+    min-width: 200px;
+    padding: 8px;
+}
+
+#evoluciones-consulta-fechas label {
+    width: fit-content;
+    padding-right: 5px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #4a6d95;
+}
+
+#tabla-evoluciones-consultar-contenedor {
+    background: #fff;
+}
+
+#tabla-evoluciones-consultar thead {
+    display: none;
+}
+
+#tabla-evoluciones-consultar tbody tr td:nth-child(1) {
+    width: 100%;
+}
+
+.evoluciones-contenido {
+    padding: 15px;
+    background: #fff;
+}
+
+.evoluciones-contenido ul {
+    margin: 0px;
+    padding-inline-start: 30px;
+    font-size: 13px;
+}
+
+.evoluciones-contenido .title {
+    position: relative;
+    font-weight: bold;
+}
+
+.evoluciones-contenido .subtitle {
+    color: black;
+    text-decoration: underline;
+}
+
+.evoluciones-contenido .notas {
+    border: 1px dashed #949494;
+    padding: 10px;
+    display: block !important;
+}
+
+.evoluciones-contenido .dato-simple {
+    flex-direction: row;
+    align-items: flex-end;
+    column-gap: 10px;
+    width: fit-content;
+    margin-right: 20px;
+}
+
+.evoluciones-contenido label {
+    white-space: nowrap;
+}
+
+.evoluciones-contenido div {
+    margin: 0px;
+}
+
+.evoluciones-botones {
+    display: flex;
+    column-gap: 5px;
+}
+
+.evoluciones-botones button {
+    padding: 3px;
+    width: 30px !important;
+    height: 25px !important;
+}
+
+#evoluciones-consultar-contenedor .separador {
+    margin-top: 20px;
+    border-bottom: 1px dashed #262626;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 10px;
+}
+
+#evoluciones-consultar-contenedor .separador::before {
+    content: "";
+    height: 100%;
+    left: 0px;
+    background: #262626;
+    width: 4px;
+    position: absolute;
+}
+
+
 /*-----------------------------------------------------*/
 /*----------------ocupaciones--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-ocupaciones::after {
+#ocupaciones-insertar::after {
     width: 200px;
 }
 
-#insertar-ocupaciones:hover::after {
-    content: "Agregar Nueva Ocupación";
+#ocupaciones-insertar:hover::after {
+    content: "Agregar nueva ocupación";
     opacity: 1;
     width:230px;
 }
@@ -4772,12 +5218,12 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------religiones--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-religiones::after {
+#religiones-insertar::after {
     width: 200px;
 }
 
-#insertar-religiones:hover::after {
-    content: "Agregar Nueva Religiòn";
+#religiones-insertar:hover::after {
+    content: "Agregar nueva religiòn";
     opacity: 1;
     width:230px;
 }
@@ -4876,14 +5322,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------estado_civil--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-estado_civil::after {
-    width: 200px;
+#estado_civil-insertar::after {
+    width: 250px;
 }
 
-#insertar-estado_civil:hover::after {
-    content: "Agregar Nuevo Estado";
+#estado_civil-insertar:hover::after {
+    content: "Agregar nuevo estado civil";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 .estado_civil-contenedor {
     width: 99%;
@@ -4970,14 +5416,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------parentescos--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-parentescos::after {
-    width: 200px;
+#parentescos-insertar::after {
+    width: 230px;
 }
 
-#insertar-parentescos:hover::after {
-    content: "Agregar Nuevo Parentesco";
+#parentescos-insertar:hover::after {
+    content: "Agregar nuevo parentesco";
     opacity: 1;
-    width:230px;
+    width:250px;
 }
 .parentescos-contenedor {
     width: 99%;
@@ -5017,14 +5463,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*----------------diagnosticos--------------------------*/
 /*-----------------------------------------------------*/
-#insertar-diagnosticos::after {
-    width: 200px;
+#diagnosticos-insertar::after {
+    width: 230px;
 }
 
-#insertar-diagnosticos:hover::after {
-    content: "Agregar Nueva Ocupación";
+#diagnosticos-insertar:hover::after {
+    content: "Agregar nuevo diagnóstico";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 .diagnosticos-contenedor {
     width: 99%;
@@ -5112,14 +5558,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- TRATAMIENTOS --------------------*/
 /*-----------------------------------------------------*/
-#insertar-tratamientos::after {
-    width: 200px;
+#tratamientos-insertar::after {
+    width: 250px;
 }
 
-#insertar-tratamientos:hover::after {
+#tratamientos-insertar:hover::after {
     content: "Agregar nuevo tratamiento";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .tratamientos-contenedor {
@@ -5191,14 +5637,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- PRESENTACIONES ------------------*/
 /*-----------------------------------------------------*/
-#insertar-presentaciones::after {
-    width: 200px;
+#presentaciones-insertar::after {
+    width: 250px;
 }
 
-#insertar-presentaciones:hover::after {
+#presentaciones-insertar:hover::after {
     content: "Agregar nueva presentación";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .presentaciones-contenedor {
@@ -5259,7 +5705,7 @@ div#tabla-notificados-contenedor .titulo::after {
 }
 
 #presentaciones-insertar:hover::after {
-    content: "Cargar nuevo presentaciones";
+    content: "Cargar nueva presentación";
 }
 
 #regresar-medicamentos .tooltip-filtro-reverso:after {
@@ -5270,14 +5716,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- MEDICAMENTOS --------------------*/
 /*-----------------------------------------------------*/
-#insertar-medicamentos::after {
-    width: 200px;
+#medicamentos-insertar::after {
+    width: 250px;
 }
 
-#insertar-medicamentos:hover::after {
+#medicamentos-insertar:hover::after {
     content: "Agregar nuevo medicamento";
     opacity: 1;
-    width:230px;
+    width:260px;
 }
 
 .medicamentos-contenedor {
@@ -5395,14 +5841,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- GENERICOS -----------------------*/
 /*-----------------------------------------------------*/
-#insertar-genericos::after {
-    width: 200px;
+#genericos-insertar::after {
+    width: 340px;
 }
 
-#insertar-genericos:hover::after {
-    content: "Agregar Nueva Medicina Genérica";
+#genericos-insertar:hover::after {
+    content: "Agregar nuevo medicamento genérico";
     opacity: 1;
-    width:230px;
+    width:350px;
 }
 .genericos-contenedor {
     width: 99%;
@@ -5442,12 +5888,12 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- REFERENCIAS ---------------------*/
 /*-----------------------------------------------------*/
-#insertar-referencias::after {
+#referencias-insertar::after {
     width: 200px;
 }
 
-#insertar-referencias:hover::after {
-    content: "Agregar Nueva Referencia";
+#referencias-insertar:hover::after {
+    content: "Agregar nueva referencia";
     opacity: 1;
     width:230px;
 }
@@ -5477,14 +5923,14 @@ div#tabla-notificados-contenedor .titulo::after {
 /*-----------------------------------------------------*/
 /*------------------- REFERIDOS ---------------------*/
 /*-----------------------------------------------------*/
-#insertar-referidos::after {
-    width: 200px;
+#referidos-insertar::after {
+    width: 260px;
 }
 
-#insertar-referidos:hover::after {
-    content: "Agregar Nuevo Referido";
+#referidos-insertar:hover::after {
+    content: "Agregar nuevo médico referido";
     opacity: 1;
-    width:230px;
+    width:270px;
 }
 
 #tabla-referidos tbody tr td:nth-child(1) {

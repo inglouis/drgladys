@@ -240,6 +240,8 @@ export class Galeria {
 
 		await Promise.all(cola);
 
+		this._imagenes = []
+
 		for (var i = 0; i < imagenes.length; i++) {
 
 			var height = imagenes[i].naturalHeight,
@@ -259,7 +261,6 @@ export class Galeria {
 	}
 
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //EJEMPLO

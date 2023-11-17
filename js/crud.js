@@ -576,15 +576,18 @@ export class Tabla {
                 th.btnBuscar.disparar()
               } 
           })
+
         } else {
-          this.btnBuscar.addEventListener('click', e => {
+
+          this.btnBuscar.addEventListener('click', this.btnBuscar.forzar = async (e) => {
             var img = document.createElement('img');
             img.src = '../imagenes/spinner.gif';
             img.style = 'width: 5vh;height: 5vh;position: absolute;top: 48%;left: 46%;';
             qs(`#${th.tabla} tbody`).appendChild(img)
 
             var peticion = th.busquedaSql()
-            peticion.onreadystatechange = function() {
+
+            peticion.onreadystatechange = await function() {
               if (this.readyState == 4 && this.status == 200) {
                 //qs(`#${th.tabla} tbody`).innerHTML = ''
                 th.limitador = th.limitante
@@ -595,8 +598,11 @@ export class Tabla {
                 if(typeof(th.btnBuscar.disparar) === 'function') {
                   th.btnBuscar.disparar()
                 } 
+
+                return ''
               }
-            };         
+            };
+
           })
         } 
       } else {

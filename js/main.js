@@ -135,6 +135,7 @@ export class Herramientas {
 		this.tiempo = 2000
 		this.tiempoFijo = 2000
 		this.tiempoAnimacionTermina = 800
+		this._retardo = 1000
 		this.cola = 0
 		this.peticion = ''
 		this.marcador = 'X'
@@ -303,6 +304,7 @@ export class Herramientas {
 
 			var archivos = new FormData();
 
+			//esto tiene que ser capaz de manejar datos asociativos
 			datos.forEach((archivo, index) => {
 
 				if (th.esDOM(archivo)) {			
@@ -739,6 +741,16 @@ export class Herramientas {
         return dateString 
 	}
 
+	async retardar() {
+
+		var th = this
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, th._retardo);
+		});
+		
+	}
+
 	procesar(boton, comparacion, elementos, tools, params) {
 		var th = this
 
@@ -917,7 +929,7 @@ export class Herramientas {
 				}
 				
 				contenedores[i].selectedIndex = 0
-			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV') {
+			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV' || contenedores[i].tagName === 'UL') {
 
 				if(contenedores[i].classList.contains('contenedor-consulta')) {
 
@@ -929,6 +941,10 @@ export class Herramientas {
 
 					contenedores[i].innerHTML = ''
 
+				} else {
+
+					contenedores[i].innerHTML = ''
+					
 				}
 
 			} else if (contenedores[i].classList.contains('contenedor-personalizable')) {
@@ -988,6 +1004,20 @@ export class Herramientas {
 	    } else {
 	        myField.value += myValue;
 	    }
+	}
+
+	copiarPortapapeles(valor) {
+
+		var input = document.createElement('input')
+	    	input.setAttribute('type', 'text')
+	    	input.setAttribute('value', valor) 
+	    	input.select();
+		document.body.appendChild(input);
+		input.select();
+		input.setSelectionRange(0, 99999);
+		document.execCommand("copy");
+		document.body.removeChild(input);
+
 	}
 	
 }
@@ -1530,12 +1560,18 @@ export class ContenedoresEspeciales {
 
 	}
 
-	filtrarComboForzado(select, input) {
+	filtrarComboForzado(select, input, mostrar) {
 		var filtrado = this.herramientas.filtrar(input['lista'], input.value, [], true, undefined)
 
 	    if(filtrado !== '') {
 	    	select.innerHTML = ''
-	    	select.appendChild(this.herramientas.generarContenidoCombo(filtrado, false))	
+	    	select.appendChild(this.herramientas.generarContenidoCombo(filtrado, false))
+
+	    	if (mostrar) {
+	    		
+	    		select.removeAttribute('data-hide')	
+
+	    	}
 	    }
 	}
 
@@ -3105,7 +3141,9 @@ export class Rellenar {
 		}
 
 		for (var i = 0; i < contenedores.length; i++) {
+
 			if (contenedores[i].tagName === 'INPUT') {
+
 				if (contenedores[i].type === 'checkbox') {
 
 					if (contenedores[i].getAttribute('value') !== null) {
@@ -3139,7 +3177,7 @@ export class Rellenar {
 
 					if(lista[contenedores[i].dataset[th.grupo]] !== null && typeof lista[contenedores[i].dataset[th.grupo]] !== 'undefined') {
 
-						contenedores[i].value = lista[contenedores[i].dataset[th.grupo]]
+						contenedores[i].value = decodeURIComponent(lista[contenedores[i].dataset[th.grupo]])
 						
 						if (contenedores[i].title === '') {
 
@@ -3150,6 +3188,7 @@ export class Rellenar {
 					}
 				}
 			} else if (contenedores[i].tagName === 'SELECT') {
+
 				var encontrado = false
 				Array.from(contenedores[i]).forEach((el,index) => {
 				    if (String(el.value).trim() === String(lista[contenedores[i].dataset[th.grupo]]).trim()) {
@@ -3165,6 +3204,7 @@ export class Rellenar {
 						contenedores[i].appendChild(inicial)
 					}		
 				}
+				
 			} else if (contenedores[i].tagName === 'SECTION' || contenedores[i].tagName === 'DIV') {
 				
 				if (contenedores[i].classList.contains('contenedor-consulta')) {
@@ -3911,6 +3951,7 @@ export class InputsDecimales {
   	this._inputs    = document.querySelectorAll(`${inputs}`)
     this._separador = (separador) ? separador : '.';
     this._decimales = (decimales) ? decimales : 2;
+    this._excepciones = {}
   
   }
   
@@ -3950,8 +3991,16 @@ export class InputsDecimales {
     	this._inputs.forEach(input => {
       
       	input.addEventListener('keyup', el => {
-        
-        	el.target.value = th.comportamiento(el.target.value)
+
+      		if (typeof th._excepciones[el.key] === 'undefined') {
+
+      			el.target.value = th.comportamiento(el.target.value)
+
+      		} else {
+
+      			el.target.value = el.target.value.substring(0,(el.target.value.length - 1))
+
+      		}
           
         })
       
@@ -4043,7 +4092,100 @@ export class PaginacionContenedores {
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////77//////
+/////////////////////////////////////////////////////////////////////////////////////////
+export class Desplazar {
+
+	constructor(contenedor, desplazador) {
+  	
+		//////////////////////////////////////////////////////////
+		if (document.querySelector(contenedor)) { 
+
+			this._contenedor = document.querySelector(contenedor) 
+
+		} else { throw 'contenedor necesario' }
+		//////////////////////////////////////////////////////////
+		if (document.querySelector(desplazador)) { 
+
+			this._desplazador = document.querySelector(desplazador) 
+
+		} else { throw 'desplazador necesario' }
+		//////////////////////////////////////////////////////////
+
+		this._click = false
+		this._x = undefined
+		this._y = undefined
+
+		this._offsetX = 30
+		this._offsetY = 25
+
+		this._inicialX = 0
+		this._inicialY = 20
+
+		this._operadorPosicionesY = 'px'
+		this._operadorPosicionesX = 'px'
+    
+  }
+  
+  init() {
+  
+  	var th = this
+    
+    this._desplazador.addEventListener('click', e => {
+  
+    	th._click = !th._click
+      
+    })
+    
+  }
+  
+  seleccionar(e) {
+
+    if (this._click && this._contenedor.getAttribute('data-hidden') === null) {
+
+  		this._x = e.clientX 
+    	this._y = e.clientY
+
+		this._contenedor.setAttributeNS(
+			null, 
+			'style', 
+			`top: ${this._y - this._offsetY}px; left: ${this._x - this._offsetX}px`
+		) 
+      
+    }
+
+  }
+  
+  abrir() {
+  
+  	this._contenedor.setAttributeNS(
+      null, 
+      'style', 
+      `top: ${this._inicialY}${this._operadorPosicionesY}; left: ${this._inicialX}${this._operadorPosicionesX}`
+    ) 
+  
+  	this._contenedor.removeAttribute('data-hidden')
+    
+    this._click = false
+  
+  }
+  
+  cerrar() {
+  
+  	this._contenedor.setAttributeNS(
+      null, 
+      'style', 
+      `top: ${this._inicialY}${this._operadorPosicionesY}; left: ${this._inicialX}${this._operadorPosicionesX}`
+    ) 
+  
+  	this._contenedor.setAttribute('data-hidden', '')
+    
+    this._click = false
+  
+  }
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
 export default '';
 
 /////////////////////////////////////////////////////////////////////////////////////////

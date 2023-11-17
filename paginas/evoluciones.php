@@ -169,7 +169,7 @@
                 padding: 0px 5px;
               ">
                 
-                <button id="evoluciones-insertar" class="btn btn-nuevo tooltip-filtro">+</button>
+                <button id="evoluciones-insertar" class="btn btn-nuevo tooltip-filtro" data-hidden>+</button>
 
               </div>
 

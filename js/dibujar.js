@@ -8,8 +8,13 @@ export class Canvas {
         this._resultado_json = undefined
         this._elementos = {}
 
+        this._fn = {
+            "remover": () => {},
+            "color": () => {}
+        }
+
         this._formato = {
-            format: 'jpeg',
+            format: 'png',
             width: 467,
             height: 272,
             quality: 1
@@ -62,9 +67,31 @@ export class Canvas {
         ////////////////////////////////////////////////
         if (typeof remover !== 'undefined') {
 
+            var th = this
+
             document.querySelector(`#${remover}`).addEventListener('click', e => {
                 this._canvas.isDrawingMode = false;
-                this._canvas.remove(this._canvas.getActiveObject());
+
+                if (this._canvas.getActiveObject() !== undefined && this._canvas.getActiveObject() !== null) {
+
+                    if ('_objects' in this._canvas.getActiveObject()) {
+
+                        this._canvas.getActiveObject()._objects.forEach((objeto) => {
+
+                            th._canvas.remove(objeto);
+
+                        })
+
+                    } else {
+
+                        this._canvas.remove(this._canvas.getActiveObject());
+
+                    }
+
+                }
+
+                this._fn['remover']()
+
             })
 
         } else {
@@ -112,6 +139,7 @@ export class Canvas {
 
     asignarImagenJSON(img, json) {
 
+        this._canvas._object = []
         this._canvas.loadFromJSON(json, this.asignarImagen(img, this))
 
     }
@@ -136,6 +164,8 @@ export class Canvas {
                 if (typeof btn.dataset.color !== 'undefined') {
 
                     th._canvas.freeDrawingBrush.color = btn.dataset.color;
+
+                    this._fn['color']()
 
                 } else {
 
@@ -231,6 +261,9 @@ export class Canvas {
         propiedades['stroke'] = (typeof propiedades['stroke'] !== 'undefined') ? propiedades['stroke'] : 'black';
         propiedades['top']  = (typeof propiedades['top']  !== 'undefined') ? propiedades['top']  : 0;
         propiedades['left'] = (typeof propiedades['left'] !== 'undefined') ? propiedades['left'] : 20;
+        propiedades['width']  = (typeof propiedades['width']  !== 'undefined') ? propiedades['width']  : undefined;
+        propiedades['height'] = (typeof propiedades['height'] !== 'undefined') ? propiedades['height'] : undefined;
+        propiedades['strokeWidth'] = (typeof propiedades['strokeWidth'] !== 'undefined') ? propiedades['strokeWidth'] : 1;
 
         this._elementos[elemento]['propiedades'] = propiedades
         this._elementos[elemento]['patron'] = patron
@@ -239,15 +272,28 @@ export class Canvas {
 
             th._canvas.isDrawingMode = false;
 
-            var path = new fabric.Path(th._elementos[elemento]['patron']);   
-            var escala = 100 / path.width;
+            var path = new fabric.Path(th._elementos[elemento]['patron']);
+
+            if (propiedades['width'] !== undefined && propiedades['height'] !== undefined) {
+
+                var escalaX = propiedades['width']
+                var escalaY = propiedades['height']
+
+            } else {
+
+                var escalaX = 100 / path.width;
+                var escalaY = 100 / path.width;
+
+            }
+
             var props = { 
-                scaleX: escala, 
-                scaleY: escala, 
+                scaleX: escalaX, 
+                scaleY: escalaY, 
                 top: th._elementos[elemento].propiedades.top,
                 left: th._elementos[elemento].propiedades.left,
                 fill: th._elementos[elemento].propiedades.fill,
-                stroke: th._elementos[elemento].propiedades.stroke
+                stroke: th._elementos[elemento].propiedades.stroke,
+                strokeWidth: th._elementos[elemento].propiedades.strokeWidth
             }
    
             path.set(props);
@@ -272,8 +318,30 @@ export class Canvas {
     }
 
     removerTeclado(evento) {
+
+        var th = this
+
         if (evento.keyCode === 46) {
-            this._canvas.remove(this._canvas.getActiveObject());
+
+            if (this._canvas.getActiveObject() !== undefined && this._canvas.getActiveObject() !== null) {
+
+                if ('_objects' in this._canvas.getActiveObject()) {
+
+                    this._canvas.getActiveObject()._objects.forEach((objeto) => {
+
+                        th._canvas.remove(objeto);
+
+                    })
+
+                } else {
+
+                    this._canvas.remove(this._canvas.getActiveObject());
+
+                }
+
+            }
+            
+            this._fn['remover']()
         }
     }
 

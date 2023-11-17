@@ -14,7 +14,7 @@ window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
+import {PopUp, Acciones, Desplazar, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
 
 /////////////////////////////////////////////////////
 //DESPLEGABLES DE LA PAGINA
@@ -30,6 +30,29 @@ window.notificados = new customDesplegable('#desplegable-notificados', '#despleg
 
 window.recipes_desplegable = new customDesplegable('#desplegable-recipes', '#desplegable-abrir-recipes', '#desplegable-cerrar-recipes', undefined, '400px')
 	   recipes_desplegable.eventos()
+
+window.evoluciones_desplegable = new customDesplegable('#desplegable-evoluciones', '#desplegable-abrir-evoluciones', '#desplegable-cerrar-evoluciones', undefined, '400px')
+	   evoluciones_desplegable.eventos()
+
+/////////////////////////////////////////////////////
+//DESPLAZARDOR DE EVOLUCIONES
+/////////////////////////////////////////////////////
+export var desplazar_evolucion = new Desplazar('#desplagable-evoluciones-contenedor', '#desplegable-evoluciones-desplazador')
+	desplazar_evolucion.init()
+    desplazar_evolucion._offsetX = 200
+    desplazar_evolucion._offsetY = 15
+
+    desplazar_evolucion._inicialY = 10
+    desplazar_evolucion._inicialX = 40
+
+    desplazar_evolucion._operadorPosicionesY = 'vh'
+    desplazar_evolucion._operadorPosicionesX = 'vw'
+
+onmousemove = function(e) {
+
+	desplazar_evolucion.seleccionar(e)
+
+}
 
 /////////////////////////////////////////////////////
 //BOTONES PAGINACION
@@ -117,8 +140,8 @@ window.camposTextosPersonalizables = new textoPersonalizable();
 	['#evoluciones-nota-f-od', '#evoluciones-previa'],
 	['#evoluciones-nota-f-oi', '#evoluciones-previa'],
 	['#evoluciones-plan', '#evoluciones-previa'],
-	['#evoluciones-nota', '#evoluciones-previa'],
-	['#evoluciones-nota', '#evoluciones-previa'],
+	['#evoluciones-prueba', '#evoluciones-previa'],
+	['#evoluciones-motilidad', '#evoluciones-previa']
 
 ]).forEach(e => { window.camposTextosPersonalizables.declarar(e[0], e[1]) })
 
@@ -128,6 +151,7 @@ window.camposTextosPersonalizables.init()
 //INPUTS QUE MANEJAN DECIMALES
 /////////////////////////////////////////////////////
 var inputsDecimales = new InputsDecimales('.decimales')
+	inputsDecimales._excepciones = {',': '', '-': '', '+': ''}
 	inputsDecimales.init()
 
 var inputsFracciones = new InputsDecimales('.fracciones', '/')
@@ -140,7 +164,7 @@ window.insPop = new PopUp('crud-insertar-popup', 'popup', 'subefecto', true, 'in
 window.infPop = new PopUp('crud-informacion-popup', 'popup', 'subefecto', true, 'informacion', '', 27)
 window.notPop = new PopUp('crud-notificaciones-popup', 'popup', 'subefecto', true, 'notificaciones', '', 27)
 window.recPop = new PopUp('crud-recipes-popup', 'popup', 'subefecto', true, 'recipes', ['presentaciones', 'tratamientos', 'medicamentos'], 27)
-window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', [], 27)
+window.evoPop = new PopUp('crud-evoluciones-popup', 'popup', 'subefecto', true, 'evoluciones', ['insertar-diagnosticos', 'insertar-estudios'], 27)
 
 window.ocuPop = new PopUp('crud-insertar-ocupaciones-popup','popup', 'subefecto', true, 'insertar-ocupaciones', '', 27)
 window.proPop = new PopUp('crud-insertar-proveniencias-popup','popup', 'subefecto', true, 'insertar-proveniencias', '', 27)
@@ -166,7 +190,8 @@ window.mediPop = new PopUp('crud-medicamentos-popup', 'popup', 'subefecto', true
 window.refInsPop = new PopUp('crud-insertar-referencia-popup', 'popup', 'subefecto', true, 'insertar-referencia', '', 27);
 window.refeInsPop = new PopUp('crud-insertar-referido-popup', 'popup', 'subefecto', true, 'insertar-referido', '', 27)
 
-window.diaPop = new PopUp('crud-insertar-diagnostico-popup', 'popup', 'subefecto', true, 'insertar-diagnostico', '', 27)
+window.diaPop = new PopUp('crud-insertar-diagnosticos-popup', 'popup', 'subefecto', true, 'insertar-diagnosticos', '', 27)
+window.estPop = new PopUp('crud-insertar-estudios-popup', 'popup', 'subefecto', true, 'insertar-estudios', '', 27)
 
 ediPop.evtBotones()
 insPop.evtBotones()
@@ -200,6 +225,7 @@ refInsPop.evtBotones()
 refeInsPop.evtBotones()
 
 diaPop.evtBotones()
+estPop.evtBotones()
 
 window.addEventListener('keyup', (e) => {
 
@@ -241,6 +267,7 @@ window.addEventListener('keyup', (e) => {
 	refeInsPop.evtEscape(e)
 
 	diaPop.evtEscape(e)
+	estPop.evtEscape(e)
 
 })
 
@@ -289,11 +316,12 @@ window.idSeleccionada = 0
 export var 
 	prevenirCierrePop = false,
 	permitirLimpiezaReportes = true,
-	ultimoBotonInsersionBasica = '',
 	reporteSeleccionado = 'constancia'
 
 window.reporteModeloSeleccionado = {}
+window.evolucionModeloSeleccionado = {}
 window.prevenirCierreReporte = false
+window.ultimoBotonInsersionBasica = ''
 /////////////////////////////////////////////////////
 //ATAJOS DE TECLADO
 /////////////////////////////////////////////////////
@@ -355,6 +383,7 @@ window.cargar.revision()
 /////////////////////////////////////////////////////
 window.lista_referencias = JSON.parse(await tools.fullAsyncQuery(`referencias`, `traer_referencias`, []))
 window.lista_referidos = JSON.parse(await tools.fullAsyncQuery(`referidos`, `traer_referidos`, []))
+window.lista_diagnosticos = JSON.parse(await tools.fullAsyncQuery(`diagnosticos`, `traer_diagnosticos`, []))
 /////////////////////////////////////////////////////
 window.rellenar = new Rellenar()
 window.reportes = new Reportes()
@@ -435,6 +464,7 @@ class Historias extends Acciones {
 			qs('#reposo-contenedor-izquierda').scrollTo(0,0)
 			qs('#informe-contenedor-izquierda').scrollTo(0,0)
 			qs('#crud-evoluciones-contenedor .filas').scrollTo(0,0)
+			qs('#tabla-evoluciones-consultar-contenedor').scrollTo(0,0)
 		}, 1000)
 
 		gid('constancia-busqueda').value = ''
@@ -459,6 +489,7 @@ class Historias extends Acciones {
 export var historias = new Historias(new Tabla(
 	[
 		['Acciones', false, 0],
+		['Evoluciones', false, 0],
 		['N°. Historia', true, 0],
 		['Paciente', true, 22],
 		['N° de cédula', true, 9],
@@ -474,9 +505,14 @@ historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cue
 		historias['crud'].gBt(['informacion btn btn-informacion', 'Información del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`),
 		historias['crud'].gBt(['editar btn btn-editar', 'Editar historia'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pencil-alt" class="svg-inline--fa fa-pencil-alt fa-w-16 iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"></path></svg>`),
 		historias['crud'].gBt(['reportes btn btn-imprimir', 'Generar reportes del paciente'], `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos-b"><path fill="currentColor" d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zM432 248a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`),
-		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`),
-		historias['crud'].gBt(['evoluciones btn btn-general', 'Generar y consultar evoluciones del paciente'], `<svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg>`)
-	], [0, 0, 0, 0, 0], ['VALUE', 'VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
+		historias['crud'].gBt(['recipes btn btn-imprimir', 'Generar y consultar recipes del paciente'], `<svg class="iconos-b" preserveAspectRatio="none" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path class="gradiante-bg-general" fill="currentColor" d="M288 130.54V112h16c8.84 0 16-7.16 16-16V80c0-8.84-7.16-16-16-16h-96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h16v18.54C115.49 146.11 32 239.18 32 352h448c0-112.82-83.49-205.89-192-221.46zM496 384H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg>`)
+	], [0, 0, 0, 0], ['VALUE', 'VALUE', 'VALUE', 'VALUE'], 'crud-botones', false
+])
+
+historias['crud'].cuerpo.push([historias['crud'].columna = historias['crud'].cuerpo.length, [
+		historias['crud'].gBt(['evoluciones btn btn-general evo-cargar', 'Generar evolución al paciente'], `<svg class="iconos-b" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></svg>`),
+		historias['crud'].gBt(['evoluciones btn btn-general evo-consultar', 'Consultar evoluciones del paciente'], `<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" class="iconos-b" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z"></path></svg>`)
+	], [0, 0], ['VALUE', 'VALUE'], 'crud-botones2', false
 ])
 
 historias['crud'].generarColumnas(['gSpan', null, null], [false],['HTML'], '', 0)
@@ -495,8 +531,8 @@ historias['crud']['inputNavegarGenerar'] = false
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 historias['crud'].botonModoBusqueda("#modo-buscar", 1, [
-	['id_historia', 'id_correlativo'],
-	['id_historia', 'id_correlativo','nombre_completo', 'cedula']
+	['id_historia'],
+	['id_historia', 'nombre_completo', 'cedula']
 ], {"mensaje": (e) => {
 	if(e.target.opcion === 0) {
 		tools['mensaje'] = 'Modo filtro PRECISO seleccionado'
@@ -781,6 +817,8 @@ historias['crud']['customBodyEvents'] = {
 
 		if (button.classList.contains('evoluciones')) {
 
+			evoluciones.modalidad = 'insertar'
+
 			botonesReportesPaginacion.ejecutar('#paginacion-contenedores .evoluciones')
 
 			historias.tr = tools.pariente(button, 'TR')
@@ -804,6 +842,16 @@ historias['crud']['customBodyEvents'] = {
 
 			fondBio.reiniciar()
 			fondBio.asignarImagen('../imagenes/fondo_ojo.jpg')
+
+			if (button.classList.contains('evo-cargar')) {
+				paginacionEvoluciones.animacion(0, true)
+			}
+
+			if (button.classList.contains('evo-consultar')) {
+				paginacionEvoluciones.animacion(1, true)
+			}
+
+			await evoluciones.traer_lista()
 
 			//var resultado = await tools.fullAsyncQuery('historias_recipes', 'cargar_recipes', [historias.sublista.id_historia])
 			//recipes.cargarTabla(JSON.parse(resultado))
@@ -842,7 +890,7 @@ var comboDiagnosticos = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_d
 	comboCivil        = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_estado_civil', [])),
 	comboReligion     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_religiones', [])),
 	comboMedico       = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos', [])),
-	comboReferencia         = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_referencias', [])),
+	comboReferencia     = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_referencias', [])),
 	comboMedicoReferido = JSON.parse(await tools.fullAsyncQuery('combos', 'combo_medicos_referidos', []))
 
 contenedores.eventos().checkboxes('status')
@@ -950,6 +998,14 @@ contenedoresEvoluciones.eventos().contenedor(
 	[0, 0], 			   //limitador de busqueda
 	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
 	{"lista": comboDiagnosticos} //funciones
+)
+
+contenedoresEvoluciones.eventos().contenedor(
+	'cc-estudios-evoluciones', //elemento
+	['combos', 'combo_referencias', ['', '']],    //informacion de la petición
+	[0, 0], 			   //limitador de busqueda
+	[false, true, [false, false], true, true, false, true, true, [true, true], false, true], //comportamientos extras
+	{"lista": comboReferencia} //funciones
 )
 //4)---------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
@@ -1120,13 +1176,13 @@ insersiones_lista.forEach((grupo, i) => {
 
 	qs(`#editar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		tools.limpiar(`.nuevas-${grupo}`, '', {})
+		tools.limpiar(`.insertar-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
 	qs(`#insertar-nueva-${grupo}`).addEventListener('click', e => {
 		ultimoBotonInsersionBasica = e.target
-		tools.limpiar(`.nuevas-${grupo}`, '', {})
+		tools.limpiar(`.insertar-${grupo}`, '', {})
 		insersiones_lista_combos[i].pop()
 	})
 
@@ -1134,14 +1190,18 @@ insersiones_lista.forEach((grupo, i) => {
 
 		if (e.target.classList.contains('insertar')) {
 
-			var datos = tools.procesar(e.target, 'insertar', `nuevas-${grupo}`,  tools)
+			var datos = tools.procesar(e.target, 'insertar', `insertar-${grupo}`,  tools)
 
 			if (datos !== '') {
 
 				if (grupo === 'medicos') {
+
 					datos.splice(2,1)
+
 				} else {
+
 					datos.splice(1,1)
+
 				}
 
 				var resultado = await tools.fullAsyncQuery(grupo, `crear_${grupo}`, datos)
@@ -1419,6 +1479,8 @@ export var informes = new Informes(new Tabla(
 	'tabla-informe', 'informe-busqueda', -1, 'null', 'null', 'null', true
 ))
 
+window.informes = informes
+
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 class Presupuestos extends Acciones {
@@ -1664,6 +1726,7 @@ export var notificados_recipes = new Notificados_recipes(new Tabla(
 
 window.notificados_recipes = notificados_recipes
 
+
 /////////////////////////////////////////////////////
 /*					MEDICAMENTOS 				   */
 /////////////////////////////////////////////////////
@@ -1829,7 +1892,7 @@ class Presentaciones extends Acciones {
 			this.clase = ''
 			this.funcion = ''
 			//-------------------------------
-			this.alternar =  ''
+			this.alternar =  [true,'#fff', '#fff']
 			this.especificos = []
 			this.limitante = 0
 			this.boton = ''
@@ -1854,6 +1917,191 @@ qs('#nueva-presentacion').addEventListener('click', e => {
 	presentaciones.crud.lista.push({"presentacion": ''})
 	presentaciones.cargarTabla(presentaciones.crud.lista)
 })
+
+/////////////////////////////////////////////////////
+/*					EVOLUCIONES 				   */
+/////////////////////////////////////////////////////
+class Evoluciones extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = 'principales'
+		this.funcion = 'evoluciones'
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['fecha']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenido = qs('#evoluciones-template').content.querySelector('.evoluciones-contenido').cloneNode(true)
+		this.select = qs('#evoluciones-consulta-fechas select')
+		this.option = document.createElement('option')
+		this.ul = document.createElement('ul')
+		this.img = document.createElement('img')
+
+		//-------------------------------
+		this._opciones = {}
+
+		this._imagenes = []
+		this._rutaImagenes = '#evoluciones-consultar-contenedor .galeria-img img'
+		this._pswp = '.pswp2'
+		this._retardo = 3000
+
+		//-------------------------------
+		this.modalidad = 'insertar' //insertar - editar
+
+	}
+
+	imagenesExpandirConstruir() {
+
+		if (PhotoSwipe !== undefined) {
+
+			this.photo = new PhotoSwipe(document.querySelectorAll(this._pswp)[0], PhotoSwipeUI_Default, this._imagenes, this._opciones)
+			this.photo.init()
+
+		} else {
+
+			console.log('PhotoSwipe es necesario para el funcionamiento de esta clase')
+
+		}
+
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////	
+	async retardar() {
+
+		var th = this
+
+		return new Promise((resolve, reject) => {
+			setTimeout(resolve, th._retardo);
+		});
+	}
+
+	imagenesExpandirConfiguracion(index) {
+
+		var th = this
+
+		this._opciones = {
+		    index: index,
+		    showHideOpacity:true,
+		    bgOpacity:0.9,
+		    closeOnScroll: false,
+		    getThumbBoundsFn: (index) => {
+			    var thumbnail = document.querySelectorAll(th._rutaImagenes)[index];
+			    var pageYScroll = window.pageYOffset || document.documentElement.scrollTop; 
+			    var rect = thumbnail.getBoundingClientRect(); 
+			    return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+			}
+		};
+	}
+	
+	async imagenesExpandirCargar() {
+		
+		var th = this,
+			cola = []
+
+		cola.push(this.retardar().then(x => {}));
+
+		await Promise.all(cola);
+
+		var imagenes = qsa(this._rutaImagenes) //.galeria-img img
+
+		this._imagenes = []
+
+		for (var i = 0; i < imagenes.length; i++) {
+
+			var height = imagenes[i].naturalHeight,
+				width  = imagenes[i].naturalWidth
+
+			if (height < 400) {height = 800}
+			if (width  < 400) {width  = 800}
+
+			th._imagenes.push({
+				src: imagenes[i].src,
+				w:width,
+				h:height
+			})
+		
+		}
+
+	}
+
+	async traer_lista() {
+
+		var th = this,
+			fr = new DocumentFragment()
+
+		var lista = JSON.parse(await tools.fullAsyncQuery(`historias_evoluciones`, `evoluciones_consultar`, [historias.sublista.id_historia]))
+
+		this.select.innerHTML = ''
+
+		lista.forEach(e => {
+
+			var option = th.option.cloneNode(true)
+				option.value = e.fecha_arreglada
+				option.innerHTML = e.fecha_arreglada
+
+			fr.appendChild(option)
+
+		})
+
+		this.select.appendChild(fr)
+
+		this.cargarTabla(lista, undefined, undefined)
+
+	}
+
+}
+
+export var evoluciones = new Evoluciones(new Tabla(
+	[	
+		['', false, 0]
+	],
+	'tabla-evoluciones-consultar', 'evoluciones-busqueda', 1, 'null', 'null', 'null', false
+))
+
+window.evoluciones = evoluciones
+
+
+/////////////////////////////////////////////////////
+/*				EVOLUCIONES NOTIFICADOS			   */
+/////////////////////////////////////////////////////
+class Evoluciones_notificadas extends Acciones {
+
+	constructor(crud) {
+		super(crud)
+		this.fila
+		this.clase   = ''
+		this.funcion = ''
+		//-------------------------------
+		this.alternar = [true, 'white', 'whitesmoke']
+		this.especificos = ['id_recipe', 'fecha']
+		this.limitante = 0
+		this.boton = ''
+		this.sublista = {}
+		this.tr = {}
+		this.posicion = undefined
+		//-------------------------------
+		this.div = document.createElement('div')
+		this.contenedorEliminarBoton = qs('#eliminar-template').content.querySelector('.eliminar-contenedor').cloneNode(true)
+		this.contenido = qs('#desplegable-evoluciones-contenido')
+	}
+
+}
+
+export var evoluciones_notificadas = new Evoluciones_notificadas(new Tabla(
+	[	
+		['Paciente', true, 2],
+		['Acciones', false, 0]
+	],
+	'tabla-evoluciones-notificados', 'null', -1, 'null', 'null', 'null', false
+))
+
+window.evoluciones_notificadas = evoluciones_notificadas
+evoluciones_notificadas.cargarTabla([])
 
 //---------------------------------------------------------------------------------------------------
 /* -------------------------------------------------------------------------------------------------*/
@@ -1946,8 +2194,11 @@ medPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.co
 genPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
 genPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
 
-diaPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"}}
-diaPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
+diaPop.funciones['apertura'] = {"apertura": () => {qs('#crud-insertar-diagnosticos-popup').style = "z-index: 11"}}
+diaPop.funciones['cierre']   = {"cierre": ()   => {qs('#crud-insertar-diagnosticos-popup').style = "z-index: 0"}}
+
+estPop.funciones['apertura'] = {"apertura": () => {qs('#crud-insertar-estudios-popup').style = "z-index: 11"}}
+estPop.funciones['cierre']   = {"cierre": ()   => {qs('#crud-insertar-estudios-popup').style = "z-index: 0"}}
 
 forPop.funciones['apertura'] = {"apertura": () => {window.paginacionHistorias.contenedor.style = "z-index: 0"; qs('#crud-infeditar-pop').scrollTo(0, 0)}}
 forPop.funciones['cierre']   = {"cierre": ()   => {window.paginacionHistorias.contenedor.style = "z-index: 10"}}
@@ -2005,10 +2256,12 @@ export var reportesDisponibles = {
 //              				NOTIFICACIONES
 //----------------------------------------------------------------------------------------------------
 export var 
-	notificacionesPop = qs('#crud-notificaciones-popup'),
-	notificacionesBoton = qs('#notificacion-doctor'),
+	notificacionesPop      = qs('#crud-notificaciones-popup'),
+	notificacionesBoton    = qs('#notificacion-doctor'),
 	notificadosDesplegable = qs('#desplegable-notificados'),
-	notificadosBoton = qs('#desplegable-abrir-notificados')
+	notificadosBoton       = qs('#desplegable-abrir-notificados'),
+	evolucionesDesplegable = qs('#desplegable-evoluciones'),
+	evolucionesBoton       = qs('#desplegable-abrir-evoluciones')
 
 var recipesDesplegable = qs('#desplegable-recipes'),
 	recipesBoton       = qs('#desplegable-abrir-recipes'),
@@ -2066,7 +2319,7 @@ setInterval(async () => {
         //
         if (recipesDesplegable.style.display === '' && usuario.rol.trim() === 'ADMINISTRACION') {
 
-        	notificados_reportes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_recipes', 'notificaciones_recipes_consultar', [])))
+        	notificados_recipes.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_recipes', 'notificaciones_recipes_consultar', [])))
 
         }
 
@@ -2096,6 +2349,33 @@ setInterval(async () => {
         if (consulta.trim() === '1') {
 
 	        historiasBoton.classList.add('notificacion-alerta-before')
+
+        }
+
+        //------------------------------------------------------------------
+    	//					NOTIFICACIONES EVOLUCION
+        //------------------------------------------------------------------
+
+        //ACTUALIZACION SI CONTENEDOR ESTA ABIERTO
+        //
+        if (evolucionesDesplegable.style.display === '' && usuario.rol.trim() === 'ADMINISTRACION') {
+
+        	evoluciones_notificadas.cargarTabla(JSON.parse(await tools.fullAsyncQuery('historias_evoluciones', 'notificaciones_evoluciones_consultar', [])))
+
+        }
+
+        //ALERTA VISUAL DE NOTIFICACION DE EVOLUCIONES 
+        //-----------------------------------------
+
+        consulta = await tools.fullAsyncQuery('historias_evoluciones', 'notificacion_evoluciones_cantidad', [])
+
+        if (consulta > 0) {
+
+	        if (evolucionesDesplegable.style.display === 'none' && usuario.rol.trim() === 'ADMINISTRACION') {
+	        	
+	        	evolucionesBoton.classList.add('notificacion-alerta')
+
+	        }
 
         }
 

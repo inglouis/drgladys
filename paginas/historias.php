@@ -13,7 +13,7 @@
   //---------------------------------------
   $_SESSION['refrescar'] = '..'.$_SERVER['REQUEST_URI'];
   //---------------------------------------
-  $dia = $obj->fechaHora('America/Caracas','Y-m-d');
+  $dia = $obj->i_pdo("select current_date", [], true)->fetchColumn(); //$obj->fechaHora('America/Caracas','Y-m-d');
 
 ?>
 <!DOCTYPE html>
@@ -39,6 +39,12 @@
       <?php
         include_once('../estructura/reportes_scripts.php');
       ?>
+
+      <style type="text/css">
+        #body {
+          overflow: hidden;
+        }
+      </style>
   </head>
     
   <!----------------------------------------- CUERPO -------------------------------------- -->
@@ -231,6 +237,215 @@
         </table>
       </div>
      
+    </div>
+
+    <!------------------------------------------------------------------------------------------->
+    <!-------------------------------- DESPLEGABLE EVOLUCIONES ---------------------------------->
+    <!------------------------------------------------------------------------------------------->
+
+    <?php 
+      if ($_SESSION['usuario']['rol'] == 'DOCTOR') {
+    ?>
+      <button id="desplegable-abrir-evoluciones" class="desplegable-abrir" title="Datos de las evoluciones para reportes de paciente" data-hidden> 
+    <?php 
+      } else if ($_SESSION['usuario']['rol'] == 'ADMINISTRACION') {
+    ?>
+      <button id="desplegable-abrir-evoluciones" class="desplegable-abrir" title="Datos de las evoluciones para reportes de paciente"> 
+    <?php 
+      }
+    ?>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" class="iconos"><path fill="currentColor" d="M168 80c-13.3 0-24 10.7-24 24V408c0 8.4-1.4 16.5-4.1 24H440c13.3 0 24-10.7 24-24V104c0-13.3-10.7-24-24-24H168zM72 480c-39.8 0-72-32.2-72-72V112C0 98.7 10.7 88 24 88s24 10.7 24 24V408c0 13.3 10.7 24 24 24s24-10.7 24-24V104c0-39.8 32.2-72 72-72H440c39.8 0 72 32.2 72 72V408c0 39.8-32.2 72-72 72H72zM176 136c0-13.3 10.7-24 24-24h96c13.3 0 24 10.7 24 24v80c0 13.3-10.7 24-24 24H200c-13.3 0-24-10.7-24-24V136zm200-24h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80h32c13.3 0 24 10.7 24 24s-10.7 24-24 24H376c-13.3 0-24-10.7-24-24s10.7-24 24-24zM200 272H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24zm0 80H408c13.3 0 24 10.7 24 24s-10.7 24-24 24H200c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></svg>
+    </button>
+
+    <div id="desplegable-evoluciones" class="desplegable-oculto">
+      
+      <section>
+        <button id="desplegable-cerrar-evoluciones" class='desplegable-cerrar'>
+          <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-right" class="svg-inline--fa fa-caret-right fa-w-6 iconos" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512"><path fill="currentColor" d="M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z"></path></svg>
+        </button>
+      </section>
+
+
+      <div id="tabla-evoluciones-contenedor" class="tabla-ppal" data-scroll>
+
+        <div class="titulo">
+          Datos de las evoluciones para reportes de paciente
+        </div>
+
+        <table id="tabla-evoluciones-notificados" class="table table-bordered table-striped" title="Click para desplegar contenedor desplazable">
+          <thead>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+     
+    </div>
+
+    <div id="desplagable-evoluciones-contenedor" data-hidden>
+    
+        <div id="desplegable-evoluciones-desplazador" title="Click para desplazar/fijar">
+          
+          <button id="desplegable-evoluciones-desplazador-cerrar" class="btn btn-cerrar" title="Click para cerrar">X</button>
+
+        </div>
+        
+        <div id="desplegable-evoluciones-contenido" data-scroll>
+          
+          <div class="cabecera">
+            Información de la evolución del paciente: <div style="font-weight: bold" class="evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">Nota inicial:</label>
+            <div data-consulta="nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Agudeza visual - 4m:</label>
+            <div data-consulta="agudeza_4" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div >
+            <label class="subtitle">Pruebas:</label>
+            <ul data-consulta="agudeza_4_pruebas" class="evolucion-desplazable-limpiar"></ul>
+          </div>
+
+          <div>
+            <label class="title">Agudeza visual - 1m:</label>
+            <div data-consulta="agudeza_1" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div >
+            <label class="subtitle">Pruebas:</label>
+            <ul data-consulta="agudeza_1_pruebas" class="evolucion-desplazable-limpiar"></ul>
+          </div>
+
+          <div>
+            <label class="title">Agudeza visual - Lectura:</label>
+            <div data-consulta="agudeza_lectura" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="subtitle">Pruebas:</label>
+            <ul data-consulta="agudeza_lectura_pruebas" class="evolucion-desplazable-limpiar"></ul>
+          </div>
+
+          <section class="dato-simple">
+            
+            <div>
+              <label class="title">Estereopsis:</label>
+              <div data-consulta="estereopsis" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+            <div>
+              <label class="title">Ishihara:</label>
+              <div data-consulta="test" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+            <div>
+              <label class="title">Stereo Fly:</label>
+              <div data-consulta="reflejo" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+          </section>
+
+          <div>
+            <label class="title">Prueba realizada:</label>
+            <div data-consulta="pruebas" class="contenido copiable evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="subtitle">Nota de la prueba:</label>
+            <div data-consulta="pruebas_nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="subtitle">Nota de la prueba de motilidad:</label>
+            <div data-consulta="motilidad_nota" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">RX:</label>
+            <div data-consulta="rx" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">RX Cicloplegia:</label>
+            <div data-consulta="rx_ciclo" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">Biomicroscopía OD:</label>
+            <div data-consulta="nota_b_od" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Biomicroscopía OI:</label>
+            <div data-consulta="nota_b_oi" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Fondo de ojo OD:</label>
+            <div data-consulta="nota_f_od" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">Fondo de ojo OI:</label>
+            <div data-consulta="nota_f_oi" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div>
+            <label class="title">PIO:</label>
+            <div data-consulta="pio" class="contenido evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+          <div >
+            <label class="title">Estudios:</label>
+            <ul data-consulta="referencias" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div >
+            <label class="title">IDX:</label>
+            <ul data-consulta="idx" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div>
+            <label class="title">Fórmula:</label>
+            <div data-consulta="formula" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <div>
+            <label class="title">Curva base:</label>
+            <div data-consulta="curva" class="contenido evolucion-desplazable-limpiar"></div>
+          </div>
+
+          <section class="dato-simple">
+
+            <div>
+              <label class="title">Altura pupilar:</label>
+              <div data-consulta="altura_pupilar" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+            <div>
+              <label class="title">Distancia interpupilar:</label>
+              <div data-consulta="interpupilar" class="contenido evolucion-desplazable-limpiar"></div>
+            </div>
+
+          </section>
+
+          <div >
+            <label class="title">Estudios focales:</label>
+            <ul data-consulta="formula_estudios" class="evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></ul>
+          </div>
+
+          <div>
+            <label class="title">Plan:</label>
+            <div data-consulta="plan" class="contenido copiable evolucion-desplazable-limpiar" title="Click para copiar al portapapeles"></div>
+          </div>
+
+        </div>
+      
     </div>
 
     <!---------------------------------------------------------------------->
