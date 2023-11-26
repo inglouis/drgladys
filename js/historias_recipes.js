@@ -286,7 +286,7 @@ recipes_notificados['crud']['propiedadesTr'] = {
 
 		var d2 = th.div.cloneNode(true)
 			d2.insertAdjacentHTML('afterbegin', e.sublista.id_historia)
-			d2.setAttribute('style', `color:#fff`)
+			d2.setAttribute('style', `color:#fff;`)
 
 		div.appendChild(d1)
 		div.appendChild(d2)
@@ -440,11 +440,13 @@ qs("#crud-recipes-botones").addEventListener('click', async e => {
 
 					if (e.marcador === 'X') { procesoMarcador = true }
 
-					if (e.tratamiento.trim() === '' && e.marcador === 'X') { procesoTratamiento = false }
+					//if (e.tratamiento.trim() === '' && e.marcador === 'X') { procesoTratamiento = false }
 
-					if (e.presentacion.trim() === '' && e.marcador === 'X') { procesoPresentacion = false }
+					//if (e.presentacion.trim() === '' && e.marcador === 'X') { procesoPresentacion = false }
 
 				});
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				if (procesoMarcador && procesoTratamiento && procesoPresentacion) {
 

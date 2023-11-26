@@ -72,6 +72,17 @@
     		$json_biomicroscopia = $args[128];
     		$json_fondo_ojo = $args[129];
 
+    		$args[3] = str_replace('%2B', '+', $args[3]);
+    		$args[4] = str_replace('%2B', '+', $args[4]);
+
+    		$args[13] = str_replace('%2B', '+', $args[13]);
+    		$args[14] = str_replace('%2B', '+', $args[14]);
+
+    		$args[23] = str_replace('%2B', '+', $args[23]);
+    		$args[24] = str_replace('%2B', '+', $args[24]);
+
+    		//$args[114] = str_replace('%2B', '+', $args[114]); add? revisar posicion
+
     		$img_biomicroscopia = str_replace('%2B', '+', $args[130]);
     		$img_fondo_ojo = str_replace('%2B', '+', $args[131]);
 
@@ -452,6 +463,10 @@
 
 	            if (is_numeric($resultado)) {
 
+	            	$sql = "update principales.historias set fecha_consulta = current_date where id_historia = ?";
+
+	            	$this->i_pdo($sql, [$id_historia], false);
+
 	            	return $resultado;
 
 	            } else {
@@ -486,6 +501,15 @@
 
     		$json_biomicroscopia = $args[128];
     		$json_fondo_ojo = $args[129];
+
+    		$args[3] = str_replace('%2B', '+', $args[3]);
+    		$args[4] = str_replace('%2B', '+', $args[4]);
+
+    		$args[13] = str_replace('%2B', '+', $args[13]);
+    		$args[14] = str_replace('%2B', '+', $args[14]);
+
+    		$args[23] = str_replace('%2B', '+', $args[23]);
+    		$args[24] = str_replace('%2B', '+', $args[24]);
 
     		$img_biomicroscopia = str_replace('%2B', '+', $args[130]);
     		$img_fondo_ojo = str_replace('%2B', '+', $args[131]);

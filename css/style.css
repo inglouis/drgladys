@@ -3623,6 +3623,11 @@ span.numeracion {
   background: #e45666;
 }
 
+.eliminar-boton-contenedor {
+    position: absolute; 
+    right: 5px
+}
+
 /*-----------------------------------------------------*/
 /*------------------ CONSTANCIAS ----------------------*/
 /*-----------------------------------------------------*/
@@ -4206,6 +4211,7 @@ div#tabla-notificados-contenedor .titulo::after {
 
 #tabla-recipes .eliminar-texto {
     font-size: 10px;
+    padding: 5px;
 }
 
 #tabla-recipes .eliminar-contenedor div {

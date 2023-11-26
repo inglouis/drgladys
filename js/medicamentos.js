@@ -241,7 +241,7 @@ contenedoresInsertar.eventos().contenedor(
 	'cc-insertar-genericos', //elemento
 	['combos', 'combo_genericos', ['', 80]],    //informacion de la petición
 	[0, 2], 			   //limitador de busqueda
-	[true, true, [false, false], true, false, true, true, true, [true, false], false, false], //comportamientos extras
+	[true, true, [false, false], true, false, true, true, true, [true, false], false, true], //comportamientos extras
 	{} //funciones
 )
 
@@ -249,7 +249,7 @@ contenedoresEditar.eventos().contenedor(
 	'cc-editar-genericos', //elemento
 	['combos', 'combo_genericos', ['', 80]],    //informacion de la petición
 	[0, 2], 			   //limitador de busqueda
-	[true, true, [false, false], true, false, true, true, true, [true, false], false, false], //comportamientos extras
+	[true, true, [false, false], true, false, true, true, true, [true, false], false, true], //comportamientos extras
 	{} //funciones
 )
 //----------------------------------------------------------------------------------------------------
@@ -294,6 +294,10 @@ qs('#crud-editar-botones').addEventListener('click', async e => {
 
 					medicamentos.crud.botonForzar(true)
 				
+				} else if (resultado.trim() === 'repetido') {
+
+					notificaciones.mensajeSimple('Este medicamento ya éxiste', resultado, 'F')
+
 				} else {
 
 					notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
@@ -329,6 +333,10 @@ qs('#crud-insertar-botones').addEventListener('click', async e => {
 
 				medicamentos.confirmarActualizacion(insPop)
 			
+			} else if (resultado.trim() === 'repetido') {
+
+				notificaciones.mensajeSimple('Este medicamento ya éxiste', resultado, 'F')
+
 			} else {
 
 				notificaciones.mensajeSimple('Error al procesar la petición', resultado, 'F')
@@ -362,6 +370,6 @@ qs('#tabla-medicamentos').addEventListener('click', e => {
 
 qs('#medicamentos-insertar').addEventListener('click', e => {
 	window.idSeleccionada = 0
-	tools.limpiar('.nuevos', '', {"asegurar": () => {return '#crud-insertar-pop'}})
+	tools.limpiar('.insertar-valores', '', {"asegurar": () => {return '#crud-insertar-pop'}})
 	insPop.pop()
 })

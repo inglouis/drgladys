@@ -30,7 +30,7 @@
       ¿DESEA ELIMINAR ESTE REGISTRO?: 
     </div>
 
-    <div>
+    <div class="eliminar-boton-contenedor">
       <button class="btn eliminar-boton btn-eliminar" title="ELIMINAR">X</button>
     </div>
   </div>
@@ -941,7 +941,7 @@
 
       <div class="columnas">
         <div>
-          <label>Descripción del estudio/referencia</label>  
+          <label class="requerido">Descripción del estudio/referencia</label>  
           <textarea id="descripcion-estudios" minlength="1" maxlength="600" class="insertar-estudios lleno upper" style="resize: none" rows="4"></textarea> 
         </div>
       </div> 

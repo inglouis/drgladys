@@ -48,6 +48,10 @@
         /*--------------------------------------------------------*/
         public function cargar_medicamentos_especificos($args) {
 
+            if (empty($args[0])) {
+                $args[0] = 0;
+            }
+
             $sql = "
                 select 
                     a.id_medicamento, 
@@ -130,9 +134,9 @@
             $pValido = 1;
             $tValido = 1;
 
-            // echo "<pre>";
-            // print_r($args);
-            // echo "</pre>";
+            //echo "<pre>";
+            //print_r($args);
+            //echo "</pre>";
 
             $conn = $this->init_transaction();
 
@@ -507,4 +511,3 @@
 
     }
 ?>
-

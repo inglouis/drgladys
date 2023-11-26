@@ -77,7 +77,7 @@
     $menor = '';
   }
 
-  if (!empty($datos['menor'])) {
+  if (!empty($datos['aula'])) {
 
     $datos['nombres'] = strtoupper($datos['nombres']);
     $datos['apellidos'] = strtoupper($datos['apellidos']);

@@ -1141,7 +1141,10 @@
 
                   <div class="dibujar-formas-v">
                     
-                    <button id="fondo-forma-1" title="Forma1">F</button>
+                    <button id="degeneracion_lattice" title="Degeneración de Lattice">    
+                      <svg id="eYmONhcefEk1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 160 60" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"><path d="M0,19.798263c0,0,17.810377-7.066746,28.213942-10.143894s41.230021-9.654369,41.230021-9.654369" transform="translate(0 20.341924)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M89.731751,0.000001c0,0,29.715571,6.618311,40.248354,9.654369s30.019895,10.143893,30.019895,10.143893" transform="translate(0 20.341924)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M19.901993,40.140187L9.497495,30.241056" transform="translate(0 0.000001)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M34.721982,34.242901l-6.50804-13.900976" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M53.345022,29.996293L50.620034,15.167988" transform="translate(0 0.000001)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M140.200915,40.140187l9.712502-9.899132" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M124.865876,35.190623l5.114229-14.848699" transform="translate(.000001 0.000001)" fill="none" stroke="#3f5787" stroke-width="2.5"/><path d="M103.188406,30.241057l3.150001-15.073068" transform="translate(.000001 0)" fill="none" stroke="#3f5787" stroke-width="2.5"/></svg>
+                    </button>
+
                     <button title="---">-</button>
                     <button title="---">-</button>
                     <button title="---">-</button>

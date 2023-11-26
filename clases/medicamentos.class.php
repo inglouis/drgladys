@@ -1,5 +1,6 @@
 <?php
     require('../clases/ppal.class.php');
+    
     class Model extends ppal {
         public $schema ='basicas';
         public $tabla = 'medicamentos';
@@ -9,12 +10,16 @@
         ];
   
         public function cargar_medicamentos($args) {
+
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla where status='A' order by nombre asc limit 8000";
+
             return $this->seleccionar($sql, $args);
+
         }
 
 
         public function buscar_medicamentos($args) {
+
             $busqueda = $args[0];
 
             if (is_numeric($busqueda) || gettype($busqueda) == 'integer' || ctype_digit($busqueda)) {
@@ -24,43 +29,56 @@
             }
 
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla where status='A' and nombre like '%'|| UPPER('$busqueda') ||'%' $conc order by id_medicamento DESC limit 8000";
+
             return $this->seleccionar($sql, []);
+
         }
 
         public function crear_medicamentos($args){     
 
-            $genericos = &$args[1];
+            $resultado = ($this->i_pdo("select id_medicamento from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
-            foreach ($genericos as &$r) {
-                $r = $r['id'];
-            }
+            if (empty($resultado)) {
 
-            $genericos = json_encode($genericos);
+                $genericos = &$args[1];
 
-            $sql = "insert into $this->schema.$this->tabla(nombre, genericos, status) VALUES(
-                    trim(upper(?)), 
-                    ?::json, 
-                    'A'
-                ) returning id_medicamento";
-                
-            $id = $this->insertar($sql, [$args[0], $genericos])[0]['id_medicamento'];
+                foreach ($genericos as &$r) {
+                    $r = $r['id'];
+                }
 
-            if (is_numeric($id)) {
-                $sql = "insert into basicas.presentaciones(id_medicamento, presentaciones, status) VALUES($id, '[]'::json, 'A')";
+                $genericos = json_encode($genericos);
 
-                $resultado = $this->insertar($sql, []);
+                $sql = "insert into $this->schema.$this->tabla(nombre, genericos, status) VALUES(
+                        trim(upper(?)), 
+                        ?::json, 
+                        'A'
+                    ) returning id_medicamento";
+                    
+                $id = $this->insertar($sql, [$args[0], $genericos])[0]['id_medicamento'];
 
-                if(trim($resultado) == 'exito') {
-
-                    $sql = "insert into basicas.tratamientos(id_medicamento, tratamientos, status) VALUES($id, '[]'::json, 'A')";
+                if (is_numeric($id)) {
+                    $sql = "insert into basicas.presentaciones(id_medicamento, presentaciones, status) VALUES($id, '[]'::json, 'A')";
 
                     $resultado = $this->insertar($sql, []);
 
                     if(trim($resultado) == 'exito') {
-                        return 'exito';
+
+                        $sql = "insert into basicas.tratamientos(id_medicamento, tratamientos, status) VALUES($id, '[]'::json, 'A')";
+
+                        $resultado = $this->insertar($sql, []);
+
+                        if(trim($resultado) == 'exito') {
+                            return 'exito';
+                        }
                     }
                 }
+
+            } else {
+
+                return 'repetido';
+
             }
+
 
         }
 
@@ -76,7 +94,6 @@
 
             $resultado = ($this->i_pdo("select id_medicamento from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) and id_medicamento != $args[3] limit 1", [], true))->fetchColumn();
 
-
             if(empty($resultado)) {
                 $sql = "update $this->schema.$this->tabla set nombre = trim(upper(?)), genericos = ?::json, status = trim(upper(?)) where id_medicamento = ?";
                 return $this->actualizar($sql, $args); 
@@ -86,20 +103,27 @@
                     
         }
 
-        public function elimina_medicamento($args){    
+        public function elimina_medicamento($args) {
+
            $sql ="delete from $this->schema.$this->tabla where id_medicamento = ?";
            return $this->eliminar($sql, $args);
+
         }
+
         //--------------------------------------------------------------
         //--------------------------------------------------------------
         public function traer_medicamento($args){     
+
             $sql = "select * from $this->schema.$this->tabla where id_medicamento = ?";
             return $this->seleccionar($sql, $args);
+
         } 
 
         public function filtrar($args) {
+
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla";   
             $this->aplicar_filtros([$sql, $args, 0, false, 'DESC', '8000']);
+            
         }
 
         public function estandar_genericos($args) {
@@ -130,4 +154,3 @@
 
     }
 ?>
-
