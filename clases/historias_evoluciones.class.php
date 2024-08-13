@@ -81,8 +81,6 @@
     		$args[23] = str_replace('%2B', '+', $args[23]);
     		$args[24] = str_replace('%2B', '+', $args[24]);
 
-    		//$args[114] = str_replace('%2B', '+', $args[114]); add? revisar posicion
-
     		$img_biomicroscopia = str_replace('%2B', '+', $args[130]);
     		$img_fondo_ojo = str_replace('%2B', '+', $args[131]);
 

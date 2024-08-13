@@ -74,7 +74,7 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		//nota
 		var texto = JSON.parse(e.sublista.nota).texto_html
-			contenedor.querySelector('[data-template="nota"] div').innerHTML = texto.toUpperCase()
+			contenedor.querySelector('[data-template="nota"] div').innerHTML = decodeURIComponent(texto.toUpperCase()) 
 
 		//examen oftalmológico
 		//------------------------------------------------
@@ -572,7 +572,7 @@ evoluciones['crud']['customBodyEvents'] = {
 
 					}
 
-					gid('evoluciones-fecha').value = window.dia
+					//gid('evoluciones-fecha').value = window.dia
 
 				}
 			})

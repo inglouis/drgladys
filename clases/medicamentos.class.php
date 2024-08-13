@@ -1,6 +1,5 @@
 <?php
     require('../clases/ppal.class.php');
-    
     class Model extends ppal {
         public $schema ='basicas';
         public $tabla = 'medicamentos';
@@ -10,16 +9,12 @@
         ];
   
         public function cargar_medicamentos($args) {
-
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla where status='A' order by nombre asc limit 8000";
-
             return $this->seleccionar($sql, $args);
-
         }
 
 
         public function buscar_medicamentos($args) {
-
             $busqueda = $args[0];
 
             if (is_numeric($busqueda) || gettype($busqueda) == 'integer' || ctype_digit($busqueda)) {
@@ -29,16 +24,14 @@
             }
 
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla where status='A' and nombre like '%'|| UPPER('$busqueda') ||'%' $conc order by id_medicamento DESC limit 8000";
-
             return $this->seleccionar($sql, []);
-
         }
 
         public function crear_medicamentos($args){     
 
             $resultado = ($this->i_pdo("select id_medicamento from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
-            if (empty($resultado)) {
+            if(empty($resultado)) {
 
                 $genericos = &$args[1];
 
@@ -103,27 +96,20 @@
                     
         }
 
-        public function elimina_medicamento($args) {
-
+        public function elimina_medicamento($args){    
            $sql ="delete from $this->schema.$this->tabla where id_medicamento = ?";
            return $this->eliminar($sql, $args);
-
         }
-
         //--------------------------------------------------------------
         //--------------------------------------------------------------
         public function traer_medicamento($args){     
-
             $sql = "select * from $this->schema.$this->tabla where id_medicamento = ?";
             return $this->seleccionar($sql, $args);
-
         } 
 
         public function filtrar($args) {
-
             $sql = "select id_medicamento, trim(nombre) as nombre, genericos, trim(status) as status from $this->schema.$this->tabla";   
             $this->aplicar_filtros([$sql, $args, 0, false, 'DESC', '8000']);
-            
         }
 
         public function estandar_genericos($args) {
@@ -154,3 +140,4 @@
 
     }
 ?>
+

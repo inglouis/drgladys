@@ -461,7 +461,7 @@
       </div>
 
       <div>
-        <label style="width: 85px;">N° de cédula:</label>
+        <label style="width: 105px;">N° de cédula:</label>
         <input type="text" autocomplete="off"  data-valor="cedula" class="evoluciones-cargar upper visual" disabled style="width: 10vw; min-width: 150px">
       </div>
 
@@ -1363,7 +1363,7 @@
 
                 <div>    
                   <label>DIP</label>
-                  <input type="number" data-valor="dip" class="evoluciones-valores upper" placeholder="00mm">
+                  <input type="text" data-valor="dip" class="evoluciones-valores upper" placeholder="00mm">
                 </div>
 
               </div>
