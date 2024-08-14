@@ -50,7 +50,10 @@ var elementos = {
  "el25": qs('[data-valor="distancia_interpupilar_od"]'),
  "el26": qs('[data-valor="distancia_interpupilar_oi"]'),
  "el27": qs('[data-valor="distancia_interpupilar_add"]'),
- "el28": qs('[data-valor="dip"]')
+ "el28": qs('[data-valor="dip"]'),
+ "el29": qs('[data-valor="test"]'),
+ "el30": qs('[data-valor="reflejo"]'),
+ "el31": qs('[data-valor="estereopsis"]')
 }
 
 /////////////////////////////////////////////////////
@@ -71,7 +74,7 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		//nota
 		var texto = JSON.parse(e.sublista.nota).texto_html
-			contenedor.querySelector('[data-template="nota"] div').innerHTML = texto.toUpperCase()
+			contenedor.querySelector('[data-template="nota"] div').innerHTML = decodeURIComponent(texto.toUpperCase()) 
 
 		//examen oftalmológico
 		//------------------------------------------------
@@ -244,7 +247,7 @@ evoluciones['crud']['propiedadesTr'] = {
 
 		contenedor.querySelector('[data-template="curva"] div').innerHTML = `OD: ${e.sublista.curva_od} - OI: ${e.sublista.curva_oi}`
 		contenedor.querySelector('[data-template="altura_pupilar"] div').innerHTML = `OD:${e.sublista.altura_pupilar_od} - OI: ${e.sublista.altura_pupilar_oi}`
-		contenedor.querySelector('[data-template="interpupilar"] div').innerHTML = `OD:${e.sublista.distancia_interpupilar_od} - OI: ${e.sublista.distancia_interpupilar_oi} - ADD: ${e.sublista.distancia_interpupilar_add} - DIP: ${e.sublista.dip}`
+		contenedor.querySelector('[data-template="interpupilar"] div').innerHTML = `OD:${e.sublista.distancia_interpupilar_od} - OI: ${e.sublista.distancia_interpupilar_oi} - ADD: ${decodeURIComponent(e.sublista.distancia_interpupilar_add)} - DIP: ${e.sublista.dip}`
 
 		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.bifocal_kriptok !== '') ? `<li>BIFOCAL KRIPTOK</li>` : ''))
 		contenedor.querySelector('[data-template="formula_estudios"] ul').insertAdjacentHTML('beforeend', ((e.sublista.multifocal !== '') ? `<li>MULTIFOCAL</li>` : ''))
@@ -469,6 +472,10 @@ evoluciones['crud']['customBodyEvents'] = {
 			if (evoluciones.sublista.distancia_interpupilar_add == false) {elementos['el27'].value = ''}
 			if (evoluciones.sublista.dip == false) {elementos['el28'].value = ''}
 
+			if (evoluciones.sublista.test == false) {elementos['el29'].value = ''}
+			if (evoluciones.sublista.reflejo == false) {elementos['el30'].value = ''}
+			if (evoluciones.sublista.estereopsis == false) {elementos['el31'].value = ''}
+
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
 		}
@@ -565,7 +572,7 @@ evoluciones['crud']['customBodyEvents'] = {
 
 					}
 
-					gid('evoluciones-fecha').value = window.dia
+					//gid('evoluciones-fecha').value = window.dia
 
 				}
 			})
@@ -612,6 +619,10 @@ evoluciones['crud']['customBodyEvents'] = {
 
 			if (evoluciones.sublista.distancia_interpupilar_add == false) {elementos['el27'].value = ''}
 			if (evoluciones.sublista.dip == false) {elementos['el28'].value = ''}
+
+			if (evoluciones.sublista.test == false) {elementos['el29'].value = ''}
+			if (evoluciones.sublista.reflejo == false) {elementos['el30'].value = ''}
+			if (evoluciones.sublista.estereopsis == false) {elementos['el31'].value = ''}
 
 			notificaciones.mensajeSimple('Datos cargados', false, 'V')
 
@@ -788,7 +799,16 @@ fondBio.asignarDibujados('.fondo-dibujar')
 fondBio.asignarGrosores('.fondo-slider')
 fondBio.asignarTexto('fondo-texto')
 
-fondBio.formaPersonalizada('fondo-forma-1', {fill: 'transparent', stroke: 'black'}, `M120.8602,63.449056q-35.096527,12.657935,1.231457,16.110097c-33.733296,1.493948-24.361628,9.178024-19.13719,12.65793c5.954242,4.009143,8.235845,6.572201,19.137189,5.41465c15.917545,2.858628,10.301356,7.253808-10.467384,14.147614s9.150424,6.306059,24.002112,9.876084-6.940727,9.16262-24.002112,15.137051s6.463382,11.089412,54.223099,12.978716c29.557498-2.378651,26.944529-10.507104,0-18.735085-6.85772-4.456182,8.674524-10.753465,21.258366-19.832125c9.604973-14.443615-3.017407-16.348224-30.841146-13.572255-6.26459-5.41465,9.58278-3.113205,9.58278-18.07258-20.111397,7.916884-34.124788,8.305147-25.873841-2.301445c4.656984-5.986552,17.376705-3.438281,16.291061-16.110098q-.307863-10.356493-35.40439,2.301445Z`)
+fondBio.formaPersonalizada('degeneracion_lattice', {top: 88, left: 78, fill: 'transparent', stroke: 'black', width:0.6, height: 0.6, strokeWidth: 2.5}, `
+  	M0,19.798263c0,0,17.810377-7.066746,28.213942-10.143894s41.230021-9.654369,41.230021-9.654369 /
+	M89.731751,0.000001c0,0,29.715571,6.618311,40.248354,9.654369s30.019895,10.143893,30.019895,10.143893 /
+	M19.901993,20.140187L9.497495,10.241056 /
+	M34.721982,14.242901l-6.50804-13.900976 /
+	M53.345022,10.996293L50.620034,-5.167988 /
+	M140.200915,20.140187l9.712502-9.899132 /
+	M124.865876,15.190623l5.114229-14.848699 /
+	M103.188406,10.241057l3.150001-15.073068
+`)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 qs('#fondo-valor').innerHTML = qs('#bio-rango').value

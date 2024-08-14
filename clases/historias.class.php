@@ -91,7 +91,7 @@
                     nro_hijo,
                     coalesce(NULLIF(nro_hijo::character varying(10), '0'), '-') AS nro_hijo_visual
                 from $this->schema.$this->tabla
-                where cedula like '$busqueda' or concat(nombres, ' ', apellidos) like '%'|| UPPER('$busqueda') ||'%' $historia order by 1 DESC
+                where status = 'A' and cedula like '%$busqueda%' or status = 'A' and concat(nombres, ' ', apellidos) like '%'|| UPPER('$busqueda') ||'%' $historia order by 1 DESC
                 limit 800
             ";
 

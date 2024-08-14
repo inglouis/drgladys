@@ -53,8 +53,10 @@
             $resultado = ($this->i_pdo("select id_referencia from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
             if(empty($resultado)) {
+
                 $sql = "insert into $this->schema.$this->tabla(id_referencia, nombre, descripcion, status) VALUES(default, trim(upper(?)), trim(upper(?)), 'A')";
-                return $this->insertar($sql, $args);
+                return $this->insertar($sql, [$args[0], $args[1]]);
+
             } else {
                 return "repetido";
             }

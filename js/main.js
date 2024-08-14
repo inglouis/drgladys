@@ -232,6 +232,12 @@ export class Herramientas {
 		}, tiempo)
 	}
 
+	esTouchscreen () {
+	  return (('ontouchstart' in window) ||
+	     (navigator.maxTouchPoints > 0) ||
+	     (navigator.msMaxTouchPoints > 0));
+	}
+
 	vacios(e) {
 		if (!e.value) {
 	   	  window.setTimeout(function() {
@@ -3981,6 +3987,55 @@ export class InputsDecimales {
     }
     
     return linea
+  
+  }
+  
+  init () {
+  
+  		var th = this
+  	
+    	this._inputs.forEach(input => {
+      
+      	input.addEventListener('keyup', el => {
+
+      		if (typeof th._excepciones[el.key] === 'undefined') {
+
+      			el.target.value = th.comportamiento(el.target.value)
+
+      		} else {
+
+      			el.target.value = el.target.value.substring(0,(el.target.value.length - 1))
+
+      		}
+          
+        })
+      
+      })
+    
+  }
+  	
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+export class RemoverCaracteres {
+	constructor(inputs, caracter) {
+  
+  	this._inputs    = document.querySelectorAll(`${inputs}`)
+    this._caracter = (caracter) ? caracter : '';
+    this._excepciones = {}
+  
+  }
+  
+  replaceAll (find, replace) {
+    var str = this;
+    return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
+  };
+  
+  comportamiento (valor) {
+ 
+  	valor = valor.replaceAll(this._caracter, '');
+
+    return valor
   
   }
   

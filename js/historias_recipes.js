@@ -196,6 +196,35 @@ recipes['crud']['propiedadesTr'] = {
 			contenedor.setAttribute('data-hidden', '')
 		})
 
+	},
+	"informacion": (e) => {
+		var fr = new DocumentFragment(), th = historias
+		var div = th.div.cloneNode(true);
+
+		var d1 = th.div.cloneNode(true)
+			d1.insertAdjacentHTML('afterbegin', 'N° del récipe: '+e.sublista.id_recipe)
+			d1.setAttribute('style', `min-width:200px; color:#fff`)
+
+		div.appendChild(d1)
+
+		div.setAttribute('style', `padding: 6px; width:fit-content; text-align: left;font-size: 1.1em; position:fixed; background:#262626`)
+		div.setAttribute('class', 'tooltip-crud')
+		div.setAttribute('data-hidden', '')
+
+		e.addEventListener('mousemove', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').style.top = (e.clientY - 50)+'px'
+			this.querySelector('.tooltip-crud').style.left = (e.clientX + 15)+'px'
+		})
+
+		e.addEventListener('mouseenter', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').removeAttribute('data-hidden')	
+		})
+
+		e.addEventListener('mouseleave', div.fn = function fn(e) {
+			this.querySelector('.tooltip-crud').setAttribute('data-hidden', '')
+		})
+
+		e.appendChild(div)
 	}
 }
 
@@ -286,7 +315,7 @@ recipes_notificados['crud']['propiedadesTr'] = {
 
 		var d2 = th.div.cloneNode(true)
 			d2.insertAdjacentHTML('afterbegin', e.sublista.id_historia)
-			d2.setAttribute('style', `color:#fff`)
+			d2.setAttribute('style', `color:#fff;`)
 
 		div.appendChild(d1)
 		div.appendChild(d2)
@@ -440,11 +469,13 @@ qs("#crud-recipes-botones").addEventListener('click', async e => {
 
 					if (e.marcador === 'X') { procesoMarcador = true }
 
-					if (e.tratamiento.trim() === '' && e.marcador === 'X') { procesoTratamiento = false }
+					//if (e.tratamiento.trim() === '' && e.marcador === 'X') { procesoTratamiento = false }
 
-					if (e.presentacion.trim() === '' && e.marcador === 'X') { procesoPresentacion = false }
+					//if (e.presentacion.trim() === '' && e.marcador === 'X') { procesoPresentacion = false }
 
 				});
+
+				window.idSeleccionada = historias.sublista.id_historia
 
 				if (procesoMarcador && procesoTratamiento && procesoPresentacion) {
 

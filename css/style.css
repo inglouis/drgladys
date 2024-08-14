@@ -2822,6 +2822,7 @@ span.numeracion {
 
 #tabla-historias tbody tr td:nth-child(3) {
     max-width: 55px;
+    min-width: 85px;
 }
 
 #tabla-historias tbody tr td:nth-child(4) {
@@ -3623,6 +3624,11 @@ span.numeracion {
   background: #e45666;
 }
 
+.eliminar-boton-contenedor {
+    position: absolute; 
+    right: 5px
+}
+
 /*-----------------------------------------------------*/
 /*------------------ CONSTANCIAS ----------------------*/
 /*-----------------------------------------------------*/
@@ -4206,6 +4212,7 @@ div#tabla-notificados-contenedor .titulo::after {
 
 #tabla-recipes .eliminar-texto {
     font-size: 10px;
+    padding: 5px;
 }
 
 #tabla-recipes .eliminar-contenedor div {
@@ -7183,4 +7190,228 @@ div#tabla-notificados-contenedor .titulo::after {
     background: -webkit-linear-gradient(#924dd3, #337ab7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/*-----------------------------------------------------*/
+/*--------------------media-queries--------------------*/
+/*-----------------------------------------------------*/
+
+@media all and (max-width:631px), (max-width:938px) {
+
+    /*---------------------- general -------------------------------*/
+
+    html {
+        overflow-y: scroll !important;
+    }
+
+    [data-crud='cerrar'] { 
+
+        display: flex;
+        position: relative;
+        background: #f43659;
+        width: 30px;
+        min-height: 30px;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50px;
+        top: 0px;
+        margin: 0px;
+        margin-bottom: 10px;
+
+    }
+
+    #tn-acordeon::-webkit-scrollbar, .scroll::-webkit-scrollbar, .no-scroll::-webkit-scrollbar, [data-scroll]::-webkit-scrollbar, .scroll-form::-webkit-scrollbar {
+        width: 1.2em;
+    }
+
+    .scroll::-webkit-scrollbar-thumb, [data-scroll]::-webkit-scrollbar-thumb {
+        background: #8f5eff6b;
+    }
+
+    .scroll::-webkit-scrollbar-thumb:horizontal, .crud-reportes-cuerpo::-webkit-scrollbar-thumb:horizontal{
+        background: #8f5eff6b;
+        border-radius: 10px;
+        height: 1.2em;
+        width: 1.2em;
+    }
+
+    .boton-ver {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    /*---------------------- tabla principal ----------------------*/
+
+    #tabla-historias {
+        border-collapse: unset;
+        box-sizing: unset;
+        border-spacing: 0px 10px;
+        border-right: none !important;
+    }
+
+    #tabla-historias tbody tr td {
+        border: 1px solid #b9a3cb !important;
+    }
+
+    #tabla-historias tbody tr td:nth-child(2) {
+        max-width: 145px;
+        row-gap: 5px;
+        align-items: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: 100%;
+        padding: 15px 5px;
+    }
+
+    #tabla-historias tbody tr td:nth-child(7) {
+        border-right: 1px solid #b9a3cb !important;
+    }
+
+    #tabla-historias tbody tr td:nth-child(3) {
+        min-width: unset !important;
+    }
+
+
+    table#tabla-historias thead {
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    table#tabla-historias thead th:nth-child(1), table#tabla-historias thead th:nth-child(8) {
+        display: none;
+    }
+
+    table#tabla-historias tbody td:nth-child(1), table#tabla-historias tbody td:nth-child(8) {
+        display: none;
+    }
+
+    table#tabla-historias thead th:nth-child(4) {
+        min-width: 70px;
+    }
+
+    table#tabla-historias tbody .crud-botones2 button:nth-child(1) {
+        margin-bottom: 5px;
+    }
+
+    table#tabla-historias thead th:nth-child(7) {
+        min-width: 75px;
+    }
+
+    /*---------------------- insertar ----------------------*/
+    #crud-insertar-pop {
+        min-width: 500px !important;
+        max-height: 50% !important;
+    }
+
+    /*---------------------- editar ----------------------*/
+    #crud-editar-pop {
+        min-width: 500px !important;
+        max-height: 50% !important;
+    }
+
+    /*---------------------- informacion ----------------------*/
+    #crud-informacion-pop {
+        min-width: 500px !important;
+        height: 50% !important;
+    }
+
+    /*------------------ recipes/reportes ----------------------*/
+    #crud-reportes-pop, #crud-recipes-pop {
+        height: 80% !important;
+        justify-content: flex-start;
+        background: #f5f5f5fa;
+        width: 90% !important;
+    }
+
+    #cruds-recipes-pop {
+        justify-content: flex-start;
+    }
+
+    #crud-recipes-contenedor {
+        height: auto;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: unset;
+    }
+
+    div#crud-recipes-botones {
+        top: -45px;
+        position: relative;
+        background: #ffffffbf;
+        padding: 10px;
+    }
+
+    button#crud-recipes-cerrar {
+        margin-top: 45px;
+    }
+
+    button#crud-reportes-cerrar {
+        margin-top: 20px;
+    }
+
+    .crud-reportes-cuerpo {
+        overflow: scroll !important;
+    }
+
+    #crud-reportes-cabecera .contenido {
+        top: 23px;
+    }
+
+    .reportes-seccion .contenedor {
+        width: max-content !important;
+        height: max-content !important;
+    }
+
+    .reportes-seccion {
+        height: 90% !important;
+    }
+
+    .reportes-seccion .cargar {
+        /*height: 74% !important;*/
+        align-self: flex-start;
+    }
+
+    .reportes-seccion .tabla-ppal {
+        height: 58vh !important;
+        align-self: flex-start;
+    }
+
+    #reposo-contenedor-izquierda, #informe-contenedor-izquierda {
+        height: 53vh !important;
+    }
+
+    #crud-repeditar-pop, #crud-coneditar-pop, #crud-infeditar-pop, #crud-refeditar-pop, #crud-preeditar-pop, #crud-geneditar-pop {
+        width: 30%;
+        min-width: 400px !important;
+        height: 50% !important;
+        overflow: scroll;
+        place-content: flex-start;
+        padding: 20px;
+        border: 3px solid #ffffff;
+    }
+
+    /*---------------------- evoluciones ----------------------*/
+    #crud-evoluciones-pop {
+        min-width: 550px !important;
+        min-height: auto;
+    }
+
+    #crud-evoluciones-cerrar {
+        place-self: center;
+        top: 20px;
+        margin-top: 5px;
+    }
+
+    #evoluciones-cargar-contenedor .filas {
+        height: 50vh !important;
+    }
+
+    #tabla-evoluciones-consultar-contenedor {
+        height: 45vh !important;
+    }
+
+    #crud-evoluciones-contenedor {
+        overflow: scroll;
+    }
+
 }

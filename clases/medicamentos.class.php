@@ -29,38 +29,49 @@
 
         public function crear_medicamentos($args){     
 
-            $genericos = &$args[1];
+            $resultado = ($this->i_pdo("select id_medicamento from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) limit 1", [], true))->fetchColumn();
 
-            foreach ($genericos as &$r) {
-                $r = $r['id'];
-            }
+            if(empty($resultado)) {
 
-            $genericos = json_encode($genericos);
+                $genericos = &$args[1];
 
-            $sql = "insert into $this->schema.$this->tabla(nombre, genericos, status) VALUES(
-                    trim(upper(?)), 
-                    ?::json, 
-                    'A'
-                ) returning id_medicamento";
-                
-            $id = $this->insertar($sql, [$args[0], $genericos])[0]['id_medicamento'];
+                foreach ($genericos as &$r) {
+                    $r = $r['id'];
+                }
 
-            if (is_numeric($id)) {
-                $sql = "insert into basicas.presentaciones(id_medicamento, presentaciones, status) VALUES($id, '[]'::json, 'A')";
+                $genericos = json_encode($genericos);
 
-                $resultado = $this->insertar($sql, []);
+                $sql = "insert into $this->schema.$this->tabla(nombre, genericos, status) VALUES(
+                        trim(upper(?)), 
+                        ?::json, 
+                        'A'
+                    ) returning id_medicamento";
+                    
+                $id = $this->insertar($sql, [$args[0], $genericos])[0]['id_medicamento'];
 
-                if(trim($resultado) == 'exito') {
-
-                    $sql = "insert into basicas.tratamientos(id_medicamento, tratamientos, status) VALUES($id, '[]'::json, 'A')";
+                if (is_numeric($id)) {
+                    $sql = "insert into basicas.presentaciones(id_medicamento, presentaciones, status) VALUES($id, '[]'::json, 'A')";
 
                     $resultado = $this->insertar($sql, []);
 
                     if(trim($resultado) == 'exito') {
-                        return 'exito';
+
+                        $sql = "insert into basicas.tratamientos(id_medicamento, tratamientos, status) VALUES($id, '[]'::json, 'A')";
+
+                        $resultado = $this->insertar($sql, []);
+
+                        if(trim($resultado) == 'exito') {
+                            return 'exito';
+                        }
                     }
                 }
+
+            } else {
+
+                return 'repetido';
+
             }
+
 
         }
 
@@ -75,7 +86,6 @@
             $genericos = json_encode($genericos);
 
             $resultado = ($this->i_pdo("select id_medicamento from $this->schema.$this->tabla where nombre = upper(trim('$args[0]')) and id_medicamento != $args[3] limit 1", [], true))->fetchColumn();
-
 
             if(empty($resultado)) {
                 $sql = "update $this->schema.$this->tabla set nombre = trim(upper(?)), genericos = ?::json, status = trim(upper(?)) where id_medicamento = ?";

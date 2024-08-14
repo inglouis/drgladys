@@ -1,0 +1,11 @@
+ALTER DATABASE dermatologia
+  SET DateStyle = 'ISO, YMD';
+
+
+
+correo
+-------------------
+sistema_dermatologia
+
+correo:sistemadermatologiarosana@gmail.com
+contraseña:v2Zu5ydVQs4j

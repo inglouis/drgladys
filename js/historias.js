@@ -14,7 +14,7 @@ window.qsa = document.querySelectorAll.bind(document)
 /////////////////////////////////////////////////////
 //IMPORTA usoS DE MAIN.JS PARA REUTILIZAR FUNCIONES
 /////////////////////////////////////////////////////
-import {PopUp, Acciones, Desplazar, Herramientas, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
+import {PopUp, Acciones, Desplazar, Herramientas, RemoverCaracteres, ContenedoresEspeciales, paginaCargada, Rellenar, Atajos, ARPropiedades, Reportes, Notificaciones, Animaciones, customDesplegable, textoPersonalizable, Paginacion, PaginacionContenedores, InputsDecimales} from '../js/main.js';
 
 /////////////////////////////////////////////////////
 //DESPLEGABLES DE LA PAGINA
@@ -23,6 +23,11 @@ const paginacionReportesDesplegable = new customDesplegable('#reportes-paginacio
 	  paginacionReportesDesplegable.horientacion = 'V'
 
 paginacionReportesDesplegable.eventos()
+
+const paginacionReportesDesplegableTablet = new customDesplegable('#reportes-paginacion', '#reportes-abrir-paginacion', '#reportes-cerrar-paginacion', ['click', 'click'], 'fit-content')
+	  paginacionReportesDesplegableTablet.horientacion = 'V'
+
+paginacionReportesDesplegableTablet.eventos()
 
 /////////////////////////////////////////////////////
 window.notificados = new customDesplegable('#desplegable-notificados', '#desplegable-abrir-notificados', '#desplegable-cerrar-notificados', undefined, '400px')
@@ -156,6 +161,10 @@ var inputsDecimales = new InputsDecimales('.decimales')
 
 var inputsFracciones = new InputsDecimales('.fracciones', '/')
 	inputsFracciones.init()
+
+var eliminarPuntos = new RemoverCaracteres('.nopuntos', '.')
+	eliminarPuntos._separador = ''
+	eliminarPuntos.init()
 /////////////////////////////////////////////////////
 //GENERA LOS COMPORTAMIENTOS BÁSICOS DE LOS POPUPS
 /////////////////////////////////////////////////////
@@ -489,11 +498,11 @@ class Historias extends Acciones {
 export var historias = new Historias(new Tabla(
 	[
 		['Acciones', false, 0],
-		['Evoluciones', false, 0],
-		['N°. Historia', true, 0],
+		[['Evo','Evoluciones del paciente'], false, 0],
+		['N°. Hist', true, 0],
 		['Paciente', true, 22],
-		['N° de cédula', true, 9],
-		['N° de hijo', true, 25],
+		['N° Cédula', true, 9],
+		['N° Hijo', true, 25],
 		['Status', true, 21]
 	],
 	'tabla-historias', 'busqueda', Number(sesiones.modo_filas), 'izquierda', 'derecha', 'numeracion', true

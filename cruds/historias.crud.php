@@ -30,7 +30,7 @@
       ¿DESEA ELIMINAR ESTE REGISTRO?: 
     </div>
 
-    <div>
+    <div class="eliminar-boton-contenedor">
       <button class="btn eliminar-boton btn-eliminar" title="ELIMINAR">X</button>
     </div>
   </div>
@@ -264,7 +264,7 @@
 
         <div style="width: 20rem" title="[TAB] para enforcar">
           <label class="requerido">Cédula/rif</label>
-          <input id="editar-enfocar" type="text" autocomplete="off"  maxlength="14" data-valor="cedula" placeholder="-" class="editar-valores lleno upper" maxlength="14">
+          <input id="editar-enfocar" type="text" autocomplete="off"  maxlength="14" data-valor="cedula" placeholder="-" class="editar-valores lleno upper nopuntos" maxlength="14">
         </div>
 
         <div style="width: 20rem;">
@@ -477,7 +477,7 @@
             <span class="tooltip-general">Presionar [ENTER] para agregar</span>
             <section>
               <input type="number" data-estilo="cc-input" placeholder="Cargar...">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
+              <select data-scroll data-limit="" data-estilo="cc-select" data-hide></select>
             </section>
             <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
 
@@ -493,7 +493,7 @@
             <span class="tooltip-general">Presionar [ENTER] para agregar</span>
             <section>
               <input type="text" autocomplete="off"  data-estilo="cc-input" placeholder="Cargar..." class="upper">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
+              <select data-scroll data-limit="" data-estilo="cc-select" data-hide></select>
             </section>
             <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
 
@@ -554,7 +554,7 @@
 
         <div style="width: 100px">
           <label class="requerido">Cédula/rif</label>
-          <input id="insertar-enfocar" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper" maxlength="14">
+          <input id="insertar-enfocar" type="text" autocomplete="off"  placeholder="-" class="insertar-valores lleno upper nopuntos" maxlength="14">
         </div>
 
         <div style="width: 20rem;">
@@ -757,7 +757,7 @@
             <span class="tooltip-general">Presionar [ENTER] para agregar</span>
             <section>
               <input type="number" data-estilo="cc-input" placeholder="Cargar...">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
+              <select data-scroll data-limit="" data-estilo="cc-select" data-hide></select>
             </section>
             <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
 
@@ -772,7 +772,7 @@
             <span class="tooltip-general">Presionar [ENTER] para agregar</span>
             <section>
               <input type="text" autocomplete="off"  data-estilo="cc-input" placeholder="Cargar..." class="upper">
-              <select data-limit="" data-estilo="cc-select" data-hide></select>
+              <select data-scroll data-limit="" data-estilo="cc-select" data-hide></select>
             </section>
             <div data-estilo="cc-div" style="max-height: 70px; min-height: 70px; border: none"></div>
 
