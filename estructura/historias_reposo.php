@@ -12,7 +12,7 @@
 
     <div class="filas" style="height: fit-content; position:relative;">
 
-      <div class="personalizacion-b" id="crud-repeditar-personalizacion" data-hidden>
+      <div class="personalizacion-b" id="crud-repeditar-personalizacion" data-hidden style="background: #000000ba !important;">
         <section>Personalización</section>
         <section style="width: 100%; border: 1px dashed #fff"></section>
         <span>ENTER: SEPARAR LÍNEA</span>
@@ -256,7 +256,7 @@
 
         <div class="cargar" title="[TAB] para enforcar">
 
-          <div class="personalizacion" data-hidden>
+          <div class="personalizacion" data-hidden style="background: #000000ba !important;">
 
             <section>Personalización</section>
             <section style="width: 100%; border: 1px dashed #fff"></section>
