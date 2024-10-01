@@ -1121,6 +1121,43 @@ qs('#evoluciones-consulta-fechas select').addEventListener('change', e => {
 })
 
 // /* -------------------------------------------------------------------------------------------------*/
+// /*           						EVOLUCIONES - REUTILIZAR RX					 				   */
+// /* -------------------------------------------------------------------------------------------------*/
+var modelo_lista_formula = {
+	"formula_od_signo_1_ciclo": "",
+	"formula_od_valor_1_ciclo": "",
+	"formula_od_signo_2_ciclo": "",
+	"formula_od_valor_2_ciclo": "",
+	"formula_od_grados_ciclo": "",
+	"formula_oi_signo_1_ciclo": "",
+	"formula_oi_valor_1_ciclo": "",
+	"formula_oi_signo_2_ciclo": "",
+	"formula_oi_valor_2_ciclo": "",
+	"formula_oi_grados_ciclo": ""
+}
+
+qs('#reusar-rxpc').addEventListener('click', e => {
+
+    var datos = tools.procesar('', '', 'evoluciones-valores-rx', tools, {})
+
+    modelo_lista_formula['formula_od_signo_1_ciclo'] = datos [0]
+    modelo_lista_formula['formula_od_valor_1_ciclo'] = datos [1]
+    modelo_lista_formula['formula_od_signo_2_ciclo'] = datos [2]
+    modelo_lista_formula['formula_od_valor_2_ciclo'] = datos [3]
+    modelo_lista_formula['formula_od_grados_ciclo']  = datos [4]
+    modelo_lista_formula['formula_oi_signo_1_ciclo'] = datos [5]
+    modelo_lista_formula['formula_oi_valor_1_ciclo'] = datos [6]
+    modelo_lista_formula['formula_oi_signo_2_ciclo'] = datos [7]
+    modelo_lista_formula['formula_oi_valor_2_ciclo'] = datos [8]
+    modelo_lista_formula['formula_oi_grados_ciclo']  = datos [9]
+
+	rellenar.contenedores(modelo_lista_formula, '.evoluciones-valores-formula', {}, {})
+
+	notificaciones.mensajeSimple(`Datos del RX cargados en la fórmula`, '', 'V')
+
+})
+
+// /* -------------------------------------------------------------------------------------------------*/
 // /*           						EVOLUCIONES - INSERTAR					 				  	   */
 // /* -------------------------------------------------------------------------------------------------*/
 

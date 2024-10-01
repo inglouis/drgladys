@@ -721,7 +721,7 @@ span.numeracion {
 }
 
 .btn-reusar:hover {
-    background: #ffb307;
+    background: #ffb307 !important;
 }
 
 .btn-nuevo, #buscar {
@@ -4973,6 +4973,20 @@ div#tabla-notificados-contenedor .titulo::after {
     position: relative;
     left: -4px;
     font-size: 20px;
+}
+
+#reusar-rxpc {
+    width: 22px !important;
+    height: 22px !important;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 0px;
+    top: -13px;
+    left: -3px;
+    position: absolute;
+    border-radius: 100px;
+    background-color: black;
 }
 
 #evoluciones-cargar-contenedor .rx input {
